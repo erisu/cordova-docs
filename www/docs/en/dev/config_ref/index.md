@@ -315,8 +315,8 @@ KeyboardDisplayRequiresUserAction(boolean) <br/> ==iOS== | *Default: true* <br/>
 LoadUrlTimeoutValue(number in milliseconds) <br/> ==Android== | *Default: 20000, 20 seconds* <br/>  When loading a page, the amount of time to wait before throwing a timeout error.
 LoadingDialog(string) <br/> ==Android== | *Default: null* <br/>  If set, displays a dialog with the specified title and message, and a spinner, when loading the first page of an application. The title and message are separated by a comma in this value string, and that comma is removed before the dialog is displayed.
 LogLevel(string) <br/> ==Android== | *Default: DEBUG* <br/> Allowed values: ERROR, WARN, INFO, DEBUG, VERBOSE <br/>  Sets the minimum log level through which log messages from your application will be filtered.
-MediaPlaybackAllowsAirPlay(boolean) <br/> ==iOS== | *Default: true* <br/>  Set to false to prevent Air Play from being used in this view. Available in default UIWebView and WKWebView.
-MediaPlaybackRequiresUserAction(boolean) <br/> ==iOS== | *Default: false* <br/>  Set to true to prevent HTML5 videos or audios from playing automatically with the autoplay attribute or via JavaScript.
+AllowsAirPlayForMediaPlayback(boolean) <br/> ==iOS== | *Default: true* <br/>  Set to false to prevent Air Play from being used in this view.
+MediaTypesRequiringUserActionForPlayback(boolean) <br/> ==iOS== | *Default: false* <br/>  Set to true to prevent HTML5 videos or audios from playing automatically with the autoplay attribute or via JavaScript.
 Min/Max Version(Regex) <br/> ==Windows== | Allowed values: **/(Microsoft.+? &#124; Windows.+?)-(MinVersion &#124; MaxVersionTested)/i** <br/> Identifies the ecosystems and their min/max versions the app is compatible with. There are three parts to each value: the **SDK**, the **version restriction**, and the **version value**.  These preferences are detected by beginning with `Windows` or `Microsoft` and ending in `-MinVersion` or `-MaxVersionTested`: <ul><li>The **SDK** defines what specialized platform you want to target.  The default is `Windows.Universal`.  Valid values for these are defined in the AppxManifest schema, in the `Package/Dependencies/TargetPlatform` elements.</li><li>The **version restriction** defines application compatibility rules.  For example, if the `-MinVersion` is set to 10.1.0.0, then OS versions which don't support at least 10.1.0.0 of the corresponding SDK won't be able to load it. Similarly you can also use `-MaxVersionTested` which specifies the highest-tested version of the SDK. If a new version of the corresponding SDK is released, it will run in compatibility mode for the specified version.</li><li>The **version value** is a 4-integer tuple in the form of *major.minor.build.qfe*.</li></ul> If no preferences of these types are specified in your config.xml file, then Windows.Universal version 10.0.0.0 will be chosen by default. <br/> **Note:** These preferences are only set in the appxmanifest files of the desired target-platform and not in the jsproj files.
 Orientation(string) | *Default: default* <br/> Allowed values: default, landscape, portrait <br/> Allows you to lock orientation and prevent the interface from rotating in response to changes in orientation. <br/> **NOTE:** The default value means Cordova will strip the orientation preference entry from the platform's manifest/configuration file allowing the platform to fallback to its default behavior. For iOS, to specify both portrait & landscape mode you would use the platform specific value 'all'.
 OSXLocalStoragePath(string) <br/> ==OS X== | *Default: `~/Library/Application Support/{bundle.id}`* <br/> **(OS X 4.0.0+)** Sets the directory for the local storage path.
@@ -356,8 +356,8 @@ Examples:
 
 <!-- iOS only preferences -->
 <preference name="EnableViewportScale" value="true"/>
-<preference name="MediaPlaybackAllowsAirPlay" value="false"/>
-<preference name="MediaPlaybackRequiresUserAction" value="true"/>
+<preference name="AllowsAirPlayForMediaPlayback" value="false"/>
+<preference name="MediaTypesRequiringUserActionForPlayback" value="true"/>
 <preference name="AllowInlineMediaPlayback" value="true"/>
 <preference name="BackupWebStorage" value="local"/>
 <preference name="TopActivityIndicator" value="white"/>
