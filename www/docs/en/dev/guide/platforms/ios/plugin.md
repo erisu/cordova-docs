@@ -45,7 +45,7 @@ follows:
 exec(<successFunction>, <failFunction>, <service>, <action>, [<args>]);
 ```
 
-This marshals a request from the `UIWebView` to the iOS native side,
+This marshals a request from the `WKWebView` to the iOS native side,
 effectively calling the `action` method on the `service` class, with
 the arguments passed in the `args` array.
 
@@ -69,7 +69,7 @@ able to access it.
 ## Plugin Initialization and Lifetime
 
 One instance of a plugin object is created for the life of each
-`UIWebView`. Plugins are not instantiated until they are first
+`WKWebView`. Plugins are not instantiated until they are first
 referenced by a call from JavaScript, unless `<param>` with an `onload`
 `name` attribute is set to `"true"` in `config.xml`. For example,
 
@@ -86,7 +86,7 @@ Plugins with long-running requests or background activities such as media
 playback, listeners, or that maintain internal state should implement
 the `onReset` method to cancel those long-running requests or to clean up
 after those activities.
-The method runs when the `UIWebView` navigates to a new page or refreshes, which
+The method runs when the `WKWebView` navigates to a new page or refreshes, which
 reloads the JavaScript.
 
 ## Writing an iOS Cordova Plugin

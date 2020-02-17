@@ -54,7 +54,7 @@ Consider the following issues to improve the performance in your mobile applicat
 
 **Click versus Touch** - Many devices impose a 300ms delay on click events in order to distinguish between a tap and tap-to-zoom gesture. This can have the effect of making your app feel slow and unresponsive. Avoiding this delay is one of the most important ways of improving your app's perceived performance. For more information on the tap delay, see [300ms tap delay, gone away](https://developers.google.com/web/updates/2013/12/300ms-tap-delay-gone-away) on the Google Developer site.
 
-Most Android versions no longer impose this delay, but iOS by default still does. For iOS, using [WkWebView](https://github.com/apache/cordova-plugin-wkwebview-engine) instead of the default UIWebView gets rid of this delay. For both Android and iOS, you must ensure that your viewport meta tag has at least `width=device-width`, or you will still have the tap delay. If you need to support older devices (Android 4.4 or iOS 8), consider a polyfill such as [FastClick](https://github.com/ftlabs/fastclick), or using `touchstart` and `touchend` instead of `click`.
+Most Android versions no longer impose this delay, and iOS has gotten rid of this delay with `WkWebView`. For both Android and iOS, you must ensure that your viewport meta tag has at least `width=device-width`, or you will still have the tap delay.
 
 **CSS Transitions versus DOM Manipulation** - Using hardware accelerated CSS transitions will be dramatically better than using JavaScript to create animations. See the list of resources at the end of this section for examples.
 
