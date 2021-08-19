@@ -1,5 +1,5 @@
 ---
-edit_link: 'https://github.com/apache/cordova-plugin-media/blob/master/README.md'
+edit_link: https://github.com/apache/cordova-plugin-media/blob/master/README.md
 title: Media
 plugin_name: cordova-plugin-media
 plugin_version: master

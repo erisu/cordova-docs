@@ -1,5 +1,5 @@
 ---
-edit_link: 'https://github.com/apache/cordova-plugin-device/blob/master/README.md'
+edit_link: https://github.com/apache/cordova-plugin-device/blob/master/README.md
 title: Device
 plugin_name: cordova-plugin-device
 plugin_version: master

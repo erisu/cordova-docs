@@ -1,5 +1,5 @@
 ---
-edit_link: 'https://github.com/apache/cordova-plugin-camera/blob/master/README.md'
+edit_link: https://github.com/apache/cordova-plugin-camera/blob/master/README.md
 title: Camera
 plugin_name: cordova-plugin-camera
 plugin_version: master

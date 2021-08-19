@@ -1,5 +1,5 @@
 ---
-edit_link: 'https://github.com/apache/cordova-plugin-battery-status/blob/master/README.md'
+edit_link: https://github.com/apache/cordova-plugin-battery-status/blob/master/README.md
 title: Battery Status
 plugin_name: cordova-plugin-battery-status
 plugin_version: master

@@ -1,5 +1,5 @@
 ---
-edit_link: 'https://github.com/apache/cordova-cli/blob/master/doc/readme.md'
+edit_link: https://github.com/apache/cordova-cli/blob/master/doc/readme.md
 title: CLI Reference
 description: Learn how to use Cordova CLI commands and their options.
 ---

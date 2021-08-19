@@ -1,5 +1,5 @@
 ---
-edit_link: 'https://github.com/apache/cordova-plugin-vibration/blob/master/README.md'
+edit_link: https://github.com/apache/cordova-plugin-vibration/blob/master/README.md
 title: Vibration
 plugin_name: cordova-plugin-vibration
 plugin_version: master

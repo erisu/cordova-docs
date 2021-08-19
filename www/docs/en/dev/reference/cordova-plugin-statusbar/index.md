@@ -1,5 +1,5 @@
 ---
-edit_link: 'https://github.com/apache/cordova-plugin-statusbar/blob/master/README.md'
+edit_link: https://github.com/apache/cordova-plugin-statusbar/blob/master/README.md
 title: Statusbar
 plugin_name: cordova-plugin-statusbar
 plugin_version: master

@@ -1,5 +1,5 @@
 ---
-edit_link: 'https://github.com/apache/cordova-plugin-dialogs/blob/master/README.md'
+edit_link: https://github.com/apache/cordova-plugin-dialogs/blob/master/README.md
 title: Dialogs
 plugin_name: cordova-plugin-dialogs
 plugin_version: master

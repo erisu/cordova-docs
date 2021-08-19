@@ -1,5 +1,5 @@
 ---
-edit_link: 'https://github.com/apache/cordova-plugin-geolocation/blob/master/README.md'
+edit_link: https://github.com/apache/cordova-plugin-geolocation/blob/master/README.md
 title: Geolocation
 plugin_name: cordova-plugin-geolocation
 plugin_version: master

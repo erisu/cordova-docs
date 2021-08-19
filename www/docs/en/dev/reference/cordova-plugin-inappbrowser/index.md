@@ -1,5 +1,5 @@
 ---
-edit_link: 'https://github.com/apache/cordova-plugin-inappbrowser/blob/master/README.md'
+edit_link: https://github.com/apache/cordova-plugin-inappbrowser/blob/master/README.md
 title: Inappbrowser
 plugin_name: cordova-plugin-inappbrowser
 plugin_version: master

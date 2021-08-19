@@ -1,5 +1,5 @@
 ---
-edit_link: 'https://github.com/apache/cordova-plugin-splashscreen/blob/master/README.md'
+edit_link: https://github.com/apache/cordova-plugin-splashscreen/blob/master/README.md
 title: Splashscreen
 plugin_name: cordova-plugin-splashscreen
 plugin_version: master
