@@ -1022,86 +1022,98 @@
             
 
             <div id="page-toc-source">
-                <h1>resume</h1>
+                <h1 id="resume">resume</h1>
 
 <p>Zdarzenie fires, gdy aplikacja jest źródło tła.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">document.addEventListener("resume", yourCallbackFunction, false);
-</code></pre></div>
-<h2>Szczegóły</h2>
 
-<p><code>resume</code>Zdarzenie fires po platformie rodzimych wyciąga wniosek od tła.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>document.addEventListener("resume", yourCallbackFunction, false);
+</code></pre></div></div>
 
-<p>Aplikacje zwykle należy użyć <code>document.addEventListener</code> Aby dołączyć słuchacza raz <code>[deviceready](events.deviceready.html)</code> pożary zdarzenia.</p>
+<h2 id="szczegóły">Szczegóły</h2>
 
-<h2>Obsługiwane platformy</h2>
+<p><code class="language-plaintext highlighter-rouge">resume</code>Zdarzenie fires po platformie rodzimych wyciąga wniosek od tła.</p>
+
+<p>Aplikacje zwykle należy użyć <code class="language-plaintext highlighter-rouge">document.addEventListener</code> Aby dołączyć słuchacza raz <code class="language-plaintext highlighter-rouge">[deviceready](events.deviceready.html)</code> pożary zdarzenia.</p>
+
+<h2 id="obsługiwane-platformy">Obsługiwane platformy</h2>
 
 <ul>
-<li>  Amazon Fire OS</li>
-<li>  Android</li>
-<li>  BlackBerry 10</li>
-<li>  iOS</li>
-<li>  Windows Phone 8</li>
-<li>  Windows 8</li>
+  <li>Amazon Fire OS</li>
+  <li>Android</li>
+  <li>BlackBerry 10</li>
+  <li>iOS</li>
+  <li>Windows Phone 8</li>
+  <li>Windows 8</li>
 </ul>
 
-<h2>Szybki przykład</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">document.addEventListener("resume", onResume, false);
+<h2 id="szybki-przykład">Szybki przykład</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>document.addEventListener("resume", onResume, false);
 
 function onResume() {
     // Handle the resume event
 }
-</code></pre></div>
-<h2>Pełny przykład</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Resume Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="pełny-przykład">Pełny przykład</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onLoad</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="p">}</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Resume Example&lt;/title&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"resume"</span><span class="p">,</span> <span class="nx">onResume</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// Handle the resume event</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onResume</span><span class="p">()</span> <span class="p">{</span>
-    <span class="p">}</span>
+    // Wait for device API libraries to load
+    //
+    function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body</span> <span class="na">onload=</span><span class="s">"onLoad()"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2>Dziwactwa iOS</h2>
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        document.addEventListener("resume", onResume, false);
+    }
 
-<p>Wszelkie interaktywne funkcje wywoływane z <code>[pause](events.pause.html)</code> obsługi zdarzeń wykonać później podczas wznawiania działania aplikacji, jak sygnalizowane przez <code>resume</code> zdarzenie. Należą do nich alerty, <code>console.log()</code> i wszelkie rozmowy z wtyczki lub Cordova API, które przechodzą przez Objective-C.</p>
+    // Handle the resume event
+    //
+    function onResume() {
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body onload="onLoad()"&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h2 id="dziwactwa-ios">Dziwactwa iOS</h2>
+
+<p>Wszelkie interaktywne funkcje wywoływane z <code class="language-plaintext highlighter-rouge">[pause](events.pause.html)</code> obsługi zdarzeń wykonać później podczas wznawiania działania aplikacji, jak sygnalizowane przez <code class="language-plaintext highlighter-rouge">resume</code> zdarzenie. Należą do nich alerty, <code class="language-plaintext highlighter-rouge">console.log()</code> i wszelkie rozmowy z wtyczki lub Cordova API, które przechodzą przez Objective-C.</p>
 
 <ul>
-<li><p><strong>aktywnych</strong> zdarzeń</p>
+  <li>
+    <p><strong>aktywnych</strong> zdarzeń</p>
 
-<p>IOS specyficzne <code>active</code> zdarzenie jest dostępna jako alternatywa dla <code>resume</code> i wykrywa użytkowników wyłączyć przycisk <strong>blokada</strong> , aby odblokować urządzenie z app uruchomiony na pierwszym planie. Jeśli aplikacji (i urządzenia) jest włączona na wielozadaniowość, to jest powiązany z kolejnym <code>resume</code> wydarzenie, ale tylko pod iOS 5. W efekcie wszystkie zablokowane aplikacje w iOS 5, że wielozadaniowych włączone są wypychane do tła. Dla aplikacji będą nadal działać, gdy zablokowane pod iOS 5, wyłączenie aplikacji wielozadaniowych przez ustawienie <a href="http://developer.apple.com/library/ios/#documentation/general/Reference/InfoPlistKeyReference/Articles/iPhoneOSKeys.html">UIApplicationExitsOnSuspend</a> <code>YES</code> . Aby uruchomić zablokowane na iOS 4, to ustawienie nie ma znaczenia.</p></li>
-<li><p><strong>wznowić</strong> imprezy</p>
+    <p>IOS specyficzne <code class="language-plaintext highlighter-rouge">active</code> zdarzenie jest dostępna jako alternatywa dla <code class="language-plaintext highlighter-rouge">resume</code> i wykrywa użytkowników wyłączyć przycisk <strong>blokada</strong> , aby odblokować urządzenie z app uruchomiony na pierwszym planie. Jeśli aplikacji (i urządzenia) jest włączona na wielozadaniowość, to jest powiązany z kolejnym <code class="language-plaintext highlighter-rouge">resume</code> wydarzenie, ale tylko pod iOS 5. W efekcie wszystkie zablokowane aplikacje w iOS 5, że wielozadaniowych włączone są wypychane do tła. Dla aplikacji będą nadal działać, gdy zablokowane pod iOS 5, wyłączenie aplikacji wielozadaniowych przez ustawienie <a href="http://developer.apple.com/library/ios/#documentation/general/Reference/InfoPlistKeyReference/Articles/iPhoneOSKeys.html">UIApplicationExitsOnSuspend</a> <code class="language-plaintext highlighter-rouge">YES</code> . Aby uruchomić zablokowane na iOS 4, to ustawienie nie ma znaczenia.</p>
+  </li>
+  <li>
+    <p><strong>wznowić</strong> imprezy</p>
 
-<p>Po wywołaniu z <code>resume</code> obsługi zdarzeń, funkcje interaktywne, takie jak <code>alert()</code> muszą być zapakowane w <code>setTimeout()</code> rozmowy z timeout wartość zero, albo aplikacja zawiesza się. Na przykład:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">document.addEventListener("resume", onResume, false);
+    <p>Po wywołaniu z <code class="language-plaintext highlighter-rouge">resume</code> obsługi zdarzeń, funkcje interaktywne, takie jak <code class="language-plaintext highlighter-rouge">alert()</code> muszą być zapakowane w <code class="language-plaintext highlighter-rouge">setTimeout()</code> rozmowy z timeout wartość zero, albo aplikacja zawiesza się. Na przykład:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>document.addEventListener("resume", onResume, false);
 function onResume() {
    setTimeout(function() {
           // TODO: do your thing!
         }, 0);
 }
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ul>
+
 
 
             </div>

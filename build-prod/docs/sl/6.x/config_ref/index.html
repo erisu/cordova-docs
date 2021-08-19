@@ -2082,34 +2082,39 @@
             
 
             <div id="page-toc-source">
-                <h1>Config.xml datoteke</h1>
+                <h1 id="configxml-datoteke">Config.xml datoteke</h1>
 
-<p>Številne vidike vedenje app je mogoče nadzorovati z globalno nastavitveno datoteko, <code>config.xml</code> . Ta platforma agnostik XML datoteke je urejen temelji na specifikaciji W3C&#39;s <a href="http://www.w3.org/TR/widgets/">Pakirani Web Apps (Widgets)</a> , in razširiti, če želite določiti jedro Cordova API funkcije, plugins in nastavitve za posamezne.</p>
+<p>Številne vidike vedenje app je mogoče nadzorovati z globalno nastavitveno datoteko, <code class="language-plaintext highlighter-rouge">config.xml</code> . Ta platforma agnostik XML datoteke je urejen temelji na specifikaciji W3C’s <a href="http://www.w3.org/TR/widgets/">Pakirani Web Apps (Widgets)</a> , in razširiti, če želite določiti jedro Cordova API funkcije, plugins in nastavitve za posamezne.</p>
 
 <p>Za projekte, ustvarjene z Cordova CLI (opisano v vmesnik ukazne vrstice), lahko te datoteke najdete v najvišji ravni imenika:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    app/config.xml
-</code></pre></div>
-<p>Upoštevajte, da pred 3.3.1-0.2.0 različico, datoteko obstajala na <code>app/www/config.xml</code> , in da imajo tukaj še vedno podprt.</p>
 
-<p>Čas using CLI zgraditi projekt, različice datoteke pasivno prekopirate v različnih <code>platforms/</code> podimenikov, na primer:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    app/platforms/ios/AppName/config.xml
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    app/config.xml
+</code></pre></div></div>
+
+<p>Upoštevajte, da pred 3.3.1-0.2.0 različico, datoteko obstajala na <code class="language-plaintext highlighter-rouge">app/www/config.xml</code> , in da imajo tukaj še vedno podprt.</p>
+
+<p>Čas using CLI zgraditi projekt, različice datoteke pasivno prekopirate v različnih <code class="language-plaintext highlighter-rouge">platforms/</code> podimenikov, na primer:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    app/platforms/ios/AppName/config.xml
     app/platforms/blackberry10/www/config.xml
     app/platforms/android/res/xml/config.xml
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Ta oddelek podrobno globalno in cross-platform konfiguracijo možnosti. Videli v nadaljevanju, za posamezne možnosti:</p>
 
 <ul>
-<li>  <a href="../guide/platforms/ios/config.html">iOS konfiguracijo</a></li>
-<li>  <a href="../guide/platforms/android/config.html">Android konfiguracijo</a></li>
-<li>  <a href="../guide/platforms/blackberry10/config.html">Konfiguracije blackBerry 10</a></li>
+  <li><a href="../guide/platforms/ios/config.html">iOS konfiguracijo</a></li>
+  <li><a href="../guide/platforms/android/config.html">Android konfiguracijo</a></li>
+  <li><a href="../guide/platforms/blackberry10/config.html">Konfiguracije blackBerry 10</a></li>
 </ul>
 
 <p>Poleg različnih možnosti konfiguracije, navedenih spodaj, lahko konfigurirate tudi aplikacijskimi jedro niz podob za vsako ciljno platformo. Več informacij najdete ikone in brizg zaslon.</p>
 
-<h2>Jedro konfiguracijo elementov</h2>
+<h2 id="jedro-konfiguracijo-elementov">Jedro konfiguracijo elementov</h2>
 
-<p>Ta primer prikazuje privzete <code>config.xml</code> nastanejo v CLI <code>create</code> ukaz, opisane v vmesnik ukazne vrstice:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;widget id="com.example.hello" version="0.0.1"&gt;
+<p>Ta primer prikazuje privzete <code class="language-plaintext highlighter-rouge">config.xml</code> nastanejo v CLI <code class="language-plaintext highlighter-rouge">create</code> ukaz, opisane v vmesnik ukazne vrstice:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;widget id="com.example.hello" version="0.0.1"&gt;
         &lt;name&gt;HelloWorld&lt;/name&gt;
         &lt;description&gt;
             A sample Apache Cordova application that responds to the deviceready event.
@@ -2120,63 +2125,99 @@
         &lt;content src="index.html" /&gt;
         &lt;access origin="*" /&gt;
     &lt;/widget&gt;
-</code></pre></div>
-<p>Naslednje konfiguracije elementi se prikažejo v najvišje ravni <code>config.xml</code> datoteke, in so podprte na vseh podprtih platformah Cordova:</p>
+</code></pre></div></div>
+
+<p>Naslednje konfiguracije elementi se prikažejo v najvišje ravni <code class="language-plaintext highlighter-rouge">config.xml</code> datoteke, in so podprte na vseh podprtih platformah Cordova:</p>
 
 <ul>
-<li><p>Na <code>&lt;widget&gt;</code> elementa <code>id</code> atribut določa identifikator app je obratno-domene, in <code>version</code> njeno polno različico število izraženo v manjših/večjih/obliž zapisu.</p></li>
-<li><p>Je <code>&lt;name&gt;</code> element določa app je uradno ime, kot je prikazano na zaslonu naprave doma in v app store vmesnikov.</p></li>
-<li><p>Na <code>&lt;description&gt;</code> in <code>&lt;author&gt;</code> elementov določite metapodatkov in kontaktne podatke, ki se lahko pojavijo v app trgovina oglasi.</p></li>
-<li><p>Izbirnem <code>&lt;content&gt;</code> element opredeljuje app je začetno stran v najvišje ravni web directory sredstvih. Privzeta vrednost je <code>index.html</code> , ki se običajno pojavi v projekt je najvišje ravni <code>www</code> imenik.</p></li>
-<li><p><code>&lt;access&gt;</code>elementi določajo nabor zunanje domene, app je dovoljeno, da komunicirajo. Privzeta vrednost, prikazano zgoraj omogoča dostop do katerega koli strežnika. Priročniku domene belo listo za podrobnosti.</p></li>
-<li><p>Na <code>&lt;preference&gt;</code> oznaka določa različne možnosti kot parov <code>name</code> / <code>value</code> atributi. Vsaka prednost <code>name</code> je case-insensitive. Mnoge nastavitve so edinstveni za posebne platforme, kot je navedeno na vrhu te strani. V nadaljevanju podrobno nastavitve, ki veljajo za več platform.</p></li>
+  <li>
+    <p>Na <code class="language-plaintext highlighter-rouge">&lt;widget&gt;</code> elementa <code class="language-plaintext highlighter-rouge">id</code> atribut določa identifikator app je obratno-domene, in <code class="language-plaintext highlighter-rouge">version</code> njeno polno različico število izraženo v manjših/večjih/obliž zapisu.</p>
+  </li>
+  <li>
+    <p>Je <code class="language-plaintext highlighter-rouge">&lt;name&gt;</code> element določa app je uradno ime, kot je prikazano na zaslonu naprave doma in v app store vmesnikov.</p>
+  </li>
+  <li>
+    <p>Na <code class="language-plaintext highlighter-rouge">&lt;description&gt;</code> in <code class="language-plaintext highlighter-rouge">&lt;author&gt;</code> elementov določite metapodatkov in kontaktne podatke, ki se lahko pojavijo v app trgovina oglasi.</p>
+  </li>
+  <li>
+    <p>Izbirnem <code class="language-plaintext highlighter-rouge">&lt;content&gt;</code> element opredeljuje app je začetno stran v najvišje ravni web directory sredstvih. Privzeta vrednost je <code class="language-plaintext highlighter-rouge">index.html</code> , ki se običajno pojavi v projekt je najvišje ravni <code class="language-plaintext highlighter-rouge">www</code> imenik.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">&lt;access&gt;</code>elementi določajo nabor zunanje domene, app je dovoljeno, da komunicirajo. Privzeta vrednost, prikazano zgoraj omogoča dostop do katerega koli strežnika. Priročniku domene belo listo za podrobnosti.</p>
+  </li>
+  <li>
+    <p>Na <code class="language-plaintext highlighter-rouge">&lt;preference&gt;</code> oznaka določa različne možnosti kot parov <code class="language-plaintext highlighter-rouge">name</code> / <code class="language-plaintext highlighter-rouge">value</code> atributi. Vsaka prednost <code class="language-plaintext highlighter-rouge">name</code> je case-insensitive. Mnoge nastavitve so edinstveni za posebne platforme, kot je navedeno na vrhu te strani. V nadaljevanju podrobno nastavitve, ki veljajo za več platform.</p>
+  </li>
 </ul>
 
-<h2>Globalne nastavitve</h2>
+<h2 id="globalne-nastavitve">Globalne nastavitve</h2>
 
 <p>Naslednje globalne nastavitve veljajo za vse platforme:</p>
 
 <ul>
-<li><p><code>Fullscreen</code>vam omogoča, da skriti vrstici stanja na vrhu zaslona. Privzeta vrednost je <code>false</code> . Primer:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="Fullscreen" value="true" /&gt;
-</code></pre></div></li>
-<li><p><code>Orientation</code>vam omogoča, da zaklenete usmerjenost in preprečiti vrtijo v odziv na spremembe v usmerjenosti vmesnik. Možni vrednosti sta <code>default</code> , <code>landscape</code> , ali <code>portrait</code> . Primer:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="Orientation" value="landscape" /&gt;
-</code></pre></div>
-<p><strong>Opomba</strong>: na <code>default</code> vrednost pomeni <em>oboje</em> pokrajina ter podoba usmeritve so omogočene. Če želite uporabiti privzete nastavitve vsako platformo (ponavadi portret samo), pustite ta oznako za <code>config.xml</code> datoteke.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Fullscreen</code>vam omogoča, da skriti vrstici stanja na vrhu zaslona. Privzeta vrednost je <code class="language-plaintext highlighter-rouge">false</code> . Primer:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="Fullscreen" value="true" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Orientation</code>vam omogoča, da zaklenete usmerjenost in preprečiti vrtijo v odziv na spremembe v usmerjenosti vmesnik. Možni vrednosti sta <code class="language-plaintext highlighter-rouge">default</code> , <code class="language-plaintext highlighter-rouge">landscape</code> , ali <code class="language-plaintext highlighter-rouge">portrait</code> . Primer:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="Orientation" value="landscape" /&gt;
+</code></pre></div>    </div>
+
+    <p><strong>Opomba</strong>: na <code class="language-plaintext highlighter-rouge">default</code> vrednost pomeni <em>oboje</em> pokrajina ter podoba usmeritve so omogočene. Če želite uporabiti privzete nastavitve vsako platformo (ponavadi portret samo), pustite ta oznako za <code class="language-plaintext highlighter-rouge">config.xml</code> datoteke.</p>
+  </li>
 </ul>
 
-<h2>Multi-Platform nastavitve</h2>
+<h2 id="multi-platform-nastavitve">Multi-Platform nastavitve</h2>
 
 <p>Veljajo naslednje nastavitve več kot ena platforma, ampak ne vse od njih:</p>
 
 <ul>
-<li><p><code>DisallowOverscroll</code>(program privzeto boolean, <code>false</code> ): nastavljena na <code>true</code> Če ne želite vmesnik za prikaz vse povratne informacije, ko uporabniki, se pomaknite čez začetek ali konec vsebin.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="DisallowOverscroll" value="true"/&gt;
-</code></pre></div>
-<p>Velja za Android in iOS. Na iOS, overscroll kretnje vzrok vsebine Odklonijo nazaj v prvotno lego. Na Android, ki jih proizvajajo bolj subtilen učinek žareče obod vrh ali dno vsebine.</p></li>
-<li><p><code>BackgroundColor</code>: Nastavite barvo ozadja app. Podpira štiribajtno čarovnica vrednost, z prvi bajt, ki predstavlja kanal alfa, in standardni RGB vrednosti za naslednje tri bytes. Primer navaja modro:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="BackgroundColor" value="0xff0000ff"/&gt;
-</code></pre></div>
-<p>Velja za Android in BlackBerry. Preglasi CSS, ki so sicer na voljo na <em>vseh</em> platformah, na primer:<code>body{background-color:blue}</code>.</p></li>
-<li><p><code>HideKeyboardFormAccessoryBar</code>(program privzeto boolean, <code>false</code> ): nastavite na <code>true</code> skriti dodatne orodne vrstice, ki se prikaže nad tipkovnico, pomagajo uporabnikom pluti iz en obrazec vložek v drugo.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="HideKeyboardFormAccessoryBar" value="true"/&gt;
-</code></pre></div>
-<p>Velja za iOS in BlackBerry.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">DisallowOverscroll</code>(program privzeto boolean, <code class="language-plaintext highlighter-rouge">false</code> ): nastavljena na <code class="language-plaintext highlighter-rouge">true</code> Če ne želite vmesnik za prikaz vse povratne informacije, ko uporabniki, se pomaknite čez začetek ali konec vsebin.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="DisallowOverscroll" value="true"/&gt;
+</code></pre></div>    </div>
+
+    <p>Velja za Android in iOS. Na iOS, overscroll kretnje vzrok vsebine Odklonijo nazaj v prvotno lego. Na Android, ki jih proizvajajo bolj subtilen učinek žareče obod vrh ali dno vsebine.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">BackgroundColor</code>: Nastavite barvo ozadja app. Podpira štiribajtno čarovnica vrednost, z prvi bajt, ki predstavlja kanal alfa, in standardni RGB vrednosti za naslednje tri bytes. Primer navaja modro:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="BackgroundColor" value="0xff0000ff"/&gt;
+</code></pre></div>    </div>
+
+    <p>Velja za Android in BlackBerry. Preglasi CSS, ki so sicer na voljo na <em>vseh</em> platformah, na primer:<code class="language-plaintext highlighter-rouge">body{background-color:blue}</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">HideKeyboardFormAccessoryBar</code>(program privzeto boolean, <code class="language-plaintext highlighter-rouge">false</code> ): nastavite na <code class="language-plaintext highlighter-rouge">true</code> skriti dodatne orodne vrstice, ki se prikaže nad tipkovnico, pomagajo uporabnikom pluti iz en obrazec vložek v drugo.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="HideKeyboardFormAccessoryBar" value="true"/&gt;
+</code></pre></div>    </div>
+
+    <p>Velja za iOS in BlackBerry.</p>
+  </li>
 </ul>
 
-<h2><em>Funkcijo</em> Element</h2>
+<h2 id="funkcijo-element"><em>Funkcijo</em> Element</h2>
 
-<p>Če uporabljate CLI razvijanje aplikacij, uporabljate v <code>plugin</code> želite omogočiti napravo API. To does ne ublažiti najvišje ravni <code>config.xml</code> Datoteka, tako je <code>&lt;feature&gt;</code> element se ne uporablja za potek dela. Če delate neposredno v je SDK in uporabo plosčad-poseben <code>config.xml</code> datoteke kot vir, uporabite na <code>&lt;feature&gt;</code> tag omogočiti napravo ravni API in zunanjih plugins. Se pogosto pojavijo z vrednosti po meri v posamezne <code>config.xml</code> datoteke. Na primer, tukaj je kako opredeliti naprave API za Android projektov:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;feature name="Device"&gt;
+<p>Če uporabljate CLI razvijanje aplikacij, uporabljate v <code class="language-plaintext highlighter-rouge">plugin</code> želite omogočiti napravo API. To does ne ublažiti najvišje ravni <code class="language-plaintext highlighter-rouge">config.xml</code> Datoteka, tako je <code class="language-plaintext highlighter-rouge">&lt;feature&gt;</code> element se ne uporablja za potek dela. Če delate neposredno v je SDK in uporabo plosčad-poseben <code class="language-plaintext highlighter-rouge">config.xml</code> datoteke kot vir, uporabite na <code class="language-plaintext highlighter-rouge">&lt;feature&gt;</code> tag omogočiti napravo ravni API in zunanjih plugins. Se pogosto pojavijo z vrednosti po meri v posamezne <code class="language-plaintext highlighter-rouge">config.xml</code> datoteke. Na primer, tukaj je kako opredeliti naprave API za Android projektov:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;feature name="Device"&gt;
         &lt;param name="android-package" value="org.apache.cordova.device.Device" /&gt;
     &lt;/feature&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Tukaj je, kako se prikaže element za iOS projektov:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;feature name="Device"&gt;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;feature name="Device"&gt;
         &lt;param name="ios-package" value="CDVDevice" /&gt;
     &lt;/feature&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Glej sklic API za podrobnosti o tem, kako določiti vsako funkcijo. Glej <a href="../guide/hybrid/plugins/index.html">Plugin razvoj vodnik</a> za več informacij o plugins.</p>
 
 

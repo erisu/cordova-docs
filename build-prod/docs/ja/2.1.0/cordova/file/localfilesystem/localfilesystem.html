@@ -1292,92 +1292,98 @@
             
 
             <div id="page-toc-source">
-                <h1>LocalFileSystem</h1>
+                <h1 id="localfilesystem">LocalFileSystem</h1>
 
 <p>このオブジェクトは、ファイルシステムのルートの取得方法を提供します。</p>
 
-<h2>メソッド</h2>
+<h2 id="メソッド">メソッド</h2>
 
 <ul>
-<li><strong>requestFileSystem:</strong> ファイルシステムをリクエストします <em>(Function)</em></li>
-<li><strong>resolveLocalFileSystemURI:</strong> ローカル URI を使用して <a href="../directoryentry/directoryentry.html">DirectoryEntry</a> または <a href="../fileentry/fileentry.html">FileEntry</a> を取得します <em>(Function)</em></li>
+  <li><strong>requestFileSystem:</strong> ファイルシステムをリクエストします <em>(Function)</em></li>
+  <li><strong>resolveLocalFileSystemURI:</strong> ローカル URI を使用して <a href="../directoryentry/directoryentry.html">DirectoryEntry</a> または <a href="../fileentry/fileentry.html">FileEntry</a> を取得します <em>(Function)</em></li>
 </ul>
 
-<h2>定数</h2>
+<h2 id="定数">定数</h2>
 
 <ul>
-<li><code>LocalFileSystem.PERSISTENT</code>: アプリやユーザーの許可なしに、ユーザエージェントのみでは削除されないような永続的なストレージを表します</li>
-<li><code>LocalFileSystem.TEMPORARY</code>: 永続性が保証されていないようなストレージを表します</li>
+  <li><code class="language-plaintext highlighter-rouge">LocalFileSystem.PERSISTENT</code>: アプリやユーザーの許可なしに、ユーザエージェントのみでは削除されないような永続的なストレージを表します</li>
+  <li><code class="language-plaintext highlighter-rouge">LocalFileSystem.TEMPORARY</code>: 永続性が保証されていないようなストレージを表します</li>
 </ul>
 
-<h2>詳細</h2>
+<h2 id="詳細">詳細</h2>
 
-<p><code>LocalFileSystem</code> オブジェクトのメソッドは <strong>window</strong> オブジェクトに定義されています。</p>
+<p><code class="language-plaintext highlighter-rouge">LocalFileSystem</code> オブジェクトのメソッドは <strong>window</strong> オブジェクトに定義されています。</p>
 
-<h2>サポートされているプラットフォーム</h2>
+<h2 id="サポートされているプラットフォーム">サポートされているプラットフォーム</h2>
 
 <ul>
-<li>Android</li>
-<li>BlackBerry WebWorks (OS 5.0 以上)</li>
-<li>iOS</li>
-<li>Windows Phone 7 (Mango)</li>
+  <li>Android</li>
+  <li>BlackBerry WebWorks (OS 5.0 以上)</li>
+  <li>iOS</li>
+  <li>Windows Phone 7 (Mango)</li>
 </ul>
 
-<h2>Request <a href="../fileobj/fileobj.html">File</a> Systemの使用例</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">function onSuccess(fileSystem) {
+<h2 id="request-file-systemの使用例">Request <a href="../fileobj/fileobj.html">File</a> Systemの使用例</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function onSuccess(fileSystem) {
     console.log(fileSystem.name);
 }
 
 // ファイルシステムをリクエスト
 window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSuccess, onError);
-</code></pre></div>
-<h2>Resolve Local <a href="../fileobj/fileobj.html">File</a> System URIの使用例</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">function onSuccess(fileEntry) {
+</code></pre></div></div>
+
+<h2 id="resolve-local-file-system-uriの使用例">Resolve Local <a href="../fileobj/fileobj.html">File</a> System URIの使用例</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function onSuccess(fileEntry) {
     console.log(fileEntry.name);
 }
 
 window.resolveLocalFileSystemURI("file:///example.txt", onSuccess, onError);
-</code></pre></div>
-<h2>詳細な使用例</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Local File System の使用例<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova-2.1.0.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="詳細な使用例">詳細な使用例</h2>
 
-    <span class="c1">// Cordova の読み込み完了まで待機</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Local File System の使用例&lt;/title&gt;
 
-    <span class="c1">// Cordova 準備完了</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">window</span><span class="p">.</span><span class="nx">requestFileSystem</span><span class="p">(</span><span class="nx">LocalFileSystem</span><span class="p">.</span><span class="nx">PERSISTENT</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">onFileSystemSuccess</span><span class="p">,</span> <span class="nx">fail</span><span class="p">);</span>
-        <span class="nb">window</span><span class="p">.</span><span class="nx">resolveLocalFileSystemURI</span><span class="p">(</span><span class="s2">"file:///example.txt"</span><span class="p">,</span> <span class="nx">onResolveSuccess</span><span class="p">,</span> <span class="nx">fail</span><span class="p">);</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.1.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="kd">function</span> <span class="nx">onFileSystemSuccess</span><span class="p">(</span><span class="nx">fileSystem</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">fileSystem</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
-    <span class="p">}</span>
+    // Cordova の読み込み完了まで待機
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
 
-    <span class="kd">function</span> <span class="nx">onResolveSuccess</span><span class="p">(</span><span class="nx">fileEntry</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">fileEntry</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
-    <span class="p">}</span>
+    // Cordova 準備完了
+    //
+    function onDeviceReady() {
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, fail);
+        window.resolveLocalFileSystemURI("file:///example.txt", onResolveSuccess, fail);
+    }
 
-    <span class="kd">function</span> <span class="nx">fail</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">code</span><span class="p">);</span>
-    <span class="p">}</span>
+    function onFileSystemSuccess(fileSystem) {
+        console.log(fileSystem.name);
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;h1&gt;</span>使用例<span class="nt">&lt;/h1&gt;</span>
-    <span class="nt">&lt;p&gt;</span>Local File System<span class="nt">&lt;/p&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+    function onResolveSuccess(fileEntry) {
+        console.log(fileEntry.name);
+    }
+
+    function fail(error) {
+        console.log(error.code);
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;使用例&lt;/h1&gt;
+    &lt;p&gt;Local File System&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

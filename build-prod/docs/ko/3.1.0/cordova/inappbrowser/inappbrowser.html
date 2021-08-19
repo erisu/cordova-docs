@@ -1182,484 +1182,565 @@
             
 
             <div id="page-toc-source">
-                <h1>InAppBrowser</h1>
+                <h1 id="inappbrowser">InAppBrowser</h1>
 
 <blockquote>
-<p><code>InAppBrowser</code>때 표시 하는 웹 브라우저 보기 전화 <code>[window.open](window.open.html)()</code> , 또는 때로 형성 된 링크 열기<code>&lt;a target=&quot;_blank&quot;&gt;</code>.</p>
+  <p><code class="language-plaintext highlighter-rouge">InAppBrowser</code>때 표시 하는 웹 브라우저 보기 전화 <code class="language-plaintext highlighter-rouge">[window.open](window.open.html)()</code> , 또는 때로 형성 된 링크 열기<code class="language-plaintext highlighter-rouge">&lt;a target="_blank"&gt;</code>.</p>
 </blockquote>
-<div class="highlight"><pre><code class="language-" data-lang="">var ref = window.open('http://apache.org', '_blank', 'location=yes');
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var ref = window.open('http://apache.org', '_blank', 'location=yes');
+</code></pre></div></div>
+
 <p><strong>참고:</strong> InAppBrowser 창 표준 웹 브라우저 처럼 동작 및 코르도바 Api에 액세스할 수 없습니다.</p>
 
-<h2>설명</h2>
+<h2 id="설명">설명</h2>
 
-<p>호출에서 반환 하는 개체<code>[window.open](window.open.html)</code>.</p>
+<p>호출에서 반환 하는 개체<code class="language-plaintext highlighter-rouge">[window.open](window.open.html)</code>.</p>
 
-<h2>메서드</h2>
+<h2 id="메서드">메서드</h2>
 
 <ul>
-<li>  addEventListener</li>
-<li>  removeEventListener</li>
-<li>  close</li>
-<li>  show</li>
-<li>  executeScript</li>
-<li>  insertCSS</li>
+  <li>addEventListener</li>
+  <li>removeEventListener</li>
+  <li>close</li>
+  <li>show</li>
+  <li>executeScript</li>
+  <li>insertCSS</li>
 </ul>
 
-<h2>기능 액세스</h2>
+<h2 id="기능-액세스">기능 액세스</h2>
 
-<p>버전 3.0, 코르도바 <em>플러그인</em>으로 <a href="../device/device.html">장치</a> 수준 Api를 구현합니다. CLI의 사용 <code>plugin</code> 명령 설명에 명령줄 인터페이스를 추가 하거나 프로젝트에 대 한이 기능을 제거 하려면:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add org.apache.cordova.inappbrowser
+<p>버전 3.0, 코르도바 <em>플러그인</em>으로 <a href="../device/device.html">장치</a> 수준 Api를 구현합니다. CLI의 사용 <code class="language-plaintext highlighter-rouge">plugin</code> 명령 설명에 명령줄 인터페이스를 추가 하거나 프로젝트에 대 한이 기능을 제거 하려면:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add org.apache.cordova.inappbrowser
     $ cordova plugin ls
     [ 'org.apache.cordova.inappbrowser' ]
     $ cordova plugin rm org.apache.cordova.inappbrowser
-</code></pre></div>
+</code></pre></div></div>
+
 <p>이 명령은 모든 타겟된 플랫폼에 적용 하지만 플랫폼 관련 구성 설정을 아래에 설명 된 수정:</p>
 
 <ul>
-<li><p>(안 드 로이드<code>app/res/xml/config.xml</code>)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="InAppBrowser"&gt;
+  <li>
+    <p>(안 드 로이드<code class="language-plaintext highlighter-rouge">app/res/xml/config.xml</code>)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="InAppBrowser"&gt;
     &lt;param name="android-package" value="org.apache.cordova.InAppBrowser" /&gt;
 &lt;/feature&gt;
-</code></pre></div></li>
-<li><p>(iOS<code>config.xml</code>)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="InAppBrowser"&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>(iOS<code class="language-plaintext highlighter-rouge">config.xml</code>)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="InAppBrowser"&gt;
     &lt;param name="ios-package" value="CDVInAppBrowser" /&gt;
 &lt;/feature&gt;
-</code></pre></div></li>
-<li><p>Windows Phone 7과 (8<code>config.xml</code>)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="InAppBrowser" /&gt;
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Windows Phone 7과 (8<code class="language-plaintext highlighter-rouge">config.xml</code>)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="InAppBrowser" /&gt;
+</code></pre></div>    </div>
+  </li>
 </ul>
 
 <p>일부 플랫폼은 특별 한 구성이 필요 없이이 기능을 지원할 수 있습니다. <em>플랫폼 지원</em> <a href="../../guide/overview/index.html">개요</a> 섹션에서을 참조 하십시오.</p>
 
-<h1>addEventListener</h1>
+<h1 id="addeventlistener">addEventListener</h1>
 
 <blockquote>
-<p>이벤트에 대 한 수신기를 추가 합니다<code>InAppBrowser</code>.</p>
+  <p>이벤트에 대 한 수신기를 추가 합니다<code class="language-plaintext highlighter-rouge">InAppBrowser</code>.</p>
 </blockquote>
-<div class="highlight"><pre><code class="language-" data-lang="">ref.addEventListener(eventname, callback);
-</code></pre></div>
-<ul>
-<li><p><strong>심판</strong>:에 대 한 참조는 <code>InAppBrowser</code> 창 <em>(InAppBrowser)</em></p></li>
-<li><p><strong>eventname</strong>: <em>(문자열)를</em> 수신 하도록 <a href="../events/events.html">이벤트</a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ref.addEventListener(eventname, callback);
+</code></pre></div></div>
 
 <ul>
-<li>  <strong>loadstart</strong>: 이벤트 발생 때는 <code>InAppBrowser</code> URL 로드를 시작 합니다.</li>
-<li>  <strong>loadstop</strong>: 이벤트가 발생 시기는 <code>InAppBrowser</code> URL 로드 완료.</li>
-<li>  <strong>loaderror</strong>: 이벤트 발생 때는 <code>InAppBrowser</code> URL을 로드할 때 오류가 발생 합니다.</li>
-<li>  <strong>종료</strong>: 이벤트가 발생 시기는 <code>InAppBrowser</code> 창이 닫힙니다.</li>
-</ul></li>
-<li><p><strong>콜백</strong>: 이벤트가 발생 될 때 실행 되는 함수. 함수는 전달 된 <code>InAppBrowserEvent</code> 개체를 매개 변수로 합니다.</p></li>
+  <li>
+    <p><strong>심판</strong>:에 대 한 참조는 <code class="language-plaintext highlighter-rouge">InAppBrowser</code> 창 <em>(InAppBrowser)</em></p>
+  </li>
+  <li>
+    <p><strong>eventname</strong>: <em>(문자열)를</em> 수신 하도록 <a href="../events/events.html">이벤트</a></p>
+
+    <ul>
+      <li><strong>loadstart</strong>: 이벤트 발생 때는 <code class="language-plaintext highlighter-rouge">InAppBrowser</code> URL 로드를 시작 합니다.</li>
+      <li><strong>loadstop</strong>: 이벤트가 발생 시기는 <code class="language-plaintext highlighter-rouge">InAppBrowser</code> URL 로드 완료.</li>
+      <li><strong>loaderror</strong>: 이벤트 발생 때는 <code class="language-plaintext highlighter-rouge">InAppBrowser</code> URL을 로드할 때 오류가 발생 합니다.</li>
+      <li><strong>종료</strong>: 이벤트가 발생 시기는 <code class="language-plaintext highlighter-rouge">InAppBrowser</code> 창이 닫힙니다.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>콜백</strong>: 이벤트가 발생 될 때 실행 되는 함수. 함수는 전달 된 <code class="language-plaintext highlighter-rouge">InAppBrowserEvent</code> 개체를 매개 변수로 합니다.</p>
+  </li>
 </ul>
 
-<h2>지원 되는 플랫폼</h2>
+<h2 id="지원-되는-플랫폼">지원 되는 플랫폼</h2>
 
 <ul>
-<li>  안 드 로이드</li>
-<li>  블랙베리</li>
-<li>  iOS</li>
-<li>  Windows Phone 7과 8</li>
+  <li>안 드 로이드</li>
+  <li>블랙베리</li>
+  <li>iOS</li>
+  <li>Windows Phone 7과 8</li>
 </ul>
 
-<h2>빠른 예제</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">var ref = window.open('http://apache.org', '_blank', 'location=yes');
+<h2 id="빠른-예제">빠른 예제</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var ref = window.open('http://apache.org', '_blank', 'location=yes');
 ref.addEventListener('loadstart', function() { alert(event.url); });
-</code></pre></div>
-<h2>전체 예제</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>InAppBrowser.addEventListener Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="전체-예제">전체 예제</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;InAppBrowser.addEventListener Example&lt;/title&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-         <span class="kd">var</span> <span class="nx">ref</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">'http://apache.org'</span><span class="p">,</span> <span class="s1">'_blank'</span><span class="p">,</span> <span class="s1">'location=yes'</span><span class="p">);</span>
-         <span class="nx">ref</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'loadstart'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="nx">alert</span><span class="p">(</span><span class="s1">'start: '</span> <span class="o">+</span> <span class="nx">event</span><span class="p">.</span><span class="nx">url</span><span class="p">);</span> <span class="p">});</span>
-         <span class="nx">ref</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'loadstop'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="nx">alert</span><span class="p">(</span><span class="s1">'stop: '</span> <span class="o">+</span> <span class="nx">event</span><span class="p">.</span><span class="nx">url</span><span class="p">);</span> <span class="p">});</span>
-         <span class="nx">ref</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'loaderror'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="nx">alert</span><span class="p">(</span><span class="s1">'error: '</span> <span class="o">+</span> <span class="nx">event</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span> <span class="p">});</span>
-         <span class="nx">ref</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'exit'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="nx">alert</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">type</span><span class="p">);</span> <span class="p">});</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h1>removeEventListener</h1>
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+         var ref = window.open('http://apache.org', '_blank', 'location=yes');
+         ref.addEventListener('loadstart', function(event) { alert('start: ' + event.url); });
+         ref.addEventListener('loadstop', function(event) { alert('stop: ' + event.url); });
+         ref.addEventListener('loaderror', function(event) { alert('error: ' + event.message); });
+         ref.addEventListener('exit', function(event) { alert(event.type); });
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h1 id="removeeventlistener">removeEventListener</h1>
 
 <blockquote>
-<p>이벤트에 대 한 수신기를 제거 합니다<code>InAppBrowser</code>.</p>
+  <p>이벤트에 대 한 수신기를 제거 합니다<code class="language-plaintext highlighter-rouge">InAppBrowser</code>.</p>
 </blockquote>
-<div class="highlight"><pre><code class="language-" data-lang="">ref.removeEventListener(eventname, callback);
-</code></pre></div>
-<ul>
-<li><p><strong>심판</strong>:에 대 한 참조는 <code>InAppBrowser</code> 창. <em>(InAppBrowser)</em></p></li>
-<li><p><strong>eventname</strong>: <a href="../events/events.html">이벤트</a> 수신 대기를 중지 합니다. <em>(문자열)</em></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ref.removeEventListener(eventname, callback);
+</code></pre></div></div>
 
 <ul>
-<li>  <strong>loadstart</strong>: 이벤트 발생 때는 <code>InAppBrowser</code> URL 로드를 시작 합니다.</li>
-<li>  <strong>loadstop</strong>: 이벤트가 발생 시기는 <code>InAppBrowser</code> URL 로드 완료.</li>
-<li>  <strong>loaderror</strong>: 이벤트 발생 때는 <code>InAppBrowser</code> URL 로드 오류가 발생 합니다.</li>
-<li>  <strong>종료</strong>: 이벤트가 발생 시기는 <code>InAppBrowser</code> 창이 닫힙니다.</li>
-</ul></li>
-<li><p><strong>콜백</strong>: 이벤트가 발생 하면 실행할 함수. 함수는 전달 된 <code>InAppBrowserEvent</code> 개체.</p></li>
+  <li>
+    <p><strong>심판</strong>:에 대 한 참조는 <code class="language-plaintext highlighter-rouge">InAppBrowser</code> 창. <em>(InAppBrowser)</em></p>
+  </li>
+  <li>
+    <p><strong>eventname</strong>: <a href="../events/events.html">이벤트</a> 수신 대기를 중지 합니다. <em>(문자열)</em></p>
+
+    <ul>
+      <li><strong>loadstart</strong>: 이벤트 발생 때는 <code class="language-plaintext highlighter-rouge">InAppBrowser</code> URL 로드를 시작 합니다.</li>
+      <li><strong>loadstop</strong>: 이벤트가 발생 시기는 <code class="language-plaintext highlighter-rouge">InAppBrowser</code> URL 로드 완료.</li>
+      <li><strong>loaderror</strong>: 이벤트 발생 때는 <code class="language-plaintext highlighter-rouge">InAppBrowser</code> URL 로드 오류가 발생 합니다.</li>
+      <li><strong>종료</strong>: 이벤트가 발생 시기는 <code class="language-plaintext highlighter-rouge">InAppBrowser</code> 창이 닫힙니다.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>콜백</strong>: 이벤트가 발생 하면 실행할 함수. 함수는 전달 된 <code class="language-plaintext highlighter-rouge">InAppBrowserEvent</code> 개체.</p>
+  </li>
 </ul>
 
-<h2>지원 되는 플랫폼</h2>
+<h2 id="지원-되는-플랫폼-1">지원 되는 플랫폼</h2>
 
 <ul>
-<li>  안 드 로이드</li>
-<li>  블랙베리</li>
-<li>  iOS</li>
-<li>  Windows Phone 7과 8</li>
+  <li>안 드 로이드</li>
+  <li>블랙베리</li>
+  <li>iOS</li>
+  <li>Windows Phone 7과 8</li>
 </ul>
 
-<h2>빠른 예제</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">var ref = window.open('http://apache.org', '_blank', 'location=yes');
+<h2 id="빠른-예제-1">빠른 예제</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var ref = window.open('http://apache.org', '_blank', 'location=yes');
 var myCallback = function() { alert(event.url); }
 ref.addEventListener('loadstart', myCallback);
 ref.removeEventListener('loadstart', myCallback);
-</code></pre></div>
-<h2>전체 예제</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>InAppBrowser.removeEventListener Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="전체-예제-1">전체 예제</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;InAppBrowser.removeEventListener Example&lt;/title&gt;
 
-    <span class="c1">// Global InAppBrowser reference</span>
-    <span class="kd">var</span> <span class="nx">iabRef</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="kd">function</span> <span class="nx">iabLoadStart</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">alert</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">type</span> <span class="o">+</span> <span class="s1">' - '</span> <span class="o">+</span> <span class="nx">event</span><span class="p">.</span><span class="nx">url</span><span class="p">);</span>
-    <span class="p">}</span>
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
 
-    <span class="kd">function</span> <span class="nx">iabLoadStop</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">alert</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">type</span> <span class="o">+</span> <span class="s1">' - '</span> <span class="o">+</span> <span class="nx">event</span><span class="p">.</span><span class="nx">url</span><span class="p">);</span>
-    <span class="p">}</span>
+    // Global InAppBrowser reference
+    var iabRef = null;
 
-    <span class="kd">function</span> <span class="nx">iabLoadError</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">alert</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">type</span> <span class="o">+</span> <span class="s1">' - '</span> <span class="o">+</span> <span class="nx">event</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
-    <span class="p">}</span>
+    function iabLoadStart(event) {
+        alert(event.type + ' - ' + event.url);
+    }
 
-    <span class="kd">function</span> <span class="nx">iabClose</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-         <span class="nx">alert</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">type</span><span class="p">);</span>
-         <span class="nx">iabRef</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s1">'loadstart'</span><span class="p">,</span> <span class="nx">iabLoadStart</span><span class="p">);</span>
-         <span class="nx">iabRef</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s1">'loadstop'</span><span class="p">,</span> <span class="nx">iabLoadStop</span><span class="p">);</span>
-         <span class="nx">iabRef</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s1">'loaderror'</span><span class="p">,</span> <span class="nx">iabLoadError</span><span class="p">);</span>
-         <span class="nx">iabRef</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s1">'exit'</span><span class="p">,</span> <span class="nx">iabClose</span><span class="p">);</span>
-    <span class="p">}</span>
+    function iabLoadStop(event) {
+        alert(event.type + ' - ' + event.url);
+    }
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-         <span class="nx">iabRef</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">'http://apache.org'</span><span class="p">,</span> <span class="s1">'_blank'</span><span class="p">,</span> <span class="s1">'location=yes'</span><span class="p">);</span>
-         <span class="nx">iabRef</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'loadstart'</span><span class="p">,</span> <span class="nx">iabLoadStart</span><span class="p">);</span>
-         <span class="nx">iabRef</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'loadstop'</span><span class="p">,</span> <span class="nx">iabLoadStop</span><span class="p">);</span>
-         <span class="nx">iabRef</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s1">'loaderror'</span><span class="p">,</span> <span class="nx">iabLoadError</span><span class="p">);</span>
-         <span class="nx">iabRef</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'exit'</span><span class="p">,</span> <span class="nx">iabClose</span><span class="p">);</span>
-    <span class="p">}</span>
+    function iabLoadError(event) {
+        alert(event.type + ' - ' + event.message);
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h1>닫기</h1>
+    function iabClose(event) {
+         alert(event.type);
+         iabRef.removeEventListener('loadstart', iabLoadStart);
+         iabRef.removeEventListener('loadstop', iabLoadStop);
+         iabRef.removeEventListener('loaderror', iabLoadError);
+         iabRef.removeEventListener('exit', iabClose);
+    }
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+         iabRef = window.open('http://apache.org', '_blank', 'location=yes');
+         iabRef.addEventListener('loadstart', iabLoadStart);
+         iabRef.addEventListener('loadstop', iabLoadStop);
+         iabRef.removeEventListener('loaderror', iabLoadError);
+         iabRef.addEventListener('exit', iabClose);
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h1 id="닫기">닫기</h1>
 
 <blockquote>
-<p>종료는 <code>InAppBrowser</code> 창.</p>
+  <p>종료는 <code class="language-plaintext highlighter-rouge">InAppBrowser</code> 창.</p>
 </blockquote>
-<div class="highlight"><pre><code class="language-" data-lang="">ref.close();
-</code></pre></div>
-<ul>
-<li>  <strong>심판</strong>:에 대 한 참조는 <code>InAppBrowser</code> 창 <em>(InAppBrowser)</em></li>
-</ul>
 
-<h2>지원 되는 플랫폼</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ref.close();
+</code></pre></div></div>
 
 <ul>
-<li>  안 드 로이드</li>
-<li>  블랙베리</li>
-<li>  iOS</li>
-<li>  Windows Phone 7과 8</li>
+  <li><strong>심판</strong>:에 대 한 참조는 <code class="language-plaintext highlighter-rouge">InAppBrowser</code> 창 <em>(InAppBrowser)</em></li>
 </ul>
 
-<h2>빠른 예제</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">var ref = window.open('http://apache.org', '_blank', 'location=yes');
+<h2 id="지원-되는-플랫폼-2">지원 되는 플랫폼</h2>
+
+<ul>
+  <li>안 드 로이드</li>
+  <li>블랙베리</li>
+  <li>iOS</li>
+  <li>Windows Phone 7과 8</li>
+</ul>
+
+<h2 id="빠른-예제-2">빠른 예제</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var ref = window.open('http://apache.org', '_blank', 'location=yes');
 ref.close();
-</code></pre></div>
-<h2>전체 예제</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>InAppBrowser.close Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="전체-예제-2">전체 예제</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;InAppBrowser.close Example&lt;/title&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-         <span class="kd">var</span> <span class="nx">ref</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">'http://apache.org'</span><span class="p">,</span> <span class="s1">'_blank'</span><span class="p">,</span> <span class="s1">'location=yes'</span><span class="p">);</span>
-         <span class="c1">// close InAppBrowser after 5 seconds</span>
-         <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-             <span class="nx">ref</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
-         <span class="p">},</span> <span class="mi">5000</span><span class="p">);</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h1>보기</h1>
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+         var ref = window.open('http://apache.org', '_blank', 'location=yes');
+         // close InAppBrowser after 5 seconds
+         setTimeout(function() {
+             ref.close();
+         }, 5000);
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h1 id="보기">보기</h1>
 
 <blockquote>
-<p>숨겨진 열은 한 InAppBrowser 창을 표시 합니다. 전화는 InAppBrowser가 이미 보이는 경우는 효과가 없습니다.</p>
+  <p>숨겨진 열은 한 InAppBrowser 창을 표시 합니다. 전화는 InAppBrowser가 이미 보이는 경우는 효과가 없습니다.</p>
 </blockquote>
-<div class="highlight"><pre><code class="language-" data-lang="">ref.show();
-</code></pre></div>
-<ul>
-<li>  <strong>ref:</strong> InAppBrowser 창 (참조<code>InAppBrowser</code>)</li>
-</ul>
 
-<h2>지원 되는 플랫폼</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ref.show();
+</code></pre></div></div>
 
 <ul>
-<li>  안 드 로이드</li>
-<li>  블랙베리</li>
-<li>  iOS</li>
+  <li><strong>ref:</strong> InAppBrowser 창 (참조<code class="language-plaintext highlighter-rouge">InAppBrowser</code>)</li>
 </ul>
 
-<h2>빠른 예제</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">var ref = window.open('http://apache.org', '_blank', 'hidden=yes');
+<h2 id="지원-되는-플랫폼-3">지원 되는 플랫폼</h2>
+
+<ul>
+  <li>안 드 로이드</li>
+  <li>블랙베리</li>
+  <li>iOS</li>
+</ul>
+
+<h2 id="빠른-예제-3">빠른 예제</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var ref = window.open('http://apache.org', '_blank', 'hidden=yes');
 ref.show();
-</code></pre></div>
-<h2>전체 예제</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>InAppBrowser.show Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="전체-예제-3">전체 예제</h2>
 
-    <span class="c1">// Wait for Cordova to load</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;InAppBrowser.show Example&lt;/title&gt;
 
-    <span class="c1">// Cordova is ready</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-         <span class="kd">var</span> <span class="nx">ref</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">'http://apache.org'</span><span class="p">,</span> <span class="s1">'_blank'</span><span class="p">,</span> <span class="s1">'hidden=yes'</span><span class="p">);</span>
-         <span class="nx">ref</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'loadstop'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-             <span class="nx">alert</span><span class="p">(</span><span class="s1">'background window loaded'</span><span class="p">);</span> 
-         <span class="p">});</span>
-         <span class="c1">// close InAppBrowser after 5 seconds</span>
-         <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-             <span class="nx">ref</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
-         <span class="p">},</span> <span class="mi">5000</span><span class="p">);</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h1>executeScript</h1>
+    // Wait for Cordova to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    // Cordova is ready
+    //
+    function onDeviceReady() {
+         var ref = window.open('http://apache.org', '_blank', 'hidden=yes');
+         ref.addEventListener('loadstop', function(event) {
+             alert('background window loaded'); 
+         });
+         // close InAppBrowser after 5 seconds
+         setTimeout(function() {
+             ref.close();
+         }, 5000);
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h1 id="executescript">executeScript</h1>
 
 <blockquote>
-<p>에 자바 스크립트 코드를 삽입는 <code>InAppBrowser</code> 창</p>
+  <p>에 자바 스크립트 코드를 삽입는 <code class="language-plaintext highlighter-rouge">InAppBrowser</code> 창</p>
 </blockquote>
-<div class="highlight"><pre><code class="language-" data-lang="">ref.executeScript(details, callback);
-</code></pre></div>
-<ul>
-<li><p><strong>심판</strong>:에 대 한 참조는 <code>InAppBrowser</code> 창. <em>(InAppBrowser)</em></p></li>
-<li><p><strong>injectDetails</strong>: 스크립트 실행의 세부 사항 중 하나를 지정 하는 <code>file</code> 또는 <code>code</code> 키. <em>(개체)</em></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ref.executeScript(details, callback);
+</code></pre></div></div>
 
 <ul>
-<li>  <strong>파일</strong>: 삽입 하는 스크립트의 URL.</li>
-<li>  <strong>코드</strong>: 스크립트 텍스트를 삽입 합니다.</li>
-</ul></li>
-<li><p><strong>콜백</strong>: 자바 스크립트 코드를 주입 후 실행 기능.</p>
+  <li>
+    <p><strong>심판</strong>:에 대 한 참조는 <code class="language-plaintext highlighter-rouge">InAppBrowser</code> 창. <em>(InAppBrowser)</em></p>
+  </li>
+  <li>
+    <p><strong>injectDetails</strong>: 스크립트 실행의 세부 사항 중 하나를 지정 하는 <code class="language-plaintext highlighter-rouge">file</code> 또는 <code class="language-plaintext highlighter-rouge">code</code> 키. <em>(개체)</em></p>
 
-<ul>
-<li>  삽입 된 스크립트 유형의 경우 <code>code</code> , 스크립트의 반환 값은 단일 매개 변수는 콜백 실행에 싸여 있는 <code>Array</code> . 여러 줄 스크립트에 대 한 마지막 문 또는 평가 마지막 식의 반환 값입니다.</li>
-</ul></li>
+    <ul>
+      <li><strong>파일</strong>: 삽입 하는 스크립트의 URL.</li>
+      <li><strong>코드</strong>: 스크립트 텍스트를 삽입 합니다.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>콜백</strong>: 자바 스크립트 코드를 주입 후 실행 기능.</p>
+
+    <ul>
+      <li>삽입 된 스크립트 유형의 경우 <code class="language-plaintext highlighter-rouge">code</code> , 스크립트의 반환 값은 단일 매개 변수는 콜백 실행에 싸여 있는 <code class="language-plaintext highlighter-rouge">Array</code> . 여러 줄 스크립트에 대 한 마지막 문 또는 평가 마지막 식의 반환 값입니다.</li>
+    </ul>
+  </li>
 </ul>
 
-<h2>지원 되는 플랫폼</h2>
+<h2 id="지원-되는-플랫폼-4">지원 되는 플랫폼</h2>
 
 <ul>
-<li>  안 드 로이드</li>
-<li>  블랙베리</li>
-<li>  iOS</li>
+  <li>안 드 로이드</li>
+  <li>블랙베리</li>
+  <li>iOS</li>
 </ul>
 
-<h2>빠른 예제</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">var ref = window.open('http://apache.org', '_blank', 'location=yes');
+<h2 id="빠른-예제-4">빠른 예제</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var ref = window.open('http://apache.org', '_blank', 'location=yes');
 ref.addEventListener('loadstop', function() {
     ref.executeSript({file: "myscript.js"});
 });
-</code></pre></div>
-<h2>전체 예제</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>InAppBrowser.executeScript Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="전체-예제-4">전체 예제</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;InAppBrowser.executeScript Example&lt;/title&gt;
 
-    <span class="c1">// Global InAppBrowser reference</span>
-    <span class="kd">var</span> <span class="nx">iabRef</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// Inject our custom JavaScript into the InAppBrowser window</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">replaceHeaderImage</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">iabRef</span><span class="p">.</span><span class="nx">executeScript</span><span class="p">({</span>
-            <span class="na">code</span><span class="p">:</span> <span class="s2">"var img=document.querySelector('#header img'); img.src='http://cordova.apache.org/images/cordova_bot.png';"</span>
-        <span class="p">},</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-            <span class="nx">alert</span><span class="p">(</span><span class="s2">"Image Element Successfully Hijacked"</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
 
-    <span class="kd">function</span> <span class="nx">iabClose</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-         <span class="nx">iabRef</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s1">'loadstop'</span><span class="p">,</span> <span class="nx">replaceHeaderImage</span><span class="p">);</span>
-         <span class="nx">iabRef</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s1">'exit'</span><span class="p">,</span> <span class="nx">iabClose</span><span class="p">);</span>
-    <span class="p">}</span>
+    // Global InAppBrowser reference
+    var iabRef = null;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-         <span class="nx">iabRef</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">'http://apache.org'</span><span class="p">,</span> <span class="s1">'_blank'</span><span class="p">,</span> <span class="s1">'location=yes'</span><span class="p">);</span>
-         <span class="nx">iabRef</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'loadstop'</span><span class="p">,</span> <span class="nx">replaceHeaderImage</span><span class="p">);</span>
-         <span class="nx">iabRef</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'exit'</span><span class="p">,</span> <span class="nx">iabClose</span><span class="p">);</span>
-    <span class="p">}</span>
+    // Inject our custom JavaScript into the InAppBrowser window
+    //
+    function replaceHeaderImage() {
+        iabRef.executeScript({
+            code: "var img=document.querySelector('#header img'); img.src='http://cordova.apache.org/images/cordova_bot.png';"
+        }, function() {
+            alert("Image Element Successfully Hijacked");
+        }
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h1>insertCSS</h1>
+    function iabClose(event) {
+         iabRef.removeEventListener('loadstop', replaceHeaderImage);
+         iabRef.removeEventListener('exit', iabClose);
+    }
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+         iabRef = window.open('http://apache.org', '_blank', 'location=yes');
+         iabRef.addEventListener('loadstop', replaceHeaderImage);
+         iabRef.addEventListener('exit', iabClose);
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h1 id="insertcss">insertCSS</h1>
 
 <blockquote>
-<p>주사로 CSS는 <code>InAppBrowser</code> 창.</p>
+  <p>주사로 CSS는 <code class="language-plaintext highlighter-rouge">InAppBrowser</code> 창.</p>
 </blockquote>
-<div class="highlight"><pre><code class="language-" data-lang="">ref.insertCSS(details, callback);
-</code></pre></div>
-<ul>
-<li><p><strong>심판</strong>:에 대 한 참조는 <code>InAppBrowser</code> 창 <em>(InAppBrowser)</em></p></li>
-<li><p><strong>injectDetails</strong>: 스크립트 실행의 세부 사항 중 하나를 지정 하는 <code>file</code> 또는 <code>code</code> 키. <em>(개체)</em></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ref.insertCSS(details, callback);
+</code></pre></div></div>
 
 <ul>
-<li>  <strong>파일</strong>: 삽입 하는 스타일 시트의 URL.</li>
-<li>  <strong>코드</strong>: 삽입 하는 스타일 시트의 텍스트.</li>
-</ul></li>
-<li><p><strong>콜백</strong>: CSS 주입 후 실행 기능.</p></li>
+  <li>
+    <p><strong>심판</strong>:에 대 한 참조는 <code class="language-plaintext highlighter-rouge">InAppBrowser</code> 창 <em>(InAppBrowser)</em></p>
+  </li>
+  <li>
+    <p><strong>injectDetails</strong>: 스크립트 실행의 세부 사항 중 하나를 지정 하는 <code class="language-plaintext highlighter-rouge">file</code> 또는 <code class="language-plaintext highlighter-rouge">code</code> 키. <em>(개체)</em></p>
+
+    <ul>
+      <li><strong>파일</strong>: 삽입 하는 스타일 시트의 URL.</li>
+      <li><strong>코드</strong>: 삽입 하는 스타일 시트의 텍스트.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>콜백</strong>: CSS 주입 후 실행 기능.</p>
+  </li>
 </ul>
 
-<h2>지원 되는 플랫폼</h2>
+<h2 id="지원-되는-플랫폼-5">지원 되는 플랫폼</h2>
 
 <ul>
-<li>  안 드 로이드</li>
-<li>  블랙베리</li>
-<li>  iOS</li>
+  <li>안 드 로이드</li>
+  <li>블랙베리</li>
+  <li>iOS</li>
 </ul>
 
-<h2>빠른 예제</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">var ref = window.open('http://apache.org', '_blank', 'location=yes');
+<h2 id="빠른-예제-5">빠른 예제</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var ref = window.open('http://apache.org', '_blank', 'location=yes');
 ref.addEventListener('loadstop', function() {
     ref.insertCSS({file: "mystyles.css"});
 });
-</code></pre></div>
-<h2>전체 예제</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>InAppBrowser.insertCSS Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="전체-예제-5">전체 예제</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;InAppBrowser.insertCSS Example&lt;/title&gt;
 
-    <span class="c1">// Global InAppBrowser reference</span>
-    <span class="kd">var</span> <span class="nx">iabRef</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// Inject our custom CSS into the InAppBrowser window</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">changeBackgroundColor</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">iabRef</span><span class="p">.</span><span class="nx">insertCSS</span><span class="p">({</span>
-            <span class="na">code</span><span class="p">:</span> <span class="s2">"body { background: #ffff00"</span>
-        <span class="p">},</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-            <span class="nx">alert</span><span class="p">(</span><span class="s2">"Styles Altered"</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
 
-    <span class="kd">function</span> <span class="nx">iabClose</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-         <span class="nx">iabRef</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s1">'loadstop'</span><span class="p">,</span> <span class="nx">changeBackgroundColor</span><span class="p">);</span>
-         <span class="nx">iabRef</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s1">'exit'</span><span class="p">,</span> <span class="nx">iabClose</span><span class="p">);</span>
-    <span class="p">}</span>
+    // Global InAppBrowser reference
+    var iabRef = null;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-         <span class="nx">iabRef</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">'http://apache.org'</span><span class="p">,</span> <span class="s1">'_blank'</span><span class="p">,</span> <span class="s1">'location=yes'</span><span class="p">);</span>
-         <span class="nx">iabRef</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'loadstop'</span><span class="p">,</span> <span class="nx">changeBackgroundColor</span><span class="p">);</span>
-         <span class="nx">iabRef</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'exit'</span><span class="p">,</span> <span class="nx">iabClose</span><span class="p">);</span>
-    <span class="p">}</span>
+    // Inject our custom CSS into the InAppBrowser window
+    //
+    function changeBackgroundColor() {
+        iabRef.insertCSS({
+            code: "body { background: #ffff00"
+        }, function() {
+            alert("Styles Altered");
+        }
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h1>InAppBrowserEvent</h1>
+    function iabClose(event) {
+         iabRef.removeEventListener('loadstop', changeBackgroundColor);
+         iabRef.removeEventListener('exit', iabClose);
+    }
 
-<p>콜백 함수에 전달 되는 개체는 <code>addEventListener</code> 에 <code>InAppBrowser</code> 개체.</p>
+    // device APIs are available
+    //
+    function onDeviceReady() {
+         iabRef = window.open('http://apache.org', '_blank', 'location=yes');
+         iabRef.addEventListener('loadstop', changeBackgroundColor);
+         iabRef.addEventListener('exit', iabClose);
+    }
 
-<h2>속성</h2>
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h1 id="inappbrowserevent">InAppBrowserEvent</h1>
+
+<p>콜백 함수에 전달 되는 개체는 <code class="language-plaintext highlighter-rouge">addEventListener</code> 에 <code class="language-plaintext highlighter-rouge">InAppBrowser</code> 개체.</p>
+
+<h2 id="속성">속성</h2>
 
 <ul>
-<li><p><strong>유형</strong>: eventname, 중 <code>loadstart</code> , <code>loadstop</code> , <code>loaderror</code> , 또는 <code>exit</code> . <em>(문자열)</em></p></li>
-<li><p><strong>url</strong>: URL 로드 된. <em>(문자열)</em></p></li>
-<li><p><strong>코드</strong>: 오류 코드의 경우에만 <code>loaderror</code> . <em>(수)</em></p></li>
-<li><p><strong>메시지</strong>: 오류 메시지의 경우에만 <code>loaderror</code> . <em>(문자열)</em></p></li>
+  <li>
+    <p><strong>유형</strong>: eventname, 중 <code class="language-plaintext highlighter-rouge">loadstart</code> , <code class="language-plaintext highlighter-rouge">loadstop</code> , <code class="language-plaintext highlighter-rouge">loaderror</code> , 또는 <code class="language-plaintext highlighter-rouge">exit</code> . <em>(문자열)</em></p>
+  </li>
+  <li>
+    <p><strong>url</strong>: URL 로드 된. <em>(문자열)</em></p>
+  </li>
+  <li>
+    <p><strong>코드</strong>: 오류 코드의 경우에만 <code class="language-plaintext highlighter-rouge">loaderror</code> . <em>(수)</em></p>
+  </li>
+  <li>
+    <p><strong>메시지</strong>: 오류 메시지의 경우에만 <code class="language-plaintext highlighter-rouge">loaderror</code> . <em>(문자열)</em></p>
+  </li>
 </ul>
 
 

@@ -1112,80 +1112,88 @@
             
 
             <div id="page-toc-source">
-                <h1>黑莓手機的外掛程式</h1>
+                <h1 id="黑莓手機的外掛程式">黑莓手機的外掛程式</h1>
 
 <p>本指南介紹了如何開發回聲外掛程式在黑莓手機上。 外掛程式開發指南提供廣泛概述，你應該已經是熟悉的和本指南撿起它的留下。 此外，下載<a href="https://git-wip-us.apache.org/repos/asf?p=cordova-blackberry-webworks.git;a=summary">科爾多瓦黑莓手機存儲庫</a>.</p>
 
-<p><code>Cordova-BlackBerry</code>專案允許您將部署到黑莓火炬、 加粗和操作手冊等。 Playbook 使用不同的代碼基比其他黑莓手持設備，您需要為其重複你的發展努力。 本指南著重于手持設備，而不是平板電腦。 （在將來，本指南應包括這兩個平臺）。</p>
+<p><code class="language-plaintext highlighter-rouge">Cordova-BlackBerry</code>專案允許您將部署到黑莓火炬、 加粗和操作手冊等。 Playbook 使用不同的代碼基比其他黑莓手持設備，您需要為其重複你的發展努力。 本指南著重于手持設備，而不是平板電腦。 （在將來，本指南應包括這兩個平臺）。</p>
 
-<p>Echo 外掛程式基本上是返回使用者不管消息提供給 <code>window.echo</code> 函數：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">window.echo = function(str, callback) {
+<p>Echo 外掛程式基本上是返回使用者不管消息提供給 <code class="language-plaintext highlighter-rouge">window.echo</code> 函數：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>window.echo = function(str, callback) {
     cordova.exec(callback, function(err) {
         callback('Nothing to echo.');
     }, "Echo", "echo", [str]);
 };
-</code></pre></div>
-<h2>修改 plugins.xml</h2>
+</code></pre></div></div>
 
-<p>您的專案的 <code>www/plugins.xml</code> 目錄中包含的所有必要引用到科爾多瓦專案的外掛程式。 添加一個額外的引用，這樣，當 <code>cordova.exec</code> 是科爾多瓦叫，知道如何映射 <code>Echo</code> 參數的 <code>cordova.exec</code> 到 <code>Echo</code> 我們想要寫本機的類：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="Echo"&gt;
+<h2 id="修改-pluginsxml">修改 plugins.xml</h2>
+
+<p>您的專案的 <code class="language-plaintext highlighter-rouge">www/plugins.xml</code> 目錄中包含的所有必要引用到科爾多瓦專案的外掛程式。 添加一個額外的引用，這樣，當 <code class="language-plaintext highlighter-rouge">cordova.exec</code> 是科爾多瓦叫，知道如何映射 <code class="language-plaintext highlighter-rouge">Echo</code> 參數的 <code class="language-plaintext highlighter-rouge">cordova.exec</code> 到 <code class="language-plaintext highlighter-rouge">Echo</code> 我們想要寫本機的類：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="Echo"&gt;
     &lt;param name="blackberry-package" value="org.apache.cordova.echo.Echo" /&gt;
 &lt;/feature&gt;
-</code></pre></div>
-<h2>添加 Echo.java</h2>
+</code></pre></div></div>
 
-<p>如果您注意到結構的值屬性，您將看到已定義的路徑，導致回聲外掛程式。 在科爾多瓦黑莓 WebWorks 回購的根目錄中，查找名為的目錄 <code>framework</code> 。 此目錄包含所有的原始程式碼在黑莓手機上本機運行。 導航到 <code>framework/ext/src/org/apache/cordova</code> 。 此時，您將看到所有的外掛程式目錄，所是的原始程式碼。 因此，添加目錄回顯到 <code>framework/ext/src/org/apache/cordova/echo</code> ，並創建一個檔稱為 <code>Echo.java</code> 在<code>framework/ext/src/org/apache/cordova/echo/Echo.java</code>.</p>
+<h2 id="添加-echojava">添加 Echo.java</h2>
 
-<h2>書寫 Echo.java</h2>
+<p>如果您注意到結構的值屬性，您將看到已定義的路徑，導致回聲外掛程式。 在科爾多瓦黑莓 WebWorks 回購的根目錄中，查找名為的目錄 <code class="language-plaintext highlighter-rouge">framework</code> 。 此目錄包含所有的原始程式碼在黑莓手機上本機運行。 導航到 <code class="language-plaintext highlighter-rouge">framework/ext/src/org/apache/cordova</code> 。 此時，您將看到所有的外掛程式目錄，所是的原始程式碼。 因此，添加目錄回顯到 <code class="language-plaintext highlighter-rouge">framework/ext/src/org/apache/cordova/echo</code> ，並創建一個檔稱為 <code class="language-plaintext highlighter-rouge">Echo.java</code> 在<code class="language-plaintext highlighter-rouge">framework/ext/src/org/apache/cordova/echo/Echo.java</code>.</p>
 
-<p>在編寫外掛程式背後的基本思想是，創建一個擴展外掛程式類的類調用的方法 <code>execute</code> 返回 <code>PluginResult</code> 類。 任何調用 <code>cordova.exec</code> 將傳遞給要在類中，以及參數內執行的操作中。 在這種情況下，&quot;回聲&quot;是我們想要執行的類中&quot;回聲&quot;和 [乙方] 的行動是我們在中傳遞的參數。</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="k">package</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">echo</span><span class="p">;</span>
+<h2 id="書寫-echojava">書寫 Echo.java</h2>
 
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="n">Plugin</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="n">PluginResult</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">json4j</span><span class="p">.</span><span class="n">JSONArray</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">json4j</span><span class="p">.</span><span class="n">JSONException</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">json4j</span><span class="p">.</span><span class="n">JSONObject</span><span class="p">;</span>
-<span class="p">/**</span>
- <span class="p">*</span> <span class="n">A</span> <span class="n">simple</span> <span class="n">plugin</span> <span class="k">to</span> <span class="n">demonstrate</span> <span class="n">how</span> <span class="k">to</span> <span class="n">build</span> <span class="n">a</span> <span class="n">plugin</span> <span class="n">for</span> <span class="n">BlackBerry</span>
- <span class="p">*</span> <span class="n">Basically</span> <span class="n">echos</span> <span class="n">back</span> <span class="n">the</span> <span class="n">msg</span> <span class="n">that</span> <span class="n">a</span> <span class="n">user</span> <span class="n">calls</span> <span class="k">to</span> <span class="n">this</span> <span class="n">plugin</span>
- <span class="p">*/</span>
-<span class="k">public</span> <span class="n">final</span> <span class="n">class</span> <span class="n">Echo</span> <span class="n">extends</span> <span class="n">Plugin</span> <span class="p">{</span>
+<p>在編寫外掛程式背後的基本思想是，創建一個擴展外掛程式類的類調用的方法 <code class="language-plaintext highlighter-rouge">execute</code> 返回 <code class="language-plaintext highlighter-rouge">PluginResult</code> 類。 任何調用 <code class="language-plaintext highlighter-rouge">cordova.exec</code> 將傳遞給要在類中，以及參數內執行的操作中。 在這種情況下，”回聲”是我們想要執行的類中”回聲”和 [乙方] 的行動是我們在中傳遞的參數。</p>
 
-    <span class="k">public</span> <span class="n">static</span> <span class="n">final</span> <span class="k">String</span> <span class="n">echo</span> <span class="p">=</span> <span class="s2">"echo"</span><span class="p">;</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package org.apache.cordova.echo;
 
-    <span class="k">public</span> <span class="n">PluginResult</span> <span class="n">execute</span><span class="p">(</span><span class="k">String</span> <span class="n">action</span><span class="p">,</span> <span class="n">JSONArray</span> <span class="n">args</span><span class="p">,</span> <span class="k">String</span> <span class="n">callbackId</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">PluginResult</span> <span class="n">result</span> <span class="p">=</span> <span class="n">new</span> <span class="n">PluginResult</span><span class="p">(</span><span class="n">PluginResult</span><span class="p">.</span><span class="n">Status</span><span class="p">.</span><span class="n">INVALID_ACTION</span><span class="p">,</span> <span class="s2">"Echo: Invalid action:"</span> <span class="p">+</span> <span class="n">action</span><span class="p">);</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">action</span><span class="p">.</span><span class="n">equals</span><span class="p">(</span><span class="n">echo</span><span class="p">)){</span>
-            <span class="n">try</span> <span class="p">{</span>
-                <span class="k">String</span> <span class="n">theMsg</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
-                <span class="k">if</span><span class="p">(</span><span class="n">theMsg</span><span class="c1">!= null || theMsg.length()&gt;0){
-</span>                    <span class="n">result</span> <span class="p">=</span> <span class="n">new</span> <span class="n">PluginResult</span><span class="p">(</span><span class="n">PluginResult</span><span class="p">.</span><span class="n">Status</span><span class="p">.</span><span class="n">OK</span><span class="p">,</span> <span class="n">theMsg</span><span class="p">);</span>
-                <span class="p">}</span><span class="k">else</span><span class="p">{</span>
-                    <span class="n">result</span> <span class="p">=</span> <span class="n">new</span> <span class="n">PluginResult</span><span class="p">(</span><span class="n">PluginResult</span><span class="p">.</span><span class="n">Status</span><span class="p">.</span><span class="n">ERROR</span><span class="p">,</span> <span class="s2">"Nothing to echo."</span><span class="p">);</span>
-                <span class="p">}</span>
-            <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">JSONException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">result</span> <span class="p">=</span> <span class="n">new</span> <span class="n">PluginResult</span><span class="p">(</span><span class="n">PluginResult</span><span class="p">.</span><span class="n">Status</span><span class="p">.</span><span class="n">JSON_EXCEPTION</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="n">getMessage</span><span class="p">());</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
+import org.apache.cordova.api.Plugin;
+import org.apache.cordova.api.PluginResult;
+import org.apache.cordova.json4j.JSONArray;
+import org.apache.cordova.json4j.JSONException;
+import org.apache.cordova.json4j.JSONObject;
+/**
+ * A simple plugin to demonstrate how to build a plugin for BlackBerry
+ * Basically echos back the msg that a user calls to this plugin
+ */
+public final class Echo extends Plugin {
 
-        <span class="n">return</span> <span class="n">result</span><span class="p">;</span>
-    <span class="p">}</span>
+    public static final String echo = "echo";
 
-<span class="p">}</span>
-</code></pre></div>
-<p>所以如果我們看看上面的代碼，我們可以看到在 execute 方法中，我們第一次尋找行動來。 Echo 外掛程式，只有一種操作， <code>echo</code> ，因此，我們將只檢查的。 如果我們的外掛程式有更多的行動，它是簡單的添加更多條件的測試，以檢查這些操作。</p>
+    public PluginResult execute(String action, JSONArray args, String callbackId) {
+        PluginResult result = new PluginResult(PluginResult.Status.INVALID_ACTION, "Echo: Invalid action:" + action);
+        if(action.equals(echo)){
+            try {
+                String theMsg = args.getString(0);
+                if(theMsg!= null || theMsg.length()&gt;0){
+                    result = new PluginResult(PluginResult.Status.OK, theMsg);
+                }else{
+                    result = new PluginResult(PluginResult.Status.ERROR, "Nothing to echo.");
+                }
+            } catch (JSONException e) {
+                result = new PluginResult(PluginResult.Status.JSON_EXCEPTION, e.getMessage());
+            }
+        }
 
-<p>然後我們拿進來從參數 args 參數由提供的消息。 我們可以抓住的只在做第一個參數<code>String theMsg = args.getString(0);</code>.</p>
+        return result;
+    }
 
-<p>我們將做一些錯誤檢查和郵件看起來很好，如果我們將具現化新的 PluginResult 與好的狀態： <code>PluginResult.Status.OK</code> ，並返回該郵件： <code>theMsg</code> 。 在此之後，我們返回的結果，要傳遞回給 JavaScript 可以在回檔中成功發射。 如果事情失敗，我們可以返回各種狀態異常，像 <code>PluginResult.Status.ERROR</code> ， <code>PluginResult.Status.JSON_EXCEPTION</code> ，或 <code>PluginResult.Status.INVALID_ACTION</code> 。 當傳遞回來時，這些類型的結果火中 JavaScript 的失敗回檔。</p>
+}
+</code></pre></div></div>
 
-<h2>更新您的專案 www 目錄中.jar</h2>
+<p>所以如果我們看看上面的代碼，我們可以看到在 execute 方法中，我們第一次尋找行動來。 Echo 外掛程式，只有一種操作， <code class="language-plaintext highlighter-rouge">echo</code> ，因此，我們將只檢查的。 如果我們的外掛程式有更多的行動，它是簡單的添加更多條件的測試，以檢查這些操作。</p>
 
-<p>添加的 <code>Echo.java</code> 需要更新您的專案中。 若要生成 <code>.jar</code> 檔，定位到黑莓 WebWorks 回購根目錄下並運行 <code>ant</code> 命令：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">ant update -Dproject.path="~/path_to_my_project"
-</code></pre></div>
-<p>這將生成新的 <code>.jar</code> 檔在 <code>build/ext</code> 目錄。複製 <code>build/ext/cordova.jar</code> 檔到您 <code>project/www/ext</code> 目錄。</p>
+<p>然後我們拿進來從參數 args 參數由提供的消息。 我們可以抓住的只在做第一個參數<code class="language-plaintext highlighter-rouge">String theMsg = args.getString(0);</code>.</p>
+
+<p>我們將做一些錯誤檢查和郵件看起來很好，如果我們將具現化新的 PluginResult 與好的狀態： <code class="language-plaintext highlighter-rouge">PluginResult.Status.OK</code> ，並返回該郵件： <code class="language-plaintext highlighter-rouge">theMsg</code> 。 在此之後，我們返回的結果，要傳遞回給 JavaScript 可以在回檔中成功發射。 如果事情失敗，我們可以返回各種狀態異常，像 <code class="language-plaintext highlighter-rouge">PluginResult.Status.ERROR</code> ， <code class="language-plaintext highlighter-rouge">PluginResult.Status.JSON_EXCEPTION</code> ，或 <code class="language-plaintext highlighter-rouge">PluginResult.Status.INVALID_ACTION</code> 。 當傳遞回來時，這些類型的結果火中 JavaScript 的失敗回檔。</p>
+
+<h2 id="更新您的專案-www-目錄中jar">更新您的專案 www 目錄中.jar</h2>
+
+<p>添加的 <code class="language-plaintext highlighter-rouge">Echo.java</code> 需要更新您的專案中。 若要生成 <code class="language-plaintext highlighter-rouge">.jar</code> 檔，定位到黑莓 WebWorks 回購根目錄下並運行 <code class="language-plaintext highlighter-rouge">ant</code> 命令：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ant update -Dproject.path="~/path_to_my_project"
+</code></pre></div></div>
+
+<p>這將生成新的 <code class="language-plaintext highlighter-rouge">.jar</code> 檔在 <code class="language-plaintext highlighter-rouge">build/ext</code> 目錄。複製 <code class="language-plaintext highlighter-rouge">build/ext/cordova.jar</code> 檔到您 <code class="language-plaintext highlighter-rouge">project/www/ext</code> 目錄。</p>
 
 <p>如果一切順利，允許您在黑莓手機中使用 Echo 外掛程式。</p>
 

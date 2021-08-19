@@ -1268,393 +1268,744 @@
             
 
             <div id="page-toc-source">
-                <h1>Android のアップグレード</h1>
+                <h1 id="android-のアップグレード">Android のアップグレード</h1>
 
-<p>このガイドは、コルドバの旧バージョンからアップグレードする Android プロジェクトを変更する方法を示します。 これらの命令のほとんど、古いの前にあるコマンド ライン ツールのセットで作成されたプロジェクトに適用されます、 <code>cordova</code> CLI ユーティリティ。 CLI のバージョンを更新する方法については、コマンド ライン インターフェイス参照してください。</p>
+<p>このガイドは、コルドバの旧バージョンからアップグレードする Android プロジェクトを変更する方法を示します。 これらの命令のほとんど、古いの前にあるコマンド ライン ツールのセットで作成されたプロジェクトに適用されます、 <code class="language-plaintext highlighter-rouge">cordova</code> CLI ユーティリティ。 CLI のバージョンを更新する方法については、コマンド ライン インターフェイス参照してください。</p>
 
-<h2>4.0.0 へのアップグレード</h2>
+<h2 id="400-へのアップグレード">4.0.0 へのアップグレード</h2>
 
 <p>4.0.0 では重要な変更を活用するために必要な特定のアップグレード手順があります。 まず、以下の通り、共通のアップグレードの手順が必要です。</p>
 
 <p>非 CLI プロジェクトを実行します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    bin/update path/to/project
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    bin/update path/to/project
+</code></pre></div></div>
+
 <p>CLI のプロジェクト。</p>
 
 <ol>
-<li><p>更新、 <code>cordova</code> CLI バージョン。コマンド ライン インターフェイスを参照してください。</p></li>
-<li><p>既存のプロジェクトで <code>cordova platform update android</code> を実行します。</p></li>
+  <li>
+    <p>更新、 <code class="language-plaintext highlighter-rouge">cordova</code> CLI バージョン。コマンド ライン インターフェイスを参照してください。</p>
+  </li>
+  <li>
+    <p>既存のプロジェクトで <code class="language-plaintext highlighter-rouge">cordova platform update android</code> を実行します。</p>
+  </li>
 </ol>
 
-<h3>ホワイト リストをアップグレードします。</h3>
+<h3 id="ホワイト-リストをアップグレードします">ホワイト リストをアップグレードします。</h3>
 
 <p>ホワイト リストのすべての機能は、今のプラグインを介して実装されます。 プラグインを使わず、アプリはもはや 4.0.0 へのアップグレード後にホワイト リストによって保護されます。 コルドヴァには 2 つのホワイト リストのプラグインは、異なるレベルの保護を提供します。</p>
 
 <ol>
-<li> <code>ホワイト リスト コルドバ-プラグイン</code>プラグイン<em>(推奨)</em></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">ホワイト リスト コルドバ-プラグイン</code>プラグイン<em>(推奨)</em></p>
+
+    <ul>
+      <li>このプラグインは強くお勧めします、それはより安全でより以前のバージョンでホワイト リストも設定可能</li>
+      <li>必要な構成変更の<a href="https://github.com/apache/cordova-plugin-whitelist">コルドバ プラグイン ホワイト リスト</a>の詳細を参照してください。</li>
+      <li>Run: <code class="language-plaintext highlighter-rouge">cordova plugin add cordova-plugin-crosswalk-webview</code></li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">コルドバ プラグイン レガシー ホワイト</code>プラグイン</p>
+
+    <ul>
+      <li>この動作は以前のバージョンと同じホワイト リストを提供します。<a href="https://github.com/apache/cordova-plugin-legacy-whitelist">コルドバのプラグイン-レガシー ホワイト リスト</a>を参照してください。</li>
+      <li>構成の変更は必要ありませんが推奨されるプラグインよりも少ないの保護を提供します</li>
+      <li>Run: <code class="language-plaintext highlighter-rouge">cordova plugin add cordova-plugin-legacy-whitelist</code></li>
+    </ul>
+  </li>
 </ol>
-<div class="highlight"><pre><code class="language-" data-lang="">*   このプラグインは強くお勧めします、それはより安全でより以前のバージョンでホワイト リストも設定可能
-*   必要な構成変更の[コルドバ プラグイン ホワイト リスト][1]の詳細を参照してください。
-*   Run: `cordova plugin add cordova-plugin-crosswalk-webview`
-</code></pre></div>
-<ol>
-<li> <code>コルドバ プラグイン レガシー ホワイト</code>プラグイン</li>
-</ol>
-<div class="highlight"><pre><code class="language-" data-lang="">*   この動作は以前のバージョンと同じホワイト リストを提供します。[コルドバのプラグイン-レガシー ホワイト リスト][2]を参照してください。
-*   構成の変更は必要ありませんが推奨されるプラグインよりも少ないの保護を提供します
-*   Run: `cordova plugin add cordova-plugin-legacy-whitelist`
-</code></pre></div>
-<h3>横断歩道の WebView を使用します。</h3>
+
+<h3 id="横断歩道の-webview-を使用します">横断歩道の WebView を使用します。</h3>
 
 <p>既定では、アプリは WebView デバイスによって提供されるシステムを使用していきます。 横断歩道の WebView を代わりに使用する場合は、単に、クロスウォーク ・ プラグインを追加します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cordova plugin add cordova-plugin-crosswalk-webview
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova plugin add cordova-plugin-crosswalk-webview
+</code></pre></div></div>
+
 <p>プラグインを追加時に、アプリは横断歩道 WebView 正しくインストールおよび構成を取得します。</p>
 
-<h3>Splashscreen プラグインへのアップグレード</h3>
+<h3 id="splashscreen-プラグインへのアップグレード">Splashscreen プラグインへのアップグレード</h3>
 
 <p>アプリになる場合、スプラッシュ スクリーンの使用機能をプラグインに移動されていること。 スプラッシュ スクリーン用の構成オプションは変更されません。 必要な唯一のアップグレード手順は、プラグインを追加します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cordova plugin add cordova-plugin-splashscreen
-</code></pre></div>
-<h2>3.6.0 から 3.7.1 にアップグレードします。</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova plugin add cordova-plugin-splashscreen
+</code></pre></div></div>
+
+<h2 id="360-から-371-にアップグレードします">3.6.0 から 3.7.1 にアップグレードします。</h2>
 
 <p>非 CLI プロジェクトを実行します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    bin/update path/to/project
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    bin/update path/to/project
+</code></pre></div></div>
+
 <p>CLI のプロジェクト。</p>
 
 <ol>
-<li><p>更新、 <code>cordova</code> CLI バージョン。コマンド ライン インターフェイスを参照してください。</p></li>
-<li><p>実行 <code>cordova platform update android</code> 既存のプロジェクトで。</p></li>
+  <li>
+    <p>更新、 <code class="language-plaintext highlighter-rouge">cordova</code> CLI バージョン。コマンド ライン インターフェイスを参照してください。</p>
+  </li>
+  <li>
+    <p>実行 <code class="language-plaintext highlighter-rouge">cordova platform update android</code> 既存のプロジェクトで。</p>
+  </li>
 </ol>
 
-<h2>3.2.0 から 3.3.0 へのアップグレード</h2>
+<h2 id="320-から-330-へのアップグレード">3.2.0 から 3.3.0 へのアップグレード</h2>
 
-<p><code>3.2.0</code>として同じ指示に従ってください。.</p>
+<p><code class="language-plaintext highlighter-rouge">3.2.0</code>として同じ指示に従ってください。.</p>
 
-<p>3.3.0 にはじまって、コルドバ ランタイム今 jar ファイルの代わりにアンドロイドをライブラリとしてコンパイルされます。 これがコマンドラインの使用法の効果がない IDE ユーザーのワークスペースに新しく追加された<code>MyProject-CordovaLib</code>プロジェクトをインポートする必要があります。</p>
+<p>3.3.0 にはじまって、コルドバ ランタイム今 jar ファイルの代わりにアンドロイドをライブラリとしてコンパイルされます。 これがコマンドラインの使用法の効果がない IDE ユーザーのワークスペースに新しく追加された<code class="language-plaintext highlighter-rouge">MyProject-CordovaLib</code>プロジェクトをインポートする必要があります。</p>
 
-<h2>3.1.0 から 3.2.0 にアップグレード</h2>
+<h2 id="310-から-320-にアップグレード">3.1.0 から 3.2.0 にアップグレード</h2>
 
 <p>コルドバ CLI で作成されたプロジェクト。</p>
 
 <ol>
-<li><p>更新、 <code>cordova</code> 、CLI バージョン。コマンド ライン インターフェイスを参照してください。</p></li>
-<li><p>Run <code>cordova platform update android</code></p></li>
+  <li>
+    <p>更新、 <code class="language-plaintext highlighter-rouge">cordova</code> 、CLI バージョン。コマンド ライン インターフェイスを参照してください。</p>
+  </li>
+  <li>
+    <p>Run <code class="language-plaintext highlighter-rouge">cordova platform update android</code></p>
+  </li>
 </ol>
 
 <p>コルドバ CLI で作成されていないプロジェクトでは、以下を実行します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    bin/update &lt;project_path&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    bin/update &lt;project_path&gt;
+</code></pre></div></div>
+
 <p><strong>警告:</strong> アンドロイド 4.4 - アンドロイド 4.4.3、ファイルを作成する入力型を持つ要素 =「ファイル」ファイル選択ダイアログ ボックスは開きません。 これは Android 上のクロムと回帰であり、問題を再現することができますスタンドアロン クロムブラウザー Android 上でアンドロイド 4.4 のファイル転送とファイルのプラグインを使用するは、回避策 (http://code.google.com/p/android/issues/detail?id=62220 を参照)。入力の型から、onClick イベントをリッスンすることができます「ファイル」を = し、ファイル ピッカー UI をポップアップします。 アップロードとフォーム データのネクタイ、するために JavaScript を使用して、出色のマルチパートのポストの要求にフォームの値をアタッチすることができます。</p>
 
-<h2>3.1.0 3.0.0 からアップグレード</h2>
+<h2 id="310-300-からアップグレード">3.1.0 3.0.0 からアップグレード</h2>
 
 <p>コルドバ CLI で作成されたプロジェクト。</p>
 
 <ol>
-<li><p>更新、 <code>cordova</code> 、CLI バージョン。コマンド ライン インターフェイスを参照してください。</p></li>
-<li><p>Run <code>cordova platform update android</code></p></li>
+  <li>
+    <p>更新、 <code class="language-plaintext highlighter-rouge">cordova</code> 、CLI バージョン。コマンド ライン インターフェイスを参照してください。</p>
+  </li>
+  <li>
+    <p>Run <code class="language-plaintext highlighter-rouge">cordova platform update android</code></p>
+  </li>
 </ol>
 
 <p>コルドバ CLI で作成されていないプロジェクトでは、以下を実行します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    bin/update &lt;project_path&gt;
-</code></pre></div>
-<h2>2.9.0 から CLI (3.0.0) へのアップグレード</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    bin/update &lt;project_path&gt;
+</code></pre></div></div>
+
+<h2 id="290-から-cli-300-へのアップグレード">2.9.0 から CLI (3.0.0) へのアップグレード</h2>
 
 <ol>
-<li><p>前述のコマンド ライン インターフェイスで、コルドバ CLI を使用して新しい Apache コルドバ 3.0.0 プロジェクトを作成します。</p></li>
-<li><p>コルドバ プロジェクトたとえば、プラットフォームの追加:<code>cordova platform add android</code>.</p></li>
-<li><p>作成したコルドバ プロジェクトのルートでの<code>www</code>ディレクトリにプロジェクトの<code>www</code>ディレクトリの内容をコピーします。</p></li>
-<li><p><code>プラットフォーム/android</code>の下の適切なディレクトリに、古いプロジェクトから、ネイティブ アセットをコピー： このディレクトリには、ネイティブのコルドバ android プロジェクトが存在します。</p></li>
-<li><p>コルドバ CLI ツールを使用する必要があります任意のプラグインをインストールします。CLI がすべてコア Api を処理するプラグインとして追加する必要がありますので注意してください。3.0.0 のみ、CLI と互換性のあるプラグインです。</p></li>
+  <li>
+    <p>前述のコマンド ライン インターフェイスで、コルドバ CLI を使用して新しい Apache コルドバ 3.0.0 プロジェクトを作成します。</p>
+  </li>
+  <li>
+    <p>コルドバ プロジェクトたとえば、プラットフォームの追加:<code class="language-plaintext highlighter-rouge">cordova platform add android</code>.</p>
+  </li>
+  <li>
+    <p>作成したコルドバ プロジェクトのルートでの<code class="language-plaintext highlighter-rouge">www</code>ディレクトリにプロジェクトの<code class="language-plaintext highlighter-rouge">www</code>ディレクトリの内容をコピーします。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">プラットフォーム/android</code>の下の適切なディレクトリに、古いプロジェクトから、ネイティブ アセットをコピー： このディレクトリには、ネイティブのコルドバ android プロジェクトが存在します。</p>
+  </li>
+  <li>
+    <p>コルドバ CLI ツールを使用する必要があります任意のプラグインをインストールします。CLI がすべてコア Api を処理するプラグインとして追加する必要がありますので注意してください。3.0.0 のみ、CLI と互換性のあるプラグインです。</p>
+  </li>
 </ol>
 
-<h2>2.9.0 から 3.0.0 にアップグレードします。</h2>
+<h2 id="290-から-300-にアップグレードします">2.9.0 から 3.0.0 にアップグレードします。</h2>
 
 <ol>
-<li><p>新しい Apache コルドバ Android プロジェクトを作成します。</p></li>
-<li><p><code>Www</code>ディレクトリの内容を新しいプロジェクトにコピーします。</p></li>
-<li><p>新しいプロジェクトに、ネイティブ Android 資産<code>res</code>ディレクトリからコピーします。</p></li>
-<li><p>新しいプロジェクトに<code>src</code>サブディレクトリからインストールされている任意のプラグインをコピーします。</p></li>
-<li><p>いずれかのアップグレードを確認古い<code>config.xml</code>ファイルから新しい<code>&lt; 機能 &gt;</code>仕様への<code>&lt; プラグイン &gt;</code>参照使用されなくなりました。</p></li>
-<li><p><code>Org.apache.cordova</code>である<code>org.apache.cordova.api</code>パッケージへの参照を更新します。.</p>
+  <li>
+    <p>新しい Apache コルドバ Android プロジェクトを作成します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Www</code>ディレクトリの内容を新しいプロジェクトにコピーします。</p>
+  </li>
+  <li>
+    <p>新しいプロジェクトに、ネイティブ Android 資産<code class="language-plaintext highlighter-rouge">res</code>ディレクトリからコピーします。</p>
+  </li>
+  <li>
+    <p>新しいプロジェクトに<code class="language-plaintext highlighter-rouge">src</code>サブディレクトリからインストールされている任意のプラグインをコピーします。</p>
+  </li>
+  <li>
+    <p>いずれかのアップグレードを確認古い<code class="language-plaintext highlighter-rouge">config.xml</code>ファイルから新しい<code class="language-plaintext highlighter-rouge">&lt; 機能 &gt;</code>仕様への<code class="language-plaintext highlighter-rouge">&lt; プラグイン &gt;</code>参照使用されなくなりました。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Org.apache.cordova</code>である<code class="language-plaintext highlighter-rouge">org.apache.cordova.api</code>パッケージへの参照を更新します。.</p>
 
-<p><strong>注</strong>： すべてのコア Api が削除されているし、のプラグインとしてインストールする必要があります。詳細についてを使用して Plugman 管理プラグイン ガイドを参照してください。</p></li>
+    <p><strong>注</strong>： すべてのコア Api が削除されているし、のプラグインとしてインストールする必要があります。詳細についてを使用して Plugman 管理プラグイン ガイドを参照してください。</p>
+  </li>
 </ol>
 
-<h2>2.8.0 から 2.9.0 にアップグレードします。</h2>
+<h2 id="280-から-290-にアップグレードします">2.8.0 から 2.9.0 にアップグレードします。</h2>
 
 <ol>
-<li> Run <code>bin/update &lt;project_path&gt;</code>.</li>
+  <li>Run <code class="language-plaintext highlighter-rouge">bin/update &lt;project_path&gt;</code>.</li>
 </ol>
 
-<h2>2.7.0 から 2.8.0 にアップグレードします。</h2>
+<h2 id="270-から-280-にアップグレードします">2.7.0 から 2.8.0 にアップグレードします。</h2>
 
 <ol>
-<li><p><code>cordova-2.7.0.jar</code>プロジェクトの<code>libs</code>ディレクトリから削除します。</p></li>
-<li><p><code>cordova-2.8.0.jar</code>プロジェクトの<code>lib</code>ディレクトリに追加します。</p></li>
-<li><p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-2.7.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">libs</code>ディレクトリから削除します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-2.8.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">lib</code>ディレクトリに追加します。</p>
+  </li>
+  <li>
+    <p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p>
+  </li>
 </ol>
 
 <!-- SS Eclipse -->
 
 <ol>
-<li><p>プロジェクトに新しい<code>cordova.js</code>をコピーします。</p></li>
-<li><p>新しい<code>cordova.js</code>ファイルを使用してあなたの HTML を更新します。</p></li>
-<li><p><code>Framework/res/xml/config.xml</code>を一致するように<code>res/xml/config.xml</code>ファイルをコピーします。.</p></li>
-<li><p>更新 <code>framework/res/xml/config.xml</code> 以前のように同様の設定を持っています。</p></li>
-<li><p>ファイルのコピー元 <code>bin/templates/cordova</code> プロジェクトの <code>cordova</code> ディレクトリ。</p></li>
+  <li>
+    <p>プロジェクトに新しい<code class="language-plaintext highlighter-rouge">cordova.js</code>をコピーします。</p>
+  </li>
+  <li>
+    <p>新しい<code class="language-plaintext highlighter-rouge">cordova.js</code>ファイルを使用してあなたの HTML を更新します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Framework/res/xml/config.xml</code>を一致するように<code class="language-plaintext highlighter-rouge">res/xml/config.xml</code>ファイルをコピーします。.</p>
+  </li>
+  <li>
+    <p>更新 <code class="language-plaintext highlighter-rouge">framework/res/xml/config.xml</code> 以前のように同様の設定を持っています。</p>
+  </li>
+  <li>
+    <p>ファイルのコピー元 <code class="language-plaintext highlighter-rouge">bin/templates/cordova</code> プロジェクトの <code class="language-plaintext highlighter-rouge">cordova</code> ディレクトリ。</p>
+  </li>
 </ol>
 
-<h2>2.6.0 からへ 2.7.0 をアップグレードします。</h2>
+<h2 id="260-からへ-270-をアップグレードします">2.6.0 からへ 2.7.0 をアップグレードします。</h2>
 
 <ol>
-<li><p><code>cordova-2.6.0.jar</code>プロジェクトの<code>libs</code>ディレクトリから削除します。</p></li>
-<li><p><code>cordova-2.7.0.jar</code>プロジェクトの<code>lib</code>ディレクトリに追加します。</p></li>
-<li><p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p></li>
-<li><p>新しい<code>コルドバ 2.7.0.js</code>がプロジェクトにコピーします。</p></li>
-<li><p>新しい<code>cordova-2.7.0.js</code>ファイルを使用してあなたの HTML を更新します。</p></li>
-<li><p>コピー、 <code>res/xml/config.xml</code> 一致するように<code>framework/res/xml/config.xml</code>.</p></li>
-<li><p>更新プログラム <code>framework/res/xml/config.xml</code> を以前のように同様の設定を持っています。</p></li>
-<li><p>ファイルのコピー元 <code>bin/templates/cordova</code> プロジェクトの <code>cordova</code> ディレクトリ。</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-2.6.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">libs</code>ディレクトリから削除します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-2.7.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">lib</code>ディレクトリに追加します。</p>
+  </li>
+  <li>
+    <p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p>
+  </li>
+  <li>
+    <p>新しい<code class="language-plaintext highlighter-rouge">コルドバ 2.7.0.js</code>がプロジェクトにコピーします。</p>
+  </li>
+  <li>
+    <p>新しい<code class="language-plaintext highlighter-rouge">cordova-2.7.0.js</code>ファイルを使用してあなたの HTML を更新します。</p>
+  </li>
+  <li>
+    <p>コピー、 <code class="language-plaintext highlighter-rouge">res/xml/config.xml</code> 一致するように<code class="language-plaintext highlighter-rouge">framework/res/xml/config.xml</code>.</p>
+  </li>
+  <li>
+    <p>更新プログラム <code class="language-plaintext highlighter-rouge">framework/res/xml/config.xml</code> を以前のように同様の設定を持っています。</p>
+  </li>
+  <li>
+    <p>ファイルのコピー元 <code class="language-plaintext highlighter-rouge">bin/templates/cordova</code> プロジェクトの <code class="language-plaintext highlighter-rouge">cordova</code> ディレクトリ。</p>
+  </li>
 </ol>
 
-<h2>2.5.0 から 2.6.0 にアップグレードします。</h2>
+<h2 id="250-から-260-にアップグレードします">2.5.0 から 2.6.0 にアップグレードします。</h2>
 
 <ol>
-<li><p><code>cordova-2.5.0.jar</code>プロジェクトの<code>libs</code>ディレクトリから削除します。</p></li>
-<li><p><code>cordova-2.6.0.jar</code>プロジェクトの<code>lib</code>ディレクトリに追加します。</p></li>
-<li><p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p></li>
-<li><p>新しいコピー <code>cordova-2.6.0.js</code> プロジェクトに。</p></li>
-<li><p>新しいを使用する HTML を更新 <code>cordova-2.6.0.js</code> ファイル。</p></li>
-<li><p>コピー、 <code>res/xml/config.xml</code> 一致するように<code>framework/res/xml/config.xml</code>.</p></li>
-<li><p>更新 <code>framework/res/xml/config.xml</code> 以前のように同様の設定を持っています。</p></li>
-<li><p>ファイルのコピー元 <code>bin/templates/cordova</code> プロジェクトの <code>cordova</code> ディレクトリ。</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-2.5.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">libs</code>ディレクトリから削除します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-2.6.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">lib</code>ディレクトリに追加します。</p>
+  </li>
+  <li>
+    <p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p>
+  </li>
+  <li>
+    <p>新しいコピー <code class="language-plaintext highlighter-rouge">cordova-2.6.0.js</code> プロジェクトに。</p>
+  </li>
+  <li>
+    <p>新しいを使用する HTML を更新 <code class="language-plaintext highlighter-rouge">cordova-2.6.0.js</code> ファイル。</p>
+  </li>
+  <li>
+    <p>コピー、 <code class="language-plaintext highlighter-rouge">res/xml/config.xml</code> 一致するように<code class="language-plaintext highlighter-rouge">framework/res/xml/config.xml</code>.</p>
+  </li>
+  <li>
+    <p>更新 <code class="language-plaintext highlighter-rouge">framework/res/xml/config.xml</code> 以前のように同様の設定を持っています。</p>
+  </li>
+  <li>
+    <p>ファイルのコピー元 <code class="language-plaintext highlighter-rouge">bin/templates/cordova</code> プロジェクトの <code class="language-plaintext highlighter-rouge">cordova</code> ディレクトリ。</p>
+  </li>
 </ol>
 
-<p><code>bin/update &lt;project&gt;</code> コルドバのソース ディレクトリに表示されるプロジェクト パスを実行します。<0></p>
+<p><code class="language-plaintext highlighter-rouge">bin/update &lt;project&gt;</code> コルドバのソース ディレクトリに表示されるプロジェクト パスを実行します。&lt;0&gt;</p>
 
-<h2>2.4.0 から 2.5.0 にアップグレードします。</h2>
+<h2 id="240-から-250-にアップグレードします">2.4.0 から 2.5.0 にアップグレードします。</h2>
 
 <ol>
-<li><p><code>cordova-2.4.0.jar</code>プロジェクトの<code>libs</code>ディレクトリから削除します。</p></li>
-<li><p><code>cordova-2.5.0.jar</code>プロジェクトの<code>lib</code>ディレクトリに追加します。</p></li>
-<li><p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p></li>
-<li><p>新しいコピー <code>cordova-2.5.0.js</code> プロジェクトに。</p></li>
-<li><p>新しいを使用する HTML を更新 <code>cordova-2.5.0.js</code> ファイル。</p></li>
-<li><p>コピー、 <code>res/xml/config.xml</code> 一致するように<code>framework/res/xml/config.xml</code>.</p></li>
-<li><p>更新 <code>framework/res/xml/config.xml</code> 以前のように同様の設定を持っています。</p></li>
-<li><p>ファイルのコピー元 <code>bin/templates/cordova</code> プロジェクトの <code>cordova</code> ディレクトリ。</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-2.4.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">libs</code>ディレクトリから削除します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-2.5.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">lib</code>ディレクトリに追加します。</p>
+  </li>
+  <li>
+    <p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p>
+  </li>
+  <li>
+    <p>新しいコピー <code class="language-plaintext highlighter-rouge">cordova-2.5.0.js</code> プロジェクトに。</p>
+  </li>
+  <li>
+    <p>新しいを使用する HTML を更新 <code class="language-plaintext highlighter-rouge">cordova-2.5.0.js</code> ファイル。</p>
+  </li>
+  <li>
+    <p>コピー、 <code class="language-plaintext highlighter-rouge">res/xml/config.xml</code> 一致するように<code class="language-plaintext highlighter-rouge">framework/res/xml/config.xml</code>.</p>
+  </li>
+  <li>
+    <p>更新 <code class="language-plaintext highlighter-rouge">framework/res/xml/config.xml</code> 以前のように同様の設定を持っています。</p>
+  </li>
+  <li>
+    <p>ファイルのコピー元 <code class="language-plaintext highlighter-rouge">bin/templates/cordova</code> プロジェクトの <code class="language-plaintext highlighter-rouge">cordova</code> ディレクトリ。</p>
+  </li>
 </ol>
 
-<h2>2.3.0 から 2.4.0 にアップグレードします。</h2>
+<h2 id="230-から-240-にアップグレードします">2.3.0 から 2.4.0 にアップグレードします。</h2>
 
 <ol>
-<li><p><code>cordova-2.3.0.jar</code>プロジェクトの<code>libs</code>ディレクトリから削除します。</p></li>
-<li><p><code>cordova-2.4.0.jar</code>プロジェクトの<code>lib</code>ディレクトリに追加します。</p></li>
-<li><p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p></li>
-<li><p>新しいコピー <code>cordova-2.4.0.js</code> プロジェクトに。</p></li>
-<li><p>新しいを使用する HTML を更新 <code>cordova-2.4.0.js</code> ファイル。</p></li>
-<li><p>コピー、 <code>res/xml/config.xml</code> 一致するように<code>framework/res/xml/config.xml</code>.</p></li>
-<li><p>ファイルのコピー元 <code>bin/templates/cordova</code> プロジェクトの <code>cordova</code> ディレクトリ。</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-2.3.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">libs</code>ディレクトリから削除します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-2.4.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">lib</code>ディレクトリに追加します。</p>
+  </li>
+  <li>
+    <p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p>
+  </li>
+  <li>
+    <p>新しいコピー <code class="language-plaintext highlighter-rouge">cordova-2.4.0.js</code> プロジェクトに。</p>
+  </li>
+  <li>
+    <p>新しいを使用する HTML を更新 <code class="language-plaintext highlighter-rouge">cordova-2.4.0.js</code> ファイル。</p>
+  </li>
+  <li>
+    <p>コピー、 <code class="language-plaintext highlighter-rouge">res/xml/config.xml</code> 一致するように<code class="language-plaintext highlighter-rouge">framework/res/xml/config.xml</code>.</p>
+  </li>
+  <li>
+    <p>ファイルのコピー元 <code class="language-plaintext highlighter-rouge">bin/templates/cordova</code> プロジェクトの <code class="language-plaintext highlighter-rouge">cordova</code> ディレクトリ。</p>
+  </li>
 </ol>
 
-<h2>2.2.0 から 2.3.0 にアップグレードします。</h2>
+<h2 id="220-から-230-にアップグレードします">2.2.0 から 2.3.0 にアップグレードします。</h2>
 
 <ol>
-<li><p><code>cordova-2.2.0.jar</code>プロジェクトの<code>libs</code>ディレクトリから削除します。</p></li>
-<li><p><code>cordova-2.3.0.jar</code>プロジェクトの<code>lib</code>ディレクトリに追加します。</p></li>
-<li><p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p></li>
-<li><p>新しいコピー <code>cordova-2.3.0.js</code> プロジェクトに。</p></li>
-<li><p>新しいを使用する HTML を更新 <code>cordova-2.3.0.js</code> ファイル。</p></li>
-<li><p>コピー、 <code>res/xml/config.xml</code> 一致するように<code>framework/res/xml/config.xml</code>.</p></li>
-<li><p>ファイルのコピー元 <code>bin/templates/cordova</code> プロジェクトの <code>cordova</code> ディレクトリ。</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-2.2.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">libs</code>ディレクトリから削除します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-2.3.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">lib</code>ディレクトリに追加します。</p>
+  </li>
+  <li>
+    <p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p>
+  </li>
+  <li>
+    <p>新しいコピー <code class="language-plaintext highlighter-rouge">cordova-2.3.0.js</code> プロジェクトに。</p>
+  </li>
+  <li>
+    <p>新しいを使用する HTML を更新 <code class="language-plaintext highlighter-rouge">cordova-2.3.0.js</code> ファイル。</p>
+  </li>
+  <li>
+    <p>コピー、 <code class="language-plaintext highlighter-rouge">res/xml/config.xml</code> 一致するように<code class="language-plaintext highlighter-rouge">framework/res/xml/config.xml</code>.</p>
+  </li>
+  <li>
+    <p>ファイルのコピー元 <code class="language-plaintext highlighter-rouge">bin/templates/cordova</code> プロジェクトの <code class="language-plaintext highlighter-rouge">cordova</code> ディレクトリ。</p>
+  </li>
 </ol>
 
-<h2>2.1.0 から 2.2.0 へのアップグレードします。</h2>
+<h2 id="210-から-220-へのアップグレードします">2.1.0 から 2.2.0 へのアップグレードします。</h2>
 
 <ol>
-<li><p><code>cordova-2.1.0.jar</code>プロジェクトの<code>libs</code>ディレクトリから削除します。</p></li>
-<li><p><code>cordova-2.2.0.jar</code>プロジェクトの<code>lib</code>ディレクトリに追加します。</p></li>
-<li><p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p></li>
-<li><p>新しいコピー <code>cordova-2.2.0.js</code> プロジェクトに。</p></li>
-<li><p>新しいを使用する HTML を更新 <code>cordova-2.2.0.js</code> ファイル。</p></li>
-<li><p>コピー、 <code>res/xml/config.xml</code> 一致するように<code>framework/res/xml/config.xml</code>.</p></li>
-<li><p>ファイルのコピー元 <code>bin/templates/cordova</code> プロジェクトの <code>cordova</code> ディレクトリ。</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-2.1.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">libs</code>ディレクトリから削除します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-2.2.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">lib</code>ディレクトリに追加します。</p>
+  </li>
+  <li>
+    <p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p>
+  </li>
+  <li>
+    <p>新しいコピー <code class="language-plaintext highlighter-rouge">cordova-2.2.0.js</code> プロジェクトに。</p>
+  </li>
+  <li>
+    <p>新しいを使用する HTML を更新 <code class="language-plaintext highlighter-rouge">cordova-2.2.0.js</code> ファイル。</p>
+  </li>
+  <li>
+    <p>コピー、 <code class="language-plaintext highlighter-rouge">res/xml/config.xml</code> 一致するように<code class="language-plaintext highlighter-rouge">framework/res/xml/config.xml</code>.</p>
+  </li>
+  <li>
+    <p>ファイルのコピー元 <code class="language-plaintext highlighter-rouge">bin/templates/cordova</code> プロジェクトの <code class="language-plaintext highlighter-rouge">cordova</code> ディレクトリ。</p>
+  </li>
 </ol>
 
-<h2>2.0.0 から 2.1.0 にアップグレードします。</h2>
+<h2 id="200-から-210-にアップグレードします">2.0.0 から 2.1.0 にアップグレードします。</h2>
 
 <ol>
-<li><p><code>cordova-2.0.0.jar</code>プロジェクトの<code>libs</code>ディレクトリから削除します。</p></li>
-<li><p><code>cordova-2.1.0.jar</code>プロジェクトの<code>lib</code>ディレクトリに追加します。</p></li>
-<li><p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p></li>
-<li><p>新しいコピー <code>cordova-2.1.0.js</code> プロジェクトに。</p></li>
-<li><p>新しいを使用する HTML を更新 <code>cordova-2.1.0.js</code> ファイル。</p></li>
-<li><p>コピー、 <code>res/xml/config.xml</code> に合わせて<code>framework/res/xml/config.xml</code>.</p></li>
-<li><p>ファイルのコピー元 <code>bin/templates/cordova</code> プロジェクトの <code>cordova</code> ディレクトリ。</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-2.0.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">libs</code>ディレクトリから削除します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-2.1.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">lib</code>ディレクトリに追加します。</p>
+  </li>
+  <li>
+    <p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p>
+  </li>
+  <li>
+    <p>新しいコピー <code class="language-plaintext highlighter-rouge">cordova-2.1.0.js</code> プロジェクトに。</p>
+  </li>
+  <li>
+    <p>新しいを使用する HTML を更新 <code class="language-plaintext highlighter-rouge">cordova-2.1.0.js</code> ファイル。</p>
+  </li>
+  <li>
+    <p>コピー、 <code class="language-plaintext highlighter-rouge">res/xml/config.xml</code> に合わせて<code class="language-plaintext highlighter-rouge">framework/res/xml/config.xml</code>.</p>
+  </li>
+  <li>
+    <p>ファイルのコピー元 <code class="language-plaintext highlighter-rouge">bin/templates/cordova</code> プロジェクトの <code class="language-plaintext highlighter-rouge">cordova</code> ディレクトリ。</p>
+  </li>
 </ol>
 
-<h2>1.9.0 から 2.0.0 にアップグレードします。</h2>
+<h2 id="190-から-200-にアップグレードします">1.9.0 から 2.0.0 にアップグレードします。</h2>
 
 <ol>
-<li><p><code>cordova-1.9.0.jar</code>プロジェクトの<code>libs</code>ディレクトリから削除します。</p></li>
-<li><p><code>cordova-2.0.0.jar</code>プロジェクトの<code>lib</code>ディレクトリに追加します。</p></li>
-<li><p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p></li>
-<li><p>新しいコピー <code>cordova-2.0.0.js</code> プロジェクトに。</p></li>
-<li><p>新しいを使用する HTML を更新 <code>cordova-2.0.0.js</code> ファイル。</p></li>
-<li><p>コピー、 <code>res/xml/config.xml</code> に合わせて<code>framework/res/xml/config.xml</code>.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-1.9.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">libs</code>ディレクトリから削除します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-2.0.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">lib</code>ディレクトリに追加します。</p>
+  </li>
+  <li>
+    <p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p>
+  </li>
+  <li>
+    <p>新しいコピー <code class="language-plaintext highlighter-rouge">cordova-2.0.0.js</code> プロジェクトに。</p>
+  </li>
+  <li>
+    <p>新しいを使用する HTML を更新 <code class="language-plaintext highlighter-rouge">cordova-2.0.0.js</code> ファイル。</p>
+  </li>
+  <li>
+    <p>コピー、 <code class="language-plaintext highlighter-rouge">res/xml/config.xml</code> に合わせて<code class="language-plaintext highlighter-rouge">framework/res/xml/config.xml</code>.</p>
+  </li>
 </ol>
 
-<p>2.0.0 のリリースでは、 <code>config.xml</code>ファイルを組み合わせた、 <code>cordova.xml</code>と<code>plugins.xml</code>に置き換えられます。 古いファイルは廃止され、彼らはまだ、2.0.0 で作業中、将来のリリースで動作しなくなります。</p>
+<p>2.0.0 のリリースでは、 <code class="language-plaintext highlighter-rouge">config.xml</code>ファイルを組み合わせた、 <code class="language-plaintext highlighter-rouge">cordova.xml</code>と<code class="language-plaintext highlighter-rouge">plugins.xml</code>に置き換えられます。 古いファイルは廃止され、彼らはまだ、2.0.0 で作業中、将来のリリースで動作しなくなります。</p>
 
-<h2>1.8.1 から 1.9.0 にアップグレードします。</h2>
+<h2 id="181-から-190-にアップグレードします">1.8.1 から 1.9.0 にアップグレードします。</h2>
 
 <ol>
-<li><p><code>cordova-1.8.0.jar</code>プロジェクトの<code>libs</code>ディレクトリから削除します。</p></li>
-<li><p><code>cordova-1.9.0.jar</code>プロジェクトの<code>lib</code>ディレクトリに追加します。</p></li>
-<li><p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p></li>
-<li><p>新しい<code>cordova-1.9.0.js</code>がプロジェクトにコピーします。</p></li>
-<li><p>新しい<code>cordova- 1.9.0.js</code>ファイルを使用してあなたの HTML を更新します。</p></li>
-<li><p>更新 <code>res/xml/plugins.xml</code> 一致するように<code>framework/res/xml/plugins.xml</code>.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-1.8.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">libs</code>ディレクトリから削除します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-1.9.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">lib</code>ディレクトリに追加します。</p>
+  </li>
+  <li>
+    <p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p>
+  </li>
+  <li>
+    <p>新しい<code class="language-plaintext highlighter-rouge">cordova-1.9.0.js</code>がプロジェクトにコピーします。</p>
+  </li>
+  <li>
+    <p>新しい<code class="language-plaintext highlighter-rouge">cordova- 1.9.0.js</code>ファイルを使用してあなたの HTML を更新します。</p>
+  </li>
+  <li>
+    <p>更新 <code class="language-plaintext highlighter-rouge">res/xml/plugins.xml</code> 一致するように<code class="language-plaintext highlighter-rouge">framework/res/xml/plugins.xml</code>.</p>
+  </li>
 </ol>
 
-<p>解放は 1.9.0 に<code>CordovaWebView</code>の導入により、サード パーティのプラグインが動作しない場合があります。 これらのプラグインは、 <code>getContext()</code>または<code>getActivity()</code>を使用して<code>CordovaInterface</code>からコンテキストを取得する必要があります。 経験豊富なアンドロイドの開発者でない場合プラグインのメンテナに連絡して、バグ追跡システムにこのタスクを追加してください。</p>
+<p>解放は 1.9.0 に<code class="language-plaintext highlighter-rouge">CordovaWebView</code>の導入により、サード パーティのプラグインが動作しない場合があります。 これらのプラグインは、 <code class="language-plaintext highlighter-rouge">getContext()</code>または<code class="language-plaintext highlighter-rouge">getActivity()</code>を使用して<code class="language-plaintext highlighter-rouge">CordovaInterface</code>からコンテキストを取得する必要があります。 経験豊富なアンドロイドの開発者でない場合プラグインのメンテナに連絡して、バグ追跡システムにこのタスクを追加してください。</p>
 
-<h2>1.8.0 から 1.8.0 へのアップグレードします。</h2>
+<h2 id="180-から-180-へのアップグレードします">1.8.0 から 1.8.0 へのアップグレードします。</h2>
 
 <ol>
-<li><p><code>cordova-1.8.0.jar</code>プロジェクトの<code>libs</code>ディレクトリから削除します。</p></li>
-<li><p><code>cordova-1.8.1.jar</code>プロジェクトの<code>lib</code>ディレクトリに追加します。</p></li>
-<li><p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p></li>
-<li><p>新しい<code>cordova-1.8.1.js</code>がプロジェクトにコピーします。</p></li>
-<li><p>新しい<code>cordova-1.8.1.js</code>ファイルを使用してあなたの HTML を更新します。</p></li>
-<li><p>更新 <code>res/xml/plugins.xml</code> 一致するように<code>framework/res/xml/plugins.xml</code>.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-1.8.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">libs</code>ディレクトリから削除します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-1.8.1.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">lib</code>ディレクトリに追加します。</p>
+  </li>
+  <li>
+    <p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p>
+  </li>
+  <li>
+    <p>新しい<code class="language-plaintext highlighter-rouge">cordova-1.8.1.js</code>がプロジェクトにコピーします。</p>
+  </li>
+  <li>
+    <p>新しい<code class="language-plaintext highlighter-rouge">cordova-1.8.1.js</code>ファイルを使用してあなたの HTML を更新します。</p>
+  </li>
+  <li>
+    <p>更新 <code class="language-plaintext highlighter-rouge">res/xml/plugins.xml</code> 一致するように<code class="language-plaintext highlighter-rouge">framework/res/xml/plugins.xml</code>.</p>
+  </li>
 </ol>
 
-<h2>1.7.0 から 1.8.0 へのアップグレードします。</h2>
+<h2 id="170-から-180-へのアップグレードします">1.7.0 から 1.8.0 へのアップグレードします。</h2>
 
 <ol>
-<li><p><code>cordova-1.7.0.jar</code>プロジェクトの<code>libs</code>ディレクトリから削除します。</p></li>
-<li><p><code>cordova-1.8.0.jar</code>プロジェクトの<code>lib</code>ディレクトリに追加します。</p></li>
-<li><p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p></li>
-<li><p>新しいコピー <code>cordova-1.8.0.js</code> プロジェクトに。</p></li>
-<li><p>新しいを使用する HTML を更新 <code>cordova-1.8.0.js</code> ファイル。</p></li>
-<li><p>更新 <code>res/xml/plugins.xml</code> に合わせて<code>framework/res/xml/plugins.xml</code>.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-1.7.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">libs</code>ディレクトリから削除します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-1.8.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">lib</code>ディレクトリに追加します。</p>
+  </li>
+  <li>
+    <p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p>
+  </li>
+  <li>
+    <p>新しいコピー <code class="language-plaintext highlighter-rouge">cordova-1.8.0.js</code> プロジェクトに。</p>
+  </li>
+  <li>
+    <p>新しいを使用する HTML を更新 <code class="language-plaintext highlighter-rouge">cordova-1.8.0.js</code> ファイル。</p>
+  </li>
+  <li>
+    <p>更新 <code class="language-plaintext highlighter-rouge">res/xml/plugins.xml</code> に合わせて<code class="language-plaintext highlighter-rouge">framework/res/xml/plugins.xml</code>.</p>
+  </li>
 </ol>
 
-<h2>1.7.0 から 1.8.0 へのアップグレードします。</h2>
+<h2 id="170-から-180-へのアップグレードします-1">1.7.0 から 1.8.0 へのアップグレードします。</h2>
 
 <ol>
-<li><p><code>cordova-1.7.0.jar</code>プロジェクトの<code>libs</code>ディレクトリから削除します。</p></li>
-<li><p><code>cordova-1.8.0.jar</code>プロジェクトの<code>lib</code>ディレクトリに追加します。</p></li>
-<li><p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p></li>
-<li><p>新しいコピー <code>cordova-1.8.0.js</code> プロジェクトに。</p></li>
-<li><p>新しいを使用する HTML を更新 <code>cordova-1.8.0.js</code> ファイル。</p></li>
-<li><p>更新 <code>res/xml/plugins.xml</code> に合わせて<code>framework/res/xml/plugins.xml</code>.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-1.7.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">libs</code>ディレクトリから削除します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-1.8.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">lib</code>ディレクトリに追加します。</p>
+  </li>
+  <li>
+    <p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p>
+  </li>
+  <li>
+    <p>新しいコピー <code class="language-plaintext highlighter-rouge">cordova-1.8.0.js</code> プロジェクトに。</p>
+  </li>
+  <li>
+    <p>新しいを使用する HTML を更新 <code class="language-plaintext highlighter-rouge">cordova-1.8.0.js</code> ファイル。</p>
+  </li>
+  <li>
+    <p>更新 <code class="language-plaintext highlighter-rouge">res/xml/plugins.xml</code> に合わせて<code class="language-plaintext highlighter-rouge">framework/res/xml/plugins.xml</code>.</p>
+  </li>
 </ol>
 
-<h2>1.6.1 から 1.7.0 へのアップグレードします。</h2>
+<h2 id="161-から-170-へのアップグレードします">1.6.1 から 1.7.0 へのアップグレードします。</h2>
 
 <ol>
-<li><p><code>cordova-1.6.1.jar</code>プロジェクトの<code>libs</code>ディレクトリから削除します。</p></li>
-<li><p><code>cordova-1.7.0.jar</code>プロジェクトの<code>lib</code>ディレクトリに追加します。</p></li>
-<li><p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p></li>
-<li><p>新しい<code>cordova-1.7.0.js</code>がプロジェクトにコピーします。</p></li>
-<li><p>更新 <code>res/xml/plugins.xml</code> に合わせて<code>framework/res/xml/plugins.xml</code>.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-1.6.1.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">libs</code>ディレクトリから削除します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-1.7.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">lib</code>ディレクトリに追加します。</p>
+  </li>
+  <li>
+    <p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p>
+  </li>
+  <li>
+    <p>新しい<code class="language-plaintext highlighter-rouge">cordova-1.7.0.js</code>がプロジェクトにコピーします。</p>
+  </li>
+  <li>
+    <p>更新 <code class="language-plaintext highlighter-rouge">res/xml/plugins.xml</code> に合わせて<code class="language-plaintext highlighter-rouge">framework/res/xml/plugins.xml</code>.</p>
+  </li>
 </ol>
 
-<h2>1.6.0 から 1.6.1 へのアップグレードします。</h2>
+<h2 id="160-から-161-へのアップグレードします">1.6.0 から 1.6.1 へのアップグレードします。</h2>
 
 <ol>
-<li><p><code>cordova- 1.6.0.jar</code>プロジェクトの<code>libs</code>ディレクトリから削除します。</p></li>
-<li><p><code>cordova-1.6.1.jar</code>プロジェクトの<code>lib</code>ディレクトリに追加します。</p></li>
-<li><p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p></li>
-<li><p>新しい<code>cordova-1.6.1.js</code>がプロジェクトにコピーします。</p></li>
-<li><p>更新 <code>res/xml/plugins.xml</code> に合わせて<code>framework/res/xml/plugins.xml</code>.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova- 1.6.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">libs</code>ディレクトリから削除します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-1.6.1.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">lib</code>ディレクトリに追加します。</p>
+  </li>
+  <li>
+    <p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p>
+  </li>
+  <li>
+    <p>新しい<code class="language-plaintext highlighter-rouge">cordova-1.6.1.js</code>がプロジェクトにコピーします。</p>
+  </li>
+  <li>
+    <p>更新 <code class="language-plaintext highlighter-rouge">res/xml/plugins.xml</code> に合わせて<code class="language-plaintext highlighter-rouge">framework/res/xml/plugins.xml</code>.</p>
+  </li>
 </ol>
 
-<h2>1.5.0 から 1.6.0 にアップグレードします。</h2>
+<h2 id="150-から-160-にアップグレードします">1.5.0 から 1.6.0 にアップグレードします。</h2>
 
 <ol>
-<li><p><code>cordova-1.5.0.jar</code>プロジェクトの<code>libs</code>ディレクトリから削除します。</p></li>
-<li><p><code>cordova-1.6.0.jar</code>プロジェクトの<code>lib</code>ディレクトリに追加します。</p></li>
-<li><p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p></li>
-<li><p>新しい<code>cordova-1.6.0.js</code>がプロジェクトにコピーします。</p></li>
-<li><p>新しい<code>cordova-1.6.0.js</code>ファイルを使用してあなたの HTML を更新します。</p></li>
-<li><p>更新 <code>res/xml/plugins.xml</code> 一致するように<code>framework/res/xml/plugins.xml</code>.</p></li>
-<li><p><code>Res/xml/cordova.xml</code> <code>framework/res/xml/cordova.xml</code>を一致するように<code>res/xml/phonegap.xml</code>を置き換える.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-1.5.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">libs</code>ディレクトリから削除します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-1.6.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">lib</code>ディレクトリに追加します。</p>
+  </li>
+  <li>
+    <p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p>
+  </li>
+  <li>
+    <p>新しい<code class="language-plaintext highlighter-rouge">cordova-1.6.0.js</code>がプロジェクトにコピーします。</p>
+  </li>
+  <li>
+    <p>新しい<code class="language-plaintext highlighter-rouge">cordova-1.6.0.js</code>ファイルを使用してあなたの HTML を更新します。</p>
+  </li>
+  <li>
+    <p>更新 <code class="language-plaintext highlighter-rouge">res/xml/plugins.xml</code> 一致するように<code class="language-plaintext highlighter-rouge">framework/res/xml/plugins.xml</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Res/xml/cordova.xml</code> <code class="language-plaintext highlighter-rouge">framework/res/xml/cordova.xml</code>を一致するように<code class="language-plaintext highlighter-rouge">res/xml/phonegap.xml</code>を置き換える.</p>
+  </li>
 </ol>
 
-<h2>1.4.0 から 1.5.0 にアップグレードします。</h2>
+<h2 id="140-から-150-にアップグレードします">1.4.0 から 1.5.0 にアップグレードします。</h2>
 
 <ol>
-<li><p><code>phonegap-1.4.0.jar</code>プロジェクトの<code>libs</code>ディレクトリから削除します。</p></li>
-<li><p><code>cordova-1.5.0.jar</code>プロジェクトの<code>lib</code>ディレクトリに追加します。</p></li>
-<li><p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p></li>
-<li><p>新しい<code>cordova- 1.5.0.js</code>がプロジェクトにコピーします。</p></li>
-<li><p>新しい<code>cordova-1.5.0.js</code>ファイルを使用してあなたの HTML を更新します。</p></li>
-<li><p>更新 <code>res/xml/plugins.xml</code> 一致するように<code>framework/res/xml/plugins.xml</code>.</p></li>
-<li><p><code>Res/xml/cordova.xml</code> <code>framework/res/xml/cordova.xml</code>を一致するように<code>res/xml/phonegap.xml</code>を置き換える.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">phonegap-1.4.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">libs</code>ディレクトリから削除します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova-1.5.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">lib</code>ディレクトリに追加します。</p>
+  </li>
+  <li>
+    <p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p>
+  </li>
+  <li>
+    <p>新しい<code class="language-plaintext highlighter-rouge">cordova- 1.5.0.js</code>がプロジェクトにコピーします。</p>
+  </li>
+  <li>
+    <p>新しい<code class="language-plaintext highlighter-rouge">cordova-1.5.0.js</code>ファイルを使用してあなたの HTML を更新します。</p>
+  </li>
+  <li>
+    <p>更新 <code class="language-plaintext highlighter-rouge">res/xml/plugins.xml</code> 一致するように<code class="language-plaintext highlighter-rouge">framework/res/xml/plugins.xml</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Res/xml/cordova.xml</code> <code class="language-plaintext highlighter-rouge">framework/res/xml/cordova.xml</code>を一致するように<code class="language-plaintext highlighter-rouge">res/xml/phonegap.xml</code>を置き換える.</p>
+  </li>
 </ol>
 
-<h2>1.3.0 から 1.4.0 にアップグレードします。</h2>
+<h2 id="130-から-140-にアップグレードします">1.3.0 から 1.4.0 にアップグレードします。</h2>
 
 <ol>
-<li><p><code>phonegap-1.3.0.jar</code>プロジェクトの<code>libs</code>ディレクトリから削除します。</p></li>
-<li><p><code>phonegap-1.4.0.jar</code>プロジェクトの<code>lib</code>ディレクトリに追加します。</p></li>
-<li><p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p></li>
-<li><p>新しい<code>phonegap-1.4.0.js</code>がプロジェクトにコピーします。</p></li>
-<li><p>新しい<code>phonegap-1.4.0.js</code>ファイルを使用してあなたの HTML を更新します。</p></li>
-<li><p>更新 <code>res/xml/plugins.xml</code> 一致するように<code>framework/res/xml/plugins.xml</code>.</p></li>
-<li><p>更新 <code>res/xml/phonegap.xml</code> 一致するように<code>framework/res/xml/phonegap.xml</code>.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">phonegap-1.3.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">libs</code>ディレクトリから削除します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">phonegap-1.4.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">lib</code>ディレクトリに追加します。</p>
+  </li>
+  <li>
+    <p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p>
+  </li>
+  <li>
+    <p>新しい<code class="language-plaintext highlighter-rouge">phonegap-1.4.0.js</code>がプロジェクトにコピーします。</p>
+  </li>
+  <li>
+    <p>新しい<code class="language-plaintext highlighter-rouge">phonegap-1.4.0.js</code>ファイルを使用してあなたの HTML を更新します。</p>
+  </li>
+  <li>
+    <p>更新 <code class="language-plaintext highlighter-rouge">res/xml/plugins.xml</code> 一致するように<code class="language-plaintext highlighter-rouge">framework/res/xml/plugins.xml</code>.</p>
+  </li>
+  <li>
+    <p>更新 <code class="language-plaintext highlighter-rouge">res/xml/phonegap.xml</code> 一致するように<code class="language-plaintext highlighter-rouge">framework/res/xml/phonegap.xml</code>.</p>
+  </li>
 </ol>
 
-<h2>1.3.0 に 1.2.0 からアップグレードします。</h2>
+<h2 id="130-に-120-からアップグレードします">1.3.0 に 1.2.0 からアップグレードします。</h2>
 
 <ol>
-<li><p><code>phonegap-1.2.0.jar</code>プロジェクトの<code>libs</code>ディレクトリから削除します。</p></li>
-<li><p><code>phonegap-1.3.0.jar</code>プロジェクトの<code>lib</code>ディレクトリに追加します。</p></li>
-<li><p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p></li>
-<li><p>新しい <code>phonegap-1.1.0.js</code> がプロジェクトにコピーします。</p></li>
-<li><p>新しい<code>phonegap-1.2.0.js</code>ファイルを使用してあなたの HTML を更新します。</p></li>
-<li><p>更新 <code>res/xml/plugins.xml</code> 一致するように<code>framework/res/xml/plugins.xml</code>.</p></li>
-<li><p>更新 <code>res/xml/phonegap.xml</code> に合わせて<code>framework/res/xml/phonegap.xml</code>.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">phonegap-1.2.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">libs</code>ディレクトリから削除します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">phonegap-1.3.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">lib</code>ディレクトリに追加します。</p>
+  </li>
+  <li>
+    <p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p>
+  </li>
+  <li>
+    <p>新しい <code class="language-plaintext highlighter-rouge">phonegap-1.1.0.js</code> がプロジェクトにコピーします。</p>
+  </li>
+  <li>
+    <p>新しい<code class="language-plaintext highlighter-rouge">phonegap-1.2.0.js</code>ファイルを使用してあなたの HTML を更新します。</p>
+  </li>
+  <li>
+    <p>更新 <code class="language-plaintext highlighter-rouge">res/xml/plugins.xml</code> 一致するように<code class="language-plaintext highlighter-rouge">framework/res/xml/plugins.xml</code>.</p>
+  </li>
+  <li>
+    <p>更新 <code class="language-plaintext highlighter-rouge">res/xml/phonegap.xml</code> に合わせて<code class="language-plaintext highlighter-rouge">framework/res/xml/phonegap.xml</code>.</p>
+  </li>
 </ol>
 
-<h2>1.1.0 から 1.2.0 にアップグレードします。</h2>
+<h2 id="110-から-120-にアップグレードします">1.1.0 から 1.2.0 にアップグレードします。</h2>
 
 <ol>
-<li><p><code>phonegap-1.1.0.jar</code>プロジェクトの<code>libs</code>ディレクトリから削除します。</p></li>
-<li><p><code>phonegap-1.2.0.jar</code>プロジェクトの<code>lib</code>ディレクトリに追加します。</p></li>
-<li><p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p></li>
-<li><p>新しい<code>phonegap-1.2.0.js</code>がプロジェクトにコピーします。</p></li>
-<li><p>新しい<code>phonegap-1.2.0.js</code>ファイルを使用してあなたの HTML を更新します。</p></li>
-<li><p>更新 <code>res/xml/plugins.xml</code> に合わせて<code>framework/res/xml/plugins.xml</code>.</p></li>
-<li><p>更新 <code>res/xml/phonegap.xml</code> に合わせて<code>framework/res/xml/phonegap.xml</code>.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">phonegap-1.1.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">libs</code>ディレクトリから削除します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">phonegap-1.2.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">lib</code>ディレクトリに追加します。</p>
+  </li>
+  <li>
+    <p>Eclipse を使用すると、Eclipse プロジェクトを更新して、クリーンを行います。</p>
+  </li>
+  <li>
+    <p>新しい<code class="language-plaintext highlighter-rouge">phonegap-1.2.0.js</code>がプロジェクトにコピーします。</p>
+  </li>
+  <li>
+    <p>新しい<code class="language-plaintext highlighter-rouge">phonegap-1.2.0.js</code>ファイルを使用してあなたの HTML を更新します。</p>
+  </li>
+  <li>
+    <p>更新 <code class="language-plaintext highlighter-rouge">res/xml/plugins.xml</code> に合わせて<code class="language-plaintext highlighter-rouge">framework/res/xml/plugins.xml</code>.</p>
+  </li>
+  <li>
+    <p>更新 <code class="language-plaintext highlighter-rouge">res/xml/phonegap.xml</code> に合わせて<code class="language-plaintext highlighter-rouge">framework/res/xml/phonegap.xml</code>.</p>
+  </li>
 </ol>
 
-<h2>1.0.0 1.1.0 にアップグレードします。</h2>
+<h2 id="100-110-にアップグレードします">1.0.0 1.1.0 にアップグレードします。</h2>
 
 <ol>
-<li><p><code>phonegap-1.0.0.jar</code>プロジェクトの<code>libs</code>ディレクトリから削除します。</p></li>
-<li><p><code>phonegap-1.1.0.jar</code>プロジェクトの<code>lib</code>ディレクトリに追加します。</p></li>
-<li><p>Eclipse を使用する場合は、Eclipse プロジェクトを更新し、クリーンを行うください。</p></li>
-<li><p>新しい<code>phonegap-1.1.0.js</code>がプロジェクトにコピーします。</p></li>
-<li><p>新しい<code>phonegap-1.1.0.js</code>ファイルを使用してあなたの HTML を更新します。</p></li>
-<li><p>更新 <code>res/xml/plugins.xml</code> に合わせて<code>framework/res/xml/plugins.xml</code>.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">phonegap-1.0.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">libs</code>ディレクトリから削除します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">phonegap-1.1.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">lib</code>ディレクトリに追加します。</p>
+  </li>
+  <li>
+    <p>Eclipse を使用する場合は、Eclipse プロジェクトを更新し、クリーンを行うください。</p>
+  </li>
+  <li>
+    <p>新しい<code class="language-plaintext highlighter-rouge">phonegap-1.1.0.js</code>がプロジェクトにコピーします。</p>
+  </li>
+  <li>
+    <p>新しい<code class="language-plaintext highlighter-rouge">phonegap-1.1.0.js</code>ファイルを使用してあなたの HTML を更新します。</p>
+  </li>
+  <li>
+    <p>更新 <code class="language-plaintext highlighter-rouge">res/xml/plugins.xml</code> に合わせて<code class="language-plaintext highlighter-rouge">framework/res/xml/plugins.xml</code>.</p>
+  </li>
 </ol>
 
-<h2>0.9.6 から 1.0.0 へのアップグレードします。</h2>
+<h2 id="096-から-100-へのアップグレードします">0.9.6 から 1.0.0 へのアップグレードします。</h2>
 
 <ol>
-<li><p><code>phonegap-0.9.6.jar</code>プロジェクトの<code>libs</code>ディレクトリから削除します。</p></li>
-<li><p><code>phonegap-1.0.0.jar</code>プロジェクトの<code>lib</code>ディレクトリに追加します。</p></li>
-<li><p>Eclipse を使用する場合は、Eclipse プロジェクトを更新し、クリーンを行うください。</p></li>
-<li><p>新しい<code>phonegap-1.0.0.js</code>がプロジェクトにコピーします。</p></li>
-<li><p>新しい<code>phonegap-1.0.0.js</code>ファイルを使用してあなたの HTML を更新します。</p></li>
-<li><p><code>Framework/res/xml/plugins.xml</code>を一致するように<code>res/xml/plugins.xml</code>を追加します。.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">phonegap-0.9.6.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">libs</code>ディレクトリから削除します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">phonegap-1.0.0.jar</code>プロジェクトの<code class="language-plaintext highlighter-rouge">lib</code>ディレクトリに追加します。</p>
+  </li>
+  <li>
+    <p>Eclipse を使用する場合は、Eclipse プロジェクトを更新し、クリーンを行うください。</p>
+  </li>
+  <li>
+    <p>新しい<code class="language-plaintext highlighter-rouge">phonegap-1.0.0.js</code>がプロジェクトにコピーします。</p>
+  </li>
+  <li>
+    <p>新しい<code class="language-plaintext highlighter-rouge">phonegap-1.0.0.js</code>ファイルを使用してあなたの HTML を更新します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Framework/res/xml/plugins.xml</code>を一致するように<code class="language-plaintext highlighter-rouge">res/xml/plugins.xml</code>を追加します。.</p>
+  </li>
 </ol>
 
 

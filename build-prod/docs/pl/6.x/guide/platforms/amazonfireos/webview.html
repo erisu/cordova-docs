@@ -2038,35 +2038,54 @@
             
 
             <div id="page-toc-source">
-                <h1>Amazon ogień OS WebViews</h1>
+                <h1 id="amazon-ogień-os-webviews">Amazon ogień OS WebViews</h1>
 
-<p>Począwszy od 3.3.0, można użyć Cordova jako składnika w aplikacji Amazon ogień OS. Amazon ogień OS odnosi się do tej części jako <code>CordovaWebView</code> . <code>CordovaWebView</code>rozszerza Widok sieci Web Amazon, który opiera się na open source Chromium projektu. Korzystając z tej funkcji, aplikacji sieci web można wykorzystać najnowsze standardy internetowe HTML5 w nowoczesny tkanina aparat runtime.</p>
+<p>Począwszy od 3.3.0, można użyć Cordova jako składnika w aplikacji Amazon ogień OS. Amazon ogień OS odnosi się do tej części jako <code class="language-plaintext highlighter-rouge">CordovaWebView</code> . <code class="language-plaintext highlighter-rouge">CordovaWebView</code>rozszerza Widok sieci Web Amazon, który opiera się na open source Chromium projektu. Korzystając z tej funkcji, aplikacji sieci web można wykorzystać najnowsze standardy internetowe HTML5 w nowoczesny tkanina aparat runtime.</p>
 
 <p>Jeśli jesteś zaznajomiony z Amazon ogień OS, najpierw należy zapoznać się z Amazon ogień OS platformy przewodnik i najnowsze SDK zainstalowany zanim spróbujesz opcji rozwoju bardziej nietypowe osadzanie widoku sieci Web.</p>
 
-<h2>Wymagania</h2>
+<h2 id="wymagania">Wymagania</h2>
 
 <ul>
-<li><p>Cordova 3.3.0 lub większa</p></li>
-<li><p>Android SDK aktualizacji do najnowszego zestawu SDK</p></li>
-<li><p>Amazon WebView SDK</p></li>
+  <li>
+    <p>Cordova 3.3.0 lub większa</p>
+  </li>
+  <li>
+    <p>Android SDK aktualizacji do najnowszego zestawu SDK</p>
+  </li>
+  <li>
+    <p>Amazon WebView SDK</p>
+  </li>
 </ul>
 
-<h2>Przewodnik CordovaWebView w projekcie OS Amazon ognia</h2>
+<h2 id="przewodnik-cordovawebview-w-projekcie-os-amazon-ognia">Przewodnik CordovaWebView w projekcie OS Amazon ognia</h2>
 
 <ol>
-<li><p>Aby wykonać te instrukcje, upewnij się, że masz najnowsze dystrybucji Cordova. Pobierz go z <a href="http://cordova.apache.org">cordova.apache.org</a> i rozpakuj jego pakiet Amazon ogień OS.</p></li>
-<li><p>Pobierz i rozwiń <a href="https://developer.amazon.com/sdk/fire/IntegratingAWV.html#installawv">Amazon WebView SDK</a> , a następnie skopiuj awv_interface.jar do <code>/framework/libs</code> katalogu. Tworzenie biblioteki / folderu, jeśli jeszcze nie istnieje.</p></li>
-<li><p>Przejdź do pakietu <code>/framework</code> katalogu i uruchomić <code>ant jar</code> . Tworzy Cordova <code>.jar</code> pliku, powstały jako<code>/framework/cordova-x.x.x.jar</code>.</p></li>
-<li><p>Kopia <code>.jar</code> pliku do projektu Android <code>/libs</code> katalogu.</p></li>
-<li><p>Dodaj następujące wpisy do aplikacji <code>/res/xml/main.xml</code> pliku, z <code>layout_height</code> , <code>layout_width</code> i <code>id</code> dostosowany do wniosku:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;org.apache.cordova.CordovaWebView
+  <li>
+    <p>Aby wykonać te instrukcje, upewnij się, że masz najnowsze dystrybucji Cordova. Pobierz go z <a href="http://cordova.apache.org">cordova.apache.org</a> i rozpakuj jego pakiet Amazon ogień OS.</p>
+  </li>
+  <li>
+    <p>Pobierz i rozwiń <a href="https://developer.amazon.com/sdk/fire/IntegratingAWV.html#installawv">Amazon WebView SDK</a> , a następnie skopiuj awv_interface.jar do <code class="language-plaintext highlighter-rouge">/framework/libs</code> katalogu. Tworzenie biblioteki / folderu, jeśli jeszcze nie istnieje.</p>
+  </li>
+  <li>
+    <p>Przejdź do pakietu <code class="language-plaintext highlighter-rouge">/framework</code> katalogu i uruchomić <code class="language-plaintext highlighter-rouge">ant jar</code> . Tworzy Cordova <code class="language-plaintext highlighter-rouge">.jar</code> pliku, powstały jako<code class="language-plaintext highlighter-rouge">/framework/cordova-x.x.x.jar</code>.</p>
+  </li>
+  <li>
+    <p>Kopia <code class="language-plaintext highlighter-rouge">.jar</code> pliku do projektu Android <code class="language-plaintext highlighter-rouge">/libs</code> katalogu.</p>
+  </li>
+  <li>
+    <p>Dodaj następujące wpisy do aplikacji <code class="language-plaintext highlighter-rouge">/res/xml/main.xml</code> pliku, z <code class="language-plaintext highlighter-rouge">layout_height</code> , <code class="language-plaintext highlighter-rouge">layout_width</code> i <code class="language-plaintext highlighter-rouge">id</code> dostosowany do wniosku:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;org.apache.cordova.CordovaWebView
     android:id="@+id/tutorialView"
     android:layout_width="match_parent"
     android:layout_height="match_parent" /&gt;
-</code></pre></div></li>
-<li><p>Modyfikować swoje działania, tak, że realizuje <code>CordovaInterface</code> . Należy wdrożyć metody zawarte. Może chcesz skopiować je z <code>/framework/src/org/apache/cordova/CordovaActivity.java</code> , lub wdrożyć je na własną rękę. Poniższy fragment kodu pokazuje podstawowych aplikacji, która korzysta z interfejsu. Zauważ, jak odpowiada identyfikator odwołanie <code>id</code> atrybut określonych we fragmencie XML pokazano powyżej:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">public class CordovaViewTestActivity extends Activity implements CordovaInterface {
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Modyfikować swoje działania, tak, że realizuje <code class="language-plaintext highlighter-rouge">CordovaInterface</code> . Należy wdrożyć metody zawarte. Może chcesz skopiować je z <code class="language-plaintext highlighter-rouge">/framework/src/org/apache/cordova/CordovaActivity.java</code> , lub wdrożyć je na własną rękę. Poniższy fragment kodu pokazuje podstawowych aplikacji, która korzysta z interfejsu. Zauważ, jak odpowiada identyfikator odwołanie <code class="language-plaintext highlighter-rouge">id</code> atrybut określonych we fragmencie XML pokazano powyżej:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class CordovaViewTestActivity extends Activity implements CordovaInterface {
     CordovaWebView cwv;
     /* Called when the activity is first created. */
     @Override
@@ -2077,11 +2096,13 @@
         Config.init(this);
         cwv.loadUrl(Config.getStartUrl());
     }
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ol>
 
 <p>Jeśli używasz aparatu, należy również wdrożyć to:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    @Override
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @Override
     public void setActivityResultCallback(CordovaPlugin plugin) {
         this.activityResultCallback = plugin;
     }
@@ -2123,16 +2144,23 @@
             callback.onActivityResult(requestCode, resultCode, intent);
         }
     }
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Wreszcie, należy pamiętać dodać wątek puli, inaczej pluginy mieć nie wątków, aby uruchomić:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    @Override
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @Override
     public ExecutorService getThreadPool() {
         return threadPool;
     }
-</code></pre></div>
+</code></pre></div></div>
+
 <ol>
-<li><p>Skopiować HTML i JavaScript, pliki aplikacji do projektu Amazon ogień OS <code>/assets/www</code> katalogu.</p></li>
-<li><p>Kopia <code>config.xml</code> z <code>/framework/res/xml</code> do projektu <code>/res/xml</code> katalogu.</p></li>
+  <li>
+    <p>Skopiować HTML i JavaScript, pliki aplikacji do projektu Amazon ogień OS <code class="language-plaintext highlighter-rouge">/assets/www</code> katalogu.</p>
+  </li>
+  <li>
+    <p>Kopia <code class="language-plaintext highlighter-rouge">config.xml</code> z <code class="language-plaintext highlighter-rouge">/framework/res/xml</code> do projektu <code class="language-plaintext highlighter-rouge">/res/xml</code> katalogu.</p>
+  </li>
 </ol>
 
 

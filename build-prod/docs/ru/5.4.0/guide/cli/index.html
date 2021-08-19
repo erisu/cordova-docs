@@ -1214,310 +1214,429 @@
     }
 </style>
 
-<h1>Интерфейс командной строки</h1>
+<h1 id="интерфейс-командной-строки">Интерфейс командной строки</h1>
 
-<p>Это руководство показывает, как создать приложения и развернуть их на различных мобильных платформах с использованием <code>cordova</code> интерфейса командной строки (CLI). Эта программа позволяет вам создавать новые проекты, собирать их на различных платформах, и запускать ваше приложение на устройствах или в эмуляторах. CLI является основным инструментом используемым для кросс платформенного процесса разработки, описанного в разделе &quot;<a href="../overview/index.html">Введение</a>&quot;. В другом случае вы также можете использовать CLI для инициализации кода проекта, а затем переключиться на использование SDK различных платформ и другие инструменты командной строки для дальнейшей разработки.</p>
+<p>Это руководство показывает, как создать приложения и развернуть их на различных мобильных платформах с использованием <code class="language-plaintext highlighter-rouge">cordova</code> интерфейса командной строки (CLI). Эта программа позволяет вам создавать новые проекты, собирать их на различных платформах, и запускать ваше приложение на устройствах или в эмуляторах. CLI является основным инструментом используемым для кросс платформенного процесса разработки, описанного в разделе “<a href="../overview/index.html">Введение</a>”. В другом случае вы также можете использовать CLI для инициализации кода проекта, а затем переключиться на использование SDK различных платформ и другие инструменты командной строки для дальнейшей разработки.</p>
 
-<h2>Необходимые условия</h2>
+<h2 id="необходимые-условия">Необходимые условия</h2>
 
-<p>Перед запуском любого средства командной строки, необходимо установить пакет SDK для каждой платформы, для которой вы хотите разрабатывать. (См. раздел &quot;<a href="../platforms/index.html">Руководство по поддерживаемым платформам</a>&quot; для получения более подробной информации.)</p>
+<p>Перед запуском любого средства командной строки, необходимо установить пакет SDK для каждой платформы, для которой вы хотите разрабатывать. (См. раздел “<a href="../platforms/index.html">Руководство по поддерживаемым платформам</a>” для получения более подробной информации.)</p>
 
 <p>Чтобы добавить поддержку платформы или перестроить проект для какой либо платформы, вы должны запустить интерфейс командной строки на том же компьютере, который поддерживает SDK платформы. CLI поддерживает следующие комбинации:</p>
 
 <ul>
-<li>  iOS (Mac)</li>
-<li>  Amazon Fire OS (Mac, Linux, Windows)</li>
-<li>  Android (Mac, Linux, Windows)</li>
-<li>  BlackBerry 10 (Mac, Linux, Windows)</li>
-<li>  Windows Phone 8 (Windows)</li>
-<li>  Windows (Windows)</li>
-<li>  Firefox OS (Mac, Linux, Windows)</li>
+  <li>iOS (Mac)</li>
+  <li>Amazon Fire OS (Mac, Linux, Windows)</li>
+  <li>Android (Mac, Linux, Windows)</li>
+  <li>BlackBerry 10 (Mac, Linux, Windows)</li>
+  <li>Windows Phone 8 (Windows)</li>
+  <li>Windows (Windows)</li>
+  <li>Firefox OS (Mac, Linux, Windows)</li>
 </ul>
 
 <p>На Mac командная строка доступна с помощью приложения <em>Терминал</em>. На ПК он доступен как приложение <em>Командная строка</em> в разделе <em>Аксессуары</em>.</p>
 
-<p><strong>Примечание</strong>: Для Windows платформ, вы по прежнему можете вести свою разработку на Mac запуская Windows в виртуальной машине или в режиме двойной загрузки. Доступные параметры см. в разделах &quot;<a href="../platforms/wp8/index.html">Руководство для платформы Windows Phone 8</a>&quot; или &quot;<a href="../platforms/win8/index.html">Руководство по платформе Windows</a>&quot;.</p>
+<p><strong>Примечание</strong>: Для Windows платформ, вы по прежнему можете вести свою разработку на Mac запуская Windows в виртуальной машине или в режиме двойной загрузки. Доступные параметры см. в разделах “<a href="../platforms/wp8/index.html">Руководство для платформы Windows Phone 8</a>” или “<a href="../platforms/win8/index.html">Руководство по платформе Windows</a>”.</p>
 
 <p>Скорее всего, вы будете запускать CLI с различных компьютеров, тем больше имеет смысл поддерживать удаленный репозиторий, откуда вы будете забирать рабочие материалы в локальные каталоги.</p>
 
-<h2>Установка CLI Cordova</h2>
+<h2 id="установка-cli-cordova">Установка CLI Cordova</h2>
 
 <p>Средство командной строки Cordova распространяется как пакет npm в готовом к использованию формате. Нет необходимости для его компиляции из исходного кода.</p>
 
-<p>Чтобы установить инструмент командной строки <code>cordova</code>, выполните следующие действия:</p>
+<p>Чтобы установить инструмент командной строки <code class="language-plaintext highlighter-rouge">cordova</code>, выполните следующие действия:</p>
 
 <ol>
-<li><p>Скачайте и установите <a href="http://nodejs.org/">Node.js</a>. После установки вы должны быть возможность выполнять <code>node</code> и <code>npm</code> в командной строке. При желании, вы можете дополнительно использовать инструмент, как например <code>nvm</code> или <code>nave</code> для управления вашей установкой Node.js.</p></li>
-<li><p>Скачайте и установите <a href="http://git-scm.com/">git клиент</a>, если у вас его еще нет. После установки вы должны быть способны вызвать <code>git</code> из вашей командной строки. Даже несмотря на то, что вы не будете использовать <code>git</code> вручную, CLI использовать для загрузки некоторых ресурсов при создании нового проекта.</p></li>
-<li><p>Установите модуль <code>cordova</code> с помощью инструмента <code>npm</code> Node.js. Модуль <code>cordova</code> будет автоматически загружен <code>npm</code>.</p></li>
+  <li>
+    <p>Скачайте и установите <a href="http://nodejs.org/">Node.js</a>. После установки вы должны быть возможность выполнять <code class="language-plaintext highlighter-rouge">node</code> и <code class="language-plaintext highlighter-rouge">npm</code> в командной строке. При желании, вы можете дополнительно использовать инструмент, как например <code class="language-plaintext highlighter-rouge">nvm</code> или <code class="language-plaintext highlighter-rouge">nave</code> для управления вашей установкой Node.js.</p>
+  </li>
+  <li>
+    <p>Скачайте и установите <a href="http://git-scm.com/">git клиент</a>, если у вас его еще нет. После установки вы должны быть способны вызвать <code class="language-plaintext highlighter-rouge">git</code> из вашей командной строки. Даже несмотря на то, что вы не будете использовать <code class="language-plaintext highlighter-rouge">git</code> вручную, CLI использовать для загрузки некоторых ресурсов при создании нового проекта.</p>
+  </li>
+  <li>
+    <p>Установите модуль <code class="language-plaintext highlighter-rouge">cordova</code> с помощью инструмента <code class="language-plaintext highlighter-rouge">npm</code> Node.js. Модуль <code class="language-plaintext highlighter-rouge">cordova</code> будет автоматически загружен <code class="language-plaintext highlighter-rouge">npm</code>.</p>
+
+    <ul>
+      <li>
+        <p>В OS X и Linux:</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo npm install -g cordova
+</code></pre></div>        </div>
+
+        <p>В OS X и Linux, может быть необходимым предварять команду <code class="language-plaintext highlighter-rouge">npm</code> командой <code class="language-plaintext highlighter-rouge">sudo</code> чтобы установить этот инструмент разработки, в защищенные каталоги, такие как <code class="language-plaintext highlighter-rouge">usr/local/share</code>. Если вы используете инструмент nvm/nave и имеете доступ на запись к каталогу установки, префикс <code class="language-plaintext highlighter-rouge">sudo</code> можно опустить. Есть <a href="http://justjs.com/posts/npm-link-developing-your-own-npm-modules-without-tears">больше подсказок</a> по использованию <code class="language-plaintext highlighter-rouge">npm</code> без <code class="language-plaintext highlighter-rouge">sudo</code>, если вы имеете желание сделать это.</p>
+      </li>
+      <li>
+        <p>В Windows:</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C:\&gt;npm install -g cordova
+</code></pre></div>        </div>
+      </li>
+    </ul>
+
+    <p>Упомянутый выше флаг <code class="language-plaintext highlighter-rouge">-g</code> указывает <code class="language-plaintext highlighter-rouge">npm</code> установить <code class="language-plaintext highlighter-rouge">cordova</code> глобально. В противном случае он будет установлен в подкаталоге <code class="language-plaintext highlighter-rouge">node_modules</code> текущего рабочего каталога.</p>
+
+    <p>Вам может понадобиться добавить каталог <code class="language-plaintext highlighter-rouge">npm</code> в переменную <code class="language-plaintext highlighter-rouge">PATH</code> вашего окружения, для того чтобы вызывать глобально установленные <code class="language-plaintext highlighter-rouge">npm</code> модули. В Windows <code class="language-plaintext highlighter-rouge">npm</code> обычно можно найти в каталоге <code class="language-plaintext highlighter-rouge">C:\Users\username\AppData\Roaming\npm</code>. На OS X и Linux его обычно можно найти в каталоге <code class="language-plaintext highlighter-rouge">/usr/local/share/npm</code>.</p>
+
+    <p>Журнал установки может приводить к ошибкам, для любого не установленного SDK платформы.</p>
+
+    <p>После установки вы должны иметь возможность запускать <code class="language-plaintext highlighter-rouge">cordova</code> в командной строке без аргументов, и это должно напечатать текст справки.</p>
+  </li>
 </ol>
-<div class="highlight"><pre><code class="language-" data-lang="">*   В OS X и Linux:
 
-        $ sudo npm install -g cordova
-
-    В OS X и Linux, может быть необходимым предварять команду `npm` командой `sudo` чтобы установить этот инструмент разработки, в защищенные каталоги, такие как `usr/local/share`. Если вы используете инструмент nvm/nave и имеете доступ на запись к каталогу установки, префикс `sudo` можно опустить. Есть [больше подсказок][3] по использованию `npm` без `sudo`, если вы имеете желание сделать это.
-
-*   В Windows:
-
-        C:\&gt;npm install -g cordova
-
-Упомянутый выше флаг `-g` указывает `npm` установить `cordova` глобально. В противном случае он будет установлен в подкаталоге `node_modules` текущего рабочего каталога.
-
-Вам может понадобиться добавить каталог `npm` в переменную `PATH` вашего окружения, для того чтобы вызывать глобально установленные `npm` модули. В Windows `npm` обычно можно найти в каталоге `C:\Users\username\AppData\Roaming\npm`. На OS X и Linux его обычно можно найти в каталоге `/usr/local/share/npm`.
-
-Журнал установки может приводить к ошибкам, для любого не установленного SDK платформы.
-
-После установки вы должны иметь возможность запускать `cordova` в командной строке без аргументов, и это должно напечатать текст справки.
-</code></pre></div>
-<h2>Создание приложения</h2>
+<h2 id="создание-приложения">Создание приложения</h2>
 
 <p>Перейдите в каталог, где вы сохранили ваш исходный код и выполнить команду следующего вида:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova create hello com.example.hello HelloWorld
-</code></pre></div>
-<p>Завершение команды может длиться дольше нескольких секунд, поэтому будьте терпеливы. Запуск команды с опцией <code>-d</code> будет показывать информацию о прогрессе операции.</p>
 
-<p>Первый аргемент - <em>hello</em> указывает каталог в котором будет сформирован ваш проект. Этот каталог не должен существовать, Cordova создаст его для вас. Подкаталог <code>www</code> созданной директории будет содержать домашнюю страницу вашего приложения, совместно с ресурсами в каталогах <code>css</code>, <code>js</code>, и <code>img</code>, что соответствует общепринятым соглашениям по наименованию файлов и каталогов принятых в веб-разработке. Эти активы будут храниться в локальной файловой системе устройства, не служил удаленно. Файл <code>config.xml</code> содержит важные метаданные необходимые для формирования и распространения приложения.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova create hello com.example.hello HelloWorld
+</code></pre></div></div>
 
-<p>Второй аргумент <code>com.example.hello</code> указывает идентификатор вашего проекта в обратном формате доменных имен. Этот аргумент необязателен, но только если вы также пропустите третий аргумент, потому что аргументы определяются в зависимости от их позиций. Вы можете изменить это значение позже в файле <code>config.xml</code>, но вам надо учитывать что возможно код сформированный вне <code>config.xml</code> использует это значение, как например имена Java пакетов. Значение по умолчанию <code>io.cordova.hellocordova</code>, но рекомендуется чтобы вы выбрали подходящее значение.</p>
+<p>Завершение команды может длиться дольше нескольких секунд, поэтому будьте терпеливы. Запуск команды с опцией <code class="language-plaintext highlighter-rouge">-d</code> будет показывать информацию о прогрессе операции.</p>
 
-<p>Третий аргумент <code>HelloWorld</code> указывает отображаемое имя приложения. Этот аргумент является необязательным. Вы можете изменить это значение позже в файле <code>config.xml</code>, но вам надо учитывать что возможно код сформированный вне <code>config.xml</code> использует это значение, как например имена Java классов. Значением по умолчанию является <code>HelloCordova</code>, но мы рекомендуем вам выбрать подходящее значение.</p>
+<p>Первый аргемент - <em>hello</em> указывает каталог в котором будет сформирован ваш проект. Этот каталог не должен существовать, Cordova создаст его для вас. Подкаталог <code class="language-plaintext highlighter-rouge">www</code> созданной директории будет содержать домашнюю страницу вашего приложения, совместно с ресурсами в каталогах <code class="language-plaintext highlighter-rouge">css</code>, <code class="language-plaintext highlighter-rouge">js</code>, и <code class="language-plaintext highlighter-rouge">img</code>, что соответствует общепринятым соглашениям по наименованию файлов и каталогов принятых в веб-разработке. Эти активы будут храниться в локальной файловой системе устройства, не служил удаленно. Файл <code class="language-plaintext highlighter-rouge">config.xml</code> содержит важные метаданные необходимые для формирования и распространения приложения.</p>
 
-<h2>Добавление платформ</h2>
+<p>Второй аргумент <code class="language-plaintext highlighter-rouge">com.example.hello</code> указывает идентификатор вашего проекта в обратном формате доменных имен. Этот аргумент необязателен, но только если вы также пропустите третий аргумент, потому что аргументы определяются в зависимости от их позиций. Вы можете изменить это значение позже в файле <code class="language-plaintext highlighter-rouge">config.xml</code>, но вам надо учитывать что возможно код сформированный вне <code class="language-plaintext highlighter-rouge">config.xml</code> использует это значение, как например имена Java пакетов. Значение по умолчанию <code class="language-plaintext highlighter-rouge">io.cordova.hellocordova</code>, но рекомендуется чтобы вы выбрали подходящее значение.</p>
+
+<p>Третий аргумент <code class="language-plaintext highlighter-rouge">HelloWorld</code> указывает отображаемое имя приложения. Этот аргумент является необязательным. Вы можете изменить это значение позже в файле <code class="language-plaintext highlighter-rouge">config.xml</code>, но вам надо учитывать что возможно код сформированный вне <code class="language-plaintext highlighter-rouge">config.xml</code> использует это значение, как например имена Java классов. Значением по умолчанию является <code class="language-plaintext highlighter-rouge">HelloCordova</code>, но мы рекомендуем вам выбрать подходящее значение.</p>
+
+<h2 id="добавление-платформ">Добавление платформ</h2>
 
 <p>Все последующие команды должны быть выполняться в каталоге проекта или любых подкаталогах в его пределах:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cd hello
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cd hello
+</code></pre></div></div>
+
 <p>Перед тем, как можно построить проект, необходимо указать набор целевых платформ. Ваши возможности по запуску этих команд зависят от того поддерживает ваш компьютер каждое SDK, и установили ли вы соответствующее SDK. Запустите любую из этих команд на Mac:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova platform add ios
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova platform add ios
     $ cordova platform add amazon-fireos
     $ cordova platform add android
     $ cordova platform add blackberry10
     $ cordova platform add firefoxos
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Запустите любую из этих команд на Windows компьютере, где <em>wp</em> ссылается на различные версии операционной системы Windows Phone:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova platform add wp8
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova platform add wp8
     $ cordova platform add windows
     $ cordova platform add amazon-fireos
     $ cordova platform add android
     $ cordova platform add blackberry10
     $ cordova platform add firefoxos
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Выполните это, чтобы проверить ваш текущий набор платформ:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova platforms ls
-</code></pre></div>
-<p>(Обратите внимание, что команды <code>platform</code> и <code>platforms</code> являются синонимами.)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova platforms ls
+</code></pre></div></div>
+
+<p>(Обратите внимание, что команды <code class="language-plaintext highlighter-rouge">platform</code> и <code class="language-plaintext highlighter-rouge">platforms</code> являются синонимами.)</p>
 
 <p>Выполните одну из следующих команд, которые являются синонимами, чтобы удалить платформу:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova platform remove blackberry10
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova platform remove blackberry10
     $ cordova platform rm amazon-fireos
     $ cordova platform rm android
-</code></pre></div>
-<p>Выполнение команд для добавления или удаления платформ затрагивает содержимое каталога <em>platforms</em> проекта, где каждая указанная платформа представлена как подкаталог. Исходный каталог <em>www</em> повторяется в подкаталоге каждой платформы, например вы можете увидеть его в <code>platforms/ios/www</code> или <code>platforms/android/assets/www</code>. Потому что CLI постоянно копирует файлы из исходной папки <em>www</em>, следует изменять только эти файлы, а не файлы, расположенные в подкаталогах <em>platforms</em>. При использовании системы управления версиями, следует добавить папку с исходным кодом <em>www</em>, наряду с папкой <em>merges</em> в вашу систему управления версиями. (Дополнительные сведения о папке <em>merges</em> можно найти в разделе &quot;Настройка каждой платформы&quot; ниже.)</p>
+</code></pre></div></div>
 
-<p><strong>Предупреждение</strong>: При использовании CLI для построения вашего приложение, вы <em>не</em> должны редактировать какие либо файлы в каталоге <code>/platforms/</code> за исключением того случая если вы знаете что вы делаете, или в документации указано обратное. Файлы в этом каталоге обычно перезаписываются при подготовке приложений к построения, или при переустановке плагина.</p>
+<p>Выполнение команд для добавления или удаления платформ затрагивает содержимое каталога <em>platforms</em> проекта, где каждая указанная платформа представлена как подкаталог. Исходный каталог <em>www</em> повторяется в подкаталоге каждой платформы, например вы можете увидеть его в <code class="language-plaintext highlighter-rouge">platforms/ios/www</code> или <code class="language-plaintext highlighter-rouge">platforms/android/assets/www</code>. Потому что CLI постоянно копирует файлы из исходной папки <em>www</em>, следует изменять только эти файлы, а не файлы, расположенные в подкаталогах <em>platforms</em>. При использовании системы управления версиями, следует добавить папку с исходным кодом <em>www</em>, наряду с папкой <em>merges</em> в вашу систему управления версиями. (Дополнительные сведения о папке <em>merges</em> можно найти в разделе “Настройка каждой платформы” ниже.)</p>
 
-<p>Если вы хотите в данный момент, можно использовать IDE, как например Eclipse или Xcode чтобы открыть проект который вы создали. Вам будет нужно открыть производный набор ресурсов из каталога <code>/platforms/</code> для разработки с использованием SDK. Это потому что специфичные для SDK метаданные хранятся в соответствующем подкаталоге <code>/platforms/</code>. (См. раздел &quot;<a href="../platforms/index.html">Руководство по поддерживаемым платформам</a>&quot; для получения информации о том как разрабатывать приложение в каждой IDE.) Используйте этот подход, если вы просто хотите инициализироавть проект с использованием CLI и потом переключиться на SDK для работы с инструментами платформы.</p>
+<p><strong>Предупреждение</strong>: При использовании CLI для построения вашего приложение, вы <em>не</em> должны редактировать какие либо файлы в каталоге <code class="language-plaintext highlighter-rouge">/platforms/</code> за исключением того случая если вы знаете что вы делаете, или в документации указано обратное. Файлы в этом каталоге обычно перезаписываются при подготовке приложений к построения, или при переустановке плагина.</p>
+
+<p>Если вы хотите в данный момент, можно использовать IDE, как например Eclipse или Xcode чтобы открыть проект который вы создали. Вам будет нужно открыть производный набор ресурсов из каталога <code class="language-plaintext highlighter-rouge">/platforms/</code> для разработки с использованием SDK. Это потому что специфичные для SDK метаданные хранятся в соответствующем подкаталоге <code class="language-plaintext highlighter-rouge">/platforms/</code>. (См. раздел “<a href="../platforms/index.html">Руководство по поддерживаемым платформам</a>” для получения информации о том как разрабатывать приложение в каждой IDE.) Используйте этот подход, если вы просто хотите инициализироавть проект с использованием CLI и потом переключиться на SDK для работы с инструментами платформы.</p>
 
 <p>Продолжайте читать если вы хотите использовать кросс-платформенный процесс разработки (CLI) для всего цикла разработки.</p>
 
-<h2>Построение приложения</h2>
+<h2 id="построение-приложения">Построение приложения</h2>
 
-<p>По умолчанию скрипт <code>cordova create</code> создает каркас веб приложения чья домашняя страница это файл проекта <code>www/index.html</code>. Изменяйте это приложения как вы желаете, но любая инициализация должна быть указана как часть обработчика события <code>[deviceready](../../cordova/events/events.deviceready.html)</code>, используемого по умолчанию из <code>www/js/index.js</code>.</p>
+<p>По умолчанию скрипт <code class="language-plaintext highlighter-rouge">cordova create</code> создает каркас веб приложения чья домашняя страница это файл проекта <code class="language-plaintext highlighter-rouge">www/index.html</code>. Изменяйте это приложения как вы желаете, но любая инициализация должна быть указана как часть обработчика события <code class="language-plaintext highlighter-rouge">[deviceready](../../cordova/events/events.deviceready.html)</code>, используемого по умолчанию из <code class="language-plaintext highlighter-rouge">www/js/index.js</code>.</p>
 
 <p>Выполните следующую команду для итеративного построения проекта:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova build
-</code></pre></div>
-<p>Это создает код платформы в подкаталоге проекта <code>platforms</code>. При необходимости можно ограничить применения каждой сборки для выбранных платформ:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova build ios
-</code></pre></div>
-<p>Команда <code>cordova build</code> это сокращение для следующих команд, которые в этом примере нацелены на одну платформу:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova prepare ios
-    $ cordova compile ios
-</code></pre></div>
-<p>В этом случае, как только вы запустили <code>prepare</code>, вы можете использовать Xcode SDK компании Apple как альтернативу для изменения и компиляции платформо-зависимого кода, который кордова создала в каталоге <code>platforms/ios</code>. Вы можете использовать тот же подход для SDK других платформ.</p>
 
-<h2>Тестирование приложения на эмуляторе или устройстве</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova build
+</code></pre></div></div>
+
+<p>Это создает код платформы в подкаталоге проекта <code class="language-plaintext highlighter-rouge">platforms</code>. При необходимости можно ограничить применения каждой сборки для выбранных платформ:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova build ios
+</code></pre></div></div>
+
+<p>Команда <code class="language-plaintext highlighter-rouge">cordova build</code> это сокращение для следующих команд, которые в этом примере нацелены на одну платформу:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova prepare ios
+    $ cordova compile ios
+</code></pre></div></div>
+
+<p>В этом случае, как только вы запустили <code class="language-plaintext highlighter-rouge">prepare</code>, вы можете использовать Xcode SDK компании Apple как альтернативу для изменения и компиляции платформо-зависимого кода, который кордова создала в каталоге <code class="language-plaintext highlighter-rouge">platforms/ios</code>. Вы можете использовать тот же подход для SDK других платформ.</p>
+
+<h2 id="тестирование-приложения-на-эмуляторе-или-устройстве">Тестирование приложения на эмуляторе или устройстве</h2>
 
 <p>SDK для мобильных платформ часто поставляются с эмуляторами которые выполняют образ устройства, таким образом что вы можете запустить ваше приложение из главного экрана и посмотреть как оно взаимодействует с различными функциями платформы. Выполните команду как указано ниже для перепостроения приложения запуска его в эмуляторе указанной платформы:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova emulate android
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova emulate android
+</code></pre></div></div>
+
 <p>Некоторые мобильные платформы эмулируют определенное устройство по умолчанию, как например iPhone для проектов iOS. Для других платформы, вам может понадобиться сперва ассоциировать устройство с эмулятором.</p>
 
 <p><strong>Примечание</strong>: Поддержка эмулятора в настоящее время недоступна для Amazon Fire ОС.</p>
 
-<p>(См. &quot;<a href="../platforms/index.html">Руководство по поддерживаемым платформам</a>&quot; для подробной информации). Например вы можете сначала выполнить команду <code>android</code> для запуска Android SDK, а затем запустить образ конкретного устройства, которое запускает его согласно поведению по умолчанию:</p>
+<p>(См. “<a href="../platforms/index.html">Руководство по поддерживаемым платформам</a>” для подробной информации). Например вы можете сначала выполнить команду <code class="language-plaintext highlighter-rouge">android</code> для запуска Android SDK, а затем запустить образ конкретного устройства, которое запускает его согласно поведению по умолчанию:</p>
 
-<p><img src="/static/img/guide/cli/android_emulate_init.png" alt=""></p>
+<p><img src="/static/img/guide/cli/android_emulate_init.png" alt="" /></p>
 
-<p>Последующая команда <code>cordova emulate</code> обновляет образ эмулятор для отображения последней версии приложение, которое теперь доступно для запуска с главного экрана:</p>
+<p>Последующая команда <code class="language-plaintext highlighter-rouge">cordova emulate</code> обновляет образ эмулятор для отображения последней версии приложение, которое теперь доступно для запуска с главного экрана:</p>
 
-<p><img src="/static/img/guide/cli/android_emulate_install.png" alt=""></p>
+<p><img src="/static/img/guide/cli/android_emulate_install.png" alt="" /></p>
 
 <p>Поочередно можно подключить телефон к компьютеру и тестирование приложения непосредственно на нем:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova run android
-</code></pre></div>
-<p>Перед выполнением этой команды, необходимо настроить устройство для тестирования, следуя процедурам, которые различаются для каждой платформы. В устройствах Android и Amazon Fire ОС вам придется включить функцию <strong>Отладка USB</strong> на устройстве и возможно добавить драйвер, USB в зависимости от вашего окружения разработки. Смотрите раздел &quot;<a href="../platforms/index.html">Руководство по поддерживаемым платформам</a>&quot; за подробностями о требованиях каждой платформы.</p>
 
-<h2>Добавить функции плагина</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova run android
+</code></pre></div></div>
+
+<p>Перед выполнением этой команды, необходимо настроить устройство для тестирования, следуя процедурам, которые различаются для каждой платформы. В устройствах Android и Amazon Fire ОС вам придется включить функцию <strong>Отладка USB</strong> на устройстве и возможно добавить драйвер, USB в зависимости от вашего окружения разработки. Смотрите раздел “<a href="../platforms/index.html">Руководство по поддерживаемым платформам</a>” за подробностями о требованиях каждой платформы.</p>
+
+<h2 id="добавить-функции-плагина">Добавить функции плагина</h2>
 
 <p>При построении или просмотре нового проекта, приложение по умолчанию не делает очень много. Вы можете изменить приложение различными способами используя преимущества стандартных веб-технологий, но для того чтобы приложение тесно взаимодействовало с различными функциями устройства, вам необходимо добавить плагины которые предоставят доступ к базовым функциям Cordova API.</p>
 
-<p><em>Плагин</em> это немного дополнительного кода которые предоставляет интерфейс к встроенным компонентам платформы. ВЫ можете создать свой собственный интерфейс плагина, к примеры для проектирования гибридного приложения которое совмещает Cordova WebView с встроенными компонентами. (За подробной информацией смотрите &quot;<a href="../hybrid/webviews/index.html">Интеграция WebViews</a>&quot; и <a href="guide_hybrid_plugins_index.md.html#Plugin%20Development%20Guide">Руководство по разработке плагинов</a>.) В основном, вы будете добавлять плагин чтобы включить одну из базовых функций Cordova описанном в разделе &quot;Справочник по API&quot;.</p>
+<p><em>Плагин</em> это немного дополнительного кода которые предоставляет интерфейс к встроенным компонентам платформы. ВЫ можете создать свой собственный интерфейс плагина, к примеры для проектирования гибридного приложения которое совмещает Cordova WebView с встроенными компонентами. (За подробной информацией смотрите “<a href="../hybrid/webviews/index.html">Интеграция WebViews</a>” и <a href="guide_hybrid_plugins_index.md.html#Plugin%20Development%20Guide">Руководство по разработке плагинов</a>.) В основном, вы будете добавлять плагин чтобы включить одну из базовых функций Cordova описанном в разделе “Справочник по API”.</p>
 
 <p>Начиная с версии 3.0 при создании проекта Cordova она не содержит каких-либо плагинов настоящей. Это новое поведение по умолчанию. Какие плагины вы хотите, даже основные плагины, должен быть явно добавлен.</p>
 
-<p>Список этих плагинов, включая дополнительные сторонние плагины, сообщества, можно найти в реестре по адресу <a href="http://plugins.cordova.io/">plugins.cordova.io</a>. Вы можете использовать CLI для поиска плагинов в этом реестре. К примеру поиск <code>bar</code> и <code>code</code> возвращает один результат который содержит оба слова без учета регистра:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin search bar code
+<p>Список этих плагинов, включая дополнительные сторонние плагины, сообщества, можно найти в реестре по адресу <a href="http://plugins.cordova.io/">plugins.cordova.io</a>. Вы можете использовать CLI для поиска плагинов в этом реестре. К примеру поиск <code class="language-plaintext highlighter-rouge">bar</code> и <code class="language-plaintext highlighter-rouge">code</code> возвращает один результат который содержит оба слова без учета регистра:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin search bar code
 
     com.phonegap.plugins.barcodescanner - Scans Barcodes
-</code></pre></div>
-<p>Поиск только по слову <code>bar</code> возвращает дополнительный результат:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    cordova-plugin-statusbar - Cordova StatusBar Plugin
-</code></pre></div>
-<p>Команда <code>cordova plugin add</code> требует чтобы вы указали репозиторий для кода плагина. Вот пример как вы можете использовать CLI для добавления функций в приложение:</p>
+</code></pre></div></div>
+
+<p>Поиск только по слову <code class="language-plaintext highlighter-rouge">bar</code> возвращает дополнительный результат:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    cordova-plugin-statusbar - Cordova StatusBar Plugin
+</code></pre></div></div>
+
+<p>Команда <code class="language-plaintext highlighter-rouge">cordova plugin add</code> требует чтобы вы указали репозиторий для кода плагина. Вот пример как вы можете использовать CLI для добавления функций в приложение:</p>
 
 <ul>
-<li><p>Базовая информация устройства (Device API):</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin add cordova-plugin-device
-</code></pre></div></li>
-<li><p>Сетевое подключение и <a href="../../cordova/events/events.html">События</a> батареи:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin add cordova-plugin-network-information
+  <li>
+    <p>Базовая информация устройства (Device API):</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin add cordova-plugin-device
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Сетевое подключение и <a href="../../cordova/events/events.html">События</a> батареи:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin add cordova-plugin-network-information
 $ cordova plugin add cordova-plugin-battery-status
-</code></pre></div></li>
-<li><p>Акселерометр, компас и информация о расположении:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin add cordova-plugin-device-motion
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Акселерометр, компас и информация о расположении:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin add cordova-plugin-device-motion
 $ cordova plugin add cordova-plugin-device-orientation
 $ cordova plugin add cordova-plugin-geolocation
-</code></pre></div></li>
-<li><p>Камера, воспроизведение мультимедиа и съемка:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin add cordova-plugin-camera
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Камера, воспроизведение мультимедиа и съемка:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin add cordova-plugin-camera
 $ cordova plugin add cordova-plugin-media-capture
 $ cordova plugin add cordova-plugin-media
-</code></pre></div></li>
-<li><p>Доступ к файлам на устройстве или по сети (File API):</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin add cordova-plugin-file
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Доступ к файлам на устройстве или по сети (File API):</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin add cordova-plugin-file
 $ cordova plugin add cordova-plugin-file-transfer
-</code></pre></div></li>
-<li><p>Уведомление с помощью диалогового окна или вибрации:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin add cordova-plugin-dialogs
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Уведомление с помощью диалогового окна или вибрации:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin add cordova-plugin-dialogs
 $ cordova plugin add cordova-plugin-vibration
-</code></pre></div></li>
-<li><p>Контакты:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin add cordova-plugin-contacts
-</code></pre></div></li>
-<li><p>Глобализация:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin add cordova-plugin-globalization
-</code></pre></div></li>
-<li><p>Заставка:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin add cordova-plugin-splashscreen
-</code></pre></div></li>
-<li><p>Открытие новых окон браузера (InAppBrowser):</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin add cordova-plugin-inappbrowser
-</code></pre></div></li>
-<li><p>Консоль отладки:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin add cordova-plugin-console
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Контакты:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin add cordova-plugin-contacts
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Глобализация:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin add cordova-plugin-globalization
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Заставка:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin add cordova-plugin-splashscreen
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Открытие новых окон браузера (InAppBrowser):</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin add cordova-plugin-inappbrowser
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Консоль отладки:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin add cordova-plugin-console
+</code></pre></div>    </div>
+  </li>
 </ul>
 
-<p><strong>Примечание</strong>: CLI добавляет код плагина соответствующим образом для каждой платформы. Если вы хотите разработать с использованием инструментов низкого уровня или SDK платформы, как описано в разделе &quot;<a href="../overview/index.html">Введение</a>&quot;, необходимо запустить утилиту Plugman которая добавит плагины отдельно для каждой платформы. (Для получения дополнительной информации, см. раздел &quot;<a href="../../plugin_ref/plugman.html">Использование Plugman для управления расширениями</a>&quot;.)</p>
+<p><strong>Примечание</strong>: CLI добавляет код плагина соответствующим образом для каждой платформы. Если вы хотите разработать с использованием инструментов низкого уровня или SDK платформы, как описано в разделе “<a href="../overview/index.html">Введение</a>”, необходимо запустить утилиту Plugman которая добавит плагины отдельно для каждой платформы. (Для получения дополнительной информации, см. раздел “<a href="../../plugin_ref/plugman.html">Использование Plugman для управления расширениями</a>”.)</p>
 
-<p>Используйте <code>plugin ls</code> (или <code>plugin list</code>, или просто <code>plugin</code>) для просмотра установленных на данный момент плагинов. Для каждого установленного плагина отображается его идентификатор:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin ls    # or 'plugin list'
+<p>Используйте <code class="language-plaintext highlighter-rouge">plugin ls</code> (или <code class="language-plaintext highlighter-rouge">plugin list</code>, или просто <code class="language-plaintext highlighter-rouge">plugin</code>) для просмотра установленных на данный момент плагинов. Для каждого установленного плагина отображается его идентификатор:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin ls    # or 'plugin list'
     [ 'cordova-plugin-console' ]
-</code></pre></div>
-<p>Чтобы удалить плагин, сошлитесь к нему по тому же идентификатору, который появляется в списке. Например таким образом вы бы удалили поддержку для консоли отладки из версии релиза:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin rm cordova-plugin-console
-    $ cordova plugin remove cordova-plugin-console    # same
-</code></pre></div>
-<p>Вы можете удалять или добавлять плагины пакетно указывая более чем один аргумент для соответствующей команды:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add cordova-plugin-console cordova-plugin-device
-</code></pre></div>
-<h2>Расширенные параметры плагина</h2>
+</code></pre></div></div>
 
-<p>При добавлении плагина, некоторые параметры позволяют указать откуда взять плагин. Приведенные выше примеры использования общепринятого реестра <code>registry.cordova.io</code>, и плагин определяется по его <code>id</code>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add cordova-plugin-console
-</code></pre></div>
-<p><code>Id</code> также может включать номер версии плагина, добавленный после символа <code>@</code>. Версия <code>latest</code> — это псевдоним для самой последней версии. Например:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add cordova-plugin-console@latest
+<p>Чтобы удалить плагин, сошлитесь к нему по тому же идентификатору, который появляется в списке. Например таким образом вы бы удалили поддержку для консоли отладки из версии релиза:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin rm cordova-plugin-console
+    $ cordova plugin remove cordova-plugin-console    # same
+</code></pre></div></div>
+
+<p>Вы можете удалять или добавлять плагины пакетно указывая более чем один аргумент для соответствующей команды:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add cordova-plugin-console cordova-plugin-device
+</code></pre></div></div>
+
+<h2 id="расширенные-параметры-плагина">Расширенные параметры плагина</h2>
+
+<p>При добавлении плагина, некоторые параметры позволяют указать откуда взять плагин. Приведенные выше примеры использования общепринятого реестра <code class="language-plaintext highlighter-rouge">registry.cordova.io</code>, и плагин определяется по его <code class="language-plaintext highlighter-rouge">id</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add cordova-plugin-console
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">Id</code> также может включать номер версии плагина, добавленный после символа <code class="language-plaintext highlighter-rouge">@</code>. Версия <code class="language-plaintext highlighter-rouge">latest</code> — это псевдоним для самой последней версии. Например:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add cordova-plugin-console@latest
     $ cordova plugin add cordova-plugin-console@0.2.1
-</code></pre></div>
-<p>Если плагин не зарегистрирована в <code>registry.cordova.io</code>, но расположен в другом репозитории git, вы можете указать альтернативный URL-адрес:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add https://github.com/apache/cordova-plugin-console.git
-</code></pre></div>
-<p>Приведенный выше пример git получает плагин из последней версии ветки master, но альтернативная git ссылка например тег или другая ветка могут быть добавлены после символа <code>#</code>:</p>
+</code></pre></div></div>
+
+<p>Если плагин не зарегистрирована в <code class="language-plaintext highlighter-rouge">registry.cordova.io</code>, но расположен в другом репозитории git, вы можете указать альтернативный URL-адрес:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add https://github.com/apache/cordova-plugin-console.git
+</code></pre></div></div>
+
+<p>Приведенный выше пример git получает плагин из последней версии ветки master, но альтернативная git ссылка например тег или другая ветка могут быть добавлены после символа <code class="language-plaintext highlighter-rouge">#</code>:</p>
 
 <p>Установка из тега:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add https://github.com/apache/cordova-plugin-console.git#r0.2.0
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add https://github.com/apache/cordova-plugin-console.git#r0.2.0
+</code></pre></div></div>
+
 <p>или из ветки:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add https://github.com/apache/cordova-plugin-console.git#CB-8438cordova-plugin-console
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add https://github.com/apache/cordova-plugin-console.git#CB-8438cordova-plugin-console
+</code></pre></div></div>
+
 <p>или git-ref также может также быть конкретным коммитом:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add https://github.com/apache/cordova-plugin-console.git#f055daec45575bf08538f885e09c85a0eba363ff
-</code></pre></div>
-<p>Если плагин (и его файл <code>plugin.xml</code>) находится в подкаталоге репозитария git, вы можете указать его после символа <code>:</code>. Обратите внимание, что символ <code>#</code> все еще необходим:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add https://github.com/someone/aplugin.git#:/my/sub/dir
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add https://github.com/apache/cordova-plugin-console.git#f055daec45575bf08538f885e09c85a0eba363ff
+</code></pre></div></div>
+
+<p>Если плагин (и его файл <code class="language-plaintext highlighter-rouge">plugin.xml</code>) находится в подкаталоге репозитария git, вы можете указать его после символа <code class="language-plaintext highlighter-rouge">:</code>. Обратите внимание, что символ <code class="language-plaintext highlighter-rouge">#</code> все еще необходим:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add https://github.com/someone/aplugin.git#:/my/sub/dir
+</code></pre></div></div>
+
 <p>Вы также можете объединить как ссылку git так и подкаталоги:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add https://github.com/someone/aplugin.git#r0.0.1:/my/sub/dir
-</code></pre></div>
-<p>Как вариант укажите локальный путь к папке плагина, который содержит файл <code>plugin.xml</code>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add ../my_plugin_dir
-</code></pre></div>
-<h2>Использование каталога <em>merges</em> для настройки каждой платформы</h2>
 
-<p>Хотя Cordova позволяет легко развертывать приложение на разных платформах, иногда необходимо добавить индивидуальные настройки. В этом случае вы не хотите изменить исходные файлы в различных каталогах <code>www</code> в каталоге верхнего уровня <code>платформы</code>, потому что они регулярно заменяются из кросс-платформенного источника - каталога верхнего уровня <code>www</code>.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add https://github.com/someone/aplugin.git#r0.0.1:/my/sub/dir
+</code></pre></div></div>
 
-<p>Вместо этого в каталог верхнего уровня <code>merges</code> предоставляет место для указания ресурсов для развертывания на определенных платформах. Каждый платформо-зависимый подкаталог <code>merges</code> отражает повторяет структуру директории <code>www</code>, и позволяет переопределить или добавить файлы, как это необходимо. Например вот как вы, возможно, использует <code>merges</code> чтобы увеличить размер шрифта по умолчанию для устройств Android и Amazon Fire ОС:</p>
+<p>Как вариант укажите локальный путь к папке плагина, который содержит файл <code class="language-plaintext highlighter-rouge">plugin.xml</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add ../my_plugin_dir
+</code></pre></div></div>
+
+<h2 id="использование-каталога-merges-для-настройки-каждой-платформы">Использование каталога <em>merges</em> для настройки каждой платформы</h2>
+
+<p>Хотя Cordova позволяет легко развертывать приложение на разных платформах, иногда необходимо добавить индивидуальные настройки. В этом случае вы не хотите изменить исходные файлы в различных каталогах <code class="language-plaintext highlighter-rouge">www</code> в каталоге верхнего уровня <code class="language-plaintext highlighter-rouge">платформы</code>, потому что они регулярно заменяются из кросс-платформенного источника - каталога верхнего уровня <code class="language-plaintext highlighter-rouge">www</code>.</p>
+
+<p>Вместо этого в каталог верхнего уровня <code class="language-plaintext highlighter-rouge">merges</code> предоставляет место для указания ресурсов для развертывания на определенных платформах. Каждый платформо-зависимый подкаталог <code class="language-plaintext highlighter-rouge">merges</code> отражает повторяет структуру директории <code class="language-plaintext highlighter-rouge">www</code>, и позволяет переопределить или добавить файлы, как это необходимо. Например вот как вы, возможно, использует <code class="language-plaintext highlighter-rouge">merges</code> чтобы увеличить размер шрифта по умолчанию для устройств Android и Amazon Fire ОС:</p>
 
 <ul>
-<li><p>Измените файл <code>www/index.html</code>, добавив ссылку на дополнительный CSS-файл, <code>overrides.css</code> в данном случае:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;link rel="stylesheet" type="text/css" href="css/overrides.css" /&gt;
-</code></pre></div></li>
-<li><p>При необходимости создайте пустой <code>www/css/overrides.css</code> файл, который будет применяться для всех построений отличных от Android, предотвращая ошибку недостающего файла.</p></li>
-<li><p>Создайте <code>css</code> подкаталог внутри <code>merges/android</code> , затем добавьте соответствующий файл <code>overrides.css</code>. Укажите CSS, который переопределяет 12 пунктовый размер шрифта по умолчанию, указанный в <code>www/css/index.css</code> , например:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">body { font-size:14px; }
-</code></pre></div></li>
+  <li>
+    <p>Измените файл <code class="language-plaintext highlighter-rouge">www/index.html</code>, добавив ссылку на дополнительный CSS-файл, <code class="language-plaintext highlighter-rouge">overrides.css</code> в данном случае:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;link rel="stylesheet" type="text/css" href="css/overrides.css" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>При необходимости создайте пустой <code class="language-plaintext highlighter-rouge">www/css/overrides.css</code> файл, который будет применяться для всех построений отличных от Android, предотвращая ошибку недостающего файла.</p>
+  </li>
+  <li>
+    <p>Создайте <code class="language-plaintext highlighter-rouge">css</code> подкаталог внутри <code class="language-plaintext highlighter-rouge">merges/android</code> , затем добавьте соответствующий файл <code class="language-plaintext highlighter-rouge">overrides.css</code>. Укажите CSS, который переопределяет 12 пунктовый размер шрифта по умолчанию, указанный в <code class="language-plaintext highlighter-rouge">www/css/index.css</code> , например:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>body { font-size:14px; }
+</code></pre></div>    </div>
+  </li>
 </ul>
 
 <p>При повторном построении проекта, Android версия будет содержать измененный размер шрифта, в то время как другие платформы остаются неизменными.</p>
 
-<p>Можно также использовать <code>merges</code> для добавления файлов, изначально не присутствующих в каталоге <code>www</code>. Например приложение может включить изображение для <em>кнопки Назал</em> в интерфейсе iOS, хранимом в <code>merges/ios/img/back_button.png</code>, в то время как версия Android вместо этого может перехватывать захватить события <code>[backbutton](../../cordova/events/events.backbutton.html)</code> от соответствующей аппаратной кнопки.</p>
+<p>Можно также использовать <code class="language-plaintext highlighter-rouge">merges</code> для добавления файлов, изначально не присутствующих в каталоге <code class="language-plaintext highlighter-rouge">www</code>. Например приложение может включить изображение для <em>кнопки Назал</em> в интерфейсе iOS, хранимом в <code class="language-plaintext highlighter-rouge">merges/ios/img/back_button.png</code>, в то время как версия Android вместо этого может перехватывать захватить события <code class="language-plaintext highlighter-rouge">[backbutton](../../cordova/events/events.backbutton.html)</code> от соответствующей аппаратной кнопки.</p>
 
-<h2>Команды справки</h2>
+<h2 id="команды-справки">Команды справки</h2>
 
-<p>Cordova имеет несколько глобальных команд, которые могут помочь вам, если вы застряли или возникли проблемы. Команда <code>help</code> отображает все доступные команды Cordova и их синтаксис:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova help
+<p>Cordova имеет несколько глобальных команд, которые могут помочь вам, если вы застряли или возникли проблемы. Команда <code class="language-plaintext highlighter-rouge">help</code> отображает все доступные команды Cordova и их синтаксис:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova help
 $ cordova        # same
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Кроме того вы можете получить более подробную справку по определенной команде. Например:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova run --help
-</code></pre></div>
-<p>Команда <code>info</code> формирует список потенциально полезных сведений, например установленных платформ и плагинов, версии SDK для каждой платформы и версии CLI и <code>node.js</code>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova info
-</code></pre></div>
-<p>Она представляет информацию на экран и перенаправляет выходные данные в локальный файл <code>info.txt</code>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova run --help
+</code></pre></div></div>
+
+<p>Команда <code class="language-plaintext highlighter-rouge">info</code> формирует список потенциально полезных сведений, например установленных платформ и плагинов, версии SDK для каждой платформы и версии CLI и <code class="language-plaintext highlighter-rouge">node.js</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova info
+</code></pre></div></div>
+
+<p>Она представляет информацию на экран и перенаправляет выходные данные в локальный файл <code class="language-plaintext highlighter-rouge">info.txt</code>.</p>
 
 <p><strong>Примечание</strong>: в настоящее время, доступны только сведения о платформах iOS и Android.</p>
 
-<h2>Обновление Cordova и вашего проекта</h2>
+<h2 id="обновление-cordova-и-вашего-проекта">Обновление Cordova и вашего проекта</h2>
 
-<p>После установки утилиты <code>cordova</code>, вы можете всегда обновить ее до последней версии, выполнив следующую команду:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ sudo npm update -g cordova
-</code></pre></div>
+<p>После установки утилиты <code class="language-plaintext highlighter-rouge">cordova</code>, вы можете всегда обновить ее до последней версии, выполнив следующую команду:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ sudo npm update -g cordova
+</code></pre></div></div>
+
 <p>Используйте этот синтаксис для установки определенной версии:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ sudo npm install -g cordova@3.1.0-0.2.0
-</code></pre></div>
-<p>Запустите <code>cordova - v</code>, чтобы увидеть, какая версия в настоящее время установлена. Выполните команду <code>npm info</code> для более длинного списка, который включает в себя текущую версию и другие доступные номера версий:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ npm info cordova
-</code></pre></div>
-<p>Кордова 3.0 является первая версия поддерживающая интерфейс командной строки, описанные в этом разделе. Если вы обновляете проект с версии ранее чем 3.0, необходимо создать новый проект, как описано выше, а затем скопировать старые ресурсы приложения в каталог верхнего уровня <code>www</code>. Там, где это применимо, далее сведения об обновлении до 3.0 доступны в разделе &quot;<a href="../platforms/index.html">Руководство по поддерживаемым платформам</a>&quot;. После обновления к интерфейсу командной строки <code>cordova</code> используйте <code>npm update</code> чтобы оставаться актуальным, более длительные процедуры, описанные там более не актуальны.</p>
 
-<p>Cordova 3.0 + по-прежнему может требовать различных изменений структуры каталогов уровня проекта и других зависимостей. После того, как вы выполните команду <code>npm</code> указанную выше для обновления Cordova, необходимо убедиться, что ресурсы вашего проекта соответствуют требованиям последней версии. Выполните команды указанную ниже для каждой платформы, под которую вы создаете приложение:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova platform update android
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ sudo npm install -g cordova@3.1.0-0.2.0
+</code></pre></div></div>
+
+<p>Запустите <code class="language-plaintext highlighter-rouge">cordova - v</code>, чтобы увидеть, какая версия в настоящее время установлена. Выполните команду <code class="language-plaintext highlighter-rouge">npm info</code> для более длинного списка, который включает в себя текущую версию и другие доступные номера версий:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ npm info cordova
+</code></pre></div></div>
+
+<p>Кордова 3.0 является первая версия поддерживающая интерфейс командной строки, описанные в этом разделе. Если вы обновляете проект с версии ранее чем 3.0, необходимо создать новый проект, как описано выше, а затем скопировать старые ресурсы приложения в каталог верхнего уровня <code class="language-plaintext highlighter-rouge">www</code>. Там, где это применимо, далее сведения об обновлении до 3.0 доступны в разделе “<a href="../platforms/index.html">Руководство по поддерживаемым платформам</a>”. После обновления к интерфейсу командной строки <code class="language-plaintext highlighter-rouge">cordova</code> используйте <code class="language-plaintext highlighter-rouge">npm update</code> чтобы оставаться актуальным, более длительные процедуры, описанные там более не актуальны.</p>
+
+<p>Cordova 3.0 + по-прежнему может требовать различных изменений структуры каталогов уровня проекта и других зависимостей. После того, как вы выполните команду <code class="language-plaintext highlighter-rouge">npm</code> указанную выше для обновления Cordova, необходимо убедиться, что ресурсы вашего проекта соответствуют требованиям последней версии. Выполните команды указанную ниже для каждой платформы, под которую вы создаете приложение:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova platform update android
     $ cordova platform update ios
     ...etc.
-</code></pre></div>
+</code></pre></div></div>
+
 
             </div>
         </div>

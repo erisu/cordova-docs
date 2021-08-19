@@ -1172,77 +1172,83 @@
             
 
             <div id="page-toc-source">
-                <h1>batterycritical</h1>
+                <h1 id="batterycritical">batterycritical</h1>
 
 <p>このイベントはバッテリー残量が危険な閾値に達したことを Cordova アプリケーションが検知したときに呼び出されます。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">window.addEventListener("batterycritical", yourCallbackFunction, false);
-</code></pre></div>
-<h2>詳細</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>window.addEventListener("batterycritical", yourCallbackFunction, false);
+</code></pre></div></div>
+
+<h2 id="詳細">詳細</h2>
 
 <p>このイベントはバッテリー残量が危険なパーセンテージの閾値に達したことを Cordova アプリケーションが検知したときに呼び出されます。この値はデバイス固有です。</p>
 
 <p>batterycritical ハンドラーは以下の2つのプロパティーを含むオブジェクトを伴って呼び出されます:</p>
 
 <ul>
-<li><strong>level:</strong> バッテリーのパーセンテージ (0-100) <em>(Number)</em></li>
-<li><strong>isPlugged:</strong> デバイスが充電器に接続されているかどうかを表します <em>(Boolean)</em></li>
+  <li><strong>level:</strong> バッテリーのパーセンテージ (0-100) <em>(Number)</em></li>
+  <li><strong>isPlugged:</strong> デバイスが充電器に接続されているかどうかを表します <em>(Boolean)</em></li>
 </ul>
 
-<p>通常は、 Cordova の &#39;<a href="events.deviceready.html">deviceready</a>&#39; イベントを受け取った後、 <code>window.addEventListener</code> を通じてイベントリスナーをセットします。</p>
+<p>通常は、 Cordova の ‘<a href="events.deviceready.html">deviceready</a>’ イベントを受け取った後、 <code class="language-plaintext highlighter-rouge">window.addEventListener</code> を通じてイベントリスナーをセットします。</p>
 
-<h2>サポートされているプラットフォーム</h2>
+<h2 id="サポートされているプラットフォーム">サポートされているプラットフォーム</h2>
 
 <ul>
-<li>iOS</li>
-<li>Android</li>
-<li>BlackBerry WebWorks (OS 5.0 以上)</li>
+  <li>iOS</li>
+  <li>Android</li>
+  <li>BlackBerry WebWorks (OS 5.0 以上)</li>
 </ul>
 
-<h2><a href="../storage/storage.opendatabase.html">使用例</a></h2>
-<div class="highlight"><pre><code class="language-" data-lang="">window.addEventListener("batterycritical", onBatteryCritical, false);
+<h2 id="使用例"><a href="../storage/storage.opendatabase.html">使用例</a></h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>window.addEventListener("batterycritical", onBatteryCritical, false);
 
 function onBatteryCritical(info) {
     // バッテリー関する操作を記述
     alert("バッテリー残量が危険です " + info.level + "%\nすぐに充電してください。");
 }
-</code></pre></div>
-<h2>詳細な使用例</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Cordova Device Ready 使用例<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova-1.7.0.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="詳細な使用例">詳細な使用例</h2>
 
-    <span class="c1">// Cordova のロード完了とともに onDeviceReady を呼び出します。</span>
-    <span class="c1">//</span>
-    <span class="c1">// この時点では、ドキュメントの読み込みは完了していますが、 cordova-1.7.0.js はまだ完了していません。</span>
-    <span class="c1">// Cordova のロード完了とともに</span>
-    <span class="c1">// `deviceready` イベントが呼び出されます。</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onLoad</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="p">}</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Cordova Device Ready 使用例&lt;/title&gt;
 
-    <span class="c1">// Cordova 準備完了</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"batterycritical"</span><span class="p">,</span> <span class="nx">onBatteryCritical</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-1.7.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// バッテリー関する操作を記述</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onBatteryCritical</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">alert</span><span class="p">(</span><span class="s2">"バッテリー残量が危険です "</span> <span class="o">+</span> <span class="nx">info</span><span class="p">.</span><span class="nx">level</span> <span class="o">+</span> <span class="s2">"%\nすぐに充電してください。"</span><span class="p">);</span>
-    <span class="p">}</span>
+    // Cordova のロード完了とともに onDeviceReady を呼び出します。
+    //
+    // この時点では、ドキュメントの読み込みは完了していますが、 cordova-1.7.0.js はまだ完了していません。
+    // Cordova のロード完了とともに
+    // `deviceready` イベントが呼び出されます。
+    //
+    function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body</span> <span class="na">onload=</span><span class="s">"onLoad()"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+    // Cordova 準備完了
+    //
+    function onDeviceReady() {
+        window.addEventListener("batterycritical", onBatteryCritical, false);
+    }
+
+    // バッテリー関する操作を記述
+    //
+    function onBatteryCritical(info) {
+        alert("バッテリー残量が危険です " + info.level + "%\nすぐに充電してください。");
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body onload="onLoad()"&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

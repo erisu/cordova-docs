@@ -1022,22 +1022,23 @@
             
 
             <div id="page-toc-source">
-                <h1>Hooks Przewodnik</h1>
+                <h1 id="hooks-przewodnik">Hooks Przewodnik</h1>
 
-<p>Cordova haki stanowią specjalne skrypty, które może być dodany przez aplikację i programistów wtyczki lub nawet przez swój własny zbudować system do Dostosuj polecenia cordova. Hak skryptów może definiowane przez dodanie ich do specjalnego folderu wstępnie zdefiniowane ( <code>/hooks</code> ) lub poprzez pliki konfiguracyjne ( <code>config.xml</code> i <code>plugin.xml</code> ) i uruchomić pojedynczo w następującej kolejności:</p>
+<p>Cordova haki stanowią specjalne skrypty, które może być dodany przez aplikację i programistów wtyczki lub nawet przez swój własny zbudować system do Dostosuj polecenia cordova. Hak skryptów może definiowane przez dodanie ich do specjalnego folderu wstępnie zdefiniowane ( <code class="language-plaintext highlighter-rouge">/hooks</code> ) lub poprzez pliki konfiguracyjne ( <code class="language-plaintext highlighter-rouge">config.xml</code> i <code class="language-plaintext highlighter-rouge">plugin.xml</code> ) i uruchomić pojedynczo w następującej kolejności:</p>
 
 <ul>
-<li>Stosowania haczyków z <code>/hooks</code> ;</li>
-<li>Stosowania haczyków z <code>config.xml</code> ;</li>
-<li>Haki plugin z<code>plugins/.../plugin.xml</code>.</li>
+  <li>Stosowania haczyków z <code class="language-plaintext highlighter-rouge">/hooks</code> ;</li>
+  <li>Stosowania haczyków z <code class="language-plaintext highlighter-rouge">config.xml</code> ;</li>
+  <li>Haki plugin z<code class="language-plaintext highlighter-rouge">plugins/.../plugin.xml</code>.</li>
 </ul>
 
-<p><strong>Uwaga</strong>: katalog <code>/hooks</code> jest uważana za zastąpiona hak elementy w pliku config.xml i plugin.xml.</p>
+<p><strong>Uwaga</strong>: katalog <code class="language-plaintext highlighter-rouge">/hooks</code> jest uważana za zastąpiona hak elementy w pliku config.xml i plugin.xml.</p>
 
-<h2>Typy obsługiwanych hak</h2>
+<h2 id="typy-obsługiwanych-hak">Typy obsługiwanych hak</h2>
 
 <p>Obsługiwane są następujące typy haka:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">after_build
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>after_build
 after_compile
 after_clean
 after_docs
@@ -1071,23 +1072,27 @@ before_prepare
 before_run
 before_serve
 pre_package // Windows and Windows Phone only
-</code></pre></div>
-<h2>Sposoby definiowania haki</h2>
+</code></pre></div></div>
 
-<h3>Via <code>/hooks</code> katalogu</h3>
+<h2 id="sposoby-definiowania-haki">Sposoby definiowania haki</h2>
+
+<h3 id="via-hooks-katalogu">Via <code class="language-plaintext highlighter-rouge">/hooks</code> katalogu</h3>
 
 <p><strong>Uwaga</strong>: Ta metoda jest uważana za zastąpiona hak elementy w pliku config.xml i plugin.xml.</p>
 
-<p>Aby wykonać akcję niestandardową podczas odpowiedniego typu hak jest zwolniony, użyj haka typu jako nazwę podfolderu wewnątrz katalogu &quot;haki&quot; i miejsce skrypt pliku tutaj, na przykład:</p>
-<div class="highlight"><pre><code class="language-" data-lang=""># script file will be automatically executed after each build
+<p>Aby wykonać akcję niestandardową podczas odpowiedniego typu hak jest zwolniony, użyj haka typu jako nazwę podfolderu wewnątrz katalogu “haki” i miejsce skrypt pliku tutaj, na przykład:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># script file will be automatically executed after each build
 hooks/after_build/after_build_custom_action.js
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Podczas korzystania z tych haczyków, zawsze działały jako pliki wykonywalne, nie jako ładowalne moduły JavaScript. <strong>Pamiętaj</strong>: zrobić skryptów wykonywalnych w tym przypadku.</p>
 
-<h3>Plik config.XML</h3>
+<h3 id="plik-configxml">Plik config.XML</h3>
 
-<p>Haki mogą być definiowane w projektu <code>config.xml</code> za pomocą <code>&lt; hak &gt;</code> elementy, na przykład:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;hook type="before_build" src="scripts/appBeforeBuild.bat" /&gt;
+<p>Haki mogą być definiowane w projektu <code class="language-plaintext highlighter-rouge">config.xml</code> za pomocą <code class="language-plaintext highlighter-rouge">&lt; hak &gt;</code> elementy, na przykład:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;hook type="before_build" src="scripts/appBeforeBuild.bat" /&gt;
 &lt;hook type="before_build" src="scripts/appBeforeBuild.js" /&gt;
 &lt;hook type="before_plugin_install" src="scripts/appBeforePluginInstall.js" /&gt;
 
@@ -1104,11 +1109,13 @@ hooks/after_build/after_build_custom_action.js
     &lt;hook type="before_plugin_install" src="scripts/windows8/appWin8BeforePluginInstall.js" /&gt;
     ...
 &lt;/platform&gt;
-</code></pre></div>
-<h3>Haki plugin (plugin.xml)</h3>
+</code></pre></div></div>
 
-<p>Jako autora wtyczki, które można zdefiniować hak skrypty za pomocą <code>&lt; hak &gt;</code> elementy w <code>plugin.xml</code> tak:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;hook type="before_plugin_install" src="scripts/beforeInstall.js" /&gt;
+<h3 id="haki-plugin-pluginxml">Haki plugin (plugin.xml)</h3>
+
+<p>Jako autora wtyczki, które można zdefiniować hak skrypty za pomocą <code class="language-plaintext highlighter-rouge">&lt; hak &gt;</code> elementy w <code class="language-plaintext highlighter-rouge">plugin.xml</code> tak:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;hook type="before_plugin_install" src="scripts/beforeInstall.js" /&gt;
 &lt;hook type="after_build" src="scripts/afterBuild.js" /&gt;
 
 &lt;platform name="wp8"&gt;
@@ -1116,91 +1123,105 @@ hooks/after_build/after_build_custom_action.js
     &lt;hook type="before_build" src="scripts/wp8BeforeBuild.js" /&gt;
     ...
 &lt;/platform&gt;
-</code></pre></div>
-<p><code>before_plugin_install</code>, <code>after_plugin_install</code>, <code>before_plugin_uninstall</code> plugin, haki będzie zwolniony wyłącznie dla wtyczki zainstalowane/odinstalowany.</p>
+</code></pre></div></div>
 
-<h2>Skrypt interfejs</h2>
+<p><code class="language-plaintext highlighter-rouge">before_plugin_install</code>, <code class="language-plaintext highlighter-rouge">after_plugin_install</code>, <code class="language-plaintext highlighter-rouge">before_plugin_uninstall</code> plugin, haki będzie zwolniony wyłącznie dla wtyczki zainstalowane/odinstalowany.</p>
 
-<h3>Javascript</h3>
+<h2 id="skrypt-interfejs">Skrypt interfejs</h2>
+
+<h3 id="javascript">Javascript</h3>
 
 <p>Jeśli piszesz haków przy użyciu Node.js należy używać następującej definicji modułu:</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
     <span class="p">...</span>
 <span class="p">}</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Możesz zrobić twój scipts asynchroniczny przy użyciu Q:</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">Q</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">requireCordovaModule</span><span class="p">(</span><span class="s1">'q'</span><span class="p">);</span>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">Q</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">requireCordovaModule</span><span class="p">(</span><span class="dl">'</span><span class="s1">q</span><span class="dl">'</span><span class="p">);</span>
     <span class="kd">var</span> <span class="nx">deferral</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Q</span><span class="p">.</span><span class="nx">defer</span><span class="p">();</span>
 
     <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'hook.js&gt;&gt; end'</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">hook.js&gt;&gt; end</span><span class="dl">'</span><span class="p">);</span>
     <span class="nx">deferral</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
     <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
 
     <span class="k">return</span> <span class="nx">deferral</span><span class="p">.</span><span class="nx">promise</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div>
-<p><code>Context</code> obiekt zawiera typ chwytacza, wykonywany skrypt pełną ścieżkę, hak opcje, argumenty przekazywane do Cordova i najwyższego poziomu &quot;cordova&quot; obiektu:</p>
-<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"hook"</span><span class="p">:</span><span class="w"> </span><span class="s2">"before_plugin_install"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"scriptLocation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c:</span><span class="se">\\</span><span class="s2">script</span><span class="se">\\</span><span class="s2">full</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">appBeforePluginInstall.js"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cmdLine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The</span><span class="se">\\</span><span class="s2">exact</span><span class="se">\\</span><span class="s2">command</span><span class="se">\\</span><span class="s2">cordova</span><span class="se">\\</span><span class="s2">run</span><span class="se">\\</span><span class="s2">with arguments"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"opts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"projectRoot"</span><span class="p">:</span><span class="s2">"C:</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">to</span><span class="se">\\</span><span class="s2">the</span><span class="se">\\</span><span class="s2">project"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cordova"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"platforms"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"wp8"</span><span class="p">],</span><span class="w">
-      </span><span class="s2">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"com.plugin.withhooks"</span><span class="p">],</span><span class="w">
-      </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.21.7-dev"</span><span class="w">
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">Context</code> obiekt zawiera typ chwytacza, wykonywany skrypt pełną ścieżkę, hak opcje, argumenty przekazywane do Cordova i najwyższego poziomu “cordova” obiektu:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"hook"</span><span class="p">:</span><span class="w"> </span><span class="s2">"before_plugin_install"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"scriptLocation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c:</span><span class="se">\\</span><span class="s2">script</span><span class="se">\\</span><span class="s2">full</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">appBeforePluginInstall.js"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"cmdLine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The</span><span class="se">\\</span><span class="s2">exact</span><span class="se">\\</span><span class="s2">command</span><span class="se">\\</span><span class="s2">cordova</span><span class="se">\\</span><span class="s2">run</span><span class="se">\\</span><span class="s2">with arguments"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"opts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"projectRoot"</span><span class="p">:</span><span class="s2">"C:</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">to</span><span class="se">\\</span><span class="s2">the</span><span class="se">\\</span><span class="s2">project"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"cordova"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"platforms"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"wp8"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"com.plugin.withhooks"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.21.7-dev"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"plugin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"com.plugin.withhooks"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"pluginInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"plugin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"com.plugin.withhooks"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"pluginInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="err">...</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wp8"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"dir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C:</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">to</span><span class="se">\\</span><span class="s2">the</span><span class="se">\\</span><span class="s2">project</span><span class="se">\\</span><span class="s2">plugins</span><span class="se">\\</span><span class="s2">com.plugin.withhooks"</span><span class="w">
+      </span><span class="nl">"platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wp8"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"dir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C:</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">to</span><span class="se">\\</span><span class="s2">the</span><span class="se">\\</span><span class="s2">project</span><span class="se">\\</span><span class="s2">plugins</span><span class="se">\\</span><span class="s2">com.plugin.withhooks"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"cordova"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+  </span><span class="nl">"cordova"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre></div>
-<p>skrypty haki plugin tylko przekazywany obiekt <code>Context.opts.plugin</code> .</p>
+</span></code></pre></div></div>
 
-<p>Może również wymagać dodatkowych modułów Cordova w skrypcie przy użyciu <code>context.requireCordovaModule</code> w następujący sposób:</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">Q</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">requireCordovaModule</span><span class="p">(</span><span class="s1">'q'</span><span class="p">);</span>
-</code></pre></div>
-<p><strong>Uwaga</strong>: nowy moduł ładowarka skrypt interfejs jest używany do plików <code>.js</code> zdefiniowane przez <code>plik config.xml</code> lub <code>plugin.xml</code> tylko. Ze względu na kompatybilność hak pliki określone przez <code>/hooks</code> foldery są uruchamiane za pośrednictwem węzła child_process tarło, zobacz &quot;Non-javascript&quot; sekcji poniżej.</p>
+<p>skrypty haki plugin tylko przekazywany obiekt <code class="language-plaintext highlighter-rouge">Context.opts.plugin</code> .</p>
 
-<h3>Non-javascript</h3>
+<p>Może również wymagać dodatkowych modułów Cordova w skrypcie przy użyciu <code class="language-plaintext highlighter-rouge">context.requireCordovaModule</code> w następujący sposób:</p>
 
-<p><strong>Uwaga</strong>: zalecamy pisania haków przy użyciu Node.js, tak, że są one cross-platform, zobacz sekcja &quot;Javascript&quot; powyżej.</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Q</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">requireCordovaModule</span><span class="p">(</span><span class="dl">'</span><span class="s1">q</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>Uwaga</strong>: nowy moduł ładowarka skrypt interfejs jest używany do plików <code class="language-plaintext highlighter-rouge">.js</code> zdefiniowane przez <code class="language-plaintext highlighter-rouge">plik config.xml</code> lub <code class="language-plaintext highlighter-rouge">plugin.xml</code> tylko. Ze względu na kompatybilność hak pliki określone przez <code class="language-plaintext highlighter-rouge">/hooks</code> foldery są uruchamiane za pośrednictwem węzła child_process tarło, zobacz “Non-javascript” sekcji poniżej.</p>
+
+<h3 id="non-javascript">Non-javascript</h3>
+
+<p><strong>Uwaga</strong>: zalecamy pisania haków przy użyciu Node.js, tak, że są one cross-platform, zobacz sekcja “Javascript” powyżej.</p>
 
 <p>Skrypty w języku javascript nie są uruchamiane za pośrednictwem węzła child_process tarło z katalogu projektu i przechodzi katalogu głównego jako pierwszy argument. Wszystkie inne opcje są przekazywane do skryptu za pomocą zmiennych środowiskowych:</p>
 
 <ul>
-<li>CORDOVA_VERSION - wersja Cordova-CLI.</li>
-<li>CORDOVA_PLATFORMS - przecinkami lista platform, które dotyczy polecenia (np.: android, ios).</li>
-<li>CORDOVA_PLUGINS - przecinkami lista pluginów identyfikatorów, które dotyczy polecenia (np.: org.apache.cordova.file, org.apache.cordova.file przelew)</li>
-<li>CORDOVA_HOOK - ścieżka do hak, który jest aktualnie wykonywany.</li>
-<li>CORDOVA_CMDLINE - dokładnie argumenty przekazywane do cordova (np.: cordova uruchamiać ios--naśladować)</li>
+  <li>CORDOVA_VERSION - wersja Cordova-CLI.</li>
+  <li>CORDOVA_PLATFORMS - przecinkami lista platform, które dotyczy polecenia (np.: android, ios).</li>
+  <li>CORDOVA_PLUGINS - przecinkami lista pluginów identyfikatorów, które dotyczy polecenia (np.: org.apache.cordova.file, org.apache.cordova.file przelew)</li>
+  <li>CORDOVA_HOOK - ścieżka do hak, który jest aktualnie wykonywany.</li>
+  <li>CORDOVA_CMDLINE - dokładnie argumenty przekazywane do cordova (np.: cordova uruchamiać ios–naśladować)</li>
 </ul>
 
 <p>Jeśli skrypt zwraca kod zakończenia, a następnie polecenie cordova nadrzędnego zostanie przerwane.</p>
 
 <p>Należy również zauważyć, że nawet jeśli pracujesz na Windows, a w przypadku skryptów hak nie są pliki bat, (które jest zalecane, jeśli chcesz, aby Twoje skrypty do pracy w systemach operacyjnych innych niż Windows) Cordova CLI będzie oczekiwać linię szulernia jako pierwszy wiersz to wiedzieć Tłumacz musi użyć do uruchomienia skryptu. Linii szulernia powinna odpowiadać następującym przykładzie:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">#!/usr/bin/env [name_of_interpreter_executable]
-</code></pre></div>
-<h2>Przykładowe użycie</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/usr/bin/env [name_of_interpreter_executable]
+</code></pre></div></div>
+
+<h2 id="przykładowe-użycie">Przykładowe użycie</h2>
 
 <p>W tym przykładzie Zademonstrowano sposób użycia haki Cordova do śledzenia wyjścia konsoli rozmiar pliku apk wygenerowany dla platformy Android.</p>
 
-<p>Utwórz puste Cordova app i dodać następującą definicję do <code>pliku config.xml</code> powiedzieć Cordova do uruchomienia skryptu <code>afterBuild.js</code> po każdej budowy platformy.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;hook type="after_build" src="scripts/afterBuild.js" /&gt;
-</code></pre></div>
-<p>Utwórz plik <code>scripts/afterBuild.js</code> i dodać następujące wykonania. Używamy asynchronicznej wersji metody <code>fs.stat</code> do wykazania, jak asynchroniczne funkcjonalności może odbywać się za pomocą haków.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">module.exports = function(ctx) {
+<p>Utwórz puste Cordova app i dodać następującą definicję do <code class="language-plaintext highlighter-rouge">pliku config.xml</code> powiedzieć Cordova do uruchomienia skryptu <code class="language-plaintext highlighter-rouge">afterBuild.js</code> po każdej budowy platformy.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;hook type="after_build" src="scripts/afterBuild.js" /&gt;
+</code></pre></div></div>
+
+<p>Utwórz plik <code class="language-plaintext highlighter-rouge">scripts/afterBuild.js</code> i dodać następujące wykonania. Używamy asynchronicznej wersji metody <code class="language-plaintext highlighter-rouge">fs.stat</code> do wykazania, jak asynchroniczne funkcjonalności może odbywać się za pomocą haków.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module.exports = function(ctx) {
     // make sure android platform is part of build 
     if (ctx.opts.platforms.indexOf('android') &lt; 0) {
         return;
@@ -1223,16 +1244,19 @@ hooks/after_build/after_build_custom_action.js
 
     return deferral.promise;
 };
-</code></pre></div>
-<p>Parametr <code>ctx</code> w powyższym przykładzie jest przekazywana przez Cordova i reprezentuje kontekst wykonywania skryptu pełną ścieżkę, platformą docelową, argumentów wiersza polecenia, itp i udostępnia również funkcje dodatkowe pomocnicze. Zobacz <code>Interfejs skrypt</code> sekcji powyżej dla więcej szczegółów.</p>
+</code></pre></div></div>
+
+<p>Parametr <code class="language-plaintext highlighter-rouge">ctx</code> w powyższym przykładzie jest przekazywana przez Cordova i reprezentuje kontekst wykonywania skryptu pełną ścieżkę, platformą docelową, argumentów wiersza polecenia, itp i udostępnia również funkcje dodatkowe pomocnicze. Zobacz <code class="language-plaintext highlighter-rouge">Interfejs skrypt</code> sekcji powyżej dla więcej szczegółów.</p>
 
 <p>Teraz można dodać platformy android i wykonać budować.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cordova platform add android
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova platform add android
 ..
 cordova build
 ..
 Size of path\to\app\platforms\android\build\outputs\apk\android-debug.apk is 1821193 bytes
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Tutaj można znaleźć więcej przykładów dobry zwyczaj:</p>
 
 <p><a href="http://devgirl.org/2013/11/12/three-hooks-your-cordovaphonegap-project-needs/">http://devgirl.org/2013/11/12/three-hooks-your-cordovaphonegap-project-needs/</a></p>

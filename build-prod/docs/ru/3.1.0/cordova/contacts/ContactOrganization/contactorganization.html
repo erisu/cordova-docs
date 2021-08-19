@@ -1310,36 +1310,47 @@
     }
 </style>
 
-<h1>ContactOrganization</h1>
+<h1 id="contactorganization">ContactOrganization</h1>
 
-<p>Содержит <code>Contact</code> свойства объекта в Организации.</p>
+<p>Содержит <code class="language-plaintext highlighter-rouge">Contact</code> свойства объекта в Организации.</p>
 
-<h2>Свойства</h2>
-
-<ul>
-<li><p><strong>pref</strong>: набор <code>true</code> Если <code>ContactOrganization</code> содержит значение предпочтительный для пользователя. <em>(логический)</em></p></li>
-<li><p><strong>тип</strong>: строка, указывающая тип поля это, <em>дома</em> например. _(DOMString)</p></li>
-<li><p><strong>имя</strong>: название организации. <em>(DOMString)</em></p></li>
-<li><p><strong>Отдел</strong>: Отдел контракт работает для. <em>(DOMString)</em></p></li>
-<li><p><strong>название</strong>: название контакта в Организации. <em>(DOMString)</em></p></li>
-</ul>
-
-<h2>Подробная информация</h2>
-
-<p><code>ContactOrganization</code>Объект сохраняет свойства контакта Организации. A <code>Contact</code> объект хранит один или более <code>ContactOrganization</code> объектов в массиве.</p>
-
-<h2>Поддерживаемые платформы</h2>
+<h2 id="свойства">Свойства</h2>
 
 <ul>
-<li>  Андроид</li>
-<li>  WebWorks ежевики (OS 5.0 и выше)</li>
-<li>  iOS</li>
-<li>  Windows Phone 7 и 8</li>
-<li>  ОС Windows 8</li>
+  <li>
+    <p><strong>pref</strong>: набор <code class="language-plaintext highlighter-rouge">true</code> Если <code class="language-plaintext highlighter-rouge">ContactOrganization</code> содержит значение предпочтительный для пользователя. <em>(логический)</em></p>
+  </li>
+  <li>
+    <p><strong>тип</strong>: строка, указывающая тип поля это, <em>дома</em> например. _(DOMString)</p>
+  </li>
+  <li>
+    <p><strong>имя</strong>: название организации. <em>(DOMString)</em></p>
+  </li>
+  <li>
+    <p><strong>Отдел</strong>: Отдел контракт работает для. <em>(DOMString)</em></p>
+  </li>
+  <li>
+    <p><strong>название</strong>: название контакта в Организации. <em>(DOMString)</em></p>
+  </li>
 </ul>
 
-<h2>Быстрый пример</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">function onSuccess(contacts) {
+<h2 id="подробная-информация">Подробная информация</h2>
+
+<p><code class="language-plaintext highlighter-rouge">ContactOrganization</code>Объект сохраняет свойства контакта Организации. A <code class="language-plaintext highlighter-rouge">Contact</code> объект хранит один или более <code class="language-plaintext highlighter-rouge">ContactOrganization</code> объектов в массиве.</p>
+
+<h2 id="поддерживаемые-платформы">Поддерживаемые платформы</h2>
+
+<ul>
+  <li>Андроид</li>
+  <li>WebWorks ежевики (OS 5.0 и выше)</li>
+  <li>iOS</li>
+  <li>Windows Phone 7 и 8</li>
+  <li>ОС Windows 8</li>
+</ul>
+
+<h2 id="быстрый-пример">Быстрый пример</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function onSuccess(contacts) {
     for (var i = 0; i &lt; contacts.length; i++) {
         for (var j = 0; j &lt; contacts[i].organizations.length; j++) {
             alert("Pref: "      + contacts[i].organizations[j].pref       + "\n" +
@@ -1359,81 +1370,104 @@ var options = new ContactFindOptions();
 options.filter = "";
 filter = ["displayName", "organizations"];
 navigator.contacts.find(filter, onSuccess, onError, options);
-</code></pre></div>
-<h2>Полный пример</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Contact Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="полный-пример">Полный пример</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Contact Example&lt;/title&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ContactFindOptions</span><span class="p">();</span>
-        <span class="nx">options</span><span class="p">.</span><span class="nx">filter</span><span class="o">=</span><span class="s2">""</span><span class="p">;</span>
-        <span class="nx">filter</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"displayName"</span><span class="p">,</span><span class="s2">"organizations"</span><span class="p">];</span>
-        <span class="nb">navigator</span><span class="p">.</span><span class="nx">contacts</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">filter</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onError</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// onSuccess: Get a snapshot of the current contacts</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onSuccess</span><span class="p">(</span><span class="nx">contacts</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">contacts</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">contacts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">organizations</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">alert</span><span class="p">(</span><span class="s2">"Pref: "</span>     <span class="o">+</span> <span class="nx">contacts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">organizations</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">pref</span>       <span class="o">+</span> <span class="s2">"\n"</span> <span class="o">+</span>
-                    <span class="s2">"Type: "</span>       <span class="o">+</span> <span class="nx">contacts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">organizations</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">type</span>       <span class="o">+</span> <span class="s2">"\n"</span> <span class="o">+</span>
-                    <span class="s2">"Name: "</span>       <span class="o">+</span> <span class="nx">contacts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">organizations</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">name</span>       <span class="o">+</span> <span class="s2">"\n"</span> <span class="o">+</span>
-                    <span class="s2">"Department: "</span> <span class="o">+</span> <span class="nx">contacts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">organizations</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">department</span> <span class="o">+</span> <span class="s2">"\n"</span> <span class="o">+</span>
-                    <span class="s2">"Title: "</span>      <span class="o">+</span> <span class="nx">contacts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">organizations</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">title</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">};</span>
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
 
-    <span class="c1">// onError: Failed to get the contacts</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onError</span><span class="p">(</span><span class="nx">contactError</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">alert</span><span class="p">(</span><span class="s1">'onError!'</span><span class="p">);</span>
-    <span class="p">}</span>
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        var options = new ContactFindOptions();
+        options.filter="";
+        filter = ["displayName","organizations"];
+        navigator.contacts.find(filter, onSuccess, onError, options);
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;h1&gt;</span>Example<span class="nt">&lt;/h1&gt;</span>
-    <span class="nt">&lt;p&gt;</span>Find Contacts<span class="nt">&lt;/p&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2>Причуды Android 2.X</h2>
+    // onSuccess: Get a snapshot of the current contacts
+    //
+    function onSuccess(contacts) {
+        for (var i = 0; i &lt; contacts.length; i++) {
+            for (var j = 0; j &lt; contacts[i].organizations.length; j++) {
+                alert("Pref: "     + contacts[i].organizations[j].pref       + "\n" +
+                    "Type: "       + contacts[i].organizations[j].type       + "\n" +
+                    "Name: "       + contacts[i].organizations[j].name       + "\n" +
+                    "Department: " + contacts[i].organizations[j].department + "\n" +
+                    "Title: "      + contacts[i].organizations[j].title);
+            }
+        }
+    };
+
+    // onError: Failed to get the contacts
+    //
+    function onError(contactError) {
+        alert('onError!');
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Example&lt;/h1&gt;
+    &lt;p&gt;Find Contacts&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h2 id="причуды-android-2x">Причуды Android 2.X</h2>
 
 <ul>
-<li>  <strong>pref</strong>: не поддерживается устройствами Android 2.X, возвращая<code>false</code>.</li>
+  <li><strong>pref</strong>: не поддерживается устройствами Android 2.X, возвращая<code class="language-plaintext highlighter-rouge">false</code>.</li>
 </ul>
 
-<h2>Причуды ежевики WebWorks (OS 5.0 и выше)</h2>
+<h2 id="причуды-ежевики-webworks-os-50-и-выше">Причуды ежевики WebWorks (OS 5.0 и выше)</h2>
 
 <ul>
-<li><p><strong>pref</strong>: не поддерживается на устройствах BlackBerry, возвращая<code>false</code>.</p></li>
-<li><p><strong>тип</strong>: не поддерживается на устройствах BlackBerry, возвращая<code>null</code>.</p></li>
-<li><p><strong>имя</strong>: частично поддерживается. Первый название организации хранится в поле <strong>компания</strong> BlackBerry.</p></li>
-<li><p><strong>Департамент</strong>: не поддерживается, возвращая<code>null</code>.</p></li>
-<li><p><strong>название</strong>: частично поддерживается. Первый титул организации хранится в поле <strong>название должности</strong> BlackBerry.</p></li>
+  <li>
+    <p><strong>pref</strong>: не поддерживается на устройствах BlackBerry, возвращая<code class="language-plaintext highlighter-rouge">false</code>.</p>
+  </li>
+  <li>
+    <p><strong>тип</strong>: не поддерживается на устройствах BlackBerry, возвращая<code class="language-plaintext highlighter-rouge">null</code>.</p>
+  </li>
+  <li>
+    <p><strong>имя</strong>: частично поддерживается. Первый название организации хранится в поле <strong>компания</strong> BlackBerry.</p>
+  </li>
+  <li>
+    <p><strong>Департамент</strong>: не поддерживается, возвращая<code class="language-plaintext highlighter-rouge">null</code>.</p>
+  </li>
+  <li>
+    <p><strong>название</strong>: частично поддерживается. Первый титул организации хранится в поле <strong>название должности</strong> BlackBerry.</p>
+  </li>
 </ul>
 
-<h2>iOS причуды</h2>
+<h2 id="ios-причуды">iOS причуды</h2>
 
 <ul>
-<li><p><strong>pref</strong>: не поддерживается на устройствах iOS, возвращая<code>false</code>.</p></li>
-<li><p><strong>тип</strong>: не поддерживается на устройствах iOS, возвращая<code>null</code>.</p></li>
-<li><p><strong>имя</strong>: частично поддерживается. Первый название организации хранится в поле <strong>kABPersonOrganizationProperty</strong> iOS.</p></li>
-<li><p><strong>Департамент</strong>: частично поддерживается. Имя первого отдела хранится в поле <strong>kABPersonDepartmentProperty</strong> iOS.</p></li>
-<li><p><strong>название</strong>: частично поддерживается. Первый титул хранится в поле <strong>kABPersonJobTitleProperty</strong> iOS.</p></li>
+  <li>
+    <p><strong>pref</strong>: не поддерживается на устройствах iOS, возвращая<code class="language-plaintext highlighter-rouge">false</code>.</p>
+  </li>
+  <li>
+    <p><strong>тип</strong>: не поддерживается на устройствах iOS, возвращая<code class="language-plaintext highlighter-rouge">null</code>.</p>
+  </li>
+  <li>
+    <p><strong>имя</strong>: частично поддерживается. Первый название организации хранится в поле <strong>kABPersonOrganizationProperty</strong> iOS.</p>
+  </li>
+  <li>
+    <p><strong>Департамент</strong>: частично поддерживается. Имя первого отдела хранится в поле <strong>kABPersonDepartmentProperty</strong> iOS.</p>
+  </li>
+  <li>
+    <p><strong>название</strong>: частично поддерживается. Первый титул хранится в поле <strong>kABPersonJobTitleProperty</strong> iOS.</p>
+  </li>
 </ul>
 
 

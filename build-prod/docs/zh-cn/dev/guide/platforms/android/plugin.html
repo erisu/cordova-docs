@@ -2114,55 +2114,66 @@
             
 
             <div id="page-toc-source">
-                <h1>Android 外掛程式</h1>
+                <h1 id="android-外掛程式">Android 外掛程式</h1>
 
 <p>此部分提供了如何在 Android 平臺上實現本機外掛程式代碼的詳細資訊。 之前讀這篇文章，請參閱應用程式外掛程式外掛程式的結構和其共同的 JavaScript 介面的概述。 這一節繼續表明通信從科爾多瓦 web 視圖的本機平臺和後面的示例<em>回聲</em>外掛程式。 另一個示例，請參閱還在<a href="https://github.com/apache/cordova-android/blob/master/framework/src/org/apache/cordova/CordovaPlugin.java">CordovaPlugin.java</a>的評論.</p>
 
-<p>Android 外掛程式基於科爾多瓦-Android，Android 的 web 視圖包括與附加到它上面的鉤子。 外掛程式被表示為類映射的 <code>config.xml</code> 檔。 外掛程式包括至少一個擴展的 JAVA 類的 <code>CordovaPlugin</code> 類，重寫的一個其 <code>execute</code> 方法。 作為最佳實踐，該外掛程式還應處理 <code>[pause](../../../cordova/events/events.pause.html)</code> 和 <code>[resume](../../../cordova/events/events.resume.html)</code> 事件，以及任何外掛程式之間傳遞的消息。 外掛程式需要長時間運行的請求，後臺活動媒體重播、 聽眾或內部狀態等應執行 <code>onReset()</code> ，以及方法。 它執行時 <code>WebView</code> 定位到新的一頁或刷新，重新載入 JavaScript。</p>
+<p>Android 外掛程式基於科爾多瓦-Android，Android 的 web 視圖包括與附加到它上面的鉤子。 外掛程式被表示為類映射的 <code class="language-plaintext highlighter-rouge">config.xml</code> 檔。 外掛程式包括至少一個擴展的 JAVA 類的 <code class="language-plaintext highlighter-rouge">CordovaPlugin</code> 類，重寫的一個其 <code class="language-plaintext highlighter-rouge">execute</code> 方法。 作為最佳實踐，該外掛程式還應處理 <code class="language-plaintext highlighter-rouge">[pause](../../../cordova/events/events.pause.html)</code> 和 <code class="language-plaintext highlighter-rouge">[resume](../../../cordova/events/events.resume.html)</code> 事件，以及任何外掛程式之間傳遞的消息。 外掛程式需要長時間運行的請求，後臺活動媒體重播、 聽眾或內部狀態等應執行 <code class="language-plaintext highlighter-rouge">onReset()</code> ，以及方法。 它執行時 <code class="language-plaintext highlighter-rouge">WebView</code> 定位到新的一頁或刷新，重新載入 JavaScript。</p>
 
-<h2>外掛程式類映射</h2>
+<h2 id="外掛程式類映射">外掛程式類映射</h2>
 
-<p>外掛程式的 JavaScript 介面使用 <code>cordova.exec</code> 方法，如下所示：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    exec （&lt; successFunction &gt; &lt; failFunction &gt;、 &lt; 服務 &gt;、 &lt; 行動 &gt; [&lt; args &gt;]) ；
-</code></pre></div>
-<p>這封送請求從 web 視圖到 Android 的本機對岸，有效地調用 <code>action</code> 方法 <code>service</code> 具有額外的參數中傳遞的類 <code>args</code> 陣列。</p>
+<p>外掛程式的 JavaScript 介面使用 <code class="language-plaintext highlighter-rouge">cordova.exec</code> 方法，如下所示：</p>
 
-<p>是否您分發外掛程式作為 JAVA 檔或作為它自己的一個<em>jar</em>檔，必須在科爾多瓦 Android 應用程式中指定外掛程式 <code>res/xml/config.xml</code> 檔。 有關如何使用的詳細資訊，請參閱應用程式外掛程式 <code>plugin.xml</code> 檔，把這個注射 <code>feature</code> 元素：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;feature name="&lt;service_name&gt;"&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    exec （&lt; successFunction &gt; &lt; failFunction &gt;、 &lt; 服務 &gt;、 &lt; 行動 &gt; [&lt; args &gt;]) ；
+</code></pre></div></div>
+
+<p>這封送請求從 web 視圖到 Android 的本機對岸，有效地調用 <code class="language-plaintext highlighter-rouge">action</code> 方法 <code class="language-plaintext highlighter-rouge">service</code> 具有額外的參數中傳遞的類 <code class="language-plaintext highlighter-rouge">args</code> 陣列。</p>
+
+<p>是否您分發外掛程式作為 JAVA 檔或作為它自己的一個<em>jar</em>檔，必須在科爾多瓦 Android 應用程式中指定外掛程式 <code class="language-plaintext highlighter-rouge">res/xml/config.xml</code> 檔。 有關如何使用的詳細資訊，請參閱應用程式外掛程式 <code class="language-plaintext highlighter-rouge">plugin.xml</code> 檔，把這個注射 <code class="language-plaintext highlighter-rouge">feature</code> 元素：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;feature name="&lt;service_name&gt;"&gt;
         &lt;param name="android-package" value="&lt;full_name_including_namespace&gt;" /&gt;
     &lt;/feature&gt;
-</code></pre></div>
-<p>服務名稱匹配在 JavaScript 中使用 <code>exec</code> 調用。 值是 JAVA 類的完全限定命名空間識別碼。 否則為該外掛程式可能會編譯，但仍不能使用到科爾多瓦。</p>
+</code></pre></div></div>
 
-<h2>外掛程式初始化和存留期</h2>
+<p>服務名稱匹配在 JavaScript 中使用 <code class="language-plaintext highlighter-rouge">exec</code> 調用。 值是 JAVA 類的完全限定命名空間識別碼。 否則為該外掛程式可能會編譯，但仍不能使用到科爾多瓦。</p>
 
-<p>外掛程式物件的一個實例創建為生活的每個 <code>WebView</code> 。 外掛程式不會具現化之前他們第一次引用通過調用從 JavaScript，除非 <code>&lt;param&gt;</code> 與 <code>onload</code> <code>name</code> 屬性設置為 <code>&quot;true&quot;</code> 的 <code>config.xml</code> 。 例如：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="Echo"&gt;
+<h2 id="外掛程式初始化和存留期">外掛程式初始化和存留期</h2>
+
+<p>外掛程式物件的一個實例創建為生活的每個 <code class="language-plaintext highlighter-rouge">WebView</code> 。 外掛程式不會具現化之前他們第一次引用通過調用從 JavaScript，除非 <code class="language-plaintext highlighter-rouge">&lt;param&gt;</code> 與 <code class="language-plaintext highlighter-rouge">onload</code> <code class="language-plaintext highlighter-rouge">name</code> 屬性設置為 <code class="language-plaintext highlighter-rouge">"true"</code> 的 <code class="language-plaintext highlighter-rouge">config.xml</code> 。 例如：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="Echo"&gt;
     &lt;param name="android-package" value="&lt;full_name_including_namespace&gt;" /&gt;
     &lt;param name="onload" value="true" /&gt;
 &lt;/feature&gt;
-</code></pre></div>
-<p>外掛程式應使用 <code>initialize</code> 方法為他們的創業邏輯。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">@Override
+</code></pre></div></div>
+
+<p>外掛程式應使用 <code class="language-plaintext highlighter-rouge">initialize</code> 方法為他們的創業邏輯。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Override
 public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     super.initialize(cordova, webView);
     // your init code here
 }
-</code></pre></div>
-<h2>編寫一個 Android JAVA 外掛程式</h2>
+</code></pre></div></div>
 
-<p>JavaScript 調用觸發外掛程式請求到本機的一邊，和相應的 JAVA 外掛程式映射正確地在 <code>config.xml</code> 檔中，但最後的 Android JAVA 外掛程式類看起來不會像什麼？ 無論派往與 JavaScript 的外掛程式 <code>exec</code> 函數傳遞到外掛程式類的 <code>execute</code> 方法。 大多數 <code>execute</code> 實現看起來像這樣：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    @Override 公共 boolean 類型的值執行 CallbackCoNtext callbackCoNtext JSONArray args 字串操作） 將引發 JSONException {如果 ("beep".equals(action)) {this.beep(args.getLong(0));callbackCoNtext.success() ；則返回 true ；} 返回 false ；/ / 返回 false 結果的"MethodNotFound"錯誤。
+<h2 id="編寫一個-android-java-外掛程式">編寫一個 Android JAVA 外掛程式</h2>
+
+<p>JavaScript 調用觸發外掛程式請求到本機的一邊，和相應的 JAVA 外掛程式映射正確地在 <code class="language-plaintext highlighter-rouge">config.xml</code> 檔中，但最後的 Android JAVA 外掛程式類看起來不會像什麼？ 無論派往與 JavaScript 的外掛程式 <code class="language-plaintext highlighter-rouge">exec</code> 函數傳遞到外掛程式類的 <code class="language-plaintext highlighter-rouge">execute</code> 方法。 大多數 <code class="language-plaintext highlighter-rouge">execute</code> 實現看起來像這樣：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @Override 公共 boolean 類型的值執行 CallbackCoNtext callbackCoNtext JSONArray args 字串操作） 將引發 JSONException {如果 ("beep".equals(action)) {this.beep(args.getLong(0));callbackCoNtext.success() ；則返回 true ；} 返回 false ；/ / 返回 false 結果的"MethodNotFound"錯誤。
     }
-</code></pre></div>
-<p>JavaScript <code>exec</code> 函數的 <code>action</code> 參數對應于一個類的私有類方法派遣了可選參數。</p>
+</code></pre></div></div>
+
+<p>JavaScript <code class="language-plaintext highlighter-rouge">exec</code> 函數的 <code class="language-plaintext highlighter-rouge">action</code> 參數對應于一個類的私有類方法派遣了可選參數。</p>
 
 <p>當捕獲異常，並返回錯誤，重要的是為了明確起見，錯誤返回給 JavaScript 匹配 JAVA 異常名稱盡可能多。</p>
 
-<h2>執行緒</h2>
+<h2 id="執行緒">執行緒</h2>
 
-<p>外掛程式的 JavaScript 並<em>不</em>在主執行緒中運行 <code>WebView</code> 介面 ； 相反，它會運行 <code>WebCore</code> 執行緒，一樣 <code>execute</code> 方法。 如果您需要與使用者介面進行交互，則應使用以下變化：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    @Override
+<p>外掛程式的 JavaScript 並<em>不</em>在主執行緒中運行 <code class="language-plaintext highlighter-rouge">WebView</code> 介面 ； 相反，它會運行 <code class="language-plaintext highlighter-rouge">WebCore</code> 執行緒，一樣 <code class="language-plaintext highlighter-rouge">execute</code> 方法。 如果您需要與使用者介面進行交互，則應使用以下變化：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @Override
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
         if ("beep".equals(action)) {
             final long duration = args.getLong(0);
@@ -2176,9 +2187,11 @@ public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         }
         return false;
     }
-</code></pre></div>
-<p>使用以下如果你不需要在主介面上運行的執行緒，但不是想阻止 <code>WebCore</code> 執行緒或者：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    @Override
+</code></pre></div></div>
+
+<p>使用以下如果你不需要在主介面上運行的執行緒，但不是想阻止 <code class="language-plaintext highlighter-rouge">WebCore</code> 執行緒或者：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @Override
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
         if ("beep".equals(action)) {
             final long duration = args.getLong(0);
@@ -2192,63 +2205,68 @@ public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         }
         return false;
     }
-</code></pre></div>
-<h2>回聲 Android 外掛程式示例</h2>
+</code></pre></div></div>
 
-<p>若要匹配的 JavaScript 介面<em>回波</em>特徵描述的應用程式外掛程式，使用 <code>plugin.xml</code> 來注入 <code>feature</code> 到本地平臺規範 <code>config.xml</code> 檔：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;platform name="android"&gt;
+<h2 id="回聲-android-外掛程式示例">回聲 Android 外掛程式示例</h2>
+
+<p>若要匹配的 JavaScript 介面<em>回波</em>特徵描述的應用程式外掛程式，使用 <code class="language-plaintext highlighter-rouge">plugin.xml</code> 來注入 <code class="language-plaintext highlighter-rouge">feature</code> 到本地平臺規範 <code class="language-plaintext highlighter-rouge">config.xml</code> 檔：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;platform name="android"&gt;
         &lt;config-file target="config.xml" parent="/*"&gt;
             &lt;feature name="Echo"&gt;
                 &lt;param name="android-package" value="org.apache.cordova.plugin.Echo"/&gt;
             &lt;/feature&gt;
         &lt;/config-file&gt;
     &lt;/platform&gt;
-</code></pre></div>
-<p>然後添加以下到 <code>src/org/apache/cordova/plugin/Echo.java</code> 檔：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    <span class="k">package</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">plugin</span><span class="p">;</span>
+</code></pre></div></div>
 
-    <span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">CordovaPlugin</span><span class="p">;</span>
-    <span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">CallbackContext</span><span class="p">;</span>
+<p>然後添加以下到 <code class="language-plaintext highlighter-rouge">src/org/apache/cordova/plugin/Echo.java</code> 檔：</p>
 
-    <span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">JSONArray</span><span class="p">;</span>
-    <span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">JSONException</span><span class="p">;</span>
-    <span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">JSONObject</span><span class="p">;</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    package org.apache.cordova.plugin;
 
-    <span class="p">/**</span>
-     <span class="p">*</span> <span class="n">This</span> <span class="n">class</span> <span class="n">echoes</span> <span class="n">a</span> <span class="k">string</span> <span class="n">called</span> <span class="k">from</span> <span class="n">JavaScript</span><span class="p">.</span>
-     <span class="p">*/</span>
-    <span class="k">public</span> <span class="n">class</span> <span class="n">Echo</span> <span class="n">extends</span> <span class="n">CordovaPlugin</span> <span class="p">{</span>
+    import org.apache.cordova.CordovaPlugin;
+    import org.apache.cordova.CallbackContext;
 
-        <span class="p">@</span><span class="n">Override</span>
-        <span class="k">public</span> <span class="k">boolean</span> <span class="n">execute</span><span class="p">(</span><span class="k">String</span> <span class="n">action</span><span class="p">,</span> <span class="n">JSONArray</span> <span class="n">args</span><span class="p">,</span> <span class="n">CallbackContext</span> <span class="n">callbackContext</span><span class="p">)</span> <span class="n">throws</span> <span class="n">JSONException</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">action</span><span class="p">.</span><span class="n">equals</span><span class="p">(</span><span class="s2">"echo"</span><span class="p">))</span> <span class="p">{</span>
-                <span class="k">String</span> <span class="n">message</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
-                <span class="n">this</span><span class="p">.</span><span class="n">echo</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">callbackContext</span><span class="p">);</span>
-                <span class="n">return</span> <span class="nb">true</span><span class="p">;</span>
-            <span class="p">}</span>
-            <span class="n">return</span> <span class="nb">false</span><span class="p">;</span>
-        <span class="p">}</span>
+    import org.json.JSONArray;
+    import org.json.JSONException;
+    import org.json.JSONObject;
 
-        <span class="n">private</span> <span class="n">void</span> <span class="n">echo</span><span class="p">(</span><span class="k">String</span> <span class="n">message</span><span class="p">,</span> <span class="n">CallbackContext</span> <span class="n">callbackContext</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">message</span> <span class="c1">!= null &amp;&amp; message.length() &gt; 0) {
-</span>                <span class="n">callbackContext</span><span class="p">.</span><span class="n">success</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="n">callbackContext</span><span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="s2">"Expected one non-empty string argument."</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-</code></pre></div>
-<p>必要的進口商品在檔的頂部延伸中的類 <code>CordovaPlugin</code> ，其 <code>execute()</code> 方法，它將覆蓋從其接收郵件 <code>exec()</code> 。 <code>execute()</code>方法第一次測試的值 <code>action</code> ，在這種情況下有有效期的只有一個 <code>echo</code> 的值。 任何其他行動返回 <code>false</code> ，並導致 <code>INVALID_ACTION</code> 錯誤，會轉換為調用的 JavaScript 一邊錯誤回檔。</p>
+    /**
+     * This class echoes a string called from JavaScript.
+     */
+    public class Echo extends CordovaPlugin {
 
-<p>下一步，該方法檢索 echo 字串使用 <code>args</code> 物件的 <code>getString</code> 方法，指定的第一個參數傳遞給該方法。 值傳遞給一個私人後 <code>echo</code> 的方法，它是參數檢查，以確保它不是 <code>null</code> 或空字串，這種情況下的 <code>callbackContext.error()</code> 調用 JavaScript 的錯誤回檔。 如果通過各種檢查， <code>callbackContext.success()</code> 將傳遞原始 <code>message</code> 回 JavaScript 的成功回檔作為參數的字串。</p>
+        @Override
+        public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+            if (action.equals("echo")) {
+                String message = args.getString(0);
+                this.echo(message, callbackContext);
+                return true;
+            }
+            return false;
+        }
 
-<h2>Android 系統集成</h2>
+        private void echo(String message, CallbackContext callbackContext) {
+            if (message != null &amp;&amp; message.length() &gt; 0) {
+                callbackContext.success(message);
+            } else {
+                callbackContext.error("Expected one non-empty string argument.");
+            }
+        }
+    }
+</code></pre></div></div>
 
-<p>Android 功能 <code>Intent</code> 允許進程互相溝通的系統。 外掛程式可以訪問 <code>CordovaInterface</code> 物件，可以訪問 Android <code>Activity</code> ，運行應用程式。 這是 <code>Context</code> 啟動新的 android 系統所需 <code>Intent</code> 。 <code>CordovaInterface</code>允許外掛程式啟動 <code>Activity</code> 一個結果，並設置回檔外掛程式時 <code>Intent</code> 返回到應用程式。</p>
+<p>必要的進口商品在檔的頂部延伸中的類 <code class="language-plaintext highlighter-rouge">CordovaPlugin</code> ，其 <code class="language-plaintext highlighter-rouge">execute()</code> 方法，它將覆蓋從其接收郵件 <code class="language-plaintext highlighter-rouge">exec()</code> 。 <code class="language-plaintext highlighter-rouge">execute()</code>方法第一次測試的值 <code class="language-plaintext highlighter-rouge">action</code> ，在這種情況下有有效期的只有一個 <code class="language-plaintext highlighter-rouge">echo</code> 的值。 任何其他行動返回 <code class="language-plaintext highlighter-rouge">false</code> ，並導致 <code class="language-plaintext highlighter-rouge">INVALID_ACTION</code> 錯誤，會轉換為調用的 JavaScript 一邊錯誤回檔。</p>
 
-<p>到科爾多瓦 2.0 外掛程式可以不再直接存取 <code>Context</code> ，和遺產 <code>ctx</code> 成員已被否決。 所有 <code>ctx</code> 的方法上存在 <code>Context</code> ，所以這兩個 <code>getContext()</code> 和 <code>getActivity()</code> 可以返回所需的物件。</p>
+<p>下一步，該方法檢索 echo 字串使用 <code class="language-plaintext highlighter-rouge">args</code> 物件的 <code class="language-plaintext highlighter-rouge">getString</code> 方法，指定的第一個參數傳遞給該方法。 值傳遞給一個私人後 <code class="language-plaintext highlighter-rouge">echo</code> 的方法，它是參數檢查，以確保它不是 <code class="language-plaintext highlighter-rouge">null</code> 或空字串，這種情況下的 <code class="language-plaintext highlighter-rouge">callbackContext.error()</code> 調用 JavaScript 的錯誤回檔。 如果通過各種檢查， <code class="language-plaintext highlighter-rouge">callbackContext.success()</code> 將傳遞原始 <code class="language-plaintext highlighter-rouge">message</code> 回 JavaScript 的成功回檔作為參數的字串。</p>
 
-<h2>調試 Android 外掛程式</h2>
+<h2 id="android-系統集成">Android 系統集成</h2>
+
+<p>Android 功能 <code class="language-plaintext highlighter-rouge">Intent</code> 允許進程互相溝通的系統。 外掛程式可以訪問 <code class="language-plaintext highlighter-rouge">CordovaInterface</code> 物件，可以訪問 Android <code class="language-plaintext highlighter-rouge">Activity</code> ，運行應用程式。 這是 <code class="language-plaintext highlighter-rouge">Context</code> 啟動新的 android 系統所需 <code class="language-plaintext highlighter-rouge">Intent</code> 。 <code class="language-plaintext highlighter-rouge">CordovaInterface</code>允許外掛程式啟動 <code class="language-plaintext highlighter-rouge">Activity</code> 一個結果，並設置回檔外掛程式時 <code class="language-plaintext highlighter-rouge">Intent</code> 返回到應用程式。</p>
+
+<p>到科爾多瓦 2.0 外掛程式可以不再直接存取 <code class="language-plaintext highlighter-rouge">Context</code> ，和遺產 <code class="language-plaintext highlighter-rouge">ctx</code> 成員已被否決。 所有 <code class="language-plaintext highlighter-rouge">ctx</code> 的方法上存在 <code class="language-plaintext highlighter-rouge">Context</code> ，所以這兩個 <code class="language-plaintext highlighter-rouge">getContext()</code> 和 <code class="language-plaintext highlighter-rouge">getActivity()</code> 可以返回所需的物件。</p>
+
+<h2 id="調試-android-外掛程式">調試 Android 外掛程式</h2>
 
 <p>Eclipse 允許您調試外掛程式作為 JAVA 原始程式碼包含在專案中。 只有最新版本的 Android 開發者工具允許您將原始程式碼附加到<em>JAR</em>的依賴關係，所以此功能尚不完全支援。</p>
 

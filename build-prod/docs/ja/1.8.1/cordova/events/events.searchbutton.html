@@ -1220,68 +1220,74 @@
             
 
             <div id="page-toc-source">
-                <h1>searchbutton</h1>
+                <h1 id="searchbutton">searchbutton</h1>
 
 <p>このイベントはユーザーが検索ボタンを押したときに呼び出されます。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">document.addEventListener("searchbutton", yourCallbackFunction, false);
-</code></pre></div>
-<h2>詳細</h2>
 
-<p>もし Android にデフォルトの検索ボタンの挙動を上書きしたい場合は、 &#39;searchbutton&#39; イベントにイベントリスナーを登録することができます。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>document.addEventListener("searchbutton", yourCallbackFunction, false);
+</code></pre></div></div>
 
-<p>通常は、 Cordova の &#39;<a href="events.deviceready.html">deviceready</a>&#39; イベントを受け取った後、 <code>document.addEventListener</code> を通じてイベントリスナーをセットします。</p>
+<h2 id="詳細">詳細</h2>
 
-<h2>サポートされているプラットフォーム</h2>
+<p>もし Android にデフォルトの検索ボタンの挙動を上書きしたい場合は、 ‘searchbutton’ イベントにイベントリスナーを登録することができます。</p>
+
+<p>通常は、 Cordova の ‘<a href="events.deviceready.html">deviceready</a>’ イベントを受け取った後、 <code class="language-plaintext highlighter-rouge">document.addEventListener</code> を通じてイベントリスナーをセットします。</p>
+
+<h2 id="サポートされているプラットフォーム">サポートされているプラットフォーム</h2>
 
 <ul>
-<li>Android</li>
+  <li>Android</li>
 </ul>
 
-<h2><a href="../storage/storage.opendatabase.html">使用例</a></h2>
-<div class="highlight"><pre><code class="language-" data-lang="">document.addEventListener("searchbutton", onSearchKeyDown, false);
+<h2 id="使用例"><a href="../storage/storage.opendatabase.html">使用例</a></h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>document.addEventListener("searchbutton", onSearchKeyDown, false);
 
 function onSearchKeyDown() {
     // 検索ボタン関する操作を記述
 }
-</code></pre></div>
-<h2>詳細な使用例</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-                      "http://www.w3.org/TR/html4/strict.dtd"&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Cordova Search Button 使用例<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova-1.8.1.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="詳細な使用例">詳細な使用例</h2>
 
-    <span class="c1">// Cordova のロード完了とともに onDeviceReady を呼び出します。</span>
-    <span class="c1">//</span>
-    <span class="c1">// この時点では、ドキュメントの読み込みは完了していますが、 cordova-1.8.1.js はまだ完了していません。</span>
-    <span class="c1">// Cordova のロード完了とともに</span>
-    <span class="c1">// `deviceready` イベントが呼び出されます。</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onLoad</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="p">}</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+                      "http://www.w3.org/TR/html4/strict.dtd"&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Cordova Search Button 使用例&lt;/title&gt;
 
-    <span class="c1">// Cordova 準備完了</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="c1">// イベントリスナーを登録</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"searchbutton"</span><span class="p">,</span> <span class="nx">onSearchKeyDown</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-1.8.1.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// 検索ボタン関する操作を記述</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onSearchKeyDown</span><span class="p">()</span> <span class="p">{</span>
-    <span class="p">}</span>
+    // Cordova のロード完了とともに onDeviceReady を呼び出します。
+    //
+    // この時点では、ドキュメントの読み込みは完了していますが、 cordova-1.8.1.js はまだ完了していません。
+    // Cordova のロード完了とともに
+    // `deviceready` イベントが呼び出されます。
+    //
+    function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body</span> <span class="na">onload=</span><span class="s">"onLoad()"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+    // Cordova 準備完了
+    //
+    function onDeviceReady() {
+        // イベントリスナーを登録
+        document.addEventListener("searchbutton", onSearchKeyDown, false);
+    }
+
+    // 検索ボタン関する操作を記述
+    //
+    function onSearchKeyDown() {
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body onload="onLoad()"&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

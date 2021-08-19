@@ -1258,74 +1258,93 @@
             
 
             <div id="page-toc-source">
-                <h1>Appareil photo</h1>
+                <h1 id="appareil-photo">Appareil photo</h1>
 
 <blockquote>
-<p>L&#39;objet <code>camera</code> donne accès à l&#39;application de caméra par défaut de l&#39;appareil.</p>
+  <p>L’objet <code class="language-plaintext highlighter-rouge">camera</code> donne accès à l’application de caméra par défaut de l’appareil.</p>
 </blockquote>
 
-<p><strong>Remarque importante sur la vie privée :</strong> La collecte et l&#39;utilisation des images de la caméra d&#39;un appareil de mesure soulève des questions importantes concernant la vie privée. La politique de confidentialité de votre application doit examiner comment l&#39;application utilise l&#39;appareil photo et si les images enregistrées sont partagées avec d&#39;autres parties. En outre, si l&#39;utilisation de l&#39;application de la caméra n&#39;est pas apparente dans l&#39;interface utilisateur, vous devez fournir un avis juste-à-temps avant que votre application n&#39;accède à la caméra (si le système d&#39;exploitation de périphérique ne le fait pas déjà). Cet avis doit fournir les mêmes renseignements mentionnés précédemment, ainsi que d&#39;obtenir l&#39;autorisation de l&#39;utilisateur (par exemple, en présentant des choix <strong>OK</strong> et <strong>Non merci</strong>). Pour plus d&#39;informations, consultez le <a href="../../guide/appdev/privacy/index.html">Guide de la vie privée</a>.</p>
+<p><strong>Remarque importante sur la vie privée :</strong> La collecte et l’utilisation des images de la caméra d’un appareil de mesure soulève des questions importantes concernant la vie privée. La politique de confidentialité de votre application doit examiner comment l’application utilise l’appareil photo et si les images enregistrées sont partagées avec d’autres parties. En outre, si l’utilisation de l’application de la caméra n’est pas apparente dans l’interface utilisateur, vous devez fournir un avis juste-à-temps avant que votre application n’accède à la caméra (si le système d’exploitation de périphérique ne le fait pas déjà). Cet avis doit fournir les mêmes renseignements mentionnés précédemment, ainsi que d’obtenir l’autorisation de l’utilisateur (par exemple, en présentant des choix <strong>OK</strong> et <strong>Non merci</strong>). Pour plus d’informations, consultez le <a href="../../guide/appdev/privacy/index.html">Guide de la vie privée</a>.</p>
 
-<h2>Méthodes</h2>
+<h2 id="méthodes">Méthodes</h2>
 
 <ul>
-<li>  <a href="camera.getPicture.html">camera.getPicture</a></li>
-<li>  Camera.Cleanup</li>
+  <li><a href="camera.getPicture.html">camera.getPicture</a></li>
+  <li>Camera.Cleanup</li>
 </ul>
 
-<h2>Accéder à la fonctionnalité</h2>
+<h2 id="accéder-à-la-fonctionnalité">Accéder à la fonctionnalité</h2>
 
-<p>Depuis la version 3.0, Cordova implémente des APIs au niveau du périphérique en tant que <em>plugins</em>. Utilisez le <code>plugin</code> de l&#39;interface en ligne de commande, décrite dans l&#39;Interface de ligne de commande, pour ajouter ou supprimer cette fonction pour un projet :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add org.apache.cordova.camera
+<p>Depuis la version 3.0, Cordova implémente des APIs au niveau du périphérique en tant que <em>plugins</em>. Utilisez le <code class="language-plaintext highlighter-rouge">plugin</code> de l’interface en ligne de commande, décrite dans l’Interface de ligne de commande, pour ajouter ou supprimer cette fonction pour un projet :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add org.apache.cordova.camera
     $ cordova plugin ls
     [ 'org.apache.cordova.camera' ]
     $ cordova plugin rm org.apache.cordova.camera
-</code></pre></div>
-<p>Ces commandes s&#39;appliquent à toutes les plates-formes ciblées, mais modifient les paramètres de configuration spécifiques à la plateforme décrites ci-dessous :</p>
+</code></pre></div></div>
+
+<p>Ces commandes s’appliquent à toutes les plates-formes ciblées, mais modifient les paramètres de configuration spécifiques à la plateforme décrites ci-dessous :</p>
 
 <ul>
-<li><p>Android</p>
-<div class="highlight"><pre><code class="language-" data-lang="">(in app/res/xml/config.xml)
+  <li>
+    <p>Android</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(in app/res/xml/config.xml)
 &lt;feature name="Camera"&gt;
     &lt;param name="android-package" value="org.apache.cordova.CameraLauncher" /&gt;
 &lt;/feature&gt;
-
+    
 (in app/AndroidManifest)
 &lt;uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /&gt;
-</code></pre></div></li>
-<li><p>BlackBerry WebWorks</p>
-<div class="highlight"><pre><code class="language-" data-lang="">(in www/plugins.xml)
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>BlackBerry WebWorks</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(in www/plugins.xml)
 &lt;feature name="Camera"&gt;
     &lt;param name="blackberry-package" value="org.apache.cordova.camera.Camera" /&gt;
 &lt;/feature&gt;
-
+    
 (in www/config.xml)
 &lt;feature id="blackberry.media.camera" /&gt;
-
+    
 &lt;rim:permissions&gt;
     &lt;rim:permit&gt;use_camera&lt;/rim:permit&gt;
 &lt;/rim:permissions&gt;
-</code></pre></div></li>
-<li><p>iOS (en<code>config.xml</code>)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="Camera"&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>iOS (en<code class="language-plaintext highlighter-rouge">config.xml</code>)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="Camera"&gt;
     &lt;param name="ios-package" value="CDVCamera" /&gt;
 &lt;/feature&gt;
-</code></pre></div></li>
-<li><p>Windows Phone (en<code>Properties/WPAppManifest.xml</code>)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;Capabilities&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Windows Phone (en<code class="language-plaintext highlighter-rouge">Properties/WPAppManifest.xml</code>)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;Capabilities&gt;
     &lt;Capability Name="ID_CAP_ISV_CAMERA" /&gt;
     &lt;Capability Name="ID_HW_FRONTCAMERA" /&gt;
 &lt;/Capabilities&gt;
-</code></pre></div>
-<p>Référence : <a href="http://msdn.microsoft.com/en-us/library/ff769509%28v=vs.92%29.aspx">manifeste d&#39;Application pour Windows Phone</a></p></li>
-<li><p>Paciarelli (dans<code>config.xml</code>)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="http://tizen.org/api/application" required="true"/&gt;
+</code></pre></div>    </div>
+
+    <p>Référence : <a href="http://msdn.microsoft.com/en-us/library/ff769509%28v=vs.92%29.aspx">manifeste d’Application pour Windows Phone</a></p>
+  </li>
+  <li>
+    <p>Paciarelli (dans<code class="language-plaintext highlighter-rouge">config.xml</code>)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="http://tizen.org/api/application" required="true"/&gt;
 &lt;feature name="http://tizen.org/api/application.launch" required="true"/&gt;
-</code></pre></div>
-<p>Référence : <a href="https://developer.tizen.org/help/topic/org.tizen.help.gs/Creating%20a%20Project.html?path=0_1_1_3#8814682_CreatingaProject-EditingconfigxmlFeatures">Manifeste d&#39;Application pour Applications Web Paciarelli</a></p></li>
+</code></pre></div>    </div>
+
+    <p>Référence : <a href="https://developer.tizen.org/help/topic/org.tizen.help.gs/Creating%20a%20Project.html?path=0_1_1_3#8814682_CreatingaProject-EditingconfigxmlFeatures">Manifeste d’Application pour Applications Web Paciarelli</a></p>
+  </li>
 </ul>
 
-<p>Certaines plates-formes peuvent prendre en charge cette fonctionnalité sans nécessiter aucune configuration spéciale. Voir <em>Support de plate-forme</em> dans la section vue d&#39;ensemble.</p>
+<p>Certaines plates-formes peuvent prendre en charge cette fonctionnalité sans nécessiter aucune configuration spéciale. Voir <em>Support de plate-forme</em> dans la section vue d’ensemble.</p>
 
 
             </div>

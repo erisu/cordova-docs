@@ -1040,34 +1040,39 @@
             
 
             <div id="page-toc-source">
-                <h1>Die Datei config.xml</h1>
+                <h1 id="die-datei-configxml">Die Datei config.xml</h1>
 
-<p>Zahlreiche Aspekte des Verhaltens einer app gesteuert werden, mit einer globalen Konfigurationsdatei <code>config.xml</code> . Diese plattformunabhängig XML-Datei ist auf der W3C <a href="http://www.w3.org/TR/widgets/">Verpackt von Web-Anwendungen (Widgets)</a> Spezifikation und erweiterte Kern-Cordova-API-Funktionen, Plugins und Plattform-spezifischen Einstellungen angeben angeordnet.</p>
+<p>Zahlreiche Aspekte des Verhaltens einer app gesteuert werden, mit einer globalen Konfigurationsdatei <code class="language-plaintext highlighter-rouge">config.xml</code> . Diese plattformunabhängig XML-Datei ist auf der W3C <a href="http://www.w3.org/TR/widgets/">Verpackt von Web-Anwendungen (Widgets)</a> Spezifikation und erweiterte Kern-Cordova-API-Funktionen, Plugins und Plattform-spezifischen Einstellungen angeben angeordnet.</p>
 
 <p>Für Projekte, die mit dem Cordova-CLI (beschrieben in The Command-Line Interface) erstellt werden kann diese Datei im obersten Verzeichnis gefunden werden:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    app/config.xml
-</code></pre></div>
-<p>Beachten Sie, dass Version 3.3.1-0.2.0, die Datei auf vorher <code>app/www/config.xml</code> , und dass es hier immer noch unterstützt wird.</p>
 
-<p>Wenn die CLI ein Projekt erstellen, werden in verschiedenen Versionen dieser Datei passiv kopiert <code>platforms/</code> Unterverzeichnisse, zum Beispiel:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    app/platforms/ios/AppName/config.xml
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    app/config.xml
+</code></pre></div></div>
+
+<p>Beachten Sie, dass Version 3.3.1-0.2.0, die Datei auf vorher <code class="language-plaintext highlighter-rouge">app/www/config.xml</code> , und dass es hier immer noch unterstützt wird.</p>
+
+<p>Wenn die CLI ein Projekt erstellen, werden in verschiedenen Versionen dieser Datei passiv kopiert <code class="language-plaintext highlighter-rouge">platforms/</code> Unterverzeichnisse, zum Beispiel:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    app/platforms/ios/AppName/config.xml
     app/platforms/blackberry10/www/config.xml
     app/platforms/android/res/xml/config.xml
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Dieser Abschnitt beschreibt globale und Cross-Plattform-Konfigurationsoptionen. Finden Sie in den folgenden Abschnitten für Plattform-spezifische Optionen:</p>
 
 <ul>
-<li>  <a href="../guide/platforms/ios/config.html">iOS Konfiguration</a></li>
-<li>  Android Konfiguration</li>
-<li>  <a href="../guide/platforms/blackberry10/config.html">BlackBerry 10 Konfiguration</a></li>
+  <li><a href="../guide/platforms/ios/config.html">iOS Konfiguration</a></li>
+  <li>Android Konfiguration</li>
+  <li><a href="../guide/platforms/blackberry10/config.html">BlackBerry 10 Konfiguration</a></li>
 </ul>
 
 <p>Neben der verschiedenen Konfigurationsoptionen unten können Sie auch eine Anwendung Kernsatz von Bildern für jede Zielplattform konfigurieren. Weitere Informationen finden Sie unter <a href="images.html">Symbole und Splash-Screens</a>.</p>
 
-<h2>Kern-Konfigurationselemente</h2>
+<h2 id="kern-konfigurationselemente">Kern-Konfigurationselemente</h2>
 
-<p>In diesem Beispiel wird den Standardwert <code>config.xml</code> erzeugt durch der CLI <code>create</code> Befehl, beschrieben in der Command-Line Interface:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;widget id="com.example.hello" version="0.0.1"&gt;
+<p>In diesem Beispiel wird den Standardwert <code class="language-plaintext highlighter-rouge">config.xml</code> erzeugt durch der CLI <code class="language-plaintext highlighter-rouge">create</code> Befehl, beschrieben in der Command-Line Interface:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;widget id="com.example.hello" version="0.0.1"&gt;
         &lt;name&gt;HelloWorld&lt;/name&gt;
         &lt;description&gt;
             A sample Apache Cordova application that responds to the deviceready event.
@@ -1078,63 +1083,99 @@
         &lt;content src="index.html" /&gt;
         &lt;access origin="*" /&gt;
     &lt;/widget&gt;
-</code></pre></div>
-<p>Die folgenden Konfigurationselemente in der obersten Ebene angezeigt <code>config.xml</code> Datei und werden auf allen unterstützten Cordova-Plattformen unterstützt:</p>
+</code></pre></div></div>
+
+<p>Die folgenden Konfigurationselemente in der obersten Ebene angezeigt <code class="language-plaintext highlighter-rouge">config.xml</code> Datei und werden auf allen unterstützten Cordova-Plattformen unterstützt:</p>
 
 <ul>
-<li><p>Die <code>&lt;widget&gt;</code> des Elements <code>id</code> Attribut bietet die app-Reverse-Domänen-ID, und der <code>version</code> seine vollständige Versionsnummer in Major/Minor/Patch-Notation ausgedrückt.</p></li>
-<li><p>Die <code>&lt;name&gt;</code> Element gibt die app formalen Namen, wie er auf home-Bildschirm des Geräts und im app-Store-Schnittstellen erscheint.</p></li>
-<li><p>Die <code>&lt;description&gt;</code> und <code>&lt;author&gt;</code> Elemente geben, Metadaten und Kontaktinformationen, die im app-Shop-Angebote angezeigt werden kann.</p></li>
-<li><p>Der optionale <code>&lt;content&gt;</code> -Element definiert die app Startseite in der obersten Ebene Webverzeichnis Vermögenswerte. Der Standardwert ist <code>index.html</code> , die üblicherweise in einem Projekt angezeigt wird, ist der obersten Ebene <code>www</code> Verzeichnis.</p></li>
-<li><p><code>&lt;access&gt;</code>Elemente definieren den Satz der externen Domänen, die, denen die app erlaubt ist, zu kommunizieren. Der Standardwert, der oben gezeigten ermöglicht es, jeden beliebigen Server zugreifen. Finden Sie im Domain-Whitelist-Guide für Details.</p></li>
-<li><p>Die <code>&lt;preference&gt;</code> Tag stellt verschiedene Optionen als Paare von <code>name</code> / <code>value</code> Attribute. Jede Vorliebe <code>name</code> ist case-insensitive. Viele Einstellungen sind nur für bestimmte Plattformen, wie oben auf dieser Seite aufgeführt. In den folgenden Abschnitten beschreiben die Einstellungen, die für mehrere Plattformen gelten.</p></li>
+  <li>
+    <p>Die <code class="language-plaintext highlighter-rouge">&lt;widget&gt;</code> des Elements <code class="language-plaintext highlighter-rouge">id</code> Attribut bietet die app-Reverse-Domänen-ID, und der <code class="language-plaintext highlighter-rouge">version</code> seine vollständige Versionsnummer in Major/Minor/Patch-Notation ausgedrückt.</p>
+  </li>
+  <li>
+    <p>Die <code class="language-plaintext highlighter-rouge">&lt;name&gt;</code> Element gibt die app formalen Namen, wie er auf home-Bildschirm des Geräts und im app-Store-Schnittstellen erscheint.</p>
+  </li>
+  <li>
+    <p>Die <code class="language-plaintext highlighter-rouge">&lt;description&gt;</code> und <code class="language-plaintext highlighter-rouge">&lt;author&gt;</code> Elemente geben, Metadaten und Kontaktinformationen, die im app-Shop-Angebote angezeigt werden kann.</p>
+  </li>
+  <li>
+    <p>Der optionale <code class="language-plaintext highlighter-rouge">&lt;content&gt;</code> -Element definiert die app Startseite in der obersten Ebene Webverzeichnis Vermögenswerte. Der Standardwert ist <code class="language-plaintext highlighter-rouge">index.html</code> , die üblicherweise in einem Projekt angezeigt wird, ist der obersten Ebene <code class="language-plaintext highlighter-rouge">www</code> Verzeichnis.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">&lt;access&gt;</code>Elemente definieren den Satz der externen Domänen, die, denen die app erlaubt ist, zu kommunizieren. Der Standardwert, der oben gezeigten ermöglicht es, jeden beliebigen Server zugreifen. Finden Sie im Domain-Whitelist-Guide für Details.</p>
+  </li>
+  <li>
+    <p>Die <code class="language-plaintext highlighter-rouge">&lt;preference&gt;</code> Tag stellt verschiedene Optionen als Paare von <code class="language-plaintext highlighter-rouge">name</code> / <code class="language-plaintext highlighter-rouge">value</code> Attribute. Jede Vorliebe <code class="language-plaintext highlighter-rouge">name</code> ist case-insensitive. Viele Einstellungen sind nur für bestimmte Plattformen, wie oben auf dieser Seite aufgeführt. In den folgenden Abschnitten beschreiben die Einstellungen, die für mehrere Plattformen gelten.</p>
+  </li>
 </ul>
 
-<h2>Globale Voreinstellungen</h2>
+<h2 id="globale-voreinstellungen">Globale Voreinstellungen</h2>
 
 <p>Die folgenden globalen Einstellungen gelten für alle Plattformen:</p>
 
 <ul>
-<li><p><code>Fullscreen</code>können Sie die Statusleiste am oberen Bildschirmrand ausblenden. Der Standardwert ist <code>false</code> . Beispiel:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="Fullscreen" value="true" /&gt;
-</code></pre></div></li>
-<li><p><code>Orientation</code>können Sie den lock Orientierung und verhindert, dass die Schnittstelle rotierend in Reaktion auf Änderungen in der Ausrichtung. Mögliche Werte sind <code>default</code> , <code>landscape</code> , oder <code>portrait</code> . Beispiel:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="Orientation" value="landscape" /&gt;
-</code></pre></div>
-<p><strong>Hinweis</strong>: die <code>default</code> Wert bedeutet <em>sowohl</em> quer- und Hochformat Ausrichtungen sind aktiviert. Wenn Sie Standardeinstellungen für jede Plattform (in der Regel Porträt nur) verwenden möchten, lassen Sie dieses Tag von der <code>config.xml</code> Datei.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Fullscreen</code>können Sie die Statusleiste am oberen Bildschirmrand ausblenden. Der Standardwert ist <code class="language-plaintext highlighter-rouge">false</code> . Beispiel:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="Fullscreen" value="true" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Orientation</code>können Sie den lock Orientierung und verhindert, dass die Schnittstelle rotierend in Reaktion auf Änderungen in der Ausrichtung. Mögliche Werte sind <code class="language-plaintext highlighter-rouge">default</code> , <code class="language-plaintext highlighter-rouge">landscape</code> , oder <code class="language-plaintext highlighter-rouge">portrait</code> . Beispiel:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="Orientation" value="landscape" /&gt;
+</code></pre></div>    </div>
+
+    <p><strong>Hinweis</strong>: die <code class="language-plaintext highlighter-rouge">default</code> Wert bedeutet <em>sowohl</em> quer- und Hochformat Ausrichtungen sind aktiviert. Wenn Sie Standardeinstellungen für jede Plattform (in der Regel Porträt nur) verwenden möchten, lassen Sie dieses Tag von der <code class="language-plaintext highlighter-rouge">config.xml</code> Datei.</p>
+  </li>
 </ul>
 
-<h2>Multi-Plattform-Einstellungen</h2>
+<h2 id="multi-plattform-einstellungen">Multi-Plattform-Einstellungen</h2>
 
 <p>Die folgenden Einstellungen gelten für mehrere Plattformen, jedoch nicht auf alle von ihnen:</p>
 
 <ul>
-<li><p><code>DisallowOverscroll</code>(Boolean, wird standardmäßig auf <code>false</code> ): Legen Sie auf <code>true</code> Wenn Sie nicht möchten, dass die Schnittstelle jedes Feedback anzeigen, wenn Benutzer die Anfang oder Ende des Inhalts einen Bildlauf durchführen.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="DisallowOverscroll" value="true"/&gt;
-</code></pre></div>
-<p>Gilt für Android und iOS. Auf iOS, Overscroll Gesten Ursache Inhalt zurück an seine ursprüngliche Position gut zu machen. Auf Android produzieren sie ein subtiler Glüheffekt am oberen oder unteren Rand des Inhalts.</p></li>
-<li><p><code>BackgroundColor</code>: Die app-Hintergrundfarbe festgelegt. Unterstützt eine 4-Byte hex-Wert, mit dem ersten Byte, die den Alphakanal und standard-RGB-Werte für die folgenden drei Bytes. In diesem Beispiel gibt blau:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="BackgroundColor" value="0xff0000ff"/&gt;
-</code></pre></div>
-<p>Gilt für Android und BlackBerry. Überschreibt CSS anderweitig verfügbar auf <em>allen</em> Plattformen, zum Beispiel:<code>body{background-color:blue}</code>.</p></li>
-<li><p><code>HideKeyboardFormAccessoryBar</code>(Boolean, wird standardmäßig auf <code>false</code> ): Legen Sie auf <code>true</code> die zusätzliche Symbolleiste ausblenden, die oberhalb der Tastatur, wodurch angezeigt wird Benutzer aus einem Formulareingabe zum anderen navigieren.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="HideKeyboardFormAccessoryBar" value="true"/&gt;
-</code></pre></div>
-<p>Gilt für iOS und BlackBerry.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">DisallowOverscroll</code>(Boolean, wird standardmäßig auf <code class="language-plaintext highlighter-rouge">false</code> ): Legen Sie auf <code class="language-plaintext highlighter-rouge">true</code> Wenn Sie nicht möchten, dass die Schnittstelle jedes Feedback anzeigen, wenn Benutzer die Anfang oder Ende des Inhalts einen Bildlauf durchführen.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="DisallowOverscroll" value="true"/&gt;
+</code></pre></div>    </div>
+
+    <p>Gilt für Android und iOS. Auf iOS, Overscroll Gesten Ursache Inhalt zurück an seine ursprüngliche Position gut zu machen. Auf Android produzieren sie ein subtiler Glüheffekt am oberen oder unteren Rand des Inhalts.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">BackgroundColor</code>: Die app-Hintergrundfarbe festgelegt. Unterstützt eine 4-Byte hex-Wert, mit dem ersten Byte, die den Alphakanal und standard-RGB-Werte für die folgenden drei Bytes. In diesem Beispiel gibt blau:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="BackgroundColor" value="0xff0000ff"/&gt;
+</code></pre></div>    </div>
+
+    <p>Gilt für Android und BlackBerry. Überschreibt CSS anderweitig verfügbar auf <em>allen</em> Plattformen, zum Beispiel:<code class="language-plaintext highlighter-rouge">body{background-color:blue}</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">HideKeyboardFormAccessoryBar</code>(Boolean, wird standardmäßig auf <code class="language-plaintext highlighter-rouge">false</code> ): Legen Sie auf <code class="language-plaintext highlighter-rouge">true</code> die zusätzliche Symbolleiste ausblenden, die oberhalb der Tastatur, wodurch angezeigt wird Benutzer aus einem Formulareingabe zum anderen navigieren.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="HideKeyboardFormAccessoryBar" value="true"/&gt;
+</code></pre></div>    </div>
+
+    <p>Gilt für iOS und BlackBerry.</p>
+  </li>
 </ul>
 
-<h2>Das <em>Feature</em> Element</h2>
+<h2 id="das-feature-element">Das <em>Feature</em> Element</h2>
 
-<p>Wenn Sie die CLI verwenden, um Anwendungen zu erstellen, verwenden Sie den <code>plugin</code> Befehl Gerät APIs zu aktivieren. Dies ändert jedoch nicht die Top-Level- <code>config.xml</code> Datei, so dass die <code>&lt;feature&gt;</code> Element gilt nicht für Ihren Workflow. Wenn Sie direkt in ein SDK und verwenden die Plattform-spezifischen Arbeiten <code>config.xml</code> Datei als Quelle, Sie verwenden die <code>&lt;feature&gt;</code> Tag auf Device-Ebene APIs und externe Plugins aktivieren. Sie erscheinen oft mit benutzerdefinierten Werte in plattformspezifischen <code>config.xml</code> Dateien. Hier ist beispielsweise die Device-API für Android Projekte angeben:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;feature name="Device"&gt;
+<p>Wenn Sie die CLI verwenden, um Anwendungen zu erstellen, verwenden Sie den <code class="language-plaintext highlighter-rouge">plugin</code> Befehl Gerät APIs zu aktivieren. Dies ändert jedoch nicht die Top-Level- <code class="language-plaintext highlighter-rouge">config.xml</code> Datei, so dass die <code class="language-plaintext highlighter-rouge">&lt;feature&gt;</code> Element gilt nicht für Ihren Workflow. Wenn Sie direkt in ein SDK und verwenden die Plattform-spezifischen Arbeiten <code class="language-plaintext highlighter-rouge">config.xml</code> Datei als Quelle, Sie verwenden die <code class="language-plaintext highlighter-rouge">&lt;feature&gt;</code> Tag auf Device-Ebene APIs und externe Plugins aktivieren. Sie erscheinen oft mit benutzerdefinierten Werte in plattformspezifischen <code class="language-plaintext highlighter-rouge">config.xml</code> Dateien. Hier ist beispielsweise die Device-API für Android Projekte angeben:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;feature name="Device"&gt;
         &lt;param name="android-package" value="org.apache.cordova.device.Device" /&gt;
     &lt;/feature&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Hier ist, wie das Element für iOS-Projekte wird angezeigt:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;feature name="Device"&gt;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;feature name="Device"&gt;
         &lt;param name="ios-package" value="CDVDevice" /&gt;
     &lt;/feature&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Finden Sie die API-Referenz für Details zu einzelnen Funktionen angeben. Finden Sie im Plugin-Entwicklung-Handbuch weitere Informationen auf Plugins.</p>
 
 

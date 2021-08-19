@@ -1214,52 +1214,95 @@
     }
 </style>
 
-<h1>Конфигурация Android</h1>
+<h1 id="конфигурация-android">Конфигурация Android</h1>
 
-<p>Файл <code>config.xml</code> управляет основные параметрами приложения, которые применяются к каждому приложению и экземпляру CordovaWebView. Этот раздел описывает настройки, которые применяются только к построениям для Android. Смотрите <a href="config_ref_index.md.html#The%20config.xml%20File">Файл config.xml</a> для получения информации о глобальных параметрах конфигурации.</p>
+<p>Файл <code class="language-plaintext highlighter-rouge">config.xml</code> управляет основные параметрами приложения, которые применяются к каждому приложению и экземпляру CordovaWebView. Этот раздел описывает настройки, которые применяются только к построениям для Android. Смотрите <a href="config_ref_index.md.html#The%20config.xml%20File">Файл config.xml</a> для получения информации о глобальных параметрах конфигурации.</p>
 
 <ul>
-<li><p><code>KeepRunning</code> (логическое значение, по умолчанию <code>true</code> ): определяет, остается ли приложение работает в фоновом режиме после вызова события <code>[pause](../../../cordova/events/events.pause.html)</code>. Установка значения в <code>false</code> не завершает приложение после события <code>[pause](../../../cordova/events/events.pause.html)</code>, но просто останавливает выполнение кода в Cordova WebView в то время пока приложение находится в фоновом режиме.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="KeepRunning" value="false"/&gt;
-</code></pre></div></li>
-<li><p><code>LoadUrlTimeoutValue</code> (число, значение по умолчанию — <code>20000</code>): при загрузке страницы, указывает продолжительность времени ожидания в миллисекундах, перед тем как произойдет ошибка ожидания. Этот пример определяет 10 секунд, а не 20:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="LoadUrlTimeoutValue" value="10000"/&gt;
-</code></pre></div></li>
-<li><p><code>SplashScreen</code>(строка, по умолчанию <code>splash</code>): Имя файла, минус его расширение в каталоге <code>res/drawable</code>. Различные ресурсы должны использовать это общее название в разных подкаталогах.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="SplashScreen" value="mySplash"/&gt;
-</code></pre></div></li>
-<li><p><code>SplashScreenDelay</code> (число, значение по умолчанию <code>3000</code>): определяет количество времени в течение которого отображается заставка.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="SplashScreenDelay" value="10000"/&gt;
-</code></pre></div></li>
-<li><p><code>InAppBrowserStorageEnabled</code> (логическое значение, по умолчанию <code>true</code>): Контролирует имеют ли страницы открытые в InAppBrowser возможность получить доступ к тому же хранилищу localStorage и WebSQL, что и страницы открытые с помощью браузера по умолчанию.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="InAppBrowserStorageEnabled" value="true"/&gt;
-</code></pre></div></li>
-<li><p><code>LoadingDialog</code> (строка, по умолчанию <code>null</code>): Если указано, отображает диалоговое окно с заданным заголовком и сообщение и индикатор загрузки, при загрузке первой странице приложения. Заголовок и сообщение разделяются запятой в этой строке значение, и что запятая удаляется перед отображением диалогового окна.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="LoadingDialog" value="My Title,My Message"/&gt;
-</code></pre></div></li>
-<li><p><code>LoadingPageDialog</code> (строки, по умолчанию <code>null</code>): так же, как <code>LoadingDialog</code>, но для загрузки каждой страницы следующей за первой страницей в приложении.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="LoadingPageDialog" value="My Title,My Message"/&gt;
-</code></pre></div></li>
-<li><p><code>ErrorUrl</code> (URL-адрес, По умолчанию используется <code>null</code>): Если установлено, будет отображаться странице ссылки на ошибку в приложении вместо диалоговое окно с заголовком «Ошибка приложения».</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="ErrorUrl" value="myErrorPage.html"/&gt;
-</code></pre></div></li>
-<li><p><code>ShowTitle</code> (логическое значение, по умолчанию <code>false</code>): Показать заголовок в верхней части экрана.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="ShowTitle" value="true"/&gt;
-</code></pre></div></li>
-<li><p><code>LogLevel</code> (строка, по умолчанию <code>ERROR</code> ): устанавливает минимальный уровень протоколирования, через который будет фильтроваться протоколируемые сообщения из вашего приложения. Допустимыми значениями являются <code>ERROR</code>, <code>WARN</code>, <code>INFO</code>, <code>DEBUG</code>, и <code>VERBOSE</code>.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="LogLevel" value="VERBOSE"/&gt;
-</code></pre></div></li>
-<li><p><code>SetFullscreen</code> (логическое значение, по умолчанию <code>false</code>): то же, что параметр <code>Fullscreen</code> в глобальной конфигурации этого XML-файла. Этот элемент специфический для Android элемент считается устаревшим и замененным глобальным элементом <code>Fullscreen</code> и будет удален в будущей версии.</p></li>
-<li><p><code>AndroidLaunchMode</code>(строки, по умолчанию <code>singleTop</code> ): задает действие <code>android:launchMode</code> атрибут. Это меняет то, что происходит, когда приложение запускается из приложения значок или намерения и уже работает. Допустимыми значениями являются <code>standard</code> , <code>singleTop</code> , <code>singleTask</code> ,<code>singleInstance</code>.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="AndroidLaunchMode" value="singleTop"/&gt;
-</code></pre></div></li>
-<li><p><code>DefaultVolumeStream</code>(строки, по умолчанию <code>default</code> , добавил в Кордова android 3.7.0): устанавливает объем которых объем аппаратные кнопки ссылка на. По умолчанию это «вызов» для «СМИ» для планшетов и телефонов. Установите это для «медиа», чтобы иметь всегда изменить громкость медиа кнопки громкости вашего приложения. Обратите внимание, что при использовании плагина Кордова в СМИ, кнопки громкости будет динамически изменить для контроля объема средств массовой информации, когда любые мультимедийные объекты являются активными.</p></li>
-<li><p><code>OverrideUserAgent</code> (строка, не определен по умолчанию): Если параметр установлен, значение заменит старое значение UserAgent для webview. Это полезно для идентификации запроса из приложения/браузера при запросе удаленных страниц. Используйте с осторожностью, в мае этого года вызывает проблемы совместимости с веб-серверами. В большинстве случаев вместо этого параметра используйте AppendUserAgent.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="OverrideUserAgent" value="Mozilla/5.0 My Browser" /&gt;
-</code></pre></div></li>
-<li><p><code>AppendUserAgent</code> (строка, не задан по умолчанию): Если параметр установлен, значение будет добавляться в конец старого значения UserAgent для webview. При использовании с OverrideUserAgent, это значение будет игнорироваться.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="AppendUserAgent" value="My Browser" /&gt;
-</code></pre></div></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">KeepRunning</code> (логическое значение, по умолчанию <code class="language-plaintext highlighter-rouge">true</code> ): определяет, остается ли приложение работает в фоновом режиме после вызова события <code class="language-plaintext highlighter-rouge">[pause](../../../cordova/events/events.pause.html)</code>. Установка значения в <code class="language-plaintext highlighter-rouge">false</code> не завершает приложение после события <code class="language-plaintext highlighter-rouge">[pause](../../../cordova/events/events.pause.html)</code>, но просто останавливает выполнение кода в Cordova WebView в то время пока приложение находится в фоновом режиме.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="KeepRunning" value="false"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">LoadUrlTimeoutValue</code> (число, значение по умолчанию — <code class="language-plaintext highlighter-rouge">20000</code>): при загрузке страницы, указывает продолжительность времени ожидания в миллисекундах, перед тем как произойдет ошибка ожидания. Этот пример определяет 10 секунд, а не 20:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="LoadUrlTimeoutValue" value="10000"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">SplashScreen</code>(строка, по умолчанию <code class="language-plaintext highlighter-rouge">splash</code>): Имя файла, минус его расширение в каталоге <code class="language-plaintext highlighter-rouge">res/drawable</code>. Различные ресурсы должны использовать это общее название в разных подкаталогах.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="SplashScreen" value="mySplash"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">SplashScreenDelay</code> (число, значение по умолчанию <code class="language-plaintext highlighter-rouge">3000</code>): определяет количество времени в течение которого отображается заставка.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="SplashScreenDelay" value="10000"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">InAppBrowserStorageEnabled</code> (логическое значение, по умолчанию <code class="language-plaintext highlighter-rouge">true</code>): Контролирует имеют ли страницы открытые в InAppBrowser возможность получить доступ к тому же хранилищу localStorage и WebSQL, что и страницы открытые с помощью браузера по умолчанию.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="InAppBrowserStorageEnabled" value="true"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">LoadingDialog</code> (строка, по умолчанию <code class="language-plaintext highlighter-rouge">null</code>): Если указано, отображает диалоговое окно с заданным заголовком и сообщение и индикатор загрузки, при загрузке первой странице приложения. Заголовок и сообщение разделяются запятой в этой строке значение, и что запятая удаляется перед отображением диалогового окна.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="LoadingDialog" value="My Title,My Message"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">LoadingPageDialog</code> (строки, по умолчанию <code class="language-plaintext highlighter-rouge">null</code>): так же, как <code class="language-plaintext highlighter-rouge">LoadingDialog</code>, но для загрузки каждой страницы следующей за первой страницей в приложении.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="LoadingPageDialog" value="My Title,My Message"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">ErrorUrl</code> (URL-адрес, По умолчанию используется <code class="language-plaintext highlighter-rouge">null</code>): Если установлено, будет отображаться странице ссылки на ошибку в приложении вместо диалоговое окно с заголовком «Ошибка приложения».</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="ErrorUrl" value="myErrorPage.html"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">ShowTitle</code> (логическое значение, по умолчанию <code class="language-plaintext highlighter-rouge">false</code>): Показать заголовок в верхней части экрана.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="ShowTitle" value="true"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">LogLevel</code> (строка, по умолчанию <code class="language-plaintext highlighter-rouge">ERROR</code> ): устанавливает минимальный уровень протоколирования, через который будет фильтроваться протоколируемые сообщения из вашего приложения. Допустимыми значениями являются <code class="language-plaintext highlighter-rouge">ERROR</code>, <code class="language-plaintext highlighter-rouge">WARN</code>, <code class="language-plaintext highlighter-rouge">INFO</code>, <code class="language-plaintext highlighter-rouge">DEBUG</code>, и <code class="language-plaintext highlighter-rouge">VERBOSE</code>.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="LogLevel" value="VERBOSE"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">SetFullscreen</code> (логическое значение, по умолчанию <code class="language-plaintext highlighter-rouge">false</code>): то же, что параметр <code class="language-plaintext highlighter-rouge">Fullscreen</code> в глобальной конфигурации этого XML-файла. Этот элемент специфический для Android элемент считается устаревшим и замененным глобальным элементом <code class="language-plaintext highlighter-rouge">Fullscreen</code> и будет удален в будущей версии.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">AndroidLaunchMode</code>(строки, по умолчанию <code class="language-plaintext highlighter-rouge">singleTop</code> ): задает действие <code class="language-plaintext highlighter-rouge">android:launchMode</code> атрибут. Это меняет то, что происходит, когда приложение запускается из приложения значок или намерения и уже работает. Допустимыми значениями являются <code class="language-plaintext highlighter-rouge">standard</code> , <code class="language-plaintext highlighter-rouge">singleTop</code> , <code class="language-plaintext highlighter-rouge">singleTask</code> ,<code class="language-plaintext highlighter-rouge">singleInstance</code>.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="AndroidLaunchMode" value="singleTop"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">DefaultVolumeStream</code>(строки, по умолчанию <code class="language-plaintext highlighter-rouge">default</code> , добавил в Кордова android 3.7.0): устанавливает объем которых объем аппаратные кнопки ссылка на. По умолчанию это «вызов» для «СМИ» для планшетов и телефонов. Установите это для «медиа», чтобы иметь всегда изменить громкость медиа кнопки громкости вашего приложения. Обратите внимание, что при использовании плагина Кордова в СМИ, кнопки громкости будет динамически изменить для контроля объема средств массовой информации, когда любые мультимедийные объекты являются активными.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">OverrideUserAgent</code> (строка, не определен по умолчанию): Если параметр установлен, значение заменит старое значение UserAgent для webview. Это полезно для идентификации запроса из приложения/браузера при запросе удаленных страниц. Используйте с осторожностью, в мае этого года вызывает проблемы совместимости с веб-серверами. В большинстве случаев вместо этого параметра используйте AppendUserAgent.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="OverrideUserAgent" value="Mozilla/5.0 My Browser" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">AppendUserAgent</code> (строка, не задан по умолчанию): Если параметр установлен, значение будет добавляться в конец старого значения UserAgent для webview. При использовании с OverrideUserAgent, это значение будет игнорироваться.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="AppendUserAgent" value="My Browser" /&gt;
+</code></pre></div>    </div>
+  </li>
 </ul>
 
 

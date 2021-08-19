@@ -1304,67 +1304,96 @@
             
 
             <div id="page-toc-source">
-                <h1>FileWriter</h1>
+                <h1 id="filewriter">FileWriter</h1>
 
 <p>Como objeto que le permite crear y escribir datos en un archivo.</p>
 
-<h2>Propiedades</h2>
+<h2 id="propiedades">Propiedades</h2>
 
 <ul>
-<li><p><strong>readyState</strong>: uno de los tres Estados posibles, ya sea <code>INIT</code> , <code>WRITING</code> , o<code>DONE</code>.</p></li>
-<li><p><strong>nombre de archivo</strong>: el nombre del archivo a ser escrito. <em>(DOMString)</em></p></li>
-<li><p><strong>longitud</strong>: la longitud del archivo a ser escrito. <em>(largo)</em></p></li>
-<li><p><strong>posición</strong>: la posición actual del puntero del archivo. <em>(largo)</em></p></li>
-<li><p><strong>error</strong>: un objeto que contiene errores. <em>(FileError)</em></p></li>
-<li><p><strong>onwritestart</strong>: cuando comienza la escritura. <em>(Función)</em></p></li>
-<li><p><strong>onwrite</strong>: cuando la solicitud se ha completado con éxito. <em>(Función)</em></p></li>
-<li><p><strong>onabort</strong>: cuando la escritura ha sido abortada. Por ejemplo, invocando el método abort(). <em>(Función)</em></p></li>
-<li><p><strong>OnError</strong>: cuando la escritura ha fallado. <em>(Función)</em></p></li>
-<li><p><strong>onwriteend</strong>: llamado cuando se haya completado la solicitud (ya sea en el éxito o el fracaso). <em>(Función)</em></p></li>
+  <li>
+    <p><strong>readyState</strong>: uno de los tres Estados posibles, ya sea <code class="language-plaintext highlighter-rouge">INIT</code> , <code class="language-plaintext highlighter-rouge">WRITING</code> , o<code class="language-plaintext highlighter-rouge">DONE</code>.</p>
+  </li>
+  <li>
+    <p><strong>nombre de archivo</strong>: el nombre del archivo a ser escrito. <em>(DOMString)</em></p>
+  </li>
+  <li>
+    <p><strong>longitud</strong>: la longitud del archivo a ser escrito. <em>(largo)</em></p>
+  </li>
+  <li>
+    <p><strong>posición</strong>: la posición actual del puntero del archivo. <em>(largo)</em></p>
+  </li>
+  <li>
+    <p><strong>error</strong>: un objeto que contiene errores. <em>(FileError)</em></p>
+  </li>
+  <li>
+    <p><strong>onwritestart</strong>: cuando comienza la escritura. <em>(Función)</em></p>
+  </li>
+  <li>
+    <p><strong>onwrite</strong>: cuando la solicitud se ha completado con éxito. <em>(Función)</em></p>
+  </li>
+  <li>
+    <p><strong>onabort</strong>: cuando la escritura ha sido abortada. Por ejemplo, invocando el método abort(). <em>(Función)</em></p>
+  </li>
+  <li>
+    <p><strong>OnError</strong>: cuando la escritura ha fallado. <em>(Función)</em></p>
+  </li>
+  <li>
+    <p><strong>onwriteend</strong>: llamado cuando se haya completado la solicitud (ya sea en el éxito o el fracaso). <em>(Función)</em></p>
+  </li>
 </ul>
 
 <p>La siguiente propiedad <em>no</em> es compatible:</p>
 
 <ul>
-<li>  <strong>OnProgress</strong>: llamado al escribir el archivo, informe de progreso en términos de <code>progress.loaded</code> / <code>progress.total</code> . <em>(Función)</em></li>
+  <li><strong>OnProgress</strong>: llamado al escribir el archivo, informe de progreso en términos de <code class="language-plaintext highlighter-rouge">progress.loaded</code> / <code class="language-plaintext highlighter-rouge">progress.total</code> . <em>(Función)</em></li>
 </ul>
 
-<h2>Métodos</h2>
+<h2 id="métodos">Métodos</h2>
 
 <ul>
-<li><p><strong>anular</strong>: anula el archivo de la escritura.</p></li>
-<li><p><strong>Buscar</strong>: mueve el puntero del archivo en el byte especificado.</p></li>
-<li><p><strong>truncar</strong>: acorta el archivo a la longitud especificada.</p></li>
-<li><p><strong>escribir</strong>: escribe los datos en el archivo.</p></li>
+  <li>
+    <p><strong>anular</strong>: anula el archivo de la escritura.</p>
+  </li>
+  <li>
+    <p><strong>Buscar</strong>: mueve el puntero del archivo en el byte especificado.</p>
+  </li>
+  <li>
+    <p><strong>truncar</strong>: acorta el archivo a la longitud especificada.</p>
+  </li>
+  <li>
+    <p><strong>escribir</strong>: escribe los datos en el archivo.</p>
+  </li>
 </ul>
 
-<h2>Detalles</h2>
+<h2 id="detalles">Detalles</h2>
 
-<p>El <code>FileWriter</code> objeto ofrece una manera de escribir archivos codificado en UTF-8 en el sistema de archivos del dispositivo. Aplicaciones responden a <code>writestart</code> , <code>progress</code> , <code>write</code> , <code>writeend</code> , <code>error</code> , y <code>abort</code> eventos.</p>
+<p>El <code class="language-plaintext highlighter-rouge">FileWriter</code> objeto ofrece una manera de escribir archivos codificado en UTF-8 en el sistema de archivos del dispositivo. Aplicaciones responden a <code class="language-plaintext highlighter-rouge">writestart</code> , <code class="language-plaintext highlighter-rouge">progress</code> , <code class="language-plaintext highlighter-rouge">write</code> , <code class="language-plaintext highlighter-rouge">writeend</code> , <code class="language-plaintext highlighter-rouge">error</code> , y <code class="language-plaintext highlighter-rouge">abort</code> eventos.</p>
 
-<p>Cada <code>FileWriter</code> corresponde a un solo archivo, a la que se pueden escribir datos muchas veces. El <code>FileWriter</code> mantiene el archivo <code>position</code> y <code>length</code> atributos, que permiten la aplicación para <code>seek</code> y <code>write</code> en el archivo. De forma predeterminada, el <code>FileWriter</code> escribe al principio del archivo, sobrescribiendo los datos existentes. Conjunto opcional <code>append</code> booleana a <code>true</code> en el <code>FileWriter</code> del constructor para escribir en el final del archivo.</p>
+<p>Cada <code class="language-plaintext highlighter-rouge">FileWriter</code> corresponde a un solo archivo, a la que se pueden escribir datos muchas veces. El <code class="language-plaintext highlighter-rouge">FileWriter</code> mantiene el archivo <code class="language-plaintext highlighter-rouge">position</code> y <code class="language-plaintext highlighter-rouge">length</code> atributos, que permiten la aplicación para <code class="language-plaintext highlighter-rouge">seek</code> y <code class="language-plaintext highlighter-rouge">write</code> en el archivo. De forma predeterminada, el <code class="language-plaintext highlighter-rouge">FileWriter</code> escribe al principio del archivo, sobrescribiendo los datos existentes. Conjunto opcional <code class="language-plaintext highlighter-rouge">append</code> booleana a <code class="language-plaintext highlighter-rouge">true</code> en el <code class="language-plaintext highlighter-rouge">FileWriter</code> del constructor para escribir en el final del archivo.</p>
 
 <p>Datos de texto es apoyados por todas las plataformas que se enumeran a continuación. Texto es codificado como UTF-8 antes de que se escriben en el sistema de archivos. Algunas plataformas soportan datos binarios, que pueden pasar en un ArrayBuffer o un Blob.</p>
 
-<h2>Plataformas soportadas</h2>
+<h2 id="plataformas-soportadas">Plataformas soportadas</h2>
 
 <p>Texto y soporte binario:</p>
 
 <ul>
-<li>  Android</li>
-<li>  iOS</li>
+  <li>Android</li>
+  <li>iOS</li>
 </ul>
 
 <p>Soporte de sólo texto:</p>
 
 <ul>
-<li>  BlackBerry WebWorks (OS 5.0 y superiores)</li>
-<li>  Windows Phone 7 y 8</li>
-<li>  Windows 8</li>
+  <li>BlackBerry WebWorks (OS 5.0 y superiores)</li>
+  <li>Windows Phone 7 y 8</li>
+  <li>Windows 8</li>
 </ul>
 
-<h2>Buscar ejemplo rápido</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">function win(writer) {
+<h2 id="buscar-ejemplo-rápido">Buscar ejemplo rápido</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function win(writer) {
     // fast forwards file pointer to end of file
     writer.seek(writer.length);
 };
@@ -1374,9 +1403,11 @@ var fail = function(evt) {
 };
 
 entry.createWriter(win, fail);
-</code></pre></div>
-<h2>Truncar ejemplo rápido</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">function win(writer) {
+</code></pre></div></div>
+
+<h2 id="truncar-ejemplo-rápido">Truncar ejemplo rápido</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function win(writer) {
     writer.truncate(10);
 };
 
@@ -1385,9 +1416,11 @@ var fail = function(evt) {
 };
 
 entry.createWriter(win, fail);
-</code></pre></div>
-<h2>Escribir rápido ejemplo</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">function win(writer) {
+</code></pre></div></div>
+
+<h2 id="escribir-rápido-ejemplo">Escribir rápido ejemplo</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function win(writer) {
     writer.onwrite = function(evt) {
         console.log("write success");
     };
@@ -1399,9 +1432,11 @@ var fail = function(evt) {
 };
 
 entry.createWriter(win, fail);
-</code></pre></div>
-<h2>Binario escribir ejemplo rápido</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">function win(writer) {
+</code></pre></div></div>
+
+<h2 id="binario-escribir-ejemplo-rápido">Binario escribir ejemplo rápido</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function win(writer) {
     var data = new ArrayBuffer(5),
         dataView = new Int8Array(data);
     for (i=0; i &lt; 5; i++) {
@@ -1418,9 +1453,11 @@ var fail = function(evt) {
 };
 
 entry.createWriter(win, fail);
-</code></pre></div>
-<h2>Anexar ejemplo rápido</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">function win(writer) {
+</code></pre></div></div>
+
+<h2 id="anexar-ejemplo-rápido">Anexar ejemplo rápido</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function win(writer) {
     writer.onwrite = function(evt) {
     console.log("write success");
 };
@@ -1433,9 +1470,11 @@ var fail = function(evt) {
 };
 
 entry.createWriter(win, fail);
-</code></pre></div>
-<h2>Abortar ejemplo rápido</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">function win(writer) {
+</code></pre></div></div>
+
+<h2 id="abortar-ejemplo-rápido">Abortar ejemplo rápido</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function win(writer) {
     writer.onwrite = function(evt) {
         console.log("write success");
     };
@@ -1448,62 +1487,65 @@ var fail = function(evt) {
 };
 
 entry.createWriter(win, fail);
-</code></pre></div>
-<h2>Ejemplo completo</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>FileWriter Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="ejemplo-completo">Ejemplo completo</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;FileWriter Example&lt;/title&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">window</span><span class="p">.</span><span class="nx">requestFileSystem</span><span class="p">(</span><span class="nx">LocalFileSystem</span><span class="p">.</span><span class="nx">PERSISTENT</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">gotFS</span><span class="p">,</span> <span class="nx">fail</span><span class="p">);</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="kd">function</span> <span class="nx">gotFS</span><span class="p">(</span><span class="nx">fileSystem</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">fileSystem</span><span class="p">.</span><span class="nx">root</span><span class="p">.</span><span class="nx">getFile</span><span class="p">(</span><span class="s2">"readme.txt"</span><span class="p">,</span> <span class="p">{</span><span class="na">create</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">exclusive</span><span class="p">:</span> <span class="kc">false</span><span class="p">},</span> <span class="nx">gotFileEntry</span><span class="p">,</span> <span class="nx">fail</span><span class="p">);</span>
-    <span class="p">}</span>
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
 
-    <span class="kd">function</span> <span class="nx">gotFileEntry</span><span class="p">(</span><span class="nx">fileEntry</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">fileEntry</span><span class="p">.</span><span class="nx">createWriter</span><span class="p">(</span><span class="nx">gotFileWriter</span><span class="p">,</span> <span class="nx">fail</span><span class="p">);</span>
-    <span class="p">}</span>
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+    }
 
-    <span class="kd">function</span> <span class="nx">gotFileWriter</span><span class="p">(</span><span class="nx">writer</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">writer</span><span class="p">.</span><span class="nx">onwriteend</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">evt</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"contents of file now 'some sample text'"</span><span class="p">);</span>
-            <span class="nx">writer</span><span class="p">.</span><span class="nx">truncate</span><span class="p">(</span><span class="mi">11</span><span class="p">);</span>
-            <span class="nx">writer</span><span class="p">.</span><span class="nx">onwriteend</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">evt</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"contents of file now 'some sample'"</span><span class="p">);</span>
-                <span class="nx">writer</span><span class="p">.</span><span class="nx">seek</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
-                <span class="nx">writer</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">" different text"</span><span class="p">);</span>
-                <span class="nx">writer</span><span class="p">.</span><span class="nx">onwriteend</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">evt</span><span class="p">){</span>
-                    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"contents of file now 'some different text'"</span><span class="p">);</span>
-                <span class="p">}</span>
-            <span class="p">};</span>
-        <span class="p">};</span>
-        <span class="nx">writer</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">"some sample text"</span><span class="p">);</span>
-    <span class="p">}</span>
+    function gotFS(fileSystem) {
+        fileSystem.root.getFile("readme.txt", {create: true, exclusive: false}, gotFileEntry, fail);
+    }
 
-    <span class="kd">function</span> <span class="nx">fail</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">code</span><span class="p">);</span>
-    <span class="p">}</span>
+    function gotFileEntry(fileEntry) {
+        fileEntry.createWriter(gotFileWriter, fail);
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;h1&gt;</span>Example<span class="nt">&lt;/h1&gt;</span>
-    <span class="nt">&lt;p&gt;</span>Write File<span class="nt">&lt;/p&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+    function gotFileWriter(writer) {
+        writer.onwriteend = function(evt) {
+            console.log("contents of file now 'some sample text'");
+            writer.truncate(11);
+            writer.onwriteend = function(evt) {
+                console.log("contents of file now 'some sample'");
+                writer.seek(4);
+                writer.write(" different text");
+                writer.onwriteend = function(evt){
+                    console.log("contents of file now 'some different text'");
+                }
+            };
+        };
+        writer.write("some sample text");
+    }
+
+    function fail(error) {
+        console.log(error.code);
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Example&lt;/h1&gt;
+    &lt;p&gt;Write File&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

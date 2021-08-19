@@ -2104,54 +2104,58 @@
             
 
             <div id="page-toc-source">
-                <h1>Windows 10 的科爾多瓦</h1>
+                <h1 id="windows-10-的科爾多瓦">Windows 10 的科爾多瓦</h1>
 
-<p>也許你可以改稱之為&quot;科爾多瓦 10 視窗&quot;。 Windows 10 已經重新設計使科爾多瓦支援到 web，並得到擋你路的平臺安全限制其 HTML 和 JavaScript 應用程式平臺。</p>
+<p>也許你可以改稱之為”科爾多瓦 10 視窗”。 Windows 10 已經重新設計使科爾多瓦支援到 web，並得到擋你路的平臺安全限制其 HTML 和 JavaScript 應用程式平臺。</p>
 
-<h2>開始使用 Windows 10</h2>
+<h2 id="開始使用-windows-10">開始使用 Windows 10</h2>
 
 <p>添加 Windows 10 支援您的應用程式非常簡單，將您的 Windows 目標平臺版本設置為 10.0:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="windows-target-version" value="10.0" /&gt;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="windows-target-version" value="10.0" /&gt;
 &lt;preference name="windows-phone-target-version" value="10.0" /&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p>當您建立與這兩個設置這些首選項時，將建成僅限單個.appx (和.appxupload)。 他們將至少需要 Windows 10。</p>
 
-<h3>瞭解遠端與本地模式模式</h3>
+<h3 id="瞭解遠端與本地模式模式">瞭解遠端與本地模式模式</h3>
 
-<p>遠端模式是 Windows 10 HTML 應用程式的 Windows 平臺的新功能。 在 Windows 8 和 8.1，HTML 應用程式在 Windows 10 工作中什麼所謂的&quot;本地模式&quot;。 在本地模式下，HTML 應用程式具有完全訪問本機 Windows API 表面和能力。 為了防止腳本注入攻擊，這可能會導致洩漏由於惡意程式碼的個人可識別資訊，本地模式不允許內聯腳本，需要開發人員執行 DOM 操作，這樣做內顯式上下文 (<code>MSApp.execUnsafeLocalFunction</code>).</p>
+<p>遠端模式是 Windows 10 HTML 應用程式的 Windows 平臺的新功能。 在 Windows 8 和 8.1，HTML 應用程式在 Windows 10 工作中什麼所謂的”本地模式”。 在本地模式下，HTML 應用程式具有完全訪問本機 Windows API 表面和能力。 為了防止腳本注入攻擊，這可能會導致洩漏由於惡意程式碼的個人可識別資訊，本地模式不允許內聯腳本，需要開發人員執行 DOM 操作，這樣做內顯式上下文 (<code class="language-plaintext highlighter-rouge">MSApp.execUnsafeLocalFunction</code>).</p>
 
 <p>遠端模式消除了這些要求，這使得它可以使用未修改的庫像 jQuery 或 AngularJS 直接在代碼中，沒有發生任何變化。 要這樣做，它將刪除您聲明某些功能時證明您在 Windows 應用商店的應用程式的能力。 刪除的這些功能通常不會阻止進入特定的功能，但它可能需要使用不同的 Api 或戰術組合。</p>
 
-<h3>遠端方式對功能的影響</h3>
+<h3 id="遠端方式對功能的影響">遠端方式對功能的影響</h3>
 
 <p>部署到 Windows 應用商店應用程式遠端模式時，下列功能不可用:</p>
 
 <ul>
-<li>企業認證 (<code>enterpriseAuthentication</code>)</li>
-<li>共用的使用者證書 (<code>sharedUserCertificates</code>)</li>
-<li>文件庫 (<code>documentsLibrary</code>)</li>
-<li>音樂庫 (<code>musicLibrary</code>)</li>
-<li>圖片庫 (<code>picturesLibrary</code>)</li>
-<li>視頻庫 (<code>videosLibrary</code>)</li>
-<li>卸除式存放裝置 (<code>removableStorage</code>)</li>
-<li>互聯網端 (<code>internetClientServer</code>)-請注意， <code>internetClient</code>仍允許</li>
-<li>私人網路絡用戶端/伺服器 (<code>privateNetworkClientServer</code>)</li>
+  <li>企業認證 (<code class="language-plaintext highlighter-rouge">enterpriseAuthentication</code>)</li>
+  <li>共用的使用者證書 (<code class="language-plaintext highlighter-rouge">sharedUserCertificates</code>)</li>
+  <li>文件庫 (<code class="language-plaintext highlighter-rouge">documentsLibrary</code>)</li>
+  <li>音樂庫 (<code class="language-plaintext highlighter-rouge">musicLibrary</code>)</li>
+  <li>圖片庫 (<code class="language-plaintext highlighter-rouge">picturesLibrary</code>)</li>
+  <li>視頻庫 (<code class="language-plaintext highlighter-rouge">videosLibrary</code>)</li>
+  <li>卸除式存放裝置 (<code class="language-plaintext highlighter-rouge">removableStorage</code>)</li>
+  <li>互聯網端 (<code class="language-plaintext highlighter-rouge">internetClientServer</code>)-請注意， <code class="language-plaintext highlighter-rouge">internetClient</code>仍允許</li>
+  <li>私人網路絡用戶端/伺服器 (<code class="language-plaintext highlighter-rouge">privateNetworkClientServer</code>)</li>
 </ul>
 
 <p>每個庫限制可能要求使用者與檔案系統通過一個<a href="https://msdn.microsoft.com/en-us/library/windows/apps/windows.storage.pickers.fileopenpicker.aspx">檔選取器</a>交互工作周圍。 這樣可以防止惡意注入的代碼任意訪問檔案系統。</p>
 
-<p>通過使用不使用能力檢查 API 或經紀通過標準的互聯網溝通管道，如<code>XMLHttpRequest</code>或 Web 通訊端通信，必須解決與網路相關的限制。</p>
+<p>通過使用不使用能力檢查 API 或經紀通過標準的互聯網溝通管道，如<code class="language-plaintext highlighter-rouge">XMLHttpRequest</code>或 Web 通訊端通信，必須解決與網路相關的限制。</p>
 
 <p>企業身份驗證和共用使用者證書功能是專門針對企業方案。 這些功能支援私營/企業啟用的應用程式商店，所以如果你正在打算將其部署到內部部署機制的應用程式，您仍然可以支援這些。 然而，他們不支援遠端模式在公共 Windows 應用商店的應用程式。 當你建立針對 Windows 10，如果這些功能之一檢測到您的應用程式清單中時，將顯示警告。</p>
 
-<h2>引用</h2>
+<h2 id="引用">引用</h2>
 
-<h3>config.xml 首選項</h3>
+<h3 id="configxml-首選項">config.xml 首選項</h3>
 
-<h4>windows-target-version, windows-phone-target-version</h4>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="windows-target-version" value="10.0" /&gt;
+<h4 id="windows-target-version-windows-phone-target-version">windows-target-version, windows-phone-target-version</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="windows-target-version" value="10.0" /&gt;
 &lt;preference name="windows-phone-target-version" value="10.0" /&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p><em>至少一個是必需的。</em></p>
 
 <p>這些首選項確定 Windows 或 Windows Phone 你想要的目標應用程式套裝軟體的版本。</p>
@@ -2159,52 +2163,56 @@
 <p><strong>有效的值</strong></p>
 
 <ul>
-<li><code>10.0</code>，<code>UAP</code>: 為 Windows 10 通用的應用程式平臺構建</li>
-<li><code>8.1</code>: 生成 Windows 8.1 或 Windows Phone 8.1</li>
-<li><code>8.0</code>: 構建 windows 8.0。 對於 Windows Phone 無效 (改用<strong>wp8</strong>科爾多瓦平臺)</li>
+  <li><code class="language-plaintext highlighter-rouge">10.0</code>，<code class="language-plaintext highlighter-rouge">UAP</code>: 為 Windows 10 通用的應用程式平臺構建</li>
+  <li><code class="language-plaintext highlighter-rouge">8.1</code>: 生成 Windows 8.1 或 Windows Phone 8.1</li>
+  <li><code class="language-plaintext highlighter-rouge">8.0</code>: 構建 windows 8.0。 對於 Windows Phone 無效 (改用<strong>wp8</strong>科爾多瓦平臺)</li>
 </ul>
 
 <p><strong>方案</strong></p>
 
-<p>如果你只針對 Windows 10，你只需要 config.xml 檔中有一個單一<code>windows 目標版本</code>設置。</p>
+<p>如果你只針對 Windows 10，你只需要 config.xml 檔中有一個單一<code class="language-plaintext highlighter-rouge">windows 目標版本</code>設置。</p>
 
-<h4>WindowsDefaultUriPrefix</h4>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="WindowsDefaultUriPrefix" value="ms-appx://|ms-appx-web://" /&gt;
-</code></pre></div>
-<p>此首選項標識是否想要您的應用程式作為其啟動 URI 為目標的<strong>局部上下文</strong>或<strong>遠端上下文</strong>。 當生成 Windows 10，預設值是遠端上下文 (<code>ms-appx-web: / /</code>).</p>
+<h4 id="windowsdefaulturiprefix">WindowsDefaultUriPrefix</h4>
 
-<p>為了有一個本地模式應用程式，不受遠端模式能力的限制，您必須將此首選項設置為<code>ms-appx://</code>和不聲明任何<code>&lt;access&gt;</code>元素與遠端 Uri。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="WindowsDefaultUriPrefix" value="ms-appx://|ms-appx-web://" /&gt;
+</code></pre></div></div>
+
+<p>此首選項標識是否想要您的應用程式作為其啟動 URI 為目標的<strong>局部上下文</strong>或<strong>遠端上下文</strong>。 當生成 Windows 10，預設值是遠端上下文 (<code class="language-plaintext highlighter-rouge">ms-appx-web: / /</code>).</p>
+
+<p>為了有一個本地模式應用程式，不受遠端模式能力的限制，您必須將此首選項設置為<code class="language-plaintext highlighter-rouge">ms-appx://</code>和不聲明任何<code class="language-plaintext highlighter-rouge">&lt;access&gt;</code>元素與遠端 Uri。</p>
 
 <p><strong>有效的值</strong></p>
 
 <ul>
-<li><code>ms-appx://</code>(預設為 Windows 8.0，8.1): 本地上下文中運行的起始頁</li>
-<li><code>ms-appx-web://</code>(預設為 Windows 10): 遠端上下文中運行的起始頁</li>
+  <li><code class="language-plaintext highlighter-rouge">ms-appx://</code>(預設為 Windows 8.0，8.1): 本地上下文中運行的起始頁</li>
+  <li><code class="language-plaintext highlighter-rouge">ms-appx-web://</code>(預設為 Windows 10): 遠端上下文中運行的起始頁</li>
 </ul>
 
-<h4>{SDK}-MinVersion，{SDK} MaxVersionTested</h4>
+<h4 id="sdk-minversionsdk-maxversiontested">{SDK}-MinVersion，{SDK} MaxVersionTested</h4>
 
 <p><em>可選</em></p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="Windows.Universal-MinVersion" value="10.0.0.0" /&gt;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="Windows.Universal-MinVersion" value="10.0.0.0" /&gt;
 &lt;preference name="Windows.Mobile-MinVersion" value="10.0.9927.0" /&gt;
 &lt;preference name="Windows.Mobile-MaxVersionTested" value="10.0.10031.0" /&gt;
 &lt;preference name="Microsoft.Band-MinVersion" value="10.0.11.0" /&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p>這些首選項確定哪些生態系統 (包括但不是限於 Windows 通用、 Windows Mobile 或 Xbox) 和它們的最小/最大版本都相容。 他們仍然需要平臺都支援通用的應用程式平臺 (所以 Windows 10 作為基礎的作業系統)。 然而，這些可能表明應用程式是意識到可能只在某些設備 (如遊戲流在 Xbox 上) 可用的特定功能。</p>
 
 <p><strong>有效的值</strong></p>
 
-<p>有三個部分的每個值: <strong>SDK</strong>、<strong>版本限制</strong>和<strong>版本價值</strong>。 通過與<code>Windows</code>或<code>微軟</code>開始和結束<code>-MinVersion</code>或<code>-MaxVersionTested</code>中檢測到這些首選項:</p>
+<p>有三個部分的每個值: <strong>SDK</strong>、<strong>版本限制</strong>和<strong>版本價值</strong>。 通過與<code class="language-plaintext highlighter-rouge">Windows</code>或<code class="language-plaintext highlighter-rouge">微軟</code>開始和結束<code class="language-plaintext highlighter-rouge">-MinVersion</code>或<code class="language-plaintext highlighter-rouge">-MaxVersionTested</code>中檢測到這些首選項:</p>
 
 <ul>
-<li><strong>SDK</strong>定義什麼專門的平臺，你想要的目標。 預設值是<code>Windows.Universal</code>。 有效值為這些 AppxManifest 架構，在<code>包/Depednencies/TargetPlatform</code>元素中定義。</li>
-<li>的 <strong>版本限制</strong> 定義應用程式相容性規則。 例如，如果 <code>-MinVersion</code> 設置為 10.1.0.0，然後至少 10.1.0.0 的相應的 sdk 並不支援的作業系統版本不能載入它。
-
-<ul>
-<li><code>-MinVersion</code>指定 SDK 所需的最低的版本</li>
-<li><code>-MaxVersionTested</code>指定的最高測試版本的 sdk。 如果發佈了新版本的相應的 sdk，它將運行在相容模式下為指定的版本。</li>
-</ul></li>
-<li><strong>版本值</strong>是 major.minor.build.qfe 的整數 4 元組形式**.</li>
+  <li><strong>SDK</strong>定義什麼專門的平臺，你想要的目標。 預設值是<code class="language-plaintext highlighter-rouge">Windows.Universal</code>。 有效值為這些 AppxManifest 架構，在<code class="language-plaintext highlighter-rouge">包/Depednencies/TargetPlatform</code>元素中定義。</li>
+  <li>的 <strong>版本限制</strong> 定義應用程式相容性規則。 例如，如果 <code class="language-plaintext highlighter-rouge">-MinVersion</code> 設置為 10.1.0.0，然後至少 10.1.0.0 的相應的 sdk 並不支援的作業系統版本不能載入它。
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">-MinVersion</code>指定 SDK 所需的最低的版本</li>
+      <li><code class="language-plaintext highlighter-rouge">-MaxVersionTested</code>指定的最高測試版本的 sdk。 如果發佈了新版本的相應的 sdk，它將運行在相容模式下為指定的版本。</li>
+    </ul>
+  </li>
+  <li><strong>版本值</strong>是 major.minor.build.qfe 的整數 4 元組形式**.</li>
 </ul>
 
 <p>如果你 config.xml 檔中指定這些類型沒有偏好，然後將預設選擇 Windows.Universal 10.0.0.0 版本。</p>

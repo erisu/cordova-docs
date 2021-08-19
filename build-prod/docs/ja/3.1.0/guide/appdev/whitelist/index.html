@@ -1436,137 +1436,181 @@
             
 
             <div id="page-toc-source">
-                <h1>ホワイト リスト ガイド</h1>
+                <h1 id="ホワイト-リスト-ガイド">ホワイト リスト ガイド</h1>
 
-<h2>概要</h2>
+<h2 id="概要">概要</h2>
 
-<p>リソースのホワイト リストを制御するセキュリティ モデルなど、外部ネットワーク リソースにアクセスが <code>http://google.com</code> 。 Apache コルドバの既定のセキュリティ ポリシーは、インターネット上の任意のサイト上の任意のリソースにアクセスできます。 運用環境にアプリケーションを移動する前にそのホワイト リストを確認し、特定のネットワーク ドメインおよびサブドメインへのアクセスを宣言する必要があります。</p>
+<p>リソースのホワイト リストを制御するセキュリティ モデルなど、外部ネットワーク リソースにアクセスが <code class="language-plaintext highlighter-rouge">http://google.com</code> 。 Apache コルドバの既定のセキュリティ ポリシーは、インターネット上の任意のサイト上の任意のリソースにアクセスできます。 運用環境にアプリケーションを移動する前にそのホワイト リストを確認し、特定のネットワーク ドメインおよびサブドメインへのアクセスを宣言する必要があります。</p>
 
-<h2>仕様</h2>
+<h2 id="仕様">仕様</h2>
 
-<p>ドメイン ホワイト<a href="http://www.w3.org/TR/widgets-access/">W3C ウィジェット アクセス</a>仕様の土台となります。 ウィジェット アクセス仕様で、 <code>&lt;access&gt;</code> 要素を使用する特定のネットワーク リソースへのアクセスを宣言します。 Apache コルドバは個々 のネットワーク リソース (Url) のホワイト リスト登録を許可するようにこの概念を拡張します。 将来的には、Apache コルドバはプラットフォームのホワイト リストの実装を抽象化します。 しかし、今のところ各プラットフォーム独自のリソースまたはドメイン ホワイト リストを実装します。 プラットフォームの実装の違いは、このドキュメントに記載されています。</p>
+<p>ドメイン ホワイト<a href="http://www.w3.org/TR/widgets-access/">W3C ウィジェット アクセス</a>仕様の土台となります。 ウィジェット アクセス仕様で、 <code class="language-plaintext highlighter-rouge">&lt;access&gt;</code> 要素を使用する特定のネットワーク リソースへのアクセスを宣言します。 Apache コルドバは個々 のネットワーク リソース (Url) のホワイト リスト登録を許可するようにこの概念を拡張します。 将来的には、Apache コルドバはプラットフォームのホワイト リストの実装を抽象化します。 しかし、今のところ各プラットフォーム独自のリソースまたはドメイン ホワイト リストを実装します。 プラットフォームの実装の違いは、このドキュメントに記載されています。</p>
 
 <p>ホワイト リストのエントリーの一般的な形式の Google クロム パッケージ アプリ「<a href="http://developer.chrome.com/apps/match_patterns.html">パターン一致</a>」仕様に従います。 リソースは、URL がアスタリスクによって指定されます (*) を示す任意の値が「行く」ここでいくつかの場所で「ワイルドカード」として文字を使用可能性があります。 具体的な例を紹介します。</p>
 
-<h2>構文</h2>
+<h2 id="構文">構文</h2>
 
 <p><a href="http://google.com">Google.com</a>ですべてのリソースへのアクセス:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">http://google.com/*
-</code></pre></div>
-<p>安全な<a href="https://google.com">google.com</a>ですべてのリソースへのアクセス ( <code>https://</code> )。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">https://google.com/*
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://google.com/*
+</code></pre></div></div>
+
+<p>安全な<a href="https://google.com">google.com</a>ですべてのリソースへのアクセス ( <code class="language-plaintext highlighter-rouge">https://</code> )。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://google.com/*
+</code></pre></div></div>
+
 <p>特定のサブドメイン<a href="http://maps.google.com">maps.google.com</a>へのアクセス:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">http://maps.google.com/*
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://maps.google.com/*
+</code></pre></div></div>
+
 <p><a href="http://google.com">Google.com</a> (例えば、<a href="http://mail.google.com">接続</a>および<a href="http://docs.google.com">docs.google.com</a>) 上のすべてのサブドメインへのアクセス:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">http://*.google.com/*
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://*.google.com/*
+</code></pre></div></div>
+
 <p><a href="http://www.google.com">Www.google.com</a> 「/モバイル」のパスの下にすべてのリソースへのアクセス:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">http://www.google.com/mobile/*
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://www.google.com/mobile/*
+</code></pre></div></div>
+
 <p>任意のプロトコル (例えば、HTTP、HTTPS、FTP など) で<a href="http://google.com">google.com</a>へのアクセス:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">*://google.com/*
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*://google.com/*
+</code></pre></div></div>
+
 <p>（例えば、 <a href="http://google.com">google.com</a>と<a href="http://developer.mozilla.org">developer.mozilla.org</a>） のインターネット上のすべての資源へのアクセス:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">*
-</code></pre></div>
-<h2>アンドロイド</h2>
 
-<h3>詳細</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*
+</code></pre></div></div>
 
-<p>ホワイト リスト登録の規則は、 <code>res/xml/config.xml</code> 要素で宣言されていると<code>&lt;access origin=&quot;...&quot; /&gt;</code>.</p>
+<h2 id="アンドロイド">アンドロイド</h2>
+
+<h3 id="詳細">詳細</h3>
+
+<p>ホワイト リスト登録の規則は、 <code class="language-plaintext highlighter-rouge">res/xml/config.xml</code> 要素で宣言されていると<code class="language-plaintext highlighter-rouge">&lt;access origin="..." /&gt;</code>.</p>
 
 <p>Android は完全にホワイト リスト構文をサポートします。</p>
 
-<h3>構文</h3>
+<h3 id="構文-1">構文</h3>
 
 <p><a href="http://google.com">Google.com</a>へのアクセス:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com/*" /&gt;
-</code></pre></div>
-<h2>ブラックベリー 10</h2>
 
-<h3>詳細</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com/*" /&gt;
+</code></pre></div></div>
 
-<p>ホワイト リスト登録の規則は、 <code>www/config.xml</code> 要素で宣言されていると<code>&lt;access origin=&quot;...&quot; /&gt;</code>.</p>
+<h2 id="ブラックベリー-10">ブラックベリー 10</h2>
+
+<h3 id="詳細-1">詳細</h3>
+
+<p>ホワイト リスト登録の規則は、 <code class="language-plaintext highlighter-rouge">www/config.xml</code> 要素で宣言されていると<code class="language-plaintext highlighter-rouge">&lt;access origin="..." /&gt;</code>.</p>
 
 <p>ブラックベリー 10 2 つの方法で他のプラットフォームとは異なるワイルドカードを処理します。</p>
 
-<p>1） XMLHttpRequest によってアクセスされるコンテンツは、明示的に宣言されなければなりません。起源 =&quot;*&quot;このユースケースは尊敬できません。また、web のすべてのセキュリティが好みを使用して無効になります。</p>
+<p>1） XMLHttpRequest によってアクセスされるコンテンツは、明示的に宣言されなければなりません。起源 =”*“このユースケースは尊敬できません。また、web のすべてのセキュリティが好みを使用して無効になります。</p>
 
-<p>サブドメイン 2) =&quot;true&quot;の代わりに使用される可能性があります&quot;* .domain&quot;</p>
+<p>サブドメイン 2) =”true”の代わりに使用される可能性があります”* .domain”</p>
 
-<h3>構文</h3>
+<h3 id="構文-2">構文</h3>
 
 <p><a href="http://google.com">Google.com</a>へのアクセス:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" subdomains="false" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" subdomains="false" /&gt;
+</code></pre></div></div>
+
 <p><a href="http://maps.google.com">Maps.google.com</a>へのアクセス:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://maps.google.com" subdomains="false" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://maps.google.com" subdomains="false" /&gt;
+</code></pre></div></div>
+
 <p><a href="http://google.com">Google.com</a>でのすべてのサブドメインへのアクセス:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" subdomains="true" /&gt;
-</code></pre></div>
-<p>含むすべてのドメインへのアクセスを <code>file://</code> プロトコル。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="*" subdomains="true" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" subdomains="true" /&gt;
+</code></pre></div></div>
+
+<p>含むすべてのドメインへのアクセスを <code class="language-plaintext highlighter-rouge">file://</code> プロトコル。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="*" subdomains="true" /&gt;
+</code></pre></div></div>
+
 <p>すべての web セキュリティを無効にします。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="websecurity" value="disable" /&gt;
-</code></pre></div>
-<h2>iOS</h2>
 
-<h3>詳細</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="websecurity" value="disable" /&gt;
+</code></pre></div></div>
 
-<p>ホワイト リスト登録の規則は、 <code>AppName/config.xml</code> 要素で宣言されていると<code>&lt;access origin=&quot;...&quot; /&gt;</code>.</p>
+<h2 id="ios">iOS</h2>
+
+<h3 id="詳細-2">詳細</h3>
+
+<p>ホワイト リスト登録の規則は、 <code class="language-plaintext highlighter-rouge">AppName/config.xml</code> 要素で宣言されていると<code class="language-plaintext highlighter-rouge">&lt;access origin="..." /&gt;</code>.</p>
 
 <p>iOS は完全にホワイト リスト構文をサポートします。</p>
 
-<h3>3.1.0 で変更されました。</h3>
+<h3 id="310-で変更されました">3.1.0 で変更されました。</h3>
 
-<p>前のバージョン 3.1.0、コルドバ iOS 他コルドバのプラットフォームでサポートされているドメイン whilelisting スキームをいくつかの非標準の拡張含まれています。 3.1.0、現在 iOS のホワイト リストは今このドキュメントの上部に記載されているリソースのホワイト リストの構文に準拠します。 変更する必要があります前 3.1.0 からアップグレードする場合にこれらの拡張機能を使用していた、 <code>config.xml</code> として前にホワイト リスト登録リソースの同じセットを続行するためにファイル。</p>
+<p>前のバージョン 3.1.0、コルドバ iOS 他コルドバのプラットフォームでサポートされているドメイン whilelisting スキームをいくつかの非標準の拡張含まれています。 3.1.0、現在 iOS のホワイト リストは今このドキュメントの上部に記載されているリソースのホワイト リストの構文に準拠します。 変更する必要があります前 3.1.0 からアップグレードする場合にこれらの拡張機能を使用していた、 <code class="language-plaintext highlighter-rouge">config.xml</code> として前にホワイト リスト登録リソースの同じセットを続行するためにファイル。</p>
 
 <p>具体的には、これらのパターンを更新する必要があります。</p>
 
 <ul>
-<li><p>&quot; <code>apache.org</code> &quot;(プロトコル): これは以前と一致 <code>http</code> 、 <code>https</code> 、 <code>ftp</code> 、および <code>ftps</code> プロトコル。 変更&quot; <code>*://apache.org/*</code> &quot;に、すべてのプロトコルを含めたり、各プロトコルをサポートする必要がある行が含まれます。</p></li>
-<li><p>&quot; <code>http://apache.*</code> &quot;(ワイルドカード ドメインの終わりに): これは以前すべて上位-レベルの-ドメイン、すべての可能な 2 文字の Tld を含むと一致 (有用ではないドメインのようにしかし。 co.uk)。 行することが実際に制御、ホワイト リストに登録する必要がある各 TLD を含めます。</p></li>
-<li><p>&quot; <code>h*t*://ap*he.o*g</code> &quot;(行方不明のランダムな文字のワイルドカード文字): これらはサポートされていません; ドメインごとに行を含めるし、したプロトコルへの変更は、実際にホワイト リストする必要があります。</p></li>
+  <li>
+    <p>” <code class="language-plaintext highlighter-rouge">apache.org</code> “(プロトコル): これは以前と一致 <code class="language-plaintext highlighter-rouge">http</code> 、 <code class="language-plaintext highlighter-rouge">https</code> 、 <code class="language-plaintext highlighter-rouge">ftp</code> 、および <code class="language-plaintext highlighter-rouge">ftps</code> プロトコル。 変更” <code class="language-plaintext highlighter-rouge">*://apache.org/*</code> “に、すべてのプロトコルを含めたり、各プロトコルをサポートする必要がある行が含まれます。</p>
+  </li>
+  <li>
+    <p>” <code class="language-plaintext highlighter-rouge">http://apache.*</code> “(ワイルドカード ドメインの終わりに): これは以前すべて上位-レベルの-ドメイン、すべての可能な 2 文字の Tld を含むと一致 (有用ではないドメインのようにしかし。 co.uk)。 行することが実際に制御、ホワイト リストに登録する必要がある各 TLD を含めます。</p>
+  </li>
+  <li>
+    <p>” <code class="language-plaintext highlighter-rouge">h*t*://ap*he.o*g</code> “(行方不明のランダムな文字のワイルドカード文字): これらはサポートされていません; ドメインごとに行を含めるし、したプロトコルへの変更は、実際にホワイト リストする必要があります。</p>
+  </li>
 </ul>
 
-<h3>構文</h3>
+<h3 id="構文-3">構文</h3>
 
 <p><a href="http://google.com">Google.com</a>へのアクセス:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com/*" /&gt;
-</code></pre></div>
-<h2>Windows Phone （7 ＆ 8）</h2>
 
-<p>ホワイト リスト登録の規則は、 <code>config.xml</code> 要素で宣言されていると<code>&lt;access origin=&quot;...&quot; /&gt;</code>.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com/*" /&gt;
+</code></pre></div></div>
 
-<h3>構文</h3>
+<h2 id="windows-phone-7--8">Windows Phone （7 ＆ 8）</h2>
 
-<p><a href="http://google.com">Google.com</a>へのアクセス:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" /&gt;
-</code></pre></div>
-<h2>Tizen</h2>
+<p>ホワイト リスト登録の規則は、 <code class="language-plaintext highlighter-rouge">config.xml</code> 要素で宣言されていると<code class="language-plaintext highlighter-rouge">&lt;access origin="..." /&gt;</code>.</p>
 
-<h3>詳細</h3>
-
-<p>アプリケーションのルート ディレクトリの <code>config.xml</code> ファイルを使用してドメイン ホワイト リスト登録のルールを指定します、 <code>&lt;access origin=&quot;...&quot; /&gt;</code> の要素。 完全なリファレンス<a href="https://developer.tizen.org/help/topic/org.tizen.help.gs/Creating%20a%20Project.html?path=0_1_1_4#8814682_CreatingaProject-AccessingExternalNetworkResources">Tizen 外部ネットワーク リソースへのアクセスのドキュメント</a>を参照してください。.</p>
-
-<h3>構文</h3>
+<h3 id="構文-4">構文</h3>
 
 <p><a href="http://google.com">Google.com</a>へのアクセス:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" subdomains="false" /&gt;
-</code></pre></div>
-<p>安全な<a href="https://google.com">google.com</a>へのアクセス ( <code>https://</code> )。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="https://google.com" subdomains="false" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" /&gt;
+</code></pre></div></div>
+
+<h2 id="tizen">Tizen</h2>
+
+<h3 id="詳細-3">詳細</h3>
+
+<p>アプリケーションのルート ディレクトリの <code class="language-plaintext highlighter-rouge">config.xml</code> ファイルを使用してドメイン ホワイト リスト登録のルールを指定します、 <code class="language-plaintext highlighter-rouge">&lt;access origin="..." /&gt;</code> の要素。 完全なリファレンス<a href="https://developer.tizen.org/help/topic/org.tizen.help.gs/Creating%20a%20Project.html?path=0_1_1_4#8814682_CreatingaProject-AccessingExternalNetworkResources">Tizen 外部ネットワーク リソースへのアクセスのドキュメント</a>を参照してください。.</p>
+
+<h3 id="構文-5">構文</h3>
+
+<p><a href="http://google.com">Google.com</a>へのアクセス:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" subdomains="false" /&gt;
+</code></pre></div></div>
+
+<p>安全な<a href="https://google.com">google.com</a>へのアクセス ( <code class="language-plaintext highlighter-rouge">https://</code> )。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="https://google.com" subdomains="false" /&gt;
+</code></pre></div></div>
+
 <p><a href="http://google.com">Google.com</a>でのすべてのサブドメインへのアクセス:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" subdomains="true" /&gt;
-</code></pre></div>
-<p>含むすべてのドメインへのアクセスを <code>file://</code> プロトコル。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="*" subdomains="true" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" subdomains="true" /&gt;
+</code></pre></div></div>
+
+<p>含むすべてのドメインへのアクセスを <code class="language-plaintext highlighter-rouge">file://</code> プロトコル。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="*" subdomains="true" /&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

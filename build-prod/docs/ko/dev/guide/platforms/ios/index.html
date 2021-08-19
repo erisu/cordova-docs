@@ -2134,21 +2134,21 @@
             
 
             <div id="page-toc-source">
-                <h1>iOS 플랫폼 가이드</h1>
+                <h1 id="ios-플랫폼-가이드">iOS 플랫폼 가이드</h1>
 
 <p>이 가이드에는 코르도바 애플 리 케이 션 아이폰과 iPad와 같은 iOS 장치에 대 한 배포 SDK 개발 환경을 설정 하는 방법을 보여 줍니다. 자세한 플랫폼 관련 내용은 다음을 참조 하십시오.</p>
 
 <ul>
-<li>  <a href="config.html">iOS 구성</a></li>
-<li>  <a href="upgrading.html">IOS 업그레이드</a></li>
-<li>  <a href="webview.html">iOS WebViews</a></li>
-<li>  <a href="plugin.html">iOS 플러그인</a></li>
-<li>  iOS 셸 도구 <a href="../../../index.html">가이드</a></li>
+  <li><a href="config.html">iOS 구성</a></li>
+  <li><a href="upgrading.html">IOS 업그레이드</a></li>
+  <li><a href="webview.html">iOS WebViews</a></li>
+  <li><a href="plugin.html">iOS 플러그인</a></li>
+  <li>iOS 셸 도구 <a href="../../../index.html">가이드</a></li>
 </ul>
 
 <p>위의 명령줄 도구 코르도바 3.0 이전 버전을 참조 하십시오. 현재 인터페이스에 대 한 내용은 명령줄 인터페이스를 참조 하십시오.</p>
 
-<h2>요구 사항 및 지원</h2>
+<h2 id="요구-사항-및-지원">요구 사항 및 지원</h2>
 
 <p>애플 ® 도구 인텔 기반 맥에 OS X 운영 체제 에서만 실행 iOS 응용 프로그램을 빌드하는 데 필요한. Xcode ® 6.0 (최소 필수 버전) 실행 OS X 버전 10.9 (댈러스 매버릭스)에 이상, iOS 8 포함 SDK (소프트웨어 개발 키트). 제출 애플 리 케이 션 애플 애플 리 케이 션 Store℠ 최신 버전을의 Apple 도구를 필요 합니다.</p>
 
@@ -2156,107 +2156,149 @@
 
 <p><a href="https://www.npmjs.org/package/ios-sim">Ios sim</a> 와 <a href="https://www.npmjs.org/package/ios-deploy">ios-deploy</a> 도구-하면 iOS 시뮬레이터로 iOS 애플 리 케이 션 및 iOS 장치에서 명령줄을 실행 합니다.</p>
 
-<h2>SDK 설치</h2>
+<h2 id="sdk-설치">SDK 설치</h2>
 
 <p>Xcode를 다운로드 하는 방법은 두 가지:</p>
 
 <ul>
-<li><p><a href="https://itunes.apple.com/us/app/xcode/id497799835?mt=12">App 스토어</a>, &quot;Xcode&quot; <strong>응용 프로그램 저장소</strong> 응용 프로그램에서 검색 하 여 사용할 수 있습니다.</p></li>
-<li><p><a href="https://developer.apple.com/downloads/index.action">애플 개발자 다운로드</a>에서 애플 개발자 등록을 해야합니다.</p></li>
+  <li>
+    <p><a href="https://itunes.apple.com/us/app/xcode/id497799835?mt=12">App 스토어</a>, “Xcode” <strong>응용 프로그램 저장소</strong> 응용 프로그램에서 검색 하 여 사용할 수 있습니다.</p>
+  </li>
+  <li>
+    <p><a href="https://developer.apple.com/downloads/index.action">애플 개발자 다운로드</a>에서 애플 개발자 등록을 해야합니다.</p>
+  </li>
 </ul>
 
 <p>Xcode 설치 되 면 여러 명령줄 도구 실행 코르도바를 사용 하도록 설정 해야 합니다. <strong>Xcode</strong> 메뉴에서 <strong>기본 설정</strong>, 다음 <strong>다운로드</strong> 탭을 선택 합니다. <strong>구성 요소</strong> 패널에서 <strong>커맨드 라인 도구</strong> 목록 옆에 있는 <strong>설치</strong> 단추를 누릅니다.</p>
 
-<h2>설치 배포 도구</h2>
+<h2 id="설치-배포-도구">설치 배포 도구</h2>
 
 <p>Comman 라인 터미널에서 실행:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ npm install -g ios-sim
-    $ npm install -g ios-deploy
-</code></pre></div>
-<h2>새 프로젝트 만들기</h2>
 
-<p>유틸리티 사용 하 여 <code>코르도바</code> 새로운 프로젝트 설정에 코르도바는 명령줄 인터페이스를 설명 하는 대로. 예를 들어 소스 코드 디렉토리에:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova create hello com.example.hello "HelloWorld"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ npm install -g ios-sim
+    $ npm install -g ios-deploy
+</code></pre></div></div>
+
+<h2 id="새-프로젝트-만들기">새 프로젝트 만들기</h2>
+
+<p>유틸리티 사용 하 여 <code class="language-plaintext highlighter-rouge">코르도바</code> 새로운 프로젝트 설정에 코르도바는 명령줄 인터페이스를 설명 하는 대로. 예를 들어 소스 코드 디렉토리에:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova create hello com.example.hello "HelloWorld"
     $ cd hello
     $ cordova platform add ios
     $ cordova prepare              # or "cordova build"
-</code></pre></div>
-<h2>응용 프로그램 배포</h2>
+</code></pre></div></div>
+
+<h2 id="응용-프로그램-배포">응용 프로그램 배포</h2>
 
 <p>연결 된 iOS 디바이스에 응용 프로그램 배포:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova run ios --device
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova run ios --device
+</code></pre></div></div>
+
 <p>기본 iOS 에뮬레이터에 응용 프로그램 배포:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova emulate ios
-</code></pre></div>
-<p>당신이 보고 사용할 수 있습니다 <strong>cordova run ios --list</strong> 모두 사용 가능한 대상 및 <strong>cordova run ios --target=target_name</strong> 특정 장치 또는 에뮬레이터에서 응용 프로그램을 실행 (예를 들어 <code>cordova run ios --target=&quot;iPhone-6&quot;</code>).</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova emulate ios
+</code></pre></div></div>
+
+<p>당신이 보고 사용할 수 있습니다 <strong>cordova run ios –list</strong> 모두 사용 가능한 대상 및 <strong>cordova run ios –target=target_name</strong> 특정 장치 또는 에뮬레이터에서 응용 프로그램을 실행 (예를 들어 <code class="language-plaintext highlighter-rouge">cordova run ios --target="iPhone-6"</code>).</p>
 
 <p>또한 참조 추가 빌드 및 실행 옵션에 <strong>코르도바 실행-도움말을</strong> 사용할 수 있습니다.</p>
 
-<h2>SDK에는 프로젝트를 열으십시오</h2>
+<h2 id="sdk에는-프로젝트를-열으십시오">SDK에는 프로젝트를 열으십시오</h2>
 
-<p>Ios 플랫폼 프로젝트에 추가 되 면 Xcode 내에서 그것을 열 수 있습니다. <code>Hello/platforms/ios/hello.xcodeproj</code> 파일을 두 번 클릭 합니다. 스크린은 다음과 같이 한다:</p>
+<p>Ios 플랫폼 프로젝트에 추가 되 면 Xcode 내에서 그것을 열 수 있습니다. <code class="language-plaintext highlighter-rouge">Hello/platforms/ios/hello.xcodeproj</code> 파일을 두 번 클릭 합니다. 스크린은 다음과 같이 한다:</p>
 
-<p><img src="/static/img/guide/platforms/ios/helloworld_project.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/ios/helloworld_project.png" alt="" /></p>
 
-<h2>에뮬레이터에 배포</h2>
+<h2 id="에뮬레이터에-배포">에뮬레이터에 배포</h2>
 
 <p>IOS 에뮬레이터에서 응용 프로그램을 미리 보기:</p>
 
 <ol>
-<li><p><em>.Xcodeproj</em> 파일은 왼쪽된 패널에서 선택 되어 있는지 확인 합니다.</p></li>
-<li><p><strong>안녕하세요</strong> 애플 리 케이 션 오른쪽에 즉시 패널에서 선택 합니다.</p></li>
-<li><p><strong>스키마</strong> 메뉴에서 원하는 장치를 선택, 아이폰으로 6.0 시뮬레이터 여기 강조:</p>
+  <li>
+    <p><em>.Xcodeproj</em> 파일은 왼쪽된 패널에서 선택 되어 있는지 확인 합니다.</p>
+  </li>
+  <li>
+    <p><strong>안녕하세요</strong> 애플 리 케이 션 오른쪽에 즉시 패널에서 선택 합니다.</p>
+  </li>
+  <li>
+    <p><strong>스키마</strong> 메뉴에서 원하는 장치를 선택, 아이폰으로 6.0 시뮬레이터 여기 강조:</p>
 
-<p><img src="/static/img/guide/platforms/ios/select_xcode_scheme.png" alt=""></p></li>
-<li><p><strong>구성표</strong>의 왼쪽에 동일한 도구 모음에 나타나는 <strong>실행</strong> 단추를 누릅니다. 빌드, 배포 하 고 에뮬레이터에서 응용 프로그램을 실행 합니다. 별도 에뮬레이터 응용 프로그램 응용 프로그램을 표시 하려면 열립니다.</p>
+    <p><img src="/static/img/guide/platforms/ios/select_xcode_scheme.png" alt="" /></p>
+  </li>
+  <li>
+    <p><strong>구성표</strong>의 왼쪽에 동일한 도구 모음에 나타나는 <strong>실행</strong> 단추를 누릅니다. 빌드, 배포 하 고 에뮬레이터에서 응용 프로그램을 실행 합니다. 별도 에뮬레이터 응용 프로그램 응용 프로그램을 표시 하려면 열립니다.</p>
 
-<p><img src="/static/img/guide/platforms/ios/HelloWorldStandard.png" alt=""></p>
+    <p><img src="/static/img/guide/platforms/ios/HelloWorldStandard.png" alt="" /></p>
 
-<p>하나의 에뮬레이터는 한 번에 실행 될 수 있습니다 다른 에뮬레이터에서 응용 프로그램을 테스트 하려면 에뮬레이터 응용 프로그램을 종료 하 고 Xcode 내에서 서로 다른 목표를 실행 해야 합니다.</p></li>
+    <p>하나의 에뮬레이터는 한 번에 실행 될 수 있습니다 다른 에뮬레이터에서 응용 프로그램을 테스트 하려면 에뮬레이터 응용 프로그램을 종료 하 고 Xcode 내에서 서로 다른 목표를 실행 해야 합니다.</p>
+  </li>
 </ol>
 
 <p>Xcode는 아이폰과 iPad의 최신 버전에 대 한 에뮬레이터와 함께 번들로 제공. 이전 버전에서 사용할 수 있는 <strong>Xcode → 환경 설정 → 다운로드 → 구성 요소</strong> 패널.</p>
 
-<h2>장치에 배포</h2>
+<h2 id="장치에-배포">장치에 배포</h2>
 
 <p>장치에 배포 하는 다양 한 요구 사항에 대 한 자세한 애플의 <a href="https://developer.apple.com/library/prerelease/ios/documentation/IDEs/Conceptual/AppDistributionGuide/Introduction/Introduction.html">응용 프로그램 배포 작업에 대 한</a> <em>장치에 당신의 애플 리 케이 션 실행</em> 섹션을 참조 하십시오. 간단히, 배포 하기 전에 다음을 수행 해야 합니다.</p>
 
 <ol>
-<li><p>애플 iOS 개발자 프로그램에 가입 하세요.</p></li>
-<li><p><em>구축 프로필</em> <a href="https://developer.apple.com/ios/manage/overview/index.action">iOS 구축 포탈</a>내에서 만듭니다. 사용 하 여 그것의 <em>개발 프로비저닝 어시스턴트</em> 를 만들고 프로필 설치 및 인증서 Xcode 필요 합니다.</p></li>
-<li><p>프로젝트 설정에서 <em>코드 서명</em> 섹션의 <em>코드 서명 Id</em> 프로비저닝 프로 파일 이름으로 설정 되어 있는지 확인 합니다.</p></li>
+  <li>
+    <p>애플 iOS 개발자 프로그램에 가입 하세요.</p>
+  </li>
+  <li>
+    <p><em>구축 프로필</em> <a href="https://developer.apple.com/ios/manage/overview/index.action">iOS 구축 포탈</a>내에서 만듭니다. 사용 하 여 그것의 <em>개발 프로비저닝 어시스턴트</em> 를 만들고 프로필 설치 및 인증서 Xcode 필요 합니다.</p>
+  </li>
+  <li>
+    <p>프로젝트 설정에서 <em>코드 서명</em> 섹션의 <em>코드 서명 Id</em> 프로비저닝 프로 파일 이름으로 설정 되어 있는지 확인 합니다.</p>
+  </li>
 </ol>
 
 <p>장치에 배포:</p>
 
 <ol>
-<li><p>USB 케이블을 사용 하 여 mac에 장치를 연결</p></li>
-<li><p>Xcode 창 <strong>구성표</strong> 드롭다운 목록에서 프로젝트의 이름을 선택 합니다.</p></li>
-<li><p><strong>장치</strong> 목록에서 장치를 선택 합니다. USB를 통해 연결 되어 있지만 여전히 표시 되지 않습니다, 모든 오류를 해결 하려면 <strong>구성</strong> 단추를 누릅니다.</p></li>
-<li><p>빌드, 배포 및 귀하의 장치에 응용 프로그램을 실행 하려면 <strong>실행</strong> 단추를 누릅니다.</p></li>
+  <li>
+    <p>USB 케이블을 사용 하 여 mac에 장치를 연결</p>
+  </li>
+  <li>
+    <p>Xcode 창 <strong>구성표</strong> 드롭다운 목록에서 프로젝트의 이름을 선택 합니다.</p>
+  </li>
+  <li>
+    <p><strong>장치</strong> 목록에서 장치를 선택 합니다. USB를 통해 연결 되어 있지만 여전히 표시 되지 않습니다, 모든 오류를 해결 하려면 <strong>구성</strong> 단추를 누릅니다.</p>
+  </li>
+  <li>
+    <p>빌드, 배포 및 귀하의 장치에 응용 프로그램을 실행 하려면 <strong>실행</strong> 단추를 누릅니다.</p>
+  </li>
 </ol>
 
-<h2>일반적인 문제</h2>
+<h2 id="일반적인-문제">일반적인 문제</h2>
 
 <p><strong>사용 중단 경고</strong>: 응용 프로그램 프로그래밍 인터페이스 (API)를 변경 하거나 다른 API로 대체, 그것은으로 표시 <em>사용 되지 않습니다</em>. API는 아직 단기적 움직이지만 결국 제거 됩니다. 이 사용 되지 않는 인터페이스의 일부 아파치 코르도바에 반영 되 고 Xcode 빌드하고 응용 프로그램을 배포 하는 경우 그들에 대 한 경고를 발급 합니다.</p>
 
-<p>Xcode의 경고 <code>invokeString</code> 방법에 대 한 사용자 지정 URL에서 응용 프로그램을 실행 하는 기능을 염려 한다. 사용자 지정 URL에서 로드 하는 메커니즘은 변경 하는 동안이 코드는 거꾸로 코르도바의 이전 버전을 사용 하 여 만든 애플 리 케이 션에 대 한 기능을 제공 하도록 여전히 존재 합니다. 샘플 응용 프로그램은이 기능을 사용 하지 않으므로 이러한 경고를 무시할 수 있습니다. 이러한 경고가 나타나지 않도록 방지 하기 위해 사용 되지 않는 invokeString API를 참조 하는 코드를 제거 합니다.</p>
+<p>Xcode의 경고 <code class="language-plaintext highlighter-rouge">invokeString</code> 방법에 대 한 사용자 지정 URL에서 응용 프로그램을 실행 하는 기능을 염려 한다. 사용자 지정 URL에서 로드 하는 메커니즘은 변경 하는 동안이 코드는 거꾸로 코르도바의 이전 버전을 사용 하 여 만든 애플 리 케이 션에 대 한 기능을 제공 하도록 여전히 존재 합니다. 샘플 응용 프로그램은이 기능을 사용 하지 않으므로 이러한 경고를 무시할 수 있습니다. 이러한 경고가 나타나지 않도록 방지 하기 위해 사용 되지 않는 invokeString API를 참조 하는 코드를 제거 합니다.</p>
 
 <ul>
-<li><p><em>Classes/MainViewController.m</em> 파일을 편집, 코드의 다음 블록을 둘러싸고 <code>/*</code> 및 <code>*/</code> 코멘트 아래와 같이 입력 합니다 <strong>명령-s</strong> 파일을 저장할:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">(void) webViewDidFinishLoad:(UIWebView*) theWebView {/ / ___PROJECTNAME__-Info.plist 처리 하는 프로토콜을 지정 하는 경우에 유효 / * 경우 (self.invokeString) {/ /이 전달 deviceready 이벤트가 발생 하기 전에 deviceready NSLog를 받을 때 js에 액세스할 수 있습니다 (@"사용 되지 않음: window.invokeString-window.handleOpenURL(url) 함수를 사용, 항상 라는 응용 프로그램을 사용자 지정 스키마 url을 통해 시작할 때.");
+  <li>
+    <p><em>Classes/MainViewController.m</em> 파일을 편집, 코드의 다음 블록을 둘러싸고 <code class="language-plaintext highlighter-rouge">/*</code> 및 <code class="language-plaintext highlighter-rouge">*/</code> 코멘트 아래와 같이 입력 합니다 <strong>명령-s</strong> 파일을 저장할:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(void) webViewDidFinishLoad:(UIWebView*) theWebView {/ / ___PROJECTNAME__-Info.plist 처리 하는 프로토콜을 지정 하는 경우에 유효 / * 경우 (self.invokeString) {/ /이 전달 deviceready 이벤트가 발생 하기 전에 deviceready NSLog를 받을 때 js에 액세스할 수 있습니다 (@"사용 되지 않음: window.invokeString-window.handleOpenURL(url) 함수를 사용, 항상 라는 응용 프로그램을 사용자 지정 스키마 url을 통해 시작할 때.");
   NSString * jsString = [NSString stringWithFormat:@"var invokeString = \" % @\ ";", self.invokeString];
   [theWebView stringByEvaluatingJavaScriptFromString:jsString];
 } * / / / 기본 색상 블랙 배경 일치 네이티브 애플 리 케이 션 theWebView.backgroundColor = [UIColor blackColor];
-
+    
 [슈퍼 webViewDidFinishLoad: theWebView] 반환;
 }
-</code></pre></div></li>
-<li><p><em>Classes/AppViewDelegate.m</em> 파일을 아래와 같이 이중 슬래시를 삽입 하 여 다음 라인을 코멘트 편집 후 파일을 저장 하도록 <strong>명령을-s</strong> 를 입력:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">//self.viewController.invokeString = invokeString;
-</code></pre></div></li>
-<li><p><strong>명령 b</strong> 프로젝트를 다시 빌드하고 경고 제거를 누릅니다.</p></li>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><em>Classes/AppViewDelegate.m</em> 파일을 아래와 같이 이중 슬래시를 삽입 하 여 다음 라인을 코멘트 편집 후 파일을 저장 하도록 <strong>명령을-s</strong> 를 입력:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//self.viewController.invokeString = invokeString;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>명령 b</strong> 프로젝트를 다시 빌드하고 경고 제거를 누릅니다.</p>
+  </li>
 </ul>
 
 <!-- Does this fix only last until the next "cordova prepare"? -->
@@ -2264,10 +2306,14 @@
 <p><strong>누락 된 헤더</strong>: 컴파일 오류 누락 된 헤더에 관한 문제가 빌드 위치에서 발생 하며 Xcode 환경 설정을 통해 해결할 수 있습니다:</p>
 
 <ol>
-<li><p><strong>Xcode → 환경 설정 → 위치</strong> 선택.</p></li>
-<li><p><strong>파생 데이터</strong> 섹션에서 <strong>고급</strong> 단추를 누르고 다음과 같이 <strong>고유</strong> <strong>빌드 위치</strong> 선택:</p>
+  <li>
+    <p><strong>Xcode → 환경 설정 → 위치</strong> 선택.</p>
+  </li>
+  <li>
+    <p><strong>파생 데이터</strong> 섹션에서 <strong>고급</strong> 단추를 누르고 다음과 같이 <strong>고유</strong> <strong>빌드 위치</strong> 선택:</p>
 
-<p><img src="/static/img/guide/platforms/ios/xcode_build_location.png" alt=""></p></li>
+    <p><img src="/static/img/guide/platforms/ios/xcode_build_location.png" alt="" /></p>
+  </li>
 </ol>
 
 <p>이것이 새로운 Xcode 설치의 기본 설정은 이지만 Xcode의 이전 버전에서 업그레이 드에 따라 다르게 설정할 수 있습니다.</p>
@@ -2275,12 +2321,24 @@
 <p>자세한 내용은 Apple의 설명서를 참조 하십시오.</p>
 
 <ul>
-<li><p><a href="http://developer.apple.com/library/ios/#referencelibrary/GettingStarted/RoadMapiOS/index.html#//apple_ref/doc/uid/TP40011343">개발 시작 iOS 애플 리 케이 션 오늘</a> iOS 애플 리 케이 션을 개발 하기 위한 단계에 대 한 빠른 개요를 제공 합니다.</p></li>
-<li><p><a href="https://developer.apple.com/membercenter/index.action">회원 센터 홈 페이지</a> 기술 리소스, 프로 비 저 닝 포털, 배포 <a href="../../../index.html">가이드</a> 및 커뮤니티 포럼 등 기술 자원을 여러 iOS에 대 한 링크를 제공 합니다.</p></li>
-<li><p><a href="http://developer.apple.com/library/ios/#documentation/Xcode/Conceptual/ios_development_workflow/00-About_the_iOS_Application_Development_Workflow/introduction.html#//apple_ref/doc/uid/TP40007959">IOS 용 도구 워크플로 가이드</a></p></li>
-<li><p><a href="http://developer.apple.com/library/ios/#documentation/ToolsLanguages/Conceptual/Xcode4UserGuide/000-About_Xcode/about.html#//apple_ref/doc/uid/TP40010215">Xcode 사용 설명서</a></p></li>
-<li><p>애플 월드 와이드 개발자 컨퍼런스 2012 (WWDC2012)에서 <a href="https://developer.apple.com/videos/wwdc/2012/">세션 동영상</a></p></li>
-<li><p><a href="http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/xcode-select.1.html">Xcode 선택 명령</a>을 경우 하나 이상의 Xcode의 올바른 버전을 지정 하는 데 도움이 설치 되어.</p></li>
+  <li>
+    <p><a href="http://developer.apple.com/library/ios/#referencelibrary/GettingStarted/RoadMapiOS/index.html#//apple_ref/doc/uid/TP40011343">개발 시작 iOS 애플 리 케이 션 오늘</a> iOS 애플 리 케이 션을 개발 하기 위한 단계에 대 한 빠른 개요를 제공 합니다.</p>
+  </li>
+  <li>
+    <p><a href="https://developer.apple.com/membercenter/index.action">회원 센터 홈 페이지</a> 기술 리소스, 프로 비 저 닝 포털, 배포 <a href="../../../index.html">가이드</a> 및 커뮤니티 포럼 등 기술 자원을 여러 iOS에 대 한 링크를 제공 합니다.</p>
+  </li>
+  <li>
+    <p><a href="http://developer.apple.com/library/ios/#documentation/Xcode/Conceptual/ios_development_workflow/00-About_the_iOS_Application_Development_Workflow/introduction.html#//apple_ref/doc/uid/TP40007959">IOS 용 도구 워크플로 가이드</a></p>
+  </li>
+  <li>
+    <p><a href="http://developer.apple.com/library/ios/#documentation/ToolsLanguages/Conceptual/Xcode4UserGuide/000-About_Xcode/about.html#//apple_ref/doc/uid/TP40010215">Xcode 사용 설명서</a></p>
+  </li>
+  <li>
+    <p>애플 월드 와이드 개발자 컨퍼런스 2012 (WWDC2012)에서 <a href="https://developer.apple.com/videos/wwdc/2012/">세션 동영상</a></p>
+  </li>
+  <li>
+    <p><a href="http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/xcode-select.1.html">Xcode 선택 명령</a>을 경우 하나 이상의 Xcode의 올바른 버전을 지정 하는 데 도움이 설치 되어.</p>
+  </li>
 </ul>
 
 <p>(Mac ® OS X ® 애플 ®, Xcode ® 응용 프로그램 Store℠, iPad ®, iPhone ®, iPod ® 및 Finder ®는 애플 inc의 등록 상표)</p>

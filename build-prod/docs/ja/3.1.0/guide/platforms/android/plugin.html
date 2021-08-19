@@ -1436,44 +1436,51 @@
             
 
             <div id="page-toc-source">
-                <h1>Android のプラグイン</h1>
+                <h1 id="android-のプラグイン">Android のプラグイン</h1>
 
-<p>プラグインを書くコルドバ Android のアーキテクチャの理解が必要です。 コルドバ アンドロイド Android の WebView それに取り付けられたフックで構成されます。 これらのプラグインのクラスへのマッピングとして表される、 <code>config.xml</code> ファイル。</p>
+<p>プラグインを書くコルドバ Android のアーキテクチャの理解が必要です。 コルドバ アンドロイド Android の WebView それに取り付けられたフックで構成されます。 これらのプラグインのクラスへのマッピングとして表される、 <code class="language-plaintext highlighter-rouge">config.xml</code> ファイル。</p>
 
-<p>プラグイン拡張する少なくとも 1 つの Java クラスから成っている、 <code>CordovaPlugin</code> クラス。 プラグインの 1 つをオーバーライドする必要があります、 <code>execute</code> メソッドから <code>CordovaPlugin</code> 。 最高のプラグインが処理する実際には、 <code>pause</code> と <code>resume</code> イベント、およびプラグインの間のメッセージパッシング。 実行時間の長い要求は、メディアの再生、リスナー、または内部の状態などのバック グラウンド アクティビティでプラグインを実装する必要があります、 <code>onReset()</code> メソッドと同様です。 それを実行するとき、 <code>WebView</code> 、java スクリプトの設定を再読み込みを新しいページまたは更新に移動します。</p>
+<p>プラグイン拡張する少なくとも 1 つの Java クラスから成っている、 <code class="language-plaintext highlighter-rouge">CordovaPlugin</code> クラス。 プラグインの 1 つをオーバーライドする必要があります、 <code class="language-plaintext highlighter-rouge">execute</code> メソッドから <code class="language-plaintext highlighter-rouge">CordovaPlugin</code> 。 最高のプラグインが処理する実際には、 <code class="language-plaintext highlighter-rouge">pause</code> と <code class="language-plaintext highlighter-rouge">resume</code> イベント、およびプラグインの間のメッセージパッシング。 実行時間の長い要求は、メディアの再生、リスナー、または内部の状態などのバック グラウンド アクティビティでプラグインを実装する必要があります、 <code class="language-plaintext highlighter-rouge">onReset()</code> メソッドと同様です。 それを実行するとき、 <code class="language-plaintext highlighter-rouge">WebView</code> 、java スクリプトの設定を再読み込みを新しいページまたは更新に移動します。</p>
 
-<h2>プラグイン クラスのマッピング</h2>
+<h2 id="プラグイン-クラスのマッピング">プラグイン クラスのマッピング</h2>
 
-<p>プラグインの JavaScript の部分を常に使用して、 <code>cordova.exec</code> メソッドは次のように。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">exec(&lt;successFunction&gt;, &lt;failFunction&gt;, &lt;service&gt;, &lt;action&gt;, [&lt;args&gt;]);
-</code></pre></div>
-<p>これは、アンドロイド ネイティブ側には、もっとまたはより少なく通話にダウン沸騰、WebView から要求をマーシャ リングします、 <code>action</code> 法、 <code>service</code> に渡された引数を持つクラス、 <code>args</code> 配列。</p>
+<p>プラグインの JavaScript の部分を常に使用して、 <code class="language-plaintext highlighter-rouge">cordova.exec</code> メソッドは次のように。</p>
 
-<p>プラグインを追加する必要がありますあなたのプラグインを Java ファイルや独自の jar ファイルとして配布するかどうか、 <code>config.xml</code> 、コルドバ Android アプリケーションでファイル <code>res/xml/</code> ディレクトリ。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="&lt;service_name&gt;"&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exec(&lt;successFunction&gt;, &lt;failFunction&gt;, &lt;service&gt;, &lt;action&gt;, [&lt;args&gt;]);
+</code></pre></div></div>
+
+<p>これは、アンドロイド ネイティブ側には、もっとまたはより少なく通話にダウン沸騰、WebView から要求をマーシャ リングします、 <code class="language-plaintext highlighter-rouge">action</code> 法、 <code class="language-plaintext highlighter-rouge">service</code> に渡された引数を持つクラス、 <code class="language-plaintext highlighter-rouge">args</code> 配列。</p>
+
+<p>プラグインを追加する必要がありますあなたのプラグインを Java ファイルや独自の jar ファイルとして配布するかどうか、 <code class="language-plaintext highlighter-rouge">config.xml</code> 、コルドバ Android アプリケーションでファイル <code class="language-plaintext highlighter-rouge">res/xml/</code> ディレクトリ。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="&lt;service_name&gt;"&gt;
     &lt;param name="android-package" value="&lt;full_name_including_namespace&gt;" /&gt;
 &lt;/feature&gt;
-</code></pre></div>
-<p>サービス名、JavaScript で使用されるものと一致する必要があります <code>exec</code> 呼び出し、および値は、Java クラスの完全名、名前空間を含みます。 それ以外の場合、プラグイン コンパイルしますが、まだコルドバで到達できません。</p>
+</code></pre></div></div>
 
-<h2>Android の Java プラグインを書く</h2>
+<p>サービス名、JavaScript で使用されるものと一致する必要があります <code class="language-plaintext highlighter-rouge">exec</code> 呼び出し、および値は、Java クラスの完全名、名前空間を含みます。 それ以外の場合、プラグイン コンパイルしますが、まだコルドバで到達できません。</p>
 
-<p>Java スクリプトの設定をネイティブ側に要求するプラグインが発生します。経由で Android の Java プラグインが正しくマップされている、 <code>config.xml</code> ファイル。だから最終的な Android の Java プラグイン クラスどのようか。</p>
+<h2 id="android-の-java-プラグインを書く">Android の Java プラグインを書く</h2>
 
-<p>何を介して JavaScript のプラグインにディスパッチを取得 <code>exec</code> 関数で渡されるプラグイン クラスの <code>execute</code> メソッド。 ほとんど <code>execute</code> の実装のようになります。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">@Override パブリック boolean 文字列操作、JSONArray args （CallbackContext callbackContext） を実行 JSONException がスローされます {場合 (「beep".equals(action)) {this.beep(args.getLong(0));callbackContext.success();返します true;} 戻り偽;//"MethodNotFound"エラーで誤った結果を返します。
+<p>Java スクリプトの設定をネイティブ側に要求するプラグインが発生します。経由で Android の Java プラグインが正しくマップされている、 <code class="language-plaintext highlighter-rouge">config.xml</code> ファイル。だから最終的な Android の Java プラグイン クラスどのようか。</p>
+
+<p>何を介して JavaScript のプラグインにディスパッチを取得 <code class="language-plaintext highlighter-rouge">exec</code> 関数で渡されるプラグイン クラスの <code class="language-plaintext highlighter-rouge">execute</code> メソッド。 ほとんど <code class="language-plaintext highlighter-rouge">execute</code> の実装のようになります。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Override パブリック boolean 文字列操作、JSONArray args （CallbackContext callbackContext） を実行 JSONException がスローされます {場合 (「beep".equals(action)) {this.beep(args.getLong(0));callbackContext.success();返します true;} 戻り偽;//"MethodNotFound"エラーで誤った結果を返します。
 }
-</code></pre></div>
-<p>値と比較の <code>action</code> パラメーター、およびディスパッチ クラスでは、必要に応じて、一部のパラメーターをメソッドに渡します (プライベート) メソッドへのオフ要求。</p>
+</code></pre></div></div>
+
+<p>値と比較の <code class="language-plaintext highlighter-rouge">action</code> パラメーター、およびディスパッチ クラスでは、必要に応じて、一部のパラメーターをメソッドに渡します (プライベート) メソッドへのオフ要求。</p>
 
 <p>とき例外をキャッチし、エラーを返す、エラー JavaScript の一致する Java の例外名を可能な限り明快のために重要です。</p>
 
-<h3>スレッド処理</h3>
+<h3 id="スレッド処理">スレッド処理</h3>
 
-<p>WebView に JavaScript が<em>なく</em>UI スレッド上で実行します。WebCore スレッドで実行されます。<code>execute</code>メソッドも WebCore スレッドを実行します。</p>
+<p>WebView に JavaScript が<em>なく</em>UI スレッド上で実行します。WebCore スレッドで実行されます。<code class="language-plaintext highlighter-rouge">execute</code>メソッドも WebCore スレッドを実行します。</p>
 
 <p>UI と対話する必要がある場合、次を使用する必要があります。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">@Override
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Override
 public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
     if ("beep".equals(action)) {
         final long duration = args.getLong(0);
@@ -1487,9 +1494,11 @@ public boolean execute(String action, JSONArray args, final CallbackContext call
     }
     return false;
 }
-</code></pre></div>
+</code></pre></div></div>
+
 <p>UI スレッド上で実行する必要がない場合 WebCore のスレッドをブロックしません。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">@Override
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Override
 public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
     if ("beep".equals(action)) {
         final long duration = args.getLong(0);
@@ -1503,66 +1512,76 @@ public boolean execute(String action, JSONArray args, final CallbackContext call
     }
     return false;
 }
-</code></pre></div>
-<h3>エコー Android のプラグインの例</h3>
+</code></pre></div></div>
 
-<p>追加するのには、次の <code>config.xml</code> ファイル。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="Echo"&gt;
+<h3 id="エコー-android-のプラグインの例">エコー Android のプラグインの例</h3>
+
+<p>追加するのには、次の <code class="language-plaintext highlighter-rouge">config.xml</code> ファイル。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="Echo"&gt;
     &lt;param name="android-package" value="org.apache.cordova.plugin.Echo" /&gt;
 &lt;/feature&gt;
-</code></pre></div>
-<p>以下のファイルを追加し、 <code>src/org/apache/cordova/plugin/Echo.java</code> コルドバ Android アプリケーション内。</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="k">package</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">plugin</span><span class="p">;</span>
+</code></pre></div></div>
 
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">CordovaPlugin</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">CallbackContext</span><span class="p">;</span>
+<p>以下のファイルを追加し、 <code class="language-plaintext highlighter-rouge">src/org/apache/cordova/plugin/Echo.java</code> コルドバ Android アプリケーション内。</p>
 
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">JSONArray</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">JSONException</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">JSONObject</span><span class="p">;</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package org.apache.cordova.plugin;
 
-<span class="p">/**</span>
- <span class="p">*</span> <span class="n">This</span> <span class="n">class</span> <span class="n">echoes</span> <span class="n">a</span> <span class="k">string</span> <span class="n">called</span> <span class="k">from</span> <span class="n">JavaScript</span><span class="p">.</span>
- <span class="p">*/</span>
-<span class="k">public</span> <span class="n">class</span> <span class="n">Echo</span> <span class="n">extends</span> <span class="n">CordovaPlugin</span> <span class="p">{</span>
+import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CallbackContext;
 
-    <span class="p">@</span><span class="n">Override</span>
-    <span class="k">public</span> <span class="k">boolean</span> <span class="n">execute</span><span class="p">(</span><span class="k">String</span> <span class="n">action</span><span class="p">,</span> <span class="n">JSONArray</span> <span class="n">args</span><span class="p">,</span> <span class="n">CallbackContext</span> <span class="n">callbackContext</span><span class="p">)</span> <span class="n">throws</span> <span class="n">JSONException</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">action</span><span class="p">.</span><span class="n">equals</span><span class="p">(</span><span class="s2">"echo"</span><span class="p">))</span> <span class="p">{</span>
-            <span class="k">String</span> <span class="n">message</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
-            <span class="n">this</span><span class="p">.</span><span class="n">echo</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">callbackContext</span><span class="p">);</span>
-            <span class="n">return</span> <span class="nb">true</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">return</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="p">}</span>
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-    <span class="n">private</span> <span class="n">void</span> <span class="n">echo</span><span class="p">(</span><span class="k">String</span> <span class="n">message</span><span class="p">,</span> <span class="n">CallbackContext</span> <span class="n">callbackContext</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">message</span> <span class="c1">!= null &amp;&amp; message.length() &gt; 0) {
-</span>            <span class="n">callbackContext</span><span class="p">.</span><span class="n">success</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="n">callbackContext</span><span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="s2">"Expected one non-empty string argument."</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>コードを見てをみましょう。 必要な <code>imports</code> が一番。 私たちのクラスから拡張 <code>CordovaPlugin</code> 。 Execute() メソッドをオーバーライドして、exec() からメッセージを受信します。 本手法はまず比較 <code>action</code> ： このプラグインは 1 つのアクションのみをサポートします、 <code>echo</code> アクション。 その他のアクションを返します <code>false</code> 、タイプのエラーの結果が <code>INVALID_ACTION</code> 、JavaScript 側エラー コールバック呼び出しに変換します。 次に、私たちを使用してエコー文字列をつかむ、 <code>getString</code> メソッドに私たち <code>args</code> 、パラメーター配列の 0 番目のパラメーターを取得したいそれを伝えます。 パラメーターのチェックのビットを行う我々： それはないことを確認 <code>null</code> 、長さ 0 の文字列ではないことを確認しています。 我々 を呼び出す場合は、 <code>callbackContext.error()</code> （これは、今では、あなたが知っておくべきエラー コールバックを呼び出します)。 かどうかすべてのこれらのチェックに合格し、我々 を呼び出す <code>callbackContext.success()</code> を渡すと、 <code>message</code> 私たちをパラメーターとして受け取る文字列。 これは最後に、JavaScript 側成功コールバックの呼び出しに変換します。 それも通過、 <code>message</code> JavaScript の成功コールバック関数にパラメーターとしてパラメーター。</p>
+/**
+ * This class echoes a string called from JavaScript.
+ */
+public class Echo extends CordovaPlugin {
 
-<h2>プラグインのデバッグ</h2>
+    @Override
+    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+        if (action.equals("echo")) {
+            String message = args.getString(0);
+            this.echo(message, callbackContext);
+            return true;
+        }
+        return false;
+    }
+
+    private void echo(String message, CallbackContext callbackContext) {
+        if (message != null &amp;&amp; message.length() &gt; 0) {
+            callbackContext.success(message);
+        } else {
+            callbackContext.error("Expected one non-empty string argument.");
+        }
+    }
+}
+</code></pre></div></div>
+
+<p>コードを見てをみましょう。 必要な <code class="language-plaintext highlighter-rouge">imports</code> が一番。 私たちのクラスから拡張 <code class="language-plaintext highlighter-rouge">CordovaPlugin</code> 。 Execute() メソッドをオーバーライドして、exec() からメッセージを受信します。 本手法はまず比較 <code class="language-plaintext highlighter-rouge">action</code> ： このプラグインは 1 つのアクションのみをサポートします、 <code class="language-plaintext highlighter-rouge">echo</code> アクション。 その他のアクションを返します <code class="language-plaintext highlighter-rouge">false</code> 、タイプのエラーの結果が <code class="language-plaintext highlighter-rouge">INVALID_ACTION</code> 、JavaScript 側エラー コールバック呼び出しに変換します。 次に、私たちを使用してエコー文字列をつかむ、 <code class="language-plaintext highlighter-rouge">getString</code> メソッドに私たち <code class="language-plaintext highlighter-rouge">args</code> 、パラメーター配列の 0 番目のパラメーターを取得したいそれを伝えます。 パラメーターのチェックのビットを行う我々： それはないことを確認 <code class="language-plaintext highlighter-rouge">null</code> 、長さ 0 の文字列ではないことを確認しています。 我々 を呼び出す場合は、 <code class="language-plaintext highlighter-rouge">callbackContext.error()</code> （これは、今では、あなたが知っておくべきエラー コールバックを呼び出します)。 かどうかすべてのこれらのチェックに合格し、我々 を呼び出す <code class="language-plaintext highlighter-rouge">callbackContext.success()</code> を渡すと、 <code class="language-plaintext highlighter-rouge">message</code> 私たちをパラメーターとして受け取る文字列。 これは最後に、JavaScript 側成功コールバックの呼び出しに変換します。 それも通過、 <code class="language-plaintext highlighter-rouge">message</code> JavaScript の成功コールバック関数にパラメーターとしてパラメーター。</p>
+
+<h2 id="プラグインのデバッグ">プラグインのデバッグ</h2>
 
 <p>Eclipse を使用して Android プロジェクトをデバッグすることができます、プロジェクトに Java ソースが含まれる場合、プラグインをデバッグできます。 Android の開発者ツールの最新バージョンのみこの時点で完全にサポートされていないのでソース コード添付ファイル JAR の依存関係を許可するように知られています。</p>
 
-<h2>一般的な落とし穴</h2>
+<h2 id="一般的な落とし穴">一般的な落とし穴</h2>
 
 <ul>
-<li><p>プラグインへのアクセスがある、 <code>CordovaInterface</code> オブジェクト。 このオブジェクトには、Android へのアクセスを <code>Activity</code> アプリケーションを実行しています。 これは、 <code>Context</code> 新しい Android を起動するために必要な <code>Intent</code> 。 <code>CordovaInterface</code>プラグインを開始することができます、 <code>Activity</code> 、結果とときのコールバックのプラグインを設定する、 <code>Intent</code> アプリケーションに戻ってくる。 これは重要ですが、以来、 <code>Intent</code> s システムは、Android とのプロセス間通信方法。</p></li>
-<li><p>プラグインに直接アクセスする必要はありません、 <code>Context</code> 彼らは、過去に持っていると。 遺産 <code>ctx</code> メンバーは廃止され、6 ヶ月間 2.0 をリリースした後削除されます。 すべての <code>ctx</code> メソッドに存在する、 <code>Context</code> 、両方 <code>getContext()</code> と <code>getActivity()</code> に必要な適切なオブジェクトを返すことが可能です。</p></li>
+  <li>
+    <p>プラグインへのアクセスがある、 <code class="language-plaintext highlighter-rouge">CordovaInterface</code> オブジェクト。 このオブジェクトには、Android へのアクセスを <code class="language-plaintext highlighter-rouge">Activity</code> アプリケーションを実行しています。 これは、 <code class="language-plaintext highlighter-rouge">Context</code> 新しい Android を起動するために必要な <code class="language-plaintext highlighter-rouge">Intent</code> 。 <code class="language-plaintext highlighter-rouge">CordovaInterface</code>プラグインを開始することができます、 <code class="language-plaintext highlighter-rouge">Activity</code> 、結果とときのコールバックのプラグインを設定する、 <code class="language-plaintext highlighter-rouge">Intent</code> アプリケーションに戻ってくる。 これは重要ですが、以来、 <code class="language-plaintext highlighter-rouge">Intent</code> s システムは、Android とのプロセス間通信方法。</p>
+  </li>
+  <li>
+    <p>プラグインに直接アクセスする必要はありません、 <code class="language-plaintext highlighter-rouge">Context</code> 彼らは、過去に持っていると。 遺産 <code class="language-plaintext highlighter-rouge">ctx</code> メンバーは廃止され、6 ヶ月間 2.0 をリリースした後削除されます。 すべての <code class="language-plaintext highlighter-rouge">ctx</code> メソッドに存在する、 <code class="language-plaintext highlighter-rouge">Context</code> 、両方 <code class="language-plaintext highlighter-rouge">getContext()</code> と <code class="language-plaintext highlighter-rouge">getActivity()</code> に必要な適切なオブジェクトを返すことが可能です。</p>
+  </li>
 </ul>
 
-<h2>ソースを使用してください。</h2>
+<h2 id="ソースを使用してください">ソースを使用してください。</h2>
 
 <p><a href="https://github.com/apache/cordova-android/tree/master/framework/src/org/apache/cordova">既存のプラグインに目を通す</a>には、独自のプラグインを書くに自分自身を準備する最もよい方法の 1 つ.</p>
 
 <p><a href="https://github.com/apache/cordova-android/blob/master/framework/src/org/apache/cordova/CordovaPlugin.java">CordovaPlugin.java</a>のコメントをまた読む必要があります。.</p>
+
 
 
             </div>

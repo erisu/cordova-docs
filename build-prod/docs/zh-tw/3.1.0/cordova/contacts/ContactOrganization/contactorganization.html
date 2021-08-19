@@ -1304,36 +1304,47 @@
             
 
             <div id="page-toc-source">
-                <h1>ContactOrganization</h1>
+                <h1 id="contactorganization">ContactOrganization</h1>
 
-<p>包含 <code>Contact</code> 物件的組織屬性。</p>
+<p>包含 <code class="language-plaintext highlighter-rouge">Contact</code> 物件的組織屬性。</p>
 
-<h2>屬性</h2>
-
-<ul>
-<li><p><strong>上一頁</strong>: 設置為 <code>true</code> 如果此 <code>ContactOrganization</code> 包含使用者的首選的值。<em>（布林）</em></p></li>
-<li><p><strong>類型</strong>： 一個字串，例如指示哪種類型的欄位這是<em>回家</em>。_(DOMString)</p></li>
-<li><p><strong>名稱</strong>： 組織的名稱。<em>() DOMString</em></p></li>
-<li><p><strong>部門</strong>： 新聞部的工程合約。<em>() DOMString</em></p></li>
-<li><p><strong>標題</strong>： 在組織連絡人的標題。<em>() DOMString</em></p></li>
-</ul>
-
-<h2>詳細資訊</h2>
-
-<p><code>ContactOrganization</code>物件存儲的連絡人的組織屬性。A <code>Contact</code> 物件存儲一個或多個 <code>ContactOrganization</code> 陣列中的物件。</p>
-
-<h2>支援的平臺</h2>
+<h2 id="屬性">屬性</h2>
 
 <ul>
-<li>  Android 系統</li>
-<li>  黑莓手機 WebWorks （OS 5.0 和更高）</li>
-<li>  iOS</li>
-<li>  Windows Phone 7 和 8</li>
-<li>  Windows 8</li>
+  <li>
+    <p><strong>上一頁</strong>: 設置為 <code class="language-plaintext highlighter-rouge">true</code> 如果此 <code class="language-plaintext highlighter-rouge">ContactOrganization</code> 包含使用者的首選的值。<em>（布林）</em></p>
+  </li>
+  <li>
+    <p><strong>類型</strong>： 一個字串，例如指示哪種類型的欄位這是<em>回家</em>。_(DOMString)</p>
+  </li>
+  <li>
+    <p><strong>名稱</strong>： 組織的名稱。<em>() DOMString</em></p>
+  </li>
+  <li>
+    <p><strong>部門</strong>： 新聞部的工程合約。<em>() DOMString</em></p>
+  </li>
+  <li>
+    <p><strong>標題</strong>： 在組織連絡人的標題。<em>() DOMString</em></p>
+  </li>
 </ul>
 
-<h2>快速的示例</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">function onSuccess(contacts) {
+<h2 id="詳細資訊">詳細資訊</h2>
+
+<p><code class="language-plaintext highlighter-rouge">ContactOrganization</code>物件存儲的連絡人的組織屬性。A <code class="language-plaintext highlighter-rouge">Contact</code> 物件存儲一個或多個 <code class="language-plaintext highlighter-rouge">ContactOrganization</code> 陣列中的物件。</p>
+
+<h2 id="支援的平臺">支援的平臺</h2>
+
+<ul>
+  <li>Android 系統</li>
+  <li>黑莓手機 WebWorks （OS 5.0 和更高）</li>
+  <li>iOS</li>
+  <li>Windows Phone 7 和 8</li>
+  <li>Windows 8</li>
+</ul>
+
+<h2 id="快速的示例">快速的示例</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function onSuccess(contacts) {
     for (var i = 0; i &lt; contacts.length; i++) {
         for (var j = 0; j &lt; contacts[i].organizations.length; j++) {
             alert("Pref: "      + contacts[i].organizations[j].pref       + "\n" +
@@ -1353,81 +1364,104 @@ var options = new ContactFindOptions();
 options.filter = "";
 filter = ["displayName", "organizations"];
 navigator.contacts.find(filter, onSuccess, onError, options);
-</code></pre></div>
-<h2>完整的示例</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Contact Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="完整的示例">完整的示例</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Contact Example&lt;/title&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ContactFindOptions</span><span class="p">();</span>
-        <span class="nx">options</span><span class="p">.</span><span class="nx">filter</span><span class="o">=</span><span class="s2">""</span><span class="p">;</span>
-        <span class="nx">filter</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"displayName"</span><span class="p">,</span><span class="s2">"organizations"</span><span class="p">];</span>
-        <span class="nb">navigator</span><span class="p">.</span><span class="nx">contacts</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">filter</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onError</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// onSuccess: Get a snapshot of the current contacts</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onSuccess</span><span class="p">(</span><span class="nx">contacts</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">contacts</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">contacts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">organizations</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">alert</span><span class="p">(</span><span class="s2">"Pref: "</span>     <span class="o">+</span> <span class="nx">contacts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">organizations</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">pref</span>       <span class="o">+</span> <span class="s2">"\n"</span> <span class="o">+</span>
-                    <span class="s2">"Type: "</span>       <span class="o">+</span> <span class="nx">contacts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">organizations</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">type</span>       <span class="o">+</span> <span class="s2">"\n"</span> <span class="o">+</span>
-                    <span class="s2">"Name: "</span>       <span class="o">+</span> <span class="nx">contacts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">organizations</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">name</span>       <span class="o">+</span> <span class="s2">"\n"</span> <span class="o">+</span>
-                    <span class="s2">"Department: "</span> <span class="o">+</span> <span class="nx">contacts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">organizations</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">department</span> <span class="o">+</span> <span class="s2">"\n"</span> <span class="o">+</span>
-                    <span class="s2">"Title: "</span>      <span class="o">+</span> <span class="nx">contacts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">organizations</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">title</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">};</span>
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
 
-    <span class="c1">// onError: Failed to get the contacts</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onError</span><span class="p">(</span><span class="nx">contactError</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">alert</span><span class="p">(</span><span class="s1">'onError!'</span><span class="p">);</span>
-    <span class="p">}</span>
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        var options = new ContactFindOptions();
+        options.filter="";
+        filter = ["displayName","organizations"];
+        navigator.contacts.find(filter, onSuccess, onError, options);
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;h1&gt;</span>Example<span class="nt">&lt;/h1&gt;</span>
-    <span class="nt">&lt;p&gt;</span>Find Contacts<span class="nt">&lt;/p&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2>Android 2.X 的怪癖</h2>
+    // onSuccess: Get a snapshot of the current contacts
+    //
+    function onSuccess(contacts) {
+        for (var i = 0; i &lt; contacts.length; i++) {
+            for (var j = 0; j &lt; contacts[i].organizations.length; j++) {
+                alert("Pref: "     + contacts[i].organizations[j].pref       + "\n" +
+                    "Type: "       + contacts[i].organizations[j].type       + "\n" +
+                    "Name: "       + contacts[i].organizations[j].name       + "\n" +
+                    "Department: " + contacts[i].organizations[j].department + "\n" +
+                    "Title: "      + contacts[i].organizations[j].title);
+            }
+        }
+    };
+
+    // onError: Failed to get the contacts
+    //
+    function onError(contactError) {
+        alert('onError!');
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Example&lt;/h1&gt;
+    &lt;p&gt;Find Contacts&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h2 id="android-2x-的怪癖">Android 2.X 的怪癖</h2>
 
 <ul>
-<li>  <strong>上一頁</strong>: 不支援的 Android 2.X 的設備，返回<code>false</code>.</li>
+  <li><strong>上一頁</strong>: 不支援的 Android 2.X 的設備，返回<code class="language-plaintext highlighter-rouge">false</code>.</li>
 </ul>
 
-<h2>黑莓手機 WebWorks （OS 5.0 和更高） 的怪癖</h2>
+<h2 id="黑莓手機-webworks-os-50-和更高-的怪癖">黑莓手機 WebWorks （OS 5.0 和更高） 的怪癖</h2>
 
 <ul>
-<li><p><strong>上一頁</strong>: 不支援的黑莓設備，返回<code>false</code>.</p></li>
-<li><p><strong>類型</strong>： 不支援的黑莓設備，返回<code>null</code>.</p></li>
-<li><p><strong>名稱</strong>： 部分支援。第一次組織名稱存儲在黑莓<strong>公司</strong>欄位中。</p></li>
-<li><p><strong>部</strong>: 不受支援，返回<code>null</code>.</p></li>
-<li><p><strong>標題</strong>: 部分支援。第一次組織標題是黑莓<strong>jobTitle</strong>欄位中存儲的。</p></li>
+  <li>
+    <p><strong>上一頁</strong>: 不支援的黑莓設備，返回<code class="language-plaintext highlighter-rouge">false</code>.</p>
+  </li>
+  <li>
+    <p><strong>類型</strong>： 不支援的黑莓設備，返回<code class="language-plaintext highlighter-rouge">null</code>.</p>
+  </li>
+  <li>
+    <p><strong>名稱</strong>： 部分支援。第一次組織名稱存儲在黑莓<strong>公司</strong>欄位中。</p>
+  </li>
+  <li>
+    <p><strong>部</strong>: 不受支援，返回<code class="language-plaintext highlighter-rouge">null</code>.</p>
+  </li>
+  <li>
+    <p><strong>標題</strong>: 部分支援。第一次組織標題是黑莓<strong>jobTitle</strong>欄位中存儲的。</p>
+  </li>
 </ul>
 
-<h2>iOS 的怪癖</h2>
+<h2 id="ios-的怪癖">iOS 的怪癖</h2>
 
 <ul>
-<li><p><strong>上一頁</strong>： 返回的 iOS 設備上不支援<code>false</code>.</p></li>
-<li><p><strong>類型</strong>： 不支援的 iOS 設備上，返回<code>null</code>.</p></li>
-<li><p><strong>名稱</strong>： 部分支援。第一次組織名稱存儲在 iOS <strong>kABPersonOrganizationProperty</strong>欄位中。</p></li>
-<li><p><strong>新聞部</strong>： 部分支援。第一部名稱存儲在 iOS <strong>kABPersonDepartmentProperty</strong>欄位中。</p></li>
-<li><p><strong>標題</strong>: 部分支援。第一個標題是 iOS <strong>kABPersonJobTitleProperty</strong>欄位中存儲的。</p></li>
+  <li>
+    <p><strong>上一頁</strong>： 返回的 iOS 設備上不支援<code class="language-plaintext highlighter-rouge">false</code>.</p>
+  </li>
+  <li>
+    <p><strong>類型</strong>： 不支援的 iOS 設備上，返回<code class="language-plaintext highlighter-rouge">null</code>.</p>
+  </li>
+  <li>
+    <p><strong>名稱</strong>： 部分支援。第一次組織名稱存儲在 iOS <strong>kABPersonOrganizationProperty</strong>欄位中。</p>
+  </li>
+  <li>
+    <p><strong>新聞部</strong>： 部分支援。第一部名稱存儲在 iOS <strong>kABPersonDepartmentProperty</strong>欄位中。</p>
+  </li>
+  <li>
+    <p><strong>標題</strong>: 部分支援。第一個標題是 iOS <strong>kABPersonJobTitleProperty</strong>欄位中存儲的。</p>
+  </li>
 </ul>
 
 

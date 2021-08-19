@@ -2112,102 +2112,154 @@
             
 
             <div id="page-toc-source">
-                <h1>BlackBerry 10 Shell Tool Guide</h1>
+                <h1 id="blackberry-10-shell-tool-guide">BlackBerry 10 Shell Tool Guide</h1>
 
-<p>Le <code>cordova</code> de l&#39;utilitaire est un outil de haut niveau qui vous permet de créer des applications sur plusieurs plateformes à la fois. Une ancienne version du framework Cordova fournit des ensembles d&#39;outils de ligne de commande spécifiques à chaque plate-forme. Pour les utiliser comme une alternative à la CLI, vous devez télécharger cette version de Cordova de <a href="http://cordova.apache.org">cordova.apache.org</a>. Le téléchargement contient les archives distincts pour chaque plate-forme. Développez la plate-forme que vous voulez cibler. Les outils décrits ici sont généralement disponibles dans le niveau supérieur <code>bin</code> répertoire, sinon, consultez le fichier <strong>README</strong> pour en savoir plus.</p>
+<p>Le <code class="language-plaintext highlighter-rouge">cordova</code> de l’utilitaire est un outil de haut niveau qui vous permet de créer des applications sur plusieurs plateformes à la fois. Une ancienne version du framework Cordova fournit des ensembles d’outils de ligne de commande spécifiques à chaque plate-forme. Pour les utiliser comme une alternative à la CLI, vous devez télécharger cette version de Cordova de <a href="http://cordova.apache.org">cordova.apache.org</a>. Le téléchargement contient les archives distincts pour chaque plate-forme. Développez la plate-forme que vous voulez cibler. Les outils décrits ici sont généralement disponibles dans le niveau supérieur <code class="language-plaintext highlighter-rouge">bin</code> répertoire, sinon, consultez le fichier <strong>README</strong> pour en savoir plus.</p>
 
-<p>Pour plus d&#39;informations sur l&#39;interface de bas niveau qui permet aux plugins, voir Plugman à l&#39;aide à gérer les Plugins. Voir Application Plugins pour plus d&#39;informations sur la façon de développer des plugins.</p>
+<p>Pour plus d’informations sur l’interface de bas niveau qui permet aux plugins, voir Plugman à l’aide à gérer les Plugins. Voir Application Plugins pour plus d’informations sur la façon de développer des plugins.</p>
 
-<p>Si vous avez besoin d&#39;aide avec n&#39;importe quelle commande ci-dessous, tapez la commande le long avec la <code>-h</code> ou <code>-help</code> arguments, qui sont pris en charge par toutes les commandes et qui fournissent une description pour chacun des arguments disponibles.</p>
+<p>Si vous avez besoin d’aide avec n’importe quelle commande ci-dessous, tapez la commande le long avec la <code class="language-plaintext highlighter-rouge">-h</code> ou <code class="language-plaintext highlighter-rouge">-help</code> arguments, qui sont pris en charge par toutes les commandes et qui fournissent une description pour chacun des arguments disponibles.</p>
 
-<h2>Créer une App</h2>
+<h2 id="créer-une-app">Créer une App</h2>
 
-<p>Le <code>create</code> commande crée un nouveau projet :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    bin/créer &lt; chemin-à-projet &gt;&lt; projet-package &gt;&lt;-nom du projet &gt;
-</code></pre></div>
+<p>Le <code class="language-plaintext highlighter-rouge">create</code> commande crée un nouveau projet :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    bin/créer &lt; chemin-à-projet &gt;&lt; projet-package &gt;&lt;-nom du projet &gt;
+</code></pre></div></div>
+
 <p>où</p>
 
 <ul>
-<li><p><code>&lt;path-to-project&gt;</code>spécifie le répertoire souhaité le projet créé dans</p></li>
-<li><p><code>&lt;project-package&gt;</code>spécifie un identificateur de modèle de domaine inversé</p></li>
-<li><p><code>&lt;project-name&gt;</code>spécifie le nom complet de apps</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">&lt;path-to-project&gt;</code>spécifie le répertoire souhaité le projet créé dans</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">&lt;project-package&gt;</code>spécifie un identificateur de modèle de domaine inversé</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">&lt;project-name&gt;</code>spécifie le nom complet de apps</p>
+  </li>
 </ul>
 
-<p><strong>NOTE</strong>: la <code>create</code> commande amorce installation de dépendance à travers la <code>npm install</code> commande. Selon les autorisations de répertoire et système d&#39;installation, cela peut nécessiter des privilèges d&#39;administrateur. S&#39;il y a problème sur OSX/Linux, exécutez <code>sudo npm install</code> avant d&#39;utiliser la <code>create</code> commande. Sous Windows, exécutez <code>npm install</code> dans un utilitaire de ligne de commande ouverte avec des privilèges d&#39;administrateur.</p>
+<p><strong>NOTE</strong>: la <code class="language-plaintext highlighter-rouge">create</code> commande amorce installation de dépendance à travers la <code class="language-plaintext highlighter-rouge">npm install</code> commande. Selon les autorisations de répertoire et système d’installation, cela peut nécessiter des privilèges d’administrateur. S’il y a problème sur OSX/Linux, exécutez <code class="language-plaintext highlighter-rouge">sudo npm install</code> avant d’utiliser la <code class="language-plaintext highlighter-rouge">create</code> commande. Sous Windows, exécutez <code class="language-plaintext highlighter-rouge">npm install</code> dans un utilitaire de ligne de commande ouverte avec des privilèges d’administrateur.</p>
 
-<h2>Créer une cible</h2>
+<h2 id="créer-une-cible">Créer une cible</h2>
 
-<p>Le <code>target</code> commande permet de gérer l&#39;émulateur ou les appareils BlackBerry qui vous permet de tester l&#39;application. Vous pouvez ajouter ou supprimer une cible ou définir une cible comme la cible par défaut.</p>
+<p>Le <code class="language-plaintext highlighter-rouge">target</code> commande permet de gérer l’émulateur ou les appareils BlackBerry qui vous permet de tester l’application. Vous pouvez ajouter ou supprimer une cible ou définir une cible comme la cible par défaut.</p>
 
-<h3>Ajouter une cible</h3>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt; chemin-à-projet &gt;/Cordoue/cible add &lt;name&gt; &lt; adresse ip &gt; [-t |--type &lt; périphérique | simulateur &gt;] [-p |--mot de passe &lt;password&gt;] [--&lt; périphérique-broche &gt;]
-</code></pre></div>
+<h3 id="ajouter-une-cible">Ajouter une cible</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt; chemin-à-projet &gt;/Cordoue/cible add &lt;name&gt; &lt; adresse ip &gt; [-t |--type &lt; périphérique | simulateur &gt;] [-p |--mot de passe &lt;password&gt;] [--&lt; périphérique-broche &gt;]
+</code></pre></div></div>
+
 <p>où</p>
 
 <ul>
-<li><p><code>&lt;name&gt;</code>spécifie un nom unique pour la cible.</p></li>
-<li><p><code>&lt;ip-address&gt;</code>Spécifie l&#39;adresse ip de l&#39;appareil BlackBerry ou un simulateur.</p></li>
-<li><p><code>-p | --password &lt;password&gt;</code>spécifie le mot de passe pour le périphérique ou l&#39;émulateur. Ceci est requis uniquement si le périphérique ou l&#39;émulateur est protégé par mot.</p></li>
-<li><p><code>--pin &lt;device-pin&gt;</code>spécifie le code PIN de l&#39;appareil BlackBerry, qui identifie cet appareil comme un hôte valide pour le jeton de débogage. Cet argument est obligatoire uniquement lorsque vous créez un jeton de débogage.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">&lt;name&gt;</code>spécifie un nom unique pour la cible.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">&lt;ip-address&gt;</code>Spécifie l’adresse ip de l’appareil BlackBerry ou un simulateur.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">-p | --password &lt;password&gt;</code>spécifie le mot de passe pour le périphérique ou l’émulateur. Ceci est requis uniquement si le périphérique ou l’émulateur est protégé par mot.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">--pin &lt;device-pin&gt;</code>spécifie le code PIN de l’appareil BlackBerry, qui identifie cet appareil comme un hôte valide pour le jeton de débogage. Cet argument est obligatoire uniquement lorsque vous créez un jeton de débogage.</p>
+  </li>
 </ul>
 
-<h3>Supprimer une cible</h3>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt; chemin-à-projet &gt;/Cordoue/cibler supprimer &lt;name&gt;
-</code></pre></div>
-<h3>Définir une cible par défaut</h3>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt; chemin-à-projet &gt;/Cordoue/cible par défaut &lt;name&gt;
-</code></pre></div>
-<h2>Construire l&#39;application</h2>
+<h3 id="supprimer-une-cible">Supprimer une cible</h3>
 
-<p>Le <code>build</code> commande génère le projet comme un fichier .bar. Vous pouvez créer l&#39;application en mode de sortie (ce qui produit un fichier .bar signé) ou en mode de débogage (qui produit un fichier .bar non signés).</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt; chemin-à-projet &gt;/Cordoue/cibler supprimer &lt;name&gt;
+</code></pre></div></div>
 
-<h3>Construire l&#39;application en Mode Release</h3>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt; chemin-à-projet &gt;/Cordoue/du build [-k |--keystorepass &lt;password&gt;] [-b |--buildId &lt;number&gt;] [-p |--params &lt; params-JSON-fichier &gt;]
-</code></pre></div>
+<h3 id="définir-une-cible-par-défaut">Définir une cible par défaut</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt; chemin-à-projet &gt;/Cordoue/cible par défaut &lt;name&gt;
+</code></pre></div></div>
+
+<h2 id="construire-lapplication">Construire l’application</h2>
+
+<p>Le <code class="language-plaintext highlighter-rouge">build</code> commande génère le projet comme un fichier .bar. Vous pouvez créer l’application en mode de sortie (ce qui produit un fichier .bar signé) ou en mode de débogage (qui produit un fichier .bar non signés).</p>
+
+<h3 id="construire-lapplication-en-mode-release">Construire l’application en Mode Release</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt; chemin-à-projet &gt;/Cordoue/du build [-k |--keystorepass &lt;password&gt;] [-b |--buildId &lt;number&gt;] [-p |--params &lt; params-JSON-fichier &gt;]
+</code></pre></div></div>
+
 <p>où</p>
 
 <ul>
-<li><p><code>-k | --keystorepass &lt;password&gt;</code>spécifie le mot de passe que vous définie lorsque vous avez configuré votre ordinateur pour signer les applications.</p></li>
-<li><p><code>-b | --buildId &lt;number&gt;</code>spécifie le numéro de version de version de votre application. En général, ce nombre doit être incrémenté de la précédente version signée. Cet argument est facultatif.</p></li>
-<li><p><code>-p | --params &lt;params-JSON-file&gt;</code>spécifie un fichier JSON qui contient des paramètres supplémentaires à passer à des outils en aval. Cet argument est facultatif.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">-k | --keystorepass &lt;password&gt;</code>spécifie le mot de passe que vous définie lorsque vous avez configuré votre ordinateur pour signer les applications.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">-b | --buildId &lt;number&gt;</code>spécifie le numéro de version de version de votre application. En général, ce nombre doit être incrémenté de la précédente version signée. Cet argument est facultatif.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">-p | --params &lt;params-JSON-file&gt;</code>spécifie un fichier JSON qui contient des paramètres supplémentaires à passer à des outils en aval. Cet argument est facultatif.</p>
+  </li>
 </ul>
 
-<h3>Générez le projet en Mode débogage</h3>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt; chemin-à-projet &gt;/Cordoue/build debug [&lt;target&gt;] [-k |--keystorepass &lt;password&gt;] [-p |--params &lt; params-JSON-fichier &gt;] [-ll |--loglevel &lt;error|warn|verbose&gt;]
-</code></pre></div>
+<h3 id="générez-le-projet-en-mode-débogage">Générez le projet en Mode débogage</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt; chemin-à-projet &gt;/Cordoue/build debug [&lt;target&gt;] [-k |--keystorepass &lt;password&gt;] [-p |--params &lt; params-JSON-fichier &gt;] [-ll |--loglevel &lt;error|warn|verbose&gt;]
+</code></pre></div></div>
+
 <p>où</p>
 
 <ul>
-<li><p><code>&lt;target&gt;</code>spécifie le nom d&#39;une cible précédemment ajouté. Si <code>&lt;target&gt;</code> n&#39;est pas spécifié, la cible par défaut est utilisée, si l&#39;un a été créé. Cet argument est uniquement nécessaire si vous souhaitez que le script pour déployer l&#39;application sur un téléphone intelligent BlackBerry ou émulateur et vous n&#39;avez pas créé une cible par défaut. En outre, si <code>&lt;target&gt;</code> est un appareil, puis cet appareil doit être connecté à votre ordinateur par connexion USB ou être connecté au même réseau WiFi que votre ordinateur.</p></li>
-<li><p><code>-k | --keystorepass &lt;password&gt;</code>spécifie le mot de passe que vous définie lorsque vous avez configuré votre ordinateur pour signer les applications. Ce mot de passe est également utilisé pour créer votre jeton de débogage. Cet argument est uniquement nécessaire si vous souhaitez que le script pour créer et installer le jeton de débogage pour vous.</p></li>
-<li><p><code>-p | --params &lt;params-JSON-file&gt;</code>spécifie un fichier JSON qui contient des paramètres supplémentaires à passer à des outils en aval.</p></li>
-<li><p><code>-ll | --loglevel &lt;level&gt;</code>spécifie le niveau de journalisation. Le niveau de journalisation peut être l&#39;un des <code>error</code> , <code>warn</code> , ou<code>verbose</code>.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">&lt;target&gt;</code>spécifie le nom d’une cible précédemment ajouté. Si <code class="language-plaintext highlighter-rouge">&lt;target&gt;</code> n’est pas spécifié, la cible par défaut est utilisée, si l’un a été créé. Cet argument est uniquement nécessaire si vous souhaitez que le script pour déployer l’application sur un téléphone intelligent BlackBerry ou émulateur et vous n’avez pas créé une cible par défaut. En outre, si <code class="language-plaintext highlighter-rouge">&lt;target&gt;</code> est un appareil, puis cet appareil doit être connecté à votre ordinateur par connexion USB ou être connecté au même réseau WiFi que votre ordinateur.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">-k | --keystorepass &lt;password&gt;</code>spécifie le mot de passe que vous définie lorsque vous avez configuré votre ordinateur pour signer les applications. Ce mot de passe est également utilisé pour créer votre jeton de débogage. Cet argument est uniquement nécessaire si vous souhaitez que le script pour créer et installer le jeton de débogage pour vous.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">-p | --params &lt;params-JSON-file&gt;</code>spécifie un fichier JSON qui contient des paramètres supplémentaires à passer à des outils en aval.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">-ll | --loglevel &lt;level&gt;</code>spécifie le niveau de journalisation. Le niveau de journalisation peut être l’un des <code class="language-plaintext highlighter-rouge">error</code> , <code class="language-plaintext highlighter-rouge">warn</code> , ou<code class="language-plaintext highlighter-rouge">verbose</code>.</p>
+  </li>
 </ul>
 
 <p>Si vous avez défini précédemment une cible par défaut (et précédemment installé un jeton de débogage, si cet objectif est un téléphone intelligent BlackBerry), vous pouvez exécuter le script avec aucun argument et les pochettes de textes votre app et déploie dans la cible par défaut. Par exemple :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt; chemin-à-projet &gt;/Cordoue/build debug
-</code></pre></div>
-<h2>Exécuter l&#39;application</h2>
 
-<p>Le <code>run</code> commande déploie de génération plus récente de l&#39;application sur le périphérique spécifié de BlackBerry ou un émulateur. Pour déployer votre application, vous devez spécifier une cible pour le périphérique ou l&#39;émulateur :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt; chemin-à-projet &gt;/Cordoue/run &lt;target&gt;
-</code></pre></div>
-<p>.. .où <code>&lt;target&gt;</code> spécifie le nom d&#39;une cible précédemment ajouté. Si <code>&lt;target&gt;</code> est un appareil, puis il doit être connecté à votre ordinateur via un câble USB, ou encore sur le même réseau WiFi que votre ordinateur.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt; chemin-à-projet &gt;/Cordoue/build debug
+</code></pre></div></div>
 
-<h2>Gérer les Plugins</h2>
+<h2 id="exécuter-lapplication">Exécuter l’application</h2>
 
-<p>Le <code>target</code> commande vous permet d&#39;ajouter et supprimer des plugins. Pour aller chercher un plugin hébergé localement :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt; chemin-à-projet &gt; plugin fetch/Cordoue/&lt; chemin-de-plugin &gt;
-</code></pre></div>
+<p>Le <code class="language-plaintext highlighter-rouge">run</code> commande déploie de génération plus récente de l’application sur le périphérique spécifié de BlackBerry ou un émulateur. Pour déployer votre application, vous devez spécifier une cible pour le périphérique ou l’émulateur :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt; chemin-à-projet &gt;/Cordoue/run &lt;target&gt;
+</code></pre></div></div>
+
+<p>.. .où <code class="language-plaintext highlighter-rouge">&lt;target&gt;</code> spécifie le nom d’une cible précédemment ajouté. Si <code class="language-plaintext highlighter-rouge">&lt;target&gt;</code> est un appareil, puis il doit être connecté à votre ordinateur via un câble USB, ou encore sur le même réseau WiFi que votre ordinateur.</p>
+
+<h2 id="gérer-les-plugins">Gérer les Plugins</h2>
+
+<p>Le <code class="language-plaintext highlighter-rouge">target</code> commande vous permet d’ajouter et supprimer des plugins. Pour aller chercher un plugin hébergé localement :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt; chemin-à-projet &gt; plugin fetch/Cordoue/&lt; chemin-de-plugin &gt;
+</code></pre></div></div>
+
 <p>Afficher la liste des plugins installés :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt; chemin-à-projet &gt; plugin ls/Cordoue /
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt; chemin-à-projet &gt; plugin ls/Cordoue /
+</code></pre></div></div>
+
 <p>Ajouter un plugin :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt; chemin-à-projet &gt; plugin/Cordoue/ajouter &lt;name&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt; chemin-à-projet &gt; plugin/Cordoue/ajouter &lt;name&gt;
+</code></pre></div></div>
+
 <p>Supprimer un plugin :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt; chemin-à-projet &gt; plugin rm/Cordoue/&lt;name&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt; chemin-à-projet &gt; plugin rm/Cordoue/&lt;name&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

@@ -1256,35 +1256,38 @@
             
 
             <div id="page-toc-source">
-                <h1>capture.captureAudio</h1>
+                <h1 id="capturecaptureaudio">capture.captureAudio</h1>
 
 <blockquote>
-<p>Démarrez l&#39;application enregistreur audionumérique et renvoyer des informations sur les fichiers de clips audio capturés.</p>
+  <p>Démarrez l’application enregistreur audionumérique et renvoyer des informations sur les fichiers de clips audio capturés.</p>
 </blockquote>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.device.capture.captureAudio(
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.device.capture.captureAudio(
     CaptureCB captureSuccess, CaptureErrorCB captureError,  [CaptureAudioOptions options]
 );
-</code></pre></div>
-<h2>Description</h2>
+</code></pre></div></div>
 
-<p>Commence une opération asynchrone pour capturer les enregistrements audio à l&#39;aide d&#39;application d&#39;enregistrement audio de l&#39;appareil par défaut. L&#39;opération permet à l&#39;utilisateur de l&#39;appareil capturer des enregistrements multiples en une seule séance.</p>
+<h2 id="description">Description</h2>
 
-<p>L&#39;opération de capture se termine lorsque l&#39;utilisateur quitte l&#39;enregistrement demande, ou le nombre maximal d&#39;enregistrements spécifié par audio <code>[CaptureAudioOptions](captureAudioOptions.html).limit</code> est atteinte. Si aucun <code>limit</code> valeur du paramètre est spécifiée, par défaut à un (1), et l&#39;opération de capture se termine après que l&#39;utilisateur enregistre un clip audio unique.</p>
+<p>Commence une opération asynchrone pour capturer les enregistrements audio à l’aide d’application d’enregistrement audio de l’appareil par défaut. L’opération permet à l’utilisateur de l’appareil capturer des enregistrements multiples en une seule séance.</p>
 
-<p>Fin de l&#39;opération de capture, le <code>CaptureCallback</code> s&#39;exécute avec un tableau de <code>[MediaFile](MediaFile.html)</code> objets décrivant chacune capturé fichiers clip audio. Si l&#39;utilisateur annule l&#39;opération avant un clip audio est capturé, le <code>CaptureErrorCallback</code> s&#39;exécute avec un <code>[CaptureError](CaptureError.html)</code> objet, mettant en vedette le <code>[CaptureError](CaptureError.html).CAPTURE_NO_MEDIA_FILES</code> code d&#39;erreur.</p>
+<p>L’opération de capture se termine lorsque l’utilisateur quitte l’enregistrement demande, ou le nombre maximal d’enregistrements spécifié par audio <code class="language-plaintext highlighter-rouge">[CaptureAudioOptions](captureAudioOptions.html).limit</code> est atteinte. Si aucun <code class="language-plaintext highlighter-rouge">limit</code> valeur du paramètre est spécifiée, par défaut à un (1), et l’opération de capture se termine après que l’utilisateur enregistre un clip audio unique.</p>
 
-<h2>Plates-formes prises en charge</h2>
+<p>Fin de l’opération de capture, le <code class="language-plaintext highlighter-rouge">CaptureCallback</code> s’exécute avec un tableau de <code class="language-plaintext highlighter-rouge">[MediaFile](MediaFile.html)</code> objets décrivant chacune capturé fichiers clip audio. Si l’utilisateur annule l’opération avant un clip audio est capturé, le <code class="language-plaintext highlighter-rouge">CaptureErrorCallback</code> s’exécute avec un <code class="language-plaintext highlighter-rouge">[CaptureError](CaptureError.html)</code> objet, mettant en vedette le <code class="language-plaintext highlighter-rouge">[CaptureError](CaptureError.html).CAPTURE_NO_MEDIA_FILES</code> code d’erreur.</p>
+
+<h2 id="plates-formes-prises-en-charge">Plates-formes prises en charge</h2>
 
 <ul>
-<li>  Android</li>
-<li>  BlackBerry WebWorks (OS 5.0 et plus)</li>
-<li>  iOS</li>
-<li>  Windows Phone 7 et 8</li>
-<li>  Windows 8</li>
+  <li>Android</li>
+  <li>BlackBerry WebWorks (OS 5.0 et plus)</li>
+  <li>iOS</li>
+  <li>Windows Phone 7 et 8</li>
+  <li>Windows 8</li>
 </ul>
 
-<h2>Petit exemple</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">// capture callback
+<h2 id="petit-exemple">Petit exemple</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// capture callback
 var captureSuccess = function(mediaFiles) {
     var i, path, len;
     for (i = 0, len = mediaFiles.length; i &lt; len; i += 1) {
@@ -1300,82 +1303,85 @@ var captureError = function(error) {
 
 // start audio capture
 navigator.device.capture.captureAudio(captureSuccess, captureError, {limit:2});
-</code></pre></div>
-<h2>Exemple complet</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Capture Audio<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"json2.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="exemple-complet">Exemple complet</h2>
 
-    <span class="c1">// Called when capture operation is finished</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">captureSuccess</span><span class="p">(</span><span class="nx">mediaFiles</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">len</span><span class="p">;</span>
-        <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">mediaFiles</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">uploadFile</span><span class="p">(</span><span class="nx">mediaFiles</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Capture Audio&lt;/title&gt;
 
-    <span class="c1">// Called if something bad happens.</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">captureError</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">msg</span> <span class="o">=</span> <span class="s1">'An error occurred during capture: '</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span><span class="p">;</span>
-        <span class="nb">navigator</span><span class="p">.</span><span class="nx">notification</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="nx">msg</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="s1">'Uh oh!'</span><span class="p">);</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="json2.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// A button will call this function</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">captureAudio</span><span class="p">()</span> <span class="p">{</span>
-        <span class="c1">// Launch device audio recording application,</span>
-        <span class="c1">// allowing user to capture up to 2 audio clips</span>
-        <span class="nb">navigator</span><span class="p">.</span><span class="nx">device</span><span class="p">.</span><span class="nx">capture</span><span class="p">.</span><span class="nx">captureAudio</span><span class="p">(</span><span class="nx">captureSuccess</span><span class="p">,</span> <span class="nx">captureError</span><span class="p">,</span> <span class="p">{</span><span class="na">limit</span><span class="p">:</span> <span class="mi">2</span><span class="p">});</span>
-    <span class="p">}</span>
+    // Called when capture operation is finished
+    //
+    function captureSuccess(mediaFiles) {
+        var i, len;
+        for (i = 0, len = mediaFiles.length; i &lt; len; i += 1) {
+            uploadFile(mediaFiles[i]);
+        }
+    }
 
-    <span class="c1">// Upload files to server</span>
-    <span class="kd">function</span> <span class="nx">uploadFile</span><span class="p">(</span><span class="nx">mediaFile</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">ft</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileTransfer</span><span class="p">(),</span>
-            <span class="nx">path</span> <span class="o">=</span> <span class="nx">mediaFile</span><span class="p">.</span><span class="nx">fullPath</span><span class="p">,</span>
-            <span class="nx">name</span> <span class="o">=</span> <span class="nx">mediaFile</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+    // Called if something bad happens.
+    //
+    function captureError(error) {
+        var msg = 'An error occurred during capture: ' + error.code;
+        navigator.notification.alert(msg, null, 'Uh oh!');
+    }
 
-        <span class="nx">ft</span><span class="p">.</span><span class="nx">upload</span><span class="p">(</span><span class="nx">path</span><span class="p">,</span>
-            <span class="s2">"http://my.domain.com/upload.php"</span><span class="p">,</span>
-            <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Upload success: '</span> <span class="o">+</span> <span class="nx">result</span><span class="p">.</span><span class="nx">responseCode</span><span class="p">);</span>
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">bytesSent</span> <span class="o">+</span> <span class="s1">' bytes sent'</span><span class="p">);</span>
-            <span class="p">},</span>
-            <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Error uploading file '</span> <span class="o">+</span> <span class="nx">path</span> <span class="o">+</span> <span class="s1">': '</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span><span class="p">);</span>
-            <span class="p">},</span>
-            <span class="p">{</span> <span class="na">fileName</span><span class="p">:</span> <span class="nx">name</span> <span class="p">});</span>
-    <span class="p">}</span>
+    // A button will call this function
+    //
+    function captureAudio() {
+        // Launch device audio recording application,
+        // allowing user to capture up to 2 audio clips
+        navigator.device.capture.captureAudio(captureSuccess, captureError, {limit: 2});
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-    <span class="nt">&lt;/head&gt;</span>
-    <span class="nt">&lt;body&gt;</span>
-        <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"captureAudio();"</span><span class="nt">&gt;</span>Capture Audio<span class="nt">&lt;/button&gt;</span> <span class="nt">&lt;br&gt;</span>
-    <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2>BlackBerry WebWorks Quirks</h2>
+    // Upload files to server
+    function uploadFile(mediaFile) {
+        var ft = new FileTransfer(),
+            path = mediaFile.fullPath,
+            name = mediaFile.name;
+
+        ft.upload(path,
+            "http://my.domain.com/upload.php",
+            function(result) {
+                console.log('Upload success: ' + result.responseCode);
+                console.log(result.bytesSent + ' bytes sent');
+            },
+            function(error) {
+                console.log('Error uploading file ' + path + ': ' + error.code);
+            },
+            { fileName: name });
+    }
+
+    &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;button onclick="captureAudio();"&gt;Capture Audio&lt;/button&gt; &lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h2 id="blackberry-webworks-quirks">BlackBerry WebWorks Quirks</h2>
 
 <ul>
-<li>  Cordova pour BlackBerry WebWorks tente de lancer l&#39;application <strong>Dictaphone Notes</strong> , fournie par RIM, pour capturer des enregistrements audio. L&#39;application reçoit un <code>[CaptureError](CaptureError.html).CAPTURE_NOT_SUPPORTED</code> code d&#39;erreur si l&#39;application n&#39;est pas installée sur l&#39;appareil.</li>
+  <li>Cordova pour BlackBerry WebWorks tente de lancer l’application <strong>Dictaphone Notes</strong> , fournie par RIM, pour capturer des enregistrements audio. L’application reçoit un <code class="language-plaintext highlighter-rouge">[CaptureError](CaptureError.html).CAPTURE_NOT_SUPPORTED</code> code d’erreur si l’application n’est pas installée sur l’appareil.</li>
 </ul>
 
-<h2>iOS Quirks</h2>
+<h2 id="ios-quirks">iOS Quirks</h2>
 
 <ul>
-<li>  iOS n&#39;a pas une application d&#39;enregistrement audio par défaut, donc une interface utilisateur simple est fournie.</li>
+  <li>iOS n’a pas une application d’enregistrement audio par défaut, donc une interface utilisateur simple est fournie.</li>
 </ul>
 
-<h2>Windows Phone 7 et 8 Quirks</h2>
+<h2 id="windows-phone-7-et-8-quirks">Windows Phone 7 et 8 Quirks</h2>
 
 <ul>
-<li>  Windows Phone 7 n&#39;a pas une application d&#39;enregistrement audio par défaut, donc une interface utilisateur simple est fournie.</li>
+  <li>Windows Phone 7 n’a pas une application d’enregistrement audio par défaut, donc une interface utilisateur simple est fournie.</li>
 </ul>
 
 

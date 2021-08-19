@@ -1094,23 +1094,23 @@
     }
 </style>
 
-<h1>Платформа Android руководство</h1>
+<h1 id="платформа-android-руководство">Платформа Android руководство</h1>
 
 <p>Это руководство показывает, как настроить среду разработки SDK для развертывания приложений Cordova для устройств Android. Он проведет вас через процесс установки Android SDK, открытие Android-проект в Eclipse SDK и развертывание на эмуляторе или устройстве. Вам будет нужно следовать этому руководству, чтобы по крайней мере установить Android SDK, независимо от того, какой процесс вы следуете. ( <em>Веб проекта Dev</em> и <em>Родной платформе Dev</em> рабочие процессы требуют Android SDK, чтобы быть установлен и доступен через ваш путь).</p>
 
 <p>Смотрите ниже для более подробной информации конкретной платформы:</p>
 
 <ul>
-<li>  Андроид конфигурации</li>
-<li>  Андроид WebViews</li>
-<li>  Андроид плагины</li>
-<li>  <a href="upgrading.html">Обновление Android</a></li>
-<li>  <a href="tools.html">Android средства командной строки</a></li>
+  <li>Андроид конфигурации</li>
+  <li>Андроид WebViews</li>
+  <li>Андроид плагины</li>
+  <li><a href="upgrading.html">Обновление Android</a></li>
+  <li><a href="tools.html">Android средства командной строки</a></li>
 </ul>
 
 <p>Средства командной строки относятся к версии до 3.0 Кордова. Смотрите информацию о текущем интерфейсе интерфейс командной строки.</p>
 
-<h2>Требования и поддержка</h2>
+<h2 id="требования-и-поддержка">Требования и поддержка</h2>
 
 <p>Смотрите <a href="http://developer.android.com/sdk/index.html">системные требования</a> Android SDK.</p>
 
@@ -1122,113 +1122,172 @@ NOTE, doc said:
 - Android 3.x (Deprecated May 2013)
 -->
 
-<p>Разработчики должны использовать <code>cordova</code> утилита в сочетании с Android SDK. Увидеть интерфейс командной строки для получения информации, как установить его, добавить проекты, а затем построить и развернуть проект.</p>
+<p>Разработчики должны использовать <code class="language-plaintext highlighter-rouge">cordova</code> утилита в сочетании с Android SDK. Увидеть интерфейс командной строки для получения информации, как установить его, добавить проекты, а затем построить и развернуть проект.</p>
 
-<p>Установить Android SDK от <a href="http://developer.android.com/sdk/">Developer.Android.com/SDK</a>. Android sdk распространяется в виде «АТД-Комплект -<os>-<arch>-<ver>&#39; файл. На windows АТД Комплект поставляется с инсталлятором. На OSX и Linux, просто распакуйте adt пакет в папке хранить средства разработки. <a href="http://developer.android.com/sdk/installing/bundle.html">Более подробную информацию по установке Android SDK можно найти здесь</a></p>
+<p>Установить Android SDK от <a href="http://developer.android.com/sdk/">Developer.Android.com/SDK</a>. Android sdk распространяется в виде «АТД-Комплект -<os>-<arch>-<ver>' файл. На windows АТД Комплект поставляется с инсталлятором. На OSX и Linux, просто распакуйте adt пакет в папке хранить средства разработки. [Более подробную информацию по установке Android SDK можно найти здесь][4]</ver></arch></os></p>
 
-<p>Для Кордова средства командной строки для работы, вам необходимо включить в SDK <code>tools</code> и <code>platform-tools</code> каталогов в среде PATH. На Mac, вы можете использовать текстовый редактор для создания или изменения <code>~/.bash_profile</code> файл, добавив строку, например, в зависимости от того, где SDK устанавливает:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">экспорт путь = ${путь}: / развития/АТД Комплект/sdk/платформы tools: / развития/АТД Комплект/sdk/инструменты
-</code></pre></div>
+<p>Для Кордова средства командной строки для работы, вам необходимо включить в SDK <code class="language-plaintext highlighter-rouge">tools</code> и <code class="language-plaintext highlighter-rouge">platform-tools</code> каталогов в среде PATH. На Mac, вы можете использовать текстовый редактор для создания или изменения <code class="language-plaintext highlighter-rouge">~/.bash_profile</code> файл, добавив строку, например, в зависимости от того, где SDK устанавливает:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>экспорт путь = ${путь}: / развития/АТД Комплект/sdk/платформы tools: / развития/АТД Комплект/sdk/инструменты
+</code></pre></div></div>
+
 <p>Это предоставляет средства SDK в недавно открытый терминал windows. В противном случае выполните это, чтобы сделать их доступными в текущем сеансе:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ Источник ~/.bash_profile
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ Источник ~/.bash_profile
+</code></pre></div></div>
+
 <p>Чтобы изменить путь среды на Windows 7:</p>
 
 <ul>
-<li><p>Нажмите на меню &quot; <strong>Пуск</strong> &quot; в левом нижнем углу рабочего стола, щелкните правой кнопкой мыши на <strong>компьютере</strong>, а затем нажмите кнопку <strong>Свойства</strong>.</p></li>
-<li><p>Нажмите кнопку <strong>Дополнительные параметры системы</strong> в столбце слева.</p></li>
-<li><p>В открывшемся диалоговом нажмите <strong>Переменные среды</strong>.</p></li>
-<li><p>Выберите переменную <strong>PATH</strong> и нажмите <strong>редактировать</strong>.</p></li>
-<li><p>Добавьте следующее в путь, основанный на котором установлен пакет SDK, например:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">;C:\Development\adt-bundle\sdk\platform-tools;C:\Development\adt-bundle\sdk\tools
-</code></pre></div></li>
-<li><p>Сохраните значение и закройте оба диалоговые окна.</p></li>
+  <li>
+    <p>Нажмите на меню “ <strong>Пуск</strong> “ в левом нижнем углу рабочего стола, щелкните правой кнопкой мыши на <strong>компьютере</strong>, а затем нажмите кнопку <strong>Свойства</strong>.</p>
+  </li>
+  <li>
+    <p>Нажмите кнопку <strong>Дополнительные параметры системы</strong> в столбце слева.</p>
+  </li>
+  <li>
+    <p>В открывшемся диалоговом нажмите <strong>Переменные среды</strong>.</p>
+  </li>
+  <li>
+    <p>Выберите переменную <strong>PATH</strong> и нажмите <strong>редактировать</strong>.</p>
+  </li>
+  <li>
+    <p>Добавьте следующее в путь, основанный на котором установлен пакет SDK, например:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>;C:\Development\adt-bundle\sdk\platform-tools;C:\Development\adt-bundle\sdk\tools
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Сохраните значение и закройте оба диалоговые окна.</p>
+  </li>
 </ul>
 
-<p>Также может потребоваться включить Java и Ant. открыть командную строку и введите <code>java</code> , а также ввести <code>ant</code> . Добавления к пути зависимости не удается запустить:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    ;%JAVA_HOME%\bin;%ANT_HOME%\bin
-</code></pre></div>
-<h2>Откройте проект в SDK</h2>
+<p>Также может потребоваться включить Java и Ant. открыть командную строку и введите <code class="language-plaintext highlighter-rouge">java</code> , а также ввести <code class="language-plaintext highlighter-rouge">ant</code> . Добавления к пути зависимости не удается запустить:</p>
 
-<p>Использование <code>cordova</code> утилита для настройки нового проекта, как описано в Cordova интерфейс командной строки. Например в каталоге исходного кода:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova create hello com.example.hello "HelloWorld"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ;%JAVA_HOME%\bin;%ANT_HOME%\bin
+</code></pre></div></div>
+
+<h2 id="откройте-проект-в-sdk">Откройте проект в SDK</h2>
+
+<p>Использование <code class="language-plaintext highlighter-rouge">cordova</code> утилита для настройки нового проекта, как описано в Cordova интерфейс командной строки. Например в каталоге исходного кода:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova create hello com.example.hello "HelloWorld"
     $ cd hello
     $ cordova platform add android
     $ cordova build
-</code></pre></div>
+</code></pre></div></div>
+
 <p>После создания, вот как использовать пакет SDK для его изменения:</p>
 
 <ul>
-<li><p>Запустите приложение <strong>Eclipse</strong> .</p></li>
-<li><p>Выберите пункт меню <strong>Создать проект</strong> .</p></li>
-<li><p>Выберите <strong>Android-проект из существующего кода</strong> из диалогового окна полученный и нажмите <strong>Далее</strong>: <img src="/static/img/guide/platforms/android/eclipse_new_project.png" alt=""></p></li>
-<li><p>Перейдите к <code>hello</code> , или какой вы создан каталог для проекта, затем в <code>platforms/android</code> подкаталога.</p></li>
-<li><p>Убедитесь, что оба <code>hello</code> и <code>hello-CordovaLib</code> должны быть импортированы выбранные проекты. <code>hello-CordovaLib</code>Проект необходим по состоянию на Cordova 3.3.0, потому что Кордова в настоящее время используется как Android библиотеки вместо файла .jar.</p></li>
-<li><p>Нажмите кнопку <strong>Готово</strong>.</p></li>
+  <li>
+    <p>Запустите приложение <strong>Eclipse</strong> .</p>
+  </li>
+  <li>
+    <p>Выберите пункт меню <strong>Создать проект</strong> .</p>
+  </li>
+  <li>
+    <p>Выберите <strong>Android-проект из существующего кода</strong> из диалогового окна полученный и нажмите <strong>Далее</strong>: <img src="/static/img/guide/platforms/android/eclipse_new_project.png" alt="" /></p>
+  </li>
+  <li>
+    <p>Перейдите к <code class="language-plaintext highlighter-rouge">hello</code> , или какой вы создан каталог для проекта, затем в <code class="language-plaintext highlighter-rouge">platforms/android</code> подкаталога.</p>
+  </li>
+  <li>
+    <p>Убедитесь, что оба <code class="language-plaintext highlighter-rouge">hello</code> и <code class="language-plaintext highlighter-rouge">hello-CordovaLib</code> должны быть импортированы выбранные проекты. <code class="language-plaintext highlighter-rouge">hello-CordovaLib</code>Проект необходим по состоянию на Cordova 3.3.0, потому что Кордова в настоящее время используется как Android библиотеки вместо файла .jar.</p>
+  </li>
+  <li>
+    <p>Нажмите кнопку <strong>Готово</strong>.</p>
+  </li>
 </ul>
 
 <p>После того, как откроется окно Eclipse, красный <strong>X</strong> может показаться указывают нерешенные проблемы. Если это так, выполните следующие дополнительные действия:</p>
 
 <ul>
-<li><p>Щелкните правой кнопкой мыши на папке проекта.</p></li>
-<li><p>В результате диалоговом окне <strong>свойств</strong> выберите <strong>Android</strong> из области переходов.</p></li>
-<li><p>Для проекта цели, выбирать самый высокий уровень Android API, которые вы установили.</p></li>
-<li><p>Нажмите <strong>кнопку ОК</strong>.</p></li>
-<li><p>Выберите <strong>очистить</strong> из меню <strong>проект</strong> . Это должно исправить все ошибки в проекте.</p></li>
+  <li>
+    <p>Щелкните правой кнопкой мыши на папке проекта.</p>
+  </li>
+  <li>
+    <p>В результате диалоговом окне <strong>свойств</strong> выберите <strong>Android</strong> из области переходов.</p>
+  </li>
+  <li>
+    <p>Для проекта цели, выбирать самый высокий уровень Android API, которые вы установили.</p>
+  </li>
+  <li>
+    <p>Нажмите <strong>кнопку ОК</strong>.</p>
+  </li>
+  <li>
+    <p>Выберите <strong>очистить</strong> из меню <strong>проект</strong> . Это должно исправить все ошибки в проекте.</p>
+  </li>
 </ul>
 
-<h2>Развернуть эмулятор</h2>
+<h2 id="развернуть-эмулятор">Развернуть эмулятор</h2>
 
-<p>Вы можете использовать <code>cordova</code> утилита для запуска приложения в эмуляторе, или вы можете запустить его в рамках SDK. В любом случае, SDK сначала должен быть настроен для отображения по крайней мере одно устройство. Чтобы сделать это, используйте менеджер SDK Android, Java-приложение, которое запускается отдельно от Eclipse. Существует два способа, чтобы открыть ее:</p>
+<p>Вы можете использовать <code class="language-plaintext highlighter-rouge">cordova</code> утилита для запуска приложения в эмуляторе, или вы можете запустить его в рамках SDK. В любом случае, SDK сначала должен быть настроен для отображения по крайней мере одно устройство. Чтобы сделать это, используйте менеджер SDK Android, Java-приложение, которое запускается отдельно от Eclipse. Существует два способа, чтобы открыть ее:</p>
 
 <ul>
-<li><p>Запуск <code>android</code> в командной строке.</p></li>
-<li><p>В Eclipse, нажмите этот значок панели инструментов:</p>
+  <li>
+    <p>Запуск <code class="language-plaintext highlighter-rouge">android</code> в командной строке.</p>
+  </li>
+  <li>
+    <p>В Eclipse, нажмите этот значок панели инструментов:</p>
 
-<p><img src="/static/img/guide/platforms/android/eclipse_android_sdk_button.png" alt=""></p></li>
+    <p><img src="/static/img/guide/platforms/android/eclipse_android_sdk_button.png" alt="" /></p>
+  </li>
 </ul>
 
 <p>После открытия, Android SDK Manager отображает различные библиотеки времени выполнения:</p>
 
-<p><img src="/static/img/guide/platforms/android/asdk_window.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/android/asdk_window.png" alt="" /></p>
 
 <p>Выберите <strong>Инструменты → Управление AVDs</strong> (Android виртуального устройства), а затем выберите любой элемент из <strong>Определения устройства</strong> в диалоговом окне возникшей:</p>
 
-<p><img src="/static/img/guide/platforms/android/asdk_device.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/android/asdk_device.png" alt="" /></p>
 
 <p>Нажмите <strong>Создать AVD</strong>, при необходимости изменяя имя, затем нажмите <strong>кнопку ОК</strong> , чтобы принять изменения:</p>
 
-<p><img src="/static/img/guide/platforms/android/asdk_newAVD.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/android/asdk_newAVD.png" alt="" /></p>
 
 <p>AVD затем появляется в списке <strong>Android виртуальных устройств</strong> :</p>
 
-<p><img src="/static/img/guide/platforms/android/asdk_avds.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/android/asdk_avds.png" alt="" /></p>
 
 <p>Чтобы открыть эмулятор как отдельное приложение, выберите AVD и нажать кнопку <strong>старт</strong>. Он запускает, как он на устройстве, с дополнительные элементы управления, доступные для аппаратных кнопок:</p>
 
-<p><img src="/static/img/guide/platforms/android/asdk_emulator.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/android/asdk_emulator.png" alt="" /></p>
 
-<p>В этот момент вы можете использовать <code>cordova</code> утилита для развертывания приложения в эмулятор из командной строки:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova emulate android
-</code></pre></div>
+<p>В этот момент вы можете использовать <code class="language-plaintext highlighter-rouge">cordova</code> утилита для развертывания приложения в эмулятор из командной строки:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova emulate android
+</code></pre></div></div>
+
 <p>Если вместо этого вы работаете в среде Eclipse, щелкните правой кнопкой мыши проект и выберите <strong>выполнить как → приложения для Android</strong>. Вас могут попросить указать AVD, если ни один уже открыт.</p>
 
 <p>Для более быстрый опыт используйте изображение на основе Intel эмулятора:</p>
 
 <ul>
-<li><p>Установите один или несколько <code>Intel x86 Atom</code> образы системы, а также <code>Intel Hardware Accelerated Execution Manager</code> , доступных под <strong>экстра</strong>.</p></li>
-<li><p>Запустите инсталлятор Intel, который доступен в вашем Android SDK в<code>extras/intel/Hardware_Accelerated_Execution_Manager</code>.</p></li>
-<li><p>Создайте новый AVD с поставленной цели Intel изображения.</p></li>
-<li><p>При запуске эмулятора, обеспечить существует без сообщений об ошибке, указывающее на сбой загрузки модулей HAX.</p></li>
+  <li>
+    <p>Установите один или несколько <code class="language-plaintext highlighter-rouge">Intel x86 Atom</code> образы системы, а также <code class="language-plaintext highlighter-rouge">Intel Hardware Accelerated Execution Manager</code> , доступных под <strong>экстра</strong>.</p>
+  </li>
+  <li>
+    <p>Запустите инсталлятор Intel, который доступен в вашем Android SDK в<code class="language-plaintext highlighter-rouge">extras/intel/Hardware_Accelerated_Execution_Manager</code>.</p>
+  </li>
+  <li>
+    <p>Создайте новый AVD с поставленной цели Intel изображения.</p>
+  </li>
+  <li>
+    <p>При запуске эмулятора, обеспечить существует без сообщений об ошибке, указывающее на сбой загрузки модулей HAX.</p>
+  </li>
 </ul>
 
-<h2>Развертывание на устройство</h2>
+<h2 id="развертывание-на-устройство">Развертывание на устройство</h2>
 
 <p>Для проталкивания приложение непосредственно на устройство, убедитесь, что включена отладка USB на вашем устройстве, как описано на <a href="http://developer.android.com/tools/device.html">Android Разработчик сайта</a>и использовать мини-USB кабель, подключить его к вашей системе.</p>
 
 <p>Вы можете нажать приложение на устройство из командной строки:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova run android
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova run android
+</code></pre></div></div>
+
 <p>Попеременно в Eclipse, щелкните правой кнопкой мыши проект и выберите <strong>выполнить как → приложения для Android</strong>.</p>
 
 

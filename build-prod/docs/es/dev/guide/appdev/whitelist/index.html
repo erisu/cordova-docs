@@ -2112,95 +2112,126 @@
             
 
             <div id="page-toc-source">
-                <h1>Guía de lista blanca</h1>
+                <h1 id="guía-de-lista-blanca">Guía de lista blanca</h1>
 
 <p>Listas blancas de dominio es un modelo de seguridad que controla el acceso a dominios externos sobre los cuales su aplicación no tiene ningún control. Cordova ofrece una política de seguridad configurable para definir los sitios externos pueden accederse. De forma predeterminada, nuevas aplicaciones están configurados para permitir el acceso a cualquier sitio. Antes de su aplicación a la producción, debe formular una lista blanca y permitir el acceso a la red específica dominios y subdominios.</p>
 
 <p>Para Android y iOS (a partir de sus 4,0 versiones), la política de seguridad de Cordova es extensible mediante una interfaz plugin. Su aplicación debe utilizar el <a href="https://github.com/apache/cordova-plugin-whitelist">cordova-plugin-whitelist</a>, que proporciona mayor seguridad y capacidad de configuración que las versiones anteriores de Cordova. Mientras que es posible implementar su propio plugin de lista blanca, no se recomienda a menos que su aplicación tiene necesidades muy específicas de seguridad política. Ver el <a href="https://github.com/apache/cordova-plugin-whitelist">cordova-plugin-whitelist</a> para obtener más información sobre el uso y configuración.</p>
 
-<p>Para otras plataformas, Cordova se adhiere a la especificación <a href="http://www.w3.org/TR/widgets-access/">W3C Widget de acceso</a> , que se basa en el elemento <code>&lt; access &gt;</code> dentro de archivo <code>config.xml</code> de la aplicación para habilitar el acceso a la red en dominios específicos. Para los proyectos que se basan en el flujo de trabajo de la CLI que se describe en la interfaz de línea de comandos, este archivo se encuentra en el directorio superior del proyecto. De lo contrario para caminos de desarrollo específico de plataforma, lugares figuran en las secciones a continuación. (Ver a las diversas guías de plataforma para obtener más información sobre cada plataforma).</p>
+<p>Para otras plataformas, Cordova se adhiere a la especificación <a href="http://www.w3.org/TR/widgets-access/">W3C Widget de acceso</a> , que se basa en el elemento <code class="language-plaintext highlighter-rouge">&lt; access &gt;</code> dentro de archivo <code class="language-plaintext highlighter-rouge">config.xml</code> de la aplicación para habilitar el acceso a la red en dominios específicos. Para los proyectos que se basan en el flujo de trabajo de la CLI que se describe en la interfaz de línea de comandos, este archivo se encuentra en el directorio superior del proyecto. De lo contrario para caminos de desarrollo específico de plataforma, lugares figuran en las secciones a continuación. (Ver a las diversas guías de plataforma para obtener más información sobre cada plataforma).</p>
 
-<p>Los siguientes ejemplos demuestran sintaxis <code>&lt; access &gt;</code> lista blanca:</p>
+<p>Los siguientes ejemplos demuestran sintaxis <code class="language-plaintext highlighter-rouge">&lt; access &gt;</code> lista blanca:</p>
 
 <ul>
-<li><p>Acceso a <a href="http://google.com">google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" /&gt;
-</code></pre></div></li>
-<li><p>Acceso a la segura <a href="https://google.com">google.com</a> (<code>https://</code>):</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="https://google.com" /&gt;
-</code></pre></div></li>
-<li><p>Acceso al subdominio <a href="http://maps.google.com">maps.google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://maps.google.com" /&gt;
-</code></pre></div></li>
-<li><p>Acceso a todos los subdominios de <a href="http://google.com">google.com</a>, por ejemplo, <a href="http://mail.google.com">mail.google.com</a> y <a href="http://docs.google.com">docs.google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://*.google.com" /&gt;
-</code></pre></div></li>
-<li><p>Acceso a <em>todos</em> los dominios, por ejemplo, <a href="http://google.com">google.com</a> y <a href="http://developer.mozilla.org">developer.mozilla.org</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="*" /&gt;
-</code></pre></div>
-<p>Este es el valor predeterminado para nuevos proyectos CLI.</p></li>
+  <li>
+    <p>Acceso a <a href="http://google.com">google.com</a>:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Acceso a la segura <a href="https://google.com">google.com</a> (<code class="language-plaintext highlighter-rouge">https://</code>):</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="https://google.com" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Acceso al subdominio <a href="http://maps.google.com">maps.google.com</a>:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://maps.google.com" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Acceso a todos los subdominios de <a href="http://google.com">google.com</a>, por ejemplo, <a href="http://mail.google.com">mail.google.com</a> y <a href="http://docs.google.com">docs.google.com</a>:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://*.google.com" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Acceso a <em>todos</em> los dominios, por ejemplo, <a href="http://google.com">google.com</a> y <a href="http://developer.mozilla.org">developer.mozilla.org</a>:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="*" /&gt;
+</code></pre></div>    </div>
+
+    <p>Este es el valor predeterminado para nuevos proyectos CLI.</p>
+  </li>
 </ul>
 
 <p>Tenga en cuenta que algunos sitios web puede redirigir automáticamente desde su página de inicio a una url distinta, por ejemplo utilizando el protocolo https o a un dominio específico del país. Por ejemplo http://www.google.com redireccionará para utilizar SSL/TLS en https://www.google.com y entonces más lejos puede redirigir a una geografía como https://www.google.co.uk. Estas situaciones pueden requerir las entradas de lista blanca modificada o adicionales más allá de su requisito inicial. Por favor considere esto como que está construyendo su lista blanca.</p>
 
 <p>Tenga en cuenta que la lista blanca se aplica sólo a los principal webview Cordova y no se aplica a un InAppBrowser webview o abrir enlaces en el navegador web del sistema.</p>
 
-<h2>Amazon fuego OS Whitelisting</h2>
+<h2 id="amazon-fuego-os-whitelisting">Amazon fuego OS Whitelisting</h2>
 
-<p>Reglas específicas de la plataforma whitelisting se encuentran en<code>res/xml/config.xml</code>.</p>
+<p>Reglas específicas de la plataforma whitelisting se encuentran en<code class="language-plaintext highlighter-rouge">res/xml/config.xml</code>.</p>
 
-<h2>Whitelisting Android</h2>
+<h2 id="whitelisting-android">Whitelisting Android</h2>
 
 <p>Como el anterior, ver <a href="https://github.com/apache/cordova-plugin-whitelist">cordova-plugin-whitelist</a> para más detalles. Cordova-androide antes 4.0.0, consulte las versiones anteriores de esta documentación.</p>
 
-<h2>iOS ListaBlanca</h2>
+<h2 id="ios-listablanca">iOS ListaBlanca</h2>
 
 <p>Como el anterior, ver <a href="https://github.com/apache/cordova-plugin-whitelist">cordova-plugin-whitelist</a> para más detalles. Cordova-ios antes 4.0.0, consulte las versiones anteriores de esta documentación.</p>
 
-<h2>BlackBerry 10 listas blancas</h2>
+<h2 id="blackberry-10-listas-blancas">BlackBerry 10 listas blancas</h2>
 
-<p>Las reglas de las listas blancas se encuentran en <code>www/config.xml</code>.</p>
+<p>Las reglas de las listas blancas se encuentran en <code class="language-plaintext highlighter-rouge">www/config.xml</code>.</p>
 
 <p>Uso de blackBerry decenas de comodines difiere de otras plataformas de dos maneras:</p>
 
 <ul>
-<li><p>Cualquier contenido utilizando <code>XMLHttpRequest</code> debe declararse explícitamente. Configuración de <code>origin=&quot;*&quot;</code> no funciona en este caso. Alternativamente, puede deshabilitarse toda seguridad web usando la preferencia <code>WebSecurity</code> que se describe en configuración de BlackBerry:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="websecurity" value="disable" /&gt;
-</code></pre></div></li>
-<li><p>Como alternativa al ajuste <code>*.domain</code>, establece un atributo adicional <code>subdomains</code> en <code>true</code>. Se debe establecer en <code>false</code> de forma predeterminada. Por ejemplo, el siguiente permite acceder a <code>google.com</code>, <code>maps.google.com</code>y <code>docs.google.com</code>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" subdomains="true" /&gt;
-</code></pre></div>
-<p>El siguiente angosto acceso a <code>google.com</code>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" subdomains="false" /&gt;
-</code></pre></div>
-<p>Especifique el acceso a todos los ámbitos, incluido el protocolo local <code>file://</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="*" subdomains="true" /&gt;
-</code></pre></div></li>
+  <li>
+    <p>Cualquier contenido utilizando <code class="language-plaintext highlighter-rouge">XMLHttpRequest</code> debe declararse explícitamente. Configuración de <code class="language-plaintext highlighter-rouge">origin="*"</code> no funciona en este caso. Alternativamente, puede deshabilitarse toda seguridad web usando la preferencia <code class="language-plaintext highlighter-rouge">WebSecurity</code> que se describe en configuración de BlackBerry:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="websecurity" value="disable" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Como alternativa al ajuste <code class="language-plaintext highlighter-rouge">*.domain</code>, establece un atributo adicional <code class="language-plaintext highlighter-rouge">subdomains</code> en <code class="language-plaintext highlighter-rouge">true</code>. Se debe establecer en <code class="language-plaintext highlighter-rouge">false</code> de forma predeterminada. Por ejemplo, el siguiente permite acceder a <code class="language-plaintext highlighter-rouge">google.com</code>, <code class="language-plaintext highlighter-rouge">maps.google.com</code>y <code class="language-plaintext highlighter-rouge">docs.google.com</code>:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" subdomains="true" /&gt;
+</code></pre></div>    </div>
+
+    <p>El siguiente angosto acceso a <code class="language-plaintext highlighter-rouge">google.com</code>:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" subdomains="false" /&gt;
+</code></pre></div>    </div>
+
+    <p>Especifique el acceso a todos los ámbitos, incluido el protocolo local <code class="language-plaintext highlighter-rouge">file://</code> :</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="*" subdomains="true" /&gt;
+</code></pre></div>    </div>
+  </li>
 </ul>
 
 <p>(Para obtener más información sobre soporte, véase documentación de BlackBerry en el <a href="https://developer.blackberry.com/html5/documentation/ww_developing/Access_element_834677_11.html">elemento de acceso</a>.)</p>
 
-<h2>Firefox OS</h2>
+<h2 id="firefox-os">Firefox OS</h2>
 
-<p>En Firefox OS no hay ningún concepto de listas blancas un dominio específico. En su lugar hay un permiso especial llamado <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest#Permissions">SystemXHR</a>. Es necesario agregar este permiso al <code>archivo config.xml</code>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;platform name="firefoxos"&gt;
+<p>En Firefox OS no hay ningún concepto de listas blancas un dominio específico. En su lugar hay un permiso especial llamado <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest#Permissions">SystemXHR</a>. Es necesario agregar este permiso al <code class="language-plaintext highlighter-rouge">archivo config.xml</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;platform name="firefoxos"&gt;
     &lt;permission name="systemXHR" privileged="true" description="load data from server" /&gt;
 &lt;/platform&gt;
-</code></pre></div>
-<p>El objeto <code>XMLHttpRequest</code> debe ser instanciada con dos parámetros <code>mozAnon</code> y <code>mozSystem</code>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">var request = new XMLHttpRequest({
+</code></pre></div></div>
+
+<p>El objeto <code class="language-plaintext highlighter-rouge">XMLHttpRequest</code> debe ser instanciada con dos parámetros <code class="language-plaintext highlighter-rouge">mozAnon</code> y <code class="language-plaintext highlighter-rouge">mozSystem</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var request = new XMLHttpRequest({
     mozAnon: true,
     mozSystem: true});
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Esta solución es transparente, así que no hay diferencias para otras plataformas.</p>
 
-<h2>Lista blanca de Windows Phone</h2>
+<h2 id="lista-blanca-de-windows-phone">Lista blanca de Windows Phone</h2>
 
-<p>Las reglas de listas blancas para Windows Phone 8 se encuentran en el archivo <code>config.xml</code> de la aplicación.</p>
+<p>Las reglas de listas blancas para Windows Phone 8 se encuentran en el archivo <code class="language-plaintext highlighter-rouge">config.xml</code> de la aplicación.</p>
 
-<h2>Las listas blancas Tizen</h2>
+<h2 id="las-listas-blancas-tizen">Las listas blancas Tizen</h2>
 
-<p>Sus reglas se encuentran en el archivo <code>config.xml</code> de la aplicación. La plataforma se basa en el mismo atributo <code>subdomains</code> como la plataforma BlackBerry. (Para obtener más información sobre compatibilidad, consulte documentación de Tizen sobre el <a href="https://developer.tizen.org/help/index.jsp?topic=%2Forg.tizen.web.appprogramming%2Fhtml%2Fide_sdk_tools%2Fconfig_editor_w3celements.htm">elemento de acceso</a>.)</p>
+<p>Sus reglas se encuentran en el archivo <code class="language-plaintext highlighter-rouge">config.xml</code> de la aplicación. La plataforma se basa en el mismo atributo <code class="language-plaintext highlighter-rouge">subdomains</code> como la plataforma BlackBerry. (Para obtener más información sobre compatibilidad, consulte documentación de Tizen sobre el <a href="https://developer.tizen.org/help/index.jsp?topic=%2Forg.tizen.web.appprogramming%2Fhtml%2Fide_sdk_tools%2Fconfig_editor_w3celements.htm">elemento de acceso</a>.)</p>
+
 
 
             </div>

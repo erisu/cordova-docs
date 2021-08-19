@@ -2112,57 +2112,62 @@
             
 
             <div id="page-toc-source">
-                <h1>Amazon Fire OS Plugins</h1>
+                <h1 id="amazon-fire-os-plugins">Amazon Fire OS Plugins</h1>
 
 <p>Folgen Sie den Anweisungen im Handbuch für das <a href="../android/plugin.html">Android Plugins</a> für einen Überblick über die Entwicklung von benutzerdefinierten Plugins.</p>
 
-<h2>Echo Amazon Fire OS Plugin Beispiel</h2>
+<h2 id="echo-amazon-fire-os-plugin-beispiel">Echo Amazon Fire OS Plugin Beispiel</h2>
 
-<p>Um die JavaScript-Schnittstelle in Anwendung Plugins beschriebene <em>Echo</em> -Funktion, verwenden die <code>plugin.xml</code> zu injizieren eines <code>feature</code> Spezifikation der lokalen Plattform <code>config.xml</code> Datei:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;platform name="amazon-fireos"&gt;
+<p>Um die JavaScript-Schnittstelle in Anwendung Plugins beschriebene <em>Echo</em> -Funktion, verwenden die <code class="language-plaintext highlighter-rouge">plugin.xml</code> zu injizieren eines <code class="language-plaintext highlighter-rouge">feature</code> Spezifikation der lokalen Plattform <code class="language-plaintext highlighter-rouge">config.xml</code> Datei:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;platform name="amazon-fireos"&gt;
     &lt;config-file target="config.xml" parent="/*"&gt;
         &lt;feature name="Echo"&gt;
             &lt;param name="android-package" value="org.apache.cordova.plugin.Echo"/&gt;
         &lt;/feature&gt;
     &lt;/config-file&gt;
 &lt;/platform&gt;
-</code></pre></div>
-<p>Fügen Sie die folgenden Schritte, um die <code>src/org/apache/cordova/plugin/Echo.java</code> Datei:</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="k">package</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">plugin</span><span class="p">;</span>
+</code></pre></div></div>
 
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">CordovaPlugin</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">CallbackContext</span><span class="p">;</span>
+<p>Fügen Sie die folgenden Schritte, um die <code class="language-plaintext highlighter-rouge">src/org/apache/cordova/plugin/Echo.java</code> Datei:</p>
 
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">JSONArray</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">JSONException</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">JSONObject</span><span class="p">;</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package org.apache.cordova.plugin;
 
-<span class="p">/**</span>
- <span class="p">*</span> <span class="n">This</span> <span class="n">class</span> <span class="n">echoes</span> <span class="n">a</span> <span class="k">string</span> <span class="n">called</span> <span class="k">from</span> <span class="n">JavaScript</span><span class="p">.</span>
- <span class="p">*/</span>
-<span class="k">public</span> <span class="n">class</span> <span class="n">Echo</span> <span class="n">extends</span> <span class="n">CordovaPlugin</span> <span class="p">{</span>
+import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CallbackContext;
 
-    <span class="p">@</span><span class="n">Override</span>
-    <span class="k">public</span> <span class="k">boolean</span> <span class="n">execute</span><span class="p">(</span><span class="k">String</span> <span class="n">action</span><span class="p">,</span> <span class="n">JSONArray</span> <span class="n">args</span><span class="p">,</span> <span class="n">CallbackContext</span> <span class="n">callbackContext</span><span class="p">)</span> <span class="n">throws</span> <span class="n">JSONException</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">action</span><span class="p">.</span><span class="n">equals</span><span class="p">(</span><span class="s2">"echo"</span><span class="p">))</span> <span class="p">{</span>
-            <span class="k">String</span> <span class="n">message</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
-            <span class="n">this</span><span class="p">.</span><span class="n">echo</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">callbackContext</span><span class="p">);</span>
-            <span class="n">return</span> <span class="nb">true</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">return</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="p">}</span>
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-    <span class="n">private</span> <span class="n">void</span> <span class="n">echo</span><span class="p">(</span><span class="k">String</span> <span class="n">message</span><span class="p">,</span> <span class="n">CallbackContext</span> <span class="n">callbackContext</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">message</span> <span class="c1">!= null &amp;&amp; message.length() &gt; 0) {
-</span>            <span class="n">callbackContext</span><span class="p">.</span><span class="n">success</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="n">callbackContext</span><span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="s2">"Expected one non-empty string argument."</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>Wenn Sie möchten wiederverwenden Android Plugin-Code für die Amazon-Feuer-OS-Plattform dann ändern die plugin.xml darauf zu die <code>android</code> bestimmte Quelldatei. Zum Beispiel</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;platform name="amazon-fireos"&gt;
+/**
+ * This class echoes a string called from JavaScript.
+ */
+public class Echo extends CordovaPlugin {
+
+    @Override
+    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+        if (action.equals("echo")) {
+            String message = args.getString(0);
+            this.echo(message, callbackContext);
+            return true;
+        }
+        return false;
+    }
+
+    private void echo(String message, CallbackContext callbackContext) {
+        if (message != null &amp;&amp; message.length() &gt; 0) {
+            callbackContext.success(message);
+        } else {
+            callbackContext.error("Expected one non-empty string argument.");
+        }
+    }
+}
+</code></pre></div></div>
+
+<p>Wenn Sie möchten wiederverwenden Android Plugin-Code für die Amazon-Feuer-OS-Plattform dann ändern die plugin.xml darauf zu die <code class="language-plaintext highlighter-rouge">android</code> bestimmte Quelldatei. Zum Beispiel</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;platform name="amazon-fireos"&gt;
     &lt;config-file target="config.xml" parent="/*"&gt;
         &lt;feature name="Echo"&gt;
             &lt;param name="android-package" value="org.apache.cordova.plugin.Echo"/&gt;
@@ -2170,9 +2175,11 @@
     &lt;/config-file&gt;
     &lt;source-file src="src/android/Echo.java" target-dir="src/org/apache/cordova/plugin" /&gt;
 &lt;/platform&gt;
-</code></pre></div>
-<p>Möchten Sie eine angepasste Plugin für die Amazon-Feuer-OS-Plattform zu schreiben, dann erstellen Sie einen Ordner mit dem Namen <code>amazon</code> unter Ihr Plugin-Src / Ordner und ändern die plugin.xml darauf zu die <code>amazon</code> bestimmte Quelldatei. Zum Beispiel</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;platform name="amazon-fireos"&gt;
+</code></pre></div></div>
+
+<p>Möchten Sie eine angepasste Plugin für die Amazon-Feuer-OS-Plattform zu schreiben, dann erstellen Sie einen Ordner mit dem Namen <code class="language-plaintext highlighter-rouge">amazon</code> unter Ihr Plugin-Src / Ordner und ändern die plugin.xml darauf zu die <code class="language-plaintext highlighter-rouge">amazon</code> bestimmte Quelldatei. Zum Beispiel</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;platform name="amazon-fireos"&gt;
     &lt;config-file target="config.xml" parent="/*"&gt;
         &lt;feature name="Echo"&gt;
             &lt;param name="android-package" value="org.apache.cordova.plugin.Echo"/&gt;
@@ -2180,12 +2187,14 @@
     &lt;/config-file&gt;
     &lt;source-file src="src/amazon/Echo.java" target-dir="src/org/apache/cordova/plugin" /&gt;
 &lt;/platform&gt;
-</code></pre></div>
-<h2>Verwendung von Amazon WebView in Ihr plugin</h2>
+</code></pre></div></div>
+
+<h2 id="verwendung-von-amazon-webview-in-ihr-plugin">Verwendung von Amazon WebView in Ihr plugin</h2>
 
 <p>Cordova für Amazon Fire OS nutzt benutzerdefinierte Amazon WebView, die auf der Open-Source-Projekt Chromium basiert. Es ist GPU beschleunigt und optimiert für die flüssige Performance am Feuer zu entzünden.</p>
 
 <p>Um zu verstehen, wie man am besten Amazon WebView in Ihrem Projekt verwenden, überprüfen Sie heraus das <a href="https://developer.amazon.com/sdk/fire/IntegratingAWV.html">Amazon-Entwicklerportal</a>.</p>
+
 
 
             </div>

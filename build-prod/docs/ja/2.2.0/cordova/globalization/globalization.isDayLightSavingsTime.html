@@ -1364,59 +1364,66 @@
             
 
             <div id="page-toc-source">
-                <h1>globalization.isDayLightSavingsTime</h1>
+                <h1 id="globalizationisdaylightsavingstime">globalization.isDayLightSavingsTime</h1>
 
 <p>クライアントのタイムゾーンとカレンダーを元に、夏時間が与えられた日付で有効かどうかを返します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.globalization.isDayLightSavingsTime(date, successCB, errorCB);
-</code></pre></div>
-<h2>概要</h2>
 
-<p>successCB コールバック関数に、プロパティーオブジェクトをパラメーターとして夏時間かどうかを返します。このオブジェクトは Boolean の <code>dst</code> プロパティーを持っています。 &#39;true&#39; は夏時間が現在有効であること、 &#39;false&#39; はそうでないことを表します。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.globalization.isDayLightSavingsTime(date, successCB, errorCB);
+</code></pre></div></div>
 
-<p>引数の <code>date</code> パラメーターは <code>Date</code> 型である必要があります。</p>
+<h2 id="概要">概要</h2>
+
+<p>successCB コールバック関数に、プロパティーオブジェクトをパラメーターとして夏時間かどうかを返します。このオブジェクトは Boolean の <code class="language-plaintext highlighter-rouge">dst</code> プロパティーを持っています。 ‘true’ は夏時間が現在有効であること、 ‘false’ はそうでないことを表します。</p>
+
+<p>引数の <code class="language-plaintext highlighter-rouge">date</code> パラメーターは <code class="language-plaintext highlighter-rouge">Date</code> 型である必要があります。</p>
 
 <p>もし日付の読み取り中にエラーが発生した場合、 errorCB コールバックが呼び出されます。このエラーに対するエラーコードは <a href="GlobalizationError/globalizationerror.html">GlobalizationError</a>.UNKNOWN_ERROR です。</p>
 
-<h2>サポートされているプラットフォーム</h2>
+<h2 id="サポートされているプラットフォーム">サポートされているプラットフォーム</h2>
 
 <ul>
-<li>Android</li>
-<li>BlackBerry WebWorks (OS 5.0 以上)</li>
-<li>iPhone</li>
+  <li>Android</li>
+  <li>BlackBerry WebWorks (OS 5.0 以上)</li>
+  <li>iPhone</li>
 </ul>
 
-<h2><a href="../storage/storage.opendatabase.html">使用例</a></h2>
+<h2 id="使用例"><a href="../storage/storage.opendatabase.html">使用例</a></h2>
 
-<p>ブラウザーが DST が有効なタイムゾーンで、夏の場合、次のコードは &quot;dst: true&quot; といったような文字列をポップアップダイアログに表示します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.globalization.isDayLightSavingsTime(
+<p>ブラウザーが DST が有効なタイムゾーンで、夏の場合、次のコードは “dst: true” といったような文字列をポップアップダイアログに表示します。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.globalization.isDayLightSavingsTime(
   new Date(),
   function (date) {alert('dst: ' + date.dst + '\n');},
   function () {alert('Error getting names\n');}
 );
-</code></pre></div>
-<h2>詳細な使用例</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Cordova<span class="nt">&lt;/title&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova-2.2.0.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
 
-    <span class="kd">function</span> <span class="nx">checkDayLightSavings</span><span class="p">()</span> <span class="p">{</span>
-      <span class="nb">navigator</span><span class="p">.</span><span class="nx">globalization</span><span class="p">.</span><span class="nx">isDayLightSavingsTime</span><span class="p">(</span>
-        <span class="k">new</span> <span class="nb">Date</span><span class="p">(),</span>
-        <span class="kd">function</span> <span class="p">(</span><span class="nx">date</span><span class="p">)</span> <span class="p">{</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'dst: '</span> <span class="o">+</span> <span class="nx">date</span><span class="p">.</span><span class="nx">dst</span> <span class="o">+</span> <span class="s1">'\n'</span><span class="p">);},</span>
-        <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'Error getting names\n'</span><span class="p">);}</span>
-      <span class="p">);</span>
-    <span class="p">}</span>
+<h2 id="詳細な使用例">詳細な使用例</h2>
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"checkDayLightSavings()"</span><span class="nt">&gt;</span>クリックして夏時間かどうかを表示<span class="nt">&lt;/button&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Cordova&lt;/title&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.2.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
+
+    function checkDayLightSavings() {
+      navigator.globalization.isDayLightSavingsTime(
+        new Date(),
+        function (date) {alert('dst: ' + date.dst + '\n');},
+        function () {alert('Error getting names\n');}
+      );
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;button onclick="checkDayLightSavings()"&gt;クリックして夏時間かどうかを表示&lt;/button&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+
 
             </div>
         </div>

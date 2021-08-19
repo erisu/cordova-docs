@@ -1312,72 +1312,87 @@
     }
 </style>
 
-<h1>События</h1>
+<h1 id="события">События</h1>
 
 <blockquote>
-<p>Кордова события жизненного цикла.</p>
+  <p>Кордова события жизненного цикла.</p>
 </blockquote>
 
-<h2>Типы событий</h2>
+<h2 id="типы-событий">Типы событий</h2>
 
 <ul>
-<li>  <a href="events.deviceready.html">deviceready</a></li>
-<li>  <a href="events.pause.html">Пауза</a></li>
-<li>  <a href="events.resume.html">резюме</a></li>
-<li>  <a href="events.online.html">онлайн</a></li>
-<li>  <a href="events.offline.html">автономном режиме</a></li>
-<li>  <a href="events.backbutton.html">backbutton</a></li>
-<li>  <a href="events.batterycritical.html">batterycritical</a></li>
-<li>  <a href="events.batterylow.html">batterylow</a></li>
-<li>  <a href="events.batterystatus.html">batterystatus</a></li>
-<li>  <a href="events.menubutton.html">menubutton</a></li>
-<li>  <a href="events.searchbutton.html">searchButton</a></li>
-<li>  <a href="events.startcallbutton.html">startcallbutton</a></li>
-<li>  <a href="events.endcallbutton.html">endcallbutton</a></li>
-<li>  <a href="events.volumedownbutton.html">volumedownbutton</a></li>
-<li>  <a href="events.volumeupbutton.html">volumeupbutton</a></li>
+  <li><a href="events.deviceready.html">deviceready</a></li>
+  <li><a href="events.pause.html">Пауза</a></li>
+  <li><a href="events.resume.html">резюме</a></li>
+  <li><a href="events.online.html">онлайн</a></li>
+  <li><a href="events.offline.html">автономном режиме</a></li>
+  <li><a href="events.backbutton.html">backbutton</a></li>
+  <li><a href="events.batterycritical.html">batterycritical</a></li>
+  <li><a href="events.batterylow.html">batterylow</a></li>
+  <li><a href="events.batterystatus.html">batterystatus</a></li>
+  <li><a href="events.menubutton.html">menubutton</a></li>
+  <li><a href="events.searchbutton.html">searchButton</a></li>
+  <li><a href="events.startcallbutton.html">startcallbutton</a></li>
+  <li><a href="events.endcallbutton.html">endcallbutton</a></li>
+  <li><a href="events.volumedownbutton.html">volumedownbutton</a></li>
+  <li><a href="events.volumeupbutton.html">volumeupbutton</a></li>
 </ul>
 
-<h2>Доступ к функции</h2>
+<h2 id="доступ-к-функции">Доступ к функции</h2>
 
-<p>Начиная с версии 3.0, состояние аккумулятора Cordova реализует и другие устройства уровня API как <em>плагины</em>. Доступ ко всем событиям, не связанные с статус батареи включены по умолчанию. Использование CLI <code>plugin</code> команды, описанные в интерфейс командной строки, чтобы включить или отключить аккумулятор события:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add org.apache.cordova.battery-status
+<p>Начиная с версии 3.0, состояние аккумулятора Cordova реализует и другие устройства уровня API как <em>плагины</em>. Доступ ко всем событиям, не связанные с статус батареи включены по умолчанию. Использование CLI <code class="language-plaintext highlighter-rouge">plugin</code> команды, описанные в интерфейс командной строки, чтобы включить или отключить аккумулятор события:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add org.apache.cordova.battery-status
     $ cordova plugin ls
     [ 'org.apache.cordova.battery-status' ]
     $ cordova plugin rm org.apache.cordova.battery-status
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Эти команды применяются для всех целевых платформ, но изменить параметры конфигурации платформы, описанные ниже:</p>
 
 <ul>
-<li><p>Андроид</p>
-<div class="highlight"><pre><code class="language-" data-lang="">(in app/res/xml/config.xml)
+  <li>
+    <p>Андроид</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(in app/res/xml/config.xml)
 &lt;feature name="Battery"&gt;
     &lt;param name="android-package" value="org.apache.cordova.BatteryListener" /&gt;
 &lt;/feature&gt;
-
+    
 (in app/AndroidManifest.xml)
 &lt;uses-permission android:name="android.permission.BROADCAST_STICKY" /&gt;
-</code></pre></div></li>
-<li><p>Ежевика WebWorks</p>
-<div class="highlight"><pre><code class="language-" data-lang="">(in www/plugins.xml)
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Ежевика WebWorks</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(in www/plugins.xml)
 &lt;feature name="Battery"&gt;
     &lt;param name="blackberry-package" value="org.apache.cordova.battery.Battery" /&gt;
 &lt;/feature&gt;
-
+    
 (in www/config.xml)
 &lt;feature id="blackberry.app"          required="true" version="1.0.0.0" /&gt;
 &lt;feature id="blackberry.app.event"    required="true" version="1.0.0.0" /&gt;
 &lt;feature id="blackberry.system.event" required="true" version="1.0.0.0" /&gt;
-</code></pre></div></li>
-<li><p>iOS (в<code>config.xml</code>)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="Battery"&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>iOS (в<code class="language-plaintext highlighter-rouge">config.xml</code>)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="Battery"&gt;
     &lt;param name="ios-package" value="CDVBattery" /&gt;
 &lt;/feature&gt;
-</code></pre></div></li>
-<li><p>Tizen (в<code>config.xml</code>)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="http://tizen.org/api/systeminfo" required="true"/&gt;
-</code></pre></div>
-<p>Ссылка: <a href="https://developer.tizen.org/help/topic/org.tizen.help.gs/Creating%20a%20Project.html?path=0_1_1_3#8814682_CreatingaProject-EditingconfigxmlFeatures">манифест приложения для Tizen веб-приложения</a></p></li>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Tizen (в<code class="language-plaintext highlighter-rouge">config.xml</code>)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="http://tizen.org/api/systeminfo" required="true"/&gt;
+</code></pre></div>    </div>
+
+    <p>Ссылка: <a href="https://developer.tizen.org/help/topic/org.tizen.help.gs/Creating%20a%20Project.html?path=0_1_1_3#8814682_CreatingaProject-EditingconfigxmlFeatures">манифест приложения для Tizen веб-приложения</a></p>
+  </li>
 </ul>
 
 <p>Некоторые платформы могут поддерживать эту функцию без необходимости специальной настройки. В разделе <em>Поддержка платформы</em> в разделе Обзор.</p>

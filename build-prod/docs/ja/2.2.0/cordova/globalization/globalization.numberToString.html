@@ -1364,62 +1364,69 @@
             
 
             <div id="page-toc-source">
-                <h1>globalization.numberToString</h1>
+                <h1 id="globalizationnumbertostring">globalization.numberToString</h1>
 
 <p>クライアントのユーザー設定を元にフォーマットされた数字を文字列で返します。
-Returns a number formatted as a string according to the client&#39;s user preferences.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.globalization.numberToString(number, successCB, errorCB, options);
-</code></pre></div>
-<h2>概要</h2>
+Returns a number formatted as a string according to the client’s user preferences.</p>
 
-<p>successCB コールバック関数に、プロパティーオブジェクトをパラメーターとしてフォーマットされた数字を渡します。このオブジェクトは文字列の <code>value</code> プロパティーを持っています。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.globalization.numberToString(number, successCB, errorCB, options);
+</code></pre></div></div>
+
+<h2 id="概要">概要</h2>
+
+<p>successCB コールバック関数に、プロパティーオブジェクトをパラメーターとしてフォーマットされた数字を渡します。このオブジェクトは文字列の <code class="language-plaintext highlighter-rouge">value</code> プロパティーを持っています。</p>
 
 <p>もし数字のフォーマット中にエラーが発生した場合、 errorCB コールバックが <a href="GlobalizationError/globalizationerror.html">GlobalizationError</a> オブジェクトをパラメーターとして呼び出されます。このエラーに対するエラーコードは <a href="GlobalizationError/globalizationerror.html">GlobalizationError</a>.FORMATTING_ERROR です。</p>
 
-<p><code>options.type</code> には &#39;decimal&#39;, &#39;percent&#39;, または &#39;currency&#39; が指定出来ます。デフォルトのオプションは <code>{type:&#39;decimal&#39;}</code> です。この <code>options</code> パラメーターはオプション (任意) です。</p>
+<p><code class="language-plaintext highlighter-rouge">options.type</code> には ‘decimal’, ‘percent’, または ‘currency’ が指定出来ます。デフォルトのオプションは <code class="language-plaintext highlighter-rouge">{type:'decimal'}</code> です。この <code class="language-plaintext highlighter-rouge">options</code> パラメーターはオプション (任意) です。</p>
 
-<h2>サポートされているプラットフォーム</h2>
+<h2 id="サポートされているプラットフォーム">サポートされているプラットフォーム</h2>
 
 <ul>
-<li>Android</li>
-<li>BlackBerry WebWorks (OS 5.0 以上)</li>
-<li>iPhone</li>
+  <li>Android</li>
+  <li>BlackBerry WebWorks (OS 5.0 以上)</li>
+  <li>iPhone</li>
 </ul>
 
-<h2><a href="../storage/storage.opendatabase.html">使用例</a></h2>
+<h2 id="使用例"><a href="../storage/storage.opendatabase.html">使用例</a></h2>
 
-<p>ブラウザーのロケールが en_US に設定されている場合、次のコードは &quot;number: 3.142&quot; といったような文字列をポップアップダイアログに表示します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.globalization.numberToString(
+<p>ブラウザーのロケールが en_US に設定されている場合、次のコードは “number: 3.142” といったような文字列をポップアップダイアログに表示します。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.globalization.numberToString(
   3.1415926,
   function (number) {alert('number: ' + number.value + '\n');},
   function () {alert('Error getting number\n');},
   {type:'decimal'}
 );
-</code></pre></div>
-<h2>詳細な使用例</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Cordova<span class="nt">&lt;/title&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova-2.2.0.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
 
-    <span class="kd">function</span> <span class="nx">checkNumber</span><span class="p">()</span> <span class="p">{</span>
-      <span class="nb">navigator</span><span class="p">.</span><span class="nx">globalization</span><span class="p">.</span><span class="nx">numberToString</span><span class="p">(</span>
-        <span class="mf">3.1415926</span><span class="p">,</span>
-        <span class="kd">function</span> <span class="p">(</span><span class="nx">number</span><span class="p">)</span> <span class="p">{</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'number: '</span> <span class="o">+</span> <span class="nx">number</span><span class="p">.</span><span class="nx">value</span> <span class="o">+</span> <span class="s1">'\n'</span><span class="p">);},</span>
-        <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'Error getting number\n'</span><span class="p">);},</span>
-        <span class="p">{</span><span class="na">type</span><span class="p">:</span><span class="s1">'decimal'</span><span class="p">}</span>
-      <span class="p">);</span>
-    <span class="p">}</span>
+<h2 id="詳細な使用例">詳細な使用例</h2>
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"checkNumber()"</span><span class="nt">&gt;</span>クリックして数字を表示<span class="nt">&lt;/button&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Cordova&lt;/title&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.2.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
+
+    function checkNumber() {
+      navigator.globalization.numberToString(
+        3.1415926,
+        function (number) {alert('number: ' + number.value + '\n');},
+        function () {alert('Error getting number\n');},
+        {type:'decimal'}
+      );
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;button onclick="checkNumber()"&gt;クリックして数字を表示&lt;/button&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+
 
             </div>
         </div>

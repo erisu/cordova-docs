@@ -1182,78 +1182,112 @@
             
 
             <div id="page-toc-source">
-                <h1>Windows Phone 플러그인</h1>
+                <h1 id="windows-phone-플러그인">Windows Phone 플러그인</h1>
 
-<p>코르 도우 바에 대 한 Windows Phone는 플러그인을 작성 코르도바의 아키텍처에 대 한 기본적인 이해를 필요 합니다. 코르 도우 바 WP7 WebBrowser 호스트 응용 프로그램 자바 코드와 네이티브 API 호출을 관리 하는 이루어져 있다. BaseCommand 이다 ( <code>WP7CordovaClassLib.Cordova.Commands.BaseCommand</code> ) 클래스에서 C#을 확장할 수 있습니다 &#39;배관&#39; 당신을 위해 이미 구축의 대다수와 함께 제공.</p>
+<p>코르 도우 바에 대 한 Windows Phone는 플러그인을 작성 코르도바의 아키텍처에 대 한 기본적인 이해를 필요 합니다. 코르 도우 바 WP7 WebBrowser 호스트 응용 프로그램 자바 코드와 네이티브 API 호출을 관리 하는 이루어져 있다. BaseCommand 이다 ( <code class="language-plaintext highlighter-rouge">WP7CordovaClassLib.Cordova.Commands.BaseCommand</code> ) 클래스에서 C#을 확장할 수 있습니다 ‘배관’ 당신을 위해 이미 구축의 대다수와 함께 제공.</p>
 
 <ol>
-<li> 프로젝트를 선택 하 고 <strong>추가 → 새 항목...</strong> 을 선택 마우스 오른쪽 단추로 클릭</li>
-</ol>
-<div class="highlight"><pre><code class="language-" data-lang="">*   가급적 이면 '플러그인' 디렉토리를 추가 하지만 그것은 당신에 게
-</code></pre></div>
-<ol>
-<li> &#39;클래스&#39;를 선택 하 고 이름을<code>Echo.cs</code></li>
-</ol>
-<div class="highlight"><pre><code class="language-" data-lang="">*   이 클래스 해야 *정확 하 게* 일치로 부르는`cordova.exec(win, fail, "Echo", ...)`
-</code></pre></div>
-<ol>
-<li><p>기본 클래스 구현을 포함</p>
-<div class="highlight"><pre><code class="language-" data-lang="">WPCordovaClassLib.Cordova;를 사용 하 여
+  <li>
+    <p>프로젝트를 선택 하 고 <strong>추가 → 새 항목…</strong> 을 선택 마우스 오른쪽 단추로 클릭</p>
+
+    <ul>
+      <li>가급적 이면 ‘플러그인’ 디렉토리를 추가 하지만 그것은 당신에 게</li>
+    </ul>
+  </li>
+  <li>
+    <p>‘클래스’를 선택 하 고 이름을<code class="language-plaintext highlighter-rouge">Echo.cs</code></p>
+
+    <ul>
+      <li>이 클래스 해야 <em>정확 하 게</em> 일치로 부르는<code class="language-plaintext highlighter-rouge">cordova.exec(win, fail, "Echo", ...)</code></li>
+    </ul>
+  </li>
+  <li>
+    <p>기본 클래스 구현을 포함</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>WPCordovaClassLib.Cordova;를 사용 하 여
 WPCordovaClassLib.Cordova.Commands;를 사용 하 여
 WPCordovaClassLib.Cordova.JSON;를 사용 하 여
-</code></pre></div></li>
-<li><p>BaseCommand에서 클래스를 확장</p>
-<div class="highlight"><pre><code class="language-" data-lang="">공용 클래스 에코: BaseCommand {/ /...}
-</code></pre></div></li>
-<li><p>자바 스크립트에서 호출할 수 있는 메서드 추가</p>
-<div class="highlight"><pre><code class="language-" data-lang="">공용 클래스 에코: BaseCommand {공공 무효 에코 (문자열 옵션) {/ / 모든 JS 호출 가능 플러그인 방법이이 서명 있어야!
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>BaseCommand에서 클래스를 확장</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>공용 클래스 에코: BaseCommand {/ /...}
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>자바 스크립트에서 호출할 수 있는 메서드 추가</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>공용 클래스 에코: BaseCommand {공공 무효 에코 (문자열 옵션) {/ / 모든 JS 호출 가능 플러그인 방법이이 서명 있어야!
         / 공공, 무효, 1 인수를 문자열로 반환 /}}
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ol>
 
-<h2>네임 스페이스</h2>
+<h2 id="네임-스페이스">네임 스페이스</h2>
 
 <p>정규화 되지 않은 명령에 대 한 기본 네임 스페이스가입니다.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">네임 스페이스 Cordova.Extension.Commands {/ /...}
-</code></pre></div>
-<p>정규화 된 전화를 해야 자신의 네임 스페이스를 사용 하려는 경우 <code>cordova.exec</code> . 예를 들어,이 같은 C# 클래스를 정의 하려면:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">네임 스페이스 com.mydomain.cordovaExtensions {공용 클래스 에코: BaseCommand {/ /...}}
-</code></pre></div>
-<p>그런 다음, 자바 스크립트에서를 호출 해야 <code>exec</code> 이 같은:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cordova.exec (승리, 실패, "com.mydomain.cordovaExtensions.Echo",...);
-</code></pre></div>
-<h2>C에서 인수를 해석</h2>
 
-<p>플러그인 방법에 의해 받은 데이터 문자열 값 이지만 실제로 우리의 자바 스크립트 코드를 보고, 우리 우리의 의도 문자열 배열을 전달 하는 참조. 우리의 자바 스크립트 호출을 다시 보면서 <code>cordova.exec</code> , 우리는 우리가 통과 참조 <code>[str]</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cordova.exec (승리, 실패, "에코", "에코", ["입력된 문자열"]);
-</code></pre></div>
-<p>우리에 전달 된 옵션 문자열을 검사 하는 경우 우리의 <code>Echo.echo</code> 방법, 우리는 값이 실제로 볼:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">"[\"input string\ "]"
-</code></pre></div>
-<p>모든 자바 스크립트 <code>exec</code> 인수는 JSON C#으로 전달 되기 전에 인코딩됩니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>네임 스페이스 Cordova.Extension.Commands {/ /...}
+</code></pre></div></div>
+
+<p>정규화 된 전화를 해야 자신의 네임 스페이스를 사용 하려는 경우 <code class="language-plaintext highlighter-rouge">cordova.exec</code> . 예를 들어,이 같은 C# 클래스를 정의 하려면:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>네임 스페이스 com.mydomain.cordovaExtensions {공용 클래스 에코: BaseCommand {/ /...}}
+</code></pre></div></div>
+
+<p>그런 다음, 자바 스크립트에서를 호출 해야 <code class="language-plaintext highlighter-rouge">exec</code> 이 같은:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova.exec (승리, 실패, "com.mydomain.cordovaExtensions.Echo",...);
+</code></pre></div></div>
+
+<h2 id="c에서-인수를-해석">C에서 인수를 해석</h2>
+
+<p>플러그인 방법에 의해 받은 데이터 문자열 값 이지만 실제로 우리의 자바 스크립트 코드를 보고, 우리 우리의 의도 문자열 배열을 전달 하는 참조. 우리의 자바 스크립트 호출을 다시 보면서 <code class="language-plaintext highlighter-rouge">cordova.exec</code> , 우리는 우리가 통과 참조 <code class="language-plaintext highlighter-rouge">[str]</code> :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova.exec (승리, 실패, "에코", "에코", ["입력된 문자열"]);
+</code></pre></div></div>
+
+<p>우리에 전달 된 옵션 문자열을 검사 하는 경우 우리의 <code class="language-plaintext highlighter-rouge">Echo.echo</code> 방법, 우리는 값이 실제로 볼:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"[\"input string\ "]"
+</code></pre></div></div>
+
+<p>모든 자바 스크립트 <code class="language-plaintext highlighter-rouge">exec</code> 인수는 JSON C#으로 전달 되기 전에 인코딩됩니다.</p>
 
 <p>우리가 우리가 기대 했던 문자열로 취급 하 고 싶다면, 우리가 그것을 해독 해야 합니다. 우리는 간단한 JSON deserialization을 사용할 수 있습니다.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">optVal 문자열 JsonHelper.Deserialize &lt; string &gt; = (옵션) [0];
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>optVal 문자열 JsonHelper.Deserialize &lt; string &gt; = (옵션) [0];
 / / optVal는 지금 "입력된 문자열"의 값
-</code></pre></div>
-<h2>자바 C#에서 통과 결과</h2>
+</code></pre></div></div>
+
+<h2 id="자바-c에서-통과-결과">자바 C#에서 통과 결과</h2>
 
 <p>기본 클래스 BaseCommand 자바 스크립트 콜백 처리기에 데이터를 전달 하기 위한 메서드를 제공 합니다. 단순히 아무 추가 결과 정보가 필요할 때 명령이 성공 했다 신호, 당신은 간단 하 게 호출할 수 있습니다.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">DispatchCommandResult(); / / 빈 플러그인 결과와 다시 통화 성공 콜백 간주
-</code></pre></div>
-<p>다른 버전을 호출 해야 데이터를 다시 전달, <code>DispatchCommandResult</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">DispatchCommandResult (새로운 PluginResult (PluginResult.Status.OK, "모든 것이 계획 대로 갔다, 이것은 성공 처리기에 전달 된 결과 이다."));
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DispatchCommandResult(); / / 빈 플러그인 결과와 다시 통화 성공 콜백 간주
+</code></pre></div></div>
+
+<p>다른 버전을 호출 해야 데이터를 다시 전달, <code class="language-plaintext highlighter-rouge">DispatchCommandResult</code> :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DispatchCommandResult (새로운 PluginResult (PluginResult.Status.OK, "모든 것이 계획 대로 갔다, 이것은 성공 처리기에 전달 된 결과 이다."));
+</code></pre></div></div>
+
 <p>JavaScript에 다시 구조화 된 개체 데이터를 전달 하는 JSON 문자열로 인코딩할 수 해야:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">DispatchCommandResult(new PluginResult(PluginResult.Status.OK, "{result:\"super awesome!\"}"));
-</code></pre></div>
-<p>오류가 발생 했습니다, 전화할 수 신호를 할 경우 <code>DispatchCommandResult</code> 로 <code>PluginResult</code> 개체:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">DispatchCommandResult (새로운 PluginResult (PluginResult.Status.ERROR, "에코 신호 오류"));
-</code></pre></div>
-<h2>귀하의 플러그인의 C# 메서드에 serialization 오류 처리</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DispatchCommandResult(new PluginResult(PluginResult.Status.OK, "{result:\"super awesome!\"}"));
+</code></pre></div></div>
+
+<p>오류가 발생 했습니다, 전화할 수 신호를 할 경우 <code class="language-plaintext highlighter-rouge">DispatchCommandResult</code> 로 <code class="language-plaintext highlighter-rouge">PluginResult</code> 개체:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DispatchCommandResult (새로운 PluginResult (PluginResult.Status.ERROR, "에코 신호 오류"));
+</code></pre></div></div>
+
+<h2 id="귀하의-플러그인의-c-메서드에-serialization-오류-처리">귀하의 플러그인의 C# 메서드에 serialization 오류 처리</h2>
 
 <p>귀하의 인수를 해석할 때 그것은 우리는 나쁜 입력 경우 try/catch 블록을 사용 하는 것이 좋습니다. 이것은 코르도바 C# 코드에서 사용 하는 패턴:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">string optVal = null;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>string optVal = null;
 
 try
 {
@@ -1271,58 +1305,75 @@ if (optVal == null)
 else
 {
     // ... 우리의 일을 계속}
-</code></pre></div>
-<h2>플러그인 XML</h2>
+</code></pre></div></div>
+
+<h2 id="플러그인-xml">플러그인 XML</h2>
 
 <p>이들은 plugin.xml 파일을 사용 하 여 windows 전화 특정 예, 자세한 내용은 플러그인 사양을 참조합니다</p>
 
-<h3><code>&lt;source-file&gt;</code></h3>
+<h3 id="source-file"><code class="language-plaintext highlighter-rouge">&lt;source-file&gt;</code></h3>
 
-<p>Windows phone은 <code>&lt;source-file&gt;</code> 요소는 현재 모든 플러그인 리소스 정의 하는 데 사용 됩니다 (즉..cs,.xaml. xaml.cs,.dll, 이미지 자산 등).</p>
+<p>Windows phone은 <code class="language-plaintext highlighter-rouge">&lt;source-file&gt;</code> 요소는 현재 모든 플러그인 리소스 정의 하는 데 사용 됩니다 (즉..cs,.xaml. xaml.cs,.dll, 이미지 자산 등).</p>
 
-<h3><code>&lt;config-file&gt;</code></h3>
+<h3 id="config-file"><code class="language-plaintext highlighter-rouge">&lt;config-file&gt;</code></h3>
 
-<p><code>&lt;config-file&gt;</code>요소 요소를 구성 파일에 넣어 정의 합니다. 플랫폼 config.xml에 플러그인을 추가 하는 등이 같은 뭔가 할 것:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt; 구성 파일 target="config.xml" 부모 = "/ *" &gt;&lt; 기능 이름 "PluginName" = &gt;&lt; param 이름을 = "wp-패키지" 값 = "PluginName" / &gt;&lt; / 기능 &gt;&lt; / config 파일 &gt;
-</code></pre></div>
+<p><code class="language-plaintext highlighter-rouge">&lt;config-file&gt;</code>요소 요소를 구성 파일에 넣어 정의 합니다. 플랫폼 config.xml에 플러그인을 추가 하는 등이 같은 뭔가 할 것:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt; 구성 파일 target="config.xml" 부모 = "/ *" &gt;&lt; 기능 이름 "PluginName" = &gt;&lt; param 이름을 = "wp-패키지" 값 = "PluginName" / &gt;&lt; / 기능 &gt;&lt; / config 파일 &gt;
+</code></pre></div></div>
+
 <p>우리는 WMAppManifest.xml에 <a href="../../../cordova/contacts/contacts.html">연락처</a> 기능을 추가 하 고 싶 었, 그것은 이렇게 보이는 것입니다.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;config-file target="Properties/WMAppManifest.xml" parent="/Deployment/App/Capabilities"&gt;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;config-file target="Properties/WMAppManifest.xml" parent="/Deployment/App/Capabilities"&gt;
     &lt;Capability Name="ID_CAP_CONTACTS" /&gt;
 &lt;/config-file&gt;
-</code></pre></div>
-<h2>고급 플러그인 기능</h2>
+</code></pre></div></div>
+
+<h2 id="고급-플러그인-기능">고급 플러그인 기능</h2>
 
 <p>재정의할 수 있는 다른 방법을 참조 하십시오.</p>
 
 <ul>
-<li>  <a href="https://github.com/apache/cordova-wp7/blob/master/templates/standalone/cordovalib/Commands/BaseCommand.cs">BaseCommand.cs</a></li>
+  <li><a href="https://github.com/apache/cordova-wp7/blob/master/templates/standalone/cordovalib/Commands/BaseCommand.cs">BaseCommand.cs</a></li>
 </ul>
 
-<p>예를 들어 &#39;<a href="../../../cordova/events/events.pause.html">일시 중지</a>&#39; 및 &#39;다시 시작&#39; 응용 프로그램 이벤트에 연결할 수 있습니다.</p>
+<p>예를 들어 ‘<a href="../../../cordova/events/events.pause.html">일시 중지</a>’ 및 ‘다시 시작’ 응용 프로그램 이벤트에 연결할 수 있습니다.</p>
 
-<h3>플러그인을 디버깅</h3>
+<h3 id="플러그인을-디버깅">플러그인을 디버깅</h3>
 
 <p>C# 쪽을 디버깅 하려면 Visual Studio 디버거를 사용 하 여, 그냥 클래스에 의해 노출 되는 방법 중 하나에 브레이크 포인트를 설정할 수 있습니다.</p>
 
-<p>자바 스크립트 디버깅 Windows Phone 조금 더 어렵습니다. 사용 해야 <code>console.log</code> 귀하의 플러그인의 상태를 출력 또는 오류 자신을 알려라.</p>
+<p>자바 스크립트 디버깅 Windows Phone 조금 더 어렵습니다. 사용 해야 <code class="language-plaintext highlighter-rouge">console.log</code> 귀하의 플러그인의 상태를 출력 또는 오류 자신을 알려라.</p>
 
-<h2>일반적인 함정</h2>
+<h2 id="일반적인-함정">일반적인 함정</h2>
 
 <ul>
-<li><p>네이티브 자바 스크립트 구현에 전달 하는 인수를 결정할 때는 주의 해야 합니다. 하지만 대부분 <a href="../../../cordova/device/device.html">장치</a> 플랫폼 기대 args 배열 될 cordova.exec에 전달 된 다른 유형의 개체가이 배열에 있는 경우 deserialize 하기 어렵거나 된다.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cordova.exec (승리, 실패, "ServiceName", "MethodName" ["이것은 문자열", 54, {리터럴: '문제'}]);
-</code></pre></div>
-<ul>
-<li><p>즉, C# 코드와 같은 문자열 값을 해독 하기 어려운 받습니다.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">"[\"this 이다은 string\ ", 54, {리터럴: '문제'}]"
-</code></pre></div></li>
-<li><p>Exec를 호출 하기 전에 모든 매개 변수를 문자열로 변환 고려 하십시오.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cordova.exec (승리, 실패, "ServiceName", "MethodName" ["이것은 문자열", "54", "{리터럴: '문제'}"]);
+  <li>
+    <p>네이티브 자바 스크립트 구현에 전달 하는 인수를 결정할 때는 주의 해야 합니다. 하지만 대부분 <a href="../../../cordova/device/device.html">장치</a> 플랫폼 기대 args 배열 될 cordova.exec에 전달 된 다른 유형의 개체가이 배열에 있는 경우 deserialize 하기 어렵거나 된다.</p>
 
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova.exec (승리, 실패, "ServiceName", "MethodName" ["이것은 문자열", 54, {리터럴: '문제'}]);
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p>즉, C# 코드와 같은 문자열 값을 해독 하기 어려운 받습니다.</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"[\"this 이다은 string\ ", 54, {리터럴: '문제'}]"
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>Exec를 호출 하기 전에 모든 매개 변수를 문자열로 변환 고려 하십시오.</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova.exec (승리, 실패, "ServiceName", "MethodName" ["이것은 문자열", "54", "{리터럴: '문제'}"]);
+        
 문자열 optValues JsonHelper.Deserialize &lt; string &gt; = (옵션);
-</code></pre></div></li>
-</ul></li>
-<li><p>그것은 일반적으로 매개 변수를 호출 하기 전에 자바 스크립트 코드에서 검사 하는 것이 좋습니다 <code>exec</code> . 이 플러그인의 다양 한 네이티브 구현 중 더 많은 JavaScript 코드를 다시 사용할 수 있습니다.</p></li>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>그것은 일반적으로 매개 변수를 호출 하기 전에 자바 스크립트 코드에서 검사 하는 것이 좋습니다 <code class="language-plaintext highlighter-rouge">exec</code> . 이 플러그인의 다양 한 네이티브 구현 중 더 많은 JavaScript 코드를 다시 사용할 수 있습니다.</p>
+  </li>
 </ul>
 
 

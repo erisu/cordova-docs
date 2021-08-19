@@ -1364,55 +1364,78 @@
             
 
             <div id="page-toc-source">
-                <h1>Developing a Plugin on Bada</h1>
+                <h1 id="developing-a-plugin-on-bada">Developing a Plugin on Bada</h1>
 
 <p>プラグインは Bada 2.0 以上のみサポートしています。 Bada 1.2 はサポートしていません。</p>
 
 <p>Bada の実装はすべて JavaScript の実装です。そのため、カスタムプラグインを追加することは、プラグインコードによって CordovaJS を更新することになります。以下は、シンプルな <em>Hello World</em> プラグインを追加するステップです:</p>
 
 <ol>
-<li><p>CordovaJS リポジトリーを clone します</p>
-<div class="highlight"><pre><code class="language-" data-lang="">git clone https://git-wip-us.apache.org/repos/asf/incubuator-cordova-js.git
-</code></pre></div></li>
-<li><p><strong>lib/bada/plugin/bada/</strong> 以下に新しい JavaScript ファイルを作成し、 <em>HelloWorld.js</em> と名前をつけます。以下の内容を追加します:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">function HelloWorld() {
-}
+  <li>
+    <p>CordovaJS リポジトリーを clone します</p>
 
-HelloWorld.prototype.printHello = function(success, fail, arg) {
-    alert(Osp.Core.StringHelper('Hello %1', arg[0]));
-}
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> git clone https://git-wip-us.apache.org/repos/asf/incubuator-cordova-js.git
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>lib/bada/plugin/bada/</strong> 以下に新しい JavaScript ファイルを作成し、 <em>HelloWorld.js</em> と名前をつけます。以下の内容を追加します:</p>
 
-module.exports = new HelloWorld();
-</code></pre></div></li>
-<li><p><strong>lib/bada/platform.js</strong> の objects プロパティーの下に、新しく作ったプラグインへのリンクを追加します:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">objects: {
-    ...
-    HelloWorld: {
-        'cordova/plugin/bada/HelloWorld'
-    },
-    ...
-}
-...
-</code></pre></div></li>
-<li><p><strong>lib/bada/exec.js</strong> のプラグインリストを、作ったプラグインを含むように更新します</p>
-<div class="highlight"><pre><code class="language-" data-lang="">var plugins = {
-    ...
-    "HelloWorld": require('cordova/plugin/bada/HelloWorld')
-};
-</code></pre></div></li>
-<li><p>これで、好きなようにユーザー向けの JavaScript を書くことができます。しかし、プラグインを実行するためには、以下のメソッドを呼び出す必要があることを忘れないで下さい</p>
-<div class="highlight"><pre><code class="language-" data-lang="">exec(succes, fail, 'HelloWorld', 'printHello', ['Jackson!']);
-</code></pre></div>
-<p>success はプラグインが正常に終了したときに実行される成功コールバック関数です
-fail はプラグインが正常に終了しなかったときに実行されるエラーコールバック関数です
-&#39;HelloWorld&#39; はあなたのプラグインの名前です
-&#39;printHello&#39; はあなたのプラグインのアクション名です
-最後のパラメーターは、プラグインへの引数です</p></li>
-<li><p>以下のコマンドを実行し、新しい共通 JavaScript を生成します (npm モジュールの jake がインストールされていることを確認して下さい)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">jake
-</code></pre></div></li>
-<li><p>新しく生成された <strong>pkg/cordova.bada.js</strong> を、 Bada プロジェクトの <strong>Res/js</strong> 以下にコピーします</p></li>
-<li><p>以上です！これで、あなたは新しい Bada プラグインを追加することができ、現在は Cordova Bada でサポートされていないたくさんの機能を実装できるようになりました。</p></li>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> function HelloWorld() {
+ }
+
+ HelloWorld.prototype.printHello = function(success, fail, arg) {
+     alert(Osp.Core.StringHelper('Hello %1', arg[0]));
+ }
+
+ module.exports = new HelloWorld();
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>lib/bada/platform.js</strong> の objects プロパティーの下に、新しく作ったプラグインへのリンクを追加します:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> objects: {
+     ...
+     HelloWorld: {
+         'cordova/plugin/bada/HelloWorld'
+     },
+     ...
+ }
+ ...
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>lib/bada/exec.js</strong> のプラグインリストを、作ったプラグインを含むように更新します</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> var plugins = {
+     ...
+     "HelloWorld": require('cordova/plugin/bada/HelloWorld')
+ };
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>これで、好きなようにユーザー向けの JavaScript を書くことができます。しかし、プラグインを実行するためには、以下のメソッドを呼び出す必要があることを忘れないで下さい</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> exec(succes, fail, 'HelloWorld', 'printHello', ['Jackson!']);
+</code></pre></div>    </div>
+
+    <p>success はプラグインが正常に終了したときに実行される成功コールバック関数です
+ fail はプラグインが正常に終了しなかったときに実行されるエラーコールバック関数です
+ ‘HelloWorld’ はあなたのプラグインの名前です
+ ‘printHello’ はあなたのプラグインのアクション名です
+ 最後のパラメーターは、プラグインへの引数です</p>
+  </li>
+  <li>
+    <p>以下のコマンドを実行し、新しい共通 JavaScript を生成します (npm モジュールの jake がインストールされていることを確認して下さい)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> jake
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>新しく生成された <strong>pkg/cordova.bada.js</strong> を、 Bada プロジェクトの <strong>Res/js</strong> 以下にコピーします</p>
+  </li>
+  <li>
+    <p>以上です！これで、あなたは新しい Bada プラグインを追加することができ、現在は Cordova Bada でサポートされていないたくさんの機能を実装できるようになりました。</p>
+  </li>
 </ol>
 
 

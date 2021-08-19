@@ -1304,41 +1304,58 @@
             
 
             <div id="page-toc-source">
-                <h1>notification.prompt</h1>
+                <h1 id="notificationprompt">notification.prompt</h1>
 
 <p>Muestra un cuadro de diálogo pronto personalizables.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.notification.prompt(message, promptCallback, [title], [buttonLabels], [defaultText])
-</code></pre></div>
-<ul>
-<li><p><strong>mensaje</strong>: mensaje de diálogo. <em>(String)</em></p></li>
-<li><p><strong>promptCallback</strong>: devolución de llamada que invocar cuando se presiona un botón. <em>(Función)</em></p></li>
-<li><p><strong>título</strong>: título <em>(String)</em> (opcional, por defecto de diálogo<code>Prompt</code>)</p></li>
-<li><p><strong>buttonLabels</strong>: matriz de cadenas especificando botón etiquetas <em>(Array)</em> (opcional, por defecto<code>[&quot;OK&quot;,&quot;Cancel&quot;]</code>)</p></li>
-<li><p><strong>defaultText</strong>: valor de la entrada predeterminada textbox ( <code>String</code> ) (opcional, por defecto: cadena vacía)</p></li>
-</ul>
 
-<h2>Descripción</h2>
-
-<p>El método <code>notification.prompt</code> muestra un cuadro de diálogo nativa que es más personalizable que función de <code>símbolo del sistema</code> del navegador.</p>
-
-<h2>promptCallback</h2>
-
-<p>El <code>promptCallback</code> se ejecuta cuando el usuario presiona uno de los botones en el cuadro de diálogo pronto. El objeto de <code>resultados</code> pasado a la devolución de llamada contiene las siguientes propiedades:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.notification.prompt(message, promptCallback, [title], [buttonLabels], [defaultText])
+</code></pre></div></div>
 
 <ul>
-<li><p><strong>buttonIndex</strong>: el índice del botón presionado. <em>(Número)</em> Observe que el índice utiliza indexación basada en uno, entonces el valor es <code>1</code> , <code>2</code> , <code>3</code> , etc..</p></li>
-<li><p><strong>INPUT1</strong>: el texto introducido en el cuadro de diálogo pronto. <em>(String)</em></p></li>
+  <li>
+    <p><strong>mensaje</strong>: mensaje de diálogo. <em>(String)</em></p>
+  </li>
+  <li>
+    <p><strong>promptCallback</strong>: devolución de llamada que invocar cuando se presiona un botón. <em>(Función)</em></p>
+  </li>
+  <li>
+    <p><strong>título</strong>: título <em>(String)</em> (opcional, por defecto de diálogo<code class="language-plaintext highlighter-rouge">Prompt</code>)</p>
+  </li>
+  <li>
+    <p><strong>buttonLabels</strong>: matriz de cadenas especificando botón etiquetas <em>(Array)</em> (opcional, por defecto<code class="language-plaintext highlighter-rouge">["OK","Cancel"]</code>)</p>
+  </li>
+  <li>
+    <p><strong>defaultText</strong>: valor de la entrada predeterminada textbox ( <code class="language-plaintext highlighter-rouge">String</code> ) (opcional, por defecto: cadena vacía)</p>
+  </li>
 </ul>
 
-<h2>Plataformas soportadas</h2>
+<h2 id="descripción">Descripción</h2>
+
+<p>El método <code class="language-plaintext highlighter-rouge">notification.prompt</code> muestra un cuadro de diálogo nativa que es más personalizable que función de <code class="language-plaintext highlighter-rouge">símbolo del sistema</code> del navegador.</p>
+
+<h2 id="promptcallback">promptCallback</h2>
+
+<p>El <code class="language-plaintext highlighter-rouge">promptCallback</code> se ejecuta cuando el usuario presiona uno de los botones en el cuadro de diálogo pronto. El objeto de <code class="language-plaintext highlighter-rouge">resultados</code> pasado a la devolución de llamada contiene las siguientes propiedades:</p>
 
 <ul>
-<li>  Android</li>
-<li>  iOS</li>
+  <li>
+    <p><strong>buttonIndex</strong>: el índice del botón presionado. <em>(Número)</em> Observe que el índice utiliza indexación basada en uno, entonces el valor es <code class="language-plaintext highlighter-rouge">1</code> , <code class="language-plaintext highlighter-rouge">2</code> , <code class="language-plaintext highlighter-rouge">3</code> , etc..</p>
+  </li>
+  <li>
+    <p><strong>INPUT1</strong>: el texto introducido en el cuadro de diálogo pronto. <em>(String)</em></p>
+  </li>
 </ul>
 
-<h2>Ejemplo rápido</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">// process the promp dialog results
+<h2 id="plataformas-soportadas">Plataformas soportadas</h2>
+
+<ul>
+  <li>Android</li>
+  <li>iOS</li>
+</ul>
+
+<h2 id="ejemplo-rápido">Ejemplo rápido</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// process the promp dialog results
 function onPrompt(results) {
     alert("You selected button number " + results.buttonIndex + " and entered " + results.input1);
 }
@@ -1354,55 +1371,62 @@ function showPrompt() {
         'Jane Doe'                 // defaultText
     );
 }
-</code></pre></div>
-<h2>Ejemplo completo</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Notification Prompt Dialog Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="ejemplo-completo">Ejemplo completo</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Notification Prompt Dialog Example&lt;/title&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="c1">// Empty</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// process the promptation dialog result</span>
-    <span class="kd">function</span> <span class="nx">onPrompt</span><span class="p">(</span><span class="nx">results</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">alert</span><span class="p">(</span><span class="s2">"You selected button number "</span> <span class="o">+</span> <span class="nx">results</span><span class="p">.</span><span class="nx">buttonIndex</span> <span class="o">+</span> <span class="s2">" and entered "</span> <span class="o">+</span> <span class="nx">results</span><span class="p">.</span><span class="nx">input1</span><span class="p">);</span>
-    <span class="p">}</span>
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
 
-    <span class="c1">// Show a custom prompt dialog</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">showPrompt</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">navigator</span><span class="p">.</span><span class="nx">notification</span><span class="p">.</span><span class="nx">prompt</span><span class="p">(</span>
-            <span class="s1">'Please enter your name'</span><span class="p">,</span>  <span class="c1">// message</span>
-            <span class="nx">onPrompt</span><span class="p">,</span>                  <span class="c1">// callback to invoke</span>
-            <span class="s1">'Registration'</span><span class="p">,</span>            <span class="c1">// title</span>
-            <span class="p">[</span><span class="s1">'Ok'</span><span class="p">,</span><span class="s1">'Exit'</span><span class="p">],</span>             <span class="c1">// buttonLabels</span>
-            <span class="s1">'Jane Doe'</span>                 <span class="c1">// defaultText</span>
-        <span class="p">);</span>
-    <span class="p">}</span>
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        // Empty
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">onclick=</span><span class="s">"showPrompt(); return false;"</span><span class="nt">&gt;</span>Show Prompt<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2>Rarezas Android</h2>
+    // process the promptation dialog result
+    function onPrompt(results) {
+        alert("You selected button number " + results.buttonIndex + " and entered " + results.input1);
+    }
+
+    // Show a custom prompt dialog
+    //
+    function showPrompt() {
+        navigator.notification.prompt(
+            'Please enter your name',  // message
+            onPrompt,                  // callback to invoke
+            'Registration',            // title
+            ['Ok','Exit'],             // buttonLabels
+            'Jane Doe'                 // defaultText
+        );
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;&lt;a href="#" onclick="showPrompt(); return false;"&gt;Show Prompt&lt;/a&gt;&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h2 id="rarezas-android">Rarezas Android</h2>
 
 <ul>
-<li><p>Android soporta un máximo de tres botones e ignora nada más.</p></li>
-<li><p>En Android 3.0 y posteriores, los botones aparecen en orden inverso para dispositivos que utilizan el tema Holo.</p></li>
+  <li>
+    <p>Android soporta un máximo de tres botones e ignora nada más.</p>
+  </li>
+  <li>
+    <p>En Android 3.0 y posteriores, los botones aparecen en orden inverso para dispositivos que utilizan el tema Holo.</p>
+  </li>
 </ul>
 
 

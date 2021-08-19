@@ -1094,42 +1094,49 @@
     }
 </style>
 
-<h1>Плагины для iOS</h1>
+<h1 id="плагины-для-ios">Плагины для iOS</h1>
 
 <p>Этот раздел содержит сведения о том, как реализовать код родной плагин на платформе iOS. Прежде чем читать это, увидеть приложения плагины обзор структуры плагина и его общий интерфейс JavaScript. Этот раздел продолжает демонстрировать пример <em>echo</em> плагина, который соообщается из WebView Cordova с кодом платформы и в обратную строну.</p>
 
-<p>IOS плагин реализован как Objective-C класс, который расширяет <code>CDVPlugin</code> класс. Для JavaScript <code>exec</code> метода <code>service</code> параметр для сопоставления с Objective-C класс, каждый плагин должен быть зарегистрирован как <code>&lt;feature&gt;</code> в каталоге именованного приложения тег <code>config.xml</code> файл.</p>
+<p>IOS плагин реализован как Objective-C класс, который расширяет <code class="language-plaintext highlighter-rouge">CDVPlugin</code> класс. Для JavaScript <code class="language-plaintext highlighter-rouge">exec</code> метода <code class="language-plaintext highlighter-rouge">service</code> параметр для сопоставления с Objective-C класс, каждый плагин должен быть зарегистрирован как <code class="language-plaintext highlighter-rouge">&lt;feature&gt;</code> в каталоге именованного приложения тег <code class="language-plaintext highlighter-rouge">config.xml</code> файл.</p>
 
-<h2>Сопоставление классов плагина</h2>
+<h2 id="сопоставление-классов-плагина">Сопоставление классов плагина</h2>
 
-<p>Часть JavaScript плагин использует <code>cordova.exec</code> метод следующим образом:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    Exec (&lt; successFunction &gt;, &lt; failFunction &gt;, &lt; служба &gt;, &lt; действия &gt; [&lt; args &gt;]);
-</code></pre></div>
-<p>Это маршалирует запрос от <code>UIWebView</code> в сторону родной iOS эффективно вызова <code>action</code> метод <code>service</code> класса, с аргументами, переданными в <code>args</code> массив.</p>
+<p>Часть JavaScript плагин использует <code class="language-plaintext highlighter-rouge">cordova.exec</code> метод следующим образом:</p>
 
-<p>Укажите плагин как <code>&lt;feature&gt;</code> тег в Кордова iOS приложения проекта <code>config.xml</code> файл, используя <code>plugin.xml</code> файл, чтобы придать этой разметки автоматически, как описано в приложении плагины:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;feature name="LocalStorage"&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    Exec (&lt; successFunction &gt;, &lt; failFunction &gt;, &lt; служба &gt;, &lt; действия &gt; [&lt; args &gt;]);
+</code></pre></div></div>
+
+<p>Это маршалирует запрос от <code class="language-plaintext highlighter-rouge">UIWebView</code> в сторону родной iOS эффективно вызова <code class="language-plaintext highlighter-rouge">action</code> метод <code class="language-plaintext highlighter-rouge">service</code> класса, с аргументами, переданными в <code class="language-plaintext highlighter-rouge">args</code> массив.</p>
+
+<p>Укажите плагин как <code class="language-plaintext highlighter-rouge">&lt;feature&gt;</code> тег в Кордова iOS приложения проекта <code class="language-plaintext highlighter-rouge">config.xml</code> файл, используя <code class="language-plaintext highlighter-rouge">plugin.xml</code> файл, чтобы придать этой разметки автоматически, как описано в приложении плагины:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;feature name="LocalStorage"&gt;
         &lt;param name="ios-package" value="CDVLocalStorage" /&gt;
     &lt;/feature&gt;
-</code></pre></div>
-<p>Функция <code>name</code> атрибут должен соответствовать указан как JavaScript <code>exec</code> вызова <code>service</code> параметр. <code>value</code>Атрибут должен соответствовать имени плагина Objective-C класса. <code>&lt;param&gt;</code>Элемента <code>name</code> всегда должно быть <code>ios-package</code> . Если не следовать этим рекомендациям, может скомпилировать плагин, но Cordova до сих пор не может быть возможность доступа к ней.</p>
+</code></pre></div></div>
 
-<h2>Инициализация плагин его жизненный цикл</h2>
+<p>Функция <code class="language-plaintext highlighter-rouge">name</code> атрибут должен соответствовать указан как JavaScript <code class="language-plaintext highlighter-rouge">exec</code> вызова <code class="language-plaintext highlighter-rouge">service</code> параметр. <code class="language-plaintext highlighter-rouge">value</code>Атрибут должен соответствовать имени плагина Objective-C класса. <code class="language-plaintext highlighter-rouge">&lt;param&gt;</code>Элемента <code class="language-plaintext highlighter-rouge">name</code> всегда должно быть <code class="language-plaintext highlighter-rouge">ios-package</code> . Если не следовать этим рекомендациям, может скомпилировать плагин, но Cordova до сих пор не может быть возможность доступа к ней.</p>
 
-<p>Для жизни каждого из них создается один экземпляр объекта плагин <code>UIWebView</code> . Плагины создаются обычно при первом обращении путем вызова из JavaScript. В противном случае они могут быть созданы путем установки <code>param</code> с именем <code>onload</code> для <code>true</code> в <code>config.xml</code> файл:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;feature name="Echo"&gt;
+<h2 id="инициализация-плагин-его-жизненный-цикл">Инициализация плагин его жизненный цикл</h2>
+
+<p>Для жизни каждого из них создается один экземпляр объекта плагин <code class="language-plaintext highlighter-rouge">UIWebView</code> . Плагины создаются обычно при первом обращении путем вызова из JavaScript. В противном случае они могут быть созданы путем установки <code class="language-plaintext highlighter-rouge">param</code> с именем <code class="language-plaintext highlighter-rouge">onload</code> для <code class="language-plaintext highlighter-rouge">true</code> в <code class="language-plaintext highlighter-rouge">config.xml</code> файл:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;feature name="Echo"&gt;
         &lt;param name="ios-package" value="Echo" /&gt;
         &lt;param name="onload" value="true" /&gt;
     &lt;/feature&gt;
-</code></pre></div>
-<p>Существует <em>нет</em> места для инициализатора для плагинов. Вместо этого следует использовать плагины <code>pluginInitialize</code> метод для их запуска логики.</p>
+</code></pre></div></div>
 
-<p>Плагины с долго выполняющихся запросов, фон деятельности, такие как воспроизведение мультимедиа, слушателей или что поддерживать внутреннее состояние следует осуществлять <code>onReset</code> метод для очистки этих мероприятий. Метод работает, когда <code>UIWebView</code> переходит на новую страницу или обновления, которая перезагружает JavaScript.</p>
+<p>Существует <em>нет</em> места для инициализатора для плагинов. Вместо этого следует использовать плагины <code class="language-plaintext highlighter-rouge">pluginInitialize</code> метод для их запуска логики.</p>
 
-<h2>Написание iOS Cordova плагин</h2>
+<p>Плагины с долго выполняющихся запросов, фон деятельности, такие как воспроизведение мультимедиа, слушателей или что поддерживать внутреннее состояние следует осуществлять <code class="language-plaintext highlighter-rouge">onReset</code> метод для очистки этих мероприятий. Метод работает, когда <code class="language-plaintext highlighter-rouge">UIWebView</code> переходит на новую страницу или обновления, которая перезагружает JavaScript.</p>
 
-<p>Вызов JavaScript запускает запрос плагин к родной стороне, и соответствующие iOS плагин Objective-C отображается правильно в <code>config.xml</code> файл, но как окончательный iOS Objective-C модуль класса взгляд? Все, что отправляется в плагин с JavaScript в <code>exec</code> функция передается в соответствующий класс плагин <code>action</code> метод. Метод плагин имеет подпись:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    - (void)myMethod:(CDVInvokedUrlCommand*)command
+<h2 id="написание-ios-cordova-плагин">Написание iOS Cordova плагин</h2>
+
+<p>Вызов JavaScript запускает запрос плагин к родной стороне, и соответствующие iOS плагин Objective-C отображается правильно в <code class="language-plaintext highlighter-rouge">config.xml</code> файл, но как окончательный iOS Objective-C модуль класса взгляд? Все, что отправляется в плагин с JavaScript в <code class="language-plaintext highlighter-rouge">exec</code> функция передается в соответствующий класс плагин <code class="language-plaintext highlighter-rouge">action</code> метод. Метод плагин имеет подпись:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    - (void)myMethod:(CDVInvokedUrlCommand*)command
     {
         CDVPluginResult* pluginResult = nil;
         NSString* myarg = [command.arguments objectAtIndex:0];
@@ -1141,80 +1148,92 @@
         }
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }
-</code></pre></div>
-<p>Для более подробной информации, см. <code>[CDVInvokedUrlCommand.h](https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVInvokedUrlCommand.h)</code> , <code>[CDVPluginResult.h](https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPluginResult.h)</code> , и<code>[CDVCommandDelegate.h](https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVCommandDelegate.h)</code>.</p>
+</code></pre></div></div>
 
-<h2>iOS CDVPluginResult типы сообщений</h2>
+<p>Для более подробной информации, см. <code class="language-plaintext highlighter-rouge">[CDVInvokedUrlCommand.h](https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVInvokedUrlCommand.h)</code> , <code class="language-plaintext highlighter-rouge">[CDVPluginResult.h](https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPluginResult.h)</code> , и<code class="language-plaintext highlighter-rouge">[CDVCommandDelegate.h](https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVCommandDelegate.h)</code>.</p>
 
-<p>Вы можете использовать <code>CDVPluginResult</code> для возвращения различных результата типа обратно в обратных вызовов JavaScript, с помощью методов класса, следовать этой схеме:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    + (CDVPluginResult*)resultWithStatus:(CDVCommandStatus)statusOrdinal messageAs...
-</code></pre></div>
-<p>Вы можете создать <code>String</code> , <code>Int</code> , <code>Double</code> , <code>Bool</code> , <code>Array</code> , <code>Dictionary</code> , <code>ArrayBuffer</code> , и <code>Multipart</code> типов. Вы можете также оставить вне каких-либо аргументов, чтобы отправить статус, или возвращает ошибку, или даже не решили отправить любой плагин результат, в этом случае срабатывает ни обратного вызова.</p>
+<h2 id="ios-cdvpluginresult-типы-сообщений">iOS CDVPluginResult типы сообщений</h2>
+
+<p>Вы можете использовать <code class="language-plaintext highlighter-rouge">CDVPluginResult</code> для возвращения различных результата типа обратно в обратных вызовов JavaScript, с помощью методов класса, следовать этой схеме:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    + (CDVPluginResult*)resultWithStatus:(CDVCommandStatus)statusOrdinal messageAs...
+</code></pre></div></div>
+
+<p>Вы можете создать <code class="language-plaintext highlighter-rouge">String</code> , <code class="language-plaintext highlighter-rouge">Int</code> , <code class="language-plaintext highlighter-rouge">Double</code> , <code class="language-plaintext highlighter-rouge">Bool</code> , <code class="language-plaintext highlighter-rouge">Array</code> , <code class="language-plaintext highlighter-rouge">Dictionary</code> , <code class="language-plaintext highlighter-rouge">ArrayBuffer</code> , и <code class="language-plaintext highlighter-rouge">Multipart</code> типов. Вы можете также оставить вне каких-либо аргументов, чтобы отправить статус, или возвращает ошибку, или даже не решили отправить любой плагин результат, в этом случае срабатывает ни обратного вызова.</p>
 
 <p>Обратите внимание на следующие для сложных возвращаемых значений:</p>
 
 <ul>
-<li><p><code>messageAsArrayBuffer</code>ожидает <code>NSData*</code> и преобразует <code>ArrayBuffer</code> в обратного вызова JavaScript. Кроме того, любой <code>ArrayBuffer</code> отправляет плагин JavaScript преобразуются в<code>NSData*</code>.</p></li>
-<li><p><code>messageAsMultipart</code>ожидает <code>NSArray*</code> содержащие любые другие поддерживаемые типы и отправляет весь массив как <code>arguments</code> для обратного вызова JavaScript. Таким образом, все аргументы сериализуются и десериализуются как необходимости, так что это безопасно вернуться <code>NSData*</code> как составной, а не как <code>Array</code> /<code>Dictionary</code>.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">messageAsArrayBuffer</code>ожидает <code class="language-plaintext highlighter-rouge">NSData*</code> и преобразует <code class="language-plaintext highlighter-rouge">ArrayBuffer</code> в обратного вызова JavaScript. Кроме того, любой <code class="language-plaintext highlighter-rouge">ArrayBuffer</code> отправляет плагин JavaScript преобразуются в<code class="language-plaintext highlighter-rouge">NSData*</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">messageAsMultipart</code>ожидает <code class="language-plaintext highlighter-rouge">NSArray*</code> содержащие любые другие поддерживаемые типы и отправляет весь массив как <code class="language-plaintext highlighter-rouge">arguments</code> для обратного вызова JavaScript. Таким образом, все аргументы сериализуются и десериализуются как необходимости, так что это безопасно вернуться <code class="language-plaintext highlighter-rouge">NSData*</code> как составной, а не как <code class="language-plaintext highlighter-rouge">Array</code> /<code class="language-plaintext highlighter-rouge">Dictionary</code>.</p>
+  </li>
 </ul>
 
-<h2>Эхо iOS плагин пример</h2>
+<h2 id="эхо-ios-плагин-пример">Эхо iOS плагин пример</h2>
 
-<p>Для сопоставления интерфейса JavaScript функция <em>echo</em>, описанная в разделе &quot;Плагины приложения&quot;, используйте <code>plugin.xml</code> для вставки спецификации <code>feature</code> в файл <code>config.xml</code> платформы:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;platform name="ios"&gt;
+<p>Для сопоставления интерфейса JavaScript функция <em>echo</em>, описанная в разделе “Плагины приложения”, используйте <code class="language-plaintext highlighter-rouge">plugin.xml</code> для вставки спецификации <code class="language-plaintext highlighter-rouge">feature</code> в файл <code class="language-plaintext highlighter-rouge">config.xml</code> платформы:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;platform name="ios"&gt;
         &lt;config-file target="config.xml" parent="/*"&gt;
             &lt;feature name="Echo"&gt;
                 &lt;param name="ios-package" value="Echo" /&gt;
             &lt;/feature&gt;
         &lt;/config-file&gt;
     &lt;/platform&gt;
-</code></pre></div>
-<p>Тогда мы хотели бы добавить следующие <code>Echo.h</code> и <code>Echo.m</code> файлы в <code>Plugins</code> папку в каталоге приложений Cordova-iOS:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    <span class="cm">/********* Echo.h Cordova Plugin Header *******/</span>
+</code></pre></div></div>
 
-    <span class="cp">#import &lt;Cordova/CDV.h&gt;
-</span>
-    <span class="k">@interface</span> <span class="nc">Echo</span> <span class="p">:</span> <span class="nc">CDVPlugin</span>
+<p>Тогда мы хотели бы добавить следующие <code class="language-plaintext highlighter-rouge">Echo.h</code> и <code class="language-plaintext highlighter-rouge">Echo.m</code> файлы в <code class="language-plaintext highlighter-rouge">Plugins</code> папку в каталоге приложений Cordova-iOS:</p>
 
-    <span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">echo</span><span class="p">:(</span><span class="n">CDVInvokedUrlCommand</span><span class="o">*</span><span class="p">)</span><span class="nv">command</span><span class="p">;</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    /********* Echo.h Cordova Plugin Header *******/
 
-    <span class="k">@end</span>
+    #import &lt;Cordova/CDV.h&gt;
 
-    <span class="cm">/********* Echo.m Cordova Plugin Implementation *******/</span>
+    @interface Echo : CDVPlugin
 
-    <span class="cp">#import "Echo.h"
-</span>    <span class="cp">#import &lt;Cordova/CDV.h&gt;
-</span>
-    <span class="k">@implementation</span> <span class="nc">Echo</span>
+    - (void)echo:(CDVInvokedUrlCommand*)command;
 
-    <span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">echo</span><span class="p">:(</span><span class="n">CDVInvokedUrlCommand</span><span class="o">*</span><span class="p">)</span><span class="nv">command</span>
-    <span class="p">{</span>
-        <span class="n">CDVPluginResult</span><span class="o">*</span> <span class="n">pluginResult</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
-        <span class="n">NSString</span><span class="o">*</span> <span class="n">echo</span> <span class="o">=</span> <span class="p">[</span><span class="n">command</span><span class="p">.</span><span class="n">arguments</span> <span class="nf">objectAtIndex</span><span class="p">:</span><span class="mi">0</span><span class="p">];</span>
+    @end
 
-        <span class="k">if</span> <span class="p">(</span><span class="n">echo</span> <span class="o">!=</span> <span class="nb">nil</span> <span class="o">&amp;&amp;</span> <span class="p">[</span><span class="n">echo</span> <span class="nf">length</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">pluginResult</span> <span class="o">=</span> <span class="p">[</span><span class="n">CDVPluginResult</span> <span class="nf">resultWithStatus</span><span class="p">:</span><span class="n">CDVCommandStatus_OK</span> <span class="nf">messageAsString</span><span class="p">:</span><span class="n">echo</span><span class="p">];</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="n">pluginResult</span> <span class="o">=</span> <span class="p">[</span><span class="n">CDVPluginResult</span> <span class="nf">resultWithStatus</span><span class="p">:</span><span class="n">CDVCommandStatus_ERROR</span><span class="p">];</span>
-        <span class="p">}</span>
+    /********* Echo.m Cordova Plugin Implementation *******/
 
-        <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">commandDelegate</span> <span class="nf">sendPluginResult</span><span class="p">:</span><span class="n">pluginResult</span> <span class="nf">callbackId</span><span class="p">:</span><span class="n">command</span><span class="p">.</span><span class="n">callbackId</span><span class="p">];</span>
-    <span class="p">}</span>
+    #import "Echo.h"
+    #import &lt;Cordova/CDV.h&gt;
 
-    <span class="k">@end</span>
-</code></pre></div>
-<p>Необходимого импорта в верхней части файла расширяет класс от <code>CDVPlugin</code> . В этом случае плагин поддерживает только один <code>echo</code> действий. Он получает эхо строку путем вызова <code>objectAtIndex</code> метод получить первый параметр <code>arguments</code> массив, который соответствует аргументам, принятому JavaScript в <code>exec()</code> функции.</p>
+    @implementation Echo
 
-<p>Он проверяет параметр, чтобы убедиться, что это не <code>nil</code> или является пустой строкой, возвращая <code>PluginResult</code> с <code>ERROR</code> статус, если это так. Если параметр проходит проверку, он возвращает <code>PluginResult</code> с <code>OK</code> статус, проходя в оригинале <code>echo</code> строка. Наконец, он отправляет результат <code>self.commandDelegate</code> , которая выполняет <code>exec</code> метода успех или неудача обратные вызовы на стороне JavaScript. Если успех обратного вызова вызывается, он проходит в <code>echo</code> параметр.</p>
+    - (void)echo:(CDVInvokedUrlCommand*)command
+    {
+        CDVPluginResult* pluginResult = nil;
+        NSString* echo = [command.arguments objectAtIndex:0];
 
-<h2>iOS интеграции</h2>
+        if (echo != nil &amp;&amp; [echo length] &gt; 0) {
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:echo];
+        } else {
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+        }
 
-<p><code>CDVPlugin</code>Класса есть другие методы, которые можно переопределить ваш плагин. Например, вы можете захватить <code>[pause](../../../cordova/events/events.pause.html)</code> , <code>[resume](../../../cordova/events/events.resume.html)</code> , прервать app и <code>handleOpenURL</code> события. См <a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.h">CDVPlugin.h</a> и <a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.m">CDVPlugin.m</a> для руководства.</p>
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }
 
-<h2>Работа с потоками</h2>
+    @end
+</code></pre></div></div>
+
+<p>Необходимого импорта в верхней части файла расширяет класс от <code class="language-plaintext highlighter-rouge">CDVPlugin</code> . В этом случае плагин поддерживает только один <code class="language-plaintext highlighter-rouge">echo</code> действий. Он получает эхо строку путем вызова <code class="language-plaintext highlighter-rouge">objectAtIndex</code> метод получить первый параметр <code class="language-plaintext highlighter-rouge">arguments</code> массив, который соответствует аргументам, принятому JavaScript в <code class="language-plaintext highlighter-rouge">exec()</code> функции.</p>
+
+<p>Он проверяет параметр, чтобы убедиться, что это не <code class="language-plaintext highlighter-rouge">nil</code> или является пустой строкой, возвращая <code class="language-plaintext highlighter-rouge">PluginResult</code> с <code class="language-plaintext highlighter-rouge">ERROR</code> статус, если это так. Если параметр проходит проверку, он возвращает <code class="language-plaintext highlighter-rouge">PluginResult</code> с <code class="language-plaintext highlighter-rouge">OK</code> статус, проходя в оригинале <code class="language-plaintext highlighter-rouge">echo</code> строка. Наконец, он отправляет результат <code class="language-plaintext highlighter-rouge">self.commandDelegate</code> , которая выполняет <code class="language-plaintext highlighter-rouge">exec</code> метода успех или неудача обратные вызовы на стороне JavaScript. Если успех обратного вызова вызывается, он проходит в <code class="language-plaintext highlighter-rouge">echo</code> параметр.</p>
+
+<h2 id="ios-интеграции">iOS интеграции</h2>
+
+<p><code class="language-plaintext highlighter-rouge">CDVPlugin</code>Класса есть другие методы, которые можно переопределить ваш плагин. Например, вы можете захватить <code class="language-plaintext highlighter-rouge">[pause](../../../cordova/events/events.pause.html)</code> , <code class="language-plaintext highlighter-rouge">[resume](../../../cordova/events/events.resume.html)</code> , прервать app и <code class="language-plaintext highlighter-rouge">handleOpenURL</code> события. См <a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.h">CDVPlugin.h</a> и <a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.m">CDVPlugin.m</a> для руководства.</p>
+
+<h2 id="работа-с-потоками">Работа с потоками</h2>
 
 <p>Плагин методы обычно выполняются в том же потоке, что основной интерфейс. Если ваш плагин требует большой обработки или требует блокирующий вызов, вам следует использовать фоновый поток. Например:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    - (void)myPluginMethod:(CDVInvokedUrlCommand*)command
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    - (void)myPluginMethod:(CDVInvokedUrlCommand*)command
     {
         // Check command.arguments here.
         [self.commandDelegate runInBackground:^{
@@ -1225,16 +1244,21 @@
             [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
         }];
     }
-</code></pre></div>
-<h2>Отладка iOS плагины</h2>
+</code></pre></div></div>
 
-<p>Для отладки на стороне Objective-C, требуется встроенный отладчик Xcode&#39;s. Для JavaScript на iOS 5.0 или позднее можно использовать <a href="https://github.com/apache/cordova-weinre">Weinre, проект Apache Cordova</a>, или <a href="http://www.iwebinspector.com/">iWebInspector, сторонняя утилита</a>. Для iOS 8 вы можете подключиться через Safari 8.0 к приложению которое работает в симуляторе iOS 8.</p>
+<h2 id="отладка-ios-плагины">Отладка iOS плагины</h2>
 
-<h2>Наиболее распространенные ошибки</h2>
+<p>Для отладки на стороне Objective-C, требуется встроенный отладчик Xcode’s. Для JavaScript на iOS 5.0 или позднее можно использовать <a href="https://github.com/apache/cordova-weinre">Weinre, проект Apache Cordova</a>, или <a href="http://www.iwebinspector.com/">iWebInspector, сторонняя утилита</a>. Для iOS 8 вы можете подключиться через Safari 8.0 к приложению которое работает в симуляторе iOS 8.</p>
+
+<h2 id="наиболее-распространенные-ошибки">Наиболее распространенные ошибки</h2>
 
 <ul>
-<li><p>Не забудьте добавить ваш плагин сопоставление <code>config.xml</code> . Если вы забыли, ошибка регистрируется в консоли Xcode.</p></li>
-<li><p>Не забудьте добавить любые узлы, при подключении к в белый список, как описано в &quot;<a href="../../appdev/whitelist/index.html">Инструкция по доступу к внешним ресурсам</a>&quot;. Если вы забыли, ошибка регистрируется в консоли Xcode.</p></li>
+  <li>
+    <p>Не забудьте добавить ваш плагин сопоставление <code class="language-plaintext highlighter-rouge">config.xml</code> . Если вы забыли, ошибка регистрируется в консоли Xcode.</p>
+  </li>
+  <li>
+    <p>Не забудьте добавить любые узлы, при подключении к в белый список, как описано в “<a href="../../appdev/whitelist/index.html">Инструкция по доступу к внешним ресурсам</a>”. Если вы забыли, ошибка регистрируется в консоли Xcode.</p>
+  </li>
 </ul>
 
 

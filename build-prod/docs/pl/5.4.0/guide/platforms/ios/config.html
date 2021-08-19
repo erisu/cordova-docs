@@ -1022,62 +1022,112 @@
             
 
             <div id="page-toc-source">
-                <h1>Konfiguracja iOS</h1>
+                <h1 id="konfiguracja-ios">Konfiguracja iOS</h1>
 
-<p><code>config.xml</code>Plik steruje aplikacji podstawowe ustawienia, które mają zastosowanie w każdej aplikacji i wystąpienie CordovaWebView. Ta sekcja zawiera szczegóły preferencje, które stosuje się tylko do iOS buduje. Zobacz <a href="config_ref_index.md.html#The%20config.xml%20File">plik config.xml</a> informacji na temat opcji konfiguracji globalnej.</p>
+<p><code class="language-plaintext highlighter-rouge">config.xml</code>Plik steruje aplikacji podstawowe ustawienia, które mają zastosowanie w każdej aplikacji i wystąpienie CordovaWebView. Ta sekcja zawiera szczegóły preferencje, które stosuje się tylko do iOS buduje. Zobacz <a href="config_ref_index.md.html#The%20config.xml%20File">plik config.xml</a> informacji na temat opcji konfiguracji globalnej.</p>
 
 <ul>
-<li><p><code>EnableViewportScale</code>(domyślnie wartość logiczna, <code>false</code> ): zestaw <code>true</code> Aby tag meta rzutni wyłączyć lub ograniczyć zakres skalowania użytkownika, który jest domyślnie włączona.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="EnableViewportScale" value="true"/&gt;
-</code></pre></div>
-<p>Miejsce wziernika następujących w HTML, aby wyłączyć skalowanie i dopasowanie treści elastycznie w renderowania widoku sieci Web:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no' /&gt;
-</code></pre></div></li>
-<li><p><code>MediaPlaybackAllowsAirPlay</code>(domyślnie wartość logiczna, <code>true</code> ): zestaw <code>false</code> Aby zapobiec Air Zagraj używane w tym widoku. Dostępne w domyślnej UIWebView i WKWebView.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="MediaPlaybackAllowsAirPlay" value="false"/&gt;
-</code></pre></div></li>
-<li><p><code>MediaPlaybackRequiresUserAction</code>(domyślnie wartość logiczna, <code>false</code> ): zestaw <code>true</code> Aby uniemożliwić automatyczne odtwarzanie z HTML5 wideo lub audio <code>autoplay</code> atrybut lub za pomocą JavaScript.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="MediaPlaybackRequiresUserAction" value="true"/&gt;
-</code></pre></div></li>
-<li><p><code>AllowInlineMediaPlayback</code>(domyślnie wartość logiczna, <code>false</code> ): zestaw <code>true</code> do HTML5 pozwala na odtwarzanie multimediów <em>wbudowane</em> w układ ekranu, za pomocą przeglądarki dostarczane kontroli zamiast rodzimych kontroli. Do tego do pracy, dodać <code>webkit-playsinline</code> atrybut do dowolnego <code>&lt;video&gt;</code> elementów.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="AllowInlineMediaPlayback" value="true"/&gt;
-</code></pre></div></li>
-<li><p><code>BackupWebStorage</code>(ciąg, albo <code>none</code> , <code>local</code> , lub domyślnie <code>cloud</code> ): zestaw <code>cloud</code> Aby umożliwić web przechowywania danych kopii zapasowych za pomocą usługi iCloud. Zestaw <code>local</code> Aby zezwolić tylko lokalnych kopii zapasowych za pośrednictwem iTunes sync. Zestaw <code>none</code> zapobiec web przechowywania kopii zapasowych.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="BackupWebStorage" value="local"/&gt;
-</code></pre></div></li>
-<li><p><code>TopActivityIndicator</code>(ciąg, domyślnie <code>gray</code> ): Steruje wyglądem małych wirująca ikona na pasku stanu, który wskazuje aktywności procesora znaczące. Prawidłowe wartości to <code>whiteLarge</code> , <code>white</code> , i<code>gray</code>.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="TopActivityIndicator" value="white"/&gt;
-</code></pre></div></li>
-<li><p><code>KeyboardDisplayRequiresUserAction</code>(domyślnie wartość logiczna, <code>true</code> ): zestaw <code>false</code> Aby umożliwić ten klawiatura wobec ukazywać się podczas wywoływania <code>focus()</code> na formularze.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="KeyboardDisplayRequiresUserAction" value="false"/&gt;
-</code></pre></div></li>
-<li><p><code>SuppressesIncrementalRendering</code>(domyślnie wartość logiczna, <code>false</code> ): zestaw <code>true</code> czekać, aż cała zawartość została odebrana przed renderuje na ekranie.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="SuppressesIncrementalRendering" value="true"/&gt;
-</code></pre></div></li>
-<li><p><code>GapBetweenPages</code>(float, domyślnie `` ): wielkość szczeliny, w punktach, między stronami.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="GapBetweenPages" value="0"/&gt;
-</code></pre></div></li>
-<li><p><code>PageLength</code>(float, domyślnie `` ): rozmiar każdej strony, w punktach, w kierunku, w którym strony przepływu. Kiedy PaginationMode jest prawo do lewej lub od lewej do prawej, ta właściwość reprezentuje szerokość każdej strony. Gdy PaginationMode jest topToBottom lub bottomToTop, ta właściwość reprezentuje wysokość każdej strony. Wartością domyślną jest 0, co oznacza, że układ używa rozmiar rzutni, aby określić wymiary strony.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="PageLength" value="0"/&gt;
-</code></pre></div></li>
-<li><p><code>PaginationBreakingMode</code>(ciąg, domyślnie <code>page</code> ): prawidłowe wartości są <code>page</code> i <code>column</code> . Sposób, w którym następuje łamanie kolumna lub strony. Ta właściwość określa, czy niektórych właściwości CSS dotyczące podziału kolumna i strony są honorowane lub ignorowane. Gdy ta właściwość jest zestaw <code>column</code> , zawartość szanuje właściwości CSS powiązana kolumna łamanie w miejscu podziału strony.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="PaginationBreakingMode" value="page"/&gt;
-</code></pre></div></li>
-<li><p><code>PaginationMode</code>(ciąg, domyślnie <code>unpaginated</code> ): prawidłowe wartości to <code>unpaginated</code> , <code>leftToRight</code> , <code>topToBottom</code> , <code>bottomToTop</code> , i <code>rightToLeft</code> . Ta właściwość określa, czy zawartość w widoku sieci web jest podzielona na strony, które wypełniają widokiem na jednym ekranie na raz, lub wyświetlane jako jeden długi przewijania widoku. Jeśli zestaw do postaci podzielona, Właściwość ta włącza i wyłącza numeracją stron układu treści, powodując jego zawartość widoku sieci web użyć wartości PageLength i GapBetweenPages do relayout.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="PaginationMode" value="unpaginated"/&gt;
-</code></pre></div></li>
-<li><p><code>UIWebViewDecelerationSpeed</code>(ciąg, domyślnie <code>normal</code> ): prawidłowe wartości to <code>normal</code> , <code>fast</code> . Właściwość ta określa prędkość spowalniania tempa przewijania. <code>normal</code>jest szybkość domyślna dla najbardziej natywne aplikacje, i <code>fast</code> jest wartość domyślna dla Mobile Safari.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="UIWebViewDecelerationSpeed" value="fast" /&gt;
-</code></pre></div></li>
-<li><p><code>ErrorUrl</code>(ciąg, nie ustawiona domyślnie): Jeśli ustawiona, będzie wyświetlić stronę lokalnych odwołanie na błąd w aplikacji.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="ErrorUrl" value="myErrorPage.html"/&gt;
-</code></pre></div></li>
-<li><p><code>OverrideUserAgent</code>(ciąg, nie ustawiona domyślnie): Jeśli ustawiona, wartość zastąpi stary UserAgent widoku sieci Web. To jest przydatne do identyfikowania wniosek z aplikacji/przeglądarki podczas żądania stron zdalnego. Należy zachować ostrożność, może to powoduje compitiable problem z serwerami sieci web. Dla większości przypadków Użyj AppendUserAgent zamiast.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="OverrideUserAgent" value="Mozilla/5.0 My Browser" /&gt;
-</code></pre></div></li>
-<li><p><code>AppendUserAgent</code>(ciąg, nie ustawiona domyślnie): Jeśli ustawiona, wartość dołączy do końca starego UserAgent widoku sieci Web. Podczas korzystania z OverrideUserAgent, wartość ta zostanie zignorowana.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="AppendUserAgent" value="My Browser" /&gt;
-</code></pre></div></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">EnableViewportScale</code>(domyślnie wartość logiczna, <code class="language-plaintext highlighter-rouge">false</code> ): zestaw <code class="language-plaintext highlighter-rouge">true</code> Aby tag meta rzutni wyłączyć lub ograniczyć zakres skalowania użytkownika, który jest domyślnie włączona.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="EnableViewportScale" value="true"/&gt;
+</code></pre></div>    </div>
+
+    <p>Miejsce wziernika następujących w HTML, aby wyłączyć skalowanie i dopasowanie treści elastycznie w renderowania widoku sieci Web:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no' /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">MediaPlaybackAllowsAirPlay</code>(domyślnie wartość logiczna, <code class="language-plaintext highlighter-rouge">true</code> ): zestaw <code class="language-plaintext highlighter-rouge">false</code> Aby zapobiec Air Zagraj używane w tym widoku. Dostępne w domyślnej UIWebView i WKWebView.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="MediaPlaybackAllowsAirPlay" value="false"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">MediaPlaybackRequiresUserAction</code>(domyślnie wartość logiczna, <code class="language-plaintext highlighter-rouge">false</code> ): zestaw <code class="language-plaintext highlighter-rouge">true</code> Aby uniemożliwić automatyczne odtwarzanie z HTML5 wideo lub audio <code class="language-plaintext highlighter-rouge">autoplay</code> atrybut lub za pomocą JavaScript.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="MediaPlaybackRequiresUserAction" value="true"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">AllowInlineMediaPlayback</code>(domyślnie wartość logiczna, <code class="language-plaintext highlighter-rouge">false</code> ): zestaw <code class="language-plaintext highlighter-rouge">true</code> do HTML5 pozwala na odtwarzanie multimediów <em>wbudowane</em> w układ ekranu, za pomocą przeglądarki dostarczane kontroli zamiast rodzimych kontroli. Do tego do pracy, dodać <code class="language-plaintext highlighter-rouge">webkit-playsinline</code> atrybut do dowolnego <code class="language-plaintext highlighter-rouge">&lt;video&gt;</code> elementów.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="AllowInlineMediaPlayback" value="true"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">BackupWebStorage</code>(ciąg, albo <code class="language-plaintext highlighter-rouge">none</code> , <code class="language-plaintext highlighter-rouge">local</code> , lub domyślnie <code class="language-plaintext highlighter-rouge">cloud</code> ): zestaw <code class="language-plaintext highlighter-rouge">cloud</code> Aby umożliwić web przechowywania danych kopii zapasowych za pomocą usługi iCloud. Zestaw <code class="language-plaintext highlighter-rouge">local</code> Aby zezwolić tylko lokalnych kopii zapasowych za pośrednictwem iTunes sync. Zestaw <code class="language-plaintext highlighter-rouge">none</code> zapobiec web przechowywania kopii zapasowych.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="BackupWebStorage" value="local"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">TopActivityIndicator</code>(ciąg, domyślnie <code class="language-plaintext highlighter-rouge">gray</code> ): Steruje wyglądem małych wirująca ikona na pasku stanu, który wskazuje aktywności procesora znaczące. Prawidłowe wartości to <code class="language-plaintext highlighter-rouge">whiteLarge</code> , <code class="language-plaintext highlighter-rouge">white</code> , i<code class="language-plaintext highlighter-rouge">gray</code>.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="TopActivityIndicator" value="white"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">KeyboardDisplayRequiresUserAction</code>(domyślnie wartość logiczna, <code class="language-plaintext highlighter-rouge">true</code> ): zestaw <code class="language-plaintext highlighter-rouge">false</code> Aby umożliwić ten klawiatura wobec ukazywać się podczas wywoływania <code class="language-plaintext highlighter-rouge">focus()</code> na formularze.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="KeyboardDisplayRequiresUserAction" value="false"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">SuppressesIncrementalRendering</code>(domyślnie wartość logiczna, <code class="language-plaintext highlighter-rouge">false</code> ): zestaw <code class="language-plaintext highlighter-rouge">true</code> czekać, aż cała zawartość została odebrana przed renderuje na ekranie.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="SuppressesIncrementalRendering" value="true"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">GapBetweenPages</code>(float, domyślnie `` ): wielkość szczeliny, w punktach, między stronami.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="GapBetweenPages" value="0"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">PageLength</code>(float, domyślnie `` ): rozmiar każdej strony, w punktach, w kierunku, w którym strony przepływu. Kiedy PaginationMode jest prawo do lewej lub od lewej do prawej, ta właściwość reprezentuje szerokość każdej strony. Gdy PaginationMode jest topToBottom lub bottomToTop, ta właściwość reprezentuje wysokość każdej strony. Wartością domyślną jest 0, co oznacza, że układ używa rozmiar rzutni, aby określić wymiary strony.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="PageLength" value="0"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">PaginationBreakingMode</code>(ciąg, domyślnie <code class="language-plaintext highlighter-rouge">page</code> ): prawidłowe wartości są <code class="language-plaintext highlighter-rouge">page</code> i <code class="language-plaintext highlighter-rouge">column</code> . Sposób, w którym następuje łamanie kolumna lub strony. Ta właściwość określa, czy niektórych właściwości CSS dotyczące podziału kolumna i strony są honorowane lub ignorowane. Gdy ta właściwość jest zestaw <code class="language-plaintext highlighter-rouge">column</code> , zawartość szanuje właściwości CSS powiązana kolumna łamanie w miejscu podziału strony.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="PaginationBreakingMode" value="page"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">PaginationMode</code>(ciąg, domyślnie <code class="language-plaintext highlighter-rouge">unpaginated</code> ): prawidłowe wartości to <code class="language-plaintext highlighter-rouge">unpaginated</code> , <code class="language-plaintext highlighter-rouge">leftToRight</code> , <code class="language-plaintext highlighter-rouge">topToBottom</code> , <code class="language-plaintext highlighter-rouge">bottomToTop</code> , i <code class="language-plaintext highlighter-rouge">rightToLeft</code> . Ta właściwość określa, czy zawartość w widoku sieci web jest podzielona na strony, które wypełniają widokiem na jednym ekranie na raz, lub wyświetlane jako jeden długi przewijania widoku. Jeśli zestaw do postaci podzielona, Właściwość ta włącza i wyłącza numeracją stron układu treści, powodując jego zawartość widoku sieci web użyć wartości PageLength i GapBetweenPages do relayout.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="PaginationMode" value="unpaginated"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">UIWebViewDecelerationSpeed</code>(ciąg, domyślnie <code class="language-plaintext highlighter-rouge">normal</code> ): prawidłowe wartości to <code class="language-plaintext highlighter-rouge">normal</code> , <code class="language-plaintext highlighter-rouge">fast</code> . Właściwość ta określa prędkość spowalniania tempa przewijania. <code class="language-plaintext highlighter-rouge">normal</code>jest szybkość domyślna dla najbardziej natywne aplikacje, i <code class="language-plaintext highlighter-rouge">fast</code> jest wartość domyślna dla Mobile Safari.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="UIWebViewDecelerationSpeed" value="fast" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">ErrorUrl</code>(ciąg, nie ustawiona domyślnie): Jeśli ustawiona, będzie wyświetlić stronę lokalnych odwołanie na błąd w aplikacji.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="ErrorUrl" value="myErrorPage.html"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">OverrideUserAgent</code>(ciąg, nie ustawiona domyślnie): Jeśli ustawiona, wartość zastąpi stary UserAgent widoku sieci Web. To jest przydatne do identyfikowania wniosek z aplikacji/przeglądarki podczas żądania stron zdalnego. Należy zachować ostrożność, może to powoduje compitiable problem z serwerami sieci web. Dla większości przypadków Użyj AppendUserAgent zamiast.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="OverrideUserAgent" value="Mozilla/5.0 My Browser" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">AppendUserAgent</code>(ciąg, nie ustawiona domyślnie): Jeśli ustawiona, wartość dołączy do końca starego UserAgent widoku sieci Web. Podczas korzystania z OverrideUserAgent, wartość ta zostanie zignorowana.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="AppendUserAgent" value="My Browser" /&gt;
+</code></pre></div>    </div>
+  </li>
 </ul>
 
 

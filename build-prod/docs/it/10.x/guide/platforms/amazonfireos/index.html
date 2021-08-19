@@ -2104,142 +2104,196 @@
             
 
             <div id="page-toc-source">
-                <h1>Amazon fuoco piattaforma OS guida</h1>
+                <h1 id="amazon-fuoco-piattaforma-os-guida">Amazon fuoco piattaforma OS guida</h1>
 
 <p>Questa guida illustra come impostare il vostro ambiente di sviluppo SDK per distribuire Cordova apps per dispositivi Amazon fuoco OS come il Kindle Fire HDX.</p>
 
 <p>Vedere la seguente per informazioni più dettagliate specifiche della piattaforma:</p>
 
 <ul>
-<li>  <a href="config.html">Configurazione di fuoco OS Amazon</a></li>
-<li>  <a href="webview.html">Amazon fuoco OS visualizzazioni Web</a></li>
-<li>  <a href="plugin.html">Amazon fuoco OS Plugins</a></li>
+  <li><a href="config.html">Configurazione di fuoco OS Amazon</a></li>
+  <li><a href="webview.html">Amazon fuoco OS visualizzazioni Web</a></li>
+  <li><a href="plugin.html">Amazon fuoco OS Plugins</a></li>
 </ul>
 
-<h2>Introduzione</h2>
+<h2 id="introduzione">Introduzione</h2>
 
-<p>Prendendo di mira la piattaforma Amazon fuoco OS, gli sviluppatori Cordova possono creare ibridi web apps che sfruttano il motore web avanzati integrato in dispositivi Kindle Fire. Amazon WebView API (LCG) è un derivato cromo web runtime esclusivo per OS di fuoco. Un rimpiazzo per il WebView che viene fornito con dispositivi Android, LCG permette di creare l&#39;esecuzione migliore e più potente ibrido web apps fornendo il supporto per un motore JavaScript più veloce (V8), il debug remoto e le ottimizzazioni di hardware per dispositivi Kindle Fire, tra cui un&#39;accelerata 2D Canvas e accesso alle funzionalità di HTML5 non supportate da Android costruito in WebView come: Calc CSS, validazione dei Form, getUserMedia, IndexedDB, Web lavoratori, WebSockets e WebGL.</p>
+<p>Prendendo di mira la piattaforma Amazon fuoco OS, gli sviluppatori Cordova possono creare ibridi web apps che sfruttano il motore web avanzati integrato in dispositivi Kindle Fire. Amazon WebView API (LCG) è un derivato cromo web runtime esclusivo per OS di fuoco. Un rimpiazzo per il WebView che viene fornito con dispositivi Android, LCG permette di creare l’esecuzione migliore e più potente ibrido web apps fornendo il supporto per un motore JavaScript più veloce (V8), il debug remoto e le ottimizzazioni di hardware per dispositivi Kindle Fire, tra cui un’accelerata 2D Canvas e accesso alle funzionalità di HTML5 non supportate da Android costruito in WebView come: Calc CSS, validazione dei Form, getUserMedia, IndexedDB, Web lavoratori, WebSockets e WebGL.</p>
 
-<p>Per ulteriori informazioni sull&#39;API WebView Amazon, consulta del portale sviluppatore Amazon <a href="https://developer.amazon.com/public/solutions/platforms/android-fireos/docs/building-and-testing-your-hybrid-app">pagina applicazioni ibride di HTML5</a>. Per domande su come ottenere iniziato e altre edizioni di sostegno, vedere Amazon Developer Portal <a href="http://forums.developer.amazon.com/forums/category.jspa?categoryID=41">forum - HTML5 ibrido Apps</a>.</p>
+<p>Per ulteriori informazioni sull’API WebView Amazon, consulta del portale sviluppatore Amazon <a href="https://developer.amazon.com/public/solutions/platforms/android-fireos/docs/building-and-testing-your-hybrid-app">pagina applicazioni ibride di HTML5</a>. Per domande su come ottenere iniziato e altre edizioni di sostegno, vedere Amazon Developer Portal <a href="http://forums.developer.amazon.com/forums/category.jspa?categoryID=41">forum - HTML5 ibrido Apps</a>.</p>
 
-<h2>Requisiti e supporto</h2>
+<h2 id="requisiti-e-supporto">Requisiti e supporto</h2>
 
-<p>Lo sviluppo di app di Cordova per Amazon fuoco OS richiede l&#39;installazione di una varietà di file di supporto, compreso tutto il necessario per lo sviluppo di Android, così come Amazon WebView SDK. Controllare la lista qui sotto per il necessario installa:</p>
+<p>Lo sviluppo di app di Cordova per Amazon fuoco OS richiede l’installazione di una varietà di file di supporto, compreso tutto il necessario per lo sviluppo di Android, così come Amazon WebView SDK. Controllare la lista qui sotto per il necessario installa:</p>
 
 <ul>
-<li>  <a href="../../cli/index.html">L&#39;interfaccia della riga di comando</a></li>
-<li>  <a href="http://developer.android.com/sdk/">Android SDK</a></li>
-<li>  <a href="http://ant.apache.org">Apache Ant</a></li>
-<li>  <a href="https://developer.amazon.com/public/solutions/platforms/android-fireos/docs/building-and-testing-your-hybrid-app">Amazon WebView SDK</a></li>
+  <li><a href="../../cli/index.html">L’interfaccia della riga di comando</a></li>
+  <li><a href="http://developer.android.com/sdk/">Android SDK</a></li>
+  <li><a href="http://ant.apache.org">Apache Ant</a></li>
+  <li><a href="https://developer.amazon.com/public/solutions/platforms/android-fireos/docs/building-and-testing-your-hybrid-app">Amazon WebView SDK</a></li>
 </ul>
 
-<h2>Installazione</h2>
+<h2 id="installazione">Installazione</h2>
 
-<h3>Android SDK e Apache Ant</h3>
+<h3 id="android-sdk-e-apache-ant">Android SDK e Apache Ant</h3>
 
-<p>Installare il SDK di Android da <a href="http://developer.android.com/sdk/">developer.android.com/sdk</a>. Altrimenti può essere presentato con una scelta di dove installare il SDK, spostare lo scaricato <code>adt-bundle</code> albero ovunque si memorizzare gli strumenti di sviluppo.</p>
+<p>Installare il SDK di Android da <a href="http://developer.android.com/sdk/">developer.android.com/sdk</a>. Altrimenti può essere presentato con una scelta di dove installare il SDK, spostare lo scaricato <code class="language-plaintext highlighter-rouge">adt-bundle</code> albero ovunque si memorizzare gli strumenti di sviluppo.</p>
 
-<p>Dovrai eseguire Android SDK Manager ( <code>android</code> da una riga di comando) almeno una volta prima di iniziare il vostro progetto di Cordova. Assicurarsi di installare la versione più recente di Android SDK Tools e SDK Platform <strong>in particolare livello di API 19</strong>. Portale per sviluppatori Amazon per ulteriori informazioni sull&#39;impostazione di ambiente di sviluppo per dispositivi Kindle Fire OS vedere <a href="https://developer.amazon.com/public/resources/development-tools/ide-tools/tech-docs/01-setting-up-your-development-environment">impostazione il tuo ambiente di sviluppo</a> .</p>
+<p>Dovrai eseguire Android SDK Manager ( <code class="language-plaintext highlighter-rouge">android</code> da una riga di comando) almeno una volta prima di iniziare il vostro progetto di Cordova. Assicurarsi di installare la versione più recente di Android SDK Tools e SDK Platform <strong>in particolare livello di API 19</strong>. Portale per sviluppatori Amazon per ulteriori informazioni sull’impostazione di ambiente di sviluppo per dispositivi Kindle Fire OS vedere <a href="https://developer.amazon.com/public/resources/development-tools/ide-tools/tech-docs/01-setting-up-your-development-environment">impostazione il tuo ambiente di sviluppo</a> .</p>
 
 <p>Installare Apache Ant costruire tool <a href="http://ant.apache.org/bindownload.cgi">scaricando una distribuzione binaria Ant</a>, decompresso in una directory, è possibile fare riferimento a più tardi. Vedere il <a href="http://ant.apache.org/manual/index.html">manuale di formica</a> per più informazioni.</p>
 
-<p>Per strumenti da riga di comando di Cordova a lavorare, è necessario includere il SDK di Android <code>tools</code> , <code>platform-tools</code> e <code>apache-ant/bin</code> le directory nel tuo ambiente PATH.</p>
+<p>Per strumenti da riga di comando di Cordova a lavorare, è necessario includere il SDK di Android <code class="language-plaintext highlighter-rouge">tools</code> , <code class="language-plaintext highlighter-rouge">platform-tools</code> e <code class="language-plaintext highlighter-rouge">apache-ant/bin</code> le directory nel tuo ambiente PATH.</p>
 
-<h4>Percorso Mac/Linux</h4>
+<h4 id="percorso-maclinux">Percorso Mac/Linux</h4>
 
-<p>Su Mac, Linux o altre piattaforme Unix-like, è possibile utilizzare un editor di testo per creare o modificare il <code>~/.bash_profile</code> file, aggiungendo una riga come la seguente, a seconda di dove sono installate il SDK e la formica:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">Export PATH = ${PATH}: / / adt-bundle/sdk/piattaforma-strumenti di sviluppo: / / adt-bundle/sdk/strumenti di sviluppo: / sviluppo/apache-ant/bin
-</code></pre></div>
+<p>Su Mac, Linux o altre piattaforme Unix-like, è possibile utilizzare un editor di testo per creare o modificare il <code class="language-plaintext highlighter-rouge">~/.bash_profile</code> file, aggiungendo una riga come la seguente, a seconda di dove sono installate il SDK e la formica:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Export PATH = ${PATH}: / / adt-bundle/sdk/piattaforma-strumenti di sviluppo: / / adt-bundle/sdk/strumenti di sviluppo: / sviluppo/apache-ant/bin
+</code></pre></div></div>
+
 <p>Questo espone strumenti SDK in windows terminal inaugurato di recente. In caso contrario eseguire questo per renderli disponibili nella sessione corrente:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ source ~/.bash_profile
-</code></pre></div>
-<h4>Percorso di Windows</h4>
 
-<p>Per modificare l&#39;ambiente del percorso su Windows:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ source ~/.bash_profile
+</code></pre></div></div>
+
+<h4 id="percorso-di-windows">Percorso di Windows</h4>
+
+<p>Per modificare l’ambiente del percorso su Windows:</p>
 
 <ul>
-<li><p>Fare clic su <strong>Start nell&#39;angolo inferiore sinistro del desktop</strong> , tasto destro del mouse su <strong>Computer</strong>, quindi fare clic su <strong>proprietà</strong>.</p></li>
-<li><p>Fare clic su <strong>Impostazioni di sistema avanzate</strong> nella colonna a sinistra.</p></li>
-<li><p>Nella finestra di dialogo risultante, premere <strong>Le variabili di ambiente</strong>.</p></li>
-<li><p>Selezionare la variabile <strong>PATH</strong> e premere <strong>Modifica</strong>.</p></li>
-<li><p>Aggiungere quanto segue al percorso basato su cui è stato installato il SDK e la formica, ad esempio:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">;C:\Development\adt-bundle\sdk\platform-tools;C:\Development\adt-bundle\sdk\tools;C:\Development\apache-ant\bin
-</code></pre></div></li>
-<li><p>Salvare il valore e chiudere le due finestre di dialogo.</p></li>
-<li><p>Inoltre devi abilitare Java. Aprire un prompt dei comandi e digitare <code>java</code> , se non viene eseguito, aggiungere il percorso dei binari Java al vostro percorso pure. Rendere %JAVA<em>HOME% sia rivolto verso il JDK installato nella directory. Potrebbe essere necessario aggiungere separatamente variabile di ambiente JAVA</em>HOME.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">; %JAVA_HOME%\bin
-</code></pre></div></li>
+  <li>
+    <p>Fare clic su <strong>Start nell’angolo inferiore sinistro del desktop</strong> , tasto destro del mouse su <strong>Computer</strong>, quindi fare clic su <strong>proprietà</strong>.</p>
+  </li>
+  <li>
+    <p>Fare clic su <strong>Impostazioni di sistema avanzate</strong> nella colonna a sinistra.</p>
+  </li>
+  <li>
+    <p>Nella finestra di dialogo risultante, premere <strong>Le variabili di ambiente</strong>.</p>
+  </li>
+  <li>
+    <p>Selezionare la variabile <strong>PATH</strong> e premere <strong>Modifica</strong>.</p>
+  </li>
+  <li>
+    <p>Aggiungere quanto segue al percorso basato su cui è stato installato il SDK e la formica, ad esempio:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>;C:\Development\adt-bundle\sdk\platform-tools;C:\Development\adt-bundle\sdk\tools;C:\Development\apache-ant\bin
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Salvare il valore e chiudere le due finestre di dialogo.</p>
+  </li>
+  <li>
+    <p>Inoltre devi abilitare Java. Aprire un prompt dei comandi e digitare <code class="language-plaintext highlighter-rouge">java</code> , se non viene eseguito, aggiungere il percorso dei binari Java al vostro percorso pure. Rendere %JAVA_HOME% sia rivolto verso il JDK installato nella directory. Potrebbe essere necessario aggiungere separatamente variabile di ambiente JAVA_HOME.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>; %JAVA_HOME%\bin
+</code></pre></div>    </div>
+  </li>
 </ul>
 
-<h3>Amazon WebView SDK</h3>
+<h3 id="amazon-webview-sdk">Amazon WebView SDK</h3>
 
 <p>Al fine di creare app di Cordova la destinazione della piattaforma Amazon fuoco OS, sarà necessario scaricare, scompattare e installare i file di supporto di Amazon WebView SDK. Solo questo passo dovrà essere fatto per il primo progetto di Amazon fuoco OS.</p>
 
 <ul>
-<li><p>Scaricare il SDK di WebView Amazon <a href="https://developer.amazon.com/public/solutions/platforms/android-fireos/docs/building-and-testing-your-hybrid-app">Amazon Developer Portal</a>.</p></li>
-<li><p>Copia <code>awv_interface.jar</code> da SDK scaricato nella directory di lavoro di Cordova. Creare la cartella commonlibs(shown below) se non esiste:</p>
+  <li>
+    <p>Scaricare il SDK di WebView Amazon <a href="https://developer.amazon.com/public/solutions/platforms/android-fireos/docs/building-and-testing-your-hybrid-app">Amazon Developer Portal</a>.</p>
+  </li>
+  <li>
+    <p>Copia <code class="language-plaintext highlighter-rouge">awv_interface.jar</code> da SDK scaricato nella directory di lavoro di Cordova. Creare la cartella commonlibs(shown below) se non esiste:</p>
 
-<p><strong>Mac/Linux:</strong> <code>~/.cordova/lib/commonlibs/</code></p>
+    <p><strong>Mac/Linux:</strong> <code class="language-plaintext highlighter-rouge">~/.cordova/lib/commonlibs/</code></p>
 
-<p><strong>Windows:</strong> <code>%USERPROFILE%\.cordova\lib\commonlibs</code></p></li>
+    <p><strong>Windows:</strong> <code class="language-plaintext highlighter-rouge">%USERPROFILE%\.cordova\lib\commonlibs</code></p>
+  </li>
 </ul>
 
-<h2>Crea nuovo progetto per Amazon fuoco OS</h2>
+<h2 id="crea-nuovo-progetto-per-amazon-fuoco-os">Crea nuovo progetto per Amazon fuoco OS</h2>
 
-<p>Uso il <code>cordova</code> utility per impostare un nuovo progetto, come descritto in Cordova The Command-Line Interface. Ad esempio, in una directory del codice sorgente:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova create hello com.example.hello "HelloWorld"
+<p>Uso il <code class="language-plaintext highlighter-rouge">cordova</code> utility per impostare un nuovo progetto, come descritto in Cordova The Command-Line Interface. Ad esempio, in una directory del codice sorgente:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova create hello com.example.hello "HelloWorld"
 $ cd hello
 $ cordova platform add amazon-fireos
 $ cordova build
-</code></pre></div>
-<p><strong><em>Nota:</em></strong> La prima volta che la piattaforma amazon-fireos è installata sul vostro sistema, Scarica i file appropriati per la directory di lavoro di Cordova, ma mancherà poi come manca i file di supporto AWV SDK (vedi sopra). Seguire le istruzioni riportate sopra per installare il <code>awv_interface.jar</code> , quindi rimuovere e aggiungere nuovamente la piattaforma amazon-fireos al progetto. Solo questo passaggio dovrà essere fatto per il primo progetto di Amazon fuoco OS.</p>
+</code></pre></div></div>
 
-<h2>Distribuire al dispositivo</h2>
+<p><strong><em>Nota:</em></strong> La prima volta che la piattaforma amazon-fireos è installata sul vostro sistema, Scarica i file appropriati per la directory di lavoro di Cordova, ma mancherà poi come manca i file di supporto AWV SDK (vedi sopra). Seguire le istruzioni riportate sopra per installare il <code class="language-plaintext highlighter-rouge">awv_interface.jar</code> , quindi rimuovere e aggiungere nuovamente la piattaforma amazon-fireos al progetto. Solo questo passaggio dovrà essere fatto per il primo progetto di Amazon fuoco OS.</p>
+
+<h2 id="distribuire-al-dispositivo">Distribuire al dispositivo</h2>
 
 <p>Per spingere un app direttamente al dispositivo, assicurarsi che il debug USB è attivato sul tuo dispositivo come descritto sul <a href="http://developer.android.com/tools/device.html">Sito per sviluppatori Android</a>e utilizzare un cavo mini USB per collegarlo al vostro sistema.</p>
 
-<p>Si può spingere l&#39;app per il dispositivo dalla riga di comando:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova eseguire amazon-fireos
-</code></pre></div>
-<p>Alternativamente all&#39;interno di Eclipse, il progetto di fare clic destro e scegliere <strong>Esegui come → applicazione Android</strong>.</p>
+<p>Si può spingere l’app per il dispositivo dalla riga di comando:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova eseguire amazon-fireos
+</code></pre></div></div>
+
+<p>Alternativamente all’interno di Eclipse, il progetto di fare clic destro e scegliere <strong>Esegui come → applicazione Android</strong>.</p>
 
 <p><strong>Nota</strong>: attualmente, testing tramite un emulatore non è supportato per Amazon WebView basati su applicazioni, inoltre le API di Amazon WebView è disponibile solo sui dispositivi antincendio OS. Per ulteriori informazioni, vedere la documentazione <a href="https://developer.amazon.com/public/solutions/platforms/android-fireos/docs/building-and-testing-your-hybrid-app">SDK API di Amazon WebView</a> .</p>
 
-<h3>Eseguire flag</h3>
+<h3 id="eseguire-flag">Eseguire flag</h3>
 
-<p>Il comando run accetta i parametri facoltativi come specificato nel documento Cordova Command Line Interface, fuoco OS accetta anche un ulteriore <code>--debug</code> bandiera che consentirà Developer Tools di Chromium per il debug remoto web.</p>
+<p>Il comando run accetta i parametri facoltativi come specificato nel documento Cordova Command Line Interface, fuoco OS accetta anche un ulteriore <code class="language-plaintext highlighter-rouge">--debug</code> bandiera che consentirà Developer Tools di Chromium per il debug remoto web.</p>
 
 <p>Per utilizzare gli strumenti per sviluppatori, immettere:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova run --debug amazon-fireos
-</code></pre></div>
-<p>Ciò consentirà gli strumenti client in esecuzione. Può quindi connettersi al client di inoltro porta utilizzando l&#39;Android Debug Bridge (adb) riferendosi al nome del pacchetto dell&#39;applicazione.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova run --debug amazon-fireos
+</code></pre></div></div>
+
+<p>Ciò consentirà gli strumenti client in esecuzione. Può quindi connettersi al client di inoltro porta utilizzando l’Android Debug Bridge (adb) riferendosi al nome del pacchetto dell’applicazione.</p>
 
 <p>Ad esempio:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">ADB tcp:9222 avanti localabstract:com.example.helloworld.devtools
-</code></pre></div>
-<p>È quindi possibile utilizzare il DevTools tramite un browser basato su Chromium spostandosi a:<code>http://localhost:9222</code>.</p>
 
-<h3>Supporto opzionale di Eclipse</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ADB tcp:9222 avanti localabstract:com.example.helloworld.devtools
+</code></pre></div></div>
 
-<p>Una volta creato, è possibile utilizzare l&#39;eclissi che arriva con il SDK di Android per modificare il progetto. Fate attenzione che le modifiche apportate attraverso Eclipse saranno sovrascritto se si continua a utilizzare gli strumenti della riga di comando Cordova.</p>
+<p>È quindi possibile utilizzare il DevTools tramite un browser basato su Chromium spostandosi a:<code class="language-plaintext highlighter-rouge">http://localhost:9222</code>.</p>
+
+<h3 id="supporto-opzionale-di-eclipse">Supporto opzionale di Eclipse</h3>
+
+<p>Una volta creato, è possibile utilizzare l’eclissi che arriva con il SDK di Android per modificare il progetto. Fate attenzione che le modifiche apportate attraverso Eclipse saranno sovrascritto se si continua a utilizzare gli strumenti della riga di comando Cordova.</p>
 
 <ul>
-<li><p>Avviare l&#39;applicazione di <strong>Eclipse</strong> .</p></li>
-<li><p>Selezionare la voce di menu <strong>Nuovo progetto</strong> .</p></li>
-<li><p>Scegliere <strong>Progetto Android da codice esistente</strong> nella finestra di dialogo risultante e premere <strong>avanti</strong>: <img src="/static/img/guide/platforms/android/eclipse_new_project.png" alt=""></p></li>
-<li><p>Passare a <code>hello</code> , o qualunque directory creata per il progetto, poi per il <code>platforms/amazon-fireos</code> sottodirectory.</p></li>
-<li><p>Eclisse vi mostrerà Ciao Ciao-CorddovaLib - 2 progetti e da aggiungere. Aggiungere entrambi.</p></li>
-<li><p>Premere <strong>fine</strong>.</p></li>
+  <li>
+    <p>Avviare l’applicazione di <strong>Eclipse</strong> .</p>
+  </li>
+  <li>
+    <p>Selezionare la voce di menu <strong>Nuovo progetto</strong> .</p>
+  </li>
+  <li>
+    <p>Scegliere <strong>Progetto Android da codice esistente</strong> nella finestra di dialogo risultante e premere <strong>avanti</strong>: <img src="/static/img/guide/platforms/android/eclipse_new_project.png" alt="" /></p>
+  </li>
+  <li>
+    <p>Passare a <code class="language-plaintext highlighter-rouge">hello</code> , o qualunque directory creata per il progetto, poi per il <code class="language-plaintext highlighter-rouge">platforms/amazon-fireos</code> sottodirectory.</p>
+  </li>
+  <li>
+    <p>Eclisse vi mostrerà Ciao Ciao-CorddovaLib - 2 progetti e da aggiungere. Aggiungere entrambi.</p>
+  </li>
+  <li>
+    <p>Premere <strong>fine</strong>.</p>
+  </li>
 </ul>
 
 <p>Una volta che si apre la finestra di Eclipse può apparire una rossa <strong>X</strong> per indicare problemi irrisolti. Se è così, segui questi passaggi aggiuntivi:</p>
 
 <ul>
-<li><p>Tasto destro del mouse sulla directory del progetto.</p></li>
-<li><p>Nella finestra di dialogo <strong>Proprietà</strong> , selezionare <strong>Android</strong> dal riquadro di spostamento.</p></li>
-<li><p>Per il target di compilazione del progetto, selezionare il livello più alto di Android API (attualmente API livello 19) sia installato.</p></li>
-<li><p>Fare clic su <strong>OK</strong>.</p></li>
-<li><p>Dal menu <strong>progetto</strong> , selezionare <strong>Clean</strong> . Questo dovrebbe correggere tutti gli errori nel progetto.</p></li>
+  <li>
+    <p>Tasto destro del mouse sulla directory del progetto.</p>
+  </li>
+  <li>
+    <p>Nella finestra di dialogo <strong>Proprietà</strong> , selezionare <strong>Android</strong> dal riquadro di spostamento.</p>
+  </li>
+  <li>
+    <p>Per il target di compilazione del progetto, selezionare il livello più alto di Android API (attualmente API livello 19) sia installato.</p>
+  </li>
+  <li>
+    <p>Fare clic su <strong>OK</strong>.</p>
+  </li>
+  <li>
+    <p>Dal menu <strong>progetto</strong> , selezionare <strong>Clean</strong> . Questo dovrebbe correggere tutti gli errori nel progetto.</p>
+  </li>
 </ul>
 
 

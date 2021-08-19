@@ -1018,58 +1018,69 @@
             
 
             <div id="page-toc-source">
-                <h1>Android Plugins</h1>
+                <h1 id="android-plugins">Android Plugins</h1>
 
 <p>Ta razdelek ponuja podrobnosti za kako izvajati native plugin kodo na Android platformi. Pred obravnavo tega, glejte Uporaba Plugins za pregled plugin strukturo in njene skupne JavaScript vmesnik. Ta oddelek še dokazati vzorec <em>echo</em> plugin, ki komunicira s spletni pogled Cordova native platformo in nazaj. Za drug vzorec, glejte tudi opombe v <a href="https://github.com/apache/cordova-android/blob/master/framework/src/org/apache/cordova/CordovaPlugin.java">CordovaPlugin.java</a>.</p>
 
-<p>Android plugins temeljijo na Cordova-Android, ki je sestavljen iz Android spletni pogled s kavlji, ki je pritrjena nanj. Plugins so predstavljene kot razred preslikave v v <code>config.xml</code> datoteko. Plugin sestavlja vsaj en Java razred, ki se razteza na <code>CordovaPlugin</code> razred, nedoločni zaimek od glaven svoje <code>execute</code> metode. Kot najboljša praksa, plugin bi obravnavala tudi <code>[pause](../../../cordova/events/events.pause.html)</code> in <code>[resume](../../../cordova/events/events.resume.html)</code> dogodki, skupaj z vsako sporočilo, ki poteka med plugins. Plugins z zahteva dolgotrajen, ozadje dejavnost predvajanje medijev, poslušalci ali notranje stanje mora izvajati v <code>onReset()</code> metode kot dobro. To izvede, ko se <code>WebView</code> premakne se nova stran ali Osveži, ki polnitve JavaScript.</p>
+<p>Android plugins temeljijo na Cordova-Android, ki je sestavljen iz Android spletni pogled s kavlji, ki je pritrjena nanj. Plugins so predstavljene kot razred preslikave v v <code class="language-plaintext highlighter-rouge">config.xml</code> datoteko. Plugin sestavlja vsaj en Java razred, ki se razteza na <code class="language-plaintext highlighter-rouge">CordovaPlugin</code> razred, nedoločni zaimek od glaven svoje <code class="language-plaintext highlighter-rouge">execute</code> metode. Kot najboljša praksa, plugin bi obravnavala tudi <code class="language-plaintext highlighter-rouge">[pause](../../../cordova/events/events.pause.html)</code> in <code class="language-plaintext highlighter-rouge">[resume](../../../cordova/events/events.resume.html)</code> dogodki, skupaj z vsako sporočilo, ki poteka med plugins. Plugins z zahteva dolgotrajen, ozadje dejavnost predvajanje medijev, poslušalci ali notranje stanje mora izvajati v <code class="language-plaintext highlighter-rouge">onReset()</code> metode kot dobro. To izvede, ko se <code class="language-plaintext highlighter-rouge">WebView</code> premakne se nova stran ali Osveži, ki polnitve JavaScript.</p>
 
-<h2>Plugin razred kartiranje</h2>
+<h2 id="plugin-razred-kartiranje">Plugin razred kartiranje</h2>
 
-<p>Plugin JavaScript vmesnik uporablja je <code>cordova.exec</code> metoda, kot sledi:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    exec(&lt;successFunction&gt;, &lt;failFunction&gt;, &lt;service&gt;, &lt;action&gt;, [&lt;args&gt;]);
-</code></pre></div>
-<p>To šerifov na zahtevo na spletni pogled na Android native strani, učinkovito kliče na <code>action</code> metoda na v <code>service</code> razred, z dodatnimi argumenti opravili v v <code>args</code> array.</p>
+<p>Plugin JavaScript vmesnik uporablja je <code class="language-plaintext highlighter-rouge">cordova.exec</code> metoda, kot sledi:</p>
 
-<p>Ali porazdelite plugin, kot Java datoteke ali datoteke <em>jar</em> lastne, plugin mora biti določena v Cordova Android aplikacije <code>res/xml/config.xml</code> datoteke. Glejte Uporaba Plugins za več informacij o uporabi na <code>plugin.xml</code> datoteko za injiciranje tega <code>feature</code> element:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;feature name="&lt;service_name&gt;"&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    exec(&lt;successFunction&gt;, &lt;failFunction&gt;, &lt;service&gt;, &lt;action&gt;, [&lt;args&gt;]);
+</code></pre></div></div>
+
+<p>To šerifov na zahtevo na spletni pogled na Android native strani, učinkovito kliče na <code class="language-plaintext highlighter-rouge">action</code> metoda na v <code class="language-plaintext highlighter-rouge">service</code> razred, z dodatnimi argumenti opravili v v <code class="language-plaintext highlighter-rouge">args</code> array.</p>
+
+<p>Ali porazdelite plugin, kot Java datoteke ali datoteke <em>jar</em> lastne, plugin mora biti določena v Cordova Android aplikacije <code class="language-plaintext highlighter-rouge">res/xml/config.xml</code> datoteke. Glejte Uporaba Plugins za več informacij o uporabi na <code class="language-plaintext highlighter-rouge">plugin.xml</code> datoteko za injiciranje tega <code class="language-plaintext highlighter-rouge">feature</code> element:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;feature name="&lt;service_name&gt;"&gt;
         &lt;param name="android-package" value="&lt;full_name_including_namespace&gt;" /&gt;
     &lt;/feature&gt;
-</code></pre></div>
-<p>Ime storitve ujema s tisto, ki se uporabljajo v JavaScript <code>exec</code> klic. Vrednost je popolnoma določeno namespace identifikator razreda Java. Drugače, plugin zbrati vendar še vedno na voljo Cordova.</p>
+</code></pre></div></div>
 
-<h2>Inicializacija plugin in življenju</h2>
+<p>Ime storitve ujema s tisto, ki se uporabljajo v JavaScript <code class="language-plaintext highlighter-rouge">exec</code> klic. Vrednost je popolnoma določeno namespace identifikator razreda Java. Drugače, plugin zbrati vendar še vedno na voljo Cordova.</p>
 
-<p>En primerek predmeta plugin je ustvarjen za življenje vsakega <code>WebView</code> . Plugins so instantiated ne, dokler se najprej sklicuje klic iz JavaScript, razen če <code>&lt;param&gt;</code> s je <code>onload</code> <code>name</code> atribut je nastavljen <code>&quot;true&quot;</code> v <code>config.xml</code> . Npr.:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="Echo"&gt;
+<h2 id="inicializacija-plugin-in-življenju">Inicializacija plugin in življenju</h2>
+
+<p>En primerek predmeta plugin je ustvarjen za življenje vsakega <code class="language-plaintext highlighter-rouge">WebView</code> . Plugins so instantiated ne, dokler se najprej sklicuje klic iz JavaScript, razen če <code class="language-plaintext highlighter-rouge">&lt;param&gt;</code> s je <code class="language-plaintext highlighter-rouge">onload</code> <code class="language-plaintext highlighter-rouge">name</code> atribut je nastavljen <code class="language-plaintext highlighter-rouge">"true"</code> v <code class="language-plaintext highlighter-rouge">config.xml</code> . Npr.:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="Echo"&gt;
     &lt;param name="android-package" value="&lt;full_name_including_namespace&gt;" /&gt;
     &lt;param name="onload" value="true" /&gt;
 &lt;/feature&gt;
-</code></pre></div>
-<p>Uporabljajte plugins je <code>initialize</code> metoda za svoje start-up logiko.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">@Override
+</code></pre></div></div>
+
+<p>Uporabljajte plugins je <code class="language-plaintext highlighter-rouge">initialize</code> metoda za svoje start-up logiko.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Override
 public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     super.initialize(cordova, webView);
     // your init code here
 }
-</code></pre></div>
-<h2>Pisanje Android Java Plugin</h2>
+</code></pre></div></div>
 
-<p>JavaScript poziv požari izklop zahteva plugin native stran in correspoinding Java plugin je pravilno preslikana v <code>config.xml</code> datoteko, ampak kaj je končni Android Java Plugin razred izgledal? Karkoli se odpravi na plugin z JavaScript je <code>exec</code> funkcija je prešla v plugin razred <code>execute</code> metoda. Večina <code>execute</code> izvedb videti takole:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    @Override javnih boolean izvršiti (niz ukrepov, JSONArray argumenta, CallbackContext callbackContext) vrže JSONException {če ("beep".equals(action)) {this.beep(args.getLong(0));
+<h2 id="pisanje-android-java-plugin">Pisanje Android Java Plugin</h2>
+
+<p>JavaScript poziv požari izklop zahteva plugin native stran in correspoinding Java plugin je pravilno preslikana v <code class="language-plaintext highlighter-rouge">config.xml</code> datoteko, ampak kaj je končni Android Java Plugin razred izgledal? Karkoli se odpravi na plugin z JavaScript je <code class="language-plaintext highlighter-rouge">exec</code> funkcija je prešla v plugin razred <code class="language-plaintext highlighter-rouge">execute</code> metoda. Večina <code class="language-plaintext highlighter-rouge">execute</code> izvedb videti takole:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @Override javnih boolean izvršiti (niz ukrepov, JSONArray argumenta, CallbackContext callbackContext) vrže JSONException {če ("beep".equals(action)) {this.beep(args.getLong(0));
             callbackContext.success();
             return true;
         } return false;  / / Vrača napačne rezultate v "MethodNotFound" napaka.
     }
-</code></pre></div>
-<p>JavaScript <code>exec</code> funkcije <code>action</code> parameter ustreza zasebno razred metoda odpremo z izbirne parametre.</p>
+</code></pre></div></div>
+
+<p>JavaScript <code class="language-plaintext highlighter-rouge">exec</code> funkcije <code class="language-plaintext highlighter-rouge">action</code> parameter ustreza zasebno razred metoda odpremo z izbirne parametre.</p>
 
 <p>Ko lov izjeme in vračanje napake, je pomembno zaradi jasnosti, da napake vrniti JavaScript tekmo Java izjema imena čim več.</p>
 
-<h2>Navojev</h2>
+<h2 id="navojev">Navojev</h2>
 
-<p>Plugin JavaScript does <em>ne</em> teči v glavni niti na <code>WebView</code> vmesnika, namesto tega, to runs naprej na <code>WebCore</code> nit, kot pa je <code>execute</code> metoda. Če potrebujete za interakcijo z uporabniškim vmesnikom, morate uporabiti naslednje spremembe:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    @Override
+<p>Plugin JavaScript does <em>ne</em> teči v glavni niti na <code class="language-plaintext highlighter-rouge">WebView</code> vmesnika, namesto tega, to runs naprej na <code class="language-plaintext highlighter-rouge">WebCore</code> nit, kot pa je <code class="language-plaintext highlighter-rouge">execute</code> metoda. Če potrebujete za interakcijo z uporabniškim vmesnikom, morate uporabiti naslednje spremembe:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @Override
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
         if ("beep".equals(action)) {
             final long duration = args.getLong(0);
@@ -1083,9 +1094,11 @@ public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         }
         return false;
     }
-</code></pre></div>
-<p>Uporabo naslednjih če vi ne potreba teči na glavni vmesnik nit, vendar ne želite blokirati v <code>WebCore</code> nit bodisi:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    @Override
+</code></pre></div></div>
+
+<p>Uporabo naslednjih če vi ne potreba teči na glavni vmesnik nit, vendar ne želite blokirati v <code class="language-plaintext highlighter-rouge">WebCore</code> nit bodisi:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @Override
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
         if ("beep".equals(action)) {
             final long duration = args.getLong(0);
@@ -1099,63 +1112,68 @@ public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         }
         return false;
     }
-</code></pre></div>
-<h2>ECHO Android Plugin primer</h2>
+</code></pre></div></div>
 
-<p>Primerjal JavaScript vmesnik <em>echo</em> funkcija, opisana v uporabo Plugins, uporabite na <code>plugin.xml</code> injicirati a <code>feature</code> Specifikacija za lokalne platforme <code>config.xml</code> datoteke:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;platform name="android"&gt;
+<h2 id="echo-android-plugin-primer">ECHO Android Plugin primer</h2>
+
+<p>Primerjal JavaScript vmesnik <em>echo</em> funkcija, opisana v uporabo Plugins, uporabite na <code class="language-plaintext highlighter-rouge">plugin.xml</code> injicirati a <code class="language-plaintext highlighter-rouge">feature</code> Specifikacija za lokalne platforme <code class="language-plaintext highlighter-rouge">config.xml</code> datoteke:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;platform name="android"&gt;
         &lt;config-file target="config.xml" parent="/*"&gt;
             &lt;feature name="Echo"&gt;
                 &lt;param name="android-package" value="org.apache.cordova.plugin.Echo"/&gt;
             &lt;/feature&gt;
         &lt;/config-file&gt;
     &lt;/platform&gt;
-</code></pre></div>
-<p>Nato dodamo naslednje v <code>src/org/apache/cordova/plugin/Echo.java</code> datoteke:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    <span class="k">package</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">plugin</span><span class="p">;</span>
+</code></pre></div></div>
 
-    <span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">CordovaPlugin</span><span class="p">;</span>
-    <span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">CallbackContext</span><span class="p">;</span>
+<p>Nato dodamo naslednje v <code class="language-plaintext highlighter-rouge">src/org/apache/cordova/plugin/Echo.java</code> datoteke:</p>
 
-    <span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">JSONArray</span><span class="p">;</span>
-    <span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">JSONException</span><span class="p">;</span>
-    <span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">JSONObject</span><span class="p">;</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    package org.apache.cordova.plugin;
 
-    <span class="p">/**</span>
-     <span class="p">*</span> <span class="n">This</span> <span class="n">class</span> <span class="n">echoes</span> <span class="n">a</span> <span class="k">string</span> <span class="n">called</span> <span class="k">from</span> <span class="n">JavaScript</span><span class="p">.</span>
-     <span class="p">*/</span>
-    <span class="k">public</span> <span class="n">class</span> <span class="n">Echo</span> <span class="n">extends</span> <span class="n">CordovaPlugin</span> <span class="p">{</span>
+    import org.apache.cordova.CordovaPlugin;
+    import org.apache.cordova.CallbackContext;
 
-        <span class="p">@</span><span class="n">Override</span>
-        <span class="k">public</span> <span class="k">boolean</span> <span class="n">execute</span><span class="p">(</span><span class="k">String</span> <span class="n">action</span><span class="p">,</span> <span class="n">JSONArray</span> <span class="n">args</span><span class="p">,</span> <span class="n">CallbackContext</span> <span class="n">callbackContext</span><span class="p">)</span> <span class="n">throws</span> <span class="n">JSONException</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">action</span><span class="p">.</span><span class="n">equals</span><span class="p">(</span><span class="s2">"echo"</span><span class="p">))</span> <span class="p">{</span>
-                <span class="k">String</span> <span class="n">message</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
-                <span class="n">this</span><span class="p">.</span><span class="n">echo</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">callbackContext</span><span class="p">);</span>
-                <span class="n">return</span> <span class="nb">true</span><span class="p">;</span>
-            <span class="p">}</span>
-            <span class="n">return</span> <span class="nb">false</span><span class="p">;</span>
-        <span class="p">}</span>
+    import org.json.JSONArray;
+    import org.json.JSONException;
+    import org.json.JSONObject;
 
-        <span class="n">private</span> <span class="n">void</span> <span class="n">echo</span><span class="p">(</span><span class="k">String</span> <span class="n">message</span><span class="p">,</span> <span class="n">CallbackContext</span> <span class="n">callbackContext</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">message</span> <span class="c1">!= null &amp;&amp; message.length() &gt; 0) {
-</span>                <span class="n">callbackContext</span><span class="p">.</span><span class="n">success</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="n">callbackContext</span><span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="s2">"Expected one non-empty string argument."</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-</code></pre></div>
-<p>Potrebno uvoz na vrhu datoteke razširja razred iz <code>CordovaPlugin</code> , katerih <code>execute()</code> metoda to preglasi prejemati sporočila <code>exec()</code> . Je <code>execute()</code> metoda najprej preveri vrednost <code>action</code> , ki v tem primeru obstaja samo ena veljavna <code>echo</code> vrednost. Poljuben drugi dejanje vrne <code>false</code> in rezultat je <code>INVALID_ACTION</code> napaka, ki prevaja napaka povratni klic, sklicuje na strani JavaScript.</p>
+    /**
+     * This class echoes a string called from JavaScript.
+     */
+    public class Echo extends CordovaPlugin {
 
-<p>Naslednji, metodo dobi niz using echo v <code>args</code> predmeta <code>getString</code> metoda, določa prvi parameter posredovali metodi. Ko vrednost prenese na zasebni <code>echo</code> metoda, je parameter kockast prepričati se to ni <code>null</code> ali prazen niz, v tem primeru <code>callbackContext.error()</code> prikliče JavaScript&#39;s povratni klic napake. Če mimo različnih preverjanj, je <code>callbackContext.success()</code> mimo samorasel <code>message</code> niz nazaj na JavaScript povratni klic uspeh kot parameter.</p>
+        @Override
+        public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+            if (action.equals("echo")) {
+                String message = args.getString(0);
+                this.echo(message, callbackContext);
+                return true;
+            }
+            return false;
+        }
 
-<h2>Android integracije</h2>
+        private void echo(String message, CallbackContext callbackContext) {
+            if (message != null &amp;&amp; message.length() &gt; 0) {
+                callbackContext.success(message);
+            } else {
+                callbackContext.error("Expected one non-empty string argument.");
+            }
+        }
+    }
+</code></pre></div></div>
 
-<p>Android funkcije je <code>Intent</code> sistem, ki omogoča procese komunicirati med seboj. Plugins so dostop do a <code>CordovaInterface</code> predmet, ki lahko dostopa do Android <code>Activity</code> ki teče uporabo. To je v <code>Context</code> zahtevati v splavitev nov Android <code>Intent</code> . Na <code>CordovaInterface</code> omogoča plugins za začetek je <code>Activity</code> za rezultat, in nastavite povratni klic plugin za takrat, ko se <code>Intent</code> vrne v uporabo.</p>
+<p>Potrebno uvoz na vrhu datoteke razširja razred iz <code class="language-plaintext highlighter-rouge">CordovaPlugin</code> , katerih <code class="language-plaintext highlighter-rouge">execute()</code> metoda to preglasi prejemati sporočila <code class="language-plaintext highlighter-rouge">exec()</code> . Je <code class="language-plaintext highlighter-rouge">execute()</code> metoda najprej preveri vrednost <code class="language-plaintext highlighter-rouge">action</code> , ki v tem primeru obstaja samo ena veljavna <code class="language-plaintext highlighter-rouge">echo</code> vrednost. Poljuben drugi dejanje vrne <code class="language-plaintext highlighter-rouge">false</code> in rezultat je <code class="language-plaintext highlighter-rouge">INVALID_ACTION</code> napaka, ki prevaja napaka povratni klic, sklicuje na strani JavaScript.</p>
 
-<p>Od Cordova 2.0, čep ni več neposreden dostop na <code>Context</code> , in zapuščina <code>ctx</code> države je odsvetovana. Vse <code>ctx</code> metodami obstaja na na <code>Context</code> , torej tako <code>getContext()</code> in <code>getActivity()</code> lahko vrne zahtevani predmet.</p>
+<p>Naslednji, metodo dobi niz using echo v <code class="language-plaintext highlighter-rouge">args</code> predmeta <code class="language-plaintext highlighter-rouge">getString</code> metoda, določa prvi parameter posredovali metodi. Ko vrednost prenese na zasebni <code class="language-plaintext highlighter-rouge">echo</code> metoda, je parameter kockast prepričati se to ni <code class="language-plaintext highlighter-rouge">null</code> ali prazen niz, v tem primeru <code class="language-plaintext highlighter-rouge">callbackContext.error()</code> prikliče JavaScript’s povratni klic napake. Če mimo različnih preverjanj, je <code class="language-plaintext highlighter-rouge">callbackContext.success()</code> mimo samorasel <code class="language-plaintext highlighter-rouge">message</code> niz nazaj na JavaScript povratni klic uspeh kot parameter.</p>
 
-<h2>Debugging Android Plugins</h2>
+<h2 id="android-integracije">Android integracije</h2>
+
+<p>Android funkcije je <code class="language-plaintext highlighter-rouge">Intent</code> sistem, ki omogoča procese komunicirati med seboj. Plugins so dostop do a <code class="language-plaintext highlighter-rouge">CordovaInterface</code> predmet, ki lahko dostopa do Android <code class="language-plaintext highlighter-rouge">Activity</code> ki teče uporabo. To je v <code class="language-plaintext highlighter-rouge">Context</code> zahtevati v splavitev nov Android <code class="language-plaintext highlighter-rouge">Intent</code> . Na <code class="language-plaintext highlighter-rouge">CordovaInterface</code> omogoča plugins za začetek je <code class="language-plaintext highlighter-rouge">Activity</code> za rezultat, in nastavite povratni klic plugin za takrat, ko se <code class="language-plaintext highlighter-rouge">Intent</code> vrne v uporabo.</p>
+
+<p>Od Cordova 2.0, čep ni več neposreden dostop na <code class="language-plaintext highlighter-rouge">Context</code> , in zapuščina <code class="language-plaintext highlighter-rouge">ctx</code> države je odsvetovana. Vse <code class="language-plaintext highlighter-rouge">ctx</code> metodami obstaja na na <code class="language-plaintext highlighter-rouge">Context</code> , torej tako <code class="language-plaintext highlighter-rouge">getContext()</code> in <code class="language-plaintext highlighter-rouge">getActivity()</code> lahko vrne zahtevani predmet.</p>
+
+<h2 id="debugging-android-plugins">Debugging Android Plugins</h2>
 
 <p>Mrk vam omogoča, da debug plugins kot Java vir vključeno v projekt. Samo najnovejšo različico Android Developer orodja omogoča pritrditev izvorne kode <em>JAR</em> odvisnosti, tako da to funkcijo še niso v celoti podprte.</p>
 

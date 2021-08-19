@@ -1018,28 +1018,40 @@
             
 
             <div id="page-toc-source">
-                <h1>Windows Phone Plugins</h1>
+                <h1 id="windows-phone-plugins">Windows Phone Plugins</h1>
 
 <p>Ta razdelek ponuja podrobnosti za kako izvajati native plugin kodo na Windows Phone platformi. Pred obravnavo tega, glejte Uporaba Plugins za pregled plugin strukturo in njene skupne JavaScript vmesnik. Ta oddelek še dokazati vzorec <em>echo</em> plugin, ki komunicira s spletni pogled Cordova native platformo in nazaj.</p>
 
-<p>Pisanje plugin za Cordova na Windows Phone zahteva osnovno razumevanje arhitekture Cordova&#39;s. Cordova WP7 sestajati od a <code>WebBrowser</code> ki gosti aplikacije JavaScript kodo in upravlja native API klici. Vi moči razširiti C# <code>BaseCommand</code> razreda ( <code>WP7CordovaClassLib.Cordova.Commands.BaseCommand</code> ), ki prihaja z večino funkcionalnosti, ki jih potrebujete:</p>
+<p>Pisanje plugin za Cordova na Windows Phone zahteva osnovno razumevanje arhitekture Cordova’s. Cordova WP7 sestajati od a <code class="language-plaintext highlighter-rouge">WebBrowser</code> ki gosti aplikacije JavaScript kodo in upravlja native API klici. Vi moči razširiti C# <code class="language-plaintext highlighter-rouge">BaseCommand</code> razreda ( <code class="language-plaintext highlighter-rouge">WP7CordovaClassLib.Cordova.Commands.BaseCommand</code> ), ki prihaja z večino funkcionalnosti, ki jih potrebujete:</p>
 
 <ol>
-<li><p>Izberite vaš projekt, in z desno tipko miške, da izberete <strong>Dodajanje → novega elementa...</strong> Če želite, ga lahko dodate v <code>Plugins</code> zgibalnik.</p></li>
-<li><p>Izberite <strong>razred</strong> in ime <code>Echo.cs</code> . Ta razred ime mora <em>točno</em> ujemati, kar imenujete določite kot storitev v je <code>cordova.exec()</code> klic na strani JavaScript.</p></li>
-<li><p>Vključujejo izvajanje osnovnih razredov:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">using WPCordovaClassLib.Cordova;
+  <li>
+    <p>Izberite vaš projekt, in z desno tipko miške, da izberete <strong>Dodajanje → novega elementa…</strong> Če želite, ga lahko dodate v <code class="language-plaintext highlighter-rouge">Plugins</code> zgibalnik.</p>
+  </li>
+  <li>
+    <p>Izberite <strong>razred</strong> in ime <code class="language-plaintext highlighter-rouge">Echo.cs</code> . Ta razred ime mora <em>točno</em> ujemati, kar imenujete določite kot storitev v je <code class="language-plaintext highlighter-rouge">cordova.exec()</code> klic na strani JavaScript.</p>
+  </li>
+  <li>
+    <p>Vključujejo izvajanje osnovnih razredov:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>using WPCordovaClassLib.Cordova;
 using WPCordovaClassLib.Cordova.Commands;
 using WPCordovaClassLib.Cordova.JSON;
-</code></pre></div></li>
-<li><p>Razširiti vaš razred iz <code>BaseCommand</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">public class Echo : BaseCommand
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Razširiti vaš razred iz <code class="language-plaintext highlighter-rouge">BaseCommand</code> :</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Echo : BaseCommand
 {
     // ...
 }
-</code></pre></div></li>
-<li><p>Dodaj je <code>echo</code> metoda, ki je vpisano od JavaScript:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">public class Echo : BaseCommand
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Dodaj je <code class="language-plaintext highlighter-rouge">echo</code> metoda, ki je vpisano od JavaScript:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Echo : BaseCommand
 {
     public void echo(string options)
     {
@@ -1047,62 +1059,84 @@ using WPCordovaClassLib.Cordova.JSON;
         // public, returning void, 1 argument that is a string
     }
 }
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ol>
 
-<p>Glej <a href="https://github.com/apache/cordova-wp7/blob/master/templates/standalone/cordovalib/Commands/BaseCommand.cs">BaseCommand.cs</a> razred za metode, ki so na voljo za plugin za preglasitev. Na primer, plugin lahko zajemanje &quot;pavza&quot; in &quot;spet&quot; dogodkov.</p>
+<p>Glej <a href="https://github.com/apache/cordova-wp7/blob/master/templates/standalone/cordovalib/Commands/BaseCommand.cs">BaseCommand.cs</a> razred za metode, ki so na voljo za plugin za preglasitev. Na primer, plugin lahko zajemanje “pavza” in “spet” dogodkov.</p>
 
-<h2>Imenski prostori</h2>
+<h2 id="imenski-prostori">Imenski prostori</h2>
 
 <p>Privzeti imenski prostor za nekvalificirana ukazov je:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    namespace Cordova.Extension.Commands
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    namespace Cordova.Extension.Commands
     {
         // ...
     }
-</code></pre></div>
-<p>Če želite določiti svoj imenski prostor, boste morali poklicati popolnoma <code>cordova.exec</code> . Na primer, če želite določiti vaš razred C# takole:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    namespace com.mydomain.cordovaExtensions
+</code></pre></div></div>
+
+<p>Če želite določiti svoj imenski prostor, boste morali poklicati popolnoma <code class="language-plaintext highlighter-rouge">cordova.exec</code> . Na primer, če želite določiti vaš razred C# takole:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    namespace com.mydomain.cordovaExtensions
     {
         public class Echo : BaseCommand
         {
             // ...
         }
     }
-</code></pre></div>
-<p>JavaScript bi morali poklicati <code>exec</code> takole:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    cordova.exec(win, fail, "com.mydomain.cordovaExtensions.Echo", ...);
-</code></pre></div>
-<h2>Tolmačenje argumentov v C</h2>
+</code></pre></div></div>
 
-<p>V primeru razpravljali v uporabo Plugins podatke prejme vaš plugin je niz, vendar kaj, če želite prenesti nizov? Recimo JavaScript <code>cordova.exec</code> klic je določena takole:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    cordova.exec(win, fail, "Echo", "echo", ["input string"]);
-</code></pre></div>
-<p>Vrednost <code>options</code> niz prenese na <code>Echo.echo</code> metoda je JSON:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    "[\"input string\"]"
-</code></pre></div>
-<p>Vse JavaScript <code>exec</code> argumenti JSON kodira pred prevalili v C#, in tako morali odkodirate:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    string optVal = JsonHelper.Deserialize&lt;string[]&gt;(options)[0];
+<p>JavaScript bi morali poklicati <code class="language-plaintext highlighter-rouge">exec</code> takole:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    cordova.exec(win, fail, "com.mydomain.cordovaExtensions.Echo", ...);
+</code></pre></div></div>
+
+<h2 id="tolmačenje-argumentov-v-c">Tolmačenje argumentov v C</h2>
+
+<p>V primeru razpravljali v uporabo Plugins podatke prejme vaš plugin je niz, vendar kaj, če želite prenesti nizov? Recimo JavaScript <code class="language-plaintext highlighter-rouge">cordova.exec</code> klic je določena takole:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    cordova.exec(win, fail, "Echo", "echo", ["input string"]);
+</code></pre></div></div>
+
+<p>Vrednost <code class="language-plaintext highlighter-rouge">options</code> niz prenese na <code class="language-plaintext highlighter-rouge">Echo.echo</code> metoda je JSON:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    "[\"input string\"]"
+</code></pre></div></div>
+
+<p>Vse JavaScript <code class="language-plaintext highlighter-rouge">exec</code> argumenti JSON kodira pred prevalili v C#, in tako morali odkodirate:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    string optVal = JsonHelper.Deserialize&lt;string[]&gt;(options)[0];
     // optVal now has the value of "input string"
-</code></pre></div>
-<h2>Kratki rezultati iz C# JavaScript</h2>
+</code></pre></div></div>
 
-<p>V <code>BaseCommand</code> razred zagotavlja metode JavaScript povratni klic oskrbniki prenesti podatke. Če želite preprosto signal uspeh brez spremnega rezultata, lahko preprosto pokličete:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    DispatchCommandResult();
+<h2 id="kratki-rezultati-iz-c-javascript">Kratki rezultati iz C# JavaScript</h2>
+
+<p>V <code class="language-plaintext highlighter-rouge">BaseCommand</code> razred zagotavlja metode JavaScript povratni klic oskrbniki prenesti podatke. Če želite preprosto signal uspeh brez spremnega rezultata, lahko preprosto pokličete:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    DispatchCommandResult();
     // calls back with an empty plugin result, considered a success callback
-</code></pre></div>
-<p>Prenesti podatke nazaj, morate poklicati <code>DispatchCommandResult</code> drugače:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    DispatchCommandResult(new PluginResult(PluginResult.Status.OK, "Everything went as planned, this is a result that is passed to the success handler."));
-</code></pre></div>
-<p>Uporabite kodirano JSON string prenesti strukturiran objekt podatke nazaj v JavaScript:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    DispatchCommandResult(new PluginResult(PluginResult.Status.OK, "{result:\"super awesome!\"}"));
-</code></pre></div>
-<p>Signal napake, oklic <code>DispatchCommandResult</code> s a <code>PluginResult</code> predmet, katerih stanje je <code>ERROR</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR, "Echo signaled an error"));
-</code></pre></div>
-<h2>Ravnanje serializacija napake</h2>
+</code></pre></div></div>
 
-<p>Pri razlagi vaše trditve, <code>try</code> / <code>catch</code> bloki pomoč zaslon iz slabo vložek. Ta vzorec se pojavi skozi Cordova C# kodo:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    string optVal = null;
+<p>Prenesti podatke nazaj, morate poklicati <code class="language-plaintext highlighter-rouge">DispatchCommandResult</code> drugače:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    DispatchCommandResult(new PluginResult(PluginResult.Status.OK, "Everything went as planned, this is a result that is passed to the success handler."));
+</code></pre></div></div>
+
+<p>Uporabite kodirano JSON string prenesti strukturiran objekt podatke nazaj v JavaScript:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    DispatchCommandResult(new PluginResult(PluginResult.Status.OK, "{result:\"super awesome!\"}"));
+</code></pre></div></div>
+
+<p>Signal napake, oklic <code class="language-plaintext highlighter-rouge">DispatchCommandResult</code> s a <code class="language-plaintext highlighter-rouge">PluginResult</code> predmet, katerih stanje je <code class="language-plaintext highlighter-rouge">ERROR</code> :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR, "Echo signaled an error"));
+</code></pre></div></div>
+
+<h2 id="ravnanje-serializacija-napake">Ravnanje serializacija napake</h2>
+
+<p>Pri razlagi vaše trditve, <code class="language-plaintext highlighter-rouge">try</code> / <code class="language-plaintext highlighter-rouge">catch</code> bloki pomoč zaslon iz slabo vložek. Ta vzorec se pojavi skozi Cordova C# kodo:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    string optVal = null;
 
     try
     {
@@ -1121,47 +1155,64 @@ using WPCordovaClassLib.Cordova.JSON;
     {
         // ... continue on to do our work
     }
-</code></pre></div>
-<h2>Plugin XML</h2>
+</code></pre></div></div>
 
-<p>Naslednje prikazuje uporabo v <code>plugin.xml</code> datoteko želite določiti a plugin izvornih datotek na Windows Phone platformi. Glejte Uporaba Plugins za pregled in specifikacije Plugin za podrobnosti o razpoložljivih možnosti.</p>
+<h2 id="plugin-xml">Plugin XML</h2>
+
+<p>Naslednje prikazuje uporabo v <code class="language-plaintext highlighter-rouge">plugin.xml</code> datoteko želite določiti a plugin izvornih datotek na Windows Phone platformi. Glejte Uporaba Plugins za pregled in specifikacije Plugin za podrobnosti o razpoložljivih možnosti.</p>
 
 <ul>
-<li><p>Je <code>&lt;source-file&gt;</code> element, ki opredeljuje vse plugin virov, kot so <em>.cs</em>, <em>.xaml</em>, <em>. xaml.cs</em>, in <em>.dll</em> pila ter podoba sredstev.</p></li>
-<li><p>Je <code>&lt;config-file&gt;</code> element opredeljuje elemente oddaja v konfiguracijski datoteki. Ta primer doda plugin na platformo <code>config.xml</code> datoteke:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;config-file target="config.xml" parent="/*"&gt;
+  <li>
+    <p>Je <code class="language-plaintext highlighter-rouge">&lt;source-file&gt;</code> element, ki opredeljuje vse plugin virov, kot so <em>.cs</em>, <em>.xaml</em>, <em>. xaml.cs</em>, in <em>.dll</em> pila ter podoba sredstev.</p>
+  </li>
+  <li>
+    <p>Je <code class="language-plaintext highlighter-rouge">&lt;config-file&gt;</code> element opredeljuje elemente oddaja v konfiguracijski datoteki. Ta primer doda plugin na platformo <code class="language-plaintext highlighter-rouge">config.xml</code> datoteke:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;config-file target="config.xml" parent="/*"&gt;
     &lt;feature name="PluginName"&gt;
         &lt;param name="wp-package" value="PluginName"/&gt;
     &lt;/feature&gt;
 &lt;/config-file&gt;
-</code></pre></div>
-<p>Ta primer doda sposobnost stike z <code>WMAppManifest.xml</code> datoteke:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;config-file target="Properties/WMAppManifest.xml" parent="/Deployment/App/Capabilities"&gt;
+</code></pre></div>    </div>
+
+    <p>Ta primer doda sposobnost stike z <code class="language-plaintext highlighter-rouge">WMAppManifest.xml</code> datoteke:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;config-file target="Properties/WMAppManifest.xml" parent="/Deployment/App/Capabilities"&gt;
     &lt;Capability Name="ID_CAP_CONTACTS" /&gt;
 &lt;/config-file&gt;
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ul>
 
-<h2>Debugging Plugins</h2>
+<h2 id="debugging-plugins">Debugging Plugins</h2>
 
 <p>Uporabite iskalnik napak za Visual Studio debug a plugin C# komponento. Break točke lahko nastavite na katero koli od metod, ki jih vaš razred.</p>
 
-<p>JavaScript je težje debug na Windows Phone. Vi potreba rabiti <code>console.log</code> izhod plugin država ali pozanimate napak.</p>
+<p>JavaScript je težje debug na Windows Phone. Vi potreba rabiti <code class="language-plaintext highlighter-rouge">console.log</code> izhod plugin država ali pozanimate napak.</p>
 
-<h2>Skupnih pastem</h2>
+<h2 id="skupnih-pastem">Skupnih pastem</h2>
 
 <ul>
-<li><p>Pazite, da ne prenesti argumente iz JavaScript strani native, ki so težko deserializirati kot JSON. Večina platforme naprav pričakujejo argument, predan <code>cordova.exec()</code> treba matriko, kot sledi:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cordova.exec(win, fail, "ServiceName", "MethodName", ["this is a string", 54, {literal:'trouble'}]);
-</code></pre></div>
-<p>To lahko povzroči preveč kompleksna niz vrednosti za C# k dekodirajo:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">"[\"this is a string\", 54, { literal:'trouble' }]"
-</code></pre></div>
-<p>Namesto tega, da preusmeri <em>vse</em> parametre na strune, preden pokličete <code>exec()</code> , in vsakega posebej dekodiranje:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cordova.exec(win, fail, "ServiceName", "MethodName", ["this is a string", "54", "{literal:'trouble'}"]);
+  <li>
+    <p>Pazite, da ne prenesti argumente iz JavaScript strani native, ki so težko deserializirati kot JSON. Večina platforme naprav pričakujejo argument, predan <code class="language-plaintext highlighter-rouge">cordova.exec()</code> treba matriko, kot sledi:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova.exec(win, fail, "ServiceName", "MethodName", ["this is a string", 54, {literal:'trouble'}]);
+</code></pre></div>    </div>
+
+    <p>To lahko povzroči preveč kompleksna niz vrednosti za C# k dekodirajo:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"[\"this is a string\", 54, { literal:'trouble' }]"
+</code></pre></div>    </div>
+
+    <p>Namesto tega, da preusmeri <em>vse</em> parametre na strune, preden pokličete <code class="language-plaintext highlighter-rouge">exec()</code> , in vsakega posebej dekodiranje:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova.exec(win, fail, "ServiceName", "MethodName", ["this is a string", "54", "{literal:'trouble'}"]);
 string[] optValues = JsonHelper.Deserialize&lt;string[]&gt;(options);
-</code></pre></div></li>
-<li><p>Ponavadi je bolje preveriti parametre v JavaScript, preden pokličete <code>exec()</code> . Tako omogoča ponovno uporabo več kode in potegnite nepotrebnih smotrnost od plugin native različnih izvedb.</p></li>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Ponavadi je bolje preveriti parametre v JavaScript, preden pokličete <code class="language-plaintext highlighter-rouge">exec()</code> . Tako omogoča ponovno uporabo več kode in potegnite nepotrebnih smotrnost od plugin native različnih izvedb.</p>
+  </li>
 </ul>
 
 

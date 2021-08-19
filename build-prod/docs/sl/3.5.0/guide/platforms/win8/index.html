@@ -1018,62 +1018,80 @@
             
 
             <div id="page-toc-source">
-                <h1>Windows 8 platformi vodnik</h1>
+                <h1 id="windows-8-platformi-vodnik">Windows 8 platformi vodnik</h1>
 
 <p>Ta vodič pokaže, kako vzpostaviti vaš SDK razvojno okolje za uvajanje Cordova aplikacije za Windows 8. Glej naslednje podrobnejše informacije značilne za platformo:</p>
 
 <ul>
-<li>  <a href="upgrading.html">Nadgradnjo operacijskega sistema Windows 8</a></li>
-<li>  <a href="tools.html">Orodja ukazne vrstice Windows 8</a></li>
+  <li><a href="upgrading.html">Nadgradnjo operacijskega sistema Windows 8</a></li>
+  <li><a href="tools.html">Orodja ukazne vrstice Windows 8</a></li>
 </ul>
 
 <p>Orodja ukazne vrstice zgoraj se nanašajo na različicah Cordova 3.0. Glej The vmesnik ukazne vrstice za informacije o trenutni vmesnik.</p>
 
 <p>Microsoft zastarelo ime <em>Metro-style aplikacije</em> Windows 8 in Windows RT. MSDN zdaj se nanaša na to vrsto app kot app <em>Windows Store</em> in tega priročnika sledi te konvencije. Tudi, v tem priročniku <em>Windows 8</em> pomeni Windows 8 in Windows RT.</p>
 
-<h2>Zahteve</h2>
+<h2 id="zahteve">Zahteve</h2>
 
 <ul>
-<li><p>Windows 8</p></li>
-<li><p>Visual Studio 2012 Professional ali boljše ali Visual Studio 2012 Express za Windows 8</p></li>
+  <li>
+    <p>Windows 8</p>
+  </li>
+  <li>
+    <p>Visual Studio 2012 Professional ali boljše ali Visual Studio 2012 Express za Windows 8</p>
+  </li>
 </ul>
 
 <p>Sledite navodilom na <a href="http://www.windowsstore.com/">windowsstore.com</a> predloži vaš app Windows trgovino.</p>
 
-<h2>Namestite SDK in Cordova</h2>
+<h2 id="namestite-sdk-in-cordova">Namestite SDK in Cordova</h2>
 
 <p>Nastavite vaš prioriteten varianta Visual Studio 2012. Vse plačano različice izdelka (poklicne, itd) bi vas zgraditi okno trgovine apps. Potrebujete <strong>Express za Windows 8</strong> za izgradnjo apps Store okno using <a href="http://www.microsoft.com/visualstudio/eng/products/visual-studio-express-products">expres naklada</a>.</p>
 
-<p>Travnato gričevje ter citat ki postaja latenten ulitek <a href="http://phonegap.com/download">Cordova</a>. Ti instuctions velja za na <code>lib\windows-8</code> podimeniku.</p>
+<p>Travnato gričevje ter citat ki postaja latenten ulitek <a href="http://phonegap.com/download">Cordova</a>. Ti instuctions velja za na <code class="language-plaintext highlighter-rouge">lib\windows-8</code> podimeniku.</p>
 
-<h2>Nastavite nov projekt</h2>
+<h2 id="nastavite-nov-projekt">Nastavite nov projekt</h2>
 
 <p>Že lahko gradijo Windows 8 apps z uporabo v <em>HTML/JavaScript tir</em> pri roki v okno trgovine apps. Uporabite Cordova v okno trgovine apps izpostaviti isto API-jev na druge platforme, ki podpira Cordova.</p>
 
 <ul>
-<li><p>Odprite Visual Studio 2012 in izberite <strong>Nov projekt</strong>.</p></li>
-<li><p>Izberite <strong>Nameščeno → predloge → → drugih jezikov JavaScript → Windows trgovina</strong> od drevesa, in potem <strong>Prazno App</strong> seznam projektov. Vnesite ime projekta vam je všeč, kot so <code>CordovaWin8Foo</code> kot v tem primeru:</p>
+  <li>
+    <p>Odprite Visual Studio 2012 in izberite <strong>Nov projekt</strong>.</p>
+  </li>
+  <li>
+    <p>Izberite <strong>Nameščeno → predloge → → drugih jezikov JavaScript → Windows trgovina</strong> od drevesa, in potem <strong>Prazno App</strong> seznam projektov. Vnesite ime projekta vam je všeč, kot so <code class="language-plaintext highlighter-rouge">CordovaWin8Foo</code> kot v tem primeru:</p>
 
-<p><img src="/static/img/guide/platforms/win8/wsnewproject.png" alt=""></p></li>
-<li><p>Microsoft še naprej uporablja <code>default.html</code> kot privzeto domačo stran, vendar večina spletnih razvijalcev uporabo <code>index.html</code> . To je dobra ideja za to, vsaj za tekme druge platforme verjetno delate. Popraviti to, v <strong>Solution Explorerju</strong> preimenovati v <code>default.html</code> datoteko <code>index.html</code> . Dvokliknite na <code>package.appxmanifest</code> datoteko in spremenite <strong>začetno stran</strong> vrednost <code>index.html</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">![](/static/img/guide/platforms/win8/wschangemanifest.png)
-</code></pre></div></li>
-<li><p>Vključiti <code>cordova.js</code> v vašem projektu, desno kliknite na v <code>js</code> imenik v <strong>Solution Explorerju</strong> in izberite <strong>novo → Dodajanje elementa</strong>. Poiščite v <code>cordova.js</code> pila v v <code>lib\windows-8</code> imenik.</p></li>
-<li><p>Urejanje kode za <code>index.html</code> . Dodajte sklic v <code>cordova.js</code> . To storite ročno ali povlečete datoteko iz <strong>Solution Explorerju</strong>. Dodajte naslednje druge odvisnosti app je domačo stran:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;!-- WinJS references --&gt;
+    <p><img src="/static/img/guide/platforms/win8/wsnewproject.png" alt="" /></p>
+  </li>
+  <li>
+    <p>Microsoft še naprej uporablja <code class="language-plaintext highlighter-rouge">default.html</code> kot privzeto domačo stran, vendar večina spletnih razvijalcev uporabo <code class="language-plaintext highlighter-rouge">index.html</code> . To je dobra ideja za to, vsaj za tekme druge platforme verjetno delate. Popraviti to, v <strong>Solution Explorerju</strong> preimenovati v <code class="language-plaintext highlighter-rouge">default.html</code> datoteko <code class="language-plaintext highlighter-rouge">index.html</code> . Dvokliknite na <code class="language-plaintext highlighter-rouge">package.appxmanifest</code> datoteko in spremenite <strong>začetno stran</strong> vrednost <code class="language-plaintext highlighter-rouge">index.html</code> :</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>![](/static/img/guide/platforms/win8/wschangemanifest.png)
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Vključiti <code class="language-plaintext highlighter-rouge">cordova.js</code> v vašem projektu, desno kliknite na v <code class="language-plaintext highlighter-rouge">js</code> imenik v <strong>Solution Explorerju</strong> in izberite <strong>novo → Dodajanje elementa</strong>. Poiščite v <code class="language-plaintext highlighter-rouge">cordova.js</code> pila v v <code class="language-plaintext highlighter-rouge">lib\windows-8</code> imenik.</p>
+  </li>
+  <li>
+    <p>Urejanje kode za <code class="language-plaintext highlighter-rouge">index.html</code> . Dodajte sklic v <code class="language-plaintext highlighter-rouge">cordova.js</code> . To storite ročno ali povlečete datoteko iz <strong>Solution Explorerju</strong>. Dodajte naslednje druge odvisnosti app je domačo stran:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;!-- WinJS references --&gt;
     &lt;link href="//Microsoft.WinJS.1.0/css/ui-dark.css" rel="stylesheet" /&gt;
     &lt;script src="//Microsoft.WinJS.1.0/js/base.js"&gt;&lt;/script&gt;
     &lt;script src="//Microsoft.WinJS.1.0/js/ui.js"&gt;&lt;/script&gt;
-
+    
     &lt;!-- Cordova --&gt;
     &lt;script src="/js/cordova.js"&gt;&lt;/script&gt;
-
+    
     &lt;!-- CordovaWin8Foo references --&gt;
     &lt;link href="/css/default.css" rel="stylesheet" /&gt;
     &lt;script src="/js/default.js"&gt;&lt;/script&gt;
-</code></pre></div></li>
-<li><p>Dodaj a <code>[deviceready](../../../cordova/events/events.deviceready.html)</code> trener dokazati Cordova deluje:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;body&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Dodaj a <code class="language-plaintext highlighter-rouge">[deviceready](../../../cordova/events/events.deviceready.html)</code> trener dokazati Cordova deluje:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;body&gt;
     &lt;p&gt;Content goes here&lt;/p&gt;
     &lt;script type="text/javascript"&gt;
         console.log("Subscribing...");
@@ -1082,14 +1100,17 @@
         });
     &lt;/script&gt;
 &lt;/body&gt;
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ul>
 
-<h2>Test projekta</h2>
+<h2 id="test-projekta">Test projekta</h2>
 
 <p>Zagon projekta Visual Studio. Boste videli polje sporočilo pojavi:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    ![](/static/img/guide/platforms/win8/wsalert.png)
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ![](/static/img/guide/platforms/win8/wsalert.png)
+</code></pre></div></div>
+
 <p>To je to. Zdaj ste pripravljeni za izgradnjo apps Windows Store z Cordova.</p>
 
 

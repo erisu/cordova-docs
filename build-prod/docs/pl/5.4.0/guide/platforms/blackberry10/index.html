@@ -1022,39 +1022,39 @@
             
 
             <div id="page-toc-source">
-                <h1>Przewodnik platformy blackBerry 10</h1>
+                <h1 id="przewodnik-platformy-blackberry-10">Przewodnik platformy blackBerry 10</h1>
 
 <p>Ten poradnik pokazuje jak skonfigurować SDK środowiska wdrażania Cordova aplikacje dla urządzeń BlackBerry 10. Poprzednie wersje BlackBerry musisz używać różnych SDK środowiska i zestaw narzędzi wiersza polecenia, opisane w podręczniku platformy BlackBerry. 10 BlackBerry musisz zainstalować SDK, bez względu na to, czy chcesz używać w consoli Cordova przekreślać platforma dla rozwoju, lub węższy zestaw narzędzi wiersza polecenia, skoncentrowanych na platformie. Dla porównania dwóch rozwoju ścieżki zobacz Omówienie. Szczegółowe informacje na każdy temat Zobacz interfejs wiersza polecenia i podręczniku narzędziem BlackBerry 10 powłoki.</p>
 
-<h2>Wymagania</h2>
+<h2 id="wymagania">Wymagania</h2>
 
 <p>Środowisko programistyczne jest dostępny na Windows, Mac i Linux.</p>
 
-<p>Programiści powinni używać <code>cordova</code> narzędzie w połączeniu z BlackBerry WebWorks SDK lub BlackBerry Native SDK. Zobacz interfejs wiersza poleceń do informacji jak zainstalować <code>cordova</code> , dodać projektów, a następnie tworzenia i wdrażania dla każdej platformy.</p>
+<p>Programiści powinni używać <code class="language-plaintext highlighter-rouge">cordova</code> narzędzie w połączeniu z BlackBerry WebWorks SDK lub BlackBerry Native SDK. Zobacz interfejs wiersza poleceń do informacji jak zainstalować <code class="language-plaintext highlighter-rouge">cordova</code> , dodać projektów, a następnie tworzenia i wdrażania dla każdej platformy.</p>
 
 <p>Symulator urządzenia blackBerry 10:</p>
 
 <ul>
-<li>  Procesor: Intel dwurdzeniowy 2.0 GHz/AMD Athlon 4200 + lub wyższy</li>
-<li>  Miejsce na dysku: 10 GB </li>
-<li>  Pamięć RAM: 4 GB </li>
-<li>  Wirtualizacja: jeden z następujących czynności: 
-
-<ul>
-<li>  <strong>Technologia wirtualizacji Intel</strong> (VT, VT-x, vmx) → <a href="http://ark.intel.com/products/virtualizationtechnology">Intel VT-x obsługiwane procesory lista</a></li>
-<li>  <strong>AMD Virtualization</strong> (AMD-V, SVM) (Od maja 2006 r. Wszystkie procesory AMD to AMD-V, z wyjątkiem Sempron).</li>
-</ul></li>
+  <li>Procesor: Intel dwurdzeniowy 2.0 GHz/AMD Athlon 4200 + lub wyższy</li>
+  <li>Miejsce na dysku: 10 GB</li>
+  <li>Pamięć RAM: 4 GB</li>
+  <li>Wirtualizacja: jeden z następujących czynności:
+    <ul>
+      <li><strong>Technologia wirtualizacji Intel</strong> (VT, VT-x, vmx) → <a href="http://ark.intel.com/products/virtualizationtechnology">Intel VT-x obsługiwane procesory lista</a></li>
+      <li><strong>AMD Virtualization</strong> (AMD-V, SVM) (Od maja 2006 r. Wszystkie procesory AMD to AMD-V, z wyjątkiem Sempron).</li>
+    </ul>
+  </li>
 </ul>
 
 <p>Więcej informacji na temat wymagań: <a href="http://developer.blackberry.com/devzone/develop/simulator/simulator_systemrequirements.html">jeśli BB10 symulator</a>.</p>
 
-<h2>Zainstaluj BlackBerry WebWorks SDK</h2>
+<h2 id="zainstaluj-blackberry-webworks-sdk">Zainstaluj BlackBerry WebWorks SDK</h2>
 
 <p>Pobierz i zainstaluj BlackBerry WebWorks SDK z <a href="https://developer.blackberry.com/html5/download/">developer.blackberry.com</a></p>
 
 <p>Instalator będzie dodać narzędzia wiersza polecenia do ścieżki. W zależności od systemu operacyjnego może trzeba otworzyæ pewien nowy koñcowy okno lub zalogować się ponownie.</p>
 
-<h2>Zainstaluj BlackBerry Native SDK</h2>
+<h2 id="zainstaluj-blackberry-native-sdk">Zainstaluj BlackBerry Native SDK</h2>
 
 <p>Jeśli musisz skompilować kodu macierzystego, na przykład podczas tworzenia macierzystego plugin, trzeba będzie zainstalować BlackBerry Native SDK.</p>
 
@@ -1063,169 +1063,237 @@
 <p>W systemie Windows:</p>
 
 <ul>
-<li><p>Przejdź do <strong>mój komputer → właściwości → zaawansowane → zmienne środowiskowe</strong>.</p></li>
-<li><p>Dołącz katalog install Native SDK do ścieżki, na przykład:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">;C:\bbndk\host_10_1_0_132\win32\x86\usr\bin\
-</code></pre></div></li>
+  <li>
+    <p>Przejdź do <strong>mój komputer → właściwości → zaawansowane → zmienne środowiskowe</strong>.</p>
+  </li>
+  <li>
+    <p>Dołącz katalog install Native SDK do ścieżki, na przykład:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>;C:\bbndk\host_10_1_0_132\win32\x86\usr\bin\
+</code></pre></div>    </div>
+  </li>
 </ul>
 
 <p>Na Mac i Linux:</p>
 
 <ul>
-<li><p>Edytuj <code>~/.bash_profile</code> pliku, dodanie linii następujących, w zależności od tego, gdzie został zainstalowany Native SDK:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ export PATH=${PATH}:/Applications/bbndk/host_10_1_0_132/darwin/x86/usr/bin/
-</code></pre></div>
-<p>lub dla 10.2 Native SDK:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ export PATH=${PATH}:/Applications/Momentics.app/host_10_2_0_15/darwin/x86/usr/bin/
-</code></pre></div></li>
-<li><p>Wykonaj następujące czynności, aby zastosować zmiany w bieżącej sesji:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ source ~/.bash_profile
-</code></pre></div></li>
+  <li>
+    <p>Edytuj <code class="language-plaintext highlighter-rouge">~/.bash_profile</code> pliku, dodanie linii następujących, w zależności od tego, gdzie został zainstalowany Native SDK:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ export PATH=${PATH}:/Applications/bbndk/host_10_1_0_132/darwin/x86/usr/bin/
+</code></pre></div>    </div>
+
+    <p>lub dla 10.2 Native SDK:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ export PATH=${PATH}:/Applications/Momentics.app/host_10_2_0_15/darwin/x86/usr/bin/
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Wykonaj następujące czynności, aby zastosować zmiany w bieżącej sesji:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ source ~/.bash_profile
+</code></pre></div>    </div>
+  </li>
 </ul>
 
 <p>Jeśli masz wszelki problem ochrony środowiska, przy użyciu Native SDK z wiersza polecenia, należy wykonać odpowiedni plik dla danej platformy, znajduje się w ścieżce instalacji:</p>
 
 <ul>
-<li><p>W systemie Windows → powłoki systemu MS-DOS:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">C:\&gt; \bbndk\bbndk-env_xx_xx_xx_xxxx.bat
-</code></pre></div></li>
-<li><p>W systemie Windows → git powłoki bash:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ `\bbndk\bbndk-env_xx_xx_xx_xxxx.bat`
-</code></pre></div></li>
-<li><p>Na Linux → zainstalowany jako użytkownik root:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ `./opt/bbndk/bbndk-env_xx_xx_xx_xxxx.sh`
-</code></pre></div></li>
-<li><p>Na Linux → zainstalowany jako zwykłego użytkownika:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ `./home/username/bbndk/bbndk-env_xx_xx_xx_xxxx.sh`
-</code></pre></div></li>
-<li><p>Na Mac:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ `/Developer/SDKs/bbndk/bbndk-env_xx_xx_xx_xxxx.sh`
-</code></pre></div></li>
+  <li>
+    <p>W systemie Windows → powłoki systemu MS-DOS:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C:\&gt; \bbndk\bbndk-env_xx_xx_xx_xxxx.bat
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>W systemie Windows → git powłoki bash:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ `\bbndk\bbndk-env_xx_xx_xx_xxxx.bat`
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Na Linux → zainstalowany jako użytkownik root:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ `./opt/bbndk/bbndk-env_xx_xx_xx_xxxx.sh`
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Na Linux → zainstalowany jako zwykłego użytkownika:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ `./home/username/bbndk/bbndk-env_xx_xx_xx_xxxx.sh`
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Na Mac:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ `/Developer/SDKs/bbndk/bbndk-env_xx_xx_xx_xxxx.sh`
+</code></pre></div>    </div>
+  </li>
 </ul>
 
-<h2>Do podpisywania</h2>
+<h2 id="do-podpisywania">Do podpisywania</h2>
 
 <p>Jeśli chcesz przetestować na urządzeniu lub dystrybucji aplikacji za pośrednictwem BlackBerry World, twój system musi być ustawienie do podpisywania kodu.</p>
 
 <p>Aby uzyskać klucz podpisywania, przejdź do [BlackBerry klucze formularz zamówienia] (https://www.blackberry.com/SignedKeys/codesigning.html).</p>
 
-<p>Zaznacz pole wyboru pierwszy: &quot;do BlackBerry10 aplikacje opracowane za pomocą BlackBerry NDK&quot; i następnie zalogować się lub utworzyć BBID.</p>
+<p>Zaznacz pole wyboru pierwszy: “do BlackBerry10 aplikacje opracowane za pomocą BlackBerry NDK” i następnie zalogować się lub utworzyć BBID.</p>
 
-<p>Wprowadź hasło i kliknij przycisk &quot;Pobierz Token&quot; do pobrania bbidtoken.csk. Zapisz ten plik do lokalizacji domyślnej dla systemu operacyjnego, który będzie wyświetlany na stronie pobierania.</p>
+<p>Wprowadź hasło i kliknij przycisk “Pobierz Token” do pobrania bbidtoken.csk. Zapisz ten plik do lokalizacji domyślnej dla systemu operacyjnego, który będzie wyświetlany na stronie pobierania.</p>
 
 <p>Ostatnim krokiem jest do generowania certyfikatu podpisywania:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ blackberry-keytool -genkeypair -storepass &lt;password&gt; -author 'Your Name’
-</code></pre></div>
-<h2>Tworzenie projektu</h2>
 
-<p>Użycie <code>cordova</code> narzędzie założyć nowego projektu, jak opisano w interfejs wiersza poleceń. Na przykład w katalogu kodu źródłowego:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova create hello com.example.hello
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ blackberry-keytool -genkeypair -storepass &lt;password&gt; -author 'Your Name’
+</code></pre></div></div>
+
+<h2 id="tworzenie-projektu">Tworzenie projektu</h2>
+
+<p>Użycie <code class="language-plaintext highlighter-rouge">cordova</code> narzędzie założyć nowego projektu, jak opisano w interfejs wiersza poleceń. Na przykład w katalogu kodu źródłowego:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova create hello com.example.hello
     $ cd hello
     $ cordova platform add blackberry10
     $ cordova build
-</code></pre></div>
-<h2>Uruchamianie na emulatorze</h2>
+</code></pre></div></div>
+
+<h2 id="uruchamianie-na-emulatorze">Uruchamianie na emulatorze</h2>
 
 <p>Jeśli chcesz uruchomić emulator urządzenia, pobrać i zainstalować symulator 10 BlackBerry.</p>
 
 <ul>
-<li>  <a href="http://developer.blackberry.com/native/download/">Pobierz za darmo</a></li>
-<li>  <a href="http://developer.blackberry.com/devzone/develop/simulator/blackberry_10_simulator_start.html">Pierwsze kroki</a></li>
+  <li><a href="http://developer.blackberry.com/native/download/">Pobierz za darmo</a></li>
+  <li><a href="http://developer.blackberry.com/devzone/develop/simulator/blackberry_10_simulator_start.html">Pierwsze kroki</a></li>
 </ul>
 
 <p>Przed testowaniem aplikacji na emulatorze lub urządzenie, należy włączyć tryb opracowania.</p>
 
 <p>Uruchomić emulator obrazu, a następnie wybierz <strong>Ustawienia</strong> na ekranie:</p>
 
-<p><img src="/static/img/guide/platforms/blackberry10/bb_home.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/blackberry10/bb_home.png" alt="" /></p>
 
 <p>Przejdź do <strong>bezpieczeństwa i prywatności → tryb opracowania</strong> sekcji i włączyć opcję:</p>
 
-<p><img src="/static/img/guide/platforms/blackberry10/bb_devel.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/blackberry10/bb_devel.png" alt="" /></p>
 
 <p>Dodatkowy zestaw narzędzi wiersza poleceń są uwzględniane podczas konfigurowania platformy BlackBerry 10 dla projektu. Następujące polecenie, w tym przypadku wywoływane z katalogu najwyższego poziomu projektu kojarzy cel o nazwie <em>emu</em> o adresie IP wyświetlane powyżej.</p>
 
 <ul>
-<li><p>W systemie Windows:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ platforms\blackberry10\cordova\target.bat add emu 169.254.0.1 -t simulator
-</code></pre></div></li>
-<li><p>Na Mac/Linux:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ platforms/blackberry10/cordova/target add emu 169.254.0.1 -t simulator
-</code></pre></div></li>
+  <li>
+    <p>W systemie Windows:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ platforms\blackberry10\cordova\target.bat add emu 169.254.0.1 -t simulator
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Na Mac/Linux:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ platforms/blackberry10/cordova/target add emu 169.254.0.1 -t simulator
+</code></pre></div>    </div>
+  </li>
 </ul>
 
-<p>Następnie uruchom <code>emulate</code> polecenie, aby wyświetlić aplikację:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova emulate blackberry10
-</code></pre></div>
-<h2>Uruchamianie na urządzeniu</h2>
+<p>Następnie uruchom <code class="language-plaintext highlighter-rouge">emulate</code> polecenie, aby wyświetlić aplikację:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova emulate blackberry10
+</code></pre></div></div>
+
+<h2 id="uruchamianie-na-urządzeniu">Uruchamianie na urządzeniu</h2>
 
 <p>Aby wdrożyć do urządzenia, upewnij się, że jest on podłączony do komputera. Włącz tryb opracowania i uzyskać adres IP jako opisaną w sekcji emulatora. Także trzeba będzie uzyskać PIN od <strong>Ustawienia</strong> aplikacji pod <strong>o → sprzętu</strong>:</p>
 
-<p><img src="/static/img/guide/platforms/blackberry10/bb_pin.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/blackberry10/bb_pin.png" alt="" /></p>
 
 <p>Należy uruchomić narzędzie wiersza polecenia miejsce docelowe powiązać nazwę z adresu IP, hasło urządzenia i PIN.</p>
 
 <ul>
-<li><p>W systemie Windows:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ platforms\blackberry10\cordova\target.bat add mydevice 169.254.0.1 -t device --password 123456 --pin FFFF972E
-</code></pre></div></li>
-<li><p>Na Mac/Linux:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ platforms/blackberry10/cordova/target add mydevice 169.254.0.1 -t device --password 123456 --pin FFFF972E
-</code></pre></div></li>
+  <li>
+    <p>W systemie Windows:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ platforms\blackberry10\cordova\target.bat add mydevice 169.254.0.1 -t device --password 123456 --pin FFFF972E
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Na Mac/Linux:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ platforms/blackberry10/cordova/target add mydevice 169.254.0.1 -t device --password 123456 --pin FFFF972E
+</code></pre></div>    </div>
+  </li>
 </ul>
 
 <p>gdzie:</p>
 
 <ul>
-<li><p><code>--password</code>odnosi się do hasła do odblokowania urządzenia.</p></li>
-<li><p><code>--pin</code>odnosi się do urządzenia kod PIN otrzymany od <strong>Ustawienia</strong> aplikacji.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">--password</code>odnosi się do hasła do odblokowania urządzenia.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">--pin</code>odnosi się do urządzenia kod PIN otrzymany od <strong>Ustawienia</strong> aplikacji.</p>
+  </li>
 </ul>
 
-<p>Następnie uruchom <code>run</code> polecenie, aby wyświetlić aplikację:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova uruchomić blackberry10
-</code></pre></div>
+<p>Następnie uruchom <code class="language-plaintext highlighter-rouge">run</code> polecenie, aby wyświetlić aplikację:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova uruchomić blackberry10
+</code></pre></div></div>
+
 <p>Jeśli token debugowania nie jeszcze jest skonfigurowana dla urządzenia, komunikat o błędzie skłania do korzystania z platformy uruchomienie skryptu przy użyciu hasła, który podałeś przy rejestracji do podpisywania kluczy.</p>
 
 <ul>
-<li><p>W systemie Windows:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ platforms\blackberry10\cordova\run.bat --device --keystorepass mysecret
-</code></pre></div></li>
-<li><p>Na Mac/Linux:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ platforms/blackberry10/cordova/run --device --keystorepass mysecret
-</code></pre></div></li>
+  <li>
+    <p>W systemie Windows:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ platforms\blackberry10\cordova\run.bat --device --keystorepass mysecret
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Na Mac/Linux:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ platforms/blackberry10/cordova/run --device --keystorepass mysecret
+</code></pre></div>    </div>
+  </li>
 </ul>
 
-<h2>Debugowanie: z WebInspector</h2>
+<h2 id="debugowanie-z-webinspector">Debugowanie: z WebInspector</h2>
 
 <p>Podczas debugowania na urządzenie lub emulator, może uruchomić WebInspector zdalnie, aby wyświetlić stan wewnętrzny aplikacji. Wiersz wyświetla adres URL, który pozwala na podłączenie do aplikacji z domyślną przeglądarką. Aby uzyskać więcej informacji zobacz <a href="http://developer.blackberry.com/html5/documentation/web_inspector_overview_1553586_11.html">debugowanie przy użyciu WebInspector</a>.</p>
 
-<h2>Budynek w wersji</h2>
+<h2 id="budynek-w-wersji">Budynek w wersji</h2>
 
-<p>Domyślnie, systemem <code>cordova build</code> polecenie tworzy plik pakiet bez znaku <em>.bar</em> nadaje się do testowania urządzenia lub symulatora.</p>
+<p>Domyślnie, systemem <code class="language-plaintext highlighter-rouge">cordova build</code> polecenie tworzy plik pakiet bez znaku <em>.bar</em> nadaje się do testowania urządzenia lub symulatora.</p>
 
-<p>Wykorzystanie <code>--release</code> do tworzenia wersji nadające się do dystrybucji przez BlackBerry World.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova build --release --keystorepass &lt;signing password&gt;
-</code></pre></div>
-<p><code>--keystorepass</code>Opcja określa hasło określone podczas konfigurowania komputera do podpisywania aplikacji.</p>
+<p>Wykorzystanie <code class="language-plaintext highlighter-rouge">--release</code> do tworzenia wersji nadające się do dystrybucji przez BlackBerry World.</p>
 
-<h2>Wdrażanie do innych lokalizacji</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova build --release --keystorepass &lt;signing password&gt;
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">--keystorepass</code>Opcja określa hasło określone podczas konfigurowania komputera do podpisywania aplikacji.</p>
+
+<h2 id="wdrażanie-do-innych-lokalizacji">Wdrażanie do innych lokalizacji</h2>
 
 <p>Powyższe instrukcje założono urządzenie jest podłączone przez USB lub symulatora jest uruchomiony na komputerze lokalnym. Jest również możliwe, aby wdrożyć do innych lokalizacji.</p>
 
 <p>Dodatkowy zestaw narzędzi wiersza poleceń są uwzględniane podczas konfigurowania platformy BlackBerry 10 dla projektu. Następujące polecenie, w tym przypadku wywoływane z katalogu najwyższego poziomu projektu kojarzy cel o nazwie <em>emu</em> z adresu IP.</p>
 
 <ul>
-<li><p>W systemie Windows:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ platforms\blackberry10\cordova\build.bat --release --keystorepass mysecret
-</code></pre></div></li>
-<li><p>Na Mac/Linux:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ platforms/blackberry10/cordova/build --release --keystorepass mysecret
-</code></pre></div></li>
+  <li>
+    <p>W systemie Windows:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ platforms\blackberry10\cordova\build.bat --release --keystorepass mysecret
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Na Mac/Linux:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ platforms/blackberry10/cordova/build --release --keystorepass mysecret
+</code></pre></div>    </div>
+  </li>
 </ul>
 
-<p>Gdy cel jest określony, może dostarczyć go do wykonywania poleceń za pomocą <code>--target</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova run blackberry10 --target=emu
-</code></pre></div>
+<p>Gdy cel jest określony, może dostarczyć go do wykonywania poleceń za pomocą <code class="language-plaintext highlighter-rouge">--target</code> :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova run blackberry10 --target=emu
+</code></pre></div></div>
+
 
             </div>
         </div>

@@ -1112,39 +1112,52 @@
             
 
             <div id="page-toc-source">
-                <h1>SQLResultSet</h1>
+                <h1 id="sqlresultset">SQLResultSet</h1>
 
-<p>Cuando se llama al método de un objeto <code>[SQLTransaction](../sqltransaction/sqltransaction.html)</code> <code>executeSql</code> la devolución de llamada especificado se ejecuta con un parámetro <code>SQLResultSet</code>.</p>
+<p>Cuando se llama al método de un objeto <code class="language-plaintext highlighter-rouge">[SQLTransaction](../sqltransaction/sqltransaction.html)</code> <code class="language-plaintext highlighter-rouge">executeSql</code> la devolución de llamada especificado se ejecuta con un parámetro <code class="language-plaintext highlighter-rouge">SQLResultSet</code>.</p>
 
-<h2>Propiedades</h2>
-
-<ul>
-<li><p><strong>insertId</strong>: el identificador de fila de la fila que instrucción SQL de la <code>SQLResultSet</code> del objeto insertado en la base de datos.</p></li>
-<li><p><strong>rowsAffected</strong>: cambió el número de filas en la sentencia SQL, cero si la declaración no afectó a ninguna fila.</p></li>
-<li><p><strong>rows</strong>: un <code>[SQLResultSetRowList](../sqlresultsetrowlist/sqlresultsetrowlist.html)</code> que representan las filas devueltas, vacío si no hay filas son devueltos.</p></li>
-</ul>
-
-<h2>Detalles</h2>
-
-<p>Cuando se llama al método de un objeto <code>[SQLTransaction](../sqltransaction/sqltransaction.html)</code> <code>executeSql</code> la devolución de llamada especificado se ejecuta con un parámetro <code>SQLResultSet</code> que contiene tres propiedades:</p>
+<h2 id="propiedades">Propiedades</h2>
 
 <ul>
-<li><p>El <code>insertId</code> devuelve el número de fila de una instrucción de inserción de SQL successly. Si el SQL no introduzca ninguna fila, el <code>insertId</code> no está establecida.</p></li>
-<li><p>El <code>rowsAffected</code> siempre es `<code>para un SQL</code>select<code>declaración. Para</code>insert<code>o</code>update` devuelve el número de declaraciones las filas modificación.</p></li>
-<li><p>La final <code>SQLResultSetList</code> contiene los datos devueltos de una instrucción select de SQL.</p></li>
+  <li>
+    <p><strong>insertId</strong>: el identificador de fila de la fila que instrucción SQL de la <code class="language-plaintext highlighter-rouge">SQLResultSet</code> del objeto insertado en la base de datos.</p>
+  </li>
+  <li>
+    <p><strong>rowsAffected</strong>: cambió el número de filas en la sentencia SQL, cero si la declaración no afectó a ninguna fila.</p>
+  </li>
+  <li>
+    <p><strong>rows</strong>: un <code class="language-plaintext highlighter-rouge">[SQLResultSetRowList](../sqlresultsetrowlist/sqlresultsetrowlist.html)</code> que representan las filas devueltas, vacío si no hay filas son devueltos.</p>
+  </li>
 </ul>
 
-<h2>Plataformas soportadas</h2>
+<h2 id="detalles">Detalles</h2>
+
+<p>Cuando se llama al método de un objeto <code class="language-plaintext highlighter-rouge">[SQLTransaction](../sqltransaction/sqltransaction.html)</code> <code class="language-plaintext highlighter-rouge">executeSql</code> la devolución de llamada especificado se ejecuta con un parámetro <code class="language-plaintext highlighter-rouge">SQLResultSet</code> que contiene tres propiedades:</p>
 
 <ul>
-<li>  Android</li>
-<li>  BlackBerry WebWorks (OS 6.0 o superior)</li>
-<li>  iOS</li>
-<li>  Tizen</li>
+  <li>
+    <p>El <code class="language-plaintext highlighter-rouge">insertId</code> devuelve el número de fila de una instrucción de inserción de SQL successly. Si el SQL no introduzca ninguna fila, el <code class="language-plaintext highlighter-rouge">insertId</code> no está establecida.</p>
+  </li>
+  <li>
+    <p>El <code class="language-plaintext highlighter-rouge">rowsAffected</code> siempre es `` para un SQL <code class="language-plaintext highlighter-rouge">select</code> declaración. Para <code class="language-plaintext highlighter-rouge">insert</code> o <code class="language-plaintext highlighter-rouge">update</code> devuelve el número de declaraciones las filas modificación.</p>
+  </li>
+  <li>
+    <p>La final <code class="language-plaintext highlighter-rouge">SQLResultSetList</code> contiene los datos devueltos de una instrucción select de SQL.</p>
+  </li>
 </ul>
 
-<h2>Ejecutar SQL ejemplo rápido</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">function queryDB(tx) {tx.executeSql ('SELECT * de DEMO', [], querySuccess, errorCB);}
+<h2 id="plataformas-soportadas">Plataformas soportadas</h2>
+
+<ul>
+  <li>Android</li>
+  <li>BlackBerry WebWorks (OS 6.0 o superior)</li>
+  <li>iOS</li>
+  <li>Tizen</li>
+</ul>
+
+<h2 id="ejecutar-sql-ejemplo-rápido">Ejecutar SQL ejemplo rápido</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function queryDB(tx) {tx.executeSql ('SELECT * de DEMO', [], querySuccess, errorCB);}
 
 function querySuccess (tx, resultados) {console.log ("devuelve filas =" + results.rows.length);
     / / Esto será cierto ya que fue una instrucción select y rowsAffected fue 0 si (! results.rowsAffected) {console.log ('no hay filas afectadas!');
@@ -1155,9 +1168,11 @@ function errorCB(err) {alert ("Error al procesar SQL:" + err.code);}
 
 var db = window.openDatabase ("Database", "1.0", "Demo Córdova", 200000);
 DB.Transaction (queryDB, errorCB);
-</code></pre></div>
-<h2>Ejemplo completo</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html &gt;</span><span class="nt">&lt;</span> <span class="nt">html</span> <span class="nt">&gt;&lt;</span> <span class="nt">cabeza</span> <span class="nt">&gt;&lt;</span> <span class="nt">t</span><span class="err">í</span><span class="na">tulo</span> <span class="nt">&gt;</span> almacenamiento ejemplo <span class="nt">&lt;</span> <span class="err">/</span> <span class="na">t</span><span class="err">í</span><span class="na">tulo</span> <span class="nt">&gt;&lt;</span> <span class="nt">de</span> <span class="na">la</span> <span class="na">escritura</span> <span class="na">de</span> <span class="na">tipo =</span><span class="err"> </span><span class="s">"text/javascript"</span> <span class="na">charset =</span><span class="err"> </span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span> <span class="nt">&gt;&lt;</span> <span class="err">/</span> <span class="na">script</span> <span class="nt">&gt;&lt;</span> <span class="nt">de</span> <span class="na">la</span> <span class="na">escritura</span> <span class="na">de</span> <span class="na">tipo =</span><span class="err"> </span><span class="s">"text/javascript"</span> <span class="na">charset =</span><span class="err"> </span><span class="s">"utf-8"</span> <span class="nt">&gt;</span> / / espera para que las bibliotecas del dispositivo API cargar / / document.addEventListener ("deviceready", onDeviceReady, false);
+</code></pre></div></div>
+
+<h2 id="ejemplo-completo">Ejemplo completo</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html &gt;&lt; html &gt;&lt; cabeza &gt;&lt; título &gt; almacenamiento ejemplo &lt; / título &gt;&lt; de la escritura de tipo = "text/javascript" charset = "utf-8" src="cordova.js" &gt;&lt; / script &gt;&lt; de la escritura de tipo = "text/javascript" charset = "utf-8" &gt; / / espera para que las bibliotecas del dispositivo API cargar / / document.addEventListener ("deviceready", onDeviceReady, false);
 
     / / Rellenar la base de datos / / function populateDB(tx) {tx.executeSql ('DROP TABLE IF EXISTS DEMO');
         tx.executeSql ('crear tabla si no existe DEMO (id único, data)');
@@ -1173,8 +1188,9 @@ DB.Transaction (queryDB, errorCB);
         DB.Transaction (queryDB, errorCB);
     } / / dispositivo APIs están disponibles / / function onDeviceReady() {var db = window.openDatabase ("Database", "1.0", "Demo Córdova", 200000);
         DB.Transaction (populateDB, errorCB, successCB);
-    } <span class="nt">&lt;</span> <span class="err">/</span><span class="na">script</span> <span class="nt">&gt;&lt;</span> <span class="err">/</span> <span class="na">cabeza</span> <span class="nt">&gt;&lt;</span> <span class="nt">cuerpo</span> <span class="nt">&gt;&lt;</span> <span class="nt">h1</span> <span class="nt">&gt;</span> ejemplo <span class="nt">&lt;</span> <span class="err">/</span> <span class="na">h1</span> <span class="nt">&gt;&lt;</span> <span class="nt">p</span> <span class="nt">&gt;</span> base de datos <span class="nt">&lt;</span> <span class="err">/</span><span class="na">p</span> <span class="nt">&gt;&lt;</span> <span class="nt">cuerpo</span> <span class="nt">/ &gt;&lt;</span> <span class="err">/</span> <span class="na">html</span> <span class="nt">&gt;</span>
-</code></pre></div>
+    } &lt; /script &gt;&lt; / cabeza &gt;&lt; cuerpo &gt;&lt; h1 &gt; ejemplo &lt; / h1 &gt;&lt; p &gt; base de datos &lt; /p &gt;&lt; cuerpo / &gt;&lt; / html &gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

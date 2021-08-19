@@ -1304,116 +1304,134 @@
             
 
             <div id="page-toc-source">
-                <h1>場合</h1>
+                <h1 id="場合">場合</h1>
 
 <p>此物件提供一個獲取根檔案系統方法。</p>
 
-<h2>方法</h2>
+<h2 id="方法">方法</h2>
 
 <ul>
-<li><p><strong>requestFileSystem</strong>: 請求的檔案系統。<em>（函數）</em></p></li>
-<li><p><strong>resolveLocalFileSystemURI</strong>: 檢索 <code>DirectoryEntry</code> 或 <code>[FileEntry](../fileentry/fileentry.html)</code> 使用當地的 URI。<em>（函數）</em></p></li>
+  <li>
+    <p><strong>requestFileSystem</strong>: 請求的檔案系統。<em>（函數）</em></p>
+  </li>
+  <li>
+    <p><strong>resolveLocalFileSystemURI</strong>: 檢索 <code class="language-plaintext highlighter-rouge">DirectoryEntry</code> 或 <code class="language-plaintext highlighter-rouge">[FileEntry](../fileentry/fileentry.html)</code> 使用當地的 URI。<em>（函數）</em></p>
+  </li>
 </ul>
 
-<h2>常量</h2>
+<h2 id="常量">常量</h2>
 
 <ul>
-<li><p><code>LocalFileSystem.PERSISTENT</code>： 用於存儲，不應由使用者代理不應用程式或使用者的許可權的情況下刪除。</p></li>
-<li><p><code>LocalFileSystem.TEMPORARY</code>： 用於不能保證的持久性存儲。</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">LocalFileSystem.PERSISTENT</code>： 用於存儲，不應由使用者代理不應用程式或使用者的許可權的情況下刪除。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">LocalFileSystem.TEMPORARY</code>： 用於不能保證的持久性存儲。</p>
+  </li>
 </ul>
 
-<h2>詳細資訊</h2>
+<h2 id="詳細資訊">詳細資訊</h2>
 
-<p><code>LocalFileSystem</code>物件的方法定義在 <code>window</code> 物件。</p>
+<p><code class="language-plaintext highlighter-rouge">LocalFileSystem</code>物件的方法定義在 <code class="language-plaintext highlighter-rouge">window</code> 物件。</p>
 
-<h2>支援的平臺</h2>
+<h2 id="支援的平臺">支援的平臺</h2>
 
 <ul>
-<li>  Android 系統</li>
-<li>  黑莓手機 WebWorks （OS 5.0 和更高）</li>
-<li>  iOS</li>
-<li>  Windows Phone 7 和 8</li>
-<li>  Windows 8</li>
+  <li>Android 系統</li>
+  <li>黑莓手機 WebWorks （OS 5.0 和更高）</li>
+  <li>iOS</li>
+  <li>Windows Phone 7 和 8</li>
+  <li>Windows 8</li>
 </ul>
 
-<h2>請求檔案系統快速示例</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">function onSuccess(fileSystem) {
+<h2 id="請求檔案系統快速示例">請求檔案系統快速示例</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function onSuccess(fileSystem) {
     console.log(fileSystem.name);
 }
 
 // request the persistent file system
 window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSuccess, onError);
-</code></pre></div>
-<h2>解決本地檔案系統的 URI 快速示例</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">function onSuccess(fileEntry) {
+</code></pre></div></div>
+
+<h2 id="解決本地檔案系統的-uri-快速示例">解決本地檔案系統的 URI 快速示例</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function onSuccess(fileEntry) {
     console.log(fileEntry.name);
 }
 
 window.resolveLocalFileSystemURI("file:///example.txt", onSuccess, onError);
-</code></pre></div>
-<h2>完整的示例</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Local File System Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="完整的示例">完整的示例</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Local File System Example&lt;/title&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">window</span><span class="p">.</span><span class="nx">requestFileSystem</span><span class="p">(</span><span class="nx">LocalFileSystem</span><span class="p">.</span><span class="nx">PERSISTENT</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">onFileSystemSuccess</span><span class="p">,</span> <span class="nx">fail</span><span class="p">);</span>
-        <span class="nb">window</span><span class="p">.</span><span class="nx">resolveLocalFileSystemURI</span><span class="p">(</span><span class="s2">"file:///example.txt"</span><span class="p">,</span> <span class="nx">onResolveSuccess</span><span class="p">,</span> <span class="nx">fail</span><span class="p">);</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="kd">function</span> <span class="nx">onFileSystemSuccess</span><span class="p">(</span><span class="nx">fileSystem</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">fileSystem</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
-    <span class="p">}</span>
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
 
-    <span class="kd">function</span> <span class="nx">onResolveSuccess</span><span class="p">(</span><span class="nx">fileEntry</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">fileEntry</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
-    <span class="p">}</span>
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, fail);
+        window.resolveLocalFileSystemURI("file:///example.txt", onResolveSuccess, fail);
+    }
 
-    <span class="kd">function</span> <span class="nx">fail</span><span class="p">(</span><span class="nx">evt</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">evt</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">code</span><span class="p">);</span>
-    <span class="p">}</span>
+    function onFileSystemSuccess(fileSystem) {
+        console.log(fileSystem.name);
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;h1&gt;</span>Example<span class="nt">&lt;/h1&gt;</span>
-    <span class="nt">&lt;p&gt;</span>Local File System<span class="nt">&lt;/p&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h1>requestFileSystem</h1>
+    function onResolveSuccess(fileEntry) {
+        console.log(fileEntry.name);
+    }
+
+    function fail(evt) {
+        console.log(evt.target.error.code);
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Example&lt;/h1&gt;
+    &lt;p&gt;Local File System&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h1 id="requestfilesystem">requestFileSystem</h1>
 
 <blockquote>
-<p>請求一個檔案系統，用來存儲應用程式資料。</p>
+  <p>請求一個檔案系統，用來存儲應用程式資料。</p>
 </blockquote>
-<div class="highlight"><pre><code class="language-" data-lang=""> window.requestFileSystem(type, size, successCallback, errorCallback)
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> window.requestFileSystem(type, size, successCallback, errorCallback)
+</code></pre></div></div>
+
 <ul>
-<li>  <strong>視窗</strong>： 對全球視窗物件的引用</li>
-<li>  <strong>類型</strong>： 本地檔案系統類型，請參見場合常數</li>
-<li>  <strong>大小</strong>： 指示應用程式期望需要多少存儲空間，以位元組為單位，</li>
-<li>  <strong>successCallback</strong>： 使用一個檔案系統物件調用</li>
-<li>  <strong>errorCallback</strong>： 如果發生錯誤的檢索檔案系統調用</li>
+  <li><strong>視窗</strong>： 對全球視窗物件的引用</li>
+  <li><strong>類型</strong>： 本地檔案系統類型，請參見場合常數</li>
+  <li><strong>大小</strong>： 指示應用程式期望需要多少存儲空間，以位元組為單位，</li>
+  <li><strong>successCallback</strong>： 使用一個檔案系統物件調用</li>
+  <li><strong>errorCallback</strong>： 如果發生錯誤的檢索檔案系統調用</li>
 </ul>
 
-<h2>請求檔案系統快速示例</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">function onSuccess(fileSystem) {
+<h2 id="請求檔案系統快速示例-1">請求檔案系統快速示例</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function onSuccess(fileSystem) {
     console.log(fileSystem.name);
 }
 
 // request the persistent file system
 window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSuccess, onError);
-</code></pre></div>
+</code></pre></div></div>
+
 
             </div>
         </div>

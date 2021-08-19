@@ -1366,73 +1366,83 @@
             
 
             <div id="page-toc-source">
-                <h1>Splashscreen</h1>
+                <h1 id="splashscreen">Splashscreen</h1>
 
 <blockquote>
-<p>アプリケーションのスプラッシュスクリーンを開発者が表示/非表示できるようにします。</p>
+  <p>アプリケーションのスプラッシュスクリーンを開発者が表示/非表示できるようにします。</p>
 </blockquote>
 
-<h2>メソッド</h2>
+<h2 id="メソッド">メソッド</h2>
 
 <ul>
-<li><a href="splashscreen.show.html">show</a></li>
-<li><a href="splashscreen.hide.html">hide</a></li>
+  <li><a href="splashscreen.show.html">show</a></li>
+  <li><a href="splashscreen.hide.html">hide</a></li>
 </ul>
 
-<h2>パーミッション</h2>
+<h2 id="パーミッション">パーミッション</h2>
 
-<h3>Android</h3>
+<h3 id="android">Android</h3>
 
-<h4>app/res/xml/config.xml</h4>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;plugin name="SplashScreen" value="org.apache.cordova.SplashScreen"/&gt;
-</code></pre></div>
-<h3>iOS</h3>
+<h4 id="appresxmlconfigxml">app/res/xml/config.xml</h4>
 
-<h4>Cordova.plist</h4>
-<div class="highlight"><pre><code class="language-" data-lang="">    Plugins ディレクトリー以下にエントリーを追加します - "SplashScreen" がキー、 "CDVSplashScreen" が値です。
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;plugin name="SplashScreen" value="org.apache.cordova.SplashScreen"/&gt;
+</code></pre></div></div>
+
+<h3 id="ios">iOS</h3>
+
+<h4 id="cordovaplist">Cordova.plist</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    Plugins ディレクトリー以下にエントリーを追加します - "SplashScreen" がキー、 "CDVSplashScreen" が値です。
     新しいプロジェクトはこのキーを既に持っています。
-</code></pre></div>
-<h2>Setup</h2>
+</code></pre></div></div>
 
-<h3>Android</h3>
+<h2 id="setup">Setup</h2>
 
-<ol>
-<li>スプラッシュスクリーンの画像を Android プロジェクトの res/drawable ディレクトリーにコピーします。画像の各サイズは以下のとおりです:</li>
-</ol>
-
-<ul>
-<li>xlarge (xhdpi): 少なくとも 960 x 720</li>
-<li>large (hdpi): 少なくとも 640 x 480</li>
-<li>medium (mdpi): 少なくとも 470 x 320</li>
-<li>small (ldpi): 少なくとも 426 x 320</li>
-</ul>
-
-<p>スプラッシュスクリーンには <a href="https://developer.android.com/tools/help/draw9patch.html">9-patch 画像</a> を使用することを強くおすすめします。</p>
+<h3 id="android-1">Android</h3>
 
 <ol>
-<li><p>DroidGap を継承したクラスの onCreate メソッドに、次の2行を追加します:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">super.setIntegerProperty("splashscreen", R.drawable.splash);
-super.loadUrl("file:///android_asset/www/index.html", 10000);
-</code></pre></div>
-<p>最初の行 &#39;super.setIntegerProperty&#39; はスプラッシュスクリーンに表示するための画像を設定します。もし名前を splash.png 以外にしている場合は、この行を編集する必要があります。
-次の行 &#39;super.loadUrl&#39; の第2引数はスプラッシュスクリーンのタイムアウトの値です。この例では、スプラッシュスクリーンは 10 秒間表示されます。もしスプラッシュスクリーンを &quot;deviceready&quot; イベントを取得した時に非表示にしたい場合は、 navigator.splashscreen.hide() メソッドを呼び出します。</p></li>
+  <li>
+    <p>スプラッシュスクリーンの画像を Android プロジェクトの res/drawable ディレクトリーにコピーします。画像の各サイズは以下のとおりです:</p>
+
+    <ul>
+      <li>xlarge (xhdpi): 少なくとも 960 x 720</li>
+      <li>large (hdpi): 少なくとも 640 x 480</li>
+      <li>medium (mdpi): 少なくとも 470 x 320</li>
+      <li>small (ldpi): 少なくとも 426 x 320</li>
+    </ul>
+
+    <p>スプラッシュスクリーンには <a href="https://developer.android.com/tools/help/draw9patch.html">9-patch 画像</a> を使用することを強くおすすめします。</p>
+  </li>
+  <li>
+    <p>DroidGap を継承したクラスの onCreate メソッドに、次の2行を追加します:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> super.setIntegerProperty("splashscreen", R.drawable.splash);
+ super.loadUrl("file:///android_asset/www/index.html", 10000);
+</code></pre></div>    </div>
+
+    <p>最初の行 ‘super.setIntegerProperty’ はスプラッシュスクリーンに表示するための画像を設定します。もし名前を splash.png 以外にしている場合は、この行を編集する必要があります。
+ 次の行 ‘super.loadUrl’ の第2引数はスプラッシュスクリーンのタイムアウトの値です。この例では、スプラッシュスクリーンは 10 秒間表示されます。もしスプラッシュスクリーンを “deviceready” イベントを取得した時に非表示にしたい場合は、 navigator.splashscreen.hide() メソッドを呼び出します。</p>
+  </li>
 </ol>
 
-<h3>iOS</h3>
+<h3 id="ios-1">iOS</h3>
 
 <ol>
-<li>スプラッシュスクリーンの画像を iOS プロジェクトの <strong>Resources/splash</strong> ディレクトリーにコピーします。サポートしたいデバイス向けの画像のみ追加するようにしてください (iPad または iPhone のスクリーンサイズ)。画像の各サイズは以下のとおりです:</li>
+  <li>
+    <p>スプラッシュスクリーンの画像を iOS プロジェクトの <strong>Resources/splash</strong> ディレクトリーにコピーします。サポートしたいデバイス向けの画像のみ追加するようにしてください (iPad または iPhone のスクリーンサイズ)。画像の各サイズは以下のとおりです:</p>
+
+    <ul>
+      <li>Default-568h@2x~iphone.png (640x1136 pixels)</li>
+      <li>Default-Landscape@2x~ipad.png (2048x1496 pixels)</li>
+      <li>Default-Landscape~ipad.png (1024x748 pixels)</li>
+      <li>Default-Portrait@2x~ipad.png (1536x2008 pixels)</li>
+      <li>Default-Portrait~ipad.png (768x1004 pixels)</li>
+      <li>Default@2x~iphone.png (640x960 pixels)</li>
+      <li>Default~iphone.png (320x480 pixels)</li>
+    </ul>
+  </li>
 </ol>
 
-<ul>
-<li>Default-568h@2x~iphone.png (640x1136 pixels)</li>
-<li>Default-Landscape@2x~ipad.png (2048x1496 pixels)</li>
-<li>Default-Landscape~ipad.png (1024x748 pixels)</li>
-<li>Default-Portrait@2x~ipad.png (1536x2008 pixels)</li>
-<li>Default-Portrait~ipad.png (768x1004 pixels)</li>
-<li>Default@2x~iphone.png (640x960 pixels)</li>
-<li>Default~iphone.png (320x480 pixels)</li>
-</ul>
 
 
             </div>

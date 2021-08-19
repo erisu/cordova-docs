@@ -1040,67 +1040,73 @@
             
 
             <div id="page-toc-source">
-                <h1>deviceready</h1>
+                <h1 id="deviceready">deviceready</h1>
 
 <p>Das Ereignis wird ausgelöst, wenn Cordova vollständig geladen ist.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">document.addEventListener("deviceready", yourCallbackFunction, false);
-</code></pre></div>
-<h2>Informationen</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>document.addEventListener("deviceready", yourCallbackFunction, false);
+</code></pre></div></div>
+
+<h2 id="informationen">Informationen</h2>
 
 <p>Dieses Ereignis ist wesentlich für jede Anwendung. Es signalisiert, dass Cordovas Gerät APIs geladen haben und bereit sind, zugreifen.</p>
 
 <p>Cordova besteht aus zwei Codebasen: native und JavaScript. Während der native Code lädt, zeigt eine benutzerdefinierte Lade-Bild. JavaScript lädt jedoch nur wenn das DOM geladen. Dies bedeutet, dass die Web-app möglicherweise eine Cordova JavaScript-Funktion nennen darf, bevor der entsprechende systemeigene Code verfügbar ist.</p>
 
-<p>Das <code>deviceready</code> -Ereignis wird ausgelöst, sobald Cordova vollständig geladen hat. Einmal können das Ereignis ausgelöst, Sie sicher Cordova-APIs aufrufen. Anwendungen in der Regel fügen Sie einen Ereignis-Listener mit <code>document.addEventListener</code> sobald das HTML-Dokument DOM geladen hat.</p>
+<p>Das <code class="language-plaintext highlighter-rouge">deviceready</code> -Ereignis wird ausgelöst, sobald Cordova vollständig geladen hat. Einmal können das Ereignis ausgelöst, Sie sicher Cordova-APIs aufrufen. Anwendungen in der Regel fügen Sie einen Ereignis-Listener mit <code class="language-plaintext highlighter-rouge">document.addEventListener</code> sobald das HTML-Dokument DOM geladen hat.</p>
 
-<p>Das <code>deviceready</code> Ereignis verhält sich etwas anders als von anderen. Ein Ereignishandler registriert nach der <code>deviceready</code> -Ereignis ausgelöst hat die Callback-Funktion aufgerufen, sofort.</p>
+<p>Das <code class="language-plaintext highlighter-rouge">deviceready</code> Ereignis verhält sich etwas anders als von anderen. Ein Ereignishandler registriert nach der <code class="language-plaintext highlighter-rouge">deviceready</code> -Ereignis ausgelöst hat die Callback-Funktion aufgerufen, sofort.</p>
 
-<h2>Unterstützte Plattformen</h2>
+<h2 id="unterstützte-plattformen">Unterstützte Plattformen</h2>
 
 <ul>
-<li>  Amazon Fire OS</li>
-<li>  Android</li>
-<li>  BlackBerry 10</li>
-<li>  iOS</li>
-<li>  Tizen</li>
-<li>  Windows Phone 7 und 8</li>
-<li>  Windows 8</li>
+  <li>Amazon Fire OS</li>
+  <li>Android</li>
+  <li>BlackBerry 10</li>
+  <li>iOS</li>
+  <li>Tizen</li>
+  <li>Windows Phone 7 und 8</li>
+  <li>Windows 8</li>
 </ul>
 
-<h2>Kleines Beispiel</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">document.addEventListener("deviceready", onDeviceReady, false);
+<h2 id="kleines-beispiel">Kleines Beispiel</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
     // Now safe to use device APIs
 }
-</code></pre></div>
-<h2>Vollständiges Beispiel</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Device Ready Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="vollständiges-beispiel">Vollständiges Beispiel</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onLoad</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="p">}</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Device Ready Example&lt;/title&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="c1">// Now safe to use device APIs</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body</span> <span class="na">onload=</span><span class="s">"onLoad()"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+    // Wait for device API libraries to load
+    //
+    function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        // Now safe to use device APIs
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body onload="onLoad()"&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

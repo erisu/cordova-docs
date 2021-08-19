@@ -2092,42 +2092,49 @@
             
 
             <div id="page-toc-source">
-                <h1>iOS Plugins</h1>
+                <h1 id="ios-plugins">iOS Plugins</h1>
 
 <p>Ta razdelek ponuja podrobnosti za kako izvajati native plugin kodo na platformi iOS. Pred obravnavo tega, glejte Uporaba Plugins za pregled plugin strukturo in njene skupne JavaScript vmesnik. Ta oddelek še dokazati vzorec <em>echo</em> plugin, ki komunicira s spletni pogled Cordova native platformo in nazaj.</p>
 
-<p>IOS plugin se izvaja kot Objective-C razred, ki razširja v <code>CDVPlugin</code> razred. Za JavaScript je <code>exec</code> metoda je <code>service</code> parameter na zemljevidu Objective-C razred, vsak plugin razred mora biti registriran kot a <code>&lt;feature&gt;</code> tag v direktorij imenovan uporaba <code>config.xml</code> datoteke.</p>
+<p>IOS plugin se izvaja kot Objective-C razred, ki razširja v <code class="language-plaintext highlighter-rouge">CDVPlugin</code> razred. Za JavaScript je <code class="language-plaintext highlighter-rouge">exec</code> metoda je <code class="language-plaintext highlighter-rouge">service</code> parameter na zemljevidu Objective-C razred, vsak plugin razred mora biti registriran kot a <code class="language-plaintext highlighter-rouge">&lt;feature&gt;</code> tag v direktorij imenovan uporaba <code class="language-plaintext highlighter-rouge">config.xml</code> datoteke.</p>
 
-<h2>Plugin razred kartiranje</h2>
+<h2 id="plugin-razred-kartiranje">Plugin razred kartiranje</h2>
 
-<p>Del JavaScript plugin uporablja je <code>cordova.exec</code> metoda, kot sledi:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    exec(&lt;successFunction&gt;, &lt;failFunction&gt;, &lt;service&gt;, &lt;action&gt;, [&lt;args&gt;]);
-</code></pre></div>
-<p>To šerifov na zahtevo v <code>UIWebView</code> iOS native strani, učinkovito kliče je <code>action</code> metoda na je <code>service</code> razreda, z argumenti, ki so opravili v v <code>args</code> array.</p>
+<p>Del JavaScript plugin uporablja je <code class="language-plaintext highlighter-rouge">cordova.exec</code> metoda, kot sledi:</p>
 
-<p>Določite plugin kot a <code>&lt;feature&gt;</code> tag v Cordova iOS aplikacijo projekta <code>config.xml</code> datoteke, uporabljate v <code>plugin.xml</code> datoteko, samodejno, kot je opisano v Plugins uporabo injicirati te oznake:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;feature name="LocalStorage"&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    exec(&lt;successFunction&gt;, &lt;failFunction&gt;, &lt;service&gt;, &lt;action&gt;, [&lt;args&gt;]);
+</code></pre></div></div>
+
+<p>To šerifov na zahtevo v <code class="language-plaintext highlighter-rouge">UIWebView</code> iOS native strani, učinkovito kliče je <code class="language-plaintext highlighter-rouge">action</code> metoda na je <code class="language-plaintext highlighter-rouge">service</code> razreda, z argumenti, ki so opravili v v <code class="language-plaintext highlighter-rouge">args</code> array.</p>
+
+<p>Določite plugin kot a <code class="language-plaintext highlighter-rouge">&lt;feature&gt;</code> tag v Cordova iOS aplikacijo projekta <code class="language-plaintext highlighter-rouge">config.xml</code> datoteke, uporabljate v <code class="language-plaintext highlighter-rouge">plugin.xml</code> datoteko, samodejno, kot je opisano v Plugins uporabo injicirati te oznake:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;feature name="LocalStorage"&gt;
         &lt;param name="ios-package" value="CDVLocalStorage" /&gt;
     &lt;/feature&gt;
-</code></pre></div>
-<p>Zunanja oblika <code>name</code> atribut mora ujemati, kar ste jih določili kot JavaScript <code>exec</code> call&#39;s <code>service</code> parameter. Na <code>value</code> atribut mora ujemati z imenom plugin Objective-C razred. Na <code>&lt;param&gt;</code> elementa <code>name</code> mora biti vedno <code>ios-package</code> . Če ne upoštevate teh smernic, lahko zbrati plugin, vendar Cordova še vedno ne morejo v postranski to.</p>
+</code></pre></div></div>
 
-<h2>Inicializacija plugin in življenju</h2>
+<p>Zunanja oblika <code class="language-plaintext highlighter-rouge">name</code> atribut mora ujemati, kar ste jih določili kot JavaScript <code class="language-plaintext highlighter-rouge">exec</code> call’s <code class="language-plaintext highlighter-rouge">service</code> parameter. Na <code class="language-plaintext highlighter-rouge">value</code> atribut mora ujemati z imenom plugin Objective-C razred. Na <code class="language-plaintext highlighter-rouge">&lt;param&gt;</code> elementa <code class="language-plaintext highlighter-rouge">name</code> mora biti vedno <code class="language-plaintext highlighter-rouge">ios-package</code> . Če ne upoštevate teh smernic, lahko zbrati plugin, vendar Cordova še vedno ne morejo v postranski to.</p>
 
-<p>En primerek predmeta plugin je ustvarjen za življenje vsakega <code>UIWebView</code> . Plugins so običajno predstavljen, ko najprej sklicuje klic iz JavaScript. Drugače lahko biti predstavljen tako, a <code>param</code> imenovan <code>onload</code> da <code>true</code> v v <code>config.xml</code> datoteke:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;feature name="Echo"&gt;
+<h2 id="inicializacija-plugin-in-življenju">Inicializacija plugin in življenju</h2>
+
+<p>En primerek predmeta plugin je ustvarjen za življenje vsakega <code class="language-plaintext highlighter-rouge">UIWebView</code> . Plugins so običajno predstavljen, ko najprej sklicuje klic iz JavaScript. Drugače lahko biti predstavljen tako, a <code class="language-plaintext highlighter-rouge">param</code> imenovan <code class="language-plaintext highlighter-rouge">onload</code> da <code class="language-plaintext highlighter-rouge">true</code> v v <code class="language-plaintext highlighter-rouge">config.xml</code> datoteke:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;feature name="Echo"&gt;
         &lt;param name="ios-package" value="Echo" /&gt;
         &lt;param name="onload" value="true" /&gt;
     &lt;/feature&gt;
-</code></pre></div>
-<p>Tam se <em>ne</em> imenuje initializer za plugins. Namesto tega uporabljajte plugins na <code>pluginInitialize</code> način za njihovo logiko zagonu.</p>
+</code></pre></div></div>
 
-<p>Plugins za dolgotrajen zahteve, v ozadju dejavnosti, kot so predvajanje medijev, poslušalci ali ki ohraniti notranje stanje bi bilo izvajala v <code>onReset</code> metoda za čiščenje teh dejavnosti. Metoda izvede, ko se <code>UIWebView</code> premakne se nova stran ali Osveži, ki polnitve JavaScript.</p>
+<p>Tam se <em>ne</em> imenuje initializer za plugins. Namesto tega uporabljajte plugins na <code class="language-plaintext highlighter-rouge">pluginInitialize</code> način za njihovo logiko zagonu.</p>
 
-<h2>Pisanje iOS Cordova Plugin</h2>
+<p>Plugins za dolgotrajen zahteve, v ozadju dejavnosti, kot so predvajanje medijev, poslušalci ali ki ohraniti notranje stanje bi bilo izvajala v <code class="language-plaintext highlighter-rouge">onReset</code> metoda za čiščenje teh dejavnosti. Metoda izvede, ko se <code class="language-plaintext highlighter-rouge">UIWebView</code> premakne se nova stran ali Osveži, ki polnitve JavaScript.</p>
 
-<p>JavaScript poziv požari izklop zahteva plugin native stran, in ustrezne iOS plugin Objective-C je preslikan pravilno v v <code>config.xml</code> datoteko, vendar kaj končni iOS Objective-C plugin razred pogled všeč? Karkoli se odpravi na plugin z JavaScript je <code>exec</code> funkcija je prešla v ustrezen plugin razred <code>action</code> metoda. Plugin metoda je ta podpis:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    - (void)myMethod:(CDVInvokedUrlCommand*)command
+<h2 id="pisanje-ios-cordova-plugin">Pisanje iOS Cordova Plugin</h2>
+
+<p>JavaScript poziv požari izklop zahteva plugin native stran, in ustrezne iOS plugin Objective-C je preslikan pravilno v v <code class="language-plaintext highlighter-rouge">config.xml</code> datoteko, vendar kaj končni iOS Objective-C plugin razred pogled všeč? Karkoli se odpravi na plugin z JavaScript je <code class="language-plaintext highlighter-rouge">exec</code> funkcija je prešla v ustrezen plugin razred <code class="language-plaintext highlighter-rouge">action</code> metoda. Plugin metoda je ta podpis:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    - (void)myMethod:(CDVInvokedUrlCommand*)command
     {
         CDVPluginResult* pluginResult = nil;
         NSString* myarg = [command.arguments objectAtIndex:0];
@@ -2139,80 +2146,92 @@
         }
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }
-</code></pre></div>
-<p>Za več podrobnosti glej <code>[CDVInvokedUrlCommand.h](https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVInvokedUrlCommand.h)</code> , <code>[CDVPluginResult.h](https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPluginResult.h)</code> , in<code>[CDVCommandDelegate.h](https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVCommandDelegate.h)</code>.</p>
+</code></pre></div></div>
 
-<h2>iOS vrste sporočil CDVPluginResult</h2>
+<p>Za več podrobnosti glej <code class="language-plaintext highlighter-rouge">[CDVInvokedUrlCommand.h](https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVInvokedUrlCommand.h)</code> , <code class="language-plaintext highlighter-rouge">[CDVPluginResult.h](https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPluginResult.h)</code> , in<code class="language-plaintext highlighter-rouge">[CDVCommandDelegate.h](https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVCommandDelegate.h)</code>.</p>
 
-<p>Uporabite lahko <code>CDVPluginResult</code> različne rezultat vrste nazaj JavaScript callbacks, z uporabo metod razreda, ki sledijo tem vzorcu:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    + (CDVPluginResult*)resultWithStatus:(CDVCommandStatus)statusOrdinal messageAs...
-</code></pre></div>
-<p>Ustvarite lahko <code>String</code> , <code>Int</code> , <code>Double</code> , <code>Bool</code> , <code>Array</code> , <code>Dictionary</code> , <code>ArrayBuffer</code> , in <code>Multipart</code> vrst. Lahko tudi izpustite argumentov poslati status ali vrnitev napake ali celo odločite, da ne spodbuda poljuben čep rezultat, pri čemer niti callback požari.</p>
+<h2 id="ios-vrste-sporočil-cdvpluginresult">iOS vrste sporočil CDVPluginResult</h2>
+
+<p>Uporabite lahko <code class="language-plaintext highlighter-rouge">CDVPluginResult</code> različne rezultat vrste nazaj JavaScript callbacks, z uporabo metod razreda, ki sledijo tem vzorcu:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    + (CDVPluginResult*)resultWithStatus:(CDVCommandStatus)statusOrdinal messageAs...
+</code></pre></div></div>
+
+<p>Ustvarite lahko <code class="language-plaintext highlighter-rouge">String</code> , <code class="language-plaintext highlighter-rouge">Int</code> , <code class="language-plaintext highlighter-rouge">Double</code> , <code class="language-plaintext highlighter-rouge">Bool</code> , <code class="language-plaintext highlighter-rouge">Array</code> , <code class="language-plaintext highlighter-rouge">Dictionary</code> , <code class="language-plaintext highlighter-rouge">ArrayBuffer</code> , in <code class="language-plaintext highlighter-rouge">Multipart</code> vrst. Lahko tudi izpustite argumentov poslati status ali vrnitev napake ali celo odločite, da ne spodbuda poljuben čep rezultat, pri čemer niti callback požari.</p>
 
 <p>Opomba za kompleksne vrnjenih vrednosti naslednje:</p>
 
 <ul>
-<li><p><code>messageAsArrayBuffer</code>pričakuje, da bo <code>NSData*</code> in pretvori v <code>ArrayBuffer</code> v JavaScript povratni klic. Prav tako vse <code>ArrayBuffer</code> JavaScript pošlje na plugin se pretvorijo v<code>NSData*</code>.</p></li>
-<li><p><code>messageAsMultipart</code>pričakuje na <code>NSArray*</code> katerekoli druge podprte vrste, in pošlje celoten niz, kot je <code>arguments</code> vaš JavaScript povratni klic. Na ta način vse trditve so serializirana ali mogoče deserializirati kot potrebno, tako da je varno za vrnitev <code>NSData*</code> kot multipart, vendar ne kot <code>Array</code> /<code>Dictionary</code>.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">messageAsArrayBuffer</code>pričakuje, da bo <code class="language-plaintext highlighter-rouge">NSData*</code> in pretvori v <code class="language-plaintext highlighter-rouge">ArrayBuffer</code> v JavaScript povratni klic. Prav tako vse <code class="language-plaintext highlighter-rouge">ArrayBuffer</code> JavaScript pošlje na plugin se pretvorijo v<code class="language-plaintext highlighter-rouge">NSData*</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">messageAsMultipart</code>pričakuje na <code class="language-plaintext highlighter-rouge">NSArray*</code> katerekoli druge podprte vrste, in pošlje celoten niz, kot je <code class="language-plaintext highlighter-rouge">arguments</code> vaš JavaScript povratni klic. Na ta način vse trditve so serializirana ali mogoče deserializirati kot potrebno, tako da je varno za vrnitev <code class="language-plaintext highlighter-rouge">NSData*</code> kot multipart, vendar ne kot <code class="language-plaintext highlighter-rouge">Array</code> /<code class="language-plaintext highlighter-rouge">Dictionary</code>.</p>
+  </li>
 </ul>
 
-<h2>ECHO iOS Plugin primer</h2>
+<h2 id="echo-ios-plugin-primer">ECHO iOS Plugin primer</h2>
 
-<p>Primerjal JavaScript vmesnik <em>echo</em> funkcija, opisana v uporabo Plugins, uporabite na <code>plugin.xml</code> injicirati a <code>feature</code> Specifikacija za lokalne platforme <code>config.xml</code> datoteke:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;platform name="ios"&gt;
+<p>Primerjal JavaScript vmesnik <em>echo</em> funkcija, opisana v uporabo Plugins, uporabite na <code class="language-plaintext highlighter-rouge">plugin.xml</code> injicirati a <code class="language-plaintext highlighter-rouge">feature</code> Specifikacija za lokalne platforme <code class="language-plaintext highlighter-rouge">config.xml</code> datoteke:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;platform name="ios"&gt;
         &lt;config-file target="config.xml" parent="/*"&gt;
             &lt;feature name="Echo"&gt;
                 &lt;param name="ios-package" value="Echo" /&gt;
             &lt;/feature&gt;
         &lt;/config-file&gt;
     &lt;/platform&gt;
-</code></pre></div>
-<p>Nato bi dodamo naslednje <code>Echo.h</code> in <code>Echo.m</code> datoteke je <code>Plugins</code> mapo znotraj Cordova iOS aplikacija imenika:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    <span class="cm">/********* Echo.h Cordova Plugin Header *******/</span>
+</code></pre></div></div>
 
-    <span class="cp">#import &lt;Cordova/CDV.h&gt;
-</span>
-    <span class="k">@interface</span> <span class="nc">Echo</span> <span class="p">:</span> <span class="nc">CDVPlugin</span>
+<p>Nato bi dodamo naslednje <code class="language-plaintext highlighter-rouge">Echo.h</code> in <code class="language-plaintext highlighter-rouge">Echo.m</code> datoteke je <code class="language-plaintext highlighter-rouge">Plugins</code> mapo znotraj Cordova iOS aplikacija imenika:</p>
 
-    <span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">echo</span><span class="p">:(</span><span class="n">CDVInvokedUrlCommand</span><span class="o">*</span><span class="p">)</span><span class="nv">command</span><span class="p">;</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    /********* Echo.h Cordova Plugin Header *******/
 
-    <span class="k">@end</span>
+    #import &lt;Cordova/CDV.h&gt;
 
-    <span class="cm">/********* Echo.m Cordova Plugin Implementation *******/</span>
+    @interface Echo : CDVPlugin
 
-    <span class="cp">#import "Echo.h"
-</span>    <span class="cp">#import &lt;Cordova/CDV.h&gt;
-</span>
-    <span class="k">@implementation</span> <span class="nc">Echo</span>
+    - (void)echo:(CDVInvokedUrlCommand*)command;
 
-    <span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">echo</span><span class="p">:(</span><span class="n">CDVInvokedUrlCommand</span><span class="o">*</span><span class="p">)</span><span class="nv">command</span>
-    <span class="p">{</span>
-        <span class="n">CDVPluginResult</span><span class="o">*</span> <span class="n">pluginResult</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
-        <span class="n">NSString</span><span class="o">*</span> <span class="n">echo</span> <span class="o">=</span> <span class="p">[</span><span class="n">command</span><span class="p">.</span><span class="n">arguments</span> <span class="nf">objectAtIndex</span><span class="p">:</span><span class="mi">0</span><span class="p">];</span>
+    @end
 
-        <span class="k">if</span> <span class="p">(</span><span class="n">echo</span> <span class="o">!=</span> <span class="nb">nil</span> <span class="o">&amp;&amp;</span> <span class="p">[</span><span class="n">echo</span> <span class="nf">length</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">pluginResult</span> <span class="o">=</span> <span class="p">[</span><span class="n">CDVPluginResult</span> <span class="nf">resultWithStatus</span><span class="p">:</span><span class="n">CDVCommandStatus_OK</span> <span class="nf">messageAsString</span><span class="p">:</span><span class="n">echo</span><span class="p">];</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="n">pluginResult</span> <span class="o">=</span> <span class="p">[</span><span class="n">CDVPluginResult</span> <span class="nf">resultWithStatus</span><span class="p">:</span><span class="n">CDVCommandStatus_ERROR</span><span class="p">];</span>
-        <span class="p">}</span>
+    /********* Echo.m Cordova Plugin Implementation *******/
 
-        <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">commandDelegate</span> <span class="nf">sendPluginResult</span><span class="p">:</span><span class="n">pluginResult</span> <span class="nf">callbackId</span><span class="p">:</span><span class="n">command</span><span class="p">.</span><span class="n">callbackId</span><span class="p">];</span>
-    <span class="p">}</span>
+    #import "Echo.h"
+    #import &lt;Cordova/CDV.h&gt;
 
-    <span class="k">@end</span>
-</code></pre></div>
-<p>Potrebno uvoz na vrhu datoteke razširja razred iz <code>CDVPlugin</code> . V tem primeru plugin podpira le eno <code>echo</code> dejanje. Pridobi echo niz s pozivom na <code>objectAtIndex</code> način dobili prvi parameter je <code>arguments</code> array, ki ustreza argumente, ki so jih v sprejel JavaScript <code>exec()</code> funkcijo.</p>
+    @implementation Echo
 
-<p>Preveri parameter prepričati se to ni <code>nil</code> ali prazen niz, vračajo z <code>PluginResult</code> s je <code>ERROR</code> status, če je tako. Če parameter prehaja ček, vrne s <code>PluginResult</code> s je <code>OK</code> status, ki poteka v izvirniku <code>echo</code> niz. Končno, pošlje rezultat na <code>self.commandDelegate</code> , ki izvede na <code>exec</code> metoda je uspeh ali neuspeh callbacks na strani JavaScript. Če se imenuje uspeh callback, prehaja v je <code>echo</code> parameter.</p>
+    - (void)echo:(CDVInvokedUrlCommand*)command
+    {
+        CDVPluginResult* pluginResult = nil;
+        NSString* echo = [command.arguments objectAtIndex:0];
 
-<h2>iOS integracije</h2>
+        if (echo != nil &amp;&amp; [echo length] &gt; 0) {
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:echo];
+        } else {
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+        }
 
-<p>V <code>CDVPlugin</code> razred značilnosti druge metode, da vaš plugin lahko preglasite. Zajamete lahko na primer v <code>[pause](../../../cordova/events/events.pause.html)</code> , <code>[resume](../../../cordova/events/events.resume.html)</code> , app končati in <code>handleOpenURL</code> dogodkov. Glej <a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.h">CDVPlugin.h</a> in <a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.m">CDVPlugin.m</a> razred za usmerjanje.</p>
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }
 
-<h2>Navojev</h2>
+    @end
+</code></pre></div></div>
+
+<p>Potrebno uvoz na vrhu datoteke razširja razred iz <code class="language-plaintext highlighter-rouge">CDVPlugin</code> . V tem primeru plugin podpira le eno <code class="language-plaintext highlighter-rouge">echo</code> dejanje. Pridobi echo niz s pozivom na <code class="language-plaintext highlighter-rouge">objectAtIndex</code> način dobili prvi parameter je <code class="language-plaintext highlighter-rouge">arguments</code> array, ki ustreza argumente, ki so jih v sprejel JavaScript <code class="language-plaintext highlighter-rouge">exec()</code> funkcijo.</p>
+
+<p>Preveri parameter prepričati se to ni <code class="language-plaintext highlighter-rouge">nil</code> ali prazen niz, vračajo z <code class="language-plaintext highlighter-rouge">PluginResult</code> s je <code class="language-plaintext highlighter-rouge">ERROR</code> status, če je tako. Če parameter prehaja ček, vrne s <code class="language-plaintext highlighter-rouge">PluginResult</code> s je <code class="language-plaintext highlighter-rouge">OK</code> status, ki poteka v izvirniku <code class="language-plaintext highlighter-rouge">echo</code> niz. Končno, pošlje rezultat na <code class="language-plaintext highlighter-rouge">self.commandDelegate</code> , ki izvede na <code class="language-plaintext highlighter-rouge">exec</code> metoda je uspeh ali neuspeh callbacks na strani JavaScript. Če se imenuje uspeh callback, prehaja v je <code class="language-plaintext highlighter-rouge">echo</code> parameter.</p>
+
+<h2 id="ios-integracije">iOS integracije</h2>
+
+<p>V <code class="language-plaintext highlighter-rouge">CDVPlugin</code> razred značilnosti druge metode, da vaš plugin lahko preglasite. Zajamete lahko na primer v <code class="language-plaintext highlighter-rouge">[pause](../../../cordova/events/events.pause.html)</code> , <code class="language-plaintext highlighter-rouge">[resume](../../../cordova/events/events.resume.html)</code> , app končati in <code class="language-plaintext highlighter-rouge">handleOpenURL</code> dogodkov. Glej <a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.h">CDVPlugin.h</a> in <a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.m">CDVPlugin.m</a> razred za usmerjanje.</p>
+
+<h2 id="navojev">Navojev</h2>
 
 <p>Plugin metod običajno izvesti v istem nit kot glavni vmesnik. Če vaš plugin zahteva blokiranje klica ali zahteva veliko predelavo, uporabite ozadje nit. Na primer:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    - (void)myPluginMethod:(CDVInvokedUrlCommand*)command
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    - (void)myPluginMethod:(CDVInvokedUrlCommand*)command
     {
         // Check command.arguments here.
         [self.commandDelegate runInBackground:^{
@@ -2223,16 +2242,21 @@
             [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
         }];
     }
-</code></pre></div>
-<h2>Debugging iOS Plugins</h2>
+</code></pre></div></div>
 
-<p>Debug na strani Objective-C, morate Xcode&#39;s vgrajen iskalnik napak. Za JavaScript, na iOS 5,0 lahko uporabite <a href="https://github.com/apache/cordova-weinre">Weinre, projekt Apache Cordova</a> ali <a href="http://www.iwebinspector.com/">iWebInspector, a tretji stranka korist</a>. Za iOS 6, lahko priložite Safari 6.0 vaš app teče v iOS 6 Simulator.</p>
+<h2 id="debugging-ios-plugins">Debugging iOS Plugins</h2>
 
-<h2>Skupnih pastem</h2>
+<p>Debug na strani Objective-C, morate Xcode’s vgrajen iskalnik napak. Za JavaScript, na iOS 5,0 lahko uporabite <a href="https://github.com/apache/cordova-weinre">Weinre, projekt Apache Cordova</a> ali <a href="http://www.iwebinspector.com/">iWebInspector, a tretji stranka korist</a>. Za iOS 6, lahko priložite Safari 6.0 vaš app teče v iOS 6 Simulator.</p>
+
+<h2 id="skupnih-pastem">Skupnih pastem</h2>
 
 <ul>
-<li><p>Ne pozabite dodati vaš plugin preslikava v <code>config.xml</code> . Če ste pozabili, napake prijavljeni Xcode konzolo.</p></li>
-<li><p>Ne pozabite dodati vseh gostiteljev povežete v seznam dovoljenih, kot je opisano v priročniku Whitelist domene. Če ste pozabili, napake prijavljeni Xcode konzolo.</p></li>
+  <li>
+    <p>Ne pozabite dodati vaš plugin preslikava v <code class="language-plaintext highlighter-rouge">config.xml</code> . Če ste pozabili, napake prijavljeni Xcode konzolo.</p>
+  </li>
+  <li>
+    <p>Ne pozabite dodati vseh gostiteljev povežete v seznam dovoljenih, kot je opisano v priročniku Whitelist domene. Če ste pozabili, napake prijavljeni Xcode konzolo.</p>
+  </li>
 </ul>
 
 

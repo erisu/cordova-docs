@@ -1304,34 +1304,39 @@
             
 
             <div id="page-toc-source">
-                <h1>Plugins de BlackBerry</h1>
+                <h1 id="plugins-de-blackberry">Plugins de BlackBerry</h1>
 
 <p>Esta guía le muestra cómo desarrollar un plugin de Echo en BlackBerry. La guía de desarrollo de Plugin ofrece un amplio resumen con el cual ya debe estar familiarizado, y esta guía recoge donde sale. Además, descargar el <a href="https://git-wip-us.apache.org/repos/asf?p=cordova-blackberry-webworks.git;a=summary">repositorio Cordova BlackBerry</a>.</p>
 
-<p>El proyecto de <code>Cordova-BlackBerry</code> permite desplegar en dispositivos como la antorcha, negrita y Playbook de BlackBerry. El libro de jugadas utiliza un código diferente base que otros dispositivos de mano BlackBerry, para lo cual necesita duplicar sus esfuerzos de desarrollo. Esta guía se centra en los dispositivos portátiles en lugar de tabletas. (En el futuro, esta guía debe cubrir ambas plataformas).</p>
+<p>El proyecto de <code class="language-plaintext highlighter-rouge">Cordova-BlackBerry</code> permite desplegar en dispositivos como la antorcha, negrita y Playbook de BlackBerry. El libro de jugadas utiliza un código diferente base que otros dispositivos de mano BlackBerry, para lo cual necesita duplicar sus esfuerzos de desarrollo. Esta guía se centra en los dispositivos portátiles en lugar de tabletas. (En el futuro, esta guía debe cubrir ambas plataformas).</p>
 
-<p>El plugin de eco esencialmente devuelve el mensaje que un usuario proporciona a la función <code>window.echo</code>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">window.echo = function(str, callback) {
+<p>El plugin de eco esencialmente devuelve el mensaje que un usuario proporciona a la función <code class="language-plaintext highlighter-rouge">window.echo</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>window.echo = function(str, callback) {
     cordova.exec(callback, function(err) {
         callback('Nothing to echo.');
     }, "Echo", "echo", [str]);
 };
-</code></pre></div>
-<h2>Modificar plugins.xml</h2>
+</code></pre></div></div>
 
-<p>De su proyecto <code>www/plugins.xml</code> directorio contiene todas las referencias necesarias a plugins de su proyecto de Cordova. Agregue una referencia adicional para que cuando se llama a <code>cordova.exec</code>, Cordova sabe cómo asignar el argumento de <code>Eco</code> de <code>cordova.exec</code> a la clase de <code>Echo</code> que queremos escribir de forma nativa:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="Echo"&gt;
+<h2 id="modificar-pluginsxml">Modificar plugins.xml</h2>
+
+<p>De su proyecto <code class="language-plaintext highlighter-rouge">www/plugins.xml</code> directorio contiene todas las referencias necesarias a plugins de su proyecto de Cordova. Agregue una referencia adicional para que cuando se llama a <code class="language-plaintext highlighter-rouge">cordova.exec</code>, Cordova sabe cómo asignar el argumento de <code class="language-plaintext highlighter-rouge">Eco</code> de <code class="language-plaintext highlighter-rouge">cordova.exec</code> a la clase de <code class="language-plaintext highlighter-rouge">Echo</code> que queremos escribir de forma nativa:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="Echo"&gt;
     &lt;param name="blackberry-package" value="org.apache.cordova.echo.Echo" /&gt;
 &lt;/feature&gt;
-</code></pre></div>
-<h2>Agregar Echo.java</h2>
+</code></pre></div></div>
 
-<p>Si observa la estructura del atributo valor, verás un camino definido que conduce al plugin de eco. En el directorio raíz de la repo Cordova BlackBerry WebWorks, busque un directorio llamado <code>framework</code> . Este directorio contiene todo el código fuente que funciona de forma nativa en el BlackBerry. Desplácese a <code>framework/ext/src/org/apache/cordova</code>. En este punto, usted verá todos los directorios de plugin, que dentro de los cuales es el código fuente. Agrega el eco directorio a <code>framework/ext/src/org/apache/cordova/echo</code> y crear un archivo llamado <code>Echo.java</code> en<code>framework/ext/src/org/apache/cordova/echo/Echo.java</code>.</p>
+<h2 id="agregar-echojava">Agregar Echo.java</h2>
 
-<h2>Escritura Echo.java</h2>
+<p>Si observa la estructura del atributo valor, verás un camino definido que conduce al plugin de eco. En el directorio raíz de la repo Cordova BlackBerry WebWorks, busque un directorio llamado <code class="language-plaintext highlighter-rouge">framework</code> . Este directorio contiene todo el código fuente que funciona de forma nativa en el BlackBerry. Desplácese a <code class="language-plaintext highlighter-rouge">framework/ext/src/org/apache/cordova</code>. En este punto, usted verá todos los directorios de plugin, que dentro de los cuales es el código fuente. Agrega el eco directorio a <code class="language-plaintext highlighter-rouge">framework/ext/src/org/apache/cordova/echo</code> y crear un archivo llamado <code class="language-plaintext highlighter-rouge">Echo.java</code> en<code class="language-plaintext highlighter-rouge">framework/ext/src/org/apache/cordova/echo/Echo.java</code>.</p>
 
-<p>La idea básica detrás de escribir un plugin es crear una clase que extiende la clase Plugin y tener un método llamado <code>execute</code> para volver a una clase de <code>PluginResult</code>. Cualquier llamada a pases de <code>cordova.exec</code> en la acción a ejecutar dentro de la clase, así como los argumentos. En este caso, &quot;echo&quot; es la acción que queremos ejecutar dentro de la clase &quot;Echo&quot; y [str] son los argumentos que estamos pasando en.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">paquete org.apache.cordova.echo;
+<h2 id="escritura-echojava">Escritura Echo.java</h2>
+
+<p>La idea básica detrás de escribir un plugin es crear una clase que extiende la clase Plugin y tener un método llamado <code class="language-plaintext highlighter-rouge">execute</code> para volver a una clase de <code class="language-plaintext highlighter-rouge">PluginResult</code>. Cualquier llamada a pases de <code class="language-plaintext highlighter-rouge">cordova.exec</code> en la acción a ejecutar dentro de la clase, así como los argumentos. En este caso, “echo” es la acción que queremos ejecutar dentro de la clase “Echo” y [str] son los argumentos que estamos pasando en.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>paquete org.apache.cordova.echo;
 
 Import org.apache.cordova.api.Plugin;
 Import org.apache.cordova.api.PluginResult;
@@ -1349,19 +1354,22 @@ Import org.apache.cordova.json4j.JSONObject;
     }
 
 }
-</code></pre></div>
-<p>Así que si nos fijamos en el código anterior, podemos ver que en el método execute, primero buscamos para qué acciones están llegando. El plugin de Echo tiene sólo una acción, <code>echo</code>, así que llegará sólo para eso. Si nuestro plugin tenía más acciones, es simplemente una cuestión de añadir más pruebas condicionales para verificar esas acciones.</p>
+</code></pre></div></div>
 
-<p>Entonces vamos a agarrar el mensaje viene de los argumentos que es suministrado por el parámetro args. Podemos coger el primer argumento por simplemente haciendo <code>String theMsg = args.getString(0);</code>.</p>
+<p>Así que si nos fijamos en el código anterior, podemos ver que en el método execute, primero buscamos para qué acciones están llegando. El plugin de Echo tiene sólo una acción, <code class="language-plaintext highlighter-rouge">echo</code>, así que llegará sólo para eso. Si nuestro plugin tenía más acciones, es simplemente una cuestión de añadir más pruebas condicionales para verificar esas acciones.</p>
 
-<p>Haremos una comprobación de errores y si el mensaje está bien, nos hará instanciar un nuevo PluginResult con un estado ok: <code>PluginResult.Status.OK</code> y el mensaje de retorno: <code>theMsg</code>. Después de esto, nos devolverá el resultado para devolver a JavaScript para ser disparada en el callback de éxito. Si algo falla, podemos regresar varias excepciones de estado como <code>PluginResult.Status.ERROR</code>, <code>PluginResult.Status.JSON_EXCEPTION</code> o <code>PluginResult.Status.INVALID_ACTION</code>. Al regreso, estos tipos de resultados fuego el callback fail en JavaScript.</p>
+<p>Entonces vamos a agarrar el mensaje viene de los argumentos que es suministrado por el parámetro args. Podemos coger el primer argumento por simplemente haciendo <code class="language-plaintext highlighter-rouge">String theMsg = args.getString(0);</code>.</p>
 
-<h2>Actualizando el jar en el directorio del proyecto www</h2>
+<p>Haremos una comprobación de errores y si el mensaje está bien, nos hará instanciar un nuevo PluginResult con un estado ok: <code class="language-plaintext highlighter-rouge">PluginResult.Status.OK</code> y el mensaje de retorno: <code class="language-plaintext highlighter-rouge">theMsg</code>. Después de esto, nos devolverá el resultado para devolver a JavaScript para ser disparada en el callback de éxito. Si algo falla, podemos regresar varias excepciones de estado como <code class="language-plaintext highlighter-rouge">PluginResult.Status.ERROR</code>, <code class="language-plaintext highlighter-rouge">PluginResult.Status.JSON_EXCEPTION</code> o <code class="language-plaintext highlighter-rouge">PluginResult.Status.INVALID_ACTION</code>. Al regreso, estos tipos de resultados fuego el callback fail en JavaScript.</p>
 
-<p>El agregado <code>Echo.java</code> necesita ser actualizado en su proyecto. Para generar el archivo <code>.jar</code>, navegar al directorio raíz de la repo BlackBerry WebWorks y ejecutar el comando <code>ant</code>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">ant update -Dproject.path="~/path_to_my_project"
-</code></pre></div>
-<p>Esto crea un nuevo archivo <code>jar</code> en el directorio <code>build/ext</code>. Copie el archivo <code>build/ext/cordova.jar</code> en tu directorio de <code>project/www/ext</code>.</p>
+<h2 id="actualizando-el-jar-en-el-directorio-del-proyecto-www">Actualizando el jar en el directorio del proyecto www</h2>
+
+<p>El agregado <code class="language-plaintext highlighter-rouge">Echo.java</code> necesita ser actualizado en su proyecto. Para generar el archivo <code class="language-plaintext highlighter-rouge">.jar</code>, navegar al directorio raíz de la repo BlackBerry WebWorks y ejecutar el comando <code class="language-plaintext highlighter-rouge">ant</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ant update -Dproject.path="~/path_to_my_project"
+</code></pre></div></div>
+
+<p>Esto crea un nuevo archivo <code class="language-plaintext highlighter-rouge">jar</code> en el directorio <code class="language-plaintext highlighter-rouge">build/ext</code>. Copie el archivo <code class="language-plaintext highlighter-rouge">build/ext/cordova.jar</code> en tu directorio de <code class="language-plaintext highlighter-rouge">project/www/ext</code>.</p>
 
 <p>Si todo va bien, que permite usar el plugin de Echo en BlackBerry.</p>
 

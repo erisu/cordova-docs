@@ -1304,26 +1304,27 @@
             
 
             <div id="page-toc-source">
-                <h1>Il File config. Xml</h1>
+                <h1 id="il-file-config-xml">Il File config. Xml</h1>
 
-<p>Molti aspetti del comportamento di un&#39;app possono essere controllati con un file di configurazione globale, <code>config.xml</code> , che è inserito nella directory web di primo livello patrimoniale insieme a pagina iniziale dell&#39;app. Questo file XML indipendente dalla piattaforma è formattato basato sulla specifica <a href="http://www.w3.org/TR/widgets/">Confezionato Web Apps (widget)</a> di W3C ed esteso per specificare le caratteristiche di nucleo API di Cordova, plugins e impostazioni specifiche della piattaforma.</p>
+<p>Molti aspetti del comportamento di un’app possono essere controllati con un file di configurazione globale, <code class="language-plaintext highlighter-rouge">config.xml</code> , che è inserito nella directory web di primo livello patrimoniale insieme a pagina iniziale dell’app. Questo file XML indipendente dalla piattaforma è formattato basato sulla specifica <a href="http://www.w3.org/TR/widgets/">Confezionato Web Apps (widget)</a> di W3C ed esteso per specificare le caratteristiche di nucleo API di Cordova, plugins e impostazioni specifiche della piattaforma.</p>
 
-<p>Per i progetti creati con Cordova CLI (descritto nella interfaccia Command-Line), questo file può essere trovato nella directory <code>www</code> di primo livello. Utilizzando la CLI per costruire un progetto rigenera le versioni di questo file in varie sottodirectory all&#39;interno di <code>platforms</code> . Se si utilizza la CLI per creare un progetto, ma poi spostare il vostro flusso di lavoro per un SDK, il file di specifica della piattaforma serve come fonte.</p>
+<p>Per i progetti creati con Cordova CLI (descritto nella interfaccia Command-Line), questo file può essere trovato nella directory <code class="language-plaintext highlighter-rouge">www</code> di primo livello. Utilizzando la CLI per costruire un progetto rigenera le versioni di questo file in varie sottodirectory all’interno di <code class="language-plaintext highlighter-rouge">platforms</code> . Se si utilizza la CLI per creare un progetto, ma poi spostare il vostro flusso di lavoro per un SDK, il file di specifica della piattaforma serve come fonte.</p>
 
 <p>In questa sezione in dettaglio le opzioni di configurazione globale e multi-piattaforma. Vedere le sezioni seguenti per le opzioni specifiche della piattaforma:</p>
 
 <ul>
-<li>  Configurazione iOS</li>
-<li>  Configurazione Android</li>
-<li>  Configurazione BlackBerry</li>
+  <li>Configurazione iOS</li>
+  <li>Configurazione Android</li>
+  <li>Configurazione BlackBerry</li>
 </ul>
 
-<p>Oltre le varie opzioni di configurazione descritte di seguito, è possibile configurare anche set di base di un&#39;applicazione delle immagini per ogni piattaforma di destinazione. Per ulteriori informazioni, vedere icone e schermate iniziali.</p>
+<p>Oltre le varie opzioni di configurazione descritte di seguito, è possibile configurare anche set di base di un’applicazione delle immagini per ogni piattaforma di destinazione. Per ulteriori informazioni, vedere icone e schermate iniziali.</p>
 
-<h2>Elementi di configurazione del nucleo</h2>
+<h2 id="elementi-di-configurazione-del-nucleo">Elementi di configurazione del nucleo</h2>
 
-<p>In questo esempio viene illustrato il valore predefinito <code>config.xml</code> generato dal CLI <code>create</code> comando, descritto in l&#39;interfaccia della riga di comando:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;widget id="com.example.hello" version="0.0.1"&gt;
+<p>In questo esempio viene illustrato il valore predefinito <code class="language-plaintext highlighter-rouge">config.xml</code> generato dal CLI <code class="language-plaintext highlighter-rouge">create</code> comando, descritto in l’interfaccia della riga di comando:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;widget id="com.example.hello" version="0.0.1"&gt;
         &lt;name&gt;HelloWorld&lt;/name&gt;
         &lt;description&gt;
             A sample Apache Cordova application that responds to the deviceready event.
@@ -1336,70 +1337,108 @@
         &lt;preference name="Fullscreen" value="true" /&gt;
         &lt;preference name="WebViewBounce" value="true" /&gt;
     &lt;/widget&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <!-- QUERY: is WebViewBounce superseded by DisallowOverscroll? -->
 
-<p>Gli elementi di configurazione seguenti appaiono nel primo livello <code>config.xml</code> del file e sono supportati su tutte le piattaforme supportate di Cordova:</p>
+<p>Gli elementi di configurazione seguenti appaiono nel primo livello <code class="language-plaintext highlighter-rouge">config.xml</code> del file e sono supportati su tutte le piattaforme supportate di Cordova:</p>
 
 <ul>
-<li><p>Il <code>&lt;widget&gt;</code> dell&#39;elemento <code>id</code> attributo fornisce l&#39;identificatore di dominio inverso dell&#39;app e la <code>version</code> il numero di versione completo espresso nella notazione di maggiore/minore/patch.</p></li>
-<li><p>Il <code>&lt;name&gt;</code> elemento specifica il nome dell&#39;app formale, come appare sulla schermata iniziale del dispositivo e all&#39;interno di app store interfacce.</p></li>
-<li><p>Il <code>&lt;description&gt;</code> e <code>&lt;author&gt;</code> elementi specificano metadati e informazioni di contatto che possono essere visualizzati all&#39;interno di elenchi di app store.</p></li>
-<li><p>L&#39;optional <code>&lt;content&gt;</code> elemento definisce la pagina iniziale dell&#39;applicazione nella directory di risorse web di primo livello. Il valore predefinito è <code>index.html</code> , che abitualmente viene visualizzata in un progetto di primo livello <code>www</code> directory.</p></li>
-<li><p><code>&lt;access&gt;</code>gli elementi definiscono l&#39;insieme di domini esterni che è consentito comunicare con l&#39;app. Il valore predefinito indicato sopra permette di accedere a qualsiasi server. Vedere la guida di dominio Whitelist per dettagli.</p></li>
-<li><p>Il <code>&lt;preference&gt;</code> etichetta imposta varie opzioni come coppie di <code>name</code> / <code>value</code> gli attributi. Ogni preferenza <code>name</code> è case-insensitive. Molte preferenze sono univoci per specifiche piattaforme, come elencato nella parte superiore di questa pagina. Le seguenti sezioni dettaglio preferenze valide per più di una piattaforma.</p></li>
+  <li>
+    <p>Il <code class="language-plaintext highlighter-rouge">&lt;widget&gt;</code> dell’elemento <code class="language-plaintext highlighter-rouge">id</code> attributo fornisce l’identificatore di dominio inverso dell’app e la <code class="language-plaintext highlighter-rouge">version</code> il numero di versione completo espresso nella notazione di maggiore/minore/patch.</p>
+  </li>
+  <li>
+    <p>Il <code class="language-plaintext highlighter-rouge">&lt;name&gt;</code> elemento specifica il nome dell’app formale, come appare sulla schermata iniziale del dispositivo e all’interno di app store interfacce.</p>
+  </li>
+  <li>
+    <p>Il <code class="language-plaintext highlighter-rouge">&lt;description&gt;</code> e <code class="language-plaintext highlighter-rouge">&lt;author&gt;</code> elementi specificano metadati e informazioni di contatto che possono essere visualizzati all’interno di elenchi di app store.</p>
+  </li>
+  <li>
+    <p>L’optional <code class="language-plaintext highlighter-rouge">&lt;content&gt;</code> elemento definisce la pagina iniziale dell’applicazione nella directory di risorse web di primo livello. Il valore predefinito è <code class="language-plaintext highlighter-rouge">index.html</code> , che abitualmente viene visualizzata in un progetto di primo livello <code class="language-plaintext highlighter-rouge">www</code> directory.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">&lt;access&gt;</code>gli elementi definiscono l’insieme di domini esterni che è consentito comunicare con l’app. Il valore predefinito indicato sopra permette di accedere a qualsiasi server. Vedere la guida di dominio Whitelist per dettagli.</p>
+  </li>
+  <li>
+    <p>Il <code class="language-plaintext highlighter-rouge">&lt;preference&gt;</code> etichetta imposta varie opzioni come coppie di <code class="language-plaintext highlighter-rouge">name</code> / <code class="language-plaintext highlighter-rouge">value</code> gli attributi. Ogni preferenza <code class="language-plaintext highlighter-rouge">name</code> è case-insensitive. Molte preferenze sono univoci per specifiche piattaforme, come elencato nella parte superiore di questa pagina. Le seguenti sezioni dettaglio preferenze valide per più di una piattaforma.</p>
+  </li>
 </ul>
 
-<h2>Preferenze globali</h2>
+<h2 id="preferenze-globali">Preferenze globali</h2>
 
 <p>Si applicano le seguenti preferenze globali per tutte le piattaforme:</p>
 
 <ul>
-<li><p><code>Fullscreen</code>consente di nascondere la barra di stato nella parte superiore dello schermo. Il valore predefinito è <code>false</code> . Esempio:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="Fullscreen" value="true" /&gt;
-</code></pre></div></li>
-<li><p><code>Orientation</code>consente di bloccare l&#39;orientamento e impedire che l&#39;interfaccia rotante in risposta ai cambiamenti nell&#39;orientamento. I valori possibili sono <code>default</code> , <code>landscape</code> , o <code>portrait</code> . Esempio:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="Orientation" value="landscape" /&gt;
-</code></pre></div>
-<p><strong>Nota:</strong> Il <code>default</code> valore significa <em>sia</em> gli orientamenti orizzontale e verticale sono abilitati. Se si desidera utilizzare le impostazioni di default su ogni piattaforma (solitamente ritratto solo), lasciare questo tag della <code>config.xml</code> file. Inoltre, utilizza BlackBerry <code>auto</code> invece di <code>default</code> nel suo <code>config.xml</code> file. Se si specifica <code>default</code> nel mondiale <code>config.xml</code> , si traduce in <code>auto</code> della compilazione di BlackBerry.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Fullscreen</code>consente di nascondere la barra di stato nella parte superiore dello schermo. Il valore predefinito è <code class="language-plaintext highlighter-rouge">false</code> . Esempio:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="Fullscreen" value="true" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Orientation</code>consente di bloccare l’orientamento e impedire che l’interfaccia rotante in risposta ai cambiamenti nell’orientamento. I valori possibili sono <code class="language-plaintext highlighter-rouge">default</code> , <code class="language-plaintext highlighter-rouge">landscape</code> , o <code class="language-plaintext highlighter-rouge">portrait</code> . Esempio:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="Orientation" value="landscape" /&gt;
+</code></pre></div>    </div>
+
+    <p><strong>Nota:</strong> Il <code class="language-plaintext highlighter-rouge">default</code> valore significa <em>sia</em> gli orientamenti orizzontale e verticale sono abilitati. Se si desidera utilizzare le impostazioni di default su ogni piattaforma (solitamente ritratto solo), lasciare questo tag della <code class="language-plaintext highlighter-rouge">config.xml</code> file. Inoltre, utilizza BlackBerry <code class="language-plaintext highlighter-rouge">auto</code> invece di <code class="language-plaintext highlighter-rouge">default</code> nel suo <code class="language-plaintext highlighter-rouge">config.xml</code> file. Se si specifica <code class="language-plaintext highlighter-rouge">default</code> nel mondiale <code class="language-plaintext highlighter-rouge">config.xml</code> , si traduce in <code class="language-plaintext highlighter-rouge">auto</code> della compilazione di BlackBerry.</p>
+  </li>
 </ul>
 
-<h2>Preferenze di multi-piattaforma</h2>
+<h2 id="preferenze-di-multi-piattaforma">Preferenze di multi-piattaforma</h2>
 
 <p>Per più di una piattaforma, ma non a tutte le, si applicano le seguenti preferenze:</p>
 
 <ul>
-<li><p><code>DisallowOverscroll</code>(boolean, impostazioni predefinite a <code>false</code> ): impostare su <code>true</code> se non volete l&#39;interfaccia per visualizzare tutte le risposte, quando gli utenti scorrere dopo l&#39;inizio o la fine del contenuto.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="DisallowOverscroll" value="true"/&gt;
-</code></pre></div>
-<p>Vale per Android e iOS. IOS, causa di gesti overscroll contenuto rimbalzare indietro nella sua posizione originale. Su Android, producono un effetto incandescente più sottile lungo il bordo superiore o inferiore del contenuto.</p></li>
-<li><p><code>BackgroundColor</code>: Impostare il colore di sfondo dell&#39;app. Supporta un valore esadecimale di quattro byte, con il primo byte che rappresenta il canale alfa e valori RGB standard per i seguenti tre byte. Questo esempio specifica blu:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="BackgroundColor" value="0xff0000ff"/&gt;
-</code></pre></div>
-<p>Vale per Android e BlackBerry. Esegue l&#39;override CSS altrimenti disponibile in <em>tutte le</em> piattaforme, ad esempio:<code>body{background-color:blue}</code>.</p></li>
-<li><p><code>HideKeyboardFormAccessoryBar</code>(boolean, impostazioni predefinite a <code>false</code> ): impostare su <code>true</code> per nascondere la barra degli strumenti aggiuntiva che appare sopra la tastiera, aiutando gli utenti a navigare da un input di una forma a altra.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="HideKeyboardFormAccessoryBar" value="true"/&gt;
-</code></pre></div>
-<p>Si applica a iOS e BlackBerry.</p>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">DisallowOverscroll</code>(boolean, impostazioni predefinite a <code class="language-plaintext highlighter-rouge">false</code> ): impostare su <code class="language-plaintext highlighter-rouge">true</code> se non volete l’interfaccia per visualizzare tutte le risposte, quando gli utenti scorrere dopo l’inizio o la fine del contenuto.</p>
 
-<p><strong>Nota:</strong> Per BlackBerry, i valori validi sono <code>enable</code> o<code>disable</code>.</p></li>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="DisallowOverscroll" value="true"/&gt;
+</code></pre></div>    </div>
+
+    <p>Vale per Android e iOS. IOS, causa di gesti overscroll contenuto rimbalzare indietro nella sua posizione originale. Su Android, producono un effetto incandescente più sottile lungo il bordo superiore o inferiore del contenuto.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">BackgroundColor</code>: Impostare il colore di sfondo dell’app. Supporta un valore esadecimale di quattro byte, con il primo byte che rappresenta il canale alfa e valori RGB standard per i seguenti tre byte. Questo esempio specifica blu:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="BackgroundColor" value="0xff0000ff"/&gt;
+</code></pre></div>    </div>
+
+    <p>Vale per Android e BlackBerry. Esegue l’override CSS altrimenti disponibile in <em>tutte le</em> piattaforme, ad esempio:<code class="language-plaintext highlighter-rouge">body{background-color:blue}</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">HideKeyboardFormAccessoryBar</code>(boolean, impostazioni predefinite a <code class="language-plaintext highlighter-rouge">false</code> ): impostare su <code class="language-plaintext highlighter-rouge">true</code> per nascondere la barra degli strumenti aggiuntiva che appare sopra la tastiera, aiutando gli utenti a navigare da un input di una forma a altra.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="HideKeyboardFormAccessoryBar" value="true"/&gt;
+</code></pre></div>    </div>
+
+    <p>Si applica a iOS e BlackBerry.</p>
+
+    <p><strong>Nota:</strong> Per BlackBerry, i valori validi sono <code class="language-plaintext highlighter-rouge">enable</code> o<code class="language-plaintext highlighter-rouge">disable</code>.</p>
+  </li>
 </ul>
 
-<h2>Il <code>&lt;feature&gt;</code> elemento</h2>
+<h2 id="il-feature-elemento">Il <code class="language-plaintext highlighter-rouge">&lt;feature&gt;</code> elemento</h2>
 
-<p>Se si utilizza la CLI per costruire applicazioni, si utilizza il <code>plugin</code> comando per abilitare il dispositivo API. Questo non modifica il livello superiore <code>config.xml</code> file, quindi il <code>&lt;feature&gt;</code> elemento non si applica al vostro flusso di lavoro. Se sei lavorando direttamente in un SDK e utilizzando le specifiche della piattaforma <code>config.xml</code> file come origine, si utilizza il <code>&lt;feature&gt;</code> tag per abilitare il dispositivo-livello API e plugin esterni. In genere appaiono in questa forma:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;feature name="Plugin" value="PluginID" /&gt;
-</code></pre></div>
-<p>Essi appaiono spesso con valori personalizzati nelle specifiche della piattaforma <code>config.xml</code> file. Ad esempio, ecco come specificare il dispositivo API per progetti Android:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;feature name="Device"&gt;
+<p>Se si utilizza la CLI per costruire applicazioni, si utilizza il <code class="language-plaintext highlighter-rouge">plugin</code> comando per abilitare il dispositivo API. Questo non modifica il livello superiore <code class="language-plaintext highlighter-rouge">config.xml</code> file, quindi il <code class="language-plaintext highlighter-rouge">&lt;feature&gt;</code> elemento non si applica al vostro flusso di lavoro. Se sei lavorando direttamente in un SDK e utilizzando le specifiche della piattaforma <code class="language-plaintext highlighter-rouge">config.xml</code> file come origine, si utilizza il <code class="language-plaintext highlighter-rouge">&lt;feature&gt;</code> tag per abilitare il dispositivo-livello API e plugin esterni. In genere appaiono in questa forma:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;feature name="Plugin" value="PluginID" /&gt;
+</code></pre></div></div>
+
+<p>Essi appaiono spesso con valori personalizzati nelle specifiche della piattaforma <code class="language-plaintext highlighter-rouge">config.xml</code> file. Ad esempio, ecco come specificare il dispositivo API per progetti Android:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;feature name="Device"&gt;
         &lt;param name="android-package" value="org.apache.cordova.device.Device" /&gt;
     &lt;/feature&gt;
-</code></pre></div>
-<p>Ecco come l&#39;elemento appare per progetti di iOS:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;feature name="Device"&gt;
+</code></pre></div></div>
+
+<p>Ecco come l’elemento appare per progetti di iOS:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;feature name="Device"&gt;
         &lt;param name="ios-package" value="CDVDevice" /&gt;
     &lt;/feature&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Vedere il riferimento API per ulteriori informazioni su come specificare ogni funzionalità. Consultare la guida di sviluppo di Plugin per ulteriori informazioni sul plugin.</p>
 
 

@@ -1310,66 +1310,81 @@
     }
 </style>
 
-<h1>camera.getPicture</h1>
+<h1 id="cameragetpicture">camera.getPicture</h1>
 
-<p>Берет фотографию с помощью камеры, или получает фотографию из галереи изображений устройства. Изображение передается на успех обратного вызова как base64-кодировке <code>String</code> , или как URI для файла образа. Сам метод возвращает <code>[CameraPopoverHandle](parameter/CameraPopoverHandle.html)</code> объект, который может использоваться для перемещения инструмента выбора файла.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.camera.getPicture( cameraSuccess, cameraError, [ cameraOptions ] );
-</code></pre></div>
-<h2>Описание</h2>
+<p>Берет фотографию с помощью камеры, или получает фотографию из галереи изображений устройства. Изображение передается на успех обратного вызова как base64-кодировке <code class="language-plaintext highlighter-rouge">String</code> , или как URI для файла образа. Сам метод возвращает <code class="language-plaintext highlighter-rouge">[CameraPopoverHandle](parameter/CameraPopoverHandle.html)</code> объект, который может использоваться для перемещения инструмента выбора файла.</p>
 
-<p><code>camera.getPicture</code>Функция открывает приложение камеры по умолчанию устройства, которое позволяет привязать фотографии. Это происходит по умолчанию, когда <code>Camera.sourceType</code> равно <code>Camera.PictureSourceType.CAMERA</code> . Как только пользователь прикрепляет фото, закрывает приложение камеры и приложение восстанавливается.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.camera.getPicture( cameraSuccess, cameraError, [ cameraOptions ] );
+</code></pre></div></div>
 
-<p>Если <code>Camera.sourceType</code> является <code>Camera.PictureSourceType.PHOTOLIBRARY</code> или <code>Camera.PictureSourceType.SAVEDPHOTOALBUM</code> , то диалоговое окно показывает, что позволяет пользователям выбрать существующее изображение. <code>camera.getPicture</code>Функция возвращает <code>[CameraPopoverHandle](parameter/CameraPopoverHandle.html)</code> объект, который может использоваться для перемещения диалога выбора изображения, например, при изменении ориентации устройства.</p>
+<h2 id="описание">Описание</h2>
 
-<p>Возвращаемое значение отправляется в <code>[cameraSuccess](parameter/cameraSuccess.html)</code> в одном из следующих форматов, в зависимости от указанной функции обратного вызова <code>[cameraOptions](parameter/cameraOptions.html)</code> :</p>
+<p><code class="language-plaintext highlighter-rouge">camera.getPicture</code>Функция открывает приложение камеры по умолчанию устройства, которое позволяет привязать фотографии. Это происходит по умолчанию, когда <code class="language-plaintext highlighter-rouge">Camera.sourceType</code> равно <code class="language-plaintext highlighter-rouge">Camera.PictureSourceType.CAMERA</code> . Как только пользователь прикрепляет фото, закрывает приложение камеры и приложение восстанавливается.</p>
+
+<p>Если <code class="language-plaintext highlighter-rouge">Camera.sourceType</code> является <code class="language-plaintext highlighter-rouge">Camera.PictureSourceType.PHOTOLIBRARY</code> или <code class="language-plaintext highlighter-rouge">Camera.PictureSourceType.SAVEDPHOTOALBUM</code> , то диалоговое окно показывает, что позволяет пользователям выбрать существующее изображение. <code class="language-plaintext highlighter-rouge">camera.getPicture</code>Функция возвращает <code class="language-plaintext highlighter-rouge">[CameraPopoverHandle](parameter/CameraPopoverHandle.html)</code> объект, который может использоваться для перемещения диалога выбора изображения, например, при изменении ориентации устройства.</p>
+
+<p>Возвращаемое значение отправляется в <code class="language-plaintext highlighter-rouge">[cameraSuccess](parameter/cameraSuccess.html)</code> в одном из следующих форматов, в зависимости от указанной функции обратного вызова <code class="language-plaintext highlighter-rouge">[cameraOptions](parameter/cameraOptions.html)</code> :</p>
 
 <ul>
-<li><p>A <code>String</code> содержащий изображение base64-кодировке фото.</p></li>
-<li><p>A <code>String</code> представляющая расположение файла изображения на локальное хранилище (по умолчанию).</p></li>
+  <li>
+    <p>A <code class="language-plaintext highlighter-rouge">String</code> содержащий изображение base64-кодировке фото.</p>
+  </li>
+  <li>
+    <p>A <code class="language-plaintext highlighter-rouge">String</code> представляющая расположение файла изображения на локальное хранилище (по умолчанию).</p>
+  </li>
 </ul>
 
 <p>Вы можете сделать все, что угодно вы хотите с кодированного изображения или URI, например:</p>
 
 <ul>
-<li><p>Отрисовывает изображение в <code>&lt;img&gt;</code> тег, как показано в примере ниже</p></li>
-<li><p>Сохранять данные локально ( <code>LocalStorage</code> , <a href="http://brianleroux.github.com/lawnchair/">Lawnchair</a>, и т.д.)</p></li>
-<li><p>Сообщение данных на удаленном сервере</p></li>
+  <li>
+    <p>Отрисовывает изображение в <code class="language-plaintext highlighter-rouge">&lt;img&gt;</code> тег, как показано в примере ниже</p>
+  </li>
+  <li>
+    <p>Сохранять данные локально ( <code class="language-plaintext highlighter-rouge">LocalStorage</code> , <a href="http://brianleroux.github.com/lawnchair/">Lawnchair</a>, и т.д.)</p>
+  </li>
+  <li>
+    <p>Сообщение данных на удаленном сервере</p>
+  </li>
 </ul>
 
-<p><strong>Примечание:</strong> Фоторазрешение на более новых приборах является достаточно хорошим. Фотографии из галереи устройства не ослабленные для более низкого качества, даже если <code>quality</code> указан параметр. Чтобы избежать общих проблем памяти, установите <code>Camera.destinationType</code> к <code>FILE_URI</code> вместо<code>DATA_URL</code>.</p>
+<p><strong>Примечание:</strong> Фоторазрешение на более новых приборах является достаточно хорошим. Фотографии из галереи устройства не ослабленные для более низкого качества, даже если <code class="language-plaintext highlighter-rouge">quality</code> указан параметр. Чтобы избежать общих проблем памяти, установите <code class="language-plaintext highlighter-rouge">Camera.destinationType</code> к <code class="language-plaintext highlighter-rouge">FILE_URI</code> вместо<code class="language-plaintext highlighter-rouge">DATA_URL</code>.</p>
 
-<h2>Поддерживаемые платформы</h2>
+<h2 id="поддерживаемые-платформы">Поддерживаемые платформы</h2>
 
 <ul>
-<li>  Андроид</li>
-<li>  WebWorks ежевики (OS 5.0 и выше)</li>
-<li>  iOS</li>
-<li>  Tizen</li>
-<li>  Windows Phone 7 и 8</li>
-<li>  ОС Windows 8</li>
+  <li>Андроид</li>
+  <li>WebWorks ежевики (OS 5.0 и выше)</li>
+  <li>iOS</li>
+  <li>Tizen</li>
+  <li>Windows Phone 7 и 8</li>
+  <li>ОС Windows 8</li>
 </ul>
 
-<h2>Андроид причуды</h2>
+<h2 id="андроид-причуды">Андроид причуды</h2>
 
 <p>Android для запуска камеры деятельность на устройстве для захвата изображений использует намерений, а на телефонах с низкой памяти, могут быть убиты Cordova деятельность. В этом случае изображение не может появиться при восстановлении деятельности cordova.</p>
 
-<h2>iOS причуды</h2>
+<h2 id="ios-причуды">iOS причуды</h2>
 
-<p>Включая JavaScript <code>alert()</code> в любом из обратного вызова функции может вызвать проблемы. Оберните оповещения в пределах <code>setTimeout()</code> Разрешить выбора изображений iOS или инструмента полностью <a href="../inappbrowser/inappbrowser.html">закрыть</a> перед оповещения отображает:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">setTimeout(function() {/ / ваши вещи!}, 0);
-</code></pre></div>
-<h2>Windows Phone 7 причуды</h2>
+<p>Включая JavaScript <code class="language-plaintext highlighter-rouge">alert()</code> в любом из обратного вызова функции может вызвать проблемы. Оберните оповещения в пределах <code class="language-plaintext highlighter-rouge">setTimeout()</code> Разрешить выбора изображений iOS или инструмента полностью <a href="../inappbrowser/inappbrowser.html">закрыть</a> перед оповещения отображает:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setTimeout(function() {/ / ваши вещи!}, 0);
+</code></pre></div></div>
+
+<h2 id="windows-phone-7-причуды">Windows Phone 7 причуды</h2>
 
 <p>Вызов приложения родной камеры в то время как ваше устройство подключено через Zune не работает и инициирует обратный вызов для ошибки.</p>
 
-<h2>Tizen причуды</h2>
+<h2 id="tizen-причуды">Tizen причуды</h2>
 
-<p>Tizen поддерживает только <code>destinationType</code> из <code>Camera.DestinationType.FILE_URI</code> и <code>sourceType</code> из<code>Camera.PictureSourceType.PHOTOLIBRARY</code>.</p>
+<p>Tizen поддерживает только <code class="language-plaintext highlighter-rouge">destinationType</code> из <code class="language-plaintext highlighter-rouge">Camera.DestinationType.FILE_URI</code> и <code class="language-plaintext highlighter-rouge">sourceType</code> из<code class="language-plaintext highlighter-rouge">Camera.PictureSourceType.PHOTOLIBRARY</code>.</p>
 
-<h2>Быстрый пример</h2>
+<h2 id="быстрый-пример">Быстрый пример</h2>
 
 <p>Сделайте фотографию и получить его как изображение base64-кодировке:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
     destinationType: Camera.DestinationType.DATA_URL
 });
 
@@ -1381,9 +1396,11 @@ function onSuccess(imageData) {
 function onFail(message) {
     alert('Failed because: ' + message);
 }
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Сделайте фотографию и получить расположение файла изображения:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
     destinationType: Camera.DestinationType.FILE_URI });
 
 function onSuccess(imageURI) {
@@ -1394,113 +1411,116 @@ function onSuccess(imageURI) {
 function onFail(message) {
     alert('Failed because: ' + message);
 }
-</code></pre></div>
-<h2>Полный пример</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Capture Photo<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="полный-пример">Полный пример</h2>
 
-    <span class="kd">var</span> <span class="nx">pictureSource</span><span class="p">;</span>   <span class="c1">// picture source</span>
-    <span class="kd">var</span> <span class="nx">destinationType</span><span class="p">;</span> <span class="c1">// sets the format of returned value</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Capture Photo&lt;/title&gt;
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span><span class="nx">onDeviceReady</span><span class="p">,</span><span class="kc">false</span><span class="p">);</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">pictureSource</span><span class="o">=</span><span class="nb">navigator</span><span class="p">.</span><span class="nx">camera</span><span class="p">.</span><span class="nx">PictureSourceType</span><span class="p">;</span>
-        <span class="nx">destinationType</span><span class="o">=</span><span class="nb">navigator</span><span class="p">.</span><span class="nx">camera</span><span class="p">.</span><span class="nx">DestinationType</span><span class="p">;</span>
-    <span class="p">}</span>
+    var pictureSource;   // picture source
+    var destinationType; // sets the format of returned value
 
-    <span class="c1">// Called when a photo is successfully retrieved</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onPhotoDataSuccess</span><span class="p">(</span><span class="nx">imageData</span><span class="p">)</span> <span class="p">{</span>
-      <span class="c1">// Uncomment to view the base64-encoded image data</span>
-      <span class="c1">// console.log(imageData);</span>
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready",onDeviceReady,false);
 
-      <span class="c1">// Get image handle</span>
-      <span class="c1">//</span>
-      <span class="kd">var</span> <span class="nx">smallImage</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'smallImage'</span><span class="p">);</span>
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        pictureSource=navigator.camera.PictureSourceType;
+        destinationType=navigator.camera.DestinationType;
+    }
 
-      <span class="c1">// Unhide image elements</span>
-      <span class="c1">//</span>
-      <span class="nx">smallImage</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">'block'</span><span class="p">;</span>
+    // Called when a photo is successfully retrieved
+    //
+    function onPhotoDataSuccess(imageData) {
+      // Uncomment to view the base64-encoded image data
+      // console.log(imageData);
 
-      <span class="c1">// Show the captured photo</span>
-      <span class="c1">// The inline CSS rules are used to resize the image</span>
-      <span class="c1">//</span>
-      <span class="nx">smallImage</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s2">"data:image/jpeg;base64,"</span> <span class="o">+</span> <span class="nx">imageData</span><span class="p">;</span>
-    <span class="p">}</span>
+      // Get image handle
+      //
+      var smallImage = document.getElementById('smallImage');
 
-    <span class="c1">// Called when a photo is successfully retrieved</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onPhotoURISuccess</span><span class="p">(</span><span class="nx">imageURI</span><span class="p">)</span> <span class="p">{</span>
-      <span class="c1">// Uncomment to view the image file URI</span>
-      <span class="c1">// console.log(imageURI);</span>
+      // Unhide image elements
+      //
+      smallImage.style.display = 'block';
 
-      <span class="c1">// Get image handle</span>
-      <span class="c1">//</span>
-      <span class="kd">var</span> <span class="nx">largeImage</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'largeImage'</span><span class="p">);</span>
+      // Show the captured photo
+      // The inline CSS rules are used to resize the image
+      //
+      smallImage.src = "data:image/jpeg;base64," + imageData;
+    }
 
-      <span class="c1">// Unhide image elements</span>
-      <span class="c1">//</span>
-      <span class="nx">largeImage</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">'block'</span><span class="p">;</span>
+    // Called when a photo is successfully retrieved
+    //
+    function onPhotoURISuccess(imageURI) {
+      // Uncomment to view the image file URI
+      // console.log(imageURI);
 
-      <span class="c1">// Show the captured photo</span>
-      <span class="c1">// The inline CSS rules are used to resize the image</span>
-      <span class="c1">//</span>
-      <span class="nx">largeImage</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">imageURI</span><span class="p">;</span>
-    <span class="p">}</span>
+      // Get image handle
+      //
+      var largeImage = document.getElementById('largeImage');
 
-    <span class="c1">// A button will call this function</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">capturePhoto</span><span class="p">()</span> <span class="p">{</span>
-      <span class="c1">// Take picture using device camera and retrieve image as base64-encoded string</span>
-      <span class="nb">navigator</span><span class="p">.</span><span class="nx">camera</span><span class="p">.</span><span class="nx">getPicture</span><span class="p">(</span><span class="nx">onPhotoDataSuccess</span><span class="p">,</span> <span class="nx">onFail</span><span class="p">,</span> <span class="p">{</span> <span class="na">quality</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
-        <span class="na">destinationType</span><span class="p">:</span> <span class="nx">destinationType</span><span class="p">.</span><span class="nx">DATA_URL</span> <span class="p">});</span>
-    <span class="p">}</span>
+      // Unhide image elements
+      //
+      largeImage.style.display = 'block';
 
-    <span class="c1">// A button will call this function</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">capturePhotoEdit</span><span class="p">()</span> <span class="p">{</span>
-      <span class="c1">// Take picture using device camera, allow edit, and retrieve image as base64-encoded string</span>
-      <span class="nb">navigator</span><span class="p">.</span><span class="nx">camera</span><span class="p">.</span><span class="nx">getPicture</span><span class="p">(</span><span class="nx">onPhotoDataSuccess</span><span class="p">,</span> <span class="nx">onFail</span><span class="p">,</span> <span class="p">{</span> <span class="na">quality</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="na">allowEdit</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-        <span class="na">destinationType</span><span class="p">:</span> <span class="nx">destinationType</span><span class="p">.</span><span class="nx">DATA_URL</span> <span class="p">});</span>
-    <span class="p">}</span>
+      // Show the captured photo
+      // The inline CSS rules are used to resize the image
+      //
+      largeImage.src = imageURI;
+    }
 
-    <span class="c1">// A button will call this function</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">getPhoto</span><span class="p">(</span><span class="nx">source</span><span class="p">)</span> <span class="p">{</span>
-      <span class="c1">// Retrieve image file location from specified source</span>
-      <span class="nb">navigator</span><span class="p">.</span><span class="nx">camera</span><span class="p">.</span><span class="nx">getPicture</span><span class="p">(</span><span class="nx">onPhotoURISuccess</span><span class="p">,</span> <span class="nx">onFail</span><span class="p">,</span> <span class="p">{</span> <span class="na">quality</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
-        <span class="na">destinationType</span><span class="p">:</span> <span class="nx">destinationType</span><span class="p">.</span><span class="nx">FILE_URI</span><span class="p">,</span>
-        <span class="na">sourceType</span><span class="p">:</span> <span class="nx">source</span> <span class="p">});</span>
-    <span class="p">}</span>
+    // A button will call this function
+    //
+    function capturePhoto() {
+      // Take picture using device camera and retrieve image as base64-encoded string
+      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
+        destinationType: destinationType.DATA_URL });
+    }
 
-    <span class="c1">// Called if something bad happens.</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onFail</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">alert</span><span class="p">(</span><span class="s1">'Failed because: '</span> <span class="o">+</span> <span class="nx">message</span><span class="p">);</span>
-    <span class="p">}</span>
+    // A button will call this function
+    //
+    function capturePhotoEdit() {
+      // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
+      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true,
+        destinationType: destinationType.DATA_URL });
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"capturePhoto();"</span><span class="nt">&gt;</span>Capture Photo<span class="nt">&lt;/button&gt;</span> <span class="nt">&lt;br&gt;</span>
-    <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"capturePhotoEdit();"</span><span class="nt">&gt;</span>Capture Editable Photo<span class="nt">&lt;/button&gt;</span> <span class="nt">&lt;br&gt;</span>
-    <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"getPhoto(pictureSource.PHOTOLIBRARY);"</span><span class="nt">&gt;</span>From Photo Library<span class="nt">&lt;/button&gt;&lt;br&gt;</span>
-    <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"getPhoto(pictureSource.SAVEDPHOTOALBUM);"</span><span class="nt">&gt;</span>From Photo Album<span class="nt">&lt;/button&gt;&lt;br&gt;</span>
-    <span class="nt">&lt;img</span> <span class="na">style=</span><span class="s">"display:none;width:60px;height:60px;"</span> <span class="na">id=</span><span class="s">"smallImage"</span> <span class="na">src=</span><span class="s">""</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;img</span> <span class="na">style=</span><span class="s">"display:none;"</span> <span class="na">id=</span><span class="s">"largeImage"</span> <span class="na">src=</span><span class="s">""</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+    // A button will call this function
+    //
+    function getPhoto(source) {
+      // Retrieve image file location from specified source
+      navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
+        destinationType: destinationType.FILE_URI,
+        sourceType: source });
+    }
+
+    // Called if something bad happens.
+    //
+    function onFail(message) {
+      alert('Failed because: ' + message);
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;button onclick="capturePhoto();"&gt;Capture Photo&lt;/button&gt; &lt;br&gt;
+    &lt;button onclick="capturePhotoEdit();"&gt;Capture Editable Photo&lt;/button&gt; &lt;br&gt;
+    &lt;button onclick="getPhoto(pictureSource.PHOTOLIBRARY);"&gt;From Photo Library&lt;/button&gt;&lt;br&gt;
+    &lt;button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);"&gt;From Photo Album&lt;/button&gt;&lt;br&gt;
+    &lt;img style="display:none;width:60px;height:60px;" id="smallImage" src="" /&gt;
+    &lt;img style="display:none;" id="largeImage" src="" /&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

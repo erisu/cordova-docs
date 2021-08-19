@@ -1310,137 +1310,181 @@
     }
 </style>
 
-<h1>Whitelist Путеводитель</h1>
+<h1 id="whitelist-путеводитель">Whitelist Путеводитель</h1>
 
-<h2>Обзор</h2>
+<h2 id="обзор">Обзор</h2>
 
-<p>Белый список ресурсов является модель безопасности, которая контролирует доступ к внешним сетевым ресурсам, таким как <code>http://google.com</code> . Политика безопасности по умолчанию Apache Cordova позволяет получить доступ к любому ресурсу на любой сайт в Интернете. Прежде чем переносить приложение к производству, следует пересмотреть свою whitelist и объявить доступ к определенным сетевым домены и поддомены.</p>
+<p>Белый список ресурсов является модель безопасности, которая контролирует доступ к внешним сетевым ресурсам, таким как <code class="language-plaintext highlighter-rouge">http://google.com</code> . Политика безопасности по умолчанию Apache Cordova позволяет получить доступ к любому ресурсу на любой сайт в Интернете. Прежде чем переносить приложение к производству, следует пересмотреть свою whitelist и объявить доступ к определенным сетевым домены и поддомены.</p>
 
-<h2>Спецификация</h2>
+<h2 id="спецификация">Спецификация</h2>
 
-<p>Домен whitelisting закладывает основу для спецификации <a href="http://www.w3.org/TR/widgets-access/">W3C виджет доступа</a> . В спецификации доступа виджет <code>&lt;access&gt;</code> элемент используется для объявления доступа к определенным сетевым ресурсам. Apache Cordova расширяет это понятие, чтобы позволить whitelisting отдельных сетевых ресурсов (URL). В будущем Apache Cordova будет аннотация белый список реализаций платформы. Однако в настоящее время каждая платформа реализует свой ресурс или домена whitelisting. Далее в этом документе описаны различия между реализациями платформы.</p>
+<p>Домен whitelisting закладывает основу для спецификации <a href="http://www.w3.org/TR/widgets-access/">W3C виджет доступа</a> . В спецификации доступа виджет <code class="language-plaintext highlighter-rouge">&lt;access&gt;</code> элемент используется для объявления доступа к определенным сетевым ресурсам. Apache Cordova расширяет это понятие, чтобы позволить whitelisting отдельных сетевых ресурсов (URL). В будущем Apache Cordova будет аннотация белый список реализаций платформы. Однако в настоящее время каждая платформа реализует свой ресурс или домена whitelisting. Далее в этом документе описаны различия между реализациями платформы.</p>
 
 <p>Общий формат для записи whitelist соответствует спецификации «<a href="http://developer.chrome.com/apps/match_patterns.html">шаблону</a>» для Google Chrome упакованных приложений. Ресурсы указываются в URL, но звездочка (*) персонаж может использоваться как «шаблон» в нескольких местах для обозначения «любое значение может пойти здесь». Ниже приводятся конкретные примеры.</p>
 
-<h2>Синтаксис</h2>
+<h2 id="синтаксис">Синтаксис</h2>
 
 <p>Доступ ко всем ресурсам на <a href="http://google.com">google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">http://google.com/*
-</code></pre></div>
-<p>Доступ ко всем ресурсам в безопасной <a href="https://google.com">google.com</a> ( <code>https://</code> ):</p>
-<div class="highlight"><pre><code class="language-" data-lang="">HTTPS://Google.com/ *
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://google.com/*
+</code></pre></div></div>
+
+<p>Доступ ко всем ресурсам в безопасной <a href="https://google.com">google.com</a> ( <code class="language-plaintext highlighter-rouge">https://</code> ):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTPS://Google.com/ *
+</code></pre></div></div>
+
 <p>Доступ к конкретным поддомен <a href="http://maps.google.com">maps.google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">http://maps.google.com/*
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://maps.google.com/*
+</code></pre></div></div>
+
 <p>Доступ ко всем дочерним доменам на <a href="http://google.com">google.com</a> (например, <a href="http://mail.google.com">mail.google.com</a> и <a href="http://docs.google.com">адресу docs.google.com</a>):</p>
-<div class="highlight"><pre><code class="language-" data-lang="">http://*.google.com/*
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://*.google.com/*
+</code></pre></div></div>
+
 <p>Доступ ко всем ресурсам на <a href="http://www.google.com">www.google.com</a> по пути «/ мобильный»:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">http://www.google.com/mobile/*
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://www.google.com/mobile/*
+</code></pre></div></div>
+
 <p>Доступ к <a href="http://google.com">google.com</a> на любой протокол (например, HTTP, HTTPS, FTP и т.д):</p>
-<div class="highlight"><pre><code class="language-" data-lang="">*://google.com/*
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*://google.com/*
+</code></pre></div></div>
+
 <p>Доступ для всех ресурсов в Интернете (например, <a href="http://google.com">google.com</a> и <a href="http://developer.mozilla.org">developer.mozilla.org</a>):</p>
-<div class="highlight"><pre><code class="language-" data-lang="">*
-</code></pre></div>
-<h2>Андроид</h2>
 
-<h3>Подробная информация</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*
+</code></pre></div></div>
 
-<p>Whitelisting правила находятся в <code>res/xml/config.xml</code> и объявил с элементом<code>&lt;access origin=&quot;...&quot; /&gt;</code>.</p>
+<h2 id="андроид">Андроид</h2>
 
-<p>Android полностью поддерживает синтаксис &quot;белый список&quot;.</p>
+<h3 id="подробная-информация">Подробная информация</h3>
 
-<h3>Синтаксис</h3>
+<p>Whitelisting правила находятся в <code class="language-plaintext highlighter-rouge">res/xml/config.xml</code> и объявил с элементом<code class="language-plaintext highlighter-rouge">&lt;access origin="..." /&gt;</code>.</p>
+
+<p>Android полностью поддерживает синтаксис “белый список”.</p>
+
+<h3 id="синтаксис-1">Синтаксис</h3>
 
 <p>Доступ к <a href="http://google.com">google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com/*" /&gt;
-</code></pre></div>
-<h2>Ежевика 10</h2>
 
-<h3>Подробная информация</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com/*" /&gt;
+</code></pre></div></div>
 
-<p>Whitelisting правила находятся в <code>www/config.xml</code> и объявил с элементом<code>&lt;access origin=&quot;...&quot; /&gt;</code>.</p>
+<h2 id="ежевика-10">Ежевика 10</h2>
+
+<h3 id="подробная-информация-1">Подробная информация</h3>
+
+<p>Whitelisting правила находятся в <code class="language-plaintext highlighter-rouge">www/config.xml</code> и объявил с элементом<code class="language-plaintext highlighter-rouge">&lt;access origin="..." /&gt;</code>.</p>
 
 <p>Ежевика 10 обрабатывает символы по-разному чем другие платформы двумя способами:</p>
 
 <p>1) Доступ к XMLHttpRequest содержимому должны быть объявлены явным образом. происхождения = «*» не будут соблюдаться для этот случай использования. Кроме того все веб-безопасности может быть отключена с помощью предпочтение.</p>
 
-<p>2) поддомены = &quot;true&quot; может быть использован вместо «* .domain»</p>
+<p>2) поддомены = “true” может быть использован вместо «* .domain»</p>
 
-<h3>Синтаксис</h3>
+<h3 id="синтаксис-2">Синтаксис</h3>
 
 <p>Доступ к <a href="http://google.com">google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" subdomains="false" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" subdomains="false" /&gt;
+</code></pre></div></div>
+
 <p>Доступ к <a href="http://maps.google.com">maps.google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://maps.google.com" subdomains="false" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://maps.google.com" subdomains="false" /&gt;
+</code></pre></div></div>
+
 <p>Доступ ко всем дочерним доменам на <a href="http://google.com">google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" subdomains="true" /&gt;
-</code></pre></div>
-<p>Доступ ко всем доменам, в том числе <code>file://</code> протокол:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="*" subdomains="true" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" subdomains="true" /&gt;
+</code></pre></div></div>
+
+<p>Доступ ко всем доменам, в том числе <code class="language-plaintext highlighter-rouge">file://</code> протокол:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="*" subdomains="true" /&gt;
+</code></pre></div></div>
+
 <p>Отключите все веб-безопасности:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="websecurity" value="disable" /&gt;
-</code></pre></div>
-<h2>iOS</h2>
 
-<h3>Подробная информация</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="websecurity" value="disable" /&gt;
+</code></pre></div></div>
 
-<p>Whitelisting правила находятся в <code>AppName/config.xml</code> и объявил с элементом<code>&lt;access origin=&quot;...&quot; /&gt;</code>.</p>
+<h2 id="ios">iOS</h2>
 
-<p>iOS полностью поддерживает синтаксис &quot;белый список&quot;.</p>
+<h3 id="подробная-информация-2">Подробная информация</h3>
 
-<h3>Изменена 3.1.0:</h3>
+<p>Whitelisting правила находятся в <code class="language-plaintext highlighter-rouge">AppName/config.xml</code> и объявил с элементом<code class="language-plaintext highlighter-rouge">&lt;access origin="..." /&gt;</code>.</p>
 
-<p>До версии 3.1.0 Кордова iOS включены некоторые нестандартные расширения схемы whilelisting домена, поддерживаемой другими платформами Cordova. По состоянию на 3.1.0 белый iOS теперь соответствует ресурсов whitelist синтаксис, описанный в верхней части этого документа. Если вы модернизируете от pre-3.1.0, и вы использовали эти расширения, может потребоваться изменить ваш <code>config.xml</code> файл для того чтобы продолжать whitelisting тот же набор ресурсов, как раньше.</p>
+<p>iOS полностью поддерживает синтаксис “белый список”.</p>
+
+<h3 id="изменена-310">Изменена 3.1.0:</h3>
+
+<p>До версии 3.1.0 Кордова iOS включены некоторые нестандартные расширения схемы whilelisting домена, поддерживаемой другими платформами Cordova. По состоянию на 3.1.0 белый iOS теперь соответствует ресурсов whitelist синтаксис, описанный в верхней части этого документа. Если вы модернизируете от pre-3.1.0, и вы использовали эти расширения, может потребоваться изменить ваш <code class="language-plaintext highlighter-rouge">config.xml</code> файл для того чтобы продолжать whitelisting тот же набор ресурсов, как раньше.</p>
 
 <p>В частности эти модели должны быть обновлены:</p>
 
 <ul>
-<li><p>« <code>apache.org</code> » (не протокол): это будет соответствовать ранее <code>http</code> , <code>https</code> , <code>ftp</code> , и <code>ftps</code> протоколы. Изменить на « <code>*://apache.org/*</code> » включить все протоколы, или включать строку для каждого протокола, необходимо поддерживать.</p></li>
-<li><p>« <code>http://apache.*</code> » (подстановочный знак в конце домена): это будет соответствовать ранее все верхнего-уровня-домены, включая все возможные двухбуквенные ДВУ (но не полезно домены как. co.uk). Включить строку для каждого TLD, который вы фактически контролировать и нуждаются в белый список.</p></li>
-<li><p>« <code>h*t*://ap*he.o*g</code> » (подстановочные знаки для случайных недостающие буквы): они больше не поддерживаются; изменения будет включать строку для каждого домена и протоколу что вы на самом деле нужно whitelist.</p></li>
+  <li>
+    <p>« <code class="language-plaintext highlighter-rouge">apache.org</code> » (не протокол): это будет соответствовать ранее <code class="language-plaintext highlighter-rouge">http</code> , <code class="language-plaintext highlighter-rouge">https</code> , <code class="language-plaintext highlighter-rouge">ftp</code> , и <code class="language-plaintext highlighter-rouge">ftps</code> протоколы. Изменить на « <code class="language-plaintext highlighter-rouge">*://apache.org/*</code> » включить все протоколы, или включать строку для каждого протокола, необходимо поддерживать.</p>
+  </li>
+  <li>
+    <p>« <code class="language-plaintext highlighter-rouge">http://apache.*</code> » (подстановочный знак в конце домена): это будет соответствовать ранее все верхнего-уровня-домены, включая все возможные двухбуквенные ДВУ (но не полезно домены как. co.uk). Включить строку для каждого TLD, который вы фактически контролировать и нуждаются в белый список.</p>
+  </li>
+  <li>
+    <p>« <code class="language-plaintext highlighter-rouge">h*t*://ap*he.o*g</code> » (подстановочные знаки для случайных недостающие буквы): они больше не поддерживаются; изменения будет включать строку для каждого домена и протоколу что вы на самом деле нужно whitelist.</p>
+  </li>
 </ul>
 
-<h3>Синтаксис</h3>
+<h3 id="синтаксис-3">Синтаксис</h3>
 
 <p>Доступ к <a href="http://google.com">google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com/*" /&gt;
-</code></pre></div>
-<h2>Windows Phone (7 и 8)</h2>
 
-<p>Whitelisting правила находятся в <code>config.xml</code> и объявил с элементом<code>&lt;access origin=&quot;...&quot; /&gt;</code>.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com/*" /&gt;
+</code></pre></div></div>
 
-<h3>Синтаксис</h3>
+<h2 id="windows-phone-7-и-8">Windows Phone (7 и 8)</h2>
 
-<p>Доступ к <a href="http://google.com">google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" /&gt;
-</code></pre></div>
-<h2>Tizen</h2>
+<p>Whitelisting правила находятся в <code class="language-plaintext highlighter-rouge">config.xml</code> и объявил с элементом<code class="language-plaintext highlighter-rouge">&lt;access origin="..." /&gt;</code>.</p>
 
-<h3>Подробная информация</h3>
-
-<p>Корневой каталог приложения <code>config.xml</code> файл определяет правила белый список доменов, используя <code>&lt;access origin=&quot;...&quot; /&gt;</code> элемент. Полный справочник смотрите в <a href="https://developer.tizen.org/help/topic/org.tizen.help.gs/Creating%20a%20Project.html?path=0_1_1_4#8814682_CreatingaProject-AccessingExternalNetworkResources">документации Tizen доступ к внешним сетевым ресурсам</a>.</p>
-
-<h3>Синтаксис</h3>
+<h3 id="синтаксис-4">Синтаксис</h3>
 
 <p>Доступ к <a href="http://google.com">google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" subdomains="false" /&gt;
-</code></pre></div>
-<p>Доступ к безопасной <a href="https://google.com">google.com</a> ( <code>https://</code> ):</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="https://google.com" subdomains="false" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" /&gt;
+</code></pre></div></div>
+
+<h2 id="tizen">Tizen</h2>
+
+<h3 id="подробная-информация-3">Подробная информация</h3>
+
+<p>Корневой каталог приложения <code class="language-plaintext highlighter-rouge">config.xml</code> файл определяет правила белый список доменов, используя <code class="language-plaintext highlighter-rouge">&lt;access origin="..." /&gt;</code> элемент. Полный справочник смотрите в <a href="https://developer.tizen.org/help/topic/org.tizen.help.gs/Creating%20a%20Project.html?path=0_1_1_4#8814682_CreatingaProject-AccessingExternalNetworkResources">документации Tizen доступ к внешним сетевым ресурсам</a>.</p>
+
+<h3 id="синтаксис-5">Синтаксис</h3>
+
+<p>Доступ к <a href="http://google.com">google.com</a>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" subdomains="false" /&gt;
+</code></pre></div></div>
+
+<p>Доступ к безопасной <a href="https://google.com">google.com</a> ( <code class="language-plaintext highlighter-rouge">https://</code> ):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="https://google.com" subdomains="false" /&gt;
+</code></pre></div></div>
+
 <p>Доступ ко всем дочерним доменам на <a href="http://google.com">google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" subdomains="true" /&gt;
-</code></pre></div>
-<p>Доступ ко всем доменам, в том числе <code>file://</code> протокол:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="*" subdomains="true" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" subdomains="true" /&gt;
+</code></pre></div></div>
+
+<p>Доступ ко всем доменам, в том числе <code class="language-plaintext highlighter-rouge">file://</code> протокол:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="*" subdomains="true" /&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

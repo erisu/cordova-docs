@@ -131,45 +131,47 @@
     </header>
     <section>
         <div>
-            <p>We recently posted <a href="/howto/2020/03/18/wkwebviewonly.html">instructions</a> how to update your apps to remove all <code>UIWebView</code> references, because Apple now rejects all apps using <code>UIWebView</code>.</p>
+            <p>We recently posted <a href="/howto/2020/03/18/wkwebviewonly.html">instructions</a> how to update your apps to remove all <code class="language-plaintext highlighter-rouge">UIWebView</code> references, because Apple now rejects all apps using <code class="language-plaintext highlighter-rouge">UIWebView</code>.</p>
 
 <p>We are talking about this warning:</p>
 
 <blockquote>
-<p>ITMS-90809: Deprecated API Usage - Apple will stop accepting submissions of apps that use UIWebView APIs.</p>
+  <p>ITMS-90809: Deprecated API Usage - Apple will stop accepting submissions of apps that use UIWebView APIs.</p>
 </blockquote>
 
 <p>Some things have changed and new versions of cordova-ios have been released since the last post.</p>
 
 <!--more-->
 
-<h2>Update cordova-ios to version 6.0.0 or newer</h2>
+<h2 id="update-cordova-ios-to-version-600-or-newer">Update cordova-ios to version 6.0.0 or newer</h2>
 
-<p>Please update to the latest <code>cordova-ios</code> version to get the best compatibility with recent iOS changes. As of this writing the current version is 6.1.0. Version 6.0.0 of cordova-ios moved <code>WKWebView</code> support into <code>cordova-ios</code> and removed <code>UIWebView</code> code. Due to this change, the <code>cordova-plugin-wkwebview-engine</code> plugin is obsolete and will not work with this release. If you have this plugin installed, it is safe to remove with <code>cordova plugin remove cordova-plugin-wkwebview-engine</code>.</p>
+<p>Please update to the latest <code class="language-plaintext highlighter-rouge">cordova-ios</code> version to get the best compatibility with recent iOS changes. As of this writing the current version is 6.1.0. Version 6.0.0 of cordova-ios moved <code class="language-plaintext highlighter-rouge">WKWebView</code> support into <code class="language-plaintext highlighter-rouge">cordova-ios</code> and removed <code class="language-plaintext highlighter-rouge">UIWebView</code> code. Due to this change, the <code class="language-plaintext highlighter-rouge">cordova-plugin-wkwebview-engine</code> plugin is obsolete and will not work with this release. If you have this plugin installed, it is safe to remove with <code class="language-plaintext highlighter-rouge">cordova plugin remove cordova-plugin-wkwebview-engine</code>.</p>
 
-<p>Additionaly, <code>WKURLSchemeHandler</code> support has been introduced with this release. Serving your app content through a custom scheme fixes CORS issues that exist because of the strict security policies that <code>WKWebView</code> has applied to the <code>file</code> scheme. You can easily configure your Cordova project to use a custom scheme by setting the preference options <code>scheme</code> and <code>hostname</code> in the <code>config.xml</code> file. <strong>Bear in mind that running your app with a custom URL scheme changes the origin of your web code and you will lose access to web storage, such as local storage, indexed DB, etc.</strong></p>
-<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;preference</span> <span class="na">name=</span><span class="s">"scheme"</span> <span class="na">value=</span><span class="s">"app"</span> <span class="nt">/&gt;</span>
+<p>Additionaly, <code class="language-plaintext highlighter-rouge">WKURLSchemeHandler</code> support has been introduced with this release. Serving your app content through a custom scheme fixes CORS issues that exist because of the strict security policies that <code class="language-plaintext highlighter-rouge">WKWebView</code> has applied to the <code class="language-plaintext highlighter-rouge">file</code> scheme. You can easily configure your Cordova project to use a custom scheme by setting the preference options <code class="language-plaintext highlighter-rouge">scheme</code> and <code class="language-plaintext highlighter-rouge">hostname</code> in the <code class="language-plaintext highlighter-rouge">config.xml</code> file. <strong>Bear in mind that running your app with a custom URL scheme changes the origin of your web code and you will lose access to web storage, such as local storage, indexed DB, etc.</strong></p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;preference</span> <span class="na">name=</span><span class="s">"scheme"</span> <span class="na">value=</span><span class="s">"app"</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;preference</span> <span class="na">name=</span><span class="s">"hostname"</span> <span class="na">value=</span><span class="s">"localhost"</span> <span class="nt">/&gt;</span>
-</code></pre></div>
-<p>It is important to know that with the introduction of <code>WKURLSchemeHandler</code>, iOS 10 support has been dropped.</p>
+</code></pre></div></div>
 
-<h2>Still getting the warning?</h2>
+<p>It is important to know that with the introduction of <code class="language-plaintext highlighter-rouge">WKURLSchemeHandler</code>, iOS 10 support has been dropped.</p>
 
-<p>If you are still getting the warning, it is most likely one or more plugins in your project still references <code>UIWebView</code>. You will need to identify which plugins contain <code>UIWebView</code> code and contact those plugin&#39;s developers through their support channel (for instance their plugin&#39;s repo). They will need to fix their plugins by either removing the references or wrap them with the new flag.</p>
+<h2 id="still-getting-the-warning">Still getting the warning?</h2>
 
-<h2>Using other WKWebView plugin</h2>
+<p>If you are still getting the warning, it is most likely one or more plugins in your project still references <code class="language-plaintext highlighter-rouge">UIWebView</code>. You will need to identify which plugins contain <code class="language-plaintext highlighter-rouge">UIWebView</code> code and contact those plugin’s developers through their support channel (for instance their plugin’s repo). They will need to fix their plugins by either removing the references or wrap them with the new flag.</p>
 
-<p>The official Apache WKWebView plugin is no longer needed with these <code>cordova-ios</code> versions since <code>WKWebView</code> has been integrated and <code>UIWebView</code> is removed. There are other WKWebView plugins that can be used. Make sure they have been updated and use the latest version. If you have any issues or usage questions with their plugins, please read their docs and request help through their support channels.</p>
+<h2 id="using-other-wkwebview-plugin">Using other WKWebView plugin</h2>
 
-<h2>CORS issues</h2>
+<p>The official Apache WKWebView plugin is no longer needed with these <code class="language-plaintext highlighter-rouge">cordova-ios</code> versions since <code class="language-plaintext highlighter-rouge">WKWebView</code> has been integrated and <code class="language-plaintext highlighter-rouge">UIWebView</code> is removed. There are other WKWebView plugins that can be used. Make sure they have been updated and use the latest version. If you have any issues or usage questions with their plugins, please read their docs and request help through their support channels.</p>
+
+<h2 id="cors-issues">CORS issues</h2>
 
 <p>If you experience any CORS issues Cordova PMC member Norman Breau published a <a href="https://breautek.com/2020/07/14/enabling-cors/">post on his blog</a> with a good explanation of CORS.</p>
 
-<h2>Weview issues</h2>
+<h2 id="weview-issues">Weview issues</h2>
 
-<p>If using a custom scheme, <code>WKWebView</code> won&#39;t allow to load file urls in img/video tags (nor fetch them, nor anything). <code>cordova-ios</code> added a helper method to convert file URLs to URLs that have the scheme and <code>WKWebView</code> can understand.</p>
+<p>If using a custom scheme, <code class="language-plaintext highlighter-rouge">WKWebView</code> won’t allow to load file urls in img/video tags (nor fetch them, nor anything). <code class="language-plaintext highlighter-rouge">cordova-ios</code> added a helper method to convert file URLs to URLs that have the scheme and <code class="language-plaintext highlighter-rouge">WKWebView</code> can understand.</p>
 
-<p>window.WkWebView.convertFilePath(&#39;your/file/path&#39;);</p>
+<p>window.WkWebView.convertFilePath(‘your/file/path’);</p>
 
         </div>
     </section>

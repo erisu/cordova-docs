@@ -1310,87 +1310,103 @@
     }
 </style>
 
-<h1>window.open</h1>
+<h1 id="windowopen">window.open</h1>
 
-<p>Открывает URL-адрес в новой <code>[InAppBrowser](inappbrowser.html)</code> например, текущий экземпляр браузера или браузера системы.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">var ref = window.open(url, target, options);
-</code></pre></div>
-<ul>
-<li><p><strong>ссылка</strong>: ссылка для <code>[InAppBrowser](inappbrowser.html)</code> окно. <em>(InAppBrowser)</em></p></li>
-<li><p><strong>URL</strong>: URL-адрес для загрузки <em>(String)</em>. Вызвать <code>encodeURI()</code> на это, если URL-адрес содержит символы Unicode.</p></li>
-<li><p><strong>Цель</strong>: цель для загрузки URL-адреса, необязательный параметр, по умолчанию <code>_self</code> . <em>(Строка)</em></p>
+<p>Открывает URL-адрес в новой <code class="language-plaintext highlighter-rouge">[InAppBrowser](inappbrowser.html)</code> например, текущий экземпляр браузера или браузера системы.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var ref = window.open(url, target, options);
+</code></pre></div></div>
 
 <ul>
-<li>  <code>_self</code>: Открывается в Cordova WebView, если URL-адрес в белый список, в противном случае он открывается в<code>InAppBrowser</code>.</li>
-<li>  <code>_blank</code>: Открывает в<code>InAppBrowser</code>.</li>
-<li>  <code>_system</code>: Открывается в веб-браузера системы.</li>
-</ul></li>
-<li><p><strong>опции</strong>: параметры для <code>[InAppBrowser](inappbrowser.html)</code> . Необязательный параметр, виновная в: <code>location=yes</code> . <em>(Строка)</em></p>
+  <li>
+    <p><strong>ссылка</strong>: ссылка для <code class="language-plaintext highlighter-rouge">[InAppBrowser](inappbrowser.html)</code> окно. <em>(InAppBrowser)</em></p>
+  </li>
+  <li>
+    <p><strong>URL</strong>: URL-адрес для загрузки <em>(String)</em>. Вызвать <code class="language-plaintext highlighter-rouge">encodeURI()</code> на это, если URL-адрес содержит символы Unicode.</p>
+  </li>
+  <li>
+    <p><strong>Цель</strong>: цель для загрузки URL-адреса, необязательный параметр, по умолчанию <code class="language-plaintext highlighter-rouge">_self</code> . <em>(Строка)</em></p>
 
-<p><code>options</code>Строка не должна содержать каких-либо пустое пространство, и каждая функция пар имя/значение должны быть разделены запятой. Функция имена нечувствительны к регистру. Все платформы поддерживают исходное значение:</p>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">_self</code>: Открывается в Cordova WebView, если URL-адрес в белый список, в противном случае он открывается в<code class="language-plaintext highlighter-rouge">InAppBrowser</code>.</li>
+      <li><code class="language-plaintext highlighter-rouge">_blank</code>: Открывает в<code class="language-plaintext highlighter-rouge">InAppBrowser</code>.</li>
+      <li><code class="language-plaintext highlighter-rouge">_system</code>: Открывается в веб-браузера системы.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>опции</strong>: параметры для <code class="language-plaintext highlighter-rouge">[InAppBrowser](inappbrowser.html)</code> . Необязательный параметр, виновная в: <code class="language-plaintext highlighter-rouge">location=yes</code> . <em>(Строка)</em></p>
 
-<ul>
-<li>  <strong>Расположение</strong>: равным <code>yes</code> или <code>no</code> превратить <code>InAppBrowser</code> в адресную строку или выключить.
-## Андроид только</li>
-<li>  <strong>closebuttoncaption</strong> - задать строку, которая будет заголовок для кнопки &quot;Готово&quot;. </li>
-<li>  <strong>скрытые</strong> - присвоено значение &#39;yes&#39;, чтобы создать браузера и загрузки страницы, но не показать его. Событие load будет срабатывать, когда загрузка завершена. Опустить или значение «нет» (по умолчанию) иметь браузера открыть и загрузить нормально. </li>
-<li>  <strong>clearcache</strong> - присвоено значение &#39;yes&#39;, чтобы иметь кэш браузера cookie очищается перед открытием нового окна</li>
-<li>  <strong>clearsessioncache</strong> - значение &#39;yes&#39;, чтобы сессии куки кэш очищается перед открытием нового окна
-## iOS только</li>
-<li>  <strong>closebuttoncaption</strong> - задать строку, которая будет заголовок для кнопки &quot;Готово&quot;. Обратите внимание, что вам будет необходимо локализовать это значение самостоятельно.</li>
-<li>  <strong>скрытые</strong> - присвоено значение &#39;yes&#39;, чтобы создать браузера и загрузки страницы, но не показать его. Событие load будет срабатывать, когда загрузка завершена. Опустить или значение «нет» (по умолчанию) иметь браузера открыть и загрузить нормально. </li>
-<li>  <strong>панель инструментов</strong> - набор «да» или «нет», чтобы включение и отключение панели инструментов для InAppBrowser (по умолчанию &#39;Да&#39;)</li>
-<li>  <strong>enableViewportScale</strong>: значение <code>yes</code> или <code>no</code> для предотвращения видового экрана, масштабирование через тег meta (по умолчанию<code>no</code>).</li>
-<li>  <strong>mediaPlaybackRequiresUserAction</strong>: значение <code>yes</code> или <code>no</code> для предотвращения HTML5 аудио или видео от Автовоспроизведение (по умолчанию<code>no</code>).</li>
-<li>  <strong>allowInlineMediaPlayback</strong>: значение <code>yes</code> или <code>no</code> чтобы разрешить воспроизведение мультимедиа Встроенный HTML5, отображение в окне браузера, а не конкретного устройства воспроизведения интерфейса. HTML <code>video</code> элемент должен также включать <code>webkit-playsinline</code> атрибут (по умолчанию<code>no</code>)</li>
-<li>  <strong>keyboardDisplayRequiresUserAction</strong>: значение <code>yes</code> или <code>no</code> чтобы открыть клавиатуру, когда формы элементы получают фокус через JavaScript в <code>focus()</code> вызов (по умолчанию<code>yes</code>).</li>
-<li>  <strong>suppressesIncrementalRendering</strong>: значение <code>yes</code> или <code>no</code> ждать, пока все новое представление содержание полученных до визуализируемого (по умолчанию<code>no</code>).</li>
-<li>  <strong>presentationstyle</strong>: набор <code>pagesheet</code> , <code>formsheet</code> или <code>fullscreen</code> чтобы задать <a href="http://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/Reference/Reference.html#//apple_ref/occ/instp/UIViewController/modalPresentationStyle">стиль презентации</a> (по умолчанию<code>fullscreen</code>).</li>
-<li>  <strong>transitionstyle</strong>: набор <code>fliphorizontal</code> , <code>crossdissolve</code> или <code>coververtical</code> чтобы задать <a href="http://developer.apple.com/library/ios/#documentation/UIKit/Reference/UIViewController_Class/Reference/Reference.html#//apple_ref/occ/instp/UIViewController/modalTransitionStyle">стиль перехода</a> (по умолчанию<code>coververtical</code>).</li>
-</ul></li>
+    <p><code class="language-plaintext highlighter-rouge">options</code>Строка не должна содержать каких-либо пустое пространство, и каждая функция пар имя/значение должны быть разделены запятой. Функция имена нечувствительны к регистру. Все платформы поддерживают исходное значение:</p>
+
+    <ul>
+      <li><strong>Расположение</strong>: равным <code class="language-plaintext highlighter-rouge">yes</code> или <code class="language-plaintext highlighter-rouge">no</code> превратить <code class="language-plaintext highlighter-rouge">InAppBrowser</code> в адресную строку или выключить.
+        <h2 id="андроид-только">Андроид только</h2>
+      </li>
+      <li><strong>closebuttoncaption</strong> - задать строку, которая будет заголовок для кнопки “Готово”.</li>
+      <li><strong>скрытые</strong> - присвоено значение ‘yes’, чтобы создать браузера и загрузки страницы, но не показать его. Событие load будет срабатывать, когда загрузка завершена. Опустить или значение «нет» (по умолчанию) иметь браузера открыть и загрузить нормально.</li>
+      <li><strong>clearcache</strong> - присвоено значение ‘yes’, чтобы иметь кэш браузера cookie очищается перед открытием нового окна</li>
+      <li><strong>clearsessioncache</strong> - значение ‘yes’, чтобы сессии куки кэш очищается перед открытием нового окна
+        <h2 id="ios-только">iOS только</h2>
+      </li>
+      <li><strong>closebuttoncaption</strong> - задать строку, которая будет заголовок для кнопки “Готово”. Обратите внимание, что вам будет необходимо локализовать это значение самостоятельно.</li>
+      <li><strong>скрытые</strong> - присвоено значение ‘yes’, чтобы создать браузера и загрузки страницы, но не показать его. Событие load будет срабатывать, когда загрузка завершена. Опустить или значение «нет» (по умолчанию) иметь браузера открыть и загрузить нормально.</li>
+      <li><strong>панель инструментов</strong> - набор «да» или «нет», чтобы включение и отключение панели инструментов для InAppBrowser (по умолчанию ‘Да’)</li>
+      <li><strong>enableViewportScale</strong>: значение <code class="language-plaintext highlighter-rouge">yes</code> или <code class="language-plaintext highlighter-rouge">no</code> для предотвращения видового экрана, масштабирование через тег meta (по умолчанию<code class="language-plaintext highlighter-rouge">no</code>).</li>
+      <li><strong>mediaPlaybackRequiresUserAction</strong>: значение <code class="language-plaintext highlighter-rouge">yes</code> или <code class="language-plaintext highlighter-rouge">no</code> для предотвращения HTML5 аудио или видео от Автовоспроизведение (по умолчанию<code class="language-plaintext highlighter-rouge">no</code>).</li>
+      <li><strong>allowInlineMediaPlayback</strong>: значение <code class="language-plaintext highlighter-rouge">yes</code> или <code class="language-plaintext highlighter-rouge">no</code> чтобы разрешить воспроизведение мультимедиа Встроенный HTML5, отображение в окне браузера, а не конкретного устройства воспроизведения интерфейса. HTML <code class="language-plaintext highlighter-rouge">video</code> элемент должен также включать <code class="language-plaintext highlighter-rouge">webkit-playsinline</code> атрибут (по умолчанию<code class="language-plaintext highlighter-rouge">no</code>)</li>
+      <li><strong>keyboardDisplayRequiresUserAction</strong>: значение <code class="language-plaintext highlighter-rouge">yes</code> или <code class="language-plaintext highlighter-rouge">no</code> чтобы открыть клавиатуру, когда формы элементы получают фокус через JavaScript в <code class="language-plaintext highlighter-rouge">focus()</code> вызов (по умолчанию<code class="language-plaintext highlighter-rouge">yes</code>).</li>
+      <li><strong>suppressesIncrementalRendering</strong>: значение <code class="language-plaintext highlighter-rouge">yes</code> или <code class="language-plaintext highlighter-rouge">no</code> ждать, пока все новое представление содержание полученных до визуализируемого (по умолчанию<code class="language-plaintext highlighter-rouge">no</code>).</li>
+      <li><strong>presentationstyle</strong>: набор <code class="language-plaintext highlighter-rouge">pagesheet</code> , <code class="language-plaintext highlighter-rouge">formsheet</code> или <code class="language-plaintext highlighter-rouge">fullscreen</code> чтобы задать <a href="http://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/Reference/Reference.html#//apple_ref/occ/instp/UIViewController/modalPresentationStyle">стиль презентации</a> (по умолчанию<code class="language-plaintext highlighter-rouge">fullscreen</code>).</li>
+      <li><strong>transitionstyle</strong>: набор <code class="language-plaintext highlighter-rouge">fliphorizontal</code> , <code class="language-plaintext highlighter-rouge">crossdissolve</code> или <code class="language-plaintext highlighter-rouge">coververtical</code> чтобы задать <a href="http://developer.apple.com/library/ios/#documentation/UIKit/Reference/UIViewController_Class/Reference/Reference.html#//apple_ref/occ/instp/UIViewController/modalTransitionStyle">стиль перехода</a> (по умолчанию<code class="language-plaintext highlighter-rouge">coververtical</code>).</li>
+    </ul>
+  </li>
 </ul>
 
-<h2>Поддерживаемые платформы</h2>
+<h2 id="поддерживаемые-платформы">Поддерживаемые платформы</h2>
 
 <ul>
-<li>  Андроид</li>
-<li>  Ежевика</li>
-<li>  iOS</li>
-<li>  Windows Phone 7 и 8</li>
+  <li>Андроид</li>
+  <li>Ежевика</li>
+  <li>iOS</li>
+  <li>Windows Phone 7 и 8</li>
 </ul>
 
-<h2>Быстрый пример</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">var ref = window.open('http://apache.org', '_blank', 'location=yes');
+<h2 id="быстрый-пример">Быстрый пример</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var ref = window.open('http://apache.org', '_blank', 'location=yes');
 var ref2 = window.open(encodeURI('http://ja.m.wikipedia.org/wiki/ハングル'), '_blank', 'location=yes');
-</code></pre></div>
-<h2>Полный пример</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>window.open Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="полный-пример">Полный пример</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;window.open Example&lt;/title&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="c1">// external url</span>
-        <span class="kd">var</span> <span class="nx">ref</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nb">encodeURI</span><span class="p">(</span><span class="s1">'http://apache.org'</span><span class="p">),</span> <span class="s1">'_blank'</span><span class="p">,</span> <span class="s1">'location=yes'</span><span class="p">);</span>
-        <span class="c1">// relative document</span>
-        <span class="nx">ref</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">'next.html'</span><span class="p">,</span> <span class="s1">'_self'</span><span class="p">);</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        // external url
+        var ref = window.open(encodeURI('http://apache.org'), '_blank', 'location=yes');
+        // relative document
+        ref = window.open('next.html', '_self');
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

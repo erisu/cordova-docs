@@ -1306,70 +1306,79 @@
             
 
             <div id="page-toc-source">
-                <h1>File</h1>
+                <h1 id="file">File</h1>
 
 <blockquote>
-<p>Un&#39;API per leggere, scrivere e navigare gerarchie file di sistema, basati sul <a href="http://www.w3.org/TR/FileAPI">w3c file api</a>.</p>
+  <p>Un’API per leggere, scrivere e navigare gerarchie file di sistema, basati sul <a href="http://www.w3.org/TR/FileAPI">w3c file api</a>.</p>
 </blockquote>
 
-<h2>Oggetti</h2>
+<h2 id="oggetti">Oggetti</h2>
 
 <ul>
-<li>  <a href="directoryentry/directoryentry.html">DirectoryEntry</a></li>
-<li>  <a href="directoryreader/directoryreader.html">DirectoryReader</a></li>
-<li>  <a href="fileobj/fileobj.html">File</a></li>
-<li>  <a href="fileentry/fileentry.html">FileEntry</a></li>
-<li>  <a href="fileerror/fileerror.html">FileError</a></li>
-<li>  <a href="filereader/filereader.html">FileReader</a></li>
-<li>  <a href="filesystem/filesystem.html">FileSystem</a></li>
-<li>  <a href="filetransfer/filetransfer.html">FileTransfer</a></li>
-<li>  <a href="filetransfererror/filetransfererror.html">FileTransferError</a></li>
-<li>  <a href="fileuploadoptions/fileuploadoptions.html">FileUploadOptions</a></li>
-<li>  <a href="fileuploadresult/fileuploadresult.html">FileUploadResult</a></li>
-<li>  <a href="filewriter/filewriter.html">FileWriter</a></li>
-<li>  <a href="flags/flags.html">Bandiere</a></li>
-<li>  <a href="localfilesystem/localfilesystem.html">LocalFileSystem</a></li>
-<li>  <a href="metadata/metadata.html">Metadati</a></li>
+  <li><a href="directoryentry/directoryentry.html">DirectoryEntry</a></li>
+  <li><a href="directoryreader/directoryreader.html">DirectoryReader</a></li>
+  <li><a href="fileobj/fileobj.html">File</a></li>
+  <li><a href="fileentry/fileentry.html">FileEntry</a></li>
+  <li><a href="fileerror/fileerror.html">FileError</a></li>
+  <li><a href="filereader/filereader.html">FileReader</a></li>
+  <li><a href="filesystem/filesystem.html">FileSystem</a></li>
+  <li><a href="filetransfer/filetransfer.html">FileTransfer</a></li>
+  <li><a href="filetransfererror/filetransfererror.html">FileTransferError</a></li>
+  <li><a href="fileuploadoptions/fileuploadoptions.html">FileUploadOptions</a></li>
+  <li><a href="fileuploadresult/fileuploadresult.html">FileUploadResult</a></li>
+  <li><a href="filewriter/filewriter.html">FileWriter</a></li>
+  <li><a href="flags/flags.html">Bandiere</a></li>
+  <li><a href="localfilesystem/localfilesystem.html">LocalFileSystem</a></li>
+  <li><a href="metadata/metadata.html">Metadati</a></li>
 </ul>
 
-<h2>La funzionalità di accesso</h2>
+<h2 id="la-funzionalità-di-accesso">La funzionalità di accesso</h2>
 
-<p>A partire dalla versione 3.0, Cordova implementa le API a livello di dispositivo come <em>plugin</em>. Utilizzare la CLI <code>plugin</code> comando, descritto in Command-Line Interface, aggiungere o rimuovere questa funzionalità per un progetto:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add org.apache.cordova.file
+<p>A partire dalla versione 3.0, Cordova implementa le API a livello di dispositivo come <em>plugin</em>. Utilizzare la CLI <code class="language-plaintext highlighter-rouge">plugin</code> comando, descritto in Command-Line Interface, aggiungere o rimuovere questa funzionalità per un progetto:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add org.apache.cordova.file
     $ cordova plugin ls
     [ 'org.apache.cordova.file' ]
     $ cordova plugin rm org.apache.cordova.file
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Per utilizzare il plugin di trasferimento file è necessario aggiungere che separatamente.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add org.apache.cordova.file-transfer
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add org.apache.cordova.file-transfer
     $ cordova plugin ls
     [ 'org.apache.cordova.file-transfer' ]
     $ cordova plugin rm org.apache.cordova.file-transfer
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Questi comandi si applicano a tutte le piattaforme mirate, ma modificano le impostazioni di configurazione specifiche della piattaforma descritte di seguito:</p>
 
 <ul>
-<li><p>Android</p>
-<div class="highlight"><pre><code class="language-" data-lang="">(in app/res/xml/config.xml)
+  <li>
+    <p>Android</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(in app/res/xml/config.xml)
 &lt;feature name="File"&gt;
     &lt;param name="android-package" value="org.apache.cordova.FileUtils" /&gt;
 &lt;/feature&gt;
 &lt;feature name="FileTransfer"&gt;
     &lt;param name="android-package" value="org.apache.cordova.FileTransfer" /&gt;
 &lt;/feature&gt;
-
+    
 (in app/AndroidManifest.xml)
 &lt;uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /&gt;
-</code></pre></div></li>
-<li><p>BlackBerry WebWorks</p>
-<div class="highlight"><pre><code class="language-" data-lang="">(in www/plugins.xml)
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>BlackBerry WebWorks</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(in www/plugins.xml)
 &lt;feature name="File"&gt;
     &lt;param name="blackberry-package" value="org.apache.cordova.file.FileManager" /&gt;
 &lt;/feature&gt;
 &lt;feature name="FileTransfer"&gt;
     &lt;param name="blackberry-package" value="org.apache.cordova.http.FileTransfer" /&gt;
 &lt;/feature&gt;
-
+    
 (in www/config.xml)
 &lt;feature id="blackberry.io.file" required="true" version="1.0.0.0" /&gt;
 &lt;feature id="blackberry.utils"   required="true" version="1.0.0.0" /&gt;
@@ -1377,15 +1386,19 @@
 &lt;rim:permissions&gt;
     &lt;rim:permit&gt;access_shared&lt;/rim:permit&gt;
 &lt;/rim:permissions&gt;
-</code></pre></div></li>
-<li><p>iOS (in<code>config.xml</code>)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="File"&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>iOS (in<code class="language-plaintext highlighter-rouge">config.xml</code>)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="File"&gt;
     &lt;param name="ios-package" value="CDVFile" /&gt;
 &lt;/feature&gt;
 &lt;feature name="FileTransfer"&gt;
     &lt;param name="ios-package" value="CDVFileTransfer" /&gt;
 &lt;/feature&gt;
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ul>
 
 <p>Alcune piattaforme possono supportare questa funzionalità senza richiedere alcuna configurazione speciale. Vedere <em>Supporto piattaforma</em> nella sezione panoramica.</p>

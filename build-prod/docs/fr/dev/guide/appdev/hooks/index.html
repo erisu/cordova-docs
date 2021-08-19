@@ -2112,22 +2112,23 @@
             
 
             <div id="page-toc-source">
-                <h1>Guide de crochets</h1>
+                <h1 id="guide-de-crochets">Guide de crochets</h1>
 
-<p>Cordova Hooks représentent des scripts spéciaux qui pourraient être ajoutées par application et développeurs de plugins ou même par votre propre build system pour personnaliser les commandes de cordova. Scripts de hook pourraient être définies en les ajoutant au dossier prédéfini spécial (<code>/hooks</code>) ou via des fichiers de configuration (<code>config.xml</code> et <code>plugin.xml</code>) et exécuter en série dans l&#39;ordre suivant :</p>
+<p>Cordova Hooks représentent des scripts spéciaux qui pourraient être ajoutées par application et développeurs de plugins ou même par votre propre build system pour personnaliser les commandes de cordova. Scripts de hook pourraient être définies en les ajoutant au dossier prédéfini spécial (<code class="language-plaintext highlighter-rouge">/hooks</code>) ou via des fichiers de configuration (<code class="language-plaintext highlighter-rouge">config.xml</code> et <code class="language-plaintext highlighter-rouge">plugin.xml</code>) et exécuter en série dans l’ordre suivant :</p>
 
 <ul>
-<li>Crochets de demande de <code>/hooks</code>;</li>
-<li>Application des crochets de <code>config.xml</code>;</li>
-<li>Crochets de plugin de <code>plugins/.../plugin.xml</code>.</li>
+  <li>Crochets de demande de <code class="language-plaintext highlighter-rouge">/hooks</code>;</li>
+  <li>Application des crochets de <code class="language-plaintext highlighter-rouge">config.xml</code>;</li>
+  <li>Crochets de plugin de <code class="language-plaintext highlighter-rouge">plugins/.../plugin.xml</code>.</li>
 </ul>
 
-<p><strong>Remarque</strong>: <code>/hooks</code> répertoire est considérée comme dépréciée en faveur des éléments crochet dans config.xml et plugin.xml.</p>
+<p><strong>Remarque</strong>: <code class="language-plaintext highlighter-rouge">/hooks</code> répertoire est considérée comme dépréciée en faveur des éléments crochet dans config.xml et plugin.xml.</p>
 
-<h2>Types de prise en charge de crochet</h2>
+<h2 id="types-de-prise-en-charge-de-crochet">Types de prise en charge de crochet</h2>
 
 <p>Les types suivants de crochet sont pris en charge :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">after_build
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>after_build
 after_compile
 after_clean
 after_docs
@@ -2161,23 +2162,27 @@ before_prepare
 before_run
 before_serve
 pre_package // Windows and Windows Phone only
-</code></pre></div>
-<h2>Façons de définir des crochets</h2>
+</code></pre></div></div>
 
-<h3>Via <code>/hooks</code> répertoire</h3>
+<h2 id="façons-de-définir-des-crochets">Façons de définir des crochets</h2>
+
+<h3 id="via-hooks-répertoire">Via <code class="language-plaintext highlighter-rouge">/hooks</code> répertoire</h3>
 
 <p><strong>Note</strong>: cette méthode est considérée comme dépréciée en faveur des éléments crochet dans config.xml et plugin.xml.</p>
 
-<p>Pour exécuter l&#39;action personnalisée lorsque le type de crochet correspondant est déclenché, utilisez le type de crochet comme nom pour un sous-dossier à l&#39;intérieur du répertoire « crochets », placez vous le script file ici, par exemple :</p>
-<div class="highlight"><pre><code class="language-" data-lang=""># script file will be automatically executed after each build
+<p>Pour exécuter l’action personnalisée lorsque le type de crochet correspondant est déclenché, utilisez le type de crochet comme nom pour un sous-dossier à l’intérieur du répertoire « crochets », placez vous le script file ici, par exemple :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># script file will be automatically executed after each build
 hooks/after_build/after_build_custom_action.js
-</code></pre></div>
-<p>Lorsque vous utilisez ces crochets, ils seront toujours exécutés sous forme de fichiers exécutables, pas en tant que modules chargeables de JavaScript. <strong>N&#39;oubliez pas</strong>: faites vos scripts exécutables dans ce cas.</p>
+</code></pre></div></div>
 
-<h3>Config.Xml</h3>
+<p>Lorsque vous utilisez ces crochets, ils seront toujours exécutés sous forme de fichiers exécutables, pas en tant que modules chargeables de JavaScript. <strong>N’oubliez pas</strong>: faites vos scripts exécutables dans ce cas.</p>
 
-<p>Crochets peuvent être définis dans le <code>fichier config.xml</code> en utilisant <code>&lt; hook &gt;</code> éléments, par exemple de projet :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;hook type="before_build" src="scripts/appBeforeBuild.bat" /&gt;
+<h3 id="configxml">Config.Xml</h3>
+
+<p>Crochets peuvent être définis dans le <code class="language-plaintext highlighter-rouge">fichier config.xml</code> en utilisant <code class="language-plaintext highlighter-rouge">&lt; hook &gt;</code> éléments, par exemple de projet :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;hook type="before_build" src="scripts/appBeforeBuild.bat" /&gt;
 &lt;hook type="before_build" src="scripts/appBeforeBuild.js" /&gt;
 &lt;hook type="before_plugin_install" src="scripts/appBeforePluginInstall.js" /&gt;
 
@@ -2194,11 +2199,13 @@ hooks/after_build/after_build_custom_action.js
     &lt;hook type="before_plugin_install" src="scripts/windows8/appWin8BeforePluginInstall.js" /&gt;
     ...
 &lt;/platform&gt;
-</code></pre></div>
-<h3>Crochets de plugin (plugin.xml)</h3>
+</code></pre></div></div>
 
-<p>Comme un développeur de plugin, que vous pouvez définir des scripts à l&#39;aide des éléments <code>&lt; hook &gt;</code> dans un <code>plugin.xml</code> comme ça hook :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;hook type="before_plugin_install" src="scripts/beforeInstall.js" /&gt;
+<h3 id="crochets-de-plugin-pluginxml">Crochets de plugin (plugin.xml)</h3>
+
+<p>Comme un développeur de plugin, que vous pouvez définir des scripts à l’aide des éléments <code class="language-plaintext highlighter-rouge">&lt; hook &gt;</code> dans un <code class="language-plaintext highlighter-rouge">plugin.xml</code> comme ça hook :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;hook type="before_plugin_install" src="scripts/beforeInstall.js" /&gt;
 &lt;hook type="after_build" src="scripts/afterBuild.js" /&gt;
 
 &lt;platform name="wp8"&gt;
@@ -2206,91 +2213,105 @@ hooks/after_build/after_build_custom_action.js
     &lt;hook type="before_build" src="scripts/wp8BeforeBuild.js" /&gt;
     ...
 &lt;/platform&gt;
-</code></pre></div>
-<p><code>before_plugin_install</code>, <code>after_plugin_install</code>, <code>before_plugin_uninstall</code> plugin crochets seront tirés exclusivement pour le plugin installé/désinstallé.</p>
+</code></pre></div></div>
 
-<h2>Interface de script</h2>
+<p><code class="language-plaintext highlighter-rouge">before_plugin_install</code>, <code class="language-plaintext highlighter-rouge">after_plugin_install</code>, <code class="language-plaintext highlighter-rouge">before_plugin_uninstall</code> plugin crochets seront tirés exclusivement pour le plugin installé/désinstallé.</p>
 
-<h3>Javascript</h3>
+<h2 id="interface-de-script">Interface de script</h2>
 
-<p>Si vous rédigez des crochets à l&#39;aide de Node.js, vous devez utiliser la définition suivante du module :</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+<h3 id="javascript">Javascript</h3>
+
+<p>Si vous rédigez des crochets à l’aide de Node.js, vous devez utiliser la définition suivante du module :</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
     <span class="p">...</span>
 <span class="p">}</span>
-</code></pre></div>
-<p>Vous pouvez faire votre async de scripts à l&#39;aide de q :</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">Q</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">requireCordovaModule</span><span class="p">(</span><span class="s1">'q'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Vous pouvez faire votre async de scripts à l’aide de q :</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">Q</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">requireCordovaModule</span><span class="p">(</span><span class="dl">'</span><span class="s1">q</span><span class="dl">'</span><span class="p">);</span>
     <span class="kd">var</span> <span class="nx">deferral</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Q</span><span class="p">.</span><span class="nx">defer</span><span class="p">();</span>
 
     <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'hook.js&gt;&gt; end'</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">hook.js&gt;&gt; end</span><span class="dl">'</span><span class="p">);</span>
     <span class="nx">deferral</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
     <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
 
     <span class="k">return</span> <span class="nx">deferral</span><span class="p">.</span><span class="nx">promise</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div>
-<p>objet de <code>context</code> contient le type de crochet, chemin d&#39;accès complet du script exécuté, les options crochet, les arguments de ligne de commande passés à Cordoue et objet de premier niveau &quot;cordova&quot; :</p>
-<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"hook"</span><span class="p">:</span><span class="w"> </span><span class="s2">"before_plugin_install"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"scriptLocation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c:</span><span class="se">\\</span><span class="s2">script</span><span class="se">\\</span><span class="s2">full</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">appBeforePluginInstall.js"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cmdLine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The</span><span class="se">\\</span><span class="s2">exact</span><span class="se">\\</span><span class="s2">command</span><span class="se">\\</span><span class="s2">cordova</span><span class="se">\\</span><span class="s2">run</span><span class="se">\\</span><span class="s2">with arguments"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"opts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"projectRoot"</span><span class="p">:</span><span class="s2">"C:</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">to</span><span class="se">\\</span><span class="s2">the</span><span class="se">\\</span><span class="s2">project"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cordova"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"platforms"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"wp8"</span><span class="p">],</span><span class="w">
-      </span><span class="s2">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"com.plugin.withhooks"</span><span class="p">],</span><span class="w">
-      </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.21.7-dev"</span><span class="w">
+</code></pre></div></div>
+
+<p>objet de <code class="language-plaintext highlighter-rouge">context</code> contient le type de crochet, chemin d’accès complet du script exécuté, les options crochet, les arguments de ligne de commande passés à Cordoue et objet de premier niveau “cordova” :</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"hook"</span><span class="p">:</span><span class="w"> </span><span class="s2">"before_plugin_install"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"scriptLocation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c:</span><span class="se">\\</span><span class="s2">script</span><span class="se">\\</span><span class="s2">full</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">appBeforePluginInstall.js"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"cmdLine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The</span><span class="se">\\</span><span class="s2">exact</span><span class="se">\\</span><span class="s2">command</span><span class="se">\\</span><span class="s2">cordova</span><span class="se">\\</span><span class="s2">run</span><span class="se">\\</span><span class="s2">with arguments"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"opts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"projectRoot"</span><span class="p">:</span><span class="s2">"C:</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">to</span><span class="se">\\</span><span class="s2">the</span><span class="se">\\</span><span class="s2">project"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"cordova"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"platforms"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"wp8"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"com.plugin.withhooks"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.21.7-dev"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"plugin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"com.plugin.withhooks"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"pluginInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"plugin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"com.plugin.withhooks"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"pluginInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="err">...</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wp8"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"dir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C:</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">to</span><span class="se">\\</span><span class="s2">the</span><span class="se">\\</span><span class="s2">project</span><span class="se">\\</span><span class="s2">plugins</span><span class="se">\\</span><span class="s2">com.plugin.withhooks"</span><span class="w">
+      </span><span class="nl">"platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wp8"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"dir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C:</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">to</span><span class="se">\\</span><span class="s2">the</span><span class="se">\\</span><span class="s2">project</span><span class="se">\\</span><span class="s2">plugins</span><span class="se">\\</span><span class="s2">com.plugin.withhooks"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"cordova"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+  </span><span class="nl">"cordova"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre></div>
-<p><code>Context.opts.plugin</code> objet se répercutera seulement aux scripts de crochets de plugin.</p>
+</span></code></pre></div></div>
 
-<p>Vous pouvez également exiger des modules supplémentaires de Cordova dans votre script à l&#39;aide de <code>context.requireCordovaModule</code> de la manière suivante :</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">Q</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">requireCordovaModule</span><span class="p">(</span><span class="s1">'q'</span><span class="p">);</span>
-</code></pre></div>
-<p><strong>Note</strong>: nouvelle interface de script chargeur de module est utilisé pour les fichiers <code>.js</code> définis via <code>config.xml</code> ou <code>plugin.xml</code> seulement. Pour des raisons de compatibilité crochet fichiers spécifiés par l&#39;intermédiaire de <code>/hooks</code> dossiers sont gérés via le nœud child_process frayer, voir &quot;Non-javascript&quot; la section ci-dessous.</p>
+<p><code class="language-plaintext highlighter-rouge">Context.opts.plugin</code> objet se répercutera seulement aux scripts de crochets de plugin.</p>
 
-<h3>Non-javascript</h3>
+<p>Vous pouvez également exiger des modules supplémentaires de Cordova dans votre script à l’aide de <code class="language-plaintext highlighter-rouge">context.requireCordovaModule</code> de la manière suivante :</p>
 
-<p><strong>Note</strong>: nous recommandons fortement d&#39;écrire vos hameçons à l&#39;aide de Node.js, afin qu&#39;ils soient multi-plateforme, voir la section &quot;Javascript&quot; ci-dessus.</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Q</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">requireCordovaModule</span><span class="p">(</span><span class="dl">'</span><span class="s1">q</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
 
-<p>Non-javascript scripts sont exécutés via spawn child_process nœud de répertoire racine du projet et ont les passes de répertoire racine comme premier argument. Toutes les autres options sont transmises au script à l&#39;aide de variables d&#39;environnement :</p>
+<p><strong>Note</strong>: nouvelle interface de script chargeur de module est utilisé pour les fichiers <code class="language-plaintext highlighter-rouge">.js</code> définis via <code class="language-plaintext highlighter-rouge">config.xml</code> ou <code class="language-plaintext highlighter-rouge">plugin.xml</code> seulement. Pour des raisons de compatibilité crochet fichiers spécifiés par l’intermédiaire de <code class="language-plaintext highlighter-rouge">/hooks</code> dossiers sont gérés via le nœud child_process frayer, voir “Non-javascript” la section ci-dessous.</p>
+
+<h3 id="non-javascript">Non-javascript</h3>
+
+<p><strong>Note</strong>: nous recommandons fortement d’écrire vos hameçons à l’aide de Node.js, afin qu’ils soient multi-plateforme, voir la section “Javascript” ci-dessus.</p>
+
+<p>Non-javascript scripts sont exécutés via spawn child_process nœud de répertoire racine du projet et ont les passes de répertoire racine comme premier argument. Toutes les autres options sont transmises au script à l’aide de variables d’environnement :</p>
 
 <ul>
-<li>CORDOVA_VERSION - la version CLI-Cordova.</li>
-<li>CORDOVA_PLATFORMS - liste des plates-formes auquel s&#39;applique la commande séparées par une virgule (p. ex.: android, ios).</li>
-<li>CORDOVA_PLUGINS - liste des plugin ID auquel s&#39;applique la commande séparées par une virgule (p. ex.: org.apache.cordova.file, org.apache.cordova.file-transfert)</li>
-<li>CORDOVA_HOOK - chemin d&#39;accès au crochet qui est en cours d&#39;exécution.</li>
-<li>CORDOVA_CMDLINE - les arguments de ligne de commande exactes passés à cordova (p. ex.: cordova exécuter ios--émuler)</li>
+  <li>CORDOVA_VERSION - la version CLI-Cordova.</li>
+  <li>CORDOVA_PLATFORMS - liste des plates-formes auquel s’applique la commande séparées par une virgule (p. ex.: android, ios).</li>
+  <li>CORDOVA_PLUGINS - liste des plugin ID auquel s’applique la commande séparées par une virgule (p. ex.: org.apache.cordova.file, org.apache.cordova.file-transfert)</li>
+  <li>CORDOVA_HOOK - chemin d’accès au crochet qui est en cours d’exécution.</li>
+  <li>CORDOVA_CMDLINE - les arguments de ligne de commande exactes passés à cordova (p. ex.: cordova exécuter ios–émuler)</li>
 </ul>
 
 <p>Si un script retourne un code de sortie différent de zéro, puis la commande de cordova parent est interrompue.</p>
 
-<p>Notez également que même si vous travaillez sous Windows, et dans le cas où vos scripts de hook ne sont pas des fichiers bat (ce qui est recommandé, si vous souhaitez que vos scripts pour travailler dans les systèmes d&#39;exploitation autres que Windows) Cordova CLI attendra une ligne shebang comme la première ligne pour qu&#39;il puisse connaître l&#39;interprète, il faut utiliser pour lancer le script. La ligne de shebang doit correspondre à l&#39;exemple suivant :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">#!/usr/bin/env [name_of_interpreter_executable]
-</code></pre></div>
-<h2>Exemple d&#39;utilisation</h2>
+<p>Notez également que même si vous travaillez sous Windows, et dans le cas où vos scripts de hook ne sont pas des fichiers bat (ce qui est recommandé, si vous souhaitez que vos scripts pour travailler dans les systèmes d’exploitation autres que Windows) Cordova CLI attendra une ligne shebang comme la première ligne pour qu’il puisse connaître l’interprète, il faut utiliser pour lancer le script. La ligne de shebang doit correspondre à l’exemple suivant :</p>
 
-<p>Cet exemple montre l&#39;utilisation de crochets Cordova à la trace à la sortie de la console la taille du fichier .apk généré pour la plateforme Android.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/usr/bin/env [name_of_interpreter_executable]
+</code></pre></div></div>
 
-<p>Créer le vide Cordova app et ajouter la définition suivante au <code>fichier config.xml</code> pour dire Cordova pour exécuter le script <code>afterBuild.js</code> après chaque génération de plate-forme.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;hook type="after_build" src="scripts/afterBuild.js" /&gt;
-</code></pre></div>
-<p>Créer le fichier <code>scripts/afterBuild.js</code> et ajoutez l&#39;implémentation suivante. Nous utilisons la version asynchrone de la méthode <code>fs.stat</code> afin de démontrer comment les fonctionnalités asynchrones pourraient être faite par l&#39;intermédiaire de crochets.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">module.exports = function(ctx) {
+<h2 id="exemple-dutilisation">Exemple d’utilisation</h2>
+
+<p>Cet exemple montre l’utilisation de crochets Cordova à la trace à la sortie de la console la taille du fichier .apk généré pour la plateforme Android.</p>
+
+<p>Créer le vide Cordova app et ajouter la définition suivante au <code class="language-plaintext highlighter-rouge">fichier config.xml</code> pour dire Cordova pour exécuter le script <code class="language-plaintext highlighter-rouge">afterBuild.js</code> après chaque génération de plate-forme.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;hook type="after_build" src="scripts/afterBuild.js" /&gt;
+</code></pre></div></div>
+
+<p>Créer le fichier <code class="language-plaintext highlighter-rouge">scripts/afterBuild.js</code> et ajoutez l’implémentation suivante. Nous utilisons la version asynchrone de la méthode <code class="language-plaintext highlighter-rouge">fs.stat</code> afin de démontrer comment les fonctionnalités asynchrones pourraient être faite par l’intermédiaire de crochets.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module.exports = function(ctx) {
     // make sure android platform is part of build 
     if (ctx.opts.platforms.indexOf('android') &lt; 0) {
         return;
@@ -2313,16 +2334,19 @@ hooks/after_build/after_build_custom_action.js
 
     return deferral.promise;
 };
-</code></pre></div>
-<p>Paramètre <code>ctx</code> dans l&#39;exemple ci-dessus est passée de Cordova et représente le contexte d&#39;exécution tels que le chemin d&#39;accès complet du script, plateforme cible, les arguments de ligne de commande, etc. et expose également les fonctionnalités d&#39;assistance supplémentaires. Voir la section <code>Interface de Script</code> ci-dessus pour plus de détails.</p>
+</code></pre></div></div>
+
+<p>Paramètre <code class="language-plaintext highlighter-rouge">ctx</code> dans l’exemple ci-dessus est passée de Cordova et représente le contexte d’exécution tels que le chemin d’accès complet du script, plateforme cible, les arguments de ligne de commande, etc. et expose également les fonctionnalités d’assistance supplémentaires. Voir la section <code class="language-plaintext highlighter-rouge">Interface de Script</code> ci-dessus pour plus de détails.</p>
 
 <p>Vous pouvez maintenant ajouter la plateforme android et exécuter la build.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cordova platform add android
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova platform add android
 ..
 cordova build
 ..
 Size of path\to\app\platforms\android\build\outputs\apk\android-debug.apk is 1821193 bytes
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Autres exemples de bon usage peuvent être trouvés ici :</p>
 
 <p><a href="http://devgirl.org/2013/11/12/three-hooks-your-cordovaphonegap-project-needs/">http://devgirl.org/2013/11/12/three-hooks-your-cordovaphonegap-project-needs/</a></p>

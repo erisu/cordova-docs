@@ -2104,67 +2104,73 @@
             
 
             <div id="page-toc-source">
-                <h1>deviceready</h1>
+                <h1 id="deviceready">deviceready</h1>
 
-<p>L&#39;évènement se déclenche lorsque Cordova est entièrement chargé.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">document.addEventListener("deviceready", yourCallbackFunction, false);
-</code></pre></div>
-<h2>Détails</h2>
+<p>L’évènement se déclenche lorsque Cordova est entièrement chargé.</p>
 
-<p>Cet évènement est essentiel à n&#39;importe quelle application. Il signale que les API matérielles Cordova ont été chargées et sont prêtes à être utilisées.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>document.addEventListener("deviceready", yourCallbackFunction, false);
+</code></pre></div></div>
 
-<p>Cordova est constitué de deux bases de code : native et JavaScript. Tant que le code natif est en cours de chargement, une image personnalisée est affichée. Cependant, le code JavaScript est chargé seulement lorsque le DOM charge. Cela signifie que l&#39;application web peut potentiellement appeler une fonction Cordova JavaScript avant le code natif correspondant soit disponible.</p>
+<h2 id="détails">Détails</h2>
 
-<p>L&#39;évènement <code>deviceready</code> se déclenche quand Cordova est totalement chargé. Une fois cet évènement déclenché, vous pouvez en toute sécurité faire appels aux API Cordova. Les applications devraient en général utiliser <code>document.addEventListener</code> pour attacher un écouteur d&#39;évènements, une fois le DOM du document HTML chargé.</p>
+<p>Cet évènement est essentiel à n’importe quelle application. Il signale que les API matérielles Cordova ont été chargées et sont prêtes à être utilisées.</p>
 
-<p>L&#39;évènement <code>deviceready</code> se comporte différemment des autres évènements. Tout gestionnaire additionnel enregistré après le déclenchement de <code>deviceready</code> est appelé immédiatement.</p>
+<p>Cordova est constitué de deux bases de code : native et JavaScript. Tant que le code natif est en cours de chargement, une image personnalisée est affichée. Cependant, le code JavaScript est chargé seulement lorsque le DOM charge. Cela signifie que l’application web peut potentiellement appeler une fonction Cordova JavaScript avant le code natif correspondant soit disponible.</p>
 
-<h2>Plates-formes supportées</h2>
+<p>L’évènement <code class="language-plaintext highlighter-rouge">deviceready</code> se déclenche quand Cordova est totalement chargé. Une fois cet évènement déclenché, vous pouvez en toute sécurité faire appels aux API Cordova. Les applications devraient en général utiliser <code class="language-plaintext highlighter-rouge">document.addEventListener</code> pour attacher un écouteur d’évènements, une fois le DOM du document HTML chargé.</p>
+
+<p>L’évènement <code class="language-plaintext highlighter-rouge">deviceready</code> se comporte différemment des autres évènements. Tout gestionnaire additionnel enregistré après le déclenchement de <code class="language-plaintext highlighter-rouge">deviceready</code> est appelé immédiatement.</p>
+
+<h2 id="plates-formes-supportées">Plates-formes supportées</h2>
 
 <ul>
-<li>  Amazon Fire OS</li>
-<li>  Android</li>
-<li>  BlackBerry 10</li>
-<li>  iOS</li>
-<li>  Paciarelli</li>
-<li>  Windows Phone 8</li>
-<li>  Windows 8</li>
+  <li>Amazon Fire OS</li>
+  <li>Android</li>
+  <li>BlackBerry 10</li>
+  <li>iOS</li>
+  <li>Paciarelli</li>
+  <li>Windows Phone 8</li>
+  <li>Windows 8</li>
 </ul>
 
-<h2>Exemple court</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">document.addEventListener("deviceready", onDeviceReady, false);
+<h2 id="exemple-court">Exemple court</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
     // Now safe to use device APIs
 }
-</code></pre></div>
-<h2>Exemple complet</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Device Ready Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="exemple-complet">Exemple complet</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onLoad</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="p">}</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Device Ready Example&lt;/title&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="c1">// Now safe to use device APIs</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body</span> <span class="na">onload=</span><span class="s">"onLoad()"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+    // Wait for device API libraries to load
+    //
+    function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        // Now safe to use device APIs
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body onload="onLoad()"&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

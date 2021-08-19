@@ -1292,109 +1292,139 @@
             
 
             <div id="page-toc-source">
-                <h1>Developing a Plugin on Windows Phone</h1>
+                <h1 id="developing-a-plugin-on-windows-phone">Developing a Plugin on Windows Phone</h1>
 
 <p>Windows Phone プラグインの開発には、 Cordova のアーキテクチャの理解が必要です。
 Cordova-WP7 は Javascript コードをホストし、
 ネイティブの API 呼び出しを管理する WebBrowser から構成されています。
-C# には継承可能な BaseCommand (<code>WP7CordovaClassLib.Cordova.Commands.BaseCommand</code>) クラスがあり、
+C# には継承可能な BaseCommand (<code class="language-plaintext highlighter-rouge">WP7CordovaClassLib.Cordova.Commands.BaseCommand</code>) クラスがあり、
 このクラスは開発者のために大半の基本的な機能を保持しています。</p>
 
 <ol>
-<li>プロジェクトを選択し、右クリックから &#39;Add -&gt; New Item ...&#39; を選びます
+  <li>プロジェクトを選択し、右クリックから ‘Add -&gt; New Item …’ を選びます
+    <ul>
+      <li>どこに追加するかはあなたの自由ですが、できれば ‘Plugins’ フォルダーに追加してください</li>
+    </ul>
+  </li>
+  <li>‘Class’ を選択し <code class="language-plaintext highlighter-rouge">Echo.cs</code> と名前をつけます
+    <ul>
+      <li>このクラスの名前は <code class="language-plaintext highlighter-rouge">cordova.exec(win, fail, "Echo", ...)</code> で呼び出す名前と完全に一致している必要があります</li>
+    </ul>
+  </li>
+  <li>
+    <p>ベースクラスをインクルードします</p>
 
-<ul>
-<li>どこに追加するかはあなたの自由ですが、できれば &#39;Plugins&#39; フォルダーに追加してください</li>
-</ul></li>
-<li>&#39;Class&#39; を選択し <code>Echo.cs</code> と名前をつけます
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> using WP7CordovaClassLib.Cordova;
+ using WP7CordovaClassLib.Cordova.Commands;
+ using WP7CordovaClassLib.Cordova.JSON;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>BaseCommand クラスを継承します</p>
 
-<ul>
-<li>このクラスの名前は <code>cordova.exec(win, fail, &quot;Echo&quot;, ...)</code> で呼び出す名前と完全に一致している必要があります</li>
-</ul></li>
-<li><p>ベースクラスをインクルードします</p>
-<div class="highlight"><pre><code class="language-" data-lang="">using WP7CordovaClassLib.Cordova;
-using WP7CordovaClassLib.Cordova.Commands;
-using WP7CordovaClassLib.Cordova.JSON;
-</code></pre></div></li>
-<li><p>BaseCommand クラスを継承します</p>
-<div class="highlight"><pre><code class="language-" data-lang="">public class Echo : BaseCommand
-{
-    // ...
-}
-</code></pre></div></li>
-<li><p>JS から呼び出し可能なメソッドを追加します</p>
-<div class="highlight"><pre><code class="language-" data-lang="">public class Echo : BaseCommand
-{
-    public void echo(string options)
-    {
-        // 全ての JS から呼び出されるメソッドはこのシグネチャを持つ必要があります
-        // publicで, void を返し, string の引数が 1 つ
-    }
-}
-</code></pre></div></li>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> public class Echo : BaseCommand
+ {
+     // ...
+ }
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>JS から呼び出し可能なメソッドを追加します</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> public class Echo : BaseCommand
+ {
+     public void echo(string options)
+     {
+         // 全ての JS から呼び出されるメソッドはこのシグネチャを持つ必要があります
+         // publicで, void を返し, string の引数が 1 つ
+     }
+ }
+</code></pre></div>    </div>
+  </li>
 </ol>
 
-<h2>ネームスペース</h2>
+<h2 id="ネームスペース">ネームスペース</h2>
 
 <p>コマンドのデフォルトのネームスペースは:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">namespace Cordova.Extension.Commands
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>namespace Cordova.Extension.Commands
 {
     // ...
 }
-</code></pre></div>
-<p>もし別のネームスペースを使用したい場合は、 <code>cordova.exec</code> の呼び出しの際にネームスペースが省略されていないクラス名を指定する必要があります。
+</code></pre></div></div>
+
+<p>もし別のネームスペースを使用したい場合は、 <code class="language-plaintext highlighter-rouge">cordova.exec</code> の呼び出しの際にネームスペースが省略されていないクラス名を指定する必要があります。
 例えば、もし以下のように C# のクラスを定義した場合は:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">namespace com.mydomain.cordovaExtensions
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>namespace com.mydomain.cordovaExtensions
 {
     public class Echo : BaseCommand
     {
         // ...
     }
 }
-</code></pre></div>
+</code></pre></div></div>
+
 <p>JS では、 exec を以下のように呼び出します:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">codova.exec(win, fail, "com.mydomain.cordovaExtensions.Echo", ...);
-</code></pre></div>
-<h2>C# での引数の読み取り</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>codova.exec(win, fail, "com.mydomain.cordovaExtensions.Echo", ...);
+</code></pre></div></div>
+
+<h2 id="c-での引数の読み取り">C# での引数の読み取り</h2>
 
 <p>プラグインメソッドから受け取った値は文字列ですが、
 JavaScript のコードを見ると、実は文字列の配列を渡そうとしていた、ということがあります。
-JS での <code>cordova.exec</code> の呼び出し部分をみると、 <code>[str]</code> を渡していることがわかります:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cordova.exec(win, fail, "Echo", "echo", ["input string"]);
-</code></pre></div>
-<p>ここで <code>Echo.echo</code> メソッドに渡された文字列を検証すると、
+JS での <code class="language-plaintext highlighter-rouge">cordova.exec</code> の呼び出し部分をみると、 <code class="language-plaintext highlighter-rouge">[str]</code> を渡していることがわかります:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova.exec(win, fail, "Echo", "echo", ["input string"]);
+</code></pre></div></div>
+
+<p>ここで <code class="language-plaintext highlighter-rouge">Echo.echo</code> メソッドに渡された文字列を検証すると、
 値は実際には次であることがわかります:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">"[\"input string\"]"
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"[\"input string\"]"
+</code></pre></div></div>
+
 <p>全ての Javascript の exec 引数は、 C# に渡される前に JSON エンコードされます。</p>
 
 <p>もしこれを期待している値にしたい場合は、デコードする必要があります。
 シンプルに JSON のデシリアライゼーションを使います。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">string optVal = JsonHelper.Deserialize&lt;string[]&gt;(options)[0];
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>string optVal = JsonHelper.Deserialize&lt;string[]&gt;(options)[0];
 // optVal は "input string" となります
-</code></pre></div>
-<h2>C# から JS へ結果を渡す</h2>
+</code></pre></div></div>
+
+<h2 id="c-から-js-へ結果を渡す">C# から JS へ結果を渡す</h2>
 
 <p>ベースクラスの BaseCommand はデータを JS のコールバックハンドラーに渡すためのメソッドを提供しています。
 追加情報が必要なく、単にコマンドが成功したことを通知するためには、
 シンプルに以下を呼びます:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">DispatchCommandResult(); // 空のプラグイン結果とともに、成功したとみなされコールバックします
-</code></pre></div>
-<p>データを返すには、異なる形式の <code>DispatchCommandResult</code> を呼ぶ必要があります:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">DispatchCommandResult(new PluginResult(PluginResult.Status.OK, "すべて計画通りにいきました。これは成功ハンドラーに渡される結果データです。"));
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DispatchCommandResult(); // 空のプラグイン結果とともに、成功したとみなされコールバックします
+</code></pre></div></div>
+
+<p>データを返すには、異なる形式の <code class="language-plaintext highlighter-rouge">DispatchCommandResult</code> を呼ぶ必要があります:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DispatchCommandResult(new PluginResult(PluginResult.Status.OK, "すべて計画通りにいきました。これは成功ハンドラーに渡される結果データです。"));
+</code></pre></div></div>
+
 <p>構造化されたデータを JS に渡すには、 JSON 形式にエンコードされている必要があります:
 To pass structured object data back to JS, it should be encoded as a JSON string:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">DispatchCommandResult(new PluginResult(PluginResult.Status.OK, "{result:\"うまくいきました！\"}"));
-</code></pre></div>
-<p>エラーが発生したことを通知する場合には、 <code>DispatchCommandResult</code> を <code>PluginResult</code> を伴って呼ぶことができます:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR, "Echo はエラーが発生したと伝えています"));
-</code></pre></div>
-<h2>プラグインの C# メソッドでのシリアライゼーションエラーの対処</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DispatchCommandResult(new PluginResult(PluginResult.Status.OK, "{result:\"うまくいきました！\"}"));
+</code></pre></div></div>
+
+<p>エラーが発生したことを通知する場合には、 <code class="language-plaintext highlighter-rouge">DispatchCommandResult</code> を <code class="language-plaintext highlighter-rouge">PluginResult</code> を伴って呼ぶことができます:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR, "Echo はエラーが発生したと伝えています"));
+</code></pre></div></div>
+
+<h2 id="プラグインの-c-メソッドでのシリアライゼーションエラーの対処">プラグインの C# メソッドでのシリアライゼーションエラーの対処</h2>
 
 <p>引数を解析するときに、万が一不正な入力があった場合のためにも try/catch ブロックを
 使用するとよいでしょう。以下は、 Cordova の C# コードで使われている方法です:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">string optVal = null;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>string optVal = null;
 
 try 
 {
@@ -1413,48 +1443,62 @@ else
 {
     // ... 任意のコードを続けます
 }
-</code></pre></div>
-<h2>一歩進んだプラグインの機能</h2>
+</code></pre></div></div>
+
+<h2 id="一歩進んだプラグインの機能">一歩進んだプラグインの機能</h2>
 
 <p>オーバーライドできるその他の機能については以下を参照してください:</p>
 
 <ol>
-<li><a href="https://github.com/apache/cordova-wp7/blob/master/templates/standalone/cordovalib/Commands/BaseCommand.cs">BaseCommand.cs</a></li>
+  <li><a href="https://github.com/apache/cordova-wp7/blob/master/templates/standalone/cordovalib/Commands/BaseCommand.cs">BaseCommand.cs</a></li>
 </ol>
 
-<p>例えば、 &#39;<a href="../../../cordova/events/events.pause.html">pause</a>&#39; や &#39;<a href="../../../cordova/events/events.resume.html">resume</a>&#39; といったアプリケーションイベントもオーバーライドできます。</p>
+<p>例えば、 ‘<a href="../../../cordova/events/events.pause.html">pause</a>’ や ‘<a href="../../../cordova/events/events.resume.html">resume</a>’ といったアプリケーションイベントもオーバーライドできます。</p>
 
-<h3>プラグインのデバッグ</h3>
+<h3 id="プラグインのデバッグ">プラグインのデバッグ</h3>
 
 <p>C# 側でデバッグするには、 Visual Studio のデバッガーを使用します。クラスの任意の箇所に
 ブレークポイントを設置してください。</p>
 
-<p>Windows Phone での Javascript のデバッグは少し難しいです。 <code>console.log</code> を使用して
+<p>Windows Phone での Javascript のデバッグは少し難しいです。 <code class="language-plaintext highlighter-rouge">console.log</code> を使用して
 プラグインの状態を出力するなどの方法をとる必要があるでしょう。</p>
 
-<h2>よくある落とし穴</h2>
+<h2 id="よくある落とし穴">よくある落とし穴</h2>
 
 <ul>
-<li><p>JavaScript 実装時に、プラグインに渡す引数を決める際には十分に注意してください。
+  <li>
+    <p>JavaScript 実装時に、プラグインに渡す引数を決める際には十分に注意してください。
 大半のデバイスは cordova.exec に渡される引数は配列であると期待していますが、
 もし配列の中に異なる形式のオブジェクトが含まれる場合は、
 デシリアライズが非常に困難、もしくは不可能となってしまいます。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cordova.exec(win, fail, "ServiceName", "MethodName", ["これは文字列です", 54, {literal:'trouble'}]);
-</code></pre></div>
-<ul>
-<li><p>これは、以下のようなデコードが非常に困難な文字列を C# 側で受け取ることを意味します:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">"[\"これは文字列です\", 54, { literal:'trouble' }]"
-</code></pre></div></li>
-<li><p>exec を呼び出す前に、全てのパラメーターを文字列に変換することを考慮してください:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cordova.exec(win, fail, "ServiceName", "MethodName", ["これは文字列です", "54", "{literal:'trouble'}"]) ;
 
-string[] optValues = JsonHelper.Deserialize&lt;string[]&gt;(options);
-</code></pre></div></li>
-</ul></li>
-<li><p>exec を呼び出す前に JavaScript コード内でパラメーターのチェックをすることを心がけましょう。
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  cordova.exec(win, fail, "ServiceName", "MethodName", ["これは文字列です", 54, {literal:'trouble'}]);
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p>これは、以下のようなデコードが非常に困難な文字列を C# 側で受け取ることを意味します:</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  "[\"これは文字列です\", 54, { literal:'trouble' }]"
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>exec を呼び出す前に、全てのパラメーターを文字列に変換することを考慮してください:</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  cordova.exec(win, fail, "ServiceName", "MethodName", ["これは文字列です", "54", "{literal:'trouble'}"])	;
+
+  string[] optValues = JsonHelper.Deserialize&lt;string[]&gt;(options);
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>exec を呼び出す前に JavaScript コード内でパラメーターのチェックをすることを心がけましょう。
 これは JS のコードをプラグインの異なるネイティブ実装間で
-再利用しやすくするという利点もあります。</p></li>
+再利用しやすくするという利点もあります。</p>
+  </li>
 </ul>
+
 
 
             </div>

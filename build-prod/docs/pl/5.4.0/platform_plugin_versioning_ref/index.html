@@ -1022,139 +1022,159 @@
             
 
             <div id="page-toc-source">
-                <h1>Platform i Zarządzanie wersjami pluginów</h1>
+                <h1 id="platform-i-zarządzanie-wersjami-pluginów">Platform i Zarządzanie wersjami pluginów</h1>
 
 <p>Od wersji starszej niż 4.3.0 Cordova zapewnia możliwość zapisać i przywrócić platform i wtyczek.</p>
 
 <p>Funkcja ta umożliwia deweloperom zapisać i przywrócić ich aplikacji w znanym stanie bez konieczności sprawdzania w wszystkie platformy i plugin kodu źródłowego.</p>
 
-<p>Polecenie &#39;Zapisz&#39; zapisuje szczegółowe informacje na temat platformy aplikacji i wersje wtyczki w pliku config.xml. Krok &quot;przywracanie&quot; dzieje się automatycznie, gdy <strong>&quot;cordova prepare&quot;</strong> jest wydawane, Dokonywanie wykorzystania informacji uprzednio zapisane w pliku config.xml.</p>
+<p>Polecenie ‘Zapisz’ zapisuje szczegółowe informacje na temat platformy aplikacji i wersje wtyczki w pliku config.xml. Krok “przywracanie” dzieje się automatycznie, gdy <strong>“cordova prepare”</strong> jest wydawane, Dokonywanie wykorzystania informacji uprzednio zapisane w pliku config.xml.</p>
 
 <p>Jeden scenariusz gdzie możliwości zapisu/przywracania przydatna jest w dużych zespołów, które działają na app, z każdego członka zespołu, koncentrując się na platformie lub wtyczki. Ta funkcja ułatwia udostępnianie projektu i zmniejszyć ilość nadmiarowego kodu, który jest sprawdzany w repozytorium.</p>
 
-<h2>Wersji platformy</h2>
+<h2 id="wersji-platformy">Wersji platformy</h2>
 
-<h3>Zapisywanie platformy</h3>
+<h3 id="zapisywanie-platformy">Zapisywanie platformy</h3>
 
 <p>Aby zapisać platformy, wydawać ten kolejne rozkazywać:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova platform add &lt;platform[@&lt;version&gt;] | directory | git_url&gt; --save
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova platform add &lt;platform[@&lt;version&gt;] | directory | git_url&gt; --save
+</code></pre></div></div>
+
 <p>Po uruchomieniu polecenia powyżej, wynikowy plik config.xml wygląda tak:</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;?xml version='1.0' encoding='utf-8'?&gt;</span>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version='1.0' encoding='utf-8'?&gt;
     ...
-    <span class="nt">&lt;engine</span> <span class="na">name=</span><span class="s">"android"</span> <span class="na">spec=</span><span class="s">"~4.0.0"</span> <span class="nt">/&gt;</span>
+    &lt;engine name="android" spec="~4.0.0" /&gt;
     ...
-<span class="nt">&lt;/xml&gt;</span>
-</code></pre></div>
+&lt;/xml&gt;
+</code></pre></div></div>
+
 <p>Kilka przykładów:</p>
 
 <ul>
-<li><strong>&#39;Platforma cordova dodać android--zapisać&#39;</strong> =&gt; pobiera przypiętych wersję platformy android, dodaje go do projektu i następnie aktualizuje pliku config.xml.</li>
-<li><strong>&#39;Platforma cordova dodać android@3.7.0--zapisać&#39;</strong> =&gt; pobiera ten android platforma, wersja 3.7.0 od npm, dodaje go do projektu, a następnie aktualizuje pliku config.xml.</li>
-<li><strong>&#39;Platforma cordova dodać Androida @https://github.com/apache/cordova-android.git--zapisać&#39;</strong> =&gt; klonów repozytorium określonego cordova-android, dodaje ten android platforma do projektu, a następnie aktualizuje plik config.xml i wskaż jego wersji git określonego adresu url.</li>
-<li><strong>&quot;platforma cordova Dodaj C:/ścieżka/do/android/platformy--zapisać&quot;</strong> =&gt; pobiera platformy android z określonego katalogu, dodaje go do projektu, a następnie aktualizuje plik config.xml i wskaż katalog.</li>
+  <li><strong>‘Platforma cordova dodać android–zapisać’</strong> =&gt; pobiera przypiętych wersję platformy android, dodaje go do projektu i następnie aktualizuje pliku config.xml.</li>
+  <li><strong>‘Platforma cordova dodać android@3.7.0–zapisać’</strong> =&gt; pobiera ten android platforma, wersja 3.7.0 od npm, dodaje go do projektu, a następnie aktualizuje pliku config.xml.</li>
+  <li><strong>‘Platforma cordova dodać Androida @https://github.com/apache/cordova-android.git–zapisać’</strong> =&gt; klonów repozytorium określonego cordova-android, dodaje ten android platforma do projektu, a następnie aktualizuje plik config.xml i wskaż jego wersji git określonego adresu url.</li>
+  <li><strong>“platforma cordova Dodaj C:/ścieżka/do/android/platformy–zapisać”</strong> =&gt; pobiera platformy android z określonego katalogu, dodaje go do projektu, a następnie aktualizuje plik config.xml i wskaż katalog.</li>
 </ul>
 
-<h3>Masą oszczędność platformy istniejącego projektu</h3>
+<h3 id="masą-oszczędność-platformy-istniejącego-projektu">Masą oszczędność platformy istniejącego projektu</h3>
 
-<p>&#39;--save &#39; flaga opisanych powyżej jest użyteczna tylko podczas ty zapamiêtaæ wobec używać ono podczas dodawania platformy. Jeśli masz istniejącego projektu i zapisać wszystkie aktualnie dodane platformy w projekcie, można użyć:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova platform save
-</code></pre></div>
-<h3>Uaktualnianie / usuwanie platformy</h3>
+<p>’–save ‘ flaga opisanych powyżej jest użyteczna tylko podczas ty zapamiêtaæ wobec używać ono podczas dodawania platformy. Jeśli masz istniejącego projektu i zapisać wszystkie aktualnie dodane platformy w projekcie, można użyć:</p>
 
-<p>Istnieje również możliwość aktualizacji/usunąć z pliku config.xml podczas polecenia &#39;cordova platformę aktualizacji&quot;i&quot;Usuń cordova platformy&quot;:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova platform update &lt;platform[@&lt;version&gt;] | directory | git_url&gt; --save
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova platform save
+</code></pre></div></div>
+
+<h3 id="uaktualnianie--usuwanie-platformy">Uaktualnianie / usuwanie platformy</h3>
+
+<p>Istnieje również możliwość aktualizacji/usunąć z pliku config.xml podczas polecenia ‘cordova platformę aktualizacji”i”Usuń cordova platformy”:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova platform update &lt;platform[@&lt;version&gt;] | directory | git_url&gt; --save
 $ cordova platform remove &lt;platform&gt; --save
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Kilka przykładów:</p>
 
 <ul>
-<li><strong>&#39;Zapisz cordova aktualizacji platformy android--&#39;</strong> =&gt; oprócz aktualizacji platformy android do wersji przypięty, <a href="../guide/platforms/android/upgrade.html">Aktualizacja</a> pliku config.xml wpis</li>
-<li><strong>&#39;Platforma cordova aktualizacji android@3.8.0--zapisać&#39;</strong> =&gt; oprócz aktualizacji platformy android do wersji 3.8.0, <a href="../guide/platforms/android/upgrade.html">Aktualizacja</a> pliku config.xml wpis</li>
-<li><strong>&#39;Platforma cordova aktualizacji /path/to/android/platform--zapisać&#39;</strong> =&gt; oprócz aktualizacji platformy android do wersji w folderze, <a href="../guide/platforms/android/upgrade.html">Aktualizacja</a> pliku config.xml wpis</li>
-<li><strong>&#39;Platforma cordova usunąć android--zapisać&#39;</strong> =&gt; usuwa platformy android z projektu i usuwa jego wpisu z pliku config.xml.</li>
+  <li><strong>‘Zapisz cordova aktualizacji platformy android–‘</strong> =&gt; oprócz aktualizacji platformy android do wersji przypięty, <a href="../guide/platforms/android/upgrade.html">Aktualizacja</a> pliku config.xml wpis</li>
+  <li><strong>‘Platforma cordova aktualizacji android@3.8.0–zapisać’</strong> =&gt; oprócz aktualizacji platformy android do wersji 3.8.0, <a href="../guide/platforms/android/upgrade.html">Aktualizacja</a> pliku config.xml wpis</li>
+  <li><strong>‘Platforma cordova aktualizacji /path/to/android/platform–zapisać’</strong> =&gt; oprócz aktualizacji platformy android do wersji w folderze, <a href="../guide/platforms/android/upgrade.html">Aktualizacja</a> pliku config.xml wpis</li>
+  <li><strong>‘Platforma cordova usunąć android–zapisać’</strong> =&gt; usuwa platformy android z projektu i usuwa jego wpisu z pliku config.xml.</li>
 </ul>
 
-<h3>Przywracanie platformy</h3>
+<h3 id="przywracanie-platformy">Przywracanie platformy</h3>
 
-<p>Platformy są automatycznie przywracane z pliku config.xml po uruchomieniu polecenia <strong>&quot;cordova przygotować&quot;</strong> .</p>
+<p>Platformy są automatycznie przywracane z pliku config.xml po uruchomieniu polecenia <strong>“cordova przygotować”</strong> .</p>
 
 <p>Jeśli dodasz platforma bez określania wersji/folder/git_url, wersja wobec rata pochodzi z pliku config.xml, <strong>Jeśli znalezione</strong>.</p>
 
 <p>Przykład:</p>
 
 <p>Załóżmy, że plik config.xml zawiera następujący wpis:</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;?xml version='1.0' encoding='utf-8'?&gt;</span>
-    ...
-    <span class="nt">&lt;engine</span> <span class="na">name=</span><span class="s">"android"</span> <span class="na">spec=</span><span class="s">"3.7.0"</span> <span class="nt">/&gt;</span>
-    ...
-<span class="nt">&lt;/xml&gt;</span>
-</code></pre></div>
-<p>Po uruchomieniu polecenia <strong>&quot;Dodaj cordova platformy android&quot;</strong> (nie ma wersji/folder/git_url określony), zostanie zainstalowana platforma &quot;android@3.7.0&quot; (jako źródło pliku config.xml).</p>
 
-<hr>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version='1.0' encoding='utf-8'?&gt;
+    ...
+    &lt;engine name="android" spec="3.7.0" /&gt;
+    ...
+&lt;/xml&gt;
+</code></pre></div></div>
 
-<h2>Wersji wtyczki</h2>
+<p>Po uruchomieniu polecenia <strong>“Dodaj cordova platformy android”</strong> (nie ma wersji/folder/git_url określony), zostanie zainstalowana platforma “android@3.7.0” (jako źródło pliku config.xml).</p>
+
+<hr />
+
+<h2 id="wersji-wtyczki">Wersji wtyczki</h2>
 
 <p><em>(Polecenia wtyczki są zwierciadłem polecenia plugin)</em></p>
 
-<h3>Zapisywanie wtyczek</h3>
+<h3 id="zapisywanie-wtyczek">Zapisywanie wtyczek</h3>
 
 <p>Aby zapisać plugin, wydawać ten kolejne rozkazywać:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin add &lt;plugin[@&lt;version&gt;] | directory | git_url&gt; --save
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin add &lt;plugin[@&lt;version&gt;] | directory | git_url&gt; --save
+</code></pre></div></div>
+
 <p>Po uruchomieniu polecenia powyżej, wynikowy plik config.xml wygląda tak:</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;?xml version='1.0' encoding='utf-8'?&gt;</span>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version='1.0' encoding='utf-8'?&gt;
     ...
-    <span class="nt">&lt;plugin</span> <span class="na">name=</span><span class="s">"cordova-plugin-console"</span> <span class="na">spec=</span><span class="s">"~1.0.0"</span> <span class="nt">/&gt;</span>
+    &lt;plugin name="cordova-plugin-console" spec="~1.0.0" /&gt;
     ...
-<span class="nt">&lt;/xml&gt;</span>
-</code></pre></div>
+&lt;/xml&gt;
+</code></pre></div></div>
+
 <p>Kilka przykładów:</p>
 
 <ul>
-<li><strong>&#39;cordova plugin dodać cordova-plugin konsoli - Zapisz&#39;</strong> =&gt; pobiera przypiętych wersje konsoli plugin, dodaje go do projektu i następnie aktualizuje pliku config.xml.</li>
-<li><strong>&#39;cordova plugin dodać cordova-plugin-console@0.2.13--zapisać&#39;</strong> =&gt; pobiera android plugin, wersja 0.2.13 z npm, dodaje go do projektu, a następnie aktualizuje pliku config.xml.</li>
-<li><strong>&#39;cordova plugin dodać https://github.com/apache/cordova-plugin-console.git--zapisać&#39;</strong> =&gt; klonów repozytorium wtyczki konsoli określonego, dodaje konsoli plugin do projektu, a następnie aktualizuje plik config.xml i wskaż jego wersji git określonego adresu url.</li>
-<li><strong>&quot;cordova wtyczki Dodaj C:/ścieżka/do/konsole/plugin--zapisać&quot;</strong> =&gt; pobiera wtyczki konsoli z określonego katalogu, dodaje go do projektu, a następnie aktualizuje plik config.xml i wskaż katalog.</li>
+  <li><strong>‘cordova plugin dodać cordova-plugin konsoli - Zapisz’</strong> =&gt; pobiera przypiętych wersje konsoli plugin, dodaje go do projektu i następnie aktualizuje pliku config.xml.</li>
+  <li><strong>‘cordova plugin dodać cordova-plugin-console@0.2.13–zapisać’</strong> =&gt; pobiera android plugin, wersja 0.2.13 z npm, dodaje go do projektu, a następnie aktualizuje pliku config.xml.</li>
+  <li><strong>‘cordova plugin dodać https://github.com/apache/cordova-plugin-console.git–zapisać’</strong> =&gt; klonów repozytorium wtyczki konsoli określonego, dodaje konsoli plugin do projektu, a następnie aktualizuje plik config.xml i wskaż jego wersji git określonego adresu url.</li>
+  <li><strong>“cordova wtyczki Dodaj C:/ścieżka/do/konsole/plugin–zapisać”</strong> =&gt; pobiera wtyczki konsoli z określonego katalogu, dodaje go do projektu, a następnie aktualizuje plik config.xml i wskaż katalog.</li>
 </ul>
 
-<h3>Masą oszczędność wtyczki istniejącego projektu</h3>
+<h3 id="masą-oszczędność-wtyczki-istniejącego-projektu">Masą oszczędność wtyczki istniejącego projektu</h3>
 
-<p>&#39;--Zapisać &#39; flaga opisanych powyżej jest użyteczna tylko podczas ty zapamiêtaæ wobec używać ono podczas dodawania plugin. Jeśli masz istniejącego projektu i zapisać wszystkie aktualnie dodane wtyczki w projekcie, można użyć:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin save
-</code></pre></div>
-<h3>Uaktualnianie / usuwanie pluginów</h3>
+<p>’–Zapisać ‘ flaga opisanych powyżej jest użyteczna tylko podczas ty zapamiêtaæ wobec używać ono podczas dodawania plugin. Jeśli masz istniejącego projektu i zapisać wszystkie aktualnie dodane wtyczki w projekcie, można użyć:</p>
 
-<p>Istnieje również możliwość aktualizacji/usunąć z pliku config.xml podczas polecenia &#39;cordova plugin aktualizacji&quot;i&quot;Usuń cordova plugin&quot;:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin update &lt;plugin[@&lt;version&gt;] | directory | git_url&gt; --save
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin save
+</code></pre></div></div>
+
+<h3 id="uaktualnianie--usuwanie-pluginów">Uaktualnianie / usuwanie pluginów</h3>
+
+<p>Istnieje również możliwość aktualizacji/usunąć z pliku config.xml podczas polecenia ‘cordova plugin aktualizacji”i”Usuń cordova plugin”:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin update &lt;plugin[@&lt;version&gt;] | directory | git_url&gt; --save
 $ cordova plugin remove &lt;plugin&gt; --save
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Kilka przykładów:</p>
 
 <ul>
-<li><strong>&#39;cordova plugin aktualizacja cordova-plugin konsoli - Zapisz&#39;</strong> =&gt; oprócz aktualizacji konsoli plugin do wersja przypiętych, <a href="../guide/platforms/android/upgrade.html">Aktualizacja</a> pliku config.xml wpis</li>
-<li><strong>&#39;cordova plugin aktualizacja cordova-plugin-console@0.2.13--zapisać&#39;</strong> =&gt; oprócz aktualizacji Androida wtyczki do wersji 3.8.0, <a href="../guide/platforms/android/upgrade.html">Aktualizacja</a> pliku config.xml wpis</li>
-<li><strong>&#39;cordova plugin aktualizacja /path/to/console/plugin--zapisać&#39;</strong> =&gt; poza aktualizacja wtyczki do wersji w folderze, <a href="../guide/platforms/android/upgrade.html">Aktualizacja</a> pliku config.xml wpis</li>
-<li><strong>&#39;cordova plugin Usuń cordova-plugin konsoli - Zapisz&#39;</strong> =&gt; usuwa wtyczki konsoli z projektu i usuwa jego wpisu z pliku config.xml.</li>
+  <li><strong>‘cordova plugin aktualizacja cordova-plugin konsoli - Zapisz’</strong> =&gt; oprócz aktualizacji konsoli plugin do wersja przypiętych, <a href="../guide/platforms/android/upgrade.html">Aktualizacja</a> pliku config.xml wpis</li>
+  <li><strong>‘cordova plugin aktualizacja cordova-plugin-console@0.2.13–zapisać’</strong> =&gt; oprócz aktualizacji Androida wtyczki do wersji 3.8.0, <a href="../guide/platforms/android/upgrade.html">Aktualizacja</a> pliku config.xml wpis</li>
+  <li><strong>‘cordova plugin aktualizacja /path/to/console/plugin–zapisać’</strong> =&gt; poza aktualizacja wtyczki do wersji w folderze, <a href="../guide/platforms/android/upgrade.html">Aktualizacja</a> pliku config.xml wpis</li>
+  <li><strong>‘cordova plugin Usuń cordova-plugin konsoli - Zapisz’</strong> =&gt; usuwa wtyczki konsoli z projektu i usuwa jego wpisu z pliku config.xml.</li>
 </ul>
 
-<h3>Przywracanie wtyczek</h3>
+<h3 id="przywracanie-wtyczek">Przywracanie wtyczek</h3>
 
-<p>Wtyczki są automatycznie przywracane z pliku config.xml po uruchomieniu polecenia <strong>&quot;cordova przygotować&quot;</strong> .</p>
+<p>Wtyczki są automatycznie przywracane z pliku config.xml po uruchomieniu polecenia <strong>“cordova przygotować”</strong> .</p>
 
 <p>Jeśli możesz dodać plugin bez określania wersji/folder/git_url, wersja mają być zainstalowane pochodzi z pliku config.xml, <strong>Jeśli znalezione</strong>.</p>
 
 <p>Przykład:</p>
 
 <p>Załóżmy, że plik config.xml zawiera następujący wpis:</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;?xml version='1.0' encoding='utf-8'?&gt;</span>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version='1.0' encoding='utf-8'?&gt;
     ...
-    <span class="nt">&lt;plugin</span> <span class="na">name=</span><span class="s">"cordova-plugin-console"</span> <span class="na">spec=</span><span class="s">"0.2.11"</span> <span class="nt">/&gt;</span>
+    &lt;plugin name="cordova-plugin-console" spec="0.2.11" /&gt;
     ...
-<span class="nt">&lt;/ xml&gt;</span>
-</code></pre></div>
-<p>Po uruchomieniu polecenia <strong>&quot;cordova wtyczki Dodaj cordova-plugin konsoli&quot;</strong> (nie ma wersji/folder/git_url określony), zostanie zainstalowany plugin &#39;cordova-plugin-console@0.2.11&#39; (jako źródło pliku config.xml).</p>
+&lt;/ xml&gt;
+</code></pre></div></div>
+
+<p>Po uruchomieniu polecenia <strong>“cordova wtyczki Dodaj cordova-plugin konsoli”</strong> (nie ma wersji/folder/git_url określony), zostanie zainstalowany plugin ‘cordova-plugin-console@0.2.11’ (jako źródło pliku config.xml).</p>
 
 
             </div>

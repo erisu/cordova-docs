@@ -1042,115 +1042,367 @@
             
 
             <div id="page-toc-source">
-                <h1>使用 Plugman 來管理外掛程式</h1>
+                <h1 id="使用-plugman-來管理外掛程式">使用 Plugman 來管理外掛程式</h1>
 
-<p>從 3.0 版本開始，科爾多瓦實現所有設備 Api 作為外掛程式，然後留在預設情況下禁用。 此外，它還支援兩種不同的方法來添加和刪除外掛程式。 第一是通過使用 <code>cordova</code> 所述的命令列介面 CLI。 第二種是通過使用一個較低級別<a href="https://github.com/apache/cordova-plugman/">Plugman</a>命令列介面 （&quot;本機平臺 dev&quot;工作流）。這些兩條發展路徑之間的主要區別是 Plugman 可以只添加外掛程式到一個平臺，一次而 CLI 會將外掛程式添加到的所有平臺，您的目標。 正因為如此，它更有意義，當你正在密切與單一的平臺，因此，工作流的&quot;本機平臺 Dev&quot;名稱時，使用 Plugman。</p>
+<p>從 3.0 版本開始，科爾多瓦實現所有設備 Api 作為外掛程式，然後留在預設情況下禁用。 此外，它還支援兩種不同的方法來添加和刪除外掛程式。 第一是通過使用 <code class="language-plaintext highlighter-rouge">cordova</code> 所述的命令列介面 CLI。 第二種是通過使用一個較低級別<a href="https://github.com/apache/cordova-plugman/">Plugman</a>命令列介面 （”本機平臺 dev”工作流）。這些兩條發展路徑之間的主要區別是 Plugman 可以只添加外掛程式到一個平臺，一次而 CLI 會將外掛程式添加到的所有平臺，您的目標。 正因為如此，它更有意義，當你正在密切與單一的平臺，因此，工作流的”本機平臺 Dev”名稱時，使用 Plugman。</p>
 
 <p>詳細資訊關於 Plugman，尤其是如果你有興趣在消費作為節點模組 Plugman 或駭客對 Plugman 的代碼，請參閱<a href="https://github.com/apache/cordova-plugman/blob/master/README.md">其庫中的讀我檔案</a>.</p>
 
-<h2>安裝 Plugman</h2>
+<h2 id="安裝-plugman">安裝 Plugman</h2>
 
 <p>要安裝 plugman，您必須在您的機器上安裝的<a href="http://nodejs.org/">節點</a>。 然後您可以運行下面的命令從任意位置在您的環境以全域，安裝 plugman，這樣就可從您的電腦上的任何目錄中：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ npm install -g plugman
-</code></pre></div>
-<p>您還必須有有 <code>git</code> 上你 <code>PATH</code> ，以便能夠直接從遠端 git Url 安裝的外掛程式。</p>
 
-<p><strong>提示:</strong>如果您發現與故宮安裝 plugman 後你仍然不能運行任何 <code>plugman</code> 的命令，請確保您已添加 <code>/npm/</code> 目錄到您<code>PATH</code>.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ npm install -g plugman
+</code></pre></div></div>
 
-<p><strong>注：</strong>如果您不想通過安裝 Plugman 全球污染您的全球故宮命名空間，您可以跳過此步驟。 如果這種情況，然後當你與外殼工具創建科爾多瓦專案，將有 <code>node_modules</code> 目錄裡面您的專案包含 Plugman。 既然你不 instally 全球範圍內，您必須調用節點，每個 Plugman 命令，例如 <code>node ./node_modules/plugman/main.js -version</code> 。 本指南的其餘部分假定您已安裝 Plugman 就全球而言，意味著您可以調用它與只是<code>plugman</code>.</p>
+<p>您還必須有有 <code class="language-plaintext highlighter-rouge">git</code> 上你 <code class="language-plaintext highlighter-rouge">PATH</code> ，以便能夠直接從遠端 git Url 安裝的外掛程式。</p>
 
-<h2>創建一個專案，科爾多瓦</h2>
+<p><strong>提示:</strong>如果您發現與故宮安裝 plugman 後你仍然不能運行任何 <code class="language-plaintext highlighter-rouge">plugman</code> 的命令，請確保您已添加 <code class="language-plaintext highlighter-rouge">/npm/</code> 目錄到您<code class="language-plaintext highlighter-rouge">PATH</code>.</p>
 
-<p>您可以使用 Plugman 之前，您必須創建一個科爾多瓦專案。 你可以用命令列介面或更低的級別的 shell 腳本。 使用 shell 腳本來創建您的專案的說明都位於平臺指南頁上列出的各項&quot;命令列工具&quot;指南。</p>
+<p><strong>注：</strong>如果您不想通過安裝 Plugman 全球污染您的全球故宮命名空間，您可以跳過此步驟。 如果這種情況，然後當你與外殼工具創建科爾多瓦專案，將有 <code class="language-plaintext highlighter-rouge">node_modules</code> 目錄裡面您的專案包含 Plugman。 既然你不 instally 全球範圍內，您必須調用節點，每個 Plugman 命令，例如 <code class="language-plaintext highlighter-rouge">node ./node_modules/plugman/main.js -version</code> 。 本指南的其餘部分假定您已安裝 Plugman 就全球而言，意味著您可以調用它與只是<code class="language-plaintext highlighter-rouge">plugman</code>.</p>
 
-<h2>添加外掛程式</h2>
+<h2 id="創建一個專案科爾多瓦">創建一個專案，科爾多瓦</h2>
+
+<p>您可以使用 Plugman 之前，您必須創建一個科爾多瓦專案。 你可以用命令列介面或更低的級別的 shell 腳本。 使用 shell 腳本來創建您的專案的說明都位於平臺指南頁上列出的各項”命令列工具”指南。</p>
+
+<h2 id="添加外掛程式">添加外掛程式</h2>
 
 <p>一旦你已經安裝了 Plugman，並已創建一個科爾多瓦專案，您可以開始將外掛程式添加到與平臺：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp7|wp8&gt; --project &lt;directory&gt; --plugin &lt;name|url|path&gt; [--plugins_dir &lt;directory&gt;] [--www &lt;directory&gt;] [--variable &lt;name&gt;=&lt;value&gt; [--variable &lt;name&gt;=&lt;value&gt; ...]]
-</code></pre></div>
-<p>使用最小的參數，此命令將外掛程式安裝到科爾多瓦的一個專案。 您必須指定一個為該平臺的平臺和科爾多瓦的專案位置。 此外必須指定與不同的外掛程式， <code>--plugin</code> 參數形式是：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp7|wp8&gt; --project &lt;directory&gt; --plugin &lt;name|url|path&gt; [--plugins_dir &lt;directory&gt;] [--www &lt;directory&gt;] [--variable &lt;name&gt;=&lt;value&gt; [--variable &lt;name&gt;=&lt;value&gt; ...]]
+</code></pre></div></div>
+
+<p>使用最小的參數，此命令將外掛程式安裝到科爾多瓦的一個專案。 您必須指定一個為該平臺的平臺和科爾多瓦的專案位置。 此外必須指定與不同的外掛程式， <code class="language-plaintext highlighter-rouge">--plugin</code> 參數形式是：</p>
 
 <ul>
-<li>  <code>name</code>： 目錄名稱外掛程式內容存在的地方。 這必須是現有目錄下的 <code>--plugins_dir</code> 路徑 （見下面的詳細資訊） 或一個外掛程式在科爾多瓦註冊表中的。</li>
-<li>  <code>url</code>： URL 以 HTTPs:// 或 git 開始： / / 指向一個有效 git 存儲庫，是複本，包含 <code>plugin.xml</code> 檔。 這個資料庫的內容將複製到<code>--plugins_dir</code>.</li>
-<li>  <code>path</code>： 目錄包含一個有效的外掛程式，其中包括路徑 <code>plugin.xml</code> 檔。此路徑的內容將被覆制到<code>--plugins_dir</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">name</code>： 目錄名稱外掛程式內容存在的地方。 這必須是現有目錄下的 <code class="language-plaintext highlighter-rouge">--plugins_dir</code> 路徑 （見下面的詳細資訊） 或一個外掛程式在科爾多瓦註冊表中的。</li>
+  <li><code class="language-plaintext highlighter-rouge">url</code>： URL 以 HTTPs:// 或 git 開始： / / 指向一個有效 git 存儲庫，是複本，包含 <code class="language-plaintext highlighter-rouge">plugin.xml</code> 檔。 這個資料庫的內容將複製到<code class="language-plaintext highlighter-rouge">--plugins_dir</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">path</code>： 目錄包含一個有效的外掛程式，其中包括路徑 <code class="language-plaintext highlighter-rouge">plugin.xml</code> 檔。此路徑的內容將被覆制到<code class="language-plaintext highlighter-rouge">--plugins_dir</code>.</li>
 </ul>
 
 <p>其他參數：</p>
 
 <ul>
-<li>  <code>--plugins_dir</code>預設值為 <code>&lt;project&gt;/cordova/plugins</code> ，但可以為每個包含子目錄中任何目錄獲取外掛程式。</li>
-<li>  <code>--www</code>預設值為專案的 <code>www</code> 資料夾的位置，但可以作為科爾多瓦專案應用程式 web 資產使用的任何目錄。</li>
-<li>  <code>--variable</code>允許指定某些變數在安裝時，有必要對某些外掛程式需要 API 金鑰或其他自訂的使用者定義的參數。 請<a href="plugin_spec.md">外掛程式規範</a>的詳細資訊，參閱。</li>
+  <li><code class="language-plaintext highlighter-rouge">--plugins_dir</code>預設值為 <code class="language-plaintext highlighter-rouge">&lt;project&gt;/cordova/plugins</code> ，但可以為每個包含子目錄中任何目錄獲取外掛程式。</li>
+  <li><code class="language-plaintext highlighter-rouge">--www</code>預設值為專案的 <code class="language-plaintext highlighter-rouge">www</code> 資料夾的位置，但可以作為科爾多瓦專案應用程式 web 資產使用的任何目錄。</li>
+  <li><code class="language-plaintext highlighter-rouge">--variable</code>允許指定某些變數在安裝時，有必要對某些外掛程式需要 API 金鑰或其他自訂的使用者定義的參數。 請<a href="plugin_spec.md">外掛程式規範</a>的詳細資訊，參閱。</li>
 </ul>
 
-<h2>刪除某個外掛程式</h2>
+<h2 id="刪除某個外掛程式">刪除某個外掛程式</h2>
 
-<p>若要卸載外掛程式，你只需通過 <code>--uninstall</code> 標記，並提供外掛程式 id。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ plugman --uninstall --platform &lt;ios|amazon-fireos|android|blackberry10|wp7|wp8&gt; --project &lt;directory&gt; --plugin &lt;id&gt; [--www &lt;directory&gt;] [--plugins_dir &lt;directory&gt;]
-</code></pre></div>
-<h2>説明命令</h2>
+<p>若要卸載外掛程式，你只需通過 <code class="language-plaintext highlighter-rouge">--uninstall</code> 標記，並提供外掛程式 id。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ plugman --uninstall --platform &lt;ios|amazon-fireos|android|blackberry10|wp7|wp8&gt; --project &lt;directory&gt; --plugin &lt;id&gt; [--www &lt;directory&gt;] [--plugins_dir &lt;directory&gt;]
+</code></pre></div></div>
+
+<h2 id="説明命令">説明命令</h2>
 
 <p>Plugman 特色全球説明命令，可以説明你如果你卡住或遇到的問題。它將顯示所有可用的 Plugman 命令和它們的語法的清單：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">plugman -help
-plugman  # same as above
-</code></pre></div>
-<p><strong>注</strong>： <code>plugman -help</code> 可能會顯示一些額外的與註冊表相關的命令。 這些命令用於外掛程式開發人員，不可能進行協力廠商外掛程式登記處。</p>
 
-<p>您還可以將追加 <code>--debug|-d</code> 旗子到任何 Plugman 命令以運行該命令以詳細模式，將顯示任何內部調試消息，因為他們排放和可説明您跟蹤下像缺少檔的問題。</p>
-<div class="highlight"><pre><code class="language-" data-lang=""># Adding Android battery-status plugin to "myProject":
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plugman -help
+plugman  # same as above
+</code></pre></div></div>
+
+<p><strong>注</strong>： <code class="language-plaintext highlighter-rouge">plugman -help</code> 可能會顯示一些額外的與註冊表相關的命令。 這些命令用於外掛程式開發人員，不可能進行協力廠商外掛程式登記處。</p>
+
+<p>您還可以將追加 <code class="language-plaintext highlighter-rouge">--debug|-d</code> 旗子到任何 Plugman 命令以運行該命令以詳細模式，將顯示任何內部調試消息，因為他們排放和可説明您跟蹤下像缺少檔的問題。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Adding Android battery-status plugin to "myProject":
 plugman -d --platform android --project myProject --plugin org.apache.cordova.battery-status
-</code></pre></div>
-<p>最後，您可以使用 <code>--version|-v</code> 標誌來查看您使用哪個版本的 Plugman。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">plugman -v
-</code></pre></div>
-<h2>註冊表操作</h2>
+</code></pre></div></div>
+
+<p>最後，您可以使用 <code class="language-plaintext highlighter-rouge">--version|-v</code> 標誌來查看您使用哪個版本的 Plugman。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plugman -v
+</code></pre></div></div>
+
+<h2 id="註冊表操作">註冊表操作</h2>
 
 <p>那裡有很多的 plugman 命令，可以用於與<a href="http://plugins.cordova.io">外掛程式註冊表</a>進行交互。 請注意這些註冊表命令是特定于<em>plugins.cordova.io</em>外掛程式註冊表，不可能由協力廠商外掛程式登記處執行。</p>
 
-<h3>尋找一個外掛程式</h3>
+<h3 id="尋找一個外掛程式">尋找一個外掛程式</h3>
 
 <p>您可以使用 Plugman 來搜索<a href="http://plugins.cordova.io">外掛程式註冊表</a>外掛程式 id 的匹配給定以空格分隔的關鍵字清單。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">plugman search &lt;plugin keywords&gt;
-</code></pre></div>
-<h3>更改外掛程式註冊表</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plugman search &lt;plugin keywords&gt;
+</code></pre></div></div>
+
+<h3 id="更改外掛程式註冊表">更改外掛程式註冊表</h3>
 
 <p>您可以獲取或設置當前外掛程式註冊表的 URL，使用的 plugman。通常你應該離開這在 HTTP://registry.cordova.io 設置，除非您想要使用協力廠商外掛程式註冊表。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">plugman config set registry &lt;url-to-registry&gt;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plugman config set registry &lt;url-to-registry&gt;
 plugman config get registry
-</code></pre></div>
-<h3>獲取外掛程式的資訊</h3>
+</code></pre></div></div>
+
+<h3 id="獲取外掛程式的資訊">獲取外掛程式的資訊</h3>
 
 <p>您可以獲得有關任何特定外掛程式在外掛程式庫中存儲的資訊：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">plugman info &lt;id&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plugman info &lt;id&gt;
+</code></pre></div></div>
+
 <p>這將聯繫的外掛程式註冊表和提取資訊，如外掛程式的版本編號。</p>
 
-<h2>安裝核心外掛程式</h2>
+<h2 id="安裝核心外掛程式">安裝核心外掛程式</h2>
 
 <p>下面的示例顯示如何添加外掛程式，如需要，這樣您在您的專案中使用任何科爾多瓦 Api 仍然工作後你升級到 3.0 版本。對於每個命令，你需要選擇目標平臺，並引用該平臺的專案目錄。</p>
 
 <ul>
-<li><p>cordova-plugin-battery-status</p>
+  <li>
+    <p>cordova-plugin-battery-status</p>
 
-<p>plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.battery-status</p></li>
-<li><p>cordova-plugin-camera plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.camera</p></li>
-<li><p>cordova-plugin-console plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.console</p></li>
-<li><p>cordova-plugin-contacts plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.contacts</p></li>
-<li><p>cordova-plugin-device plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.device</p></li>
-<li><p>cordova-plugin-device-motion (accelerometer) plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.device-motion</p></li>
-<li><p>cordova-plugin-device-orientation (compass) plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.device-orientation</p></li>
-<li><p>cordova-plugin-dialogs plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.dialogs</p></li>
-<li><p>cordova-plugin-file plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.file</p></li>
-<li><p>cordova-plugin-file-transfer plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.file-transfer</p></li>
-<li><p>cordova-plugin-geolocation plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.geolocation</p></li>
-<li><p>cordova-plugin-globalization plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.globalization</p></li>
-<li><p>cordova-plugin-inappbrowser plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.inappbrowser</p></li>
-<li><p>cordova-plugin-media plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.media</p></li>
-<li><p>cordova-plugin-media-capture plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.media-capture</p></li>
-<li><p>cordova-plugin-network-information plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.network-information</p></li>
-<li><p>cordova-plugin-splashscreen plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.splashscreen</p></li>
-<li><p>cordova-plugin-vibration plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.vibration</p></li>
+    <table>
+      <tbody>
+        <tr>
+          <td>plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.battery-status</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-camera plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.camera</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-console plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.console</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-contacts plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.contacts</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-device plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.device</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-device-motion (accelerometer) plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.device-motion</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-device-orientation (compass) plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.device-orientation</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-dialogs plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.dialogs</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-file plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.file</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-file-transfer plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.file-transfer</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-geolocation plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.geolocation</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-globalization plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.globalization</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-inappbrowser plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.inappbrowser</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-media plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.media</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-media-capture plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.media-capture</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-network-information plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.network-information</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-splashscreen plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.splashscreen</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-vibration plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.vibration</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
 </ul>
 
 

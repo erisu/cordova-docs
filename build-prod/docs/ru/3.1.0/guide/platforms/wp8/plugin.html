@@ -1310,34 +1310,46 @@
     }
 </style>
 
-<h1>Windows Phone плагины</h1>
+<h1 id="windows-phone-плагины">Windows Phone плагины</h1>
 
-<p>Написание плагин для Кордова на Windows Phone требует понимания архитектуры Cordova. Кордова-WP7 состоит из WebBrowser, который размещает код JavaScript приложения и управляет родной вызовы API. Есть BaseCommand ( <code>WP7CordovaClassLib.Cordova.Commands.BaseCommand</code> ) класс в C#, который можно расширить, и он приходит с большинством «сантехника» построен для вас уже.</p>
+<p>Написание плагин для Кордова на Windows Phone требует понимания архитектуры Cordova. Кордова-WP7 состоит из WebBrowser, который размещает код JavaScript приложения и управляет родной вызовы API. Есть BaseCommand ( <code class="language-plaintext highlighter-rouge">WP7CordovaClassLib.Cordova.Commands.BaseCommand</code> ) класс в C#, который можно расширить, и он приходит с большинством «сантехника» построен для вас уже.</p>
 
 <ol>
-<li> Выберите ваш проект и щелкните правой кнопкой мыши выбрать <strong>Добавить → новый элемент...</strong></li>
-</ol>
-<div class="highlight"><pre><code class="language-" data-lang="">*   Желательно добавить его в папку «Плагины», но это до вас
-</code></pre></div>
-<ol>
-<li> Выберите «Класс» и назовите его<code>Echo.cs</code></li>
-</ol>
-<div class="highlight"><pre><code class="language-" data-lang="">*   Имя этого класса должны *точно* совпадать, что вы называете в`cordova.exec(win, fail, "Echo", ...)`
-</code></pre></div>
-<ol>
-<li><p>Включить осуществление базовых классов</p>
-<div class="highlight"><pre><code class="language-" data-lang="">using WPCordovaClassLib.Cordova;
+  <li>
+    <p>Выберите ваш проект и щелкните правой кнопкой мыши выбрать <strong>Добавить → новый элемент…</strong></p>
+
+    <ul>
+      <li>Желательно добавить его в папку «Плагины», но это до вас</li>
+    </ul>
+  </li>
+  <li>
+    <p>Выберите «Класс» и назовите его<code class="language-plaintext highlighter-rouge">Echo.cs</code></p>
+
+    <ul>
+      <li>Имя этого класса должны <em>точно</em> совпадать, что вы называете в<code class="language-plaintext highlighter-rouge">cordova.exec(win, fail, "Echo", ...)</code></li>
+    </ul>
+  </li>
+  <li>
+    <p>Включить осуществление базовых классов</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>using WPCordovaClassLib.Cordova;
 using WPCordovaClassLib.Cordova.Commands;
 using WPCordovaClassLib.Cordova.JSON;
-</code></pre></div></li>
-<li><p>Расширить свой класс от BaseCommand</p>
-<div class="highlight"><pre><code class="language-" data-lang="">public class Echo : BaseCommand
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Расширить свой класс от BaseCommand</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Echo : BaseCommand
 {
     // ...
 }
-</code></pre></div></li>
-<li><p>Добавьте метод, который можно вызывать из JavaScript</p>
-<div class="highlight"><pre><code class="language-" data-lang="">public class Echo : BaseCommand
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Добавьте метод, который можно вызывать из JavaScript</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Echo : BaseCommand
 {
     public void echo(string options)
     {
@@ -1345,61 +1357,83 @@ using WPCordovaClassLib.Cordova.JSON;
         // public, returning void, 1 argument that is a string
     }
 }
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ol>
 
-<h2>Пространства имен</h2>
+<h2 id="пространства-имен">Пространства имен</h2>
 
 <p>Пространство имен по умолчанию для неквалифицированных команд является:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">namespace Cordova.Extension.Commands
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>namespace Cordova.Extension.Commands
 {
     // ...
 }
-</code></pre></div>
-<p>Если вы хотите использовать свои собственные пространства имен, вам нужно позвонить полное <code>cordova.exec</code> . Например, если вы хотите определить класс C# следующим образом:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">namespace com.mydomain.cordovaExtensions
+</code></pre></div></div>
+
+<p>Если вы хотите использовать свои собственные пространства имен, вам нужно позвонить полное <code class="language-plaintext highlighter-rouge">cordova.exec</code> . Например, если вы хотите определить класс C# следующим образом:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>namespace com.mydomain.cordovaExtensions
 {
     public class Echo : BaseCommand
     {
         // ...
     }
 }
-</code></pre></div>
-<p>Затем, в JavaScript необходимо вызвать <code>exec</code> , как это:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cordova.exec(win, fail, "com.mydomain.cordovaExtensions.Echo", ...);
-</code></pre></div>
-<h2>Интерпретации аргументов в C</h2>
+</code></pre></div></div>
 
-<p>Данные, полученные методом ваш плагин — это строковое значение, но в действительности, глядя на наш код JavaScript, мы видим, что наше намерение передать массив строк. Оглядываясь назад на наш вызов JavaScript <code>cordova.exec</code> , мы видим, мы прошли <code>[str]</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cordova.exec(win, fail, "Echo", "echo", ["input string"]);
-</code></pre></div>
-<p>Если мы проверяем параметры строки, переданной в нашей <code>Echo.echo</code> метод, мы видим, что значение является на самом деле:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">"[\"input string\"]"
-</code></pre></div>
-<p>Все JavaScript <code>exec</code> аргументы являются JSON кодируются перед передачей в C#.</p>
+<p>Затем, в JavaScript необходимо вызвать <code class="language-plaintext highlighter-rouge">exec</code> , как это:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova.exec(win, fail, "com.mydomain.cordovaExtensions.Echo", ...);
+</code></pre></div></div>
+
+<h2 id="интерпретации-аргументов-в-c">Интерпретации аргументов в C</h2>
+
+<p>Данные, полученные методом ваш плагин — это строковое значение, но в действительности, глядя на наш код JavaScript, мы видим, что наше намерение передать массив строк. Оглядываясь назад на наш вызов JavaScript <code class="language-plaintext highlighter-rouge">cordova.exec</code> , мы видим, мы прошли <code class="language-plaintext highlighter-rouge">[str]</code> :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova.exec(win, fail, "Echo", "echo", ["input string"]);
+</code></pre></div></div>
+
+<p>Если мы проверяем параметры строки, переданной в нашей <code class="language-plaintext highlighter-rouge">Echo.echo</code> метод, мы видим, что значение является на самом деле:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"[\"input string\"]"
+</code></pre></div></div>
+
+<p>Все JavaScript <code class="language-plaintext highlighter-rouge">exec</code> аргументы являются JSON кодируются перед передачей в C#.</p>
 
 <p>Если мы хотим, чтобы рассматривать это как строку, которую мы ожидали, нам нужно расшифровать его. Мы можем использовать простой десериализации JSON.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">string optVal = JsonHelper.Deserialize&lt;string[]&gt;(options)[0];
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>string optVal = JsonHelper.Deserialize&lt;string[]&gt;(options)[0];
 // optVal now has the value of "input string"
-</code></pre></div>
-<h2>Передача результатов из C# в JavaScript</h2>
+</code></pre></div></div>
+
+<h2 id="передача-результатов-из-c-в-javascript">Передача результатов из C# в JavaScript</h2>
 
 <p>Базовый класс BaseCommand предоставляет методы для передачи данных в обработчиках обратного вызова JavaScript. Чтобы просто сигнал, что команда была выполнена успешно, когда не требуется никаких дополнительных результат информация, вы можете просто позвонить:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">DispatchCommandResult(); // calls back with an empty plugin result, considered a success callback
-</code></pre></div>
-<p>Чтобы передать данные обратно, необходимо вызвать другую версию <code>DispatchCommandResult</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">DispatchCommandResult(new PluginResult(PluginResult.Status.OK, "Everything went as planned, this is a result that is passed to the success handler."));
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DispatchCommandResult(); // calls back with an empty plugin result, considered a success callback
+</code></pre></div></div>
+
+<p>Чтобы передать данные обратно, необходимо вызвать другую версию <code class="language-plaintext highlighter-rouge">DispatchCommandResult</code> :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DispatchCommandResult(new PluginResult(PluginResult.Status.OK, "Everything went as planned, this is a result that is passed to the success handler."));
+</code></pre></div></div>
+
 <p>Для передачи данных структурированных объектов JavaScript, он должен быть закодирован как JSON-строка:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">DispatchCommandResult(new PluginResult(PluginResult.Status.OK, "{result:\"super awesome!\"}"));
-</code></pre></div>
-<p>Если вам необходимо сигнализировать, что произошла ошибка, вы можете позвонить <code>DispatchCommandResult</code> с <code>PluginResult</code> объект:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR, "Echo signaled an error"));
-</code></pre></div>
-<h2>Обработка ошибок сериализации в ваш плагин метода C</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DispatchCommandResult(new PluginResult(PluginResult.Status.OK, "{result:\"super awesome!\"}"));
+</code></pre></div></div>
+
+<p>Если вам необходимо сигнализировать, что произошла ошибка, вы можете позвонить <code class="language-plaintext highlighter-rouge">DispatchCommandResult</code> с <code class="language-plaintext highlighter-rouge">PluginResult</code> объект:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR, "Echo signaled an error"));
+</code></pre></div></div>
+
+<h2 id="обработка-ошибок-сериализации-в-ваш-плагин-метода-c">Обработка ошибок сериализации в ваш плагин метода C#</h2>
 
 <p>При интерпретации ваши аргументы, это хорошая идея, чтобы использовать блок try/catch в случае, если у нас есть плохие ввода. Это шаблон используется во всем код Cordova C#:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">string optVal = null;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>string optVal = null;
 
 try
 {
@@ -1417,62 +1451,79 @@ if (optVal == null)
 else
 {
     // ... Продолжайте делать нашу работу}
-</code></pre></div>
-<h2>Плагин XML</h2>
+</code></pre></div></div>
+
+<h2 id="плагин-xml">Плагин XML</h2>
 
 <p>Это windows телефон конкретные примеры использования файла plugin.xml, обратитесь к спецификации плагин для получения более подробной информации</p>
 
-<h3><code>&lt;source-file&gt;</code></h3>
+<h3 id="source-file"><code class="language-plaintext highlighter-rouge">&lt;source-file&gt;</code></h3>
 
-<p>В windows phone <code>&lt;source-file&gt;</code> элемент в настоящее время используется для определения всех плагинов ресурсов (т.е. .cs, .xaml,. xaml.cs, .dll, изображения активов и т.д.).</p>
+<p>В windows phone <code class="language-plaintext highlighter-rouge">&lt;source-file&gt;</code> элемент в настоящее время используется для определения всех плагинов ресурсов (т.е. .cs, .xaml,. xaml.cs, .dll, изображения активов и т.д.).</p>
 
-<h3><code>&lt;config-file&gt;</code></h3>
+<h3 id="config-file"><code class="language-plaintext highlighter-rouge">&lt;config-file&gt;</code></h3>
 
-<p><code>&lt;config-file&gt;</code>Элемент определяет, какие элементы получают положить в файл config. Например добавить плагин в config.xml платформ вы могли бы сделать что-то вроде этого:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;config-file target="config.xml" parent="/*"&gt;
+<p><code class="language-plaintext highlighter-rouge">&lt;config-file&gt;</code>Элемент определяет, какие элементы получают положить в файл config. Например добавить плагин в config.xml платформ вы могли бы сделать что-то вроде этого:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;config-file target="config.xml" parent="/*"&gt;
     &lt;feature name="PluginName"&gt;
         &lt;param name="wp-package" value="PluginName"/&gt;
     &lt;/feature&gt;
 &lt;/config-file&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Если мы хотим добавить возможность контактов WMAppManifest.xml, он будет выглядеть следующим образом:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;config-file target="Properties/WMAppManifest.xml" parent="/Deployment/App/Capabilities"&gt;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;config-file target="Properties/WMAppManifest.xml" parent="/Deployment/App/Capabilities"&gt;
     &lt;Capability Name="ID_CAP_CONTACTS" /&gt;
 &lt;/config-file&gt;
-</code></pre></div>
-<h2>Расширенный плагин функциональность</h2>
+</code></pre></div></div>
+
+<h2 id="расширенный-плагин-функциональность">Расширенный плагин функциональность</h2>
 
 <p>Смотрите другие методы, которые можно переопределить в:</p>
 
 <ul>
-<li>  <a href="https://github.com/apache/cordova-wp7/blob/master/templates/standalone/cordovalib/Commands/BaseCommand.cs">BaseCommand.cs</a></li>
+  <li><a href="https://github.com/apache/cordova-wp7/blob/master/templates/standalone/cordovalib/Commands/BaseCommand.cs">BaseCommand.cs</a></li>
 </ul>
 
 <p>Например вы можете подключить в «пауза» и «резюме» события приложения.</p>
 
-<h3>Отладка плагины</h3>
+<h3 id="отладка-плагины">Отладка плагины</h3>
 
 <p>Для отладки C# стороне, вы можете использовать отладчик Visual Studio, просто установите точку останова в любом из методов, предоставляемых вашего класса.</p>
 
-<p>JavaScript является немного более трудным для отладки на Windows Phone. Вам нужно использовать <code>console.log</code> для вывода состояния вашего плагина, или информировать себя от ошибок.</p>
+<p>JavaScript является немного более трудным для отладки на Windows Phone. Вам нужно использовать <code class="language-plaintext highlighter-rouge">console.log</code> для вывода состояния вашего плагина, или информировать себя от ошибок.</p>
 
-<h2>Наиболее распространенные ошибки</h2>
+<h2 id="наиболее-распространенные-ошибки">Наиболее распространенные ошибки</h2>
 
 <ul>
-<li><p>Будьте осторожны при принятии решения о аргументов, передаваемый в машинный код в вашем JavaScript реализации. Большинство платформ устройств ожидать передан cordova.exec чтобы быть массивом args, но если у вас есть различные типы объектов в этом массиве, она становится трудно или невозможно выполнить десериализацию.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cordova.exec(win, fail, "ServiceName", "MethodName", ["this is a string", 54, {literal:'trouble'}]);
-</code></pre></div>
-<ul>
-<li><p>Это означает, что код C# получает трудно расшифровать строковое значение, таких как:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">"[\"this is a string\", 54, { literal:'trouble' }]"
-</code></pre></div></li>
-<li><p>Рассмотрим преобразование всех параметров в строки перед вызовом exec:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cordova.exec(win, fail, "ServiceName", "MethodName", ["this is a string", "54", "{literal:'trouble'}"]) ;
+  <li>
+    <p>Будьте осторожны при принятии решения о аргументов, передаваемый в машинный код в вашем JavaScript реализации. Большинство платформ устройств ожидать передан cordova.exec чтобы быть массивом args, но если у вас есть различные типы объектов в этом массиве, она становится трудно или невозможно выполнить десериализацию.</p>
 
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova.exec(win, fail, "ServiceName", "MethodName", ["this is a string", 54, {literal:'trouble'}]);
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p>Это означает, что код C# получает трудно расшифровать строковое значение, таких как:</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"[\"this is a string\", 54, { literal:'trouble' }]"
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>Рассмотрим преобразование всех параметров в строки перед вызовом exec:</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova.exec(win, fail, "ServiceName", "MethodName", ["this is a string", "54", "{literal:'trouble'}"]) ;
+        
 string[] optValues = JsonHelper.Deserialize&lt;string[]&gt;(options);
-</code></pre></div></li>
-</ul></li>
-<li><p>Это обычно хорошая идея, чтобы сделать параметр проверки в коде JavaScript, перед вызовом метода <code>exec</code> . Это позволяет повторно использовать код JavaScript среди различных встроенных реализаций ваш плагин.</p></li>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Это обычно хорошая идея, чтобы сделать параметр проверки в коде JavaScript, перед вызовом метода <code class="language-plaintext highlighter-rouge">exec</code> . Это позволяет повторно использовать код JavaScript среди различных встроенных реализаций ваш плагин.</p>
+  </li>
 </ul>
 
 

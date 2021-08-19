@@ -1310,40 +1310,51 @@
     }
 </style>
 
-<h1>contacts.find</h1>
+<h1 id="contactsfind">contacts.find</h1>
 
-<p>Запрашивает базу данных контактов устройства и возвращает один или несколько <code>Contact</code> объектов, каждый из которых содержит указанные поля.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.contacts.find(contactFields, contactSuccess, contactError, contactFindOptions);
-</code></pre></div>
-<h2>Описание</h2>
+<p>Запрашивает базу данных контактов устройства и возвращает один или несколько <code class="language-plaintext highlighter-rouge">Contact</code> объектов, каждый из которых содержит указанные поля.</p>
 
-<p><code>contacts.find</code>Метод выполняется асинхронно, запрашивая базу контактов устройства и возвращая массив <code>Contact</code> объектов. Полученные объекты передаются в <code>[contactSuccess](parameters/contactSuccess.html)</code> функции обратного вызова, указанный параметром <strong>contactSuccess</strong> .</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.contacts.find(contactFields, contactSuccess, contactError, contactFindOptions);
+</code></pre></div></div>
 
-<p>Параметр <strong>contactFields</strong> указывает поля, чтобы использоваться в качестве квалификатора Поиск, и только те результаты, которые передаются функции обратного вызова <strong>contactSuccess</strong> . Нулевой длины <strong>contactFields</strong> параметр является недопустимым и приводит к <code>[ContactError](ContactError/contactError.html).INVALID_ARGUMENT_ERROR</code> . Значение <strong>contactFields</strong> <code>&quot;*&quot;</code> возвращает все поля контактов.</p>
+<h2 id="описание">Описание</h2>
+
+<p><code class="language-plaintext highlighter-rouge">contacts.find</code>Метод выполняется асинхронно, запрашивая базу контактов устройства и возвращая массив <code class="language-plaintext highlighter-rouge">Contact</code> объектов. Полученные объекты передаются в <code class="language-plaintext highlighter-rouge">[contactSuccess](parameters/contactSuccess.html)</code> функции обратного вызова, указанный параметром <strong>contactSuccess</strong> .</p>
+
+<p>Параметр <strong>contactFields</strong> указывает поля, чтобы использоваться в качестве квалификатора Поиск, и только те результаты, которые передаются функции обратного вызова <strong>contactSuccess</strong> . Нулевой длины <strong>contactFields</strong> параметр является недопустимым и приводит к <code class="language-plaintext highlighter-rouge">[ContactError](ContactError/contactError.html).INVALID_ARGUMENT_ERROR</code> . Значение <strong>contactFields</strong> <code class="language-plaintext highlighter-rouge">"*"</code> возвращает все поля контактов.</p>
 
 <p><strong>ContactFindOptions.filter</strong> строка может использоваться как фильтр поиска при запросах к базе данных контактов. Если, без учета регистра, матч частичное значение применяется к каждому полю, указанному в параметре <strong>contactFields</strong> . Если есть совпадение для <em>любого</em> из указанных полей, возвращается контакт.</p>
 
-<h2>Параметры</h2>
+<h2 id="параметры">Параметры</h2>
 
 <ul>
-<li><p><strong>contactFields</strong>: контакт поля для использования в качестве квалификатора поиска. Полученный <code>Contact</code> объект только функции значения для этих полей. <em>(DOMString[])</em> [Требуется]</p></li>
-<li><p><strong>contactSuccess</strong>: успех функция обратного вызова вызывается с контактами вернулся из базы данных. [Требуется]</p></li>
-<li><p><strong>contactError</strong>: ошибка функции обратного вызова, вызывается при возникновении ошибки. [Опционально]</p></li>
-<li><p><strong>contactFindOptions</strong>: параметры для фильтрации контактов поиска. [Опционально]</p></li>
+  <li>
+    <p><strong>contactFields</strong>: контакт поля для использования в качестве квалификатора поиска. Полученный <code class="language-plaintext highlighter-rouge">Contact</code> объект только функции значения для этих полей. <em>(DOMString[])</em> [Требуется]</p>
+  </li>
+  <li>
+    <p><strong>contactSuccess</strong>: успех функция обратного вызова вызывается с контактами вернулся из базы данных. [Требуется]</p>
+  </li>
+  <li>
+    <p><strong>contactError</strong>: ошибка функции обратного вызова, вызывается при возникновении ошибки. [Опционально]</p>
+  </li>
+  <li>
+    <p><strong>contactFindOptions</strong>: параметры для фильтрации контактов поиска. [Опционально]</p>
+  </li>
 </ul>
 
-<h2>Поддерживаемые платформы</h2>
+<h2 id="поддерживаемые-платформы">Поддерживаемые платформы</h2>
 
 <ul>
-<li>  Андроид</li>
-<li>  WebWorks ежевики (OS 5.0 и выше)</li>
-<li>  iOS</li>
-<li>  Windows Phone 7 и 8</li>
-<li>  ОС Windows 8</li>
+  <li>Андроид</li>
+  <li>WebWorks ежевики (OS 5.0 и выше)</li>
+  <li>iOS</li>
+  <li>Windows Phone 7 и 8</li>
+  <li>ОС Windows 8</li>
 </ul>
 
-<h2>Быстрый пример</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">function onSuccess(contacts) {
+<h2 id="быстрый-пример">Быстрый пример</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function onSuccess(contacts) {
     alert('Found ' + contacts.length + ' contacts.');
 };
 
@@ -1357,50 +1368,53 @@ options.filter   = "Bob";
 options.multiple = true;
 var fields       = ["displayName", "name"];
 navigator.contacts.find(fields, onSuccess, onError, options);
-</code></pre></div>
-<h2>Полный пример</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-    <span class="nt">&lt;head&gt;</span>
-        <span class="nt">&lt;title&gt;</span>Contact Example<span class="nt">&lt;/title&gt;</span>
-        <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-        <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
 
-            <span class="c1">// Wait for device API libraries to load</span>
-            <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<h2 id="полный-пример">Полный пример</h2>
 
-            <span class="c1">// device APIs are available</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Contact Example&lt;/title&gt;
+        &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+        &lt;script type="text/javascript" charset="utf-8"&gt;
 
-            <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-                <span class="c1">// find all contacts with 'Bob' in any name field</span>
-                <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ContactFindOptions</span><span class="p">();</span>
-                <span class="nx">options</span><span class="p">.</span><span class="nx">filter</span> <span class="o">=</span> <span class="s2">"Bob"</span><span class="p">;</span>
-                <span class="kd">var</span> <span class="nx">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"displayName"</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">];</span>
-                <span class="nb">navigator</span><span class="p">.</span><span class="nx">contacts</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">fields</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onError</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
-            <span class="p">}</span>
+            // Wait for device API libraries to load
+            document.addEventListener("deviceready", onDeviceReady, false);
 
-            <span class="c1">// onSuccess: Get a snapshot of the current contacts</span>
+            // device APIs are available
 
-            <span class="kd">function</span> <span class="nx">onSuccess</span><span class="p">(</span><span class="nx">contacts</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">contacts</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Display Name = "</span> <span class="o">+</span> <span class="nx">contacts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">displayName</span><span class="p">);</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
+            function onDeviceReady() {
+                // find all contacts with 'Bob' in any name field
+                var options = new ContactFindOptions();
+                options.filter = "Bob";
+                var fields = ["displayName", "name"];
+                navigator.contacts.find(fields, onSuccess, onError, options);
+            }
 
-            <span class="c1">// onError: Failed to get the contacts</span>
+            // onSuccess: Get a snapshot of the current contacts
 
-            <span class="kd">function</span> <span class="nx">onError</span><span class="p">(</span><span class="nx">contactError</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">alert</span><span class="p">(</span><span class="s1">'onError!'</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="nt">&lt;/script&gt;</span>
-    <span class="nt">&lt;/head&gt;</span>
+            function onSuccess(contacts) {
+                for (var i = 0; i &lt; contacts.length; i++) {
+                    console.log("Display Name = " + contacts[i].displayName);
+                }
+            }
 
-    <span class="nt">&lt;body&gt;</span>
-        <span class="nt">&lt;h1&gt;</span>Example<span class="nt">&lt;/h1&gt;</span>
-        <span class="nt">&lt;p&gt;</span>Find Contacts<span class="nt">&lt;/p&gt;</span>
-    <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+            // onError: Failed to get the contacts
+
+            function onError(contactError) {
+                alert('onError!');
+            }
+        &lt;/script&gt;
+    &lt;/head&gt;
+
+    &lt;body&gt;
+        &lt;h1&gt;Example&lt;/h1&gt;
+        &lt;p&gt;Find Contacts&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

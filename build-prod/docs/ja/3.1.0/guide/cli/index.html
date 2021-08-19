@@ -1436,213 +1436,292 @@
             
 
             <div id="page-toc-source">
-                <h1>コマンド ライン インターフェイス</h1>
+                <h1 id="コマンド-ライン-インターフェイス">コマンド ライン インターフェイス</h1>
 
-<p>このガイドでは、アプリケーションの作成し、を使用してさまざまなネイティブ モバイル プラットフォームに展開する方法を示します、 <code>cordova</code> コマンド ライン インターフェイス (CLI)。 このツールは、新しいプロジェクトの作成、異なるプラットフォームでビルドし、エミュレーター内で実行することができます。 CLI を使用して、プロジェクト コード、さらにそれらを開発する様々 なプラットフォームの Sdk を使用するが後を初期化することもできます。</p>
+<p>このガイドでは、アプリケーションの作成し、を使用してさまざまなネイティブ モバイル プラットフォームに展開する方法を示します、 <code class="language-plaintext highlighter-rouge">cordova</code> コマンド ライン インターフェイス (CLI)。 このツールは、新しいプロジェクトの作成、異なるプラットフォームでビルドし、エミュレーター内で実行することができます。 CLI を使用して、プロジェクト コード、さらにそれらを開発する様々 なプラットフォームの Sdk を使用するが後を初期化することもできます。</p>
 
-<h2>前提条件</h2>
+<h2 id="前提条件">前提条件</h2>
 
 <p>任意のコマンド ライン ツールを実行する前にターゲットにするプラットフォーム用の Sdk をインストールする必要があります。(詳細については、プラットフォームのガイドを参照)。</p>
 
 <p>サポートを追加する任意のプラットフォーム用のプロジェクトをリビルド プラットフォームの SDK をサポートしている同じマシンからコマンド ライン インターフェイスを実行する必要があります。CLI には、次の組み合わせをサポートします。</p>
 
 <ul>
-<li>  iOS (Mac)</li>
-<li>  アンドロイド (マック、Linux)</li>
-<li>  ブラックベリー 10 (Mac、Linux、Windows)</li>
-<li>  Windows Phone 7 (Windows)</li>
-<li>  Windows Phone 8 (Windows)</li>
-<li>  Windows 8 (Windows)</li>
-<li>  Firefox OS （Mac、Linux、Windows）</li>
+  <li>iOS (Mac)</li>
+  <li>アンドロイド (マック、Linux)</li>
+  <li>ブラックベリー 10 (Mac、Linux、Windows)</li>
+  <li>Windows Phone 7 (Windows)</li>
+  <li>Windows Phone 8 (Windows)</li>
+  <li>Windows 8 (Windows)</li>
+  <li>Firefox OS （Mac、Linux、Windows）</li>
 </ul>
 
 <p>Mac のコマンドラインです<em>ターミナル</em>アプリケーション経由で利用できます。PC 上だ<em>アクセサリー</em>の下で<em>コマンド プロンプト</em>として使用可能.</p>
 
 <p>多くの可能性、CLI リモート ソース コード リポジトリでは、ローカルの作業ディレクトリにプルダウンその資産を維持するために理にかなってより多くの異なるマシンからに実行することです。</p>
 
-<p>インストールする、 <code>cordova</code> コマンド ライン ツールは、次の手順に従ってください。</p>
+<p>インストールする、 <code class="language-plaintext highlighter-rouge">cordova</code> コマンド ライン ツールは、次の手順に従ってください。</p>
 
 <ol>
-<li><p>ダウンロードしてインストール<a href="http://nodejs.org/">Node.js</a>。呼び出すことができる必要がありますインストール直後は、 <code>node</code> または <code>npm</code> コマンド ライン。</p></li>
-<li><p>インストール、 <code>cordova</code> ユーティリティ。Unix では、プレフィックス、追加 <code>sudo</code> 開発ユーティリティをインストールする必要があるかもしれませんコマンドでディレクトリを制限されてそれ以外の場合。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ sudo npm install -g cordova
-</code></pre></div>
-<p>インストール ログすべてアンインストールされたプラットフォーム Sdk の誤差が生じる可能性があります。インストール後、実行することができる必要があります <code>cordova</code> コマンド ・ ラインで。</p></li>
+  <li>
+    <p>ダウンロードしてインストール<a href="http://nodejs.org/">Node.js</a>。呼び出すことができる必要がありますインストール直後は、 <code class="language-plaintext highlighter-rouge">node</code> または <code class="language-plaintext highlighter-rouge">npm</code> コマンド ライン。</p>
+  </li>
+  <li>
+    <p>インストール、 <code class="language-plaintext highlighter-rouge">cordova</code> ユーティリティ。Unix では、プレフィックス、追加 <code class="language-plaintext highlighter-rouge">sudo</code> 開発ユーティリティをインストールする必要があるかもしれませんコマンドでディレクトリを制限されてそれ以外の場合。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo npm install -g cordova
+</code></pre></div>    </div>
+
+    <p>インストール ログすべてアンインストールされたプラットフォーム Sdk の誤差が生じる可能性があります。インストール後、実行することができる必要があります <code class="language-plaintext highlighter-rouge">cordova</code> コマンド ・ ラインで。</p>
+  </li>
 </ol>
 
-<h2>アプリを作成します。</h2>
+<h2 id="アプリを作成します">アプリを作成します。</h2>
 
 <p>ソース コードを維持する、ディレクトリに移動し、次のようなコマンドを実行します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova create hello com.example.hello HelloWorld
-</code></pre></div>
-<p>いくつかの時間がかかるを完了するコマンドがかかります。実行、 <code>cordova -d</code> の進行状況に関する情報を表示します。</p>
 
-<p>最初の引数は、プロジェクトに対して生成される<em>こんにちは</em>ディレクトリを指定します。 その <code>www</code> サブディレクトリ、アプリケーションのホーム ページで、下にあるさまざまなリソースと一緒に家 <code>css</code> 、 <code>js</code> と <code>img</code> 、一般的な web 開発ファイル名前付け規則に従いますが。 <code>config.xml</code>ファイルには生成し、アプリケーションの配布に必要な重要なメタデータが含まれています。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova create hello com.example.hello HelloWorld
+</code></pre></div></div>
 
-<p>他の 2 つの引数は省略可能: <code>com.example.hello</code> 引数は、逆ドメイン スタイル識別子を使用してプロジェクトを提供します、 <code>HelloWorld</code> アプリケーションの表示テキストを提供します。 これらの値の後の両方を編集することができます、 <code>config.xml</code> ファイル。</p>
+<p>いくつかの時間がかかるを完了するコマンドがかかります。実行、 <code class="language-plaintext highlighter-rouge">cordova -d</code> の進行状況に関する情報を表示します。</p>
 
-<h2>プラットフォームを追加します。</h2>
+<p>最初の引数は、プロジェクトに対して生成される<em>こんにちは</em>ディレクトリを指定します。 その <code class="language-plaintext highlighter-rouge">www</code> サブディレクトリ、アプリケーションのホーム ページで、下にあるさまざまなリソースと一緒に家 <code class="language-plaintext highlighter-rouge">css</code> 、 <code class="language-plaintext highlighter-rouge">js</code> と <code class="language-plaintext highlighter-rouge">img</code> 、一般的な web 開発ファイル名前付け規則に従いますが。 <code class="language-plaintext highlighter-rouge">config.xml</code>ファイルには生成し、アプリケーションの配布に必要な重要なメタデータが含まれています。</p>
+
+<p>他の 2 つの引数は省略可能: <code class="language-plaintext highlighter-rouge">com.example.hello</code> 引数は、逆ドメイン スタイル識別子を使用してプロジェクトを提供します、 <code class="language-plaintext highlighter-rouge">HelloWorld</code> アプリケーションの表示テキストを提供します。 これらの値の後の両方を編集することができます、 <code class="language-plaintext highlighter-rouge">config.xml</code> ファイル。</p>
+
+<h2 id="プラットフォームを追加します">プラットフォームを追加します。</h2>
 
 <p>すべての後続コマンドは、プロジェクトのディレクトリまたはそのサブディレクトリのスコープ内で実行する必要があります。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cd hello
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cd hello
+</code></pre></div></div>
+
 <p>プロジェクトをビルドする前に対象プラットフォームのセットを指定する必要があります。 これらのコマンドを実行する能力にあなたのマシンが各 SDK をサポートしているかどうかに依存し、各 SDK をインストールされて既にがあるかどうか。 Mac からこれらのいずれかを実行します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova platform add ios
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova platform add ios
     $ cordova platform add android
     $ cordova platform add blackberry10
     $ cordova platform add firefoxos
-</code></pre></div>
+</code></pre></div></div>
+
 <p><em>Wp</em>は Windows Phone オペレーティング システムの異なるバージョンを参照 Windows マシンからこれらのいずれかを実行します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova platform add wp7
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova platform add wp7
     $ cordova platform add wp8
     $ cordova platform add windows8
     $ cordova platform add android
     $ cordova platform add blackberry10
     $ cordova platform add firefoxos
-</code></pre></div>
+</code></pre></div></div>
+
 <p>現在のプラットフォームのセットを確認するこれを実行します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova platforms ls
-</code></pre></div>
-<p>（注、 <code>platform</code> と <code>platforms</code> コマンドは同じ意味です)。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova platforms ls
+</code></pre></div></div>
+
+<p>（注、 <code class="language-plaintext highlighter-rouge">platform</code> と <code class="language-plaintext highlighter-rouge">platforms</code> コマンドは同じ意味です)。</p>
 
 <p>プラットフォームを削除する次の同義のコマンドのいずれかを実行します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova platform remove blackberry10
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova platform remove blackberry10
     $ cordova platform rm android
-</code></pre></div>
-<p>各指定されたプラットフォームがサブディレクトリとして追加またはプラットフォームに影響を与えるプロジェクトの<em>プラットフォーム</em>ディレクトリの内容を削除するコマンドを実行します。 <em>Www</em>ソース ディレクトリは再現などに表示されるプラットフォームごとのサブディレクトリ内で <code>platforms/ios/www</code> または <code>platforms/android/assets/www</code> 。 既定では、コルドバの Api のすべてにアクセスできるようにする各プラットフォームの構成ファイルが設定します。</p>
+</code></pre></div></div>
+
+<p>各指定されたプラットフォームがサブディレクトリとして追加またはプラットフォームに影響を与えるプロジェクトの<em>プラットフォーム</em>ディレクトリの内容を削除するコマンドを実行します。 <em>Www</em>ソース ディレクトリは再現などに表示されるプラットフォームごとのサブディレクトリ内で <code class="language-plaintext highlighter-rouge">platforms/ios/www</code> または <code class="language-plaintext highlighter-rouge">platforms/android/assets/www</code> 。 既定では、コルドバの Api のすべてにアクセスできるようにする各プラットフォームの構成ファイルが設定します。</p>
 
 <p>希望する場合は、この時点で、SDK を使用して作成したプロジェクトを開くことができます。 ただし、SDK 影響派生物内のプロジェクトへの編集は元クロスプラット フォームのソース ファイルではなく、資産の設定します。 単に、プロジェクトを初期化する場合は、このアプローチを使用します。 （各 SDK 内のアプリケーションを開発する方法についての情報のためのプラットフォームのガイドを参照）。記事を読む場合、開発サイクル全体のコマンド ライン ツールを使用したいです。</p>
 
-<h2>アプリをビルドします。</h2>
+<h2 id="アプリをビルドします">アプリをビルドします。</h2>
 
-<p>既定で、 <code>cordova create</code> スクリプト生成骨格の web ベースのアプリケーションのホーム ページは、プロジェクトの <code>www/index.html</code> ファイル。 しかしが、初期化の一部として指定する必要がありますこのアプリケーションの編集、 <code>[deviceready](../../cordova/events/events.deviceready.html)</code> から既定で参照されるイベント ハンドラーは、 <code>www/js/index.js</code> 。 &lt;!-- XREF
+<p>既定で、 <code class="language-plaintext highlighter-rouge">cordova create</code> スクリプト生成骨格の web ベースのアプリケーションのホーム ページは、プロジェクトの <code class="language-plaintext highlighter-rouge">www/index.html</code> ファイル。 しかしが、初期化の一部として指定する必要がありますこのアプリケーションの編集、 <code class="language-plaintext highlighter-rouge">[deviceready](../../cordova/events/events.deviceready.html)</code> から既定で参照されるイベント ハンドラーは、 <code class="language-plaintext highlighter-rouge">www/js/index.js</code> 。 <!-- XREF
 (See the Application Development Guide for details.)
-XREF --&gt;</p>
+XREF --></p>
 
 <p>繰り返しプロジェクトをビルドする、次のコマンドを実行します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova build
-</code></pre></div>
-<p>これは、プロジェクト内でプラットフォーム固有のコードを生成します <code>platforms</code> サブディレクトリ。必要に応じて、特定のプラットフォームを各ビルドのスコープを制限できます。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova build ios
-</code></pre></div>
-<p><code>cordova build</code>コマンドは、この例では、単一のプラットフォームにも対象指定される次の簡略化。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova prepare ios
-    $ cordova compile ios
-</code></pre></div>
-<p>この場合、1 回を実行する <code>prepare</code> 、変更およびコルドバ内で生成するプラットフォーム固有のコードをコンパイルする別の方法として Apple の Xcode SDK を使用することができます <code>platforms/ios</code> 。 他のプラットフォームの Sdk と同じアプローチを使用できます。</p>
 
-<h2>エミュレーターまたはデバイス上のアプリをテストします。</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova build
+</code></pre></div></div>
+
+<p>これは、プロジェクト内でプラットフォーム固有のコードを生成します <code class="language-plaintext highlighter-rouge">platforms</code> サブディレクトリ。必要に応じて、特定のプラットフォームを各ビルドのスコープを制限できます。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova build ios
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">cordova build</code>コマンドは、この例では、単一のプラットフォームにも対象指定される次の簡略化。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova prepare ios
+    $ cordova compile ios
+</code></pre></div></div>
+
+<p>この場合、1 回を実行する <code class="language-plaintext highlighter-rouge">prepare</code> 、変更およびコルドバ内で生成するプラットフォーム固有のコードをコンパイルする別の方法として Apple の Xcode SDK を使用することができます <code class="language-plaintext highlighter-rouge">platforms/ios</code> 。 他のプラットフォームの Sdk と同じアプローチを使用できます。</p>
+
+<h2 id="エミュレーターまたはデバイス上のアプリをテストします">エミュレーターまたはデバイス上のアプリをテストします。</h2>
 
 <p>モバイル プラットフォーム用の Sdk はしばしばホーム画面からアプリを起動し、それは多くのプラットフォーム機能と対話する方法を参照してくださいすることができますようにデバイス イメージを実行するエミュレーターにバンドルされています。 アプリを再構築し、特定のプラットフォームのエミュレーター内で表示するには、次のようなコマンドを実行します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova emulate android
-</code></pre></div>
-<p>いくつかのモバイル プラットフォーム既定では、iOS のプロジェクトのため iPhone など、特定のデバイスをエミュレートします。 他のプラットフォーム用に最初のデバイス エミュレーターに関連付ける必要があります。 (詳細については、プラットフォームのガイドを参照)。たとえば、あなたが最初の実行、 <code>android</code> 人造人間 SDK を起動し、その既定の動作によると起動する特定のデバイスのイメージを実行するコマンド。</p>
 
-<p><img src="/static/img/guide/cli/android_emulate_init.png" alt=""></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova emulate android
+</code></pre></div></div>
 
-<p>フォロー アップで、 <code>cordova emulate</code> コマンドは、ホーム画面から起動できるようになります最新のアプリケーションを表示するエミュレーター イメージを更新します。</p>
+<p>いくつかのモバイル プラットフォーム既定では、iOS のプロジェクトのため iPhone など、特定のデバイスをエミュレートします。 他のプラットフォーム用に最初のデバイス エミュレーターに関連付ける必要があります。 (詳細については、プラットフォームのガイドを参照)。たとえば、あなたが最初の実行、 <code class="language-plaintext highlighter-rouge">android</code> 人造人間 SDK を起動し、その既定の動作によると起動する特定のデバイスのイメージを実行するコマンド。</p>
 
-<p><img src="/static/img/guide/cli/android_emulate_install.png" alt=""></p>
+<p><img src="/static/img/guide/cli/android_emulate_init.png" alt="" /></p>
+
+<p>フォロー アップで、 <code class="language-plaintext highlighter-rouge">cordova emulate</code> コマンドは、ホーム画面から起動できるようになります最新のアプリケーションを表示するエミュレーター イメージを更新します。</p>
+
+<p><img src="/static/img/guide/cli/android_emulate_install.png" alt="" /></p>
 
 <p>代わりに、携帯電話をお使いのコンピューターに差し込み、アプリを直接テストすることができます。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova run android
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova run android
+</code></pre></div></div>
+
 <p>このコマンドを実行する前に必要、テスト デバイスを設定するプラットフォームごとに異なる手順に従います。 Android の場合、デバイス上の<strong>USB デバッグ</strong>オプションを有効にして、おそらく開発環境に応じて USB ドライバーを追加する必要があります。 各プラットフォームの要件の詳細については、プラットフォームのガイドを参照してください。</p>
 
-<h2>機能を追加します。</h2>
+<h2 id="機能を追加します">機能を追加します。</h2>
 
 <p>ビルド、新しいプロジェクトを表示すると表示される既定のアプリケーションは非常にしません。 標準の web テクノロジーを活用する多くの方法でアプリを変更することができますが、デバイス レベルのさまざまな機能と密接に通信するアプリ、コア コルドバ Api へのアクセスを提供するプラグインを追加する必要があります。</p>
 
-<p><em>プラグイン</em>はネイティブ コンポーネントへのインタ フェースを提供するアドオン コードのビットです。 たとえば、ネイティブ コンポーネントを持つコルドバの WebView をミックスしたハイブリッド アプリを設計するときの独自のプラグイン インターフェイスをデザインできます。 (詳細については埋め込み web 表示とプラグイン開発ガイドを参照してください)。コルドバの基本的なデバイス ・ レベルの機能の 1 つを有効にするプラグインを追加するより一般的に、&lt; ！ ― ― 『 アプリケーション開発ガイド 』 で説明した外部参照と外部参照--&gt; API リファレンスで詳しく説明します。</p>
+<p><em>プラグイン</em>はネイティブ コンポーネントへのインタ フェースを提供するアドオン コードのビットです。 たとえば、ネイティブ コンポーネントを持つコルドバの WebView をミックスしたハイブリッド アプリを設計するときの独自のプラグイン インターフェイスをデザインできます。 (詳細については埋め込み web 表示とプラグイン開発ガイドを参照してください)。コルドバの基本的なデバイス ・ レベルの機能の 1 つを有効にするプラグインを追加するより一般的に、&lt; ！ ― ― 『 アプリケーション開発ガイド 』 で説明した外部参照と外部参照–&gt; API リファレンスで詳しく説明します。</p>
 
-<p><code>cordova plugin add</code>コマンドは、プラグインのコードのリポジトリを指定する必要があります。追加可能性があります機能の例を示します。</p>
+<p><code class="language-plaintext highlighter-rouge">cordova plugin add</code>コマンドは、プラグインのコードのリポジトリを指定する必要があります。追加可能性があります機能の例を示します。</p>
 
 <ul>
-<li><p>基本的なデバイス情報 (<a href="../../cordova/device/device.html">デバイス</a> API):</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin add org.apache.cordova.device
-</code></pre></div></li>
-<li><p>ネットワーク接続とバッテリーのイベント:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin add org.apache.cordova.network-information
+  <li>
+    <p>基本的なデバイス情報 (<a href="../../cordova/device/device.html">デバイス</a> API):</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin add org.apache.cordova.device
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>ネットワーク接続とバッテリーのイベント:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin add org.apache.cordova.network-information
 $ cordova plugin add org.apache.cordova.battery-status
-</code></pre></div></li>
-<li><p>加速度計、コンパス、および地理位置情報:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin add org.apache.cordova.device-motion
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>加速度計、コンパス、および地理位置情報:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin add org.apache.cordova.device-motion
 $ cordova plugin add org.apache.cordova.device-orientation
 $ cordova plugin add org.apache.cordova.geolocation
-</code></pre></div></li>
-<li><p>カメラ、メディアの再生とキャプチャ：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin add org.apache.cordova.camera
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>カメラ、メディアの再生とキャプチャ：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin add org.apache.cordova.camera
 $ cordova plugin add org.apache.cordova.media-capture
 $ cordova plugin add org.apache.cordova.media
-</code></pre></div></li>
-<li><p>デバイスまたはネットワーク (File API) 上のアクセス <a href="../../cordova/file/fileobj/fileobj.html">ファイル</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin add org.apache.cordova.file
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>デバイスまたはネットワーク (File API) 上のアクセス <a href="../../cordova/file/fileobj/fileobj.html">ファイル</a>:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin add org.apache.cordova.file
 $ cordova plugin add org.apache.cordova.file-transfer
-</code></pre></div></li>
-<li><p>ダイアログ ボックスまたは振動による通知:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin add org.apache.cordova.dialogs
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>ダイアログ ボックスまたは振動による通知:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin add org.apache.cordova.dialogs
 $ cordova plugin add org.apache.cordova.vibration
-</code></pre></div></li>
-<li><p>連絡先：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin add org.apache.cordova.contacts
-</code></pre></div></li>
-<li><p>グローバル化:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin add org.apache.cordova.globalization
-</code></pre></div></li>
-<li><p>スプラッシュ ・ スクリーン:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin add org.apache.cordova.splashscreen
-</code></pre></div></li>
-<li><p>開いている新しいブラウザー ウィンドウ (InAppBrowser):</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin add org.apache.cordova.inappbrowser
-</code></pre></div></li>
-<li><p>デバッグ コンソール：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin add org.apache.cordova.console
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>連絡先：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin add org.apache.cordova.contacts
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>グローバル化:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin add org.apache.cordova.globalization
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>スプラッシュ ・ スクリーン:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin add org.apache.cordova.splashscreen
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>開いている新しいブラウザー ウィンドウ (InAppBrowser):</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin add org.apache.cordova.inappbrowser
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>デバッグ コンソール：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin add org.apache.cordova.console
+</code></pre></div>    </div>
+  </li>
 </ul>
 
-<p>使用 <code>plugin ls</code> (または <code>plugin list</code> 、または <code>plugin</code> 自体によって) 現在を表示するプラグインをインストールします。それぞれの識別子が表示されます。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin ls    # or 'plugin list'
+<p>使用 <code class="language-plaintext highlighter-rouge">plugin ls</code> (または <code class="language-plaintext highlighter-rouge">plugin list</code> 、または <code class="language-plaintext highlighter-rouge">plugin</code> 自体によって) 現在を表示するプラグインをインストールします。それぞれの識別子が表示されます。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin ls    # or 'plugin list'
     [ 'org.apache.cordova.console' ]
-</code></pre></div>
+</code></pre></div></div>
+
 <p>プラグインを削除するには、リストに表示される同じ識別子によってそれを参照してください。たとえば、ここではリリース バージョンからデバッグ コンソールのサポートを削除するだろう方法です。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin rm org.apache.cordova.console        
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin rm org.apache.cordova.console        
     $ cordova plugin remove org.apache.cordova.console    # same
-</code></pre></div>
+</code></pre></div></div>
+
 <p>バッチ削除したりコマンドごとに 1 つ以上の引数を指定して、プラグインを追加できます。</p>
 
-<h2>各プラットフォームをカスタマイズします。</h2>
+<h2 id="各プラットフォームをカスタマイズします">各プラットフォームをカスタマイズします。</h2>
 
-<p>コルドバは、多くの異なるプラットフォーム用のアプリを簡単に展開することができます、間時々 カスタマイズを追加する必要があります。 この場合、様々 なソース ファイルを変更するたくない <code>www</code> 内の最上位レベルのディレクトリ <code>platforms</code> ディレクトリ、彼らしている定期的に置き換えられるので、最上位の <code>www</code> ディレクトリのクロスプラット フォームのソース。</p>
+<p>コルドバは、多くの異なるプラットフォーム用のアプリを簡単に展開することができます、間時々 カスタマイズを追加する必要があります。 この場合、様々 なソース ファイルを変更するたくない <code class="language-plaintext highlighter-rouge">www</code> 内の最上位レベルのディレクトリ <code class="language-plaintext highlighter-rouge">platforms</code> ディレクトリ、彼らしている定期的に置き換えられるので、最上位の <code class="language-plaintext highlighter-rouge">www</code> ディレクトリのクロスプラット フォームのソース。</p>
 
-<p>代わりに、最上位 <code>merges</code> ディレクトリの特定のプラットフォームに展開する資産を指定する場所を提供しています。 各プラットフォーム固有のサブディレクトリ内で <code>merges</code> のディレクトリ構造をミラー、 <code>www</code> ソース ツリーで、オーバーライドまたは必要に応じてファイルを追加することができます。 たとえば、使用する可能性がありますどのようにここでは <code>merges</code> Android デバイス用の既定のフォント サイズを後押しします。</p>
+<p>代わりに、最上位 <code class="language-plaintext highlighter-rouge">merges</code> ディレクトリの特定のプラットフォームに展開する資産を指定する場所を提供しています。 各プラットフォーム固有のサブディレクトリ内で <code class="language-plaintext highlighter-rouge">merges</code> のディレクトリ構造をミラー、 <code class="language-plaintext highlighter-rouge">www</code> ソース ツリーで、オーバーライドまたは必要に応じてファイルを追加することができます。 たとえば、使用する可能性がありますどのようにここでは <code class="language-plaintext highlighter-rouge">merges</code> Android デバイス用の既定のフォント サイズを後押しします。</p>
 
 <ul>
-<li><p>編集、 <code>www/index.html</code> 、追加の CSS ファイルへのリンクを追加して、ファイル <code>overrides.css</code> この場合。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;link rel="stylesheet" type="text/css" href="css/overrides.css" /&gt;
-</code></pre></div></li>
-<li><p>必要に応じて作成する空の <code>www/css/overrides.css</code> ファイル、不足しているファイルのエラーを防止する、すべてのアンドロイド ビルドに適用されます。</p></li>
-<li><p>作成、 <code>css</code> 内のサブディレクトリ <code>merges/android</code> 、追加し、対応する <code>overrides.css</code> ファイル。 CSS オーバーライド内で指定された 12 ポイントの既定のフォント サイズを指定する <code>www/css/index.css</code> 、たとえば。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">body { font-size:14px; }
-</code></pre></div></li>
+  <li>
+    <p>編集、 <code class="language-plaintext highlighter-rouge">www/index.html</code> 、追加の CSS ファイルへのリンクを追加して、ファイル <code class="language-plaintext highlighter-rouge">overrides.css</code> この場合。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;link rel="stylesheet" type="text/css" href="css/overrides.css" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>必要に応じて作成する空の <code class="language-plaintext highlighter-rouge">www/css/overrides.css</code> ファイル、不足しているファイルのエラーを防止する、すべてのアンドロイド ビルドに適用されます。</p>
+  </li>
+  <li>
+    <p>作成、 <code class="language-plaintext highlighter-rouge">css</code> 内のサブディレクトリ <code class="language-plaintext highlighter-rouge">merges/android</code> 、追加し、対応する <code class="language-plaintext highlighter-rouge">overrides.css</code> ファイル。 CSS オーバーライド内で指定された 12 ポイントの既定のフォント サイズを指定する <code class="language-plaintext highlighter-rouge">www/css/index.css</code> 、たとえば。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>body { font-size:14px; }
+</code></pre></div>    </div>
+  </li>
 </ul>
 
 <p>プロジェクトをリビルドするとき他が変わらない間、Android のバージョン カスタム フォント サイズを備えています。</p>
 
-<p>また使用することができます <code>merges</code> 、元のファイルが存在しないを追加する <code>www</code> ディレクトリ。 たとえば、アプリ組み込むことができます<em>戻るボタン</em>グラフィック iOS インターフェイスに格納されている <code>merges/ios/img/back_button.png</code> 、Android のバージョンをキャプチャすることができます代わりに、 <code>backbutton</code> 、対応するハードウェア ボタンからのイベント。</p>
+<p>また使用することができます <code class="language-plaintext highlighter-rouge">merges</code> 、元のファイルが存在しないを追加する <code class="language-plaintext highlighter-rouge">www</code> ディレクトリ。 たとえば、アプリ組み込むことができます<em>戻るボタン</em>グラフィック iOS インターフェイスに格納されている <code class="language-plaintext highlighter-rouge">merges/ios/img/back_button.png</code> 、Android のバージョンをキャプチャすることができます代わりに、 <code class="language-plaintext highlighter-rouge">backbutton</code> 、対応するハードウェア ボタンからのイベント。</p>
 
-<h2>コルドバの更新</h2>
+<h2 id="コルドバの更新">コルドバの更新</h2>
 
-<p>インストールした後、 <code>cordova</code> ユーティリティ、常に更新できます、最新のバージョンに次のコマンドを実行します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ sudo npm update -g cordova
-</code></pre></div>
+<p>インストールした後、 <code class="language-plaintext highlighter-rouge">cordova</code> ユーティリティ、常に更新できます、最新のバージョンに次のコマンドを実行します。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ sudo npm update -g cordova
+</code></pre></div></div>
+
 <p>特定のバージョンをインストールするには、この構文を使用します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ sudo 故宮をインストール-g cordova@3.1.0
-</code></pre></div>
-<p>実行 <code>cordova -v</code> を現在実行中のバージョンを参照してください。 実行、 <code>npm
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ sudo 故宮をインストール-g cordova@3.1.0
+</code></pre></div></div>
+
+<p>実行 <code class="language-plaintext highlighter-rouge">cordova -v</code> を現在実行中のバージョンを参照してください。 実行、 <code class="language-plaintext highlighter-rouge">npm
 info</code> をその他の利用可能なバージョン番号と共に現在のバージョンを含む長い一覧のコマンド。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ npm info cordova
-</code></pre></div>
-<p>コルドバ 3.0 は、このセクションで説明されているコマンド ライン インターフェイスをサポートするために最初のバージョンです。 前述のように、新しいプロジェクトを作成し、古いアプリケーション資産の最上位レベルにコピーする必要があります 3.0 以前のバージョンから更新する場合は <code>www</code> ディレクトリ。 該当する場合は、3.0 へのアップグレードに関する詳細はプラットフォームのガイドで利用できます。 アップグレードした後、 <code>cordova</code> コマンド ライン インターフェイスおよび使用 <code>npm update</code> 現在滞在より時間のかかる手順には、もはや関連。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ npm info cordova
+</code></pre></div></div>
+
+<p>コルドバ 3.0 は、このセクションで説明されているコマンド ライン インターフェイスをサポートするために最初のバージョンです。 前述のように、新しいプロジェクトを作成し、古いアプリケーション資産の最上位レベルにコピーする必要があります 3.0 以前のバージョンから更新する場合は <code class="language-plaintext highlighter-rouge">www</code> ディレクトリ。 該当する場合は、3.0 へのアップグレードに関する詳細はプラットフォームのガイドで利用できます。 アップグレードした後、 <code class="language-plaintext highlighter-rouge">cordova</code> コマンド ライン インターフェイスおよび使用 <code class="language-plaintext highlighter-rouge">npm update</code> 現在滞在より時間のかかる手順には、もはや関連。</p>
 
 
             </div>

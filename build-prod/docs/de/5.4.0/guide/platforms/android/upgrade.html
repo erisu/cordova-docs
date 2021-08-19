@@ -1112,393 +1112,744 @@
             
 
             <div id="page-toc-source">
-                <h1>Aktualisierung von Android</h1>
+                <h1 id="aktualisierung-von-android">Aktualisierung von Android</h1>
 
-<p>Diese Anleitung zeigt, wie Android Projekte Upgrade von älteren Versionen von Cordova ändern. Die meisten diese Anweisungen gelten für Projekte, die mit einer älteren Befehlszeilentools, die vorangehen erstellt die <code>cordova</code> CLI-Hilfsprogramm. Informationen finden Sie unter The Command-Line Interface die CLI-Version zu aktualisieren.</p>
+<p>Diese Anleitung zeigt, wie Android Projekte Upgrade von älteren Versionen von Cordova ändern. Die meisten diese Anweisungen gelten für Projekte, die mit einer älteren Befehlszeilentools, die vorangehen erstellt die <code class="language-plaintext highlighter-rouge">cordova</code> CLI-Hilfsprogramm. Informationen finden Sie unter The Command-Line Interface die CLI-Version zu aktualisieren.</p>
 
-<h2>Upgrade auf 4.0.0</h2>
+<h2 id="upgrade-auf-400">Upgrade auf 4.0.0</h2>
 
 <p>Gibt es bestimmte Schritte benötigt, um wichtige Änderungen in 4.0.0 nutzen. Zunächst werden die gemeinsamen Schritte wie unten beschrieben.</p>
 
 <p>Für nicht-CLI-Projekte führen:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    bin/update path/to/project
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    bin/update path/to/project
+</code></pre></div></div>
+
 <p>CLI-Projekte:</p>
 
 <ol>
-<li><p>Update der <code>cordova</code> CLI-Version. Finden Sie die Befehlszeilenschnittstelle.</p></li>
-<li><p><code>cordova platform update android</code> in Ihre bestehenden Projekte ausgeführt.</p></li>
+  <li>
+    <p>Update der <code class="language-plaintext highlighter-rouge">cordova</code> CLI-Version. Finden Sie die Befehlszeilenschnittstelle.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova platform update android</code> in Ihre bestehenden Projekte ausgeführt.</p>
+  </li>
 </ol>
 
-<h3>Aktualisierung der weißen Liste</h3>
+<h3 id="aktualisierung-der-weißen-liste">Aktualisierung der weißen Liste</h3>
 
 <p>Alle Whitelist-Funktionalität ist jetzt via Plugin implementiert. Ohne Plugin ist Ihre Anwendung nicht mehr durch eine Whitelist geschützt, nach dem Upgrade auf 4.0.0. Cordova hat zwei Whitelist-Plugins, die verschiedene Ebenen des Schutzes zur Verfügung zu stellen.</p>
 
 <ol>
-<li> <code>Cordova-Plugin-Whitelist</code> Plugin <em>(empfohlen)</em></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Cordova-Plugin-Whitelist</code> Plugin <em>(empfohlen)</em></p>
+
+    <ul>
+      <li>Dieses Plugin wird dringend empfohlen, da es sicherer und konfigurierbar als die Whitelist in früheren Versionen ist,</li>
+      <li>Siehe <a href="https://github.com/apache/cordova-plugin-whitelist">Cordova-Plugin-Whitelist</a> für Details auf die Konfigurationsänderungen erforderlich</li>
+      <li>Ausführung: <code class="language-plaintext highlighter-rouge">cordova plugin add cordova-plugin-crosswalk-webview</code></li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Cordova-Plugin-Legacy-Whitelist</code> plugin</p>
+
+    <ul>
+      <li>Dieses Plugin bietet das Whitelist-Verhalten wie in früheren Versionen. Siehe <a href="https://github.com/apache/cordova-plugin-legacy-whitelist">Cordova-Plugin-Legacy-whitelist</a></li>
+      <li>Keine Konfigurationsänderungen sind erforderlich, aber es bietet weniger Schutz als die empfohlenen plugin</li>
+      <li>Ausführung: <code class="language-plaintext highlighter-rouge">cordova plugin add cordova-plugin-legacy-whitelist</code></li>
+    </ul>
+  </li>
 </ol>
-<div class="highlight"><pre><code class="language-" data-lang="">*   Dieses Plugin wird dringend empfohlen, da es sicherer und konfigurierbar als die Whitelist in früheren Versionen ist,
-*   Siehe [Cordova-Plugin-Whitelist][1] für Details auf die Konfigurationsänderungen erforderlich
-*   Ausführung: `cordova plugin add cordova-plugin-crosswalk-webview`
-</code></pre></div>
-<ol>
-<li> <code>Cordova-Plugin-Legacy-Whitelist</code> plugin</li>
-</ol>
-<div class="highlight"><pre><code class="language-" data-lang="">*   Dieses Plugin bietet das Whitelist-Verhalten wie in früheren Versionen. Siehe [Cordova-Plugin-Legacy-whitelist][2]
-*   Keine Konfigurationsänderungen sind erforderlich, aber es bietet weniger Schutz als die empfohlenen plugin
-*   Ausführung: `cordova plugin add cordova-plugin-legacy-whitelist`
-</code></pre></div>
-<h3>Mithilfe der Zebrastreifen WebView</h3>
+
+<h3 id="mithilfe-der-zebrastreifen-webview">Mithilfe der Zebrastreifen WebView</h3>
 
 <p>Standardmäßig wird Ihre Anwendung weiterhin das System verwenden WebView vom Gerät zur Verfügung gestellt. Wenn Sie den Zebrastreifen WebView stattdessen verwenden möchten, fügen Sie einfach das Zebrastreifen-Plugin:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cordova plugin add cordova-plugin-crosswalk-webview
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova plugin add cordova-plugin-crosswalk-webview
+</code></pre></div></div>
+
 <p>Das Plugin hinzufügen, erhalten Ihre app den Zebrastreifen WebView ordnungsgemäß installiert und konfiguriert.</p>
 
-<h3>Upgrade auf das Splashscreen-Plugin</h3>
+<h3 id="upgrade-auf-das-splashscreen-plugin">Upgrade auf das Splashscreen-Plugin</h3>
 
 <p>Wenn Ihre app macht Verwendung von einen Splash-Screen Funktionalität zu einem Plugin verschoben wurde. Die Konfigurationsoptionen für Begrüßungsbildschirme sind unverändert. Der einzige Upgrade Schritt benötigt, ist das Plugin hinzufügen:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cordova plugin add cordova-plugin-splashscreen
-</code></pre></div>
-<h2>Upgrade von 3.6.0 auf 3.7.1</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova plugin add cordova-plugin-splashscreen
+</code></pre></div></div>
+
+<h2 id="upgrade-von-360-auf-371">Upgrade von 3.6.0 auf 3.7.1</h2>
 
 <p>Für nicht-CLI-Projekte führen:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    bin/update path/to/project
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    bin/update path/to/project
+</code></pre></div></div>
+
 <p>CLI-Projekte:</p>
 
 <ol>
-<li><p>Update der <code>cordova</code> CLI-Version. Finden Sie die Befehlszeilenschnittstelle.</p></li>
-<li><p>Führen Sie <code>cordova platform update android</code> in Ihre bestehenden Projekte.</p></li>
+  <li>
+    <p>Update der <code class="language-plaintext highlighter-rouge">cordova</code> CLI-Version. Finden Sie die Befehlszeilenschnittstelle.</p>
+  </li>
+  <li>
+    <p>Führen Sie <code class="language-plaintext highlighter-rouge">cordova platform update android</code> in Ihre bestehenden Projekte.</p>
+  </li>
 </ol>
 
-<h2>Upgrade von 3.2.0 auf 3.3.0</h2>
+<h2 id="upgrade-von-320-auf-330">Upgrade von 3.2.0 auf 3.3.0</h2>
 
-<p>Folgen Sie die Anweisungen wie für <code>3.2.0</code>.</p>
+<p>Folgen Sie die Anweisungen wie für <code class="language-plaintext highlighter-rouge">3.2.0</code>.</p>
 
-<p>Beginnend mit 3.3.0, wird Cordova-Runtime jetzt als Android-Bibliothek anstelle von einem Glas kompiliert. Dies sollte keine Auswirkungen für Command-Line Usage, aber IDE-Benutzer müssen das neu hinzugefügte <code>MyProject-CordovaLib</code>-Projekt in ihren Arbeitsbereich zu importieren.</p>
+<p>Beginnend mit 3.3.0, wird Cordova-Runtime jetzt als Android-Bibliothek anstelle von einem Glas kompiliert. Dies sollte keine Auswirkungen für Command-Line Usage, aber IDE-Benutzer müssen das neu hinzugefügte <code class="language-plaintext highlighter-rouge">MyProject-CordovaLib</code>-Projekt in ihren Arbeitsbereich zu importieren.</p>
 
-<h2>Upgrade von 3.1.0 auf 3.2.0</h2>
+<h2 id="upgrade-von-310-auf-320">Upgrade von 3.1.0 auf 3.2.0</h2>
 
 <p>Für Projekte, die mit Cordova CLI erstellt wurden:</p>
 
 <ol>
-<li><p>Update der <code>cordova</code> CLI-Version. Finden Sie die Befehlszeilenschnittstelle.</p></li>
-<li><p><code>cordova plattform update android</code> ausführen</p></li>
+  <li>
+    <p>Update der <code class="language-plaintext highlighter-rouge">cordova</code> CLI-Version. Finden Sie die Befehlszeilenschnittstelle.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova plattform update android</code> ausführen</p>
+  </li>
 </ol>
 
 <p>Für Projekte, die nicht mit der Cordova CLI erstellt ausgeführt:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    bin/update &lt;project_path&gt;
-</code></pre></div>
-<p><strong>WARNUNG:</strong> Auf Android 4.4 - Android 4.4.3, Erstellen einer Datei input-Element mit type=&quot;file&quot; wird nicht im Dialog Datei Picker. Dies ist eine Regression mit Chrom auf Android und das Problem reproduzierbar in der Standalone-Chrome-Browser auf Android (siehe http://code.google.com/p/android/issues/detail?id=62220) die empfohlene Problemumgehung besteht darin die FileTransfer und Datei-Plugins für Android 4.4 verwenden. Sie können für ein OnClick-Ereignis aus der Eingabetyp type=&quot;file&quot; und dann pop-up eine Dateiauswahl UI. Um die Formulardaten mit dem Upload zu binden, können Sie JavaScript Formularwerte FileTransfer macht die mehrteilige POST-Anforderung an.</p>
 
-<h2>Upgrade von 3.0.0 auf 3.1.0</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    bin/update &lt;project_path&gt;
+</code></pre></div></div>
+
+<p><strong>WARNUNG:</strong> Auf Android 4.4 - Android 4.4.3, Erstellen einer Datei input-Element mit type=”file” wird nicht im Dialog Datei Picker. Dies ist eine Regression mit Chrom auf Android und das Problem reproduzierbar in der Standalone-Chrome-Browser auf Android (siehe http://code.google.com/p/android/issues/detail?id=62220) die empfohlene Problemumgehung besteht darin die FileTransfer und Datei-Plugins für Android 4.4 verwenden. Sie können für ein OnClick-Ereignis aus der Eingabetyp type=”file” und dann pop-up eine Dateiauswahl UI. Um die Formulardaten mit dem Upload zu binden, können Sie JavaScript Formularwerte FileTransfer macht die mehrteilige POST-Anforderung an.</p>
+
+<h2 id="upgrade-von-300-auf-310">Upgrade von 3.0.0 auf 3.1.0</h2>
 
 <p>Für Projekte, die mit Cordova CLI erstellt wurden:</p>
 
 <ol>
-<li><p>Update der <code>cordova</code> CLI-Version. Finden Sie die Befehlszeilenschnittstelle.</p></li>
-<li><p><code>cordova plattform update android</code> ausführen</p></li>
+  <li>
+    <p>Update der <code class="language-plaintext highlighter-rouge">cordova</code> CLI-Version. Finden Sie die Befehlszeilenschnittstelle.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cordova plattform update android</code> ausführen</p>
+  </li>
 </ol>
 
 <p>Für Projekte, die nicht mit der Cordova CLI erstellt ausgeführt:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    bin/update &lt;project_path&gt;
-</code></pre></div>
-<h2>Upgrade auf die CLI (3.0.0) aus 2.9.0</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    bin/update &lt;project_path&gt;
+</code></pre></div></div>
+
+<h2 id="upgrade-auf-die-cli-300-aus-290">Upgrade auf die CLI (3.0.0) aus 2.9.0</h2>
 
 <ol>
-<li><p>Erstellen Sie ein neues Apache Cordova 3.0.0-Projekt mit Cordova CLI, wie in der Command-Line Interface beschrieben.</p></li>
-<li><p>Fügen Sie Ihrer Plattformen Projektes Cordova, zum Beispiel: <code>cordova platform add android</code>.</p></li>
-<li><p>Kopieren Sie den Inhalt der <code>Www</code>-Verzeichnis des Projekts in das <code>Www</code>-Verzeichnis im Stammverzeichnis des Projektes Cordova soeben erstellten.</p></li>
-<li><p>Nativen Vermögen aus dem alten Projekt kopieren, in die entsprechenden Verzeichnisse unter <code>platforms/android</code>: in diesem Verzeichnis werden in dem systemeigene Cordova-Android Projekt vorhanden ist.</p></li>
-<li><p>Verwenden Sie das Cordova CLI Tool irgendwelche Plugins installieren, die Sie brauchen. Beachten Sie, dass die CLI behandelt alle Kern-APIs wie Plugins, so müssen sie möglicherweise hinzugefügt werden. Nur 3.0.0 Plugins sind kompatibel mit CLI.</p></li>
+  <li>
+    <p>Erstellen Sie ein neues Apache Cordova 3.0.0-Projekt mit Cordova CLI, wie in der Command-Line Interface beschrieben.</p>
+  </li>
+  <li>
+    <p>Fügen Sie Ihrer Plattformen Projektes Cordova, zum Beispiel: <code class="language-plaintext highlighter-rouge">cordova platform add android</code>.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie den Inhalt der <code class="language-plaintext highlighter-rouge">Www</code>-Verzeichnis des Projekts in das <code class="language-plaintext highlighter-rouge">Www</code>-Verzeichnis im Stammverzeichnis des Projektes Cordova soeben erstellten.</p>
+  </li>
+  <li>
+    <p>Nativen Vermögen aus dem alten Projekt kopieren, in die entsprechenden Verzeichnisse unter <code class="language-plaintext highlighter-rouge">platforms/android</code>: in diesem Verzeichnis werden in dem systemeigene Cordova-Android Projekt vorhanden ist.</p>
+  </li>
+  <li>
+    <p>Verwenden Sie das Cordova CLI Tool irgendwelche Plugins installieren, die Sie brauchen. Beachten Sie, dass die CLI behandelt alle Kern-APIs wie Plugins, so müssen sie möglicherweise hinzugefügt werden. Nur 3.0.0 Plugins sind kompatibel mit CLI.</p>
+  </li>
 </ol>
 
-<h2>Ein Upgrade auf 3.0.0 von 2.9.0</h2>
+<h2 id="ein-upgrade-auf-300-von-290">Ein Upgrade auf 3.0.0 von 2.9.0</h2>
 
 <ol>
-<li><p>Erstellen Sie ein neues Apache Cordova Android Projekt.</p></li>
-<li><p>Kopieren Sie den Inhalt des Verzeichnisses <code>www</code> zum neuen Projekt.</p></li>
-<li><p>Kopieren Sie nativen Android Vermögen aus dem <code>res</code>-Verzeichnis zum neuen Projekt.</p></li>
-<li><p>Kopieren Sie über alle Plug-ins, die Sie aus der <code>src</code>-Unterverzeichnissen in das neue Projekt installiert.</p></li>
-<li><p>Achten Sie darauf, alle aktualisieren veraltet <code>&lt;plugin&gt;</code> Verweise aus der alten Datei <code>&quot;config.xml&quot;</code> auf der neuen <code>&lt;feature&gt;</code> Spezifikation.</p></li>
-<li><p>Alle Verweise auf das <code>org.apache.cordova.api</code>-Paket <code>org.apache.cordova</code> zu aktualisieren.</p>
+  <li>
+    <p>Erstellen Sie ein neues Apache Cordova Android Projekt.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie den Inhalt des Verzeichnisses <code class="language-plaintext highlighter-rouge">www</code> zum neuen Projekt.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie nativen Android Vermögen aus dem <code class="language-plaintext highlighter-rouge">res</code>-Verzeichnis zum neuen Projekt.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie über alle Plug-ins, die Sie aus der <code class="language-plaintext highlighter-rouge">src</code>-Unterverzeichnissen in das neue Projekt installiert.</p>
+  </li>
+  <li>
+    <p>Achten Sie darauf, alle aktualisieren veraltet <code class="language-plaintext highlighter-rouge">&lt;plugin&gt;</code> Verweise aus der alten Datei <code class="language-plaintext highlighter-rouge">"config.xml"</code> auf der neuen <code class="language-plaintext highlighter-rouge">&lt;feature&gt;</code> Spezifikation.</p>
+  </li>
+  <li>
+    <p>Alle Verweise auf das <code class="language-plaintext highlighter-rouge">org.apache.cordova.api</code>-Paket <code class="language-plaintext highlighter-rouge">org.apache.cordova</code> zu aktualisieren.</p>
 
-<p><strong>Hinweis</strong>: alle Core APIs wurden entfernt und als Plugins installiert sein. Einzelheiten finden Sie unter der Verwendung von Plugman zum Verwalten von Plugins-Anleitung.</p></li>
+    <p><strong>Hinweis</strong>: alle Core APIs wurden entfernt und als Plugins installiert sein. Einzelheiten finden Sie unter der Verwendung von Plugman zum Verwalten von Plugins-Anleitung.</p>
+  </li>
 </ol>
 
-<h2>Ein Upgrade auf 2.9.0 von 2.8.0</h2>
+<h2 id="ein-upgrade-auf-290-von-280">Ein Upgrade auf 2.9.0 von 2.8.0</h2>
 
 <ol>
-<li> Run <code>bin/update &lt;project_path&gt;</code>.</li>
+  <li>Run <code class="language-plaintext highlighter-rouge">bin/update &lt;project_path&gt;</code>.</li>
 </ol>
 
-<h2>Ein Upgrade auf 2.8.0 von 2.7.0</h2>
+<h2 id="ein-upgrade-auf-280-von-270">Ein Upgrade auf 2.8.0 von 2.7.0</h2>
 
 <ol>
-<li><p>Entfernen Sie <code>Cordova-2.7.0.jar</code> aus dem Projektverzeichnis <code>Libs</code> .</p></li>
-<li><p><code>Cordova-2.8.0.jar</code> des Projekts <code>Libs</code> Verzeichnis hinzufügen.</p></li>
-<li><p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p></li>
+  <li>
+    <p>Entfernen Sie <code class="language-plaintext highlighter-rouge">Cordova-2.7.0.jar</code> aus dem Projektverzeichnis <code class="language-plaintext highlighter-rouge">Libs</code> .</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Cordova-2.8.0.jar</code> des Projekts <code class="language-plaintext highlighter-rouge">Libs</code> Verzeichnis hinzufügen.</p>
+  </li>
+  <li>
+    <p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p>
+  </li>
 </ol>
 
 <!-- SS Eclipse -->
 
 <ol>
-<li><p>Kopieren Sie die neue <code>cordova.js</code> in Ihr Projekt.</p></li>
-<li><p>Aktualisieren Sie den HTML-Code um die neue <code>cordova.js</code> -Datei verwenden.</p></li>
-<li><p>Kopieren Sie die Datei <code>res/xml/config.xml</code> , um <code>framework/res/xml/config.xml</code> zu entsprechen.</p></li>
-<li><p>Update <code>framework/res/xml/config.xml</code> ähnliche Einstellungen haben, wie es früher war.</p></li>
-<li><p>Kopieren Sie Dateien aus <code>bin/templates/cordova</code> dem Projekt <code>cordova</code> Verzeichnis.</p></li>
+  <li>
+    <p>Kopieren Sie die neue <code class="language-plaintext highlighter-rouge">cordova.js</code> in Ihr Projekt.</p>
+  </li>
+  <li>
+    <p>Aktualisieren Sie den HTML-Code um die neue <code class="language-plaintext highlighter-rouge">cordova.js</code> -Datei verwenden.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie die Datei <code class="language-plaintext highlighter-rouge">res/xml/config.xml</code> , um <code class="language-plaintext highlighter-rouge">framework/res/xml/config.xml</code> zu entsprechen.</p>
+  </li>
+  <li>
+    <p>Update <code class="language-plaintext highlighter-rouge">framework/res/xml/config.xml</code> ähnliche Einstellungen haben, wie es früher war.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie Dateien aus <code class="language-plaintext highlighter-rouge">bin/templates/cordova</code> dem Projekt <code class="language-plaintext highlighter-rouge">cordova</code> Verzeichnis.</p>
+  </li>
 </ol>
 
-<h2>Ein Upgrade auf 2.7.0 von 2.6.0</h2>
+<h2 id="ein-upgrade-auf-270-von-260">Ein Upgrade auf 2.7.0 von 2.6.0</h2>
 
 <ol>
-<li><p>Entfernen Sie <code>Cordova-2.6.0.jar</code> aus dem Projektverzeichnis <code>Libs</code> .</p></li>
-<li><p><code>Cordova-2.7.0.jar</code> des Projekts <code>Libs</code> Verzeichnis hinzufügen.</p></li>
-<li><p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p></li>
-<li><p>Kopieren Sie die neue <code>cordova-2.7.0.js</code> in Ihr Projekt.</p></li>
-<li><p>Aktualisieren Sie den HTML-Code um die neue <code>cordova-2.7.0.js</code> -Datei verwenden.</p></li>
-<li><p>Kopie der <code>res/xml/config.xml</code> entsprechend<code>framework/res/xml/config.xml</code>.</p></li>
-<li><p>Update <code>framework/res/xml/config.xml</code> ähnliche Einstellungen haben, wie es früher war.</p></li>
-<li><p>Kopieren Sie Dateien aus <code>bin/templates/cordova</code> für des Projekts <code>cordova</code> Verzeichnis.</p></li>
+  <li>
+    <p>Entfernen Sie <code class="language-plaintext highlighter-rouge">Cordova-2.6.0.jar</code> aus dem Projektverzeichnis <code class="language-plaintext highlighter-rouge">Libs</code> .</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Cordova-2.7.0.jar</code> des Projekts <code class="language-plaintext highlighter-rouge">Libs</code> Verzeichnis hinzufügen.</p>
+  </li>
+  <li>
+    <p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie die neue <code class="language-plaintext highlighter-rouge">cordova-2.7.0.js</code> in Ihr Projekt.</p>
+  </li>
+  <li>
+    <p>Aktualisieren Sie den HTML-Code um die neue <code class="language-plaintext highlighter-rouge">cordova-2.7.0.js</code> -Datei verwenden.</p>
+  </li>
+  <li>
+    <p>Kopie der <code class="language-plaintext highlighter-rouge">res/xml/config.xml</code> entsprechend<code class="language-plaintext highlighter-rouge">framework/res/xml/config.xml</code>.</p>
+  </li>
+  <li>
+    <p>Update <code class="language-plaintext highlighter-rouge">framework/res/xml/config.xml</code> ähnliche Einstellungen haben, wie es früher war.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie Dateien aus <code class="language-plaintext highlighter-rouge">bin/templates/cordova</code> für des Projekts <code class="language-plaintext highlighter-rouge">cordova</code> Verzeichnis.</p>
+  </li>
 </ol>
 
-<h2>Ein Upgrade auf 2.6.0 von 2.5.0</h2>
+<h2 id="ein-upgrade-auf-260-von-250">Ein Upgrade auf 2.6.0 von 2.5.0</h2>
 
 <ol>
-<li><p>Entfernen Sie <code>Cordova-2.5.0.jar</code> aus dem Projektverzeichnis <code>Libs</code> .</p></li>
-<li><p><code>Cordova-2.6.0.jar</code> des Projekts <code>Libs</code> Verzeichnis hinzufügen.</p></li>
-<li><p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p></li>
-<li><p>Kopieren Sie die neue <code>cordova-2.6.0.js</code> in Ihr Projekt.</p></li>
-<li><p>Aktualisieren Sie Ihre HTML-um das neue <code>cordova-2.6.0.js</code> Datei.</p></li>
-<li><p>Kopie der <code>res/xml/config.xml</code> entsprechend<code>framework/res/xml/config.xml</code>.</p></li>
-<li><p>Update <code>framework/res/xml/config.xml</code> ähnliche Einstellungen haben, wie es früher war.</p></li>
-<li><p>Kopieren Sie Dateien aus <code>bin/templates/cordova</code> dem Projekt <code>cordova</code> Verzeichnis.</p></li>
+  <li>
+    <p>Entfernen Sie <code class="language-plaintext highlighter-rouge">Cordova-2.5.0.jar</code> aus dem Projektverzeichnis <code class="language-plaintext highlighter-rouge">Libs</code> .</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Cordova-2.6.0.jar</code> des Projekts <code class="language-plaintext highlighter-rouge">Libs</code> Verzeichnis hinzufügen.</p>
+  </li>
+  <li>
+    <p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie die neue <code class="language-plaintext highlighter-rouge">cordova-2.6.0.js</code> in Ihr Projekt.</p>
+  </li>
+  <li>
+    <p>Aktualisieren Sie Ihre HTML-um das neue <code class="language-plaintext highlighter-rouge">cordova-2.6.0.js</code> Datei.</p>
+  </li>
+  <li>
+    <p>Kopie der <code class="language-plaintext highlighter-rouge">res/xml/config.xml</code> entsprechend<code class="language-plaintext highlighter-rouge">framework/res/xml/config.xml</code>.</p>
+  </li>
+  <li>
+    <p>Update <code class="language-plaintext highlighter-rouge">framework/res/xml/config.xml</code> ähnliche Einstellungen haben, wie es früher war.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie Dateien aus <code class="language-plaintext highlighter-rouge">bin/templates/cordova</code> dem Projekt <code class="language-plaintext highlighter-rouge">cordova</code> Verzeichnis.</p>
+  </li>
 </ol>
 
-<p>Führen Sie <code>bin/update &lt;project&gt;</code> mit den Projektpfad im Cordova Quellverzeichnis aufgeführt.</p>
+<p>Führen Sie <code class="language-plaintext highlighter-rouge">bin/update &lt;project&gt;</code> mit den Projektpfad im Cordova Quellverzeichnis aufgeführt.</p>
 
-<h2>Ein Upgrade auf 2.5.0 von 2.4.0</h2>
+<h2 id="ein-upgrade-auf-250-von-240">Ein Upgrade auf 2.5.0 von 2.4.0</h2>
 
 <ol>
-<li><p>Entfernen Sie <code>Cordova-2.4.0.jar</code> aus dem Projektverzeichnis <code>Libs</code> .</p></li>
-<li><p><code>Cordova-2.5.0.jar</code> des Projekts <code>Libs</code> Verzeichnis hinzufügen.</p></li>
-<li><p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p></li>
-<li><p>Kopieren Sie die neue <code>cordova-2.5.0.js</code> in Ihr Projekt.</p></li>
-<li><p>Aktualisieren Sie Ihre HTML-um das neue <code>cordova-2.5.0.js</code> Datei.</p></li>
-<li><p>Kopie der <code>res/xml/config.xml</code> entsprechend<code>framework/res/xml/config.xml</code>.</p></li>
-<li><p>Update <code>framework/res/xml/config.xml</code> ähnliche Einstellungen haben, wie es früher war.</p></li>
-<li><p>Kopieren Sie Dateien aus <code>bin/templates/cordova</code> dem Projekt <code>cordova</code> Verzeichnis.</p></li>
+  <li>
+    <p>Entfernen Sie <code class="language-plaintext highlighter-rouge">Cordova-2.4.0.jar</code> aus dem Projektverzeichnis <code class="language-plaintext highlighter-rouge">Libs</code> .</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Cordova-2.5.0.jar</code> des Projekts <code class="language-plaintext highlighter-rouge">Libs</code> Verzeichnis hinzufügen.</p>
+  </li>
+  <li>
+    <p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie die neue <code class="language-plaintext highlighter-rouge">cordova-2.5.0.js</code> in Ihr Projekt.</p>
+  </li>
+  <li>
+    <p>Aktualisieren Sie Ihre HTML-um das neue <code class="language-plaintext highlighter-rouge">cordova-2.5.0.js</code> Datei.</p>
+  </li>
+  <li>
+    <p>Kopie der <code class="language-plaintext highlighter-rouge">res/xml/config.xml</code> entsprechend<code class="language-plaintext highlighter-rouge">framework/res/xml/config.xml</code>.</p>
+  </li>
+  <li>
+    <p>Update <code class="language-plaintext highlighter-rouge">framework/res/xml/config.xml</code> ähnliche Einstellungen haben, wie es früher war.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie Dateien aus <code class="language-plaintext highlighter-rouge">bin/templates/cordova</code> dem Projekt <code class="language-plaintext highlighter-rouge">cordova</code> Verzeichnis.</p>
+  </li>
 </ol>
 
-<h2>Ein Upgrade auf 2.4.0 von 2.3.0</h2>
+<h2 id="ein-upgrade-auf-240-von-230">Ein Upgrade auf 2.4.0 von 2.3.0</h2>
 
 <ol>
-<li><p>Entfernen Sie <code>Cordova-2.3.0.jar</code> aus dem Projektverzeichnis <code>Libs</code> .</p></li>
-<li><p><code>Cordova-2.4.0.jar</code> des Projekts <code>Libs</code> Verzeichnis hinzufügen.</p></li>
-<li><p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p></li>
-<li><p>Kopieren Sie die neue <code>cordova-2.4.0.js</code> in Ihr Projekt.</p></li>
-<li><p>Aktualisieren Sie Ihre HTML-um das neue <code>cordova-2.4.0.js</code> Datei.</p></li>
-<li><p>Kopie der <code>res/xml/config.xml</code> entsprechend<code>framework/res/xml/config.xml</code>.</p></li>
-<li><p>Kopieren Sie Dateien aus <code>bin/templates/cordova</code> für des Projekts <code>cordova</code> Verzeichnis.</p></li>
+  <li>
+    <p>Entfernen Sie <code class="language-plaintext highlighter-rouge">Cordova-2.3.0.jar</code> aus dem Projektverzeichnis <code class="language-plaintext highlighter-rouge">Libs</code> .</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Cordova-2.4.0.jar</code> des Projekts <code class="language-plaintext highlighter-rouge">Libs</code> Verzeichnis hinzufügen.</p>
+  </li>
+  <li>
+    <p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie die neue <code class="language-plaintext highlighter-rouge">cordova-2.4.0.js</code> in Ihr Projekt.</p>
+  </li>
+  <li>
+    <p>Aktualisieren Sie Ihre HTML-um das neue <code class="language-plaintext highlighter-rouge">cordova-2.4.0.js</code> Datei.</p>
+  </li>
+  <li>
+    <p>Kopie der <code class="language-plaintext highlighter-rouge">res/xml/config.xml</code> entsprechend<code class="language-plaintext highlighter-rouge">framework/res/xml/config.xml</code>.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie Dateien aus <code class="language-plaintext highlighter-rouge">bin/templates/cordova</code> für des Projekts <code class="language-plaintext highlighter-rouge">cordova</code> Verzeichnis.</p>
+  </li>
 </ol>
 
-<h2>Ein Upgrade auf 2.3.0 von 2.2.0</h2>
+<h2 id="ein-upgrade-auf-230-von-220">Ein Upgrade auf 2.3.0 von 2.2.0</h2>
 
 <ol>
-<li><p>Entfernen Sie <code>Cordova-2.2.0.jar</code> aus dem Projektverzeichnis <code>Libs</code> .</p></li>
-<li><p><code>Cordova-2.3.0.jar</code> des Projekts <code>Libs</code> Verzeichnis hinzufügen.</p></li>
-<li><p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p></li>
-<li><p>Kopieren Sie die neue <code>cordova-2.3.0.js</code> in Ihr Projekt.</p></li>
-<li><p>Aktualisieren Sie Ihre HTML-um das neue <code>cordova-2.3.0.js</code> Datei.</p></li>
-<li><p>Kopie der <code>res/xml/config.xml</code> entsprechend<code>framework/res/xml/config.xml</code>.</p></li>
-<li><p>Kopieren Sie Dateien aus <code>bin/templates/cordova</code> für des Projekts <code>cordova</code> Verzeichnis.</p></li>
+  <li>
+    <p>Entfernen Sie <code class="language-plaintext highlighter-rouge">Cordova-2.2.0.jar</code> aus dem Projektverzeichnis <code class="language-plaintext highlighter-rouge">Libs</code> .</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Cordova-2.3.0.jar</code> des Projekts <code class="language-plaintext highlighter-rouge">Libs</code> Verzeichnis hinzufügen.</p>
+  </li>
+  <li>
+    <p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie die neue <code class="language-plaintext highlighter-rouge">cordova-2.3.0.js</code> in Ihr Projekt.</p>
+  </li>
+  <li>
+    <p>Aktualisieren Sie Ihre HTML-um das neue <code class="language-plaintext highlighter-rouge">cordova-2.3.0.js</code> Datei.</p>
+  </li>
+  <li>
+    <p>Kopie der <code class="language-plaintext highlighter-rouge">res/xml/config.xml</code> entsprechend<code class="language-plaintext highlighter-rouge">framework/res/xml/config.xml</code>.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie Dateien aus <code class="language-plaintext highlighter-rouge">bin/templates/cordova</code> für des Projekts <code class="language-plaintext highlighter-rouge">cordova</code> Verzeichnis.</p>
+  </li>
 </ol>
 
-<h2>Ein Upgrade auf 2.2.0 von 2.1.0</h2>
+<h2 id="ein-upgrade-auf-220-von-210">Ein Upgrade auf 2.2.0 von 2.1.0</h2>
 
 <ol>
-<li><p>Entfernen Sie <code>Cordova-2.1.0.jar</code> aus dem Projektverzeichnis <code>Libs</code> .</p></li>
-<li><p><code>Cordova-2.2.0.jar</code> des Projekts <code>Libs</code> Verzeichnis hinzufügen.</p></li>
-<li><p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p></li>
-<li><p>Kopieren Sie die neue <code>cordova-2.2.0.js</code> in Ihr Projekt.</p></li>
-<li><p>Aktualisieren Sie Ihre HTML-um das neue <code>cordova-2.2.0.js</code> Datei.</p></li>
-<li><p>Kopie der <code>res/xml/config.xml</code> entsprechend<code>framework/res/xml/config.xml</code>.</p></li>
-<li><p>Kopieren Sie Dateien aus <code>bin/templates/cordova</code> dem Projekt <code>cordova</code> Verzeichnis.</p></li>
+  <li>
+    <p>Entfernen Sie <code class="language-plaintext highlighter-rouge">Cordova-2.1.0.jar</code> aus dem Projektverzeichnis <code class="language-plaintext highlighter-rouge">Libs</code> .</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Cordova-2.2.0.jar</code> des Projekts <code class="language-plaintext highlighter-rouge">Libs</code> Verzeichnis hinzufügen.</p>
+  </li>
+  <li>
+    <p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie die neue <code class="language-plaintext highlighter-rouge">cordova-2.2.0.js</code> in Ihr Projekt.</p>
+  </li>
+  <li>
+    <p>Aktualisieren Sie Ihre HTML-um das neue <code class="language-plaintext highlighter-rouge">cordova-2.2.0.js</code> Datei.</p>
+  </li>
+  <li>
+    <p>Kopie der <code class="language-plaintext highlighter-rouge">res/xml/config.xml</code> entsprechend<code class="language-plaintext highlighter-rouge">framework/res/xml/config.xml</code>.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie Dateien aus <code class="language-plaintext highlighter-rouge">bin/templates/cordova</code> dem Projekt <code class="language-plaintext highlighter-rouge">cordova</code> Verzeichnis.</p>
+  </li>
 </ol>
 
-<h2>Upgrade auf 2.1.0 von 2.0.0</h2>
+<h2 id="upgrade-auf-210-von-200">Upgrade auf 2.1.0 von 2.0.0</h2>
 
 <ol>
-<li><p>Entfernen Sie <code>Cordova-2.0.0.jar</code> aus dem Projektverzeichnis <code>Libs</code> .</p></li>
-<li><p><code>Cordova-2.1.0.jar</code> des Projekts <code>Libs</code> Verzeichnis hinzufügen.</p></li>
-<li><p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p></li>
-<li><p>Kopieren Sie die neue <code>cordova-2.1.0.js</code> in Ihr Projekt.</p></li>
-<li><p>Aktualisieren Sie Ihre HTML-um das neue <code>cordova-2.1.0.js</code> Datei.</p></li>
-<li><p>Kopie der <code>res/xml/config.xml</code> entsprechen<code>framework/res/xml/config.xml</code>.</p></li>
-<li><p>Kopieren Sie Dateien aus <code>bin/templates/cordova</code> dem Projekt <code>cordova</code> Verzeichnis.</p></li>
+  <li>
+    <p>Entfernen Sie <code class="language-plaintext highlighter-rouge">Cordova-2.0.0.jar</code> aus dem Projektverzeichnis <code class="language-plaintext highlighter-rouge">Libs</code> .</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Cordova-2.1.0.jar</code> des Projekts <code class="language-plaintext highlighter-rouge">Libs</code> Verzeichnis hinzufügen.</p>
+  </li>
+  <li>
+    <p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie die neue <code class="language-plaintext highlighter-rouge">cordova-2.1.0.js</code> in Ihr Projekt.</p>
+  </li>
+  <li>
+    <p>Aktualisieren Sie Ihre HTML-um das neue <code class="language-plaintext highlighter-rouge">cordova-2.1.0.js</code> Datei.</p>
+  </li>
+  <li>
+    <p>Kopie der <code class="language-plaintext highlighter-rouge">res/xml/config.xml</code> entsprechen<code class="language-plaintext highlighter-rouge">framework/res/xml/config.xml</code>.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie Dateien aus <code class="language-plaintext highlighter-rouge">bin/templates/cordova</code> dem Projekt <code class="language-plaintext highlighter-rouge">cordova</code> Verzeichnis.</p>
+  </li>
 </ol>
 
-<h2>Ein Upgrade auf 2.0.0 von 1.9.0</h2>
+<h2 id="ein-upgrade-auf-200-von-190">Ein Upgrade auf 2.0.0 von 1.9.0</h2>
 
 <ol>
-<li><p>Entfernen Sie <code>Cordova-1.9.0.jar</code> aus dem Projektverzeichnis <code>Libs</code> .</p></li>
-<li><p><code>Cordova-2.0.0.jar</code> des Projekts <code>Libs</code> Verzeichnis hinzufügen.</p></li>
-<li><p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p></li>
-<li><p>Kopieren Sie die neue <code>cordova-2.0.0.js</code> in Ihr Projekt.</p></li>
-<li><p>Aktualisieren Sie Ihre HTML-um das neue <code>cordova-2.0.0.js</code> Datei.</p></li>
-<li><p>Kopie der <code>res/xml/config.xml</code> entsprechen<code>framework/res/xml/config.xml</code>.</p></li>
+  <li>
+    <p>Entfernen Sie <code class="language-plaintext highlighter-rouge">Cordova-1.9.0.jar</code> aus dem Projektverzeichnis <code class="language-plaintext highlighter-rouge">Libs</code> .</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Cordova-2.0.0.jar</code> des Projekts <code class="language-plaintext highlighter-rouge">Libs</code> Verzeichnis hinzufügen.</p>
+  </li>
+  <li>
+    <p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie die neue <code class="language-plaintext highlighter-rouge">cordova-2.0.0.js</code> in Ihr Projekt.</p>
+  </li>
+  <li>
+    <p>Aktualisieren Sie Ihre HTML-um das neue <code class="language-plaintext highlighter-rouge">cordova-2.0.0.js</code> Datei.</p>
+  </li>
+  <li>
+    <p>Kopie der <code class="language-plaintext highlighter-rouge">res/xml/config.xml</code> entsprechen<code class="language-plaintext highlighter-rouge">framework/res/xml/config.xml</code>.</p>
+  </li>
 </ol>
 
-<p>In der 2.0.0 Release, die Datei <code>config.xml</code> kombiniert und ersetzt <code>cordova.xml</code> und <code>plugins.xml</code>. Die alten Dateien sind veraltet, und während sie noch in 2.0.0, arbeiten funktioniert nicht mehr in einer zukünftigen Version.</p>
+<p>In der 2.0.0 Release, die Datei <code class="language-plaintext highlighter-rouge">config.xml</code> kombiniert und ersetzt <code class="language-plaintext highlighter-rouge">cordova.xml</code> und <code class="language-plaintext highlighter-rouge">plugins.xml</code>. Die alten Dateien sind veraltet, und während sie noch in 2.0.0, arbeiten funktioniert nicht mehr in einer zukünftigen Version.</p>
 
-<h2>Ein Upgrade auf 1.9.0 von 1.8.1</h2>
+<h2 id="ein-upgrade-auf-190-von-181">Ein Upgrade auf 1.9.0 von 1.8.1</h2>
 
 <ol>
-<li><p>Entfernen Sie <code>Cordova-1.8.0.jar</code> aus dem Projektverzeichnis <code>Libs</code> .</p></li>
-<li><p><code>Cordova-1.9.0.jar</code> des Projekts <code>Libs</code> Verzeichnis hinzufügen.</p></li>
-<li><p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p></li>
-<li><p>Kopieren Sie die neue <code>Cordova-1.9.0.js</code> in Ihr Projekt.</p></li>
-<li><p>Aktualisieren Sie den HTML-Code um die neue <code>Cordova-1.9.0.js</code> -Datei verwenden.</p></li>
-<li><p>Update <code>res/xml/plugins.xml</code> entsprechend<code>framework/res/xml/plugins.xml</code>.</p></li>
+  <li>
+    <p>Entfernen Sie <code class="language-plaintext highlighter-rouge">Cordova-1.8.0.jar</code> aus dem Projektverzeichnis <code class="language-plaintext highlighter-rouge">Libs</code> .</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Cordova-1.9.0.jar</code> des Projekts <code class="language-plaintext highlighter-rouge">Libs</code> Verzeichnis hinzufügen.</p>
+  </li>
+  <li>
+    <p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie die neue <code class="language-plaintext highlighter-rouge">Cordova-1.9.0.js</code> in Ihr Projekt.</p>
+  </li>
+  <li>
+    <p>Aktualisieren Sie den HTML-Code um die neue <code class="language-plaintext highlighter-rouge">Cordova-1.9.0.js</code> -Datei verwenden.</p>
+  </li>
+  <li>
+    <p>Update <code class="language-plaintext highlighter-rouge">res/xml/plugins.xml</code> entsprechend<code class="language-plaintext highlighter-rouge">framework/res/xml/plugins.xml</code>.</p>
+  </li>
 </ol>
 
-<p>Aufgrund der Einführung des <code>CordovaWebView</code> in die 1.9.0 release, Drittanbieter Plug-ins funktionieren nicht. Diese Plugins müssen einen Kontext aus dem <code>CordovaInterface</code> mit <code>getContext()</code> oder <code>getActivity()</code>. Wenn Sie kein erfahrener Android-Entwickler sind, bitte kontaktieren Sie den Plugin-Betreuer und fügen Sie diese Aufgabe auf ihre Bug-Tracker.</p>
+<p>Aufgrund der Einführung des <code class="language-plaintext highlighter-rouge">CordovaWebView</code> in die 1.9.0 release, Drittanbieter Plug-ins funktionieren nicht. Diese Plugins müssen einen Kontext aus dem <code class="language-plaintext highlighter-rouge">CordovaInterface</code> mit <code class="language-plaintext highlighter-rouge">getContext()</code> oder <code class="language-plaintext highlighter-rouge">getActivity()</code>. Wenn Sie kein erfahrener Android-Entwickler sind, bitte kontaktieren Sie den Plugin-Betreuer und fügen Sie diese Aufgabe auf ihre Bug-Tracker.</p>
 
-<h2>Ein Upgrade auf 1.8.0 von 1.8.0</h2>
+<h2 id="ein-upgrade-auf-180-von-180">Ein Upgrade auf 1.8.0 von 1.8.0</h2>
 
 <ol>
-<li><p>Entfernen Sie <code>Cordova-1.8.0.jar</code> aus dem Projektverzeichnis <code>Libs</code> .</p></li>
-<li><p><code>Cordova-1.8.1.jar</code> des Projekts <code>Libs</code> Verzeichnis hinzufügen.</p></li>
-<li><p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p></li>
-<li><p>Kopieren Sie die neue <code>Cordova-1.8.1.js</code> in Ihr Projekt.</p></li>
-<li><p>Aktualisieren Sie den HTML-Code um die neue <code>Cordova-1.8.1.js</code> -Datei verwenden.</p></li>
-<li><p>Update <code>res/xml/plugins.xml</code> entsprechend<code>framework/res/xml/plugins.xml</code>.</p></li>
+  <li>
+    <p>Entfernen Sie <code class="language-plaintext highlighter-rouge">Cordova-1.8.0.jar</code> aus dem Projektverzeichnis <code class="language-plaintext highlighter-rouge">Libs</code> .</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Cordova-1.8.1.jar</code> des Projekts <code class="language-plaintext highlighter-rouge">Libs</code> Verzeichnis hinzufügen.</p>
+  </li>
+  <li>
+    <p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie die neue <code class="language-plaintext highlighter-rouge">Cordova-1.8.1.js</code> in Ihr Projekt.</p>
+  </li>
+  <li>
+    <p>Aktualisieren Sie den HTML-Code um die neue <code class="language-plaintext highlighter-rouge">Cordova-1.8.1.js</code> -Datei verwenden.</p>
+  </li>
+  <li>
+    <p>Update <code class="language-plaintext highlighter-rouge">res/xml/plugins.xml</code> entsprechend<code class="language-plaintext highlighter-rouge">framework/res/xml/plugins.xml</code>.</p>
+  </li>
 </ol>
 
-<h2>Ein Upgrade auf 1.8.0 von 1.7.0</h2>
+<h2 id="ein-upgrade-auf-180-von-170">Ein Upgrade auf 1.8.0 von 1.7.0</h2>
 
 <ol>
-<li><p>Entfernen Sie <code>Cordova-1.7.0.jar</code> aus dem Projektverzeichnis <code>Libs</code> .</p></li>
-<li><p><code>Cordova-1.8.0.jar</code> des Projekts <code>Libs</code> Verzeichnis hinzufügen.</p></li>
-<li><p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p></li>
-<li><p>Kopieren Sie die neue <code>cordova-1.8.0.js</code> in Ihr Projekt.</p></li>
-<li><p>Aktualisieren Sie Ihre HTML-um das neue <code>cordova-1.8.0.js</code> Datei.</p></li>
-<li><p>Update <code>res/xml/plugins.xml</code> übereinstimmen<code>framework/res/xml/plugins.xml</code>.</p></li>
+  <li>
+    <p>Entfernen Sie <code class="language-plaintext highlighter-rouge">Cordova-1.7.0.jar</code> aus dem Projektverzeichnis <code class="language-plaintext highlighter-rouge">Libs</code> .</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Cordova-1.8.0.jar</code> des Projekts <code class="language-plaintext highlighter-rouge">Libs</code> Verzeichnis hinzufügen.</p>
+  </li>
+  <li>
+    <p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie die neue <code class="language-plaintext highlighter-rouge">cordova-1.8.0.js</code> in Ihr Projekt.</p>
+  </li>
+  <li>
+    <p>Aktualisieren Sie Ihre HTML-um das neue <code class="language-plaintext highlighter-rouge">cordova-1.8.0.js</code> Datei.</p>
+  </li>
+  <li>
+    <p>Update <code class="language-plaintext highlighter-rouge">res/xml/plugins.xml</code> übereinstimmen<code class="language-plaintext highlighter-rouge">framework/res/xml/plugins.xml</code>.</p>
+  </li>
 </ol>
 
-<h2>Ein Upgrade auf 1.8.0 von 1.7.0</h2>
+<h2 id="ein-upgrade-auf-180-von-170-1">Ein Upgrade auf 1.8.0 von 1.7.0</h2>
 
 <ol>
-<li><p>Entfernen Sie <code>Cordova-1.7.0.jar</code> aus dem Projektverzeichnis <code>Libs</code> .</p></li>
-<li><p><code>Cordova-1.8.0.jar</code> des Projekts <code>Libs</code> Verzeichnis hinzufügen.</p></li>
-<li><p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p></li>
-<li><p>Kopieren Sie die neue <code>cordova-1.8.0.js</code> in Ihr Projekt.</p></li>
-<li><p>Aktualisieren Sie Ihre HTML-um das neue <code>cordova-1.8.0.js</code> Datei.</p></li>
-<li><p>Update <code>res/xml/plugins.xml</code> übereinstimmen<code>framework/res/xml/plugins.xml</code>.</p></li>
+  <li>
+    <p>Entfernen Sie <code class="language-plaintext highlighter-rouge">Cordova-1.7.0.jar</code> aus dem Projektverzeichnis <code class="language-plaintext highlighter-rouge">Libs</code> .</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Cordova-1.8.0.jar</code> des Projekts <code class="language-plaintext highlighter-rouge">Libs</code> Verzeichnis hinzufügen.</p>
+  </li>
+  <li>
+    <p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie die neue <code class="language-plaintext highlighter-rouge">cordova-1.8.0.js</code> in Ihr Projekt.</p>
+  </li>
+  <li>
+    <p>Aktualisieren Sie Ihre HTML-um das neue <code class="language-plaintext highlighter-rouge">cordova-1.8.0.js</code> Datei.</p>
+  </li>
+  <li>
+    <p>Update <code class="language-plaintext highlighter-rouge">res/xml/plugins.xml</code> übereinstimmen<code class="language-plaintext highlighter-rouge">framework/res/xml/plugins.xml</code>.</p>
+  </li>
 </ol>
 
-<h2>Ein Upgrade auf 1.7.0 von 1.6.1</h2>
+<h2 id="ein-upgrade-auf-170-von-161">Ein Upgrade auf 1.7.0 von 1.6.1</h2>
 
 <ol>
-<li><p>Entfernen Sie <code>Cordova-1.6.1.jar</code> aus dem Projektverzeichnis <code>Libs</code> .</p></li>
-<li><p><code>Cordova-1.7.0.jar</code> des Projekts <code>Libs</code> Verzeichnis hinzufügen.</p></li>
-<li><p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p></li>
-<li><p>Kopieren Sie die neue <code>Cordova-1.7.0.js</code> in Ihr Projekt.</p></li>
-<li><p>Update <code>res/xml/plugins.xml</code> übereinstimmen<code>framework/res/xml/plugins.xml</code>.</p></li>
+  <li>
+    <p>Entfernen Sie <code class="language-plaintext highlighter-rouge">Cordova-1.6.1.jar</code> aus dem Projektverzeichnis <code class="language-plaintext highlighter-rouge">Libs</code> .</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Cordova-1.7.0.jar</code> des Projekts <code class="language-plaintext highlighter-rouge">Libs</code> Verzeichnis hinzufügen.</p>
+  </li>
+  <li>
+    <p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie die neue <code class="language-plaintext highlighter-rouge">Cordova-1.7.0.js</code> in Ihr Projekt.</p>
+  </li>
+  <li>
+    <p>Update <code class="language-plaintext highlighter-rouge">res/xml/plugins.xml</code> übereinstimmen<code class="language-plaintext highlighter-rouge">framework/res/xml/plugins.xml</code>.</p>
+  </li>
 </ol>
 
-<h2>Ein Upgrade auf 1.6.1 von 1.6.0</h2>
+<h2 id="ein-upgrade-auf-161-von-160">Ein Upgrade auf 1.6.1 von 1.6.0</h2>
 
 <ol>
-<li><p>Entfernen Sie <code>Cordova-1.6.0.jar</code> aus dem Projektverzeichnis <code>Libs</code> .</p></li>
-<li><p><code>Cordova-1.6.1.jar</code> des Projekts <code>Libs</code> Verzeichnis hinzufügen.</p></li>
-<li><p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p></li>
-<li><p>Kopieren Sie die neue <code>Cordova-1.6.1.js</code> in Ihr Projekt.</p></li>
-<li><p>Update <code>res/xml/plugins.xml</code> übereinstimmen<code>framework/res/xml/plugins.xml</code>.</p></li>
+  <li>
+    <p>Entfernen Sie <code class="language-plaintext highlighter-rouge">Cordova-1.6.0.jar</code> aus dem Projektverzeichnis <code class="language-plaintext highlighter-rouge">Libs</code> .</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Cordova-1.6.1.jar</code> des Projekts <code class="language-plaintext highlighter-rouge">Libs</code> Verzeichnis hinzufügen.</p>
+  </li>
+  <li>
+    <p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie die neue <code class="language-plaintext highlighter-rouge">Cordova-1.6.1.js</code> in Ihr Projekt.</p>
+  </li>
+  <li>
+    <p>Update <code class="language-plaintext highlighter-rouge">res/xml/plugins.xml</code> übereinstimmen<code class="language-plaintext highlighter-rouge">framework/res/xml/plugins.xml</code>.</p>
+  </li>
 </ol>
 
-<h2>Ein Upgrade auf 1.6.0 von 1.5.0</h2>
+<h2 id="ein-upgrade-auf-160-von-150">Ein Upgrade auf 1.6.0 von 1.5.0</h2>
 
 <ol>
-<li><p>Entfernen Sie <code>Cordova-1.5.0.jar</code> aus dem Projektverzeichnis <code>Libs</code> .</p></li>
-<li><p><code>Cordova-1.6.0.jar</code> des Projekts <code>Libs</code> Verzeichnis hinzufügen.</p></li>
-<li><p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p></li>
-<li><p>Kopieren Sie die neue <code>Cordova-1.6.0.js</code> in Ihr Projekt.</p></li>
-<li><p>Aktualisieren Sie den HTML-Code um die neue <code>Cordova-1.6.0.js</code> -Datei verwenden.</p></li>
-<li><p>Update <code>res/xml/plugins.xml</code> entsprechend<code>framework/res/xml/plugins.xml</code>.</p></li>
-<li><p>Ersetzen Sie <code>res/xml/phonegap.xml</code> durch <code>res/xml/cordova.xml</code> entsprechend <code>framework/res/xml/cordova.xml</code>.</p></li>
+  <li>
+    <p>Entfernen Sie <code class="language-plaintext highlighter-rouge">Cordova-1.5.0.jar</code> aus dem Projektverzeichnis <code class="language-plaintext highlighter-rouge">Libs</code> .</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Cordova-1.6.0.jar</code> des Projekts <code class="language-plaintext highlighter-rouge">Libs</code> Verzeichnis hinzufügen.</p>
+  </li>
+  <li>
+    <p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie die neue <code class="language-plaintext highlighter-rouge">Cordova-1.6.0.js</code> in Ihr Projekt.</p>
+  </li>
+  <li>
+    <p>Aktualisieren Sie den HTML-Code um die neue <code class="language-plaintext highlighter-rouge">Cordova-1.6.0.js</code> -Datei verwenden.</p>
+  </li>
+  <li>
+    <p>Update <code class="language-plaintext highlighter-rouge">res/xml/plugins.xml</code> entsprechend<code class="language-plaintext highlighter-rouge">framework/res/xml/plugins.xml</code>.</p>
+  </li>
+  <li>
+    <p>Ersetzen Sie <code class="language-plaintext highlighter-rouge">res/xml/phonegap.xml</code> durch <code class="language-plaintext highlighter-rouge">res/xml/cordova.xml</code> entsprechend <code class="language-plaintext highlighter-rouge">framework/res/xml/cordova.xml</code>.</p>
+  </li>
 </ol>
 
-<h2>Ein Upgrade auf 1.5.0 von 1.4.0</h2>
+<h2 id="ein-upgrade-auf-150-von-140">Ein Upgrade auf 1.5.0 von 1.4.0</h2>
 
 <ol>
-<li><p>Entfernen Sie <code>Phonegap-1.4.0.jar</code> aus dem Projektverzeichnis <code>Libs</code> .</p></li>
-<li><p><code>Cordova-1.5.0.jar</code> des Projekts <code>Libs</code> Verzeichnis hinzufügen.</p></li>
-<li><p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p></li>
-<li><p>Kopieren Sie die neue <code>Cordova-1.5.0.js</code> in Ihr Projekt.</p></li>
-<li><p>Aktualisieren Sie den HTML-Code um die neue <code>Cordova-1.5.0.js</code> -Datei verwenden.</p></li>
-<li><p>Update <code>res/xml/plugins.xml</code> entsprechend<code>framework/res/xml/plugins.xml</code>.</p></li>
-<li><p>Ersetzen Sie <code>res/xml/phonegap.xml</code> durch <code>res/xml/cordova.xml</code> entsprechend <code>framework/res/xml/cordova.xml</code>.</p></li>
+  <li>
+    <p>Entfernen Sie <code class="language-plaintext highlighter-rouge">Phonegap-1.4.0.jar</code> aus dem Projektverzeichnis <code class="language-plaintext highlighter-rouge">Libs</code> .</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Cordova-1.5.0.jar</code> des Projekts <code class="language-plaintext highlighter-rouge">Libs</code> Verzeichnis hinzufügen.</p>
+  </li>
+  <li>
+    <p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie die neue <code class="language-plaintext highlighter-rouge">Cordova-1.5.0.js</code> in Ihr Projekt.</p>
+  </li>
+  <li>
+    <p>Aktualisieren Sie den HTML-Code um die neue <code class="language-plaintext highlighter-rouge">Cordova-1.5.0.js</code> -Datei verwenden.</p>
+  </li>
+  <li>
+    <p>Update <code class="language-plaintext highlighter-rouge">res/xml/plugins.xml</code> entsprechend<code class="language-plaintext highlighter-rouge">framework/res/xml/plugins.xml</code>.</p>
+  </li>
+  <li>
+    <p>Ersetzen Sie <code class="language-plaintext highlighter-rouge">res/xml/phonegap.xml</code> durch <code class="language-plaintext highlighter-rouge">res/xml/cordova.xml</code> entsprechend <code class="language-plaintext highlighter-rouge">framework/res/xml/cordova.xml</code>.</p>
+  </li>
 </ol>
 
-<h2>Ein Upgrade auf 1.4.0 von 1.3.0</h2>
+<h2 id="ein-upgrade-auf-140-von-130">Ein Upgrade auf 1.4.0 von 1.3.0</h2>
 
 <ol>
-<li><p>Entfernen Sie <code>Phonegap-1.3.0.jar</code> aus dem Projektverzeichnis <code>Libs</code> .</p></li>
-<li><p>Das Verzeichnis des Projekts <code>Libs</code> <code>Phonegap-1.4.0.jar</code> hinzufügen.</p></li>
-<li><p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p></li>
-<li><p>Kopieren Sie die neue <code>Phonegap-1.4.0.js</code> in Ihr Projekt.</p></li>
-<li><p>Aktualisieren Sie den HTML-Code um die neue <code>Phonegap-1.4.0.js</code> -Datei verwenden.</p></li>
-<li><p>Update <code>res/xml/plugins.xml</code> entsprechend<code>framework/res/xml/plugins.xml</code>.</p></li>
-<li><p>Update <code>res/xml/phonegap.xml</code> entsprechend<code>framework/res/xml/phonegap.xml</code>.</p></li>
+  <li>
+    <p>Entfernen Sie <code class="language-plaintext highlighter-rouge">Phonegap-1.3.0.jar</code> aus dem Projektverzeichnis <code class="language-plaintext highlighter-rouge">Libs</code> .</p>
+  </li>
+  <li>
+    <p>Das Verzeichnis des Projekts <code class="language-plaintext highlighter-rouge">Libs</code> <code class="language-plaintext highlighter-rouge">Phonegap-1.4.0.jar</code> hinzufügen.</p>
+  </li>
+  <li>
+    <p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie die neue <code class="language-plaintext highlighter-rouge">Phonegap-1.4.0.js</code> in Ihr Projekt.</p>
+  </li>
+  <li>
+    <p>Aktualisieren Sie den HTML-Code um die neue <code class="language-plaintext highlighter-rouge">Phonegap-1.4.0.js</code> -Datei verwenden.</p>
+  </li>
+  <li>
+    <p>Update <code class="language-plaintext highlighter-rouge">res/xml/plugins.xml</code> entsprechend<code class="language-plaintext highlighter-rouge">framework/res/xml/plugins.xml</code>.</p>
+  </li>
+  <li>
+    <p>Update <code class="language-plaintext highlighter-rouge">res/xml/phonegap.xml</code> entsprechend<code class="language-plaintext highlighter-rouge">framework/res/xml/phonegap.xml</code>.</p>
+  </li>
 </ol>
 
-<h2>Ein Upgrade auf 1.3.0 von 1.2.0</h2>
+<h2 id="ein-upgrade-auf-130-von-120">Ein Upgrade auf 1.3.0 von 1.2.0</h2>
 
 <ol>
-<li><p>Entfernen Sie <code>Phonegap-1.2.0.jar</code> aus dem Projektverzeichnis <code>Libs</code> .</p></li>
-<li><p>Das Verzeichnis des Projekts <code>Libs</code> <code>Phonegap-1.3.0.jar</code> hinzufügen.</p></li>
-<li><p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p></li>
-<li><p>Kopieren Sie die neue <code>Phonegap-1.3.0.js</code> in Ihr Projekt.</p></li>
-<li><p>Aktualisieren Sie den HTML-Code um die neue <code>Phonegap-1.2.0.js</code> -Datei verwenden.</p></li>
-<li><p>Update <code>res/xml/plugins.xml</code> entsprechend<code>framework/res/xml/plugins.xml</code>.</p></li>
-<li><p>Update <code>res/xml/phonegap.xml</code> übereinstimmen<code>framework/res/xml/phonegap.xml</code>.</p></li>
+  <li>
+    <p>Entfernen Sie <code class="language-plaintext highlighter-rouge">Phonegap-1.2.0.jar</code> aus dem Projektverzeichnis <code class="language-plaintext highlighter-rouge">Libs</code> .</p>
+  </li>
+  <li>
+    <p>Das Verzeichnis des Projekts <code class="language-plaintext highlighter-rouge">Libs</code> <code class="language-plaintext highlighter-rouge">Phonegap-1.3.0.jar</code> hinzufügen.</p>
+  </li>
+  <li>
+    <p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie die neue <code class="language-plaintext highlighter-rouge">Phonegap-1.3.0.js</code> in Ihr Projekt.</p>
+  </li>
+  <li>
+    <p>Aktualisieren Sie den HTML-Code um die neue <code class="language-plaintext highlighter-rouge">Phonegap-1.2.0.js</code> -Datei verwenden.</p>
+  </li>
+  <li>
+    <p>Update <code class="language-plaintext highlighter-rouge">res/xml/plugins.xml</code> entsprechend<code class="language-plaintext highlighter-rouge">framework/res/xml/plugins.xml</code>.</p>
+  </li>
+  <li>
+    <p>Update <code class="language-plaintext highlighter-rouge">res/xml/phonegap.xml</code> übereinstimmen<code class="language-plaintext highlighter-rouge">framework/res/xml/phonegap.xml</code>.</p>
+  </li>
 </ol>
 
-<h2>Ein Upgrade auf 1.2.0 von 1.1.0</h2>
+<h2 id="ein-upgrade-auf-120-von-110">Ein Upgrade auf 1.2.0 von 1.1.0</h2>
 
 <ol>
-<li><p>Entfernen Sie <code>Phonegap-1.1.0.jar</code> aus dem Projektverzeichnis <code>Libs</code> .</p></li>
-<li><p>Das Verzeichnis des Projekts <code>Libs</code> <code>Phonegap-1.2.0.jar</code> hinzufügen.</p></li>
-<li><p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p></li>
-<li><p>Kopieren Sie die neue <code>Phonegap-1.2.0.js</code> in Ihr Projekt.</p></li>
-<li><p>Aktualisieren Sie den HTML-Code um die neue <code>Phonegap-1.2.0.js</code> -Datei verwenden.</p></li>
-<li><p>Update <code>res/xml/plugins.xml</code> übereinstimmen<code>framework/res/xml/plugins.xml</code>.</p></li>
-<li><p>Update <code>res/xml/phonegap.xml</code> übereinstimmen<code>framework/res/xml/phonegap.xml</code>.</p></li>
+  <li>
+    <p>Entfernen Sie <code class="language-plaintext highlighter-rouge">Phonegap-1.1.0.jar</code> aus dem Projektverzeichnis <code class="language-plaintext highlighter-rouge">Libs</code> .</p>
+  </li>
+  <li>
+    <p>Das Verzeichnis des Projekts <code class="language-plaintext highlighter-rouge">Libs</code> <code class="language-plaintext highlighter-rouge">Phonegap-1.2.0.jar</code> hinzufügen.</p>
+  </li>
+  <li>
+    <p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie die neue <code class="language-plaintext highlighter-rouge">Phonegap-1.2.0.js</code> in Ihr Projekt.</p>
+  </li>
+  <li>
+    <p>Aktualisieren Sie den HTML-Code um die neue <code class="language-plaintext highlighter-rouge">Phonegap-1.2.0.js</code> -Datei verwenden.</p>
+  </li>
+  <li>
+    <p>Update <code class="language-plaintext highlighter-rouge">res/xml/plugins.xml</code> übereinstimmen<code class="language-plaintext highlighter-rouge">framework/res/xml/plugins.xml</code>.</p>
+  </li>
+  <li>
+    <p>Update <code class="language-plaintext highlighter-rouge">res/xml/phonegap.xml</code> übereinstimmen<code class="language-plaintext highlighter-rouge">framework/res/xml/phonegap.xml</code>.</p>
+  </li>
 </ol>
 
-<h2>Von 1.0.0 auf 1.1.0 aktualisieren</h2>
+<h2 id="von-100-auf-110-aktualisieren">Von 1.0.0 auf 1.1.0 aktualisieren</h2>
 
 <ol>
-<li><p>Entfernen Sie <code>Phonegap-1.0.0.jar</code> aus dem Projektverzeichnis <code>Libs</code> .</p></li>
-<li><p>Das Verzeichnis des Projekts <code>Libs</code> <code>Phonegap-1.1.0.jar</code> hinzufügen.</p></li>
-<li><p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p></li>
-<li><p>Kopieren Sie die neue <code>Phonegap-1.1.0.js</code> in Ihr Projekt.</p></li>
-<li><p>Aktualisieren Sie den HTML-Code um die neue <code>Phonegap-1.1.0.js</code> -Datei verwenden.</p></li>
-<li><p>Update <code>res/xml/plugins.xml</code> übereinstimmen<code>framework/res/xml/plugins.xml</code>.</p></li>
+  <li>
+    <p>Entfernen Sie <code class="language-plaintext highlighter-rouge">Phonegap-1.0.0.jar</code> aus dem Projektverzeichnis <code class="language-plaintext highlighter-rouge">Libs</code> .</p>
+  </li>
+  <li>
+    <p>Das Verzeichnis des Projekts <code class="language-plaintext highlighter-rouge">Libs</code> <code class="language-plaintext highlighter-rouge">Phonegap-1.1.0.jar</code> hinzufügen.</p>
+  </li>
+  <li>
+    <p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie die neue <code class="language-plaintext highlighter-rouge">Phonegap-1.1.0.js</code> in Ihr Projekt.</p>
+  </li>
+  <li>
+    <p>Aktualisieren Sie den HTML-Code um die neue <code class="language-plaintext highlighter-rouge">Phonegap-1.1.0.js</code> -Datei verwenden.</p>
+  </li>
+  <li>
+    <p>Update <code class="language-plaintext highlighter-rouge">res/xml/plugins.xml</code> übereinstimmen<code class="language-plaintext highlighter-rouge">framework/res/xml/plugins.xml</code>.</p>
+  </li>
 </ol>
 
-<h2>Ein Upgrade auf 1.0.0 von 0.9.6</h2>
+<h2 id="ein-upgrade-auf-100-von-096">Ein Upgrade auf 1.0.0 von 0.9.6</h2>
 
 <ol>
-<li><p>Entfernen Sie <code>Phonegap-0.9.6.jar</code> aus dem Projektverzeichnis <code>Libs</code> .</p></li>
-<li><p>Das Verzeichnis des Projekts <code>Libs</code> <code>Phonegap-1.0.0.jar</code> hinzufügen.</p></li>
-<li><p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p></li>
-<li><p>Kopieren Sie die neue <code>Phonegap-1.0.0.js</code> in Ihr Projekt.</p></li>
-<li><p>Aktualisieren Sie den HTML-Code um die neue <code>Phonegap-1.0.0.js</code> -Datei verwenden.</p></li>
-<li><p>Fügen Sie die <code>res/xml/plugins.xml</code> entsprechend <code>framework/res/xml/plugins.xml</code>.</p></li>
+  <li>
+    <p>Entfernen Sie <code class="language-plaintext highlighter-rouge">Phonegap-0.9.6.jar</code> aus dem Projektverzeichnis <code class="language-plaintext highlighter-rouge">Libs</code> .</p>
+  </li>
+  <li>
+    <p>Das Verzeichnis des Projekts <code class="language-plaintext highlighter-rouge">Libs</code> <code class="language-plaintext highlighter-rouge">Phonegap-1.0.0.jar</code> hinzufügen.</p>
+  </li>
+  <li>
+    <p>Wenn Sie Eclipse verwenden, aktualisieren das Eclipse-Projekt und eine saubere zu tun.</p>
+  </li>
+  <li>
+    <p>Kopieren Sie die neue <code class="language-plaintext highlighter-rouge">Phonegap-1.0.0.js</code> in Ihr Projekt.</p>
+  </li>
+  <li>
+    <p>Aktualisieren Sie den HTML-Code um die neue <code class="language-plaintext highlighter-rouge">Phonegap-1.0.0.js</code> -Datei verwenden.</p>
+  </li>
+  <li>
+    <p>Fügen Sie die <code class="language-plaintext highlighter-rouge">res/xml/plugins.xml</code> entsprechend <code class="language-plaintext highlighter-rouge">framework/res/xml/plugins.xml</code>.</p>
+  </li>
 </ol>
 
 

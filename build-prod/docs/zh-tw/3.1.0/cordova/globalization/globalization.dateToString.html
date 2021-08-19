@@ -1304,72 +1304,80 @@
             
 
             <div id="page-toc-source">
-                <h1>globalization.dateToString</h1>
+                <h1 id="globalizationdatetostring">globalization.dateToString</h1>
 
 <p>返回一個日期格式設置為一個字串，根據用戶端的地區設定和時區。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.globalization.dateToString(date, successCallback, errorCallback, options);
-</code></pre></div>
-<h2>說明</h2>
 
-<p>返回格式化的日期 <code>String</code> 通過 <code>value</code> 屬性可從該物件作為一個參數傳遞<code>successCallback</code>.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.globalization.dateToString(date, successCallback, errorCallback, options);
+</code></pre></div></div>
 
-<p>入站 <code>date</code> 參數的類型應為<code>Date</code>.</p>
+<h2 id="說明">說明</h2>
 
-<p>如果有錯誤格式日期，然後 <code>errorCallback</code> 執行與 <code>[GlobalizationError](GlobalizationError/globalizationerror.html)</code> 物件作為參數。 錯誤的期望的代碼<code>[GlobalizationError](GlobalizationError/globalizationerror.html).FORMATTING\_ERROR</code>.</p>
+<p>返回格式化的日期 <code class="language-plaintext highlighter-rouge">String</code> 通過 <code class="language-plaintext highlighter-rouge">value</code> 屬性可從該物件作為一個參數傳遞<code class="language-plaintext highlighter-rouge">successCallback</code>.</p>
 
-<p><code>options</code>參數是可選的且其預設值：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">{formatLength: '短'，選擇器： 日期和時間}
-</code></pre></div>
-<p><code>options.formatLength</code>可以是 <code>short</code> ， <code>medium</code> ， <code>long</code> ，或<code>full</code>.</p>
+<p>入站 <code class="language-plaintext highlighter-rouge">date</code> 參數的類型應為<code class="language-plaintext highlighter-rouge">Date</code>.</p>
 
-<p><code>options.selector</code>可以是 <code>date</code> ， <code>time</code> 或<code>date and time</code>.</p>
+<p>如果有錯誤格式日期，然後 <code class="language-plaintext highlighter-rouge">errorCallback</code> 執行與 <code class="language-plaintext highlighter-rouge">[GlobalizationError](GlobalizationError/globalizationerror.html)</code> 物件作為參數。 錯誤的期望的代碼<code class="language-plaintext highlighter-rouge">[GlobalizationError](GlobalizationError/globalizationerror.html).FORMATTING\_ERROR</code>.</p>
 
-<h2>支援的平臺</h2>
+<p><code class="language-plaintext highlighter-rouge">options</code>參數是可選的且其預設值：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{formatLength: '短'，選擇器： 日期和時間}
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">options.formatLength</code>可以是 <code class="language-plaintext highlighter-rouge">short</code> ， <code class="language-plaintext highlighter-rouge">medium</code> ， <code class="language-plaintext highlighter-rouge">long</code> ，或<code class="language-plaintext highlighter-rouge">full</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">options.selector</code>可以是 <code class="language-plaintext highlighter-rouge">date</code> ， <code class="language-plaintext highlighter-rouge">time</code> 或<code class="language-plaintext highlighter-rouge">date and time</code>.</p>
+
+<h2 id="支援的平臺">支援的平臺</h2>
 
 <ul>
-<li>  Android 系統</li>
-<li>  黑莓手機 WebWorks （OS 5.0 和更高）</li>
-<li>  iOS</li>
-<li>  Windows Phone 8</li>
+  <li>Android 系統</li>
+  <li>黑莓手機 WebWorks （OS 5.0 和更高）</li>
+  <li>iOS</li>
+  <li>Windows Phone 8</li>
 </ul>
 
-<h2>快速的示例</h2>
+<h2 id="快速的示例">快速的示例</h2>
 
-<p>如果瀏覽器設置為 <code>en\_US</code> 的地區設定，這將顯示一個彈出對話方塊與類似的文本 <code>date: 9/25/2012 4:21PM</code> 使用預設選項：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.globalization.dateToString(
+<p>如果瀏覽器設置為 <code class="language-plaintext highlighter-rouge">en\_US</code> 的地區設定，這將顯示一個彈出對話方塊與類似的文本 <code class="language-plaintext highlighter-rouge">date: 9/25/2012 4:21PM</code> 使用預設選項：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.globalization.dateToString(
     new Date(),
     function (date) { alert('date: ' + date.value + '\n'); },
     function () { alert('Error getting dateString\n'); },
     { formatLength: 'short', selector: 'date and time' }
 );
-</code></pre></div>
-<h2>完整的示例</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>dateToString Example<span class="nt">&lt;/title&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
 
-    <span class="kd">function</span> <span class="nx">checkDateString</span><span class="p">()</span> <span class="p">{</span>
-      <span class="nb">navigator</span><span class="p">.</span><span class="nx">globalization</span><span class="p">.</span><span class="nx">dateToString</span><span class="p">(</span>
-        <span class="k">new</span> <span class="nb">Date</span><span class="p">(),</span>
-        <span class="kd">function</span> <span class="p">(</span><span class="nx">date</span><span class="p">)</span> <span class="p">{</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'date: '</span> <span class="o">+</span> <span class="nx">date</span><span class="p">.</span><span class="nx">value</span> <span class="o">+</span> <span class="s1">'\n'</span><span class="p">);},</span>
-        <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'Error getting dateString\n'</span><span class="p">);,</span>
-        <span class="p">{</span><span class="na">formatLength</span><span class="p">:</span><span class="s1">'short'</span><span class="p">,</span> <span class="na">selector</span><span class="p">:</span><span class="s1">'date and time'</span><span class="p">}}</span>
-      <span class="p">);</span>
-    <span class="p">}</span>
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"checkDateString()"</span><span class="nt">&gt;</span>Click for date string<span class="nt">&lt;/button&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2>Windows Phone 8 怪癖</h2>
+<h2 id="完整的示例">完整的示例</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;dateToString Example&lt;/title&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
+
+    function checkDateString() {
+      navigator.globalization.dateToString(
+        new Date(),
+        function (date) {alert('date: ' + date.value + '\n');},
+        function () {alert('Error getting dateString\n');,
+        {formatLength:'short', selector:'date and time'}}
+      );
+    }
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;button onclick="checkDateString()"&gt;Click for date string&lt;/button&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h2 id="windows-phone-8-怪癖">Windows Phone 8 怪癖</h2>
 
 <ul>
-<li>  <code>formatLength</code>選項僅支援 <code>short</code> 和 <code>full</code> 的值。</li>
+  <li><code class="language-plaintext highlighter-rouge">formatLength</code>選項僅支援 <code class="language-plaintext highlighter-rouge">short</code> 和 <code class="language-plaintext highlighter-rouge">full</code> 的值。</li>
 </ul>
 
 

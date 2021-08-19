@@ -1182,44 +1182,51 @@
             
 
             <div id="page-toc-source">
-                <h1>iOS 플러그인</h1>
+                <h1 id="ios-플러그인">iOS 플러그인</h1>
 
-<p>플러그인은 확장 하는 오브 젝 티브-C 클래스는 <code>CDVPlugin</code> 클래스.</p>
+<p>플러그인은 확장 하는 오브 젝 티브-C 클래스는 <code class="language-plaintext highlighter-rouge">CDVPlugin</code> 클래스.</p>
 
-<p>로 각 플러그인 클래스를 등록 해야 한 <code>&lt;feature&gt;</code> 태그는 <code>config.xml</code> <a href="../../../cordova/file/fileobj/fileobj.html">파일</a>. 그것은이 메커니즘을 통해 JavaScript가 <code>exec</code> 메서드의 <code>service</code> 매개 변수는 오브 젝 티브-C 클래스에 매핑됩니다.</p>
+<p>로 각 플러그인 클래스를 등록 해야 한 <code class="language-plaintext highlighter-rouge">&lt;feature&gt;</code> 태그는 <code class="language-plaintext highlighter-rouge">config.xml</code> <a href="../../../cordova/file/fileobj/fileobj.html">파일</a>. 그것은이 메커니즘을 통해 JavaScript가 <code class="language-plaintext highlighter-rouge">exec</code> 메서드의 <code class="language-plaintext highlighter-rouge">service</code> 매개 변수는 오브 젝 티브-C 클래스에 매핑됩니다.</p>
 
-<h2>플러그인 클래스 매핑</h2>
+<h2 id="플러그인-클래스-매핑">플러그인 클래스 매핑</h2>
 
-<p>플러그인의 자바 부분 항상 사용 하는 <code>cordova.exec</code> 메서드가 다음과 같이:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">exec(&lt;successFunction&gt;, &lt;failFunction&gt;, &lt;service&gt;, &lt;action&gt;, [&lt;args&gt;]);
-</code></pre></div>
-<p>이 요청을 마샬링하는 <code>UIWebView</code> iOS 기본 측면, 더 많거나 적은 전화 아래로 끓는 <code>action</code> 메서드는 <code>service</code> 인수에 전달 된 클래스는 <code>args</code> 배열.</p>
+<p>플러그인의 자바 부분 항상 사용 하는 <code class="language-plaintext highlighter-rouge">cordova.exec</code> 메서드가 다음과 같이:</p>
 
-<p>지정한 플러그인으로는 <code>&lt;feature&gt;</code> 코르도바 iOS 응용 프로그램의 프로젝트에 태그 <code>config.xml</code> <a href="../../../cordova/file/fileobj/fileobj.html">파일</a>.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="LocalStorage"&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exec(&lt;successFunction&gt;, &lt;failFunction&gt;, &lt;service&gt;, &lt;action&gt;, [&lt;args&gt;]);
+</code></pre></div></div>
+
+<p>이 요청을 마샬링하는 <code class="language-plaintext highlighter-rouge">UIWebView</code> iOS 기본 측면, 더 많거나 적은 전화 아래로 끓는 <code class="language-plaintext highlighter-rouge">action</code> 메서드는 <code class="language-plaintext highlighter-rouge">service</code> 인수에 전달 된 클래스는 <code class="language-plaintext highlighter-rouge">args</code> 배열.</p>
+
+<p>지정한 플러그인으로는 <code class="language-plaintext highlighter-rouge">&lt;feature&gt;</code> 코르도바 iOS 응용 프로그램의 프로젝트에 태그 <code class="language-plaintext highlighter-rouge">config.xml</code> <a href="../../../cordova/file/fileobj/fileobj.html">파일</a>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="LocalStorage"&gt;
     &lt;param name="ios-package" value="CDVLocalStorage" /&gt;
 &lt;/feature&gt;
-</code></pre></div>
-<p>기능 <code>name</code> 특성은 자바 스크립트의 사용 일치 해야 <code>exec</code> 호출의 <code>service</code> 매개 <a href="../../../plugin_ref/spec.html">변수</a>, 및 <code>value</code> 특성 플러그인의 목표-C 클래스의 이름과 일치 해야 합니다. <code>&lt;param name&gt;</code>난 항상 이어야 한다 <code>&quot;ios-package&quot;</code> . 이 설치를 수행 하지 않으면, 플러그인 컴파일 수 있습니다 하지만 코르도바 연결할 수 수 없습니다.</p>
+</code></pre></div></div>
 
-<h2>플러그인 초기화 및 수명</h2>
+<p>기능 <code class="language-plaintext highlighter-rouge">name</code> 특성은 자바 스크립트의 사용 일치 해야 <code class="language-plaintext highlighter-rouge">exec</code> 호출의 <code class="language-plaintext highlighter-rouge">service</code> 매개 <a href="../../../plugin_ref/spec.html">변수</a>, 및 <code class="language-plaintext highlighter-rouge">value</code> 특성 플러그인의 목표-C 클래스의 이름과 일치 해야 합니다. <code class="language-plaintext highlighter-rouge">&lt;param name&gt;</code>난 항상 이어야 한다 <code class="language-plaintext highlighter-rouge">"ios-package"</code> . 이 설치를 수행 하지 않으면, 플러그인 컴파일 수 있습니다 하지만 코르도바 연결할 수 수 없습니다.</p>
 
-<p>각각의 인생에 대 한 플러그인 개체의 인스턴스 생성 <code>UIWebView</code> . 플러그인은 인스턴스화되지 않습니다 JavaScript에서 호출 하 여 처음 참조 될 때까지 않는 한 <code>&lt;param&gt;</code> 와 <code>onload</code> <code>name</code> 특성 설정 <code>&quot;true&quot;</code> 에 <code>config.xml</code> . 예를 들면:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="Echo"&gt;
+<h2 id="플러그인-초기화-및-수명">플러그인 초기화 및 수명</h2>
+
+<p>각각의 인생에 대 한 플러그인 개체의 인스턴스 생성 <code class="language-plaintext highlighter-rouge">UIWebView</code> . 플러그인은 인스턴스화되지 않습니다 JavaScript에서 호출 하 여 처음 참조 될 때까지 않는 한 <code class="language-plaintext highlighter-rouge">&lt;param&gt;</code> 와 <code class="language-plaintext highlighter-rouge">onload</code> <code class="language-plaintext highlighter-rouge">name</code> 특성 설정 <code class="language-plaintext highlighter-rouge">"true"</code> 에 <code class="language-plaintext highlighter-rouge">config.xml</code> . 예를 들면:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="Echo"&gt;
     &lt;param name="ios-package" value="Echo" /&gt;
     &lt;param name="onload" value="true" /&gt;
 &lt;/feature&gt;
-</code></pre></div>
-<p><em>아니</em> 플러그인에 대 한 이니셜라이저를 지정입니다. 대신, 플러그인을 사용 해야 합니다에 <code>pluginInitialize</code> 그들의 시작 논리에 대 한 방법.</p>
+</code></pre></div></div>
 
-<p>장기 실행 요청 플러그인 배경 활동 (예: 재생 미디어), 수신기 또는 내부 상태를 구현 해야 합니다에 <code>onReset</code> 메서드 및 중지 또는 그 활동을 정리. 이 방법은 때 실행 되는 <code>UIWebView</code> 이동 새 페이지 또는 새로 고침, 자바 스크립트를 다시 로드 하는.</p>
+<p><em>아니</em> 플러그인에 대 한 이니셜라이저를 지정입니다. 대신, 플러그인을 사용 해야 합니다에 <code class="language-plaintext highlighter-rouge">pluginInitialize</code> 그들의 시작 논리에 대 한 방법.</p>
 
-<h2>IOS 코르도바 플러그인 작성</h2>
+<p>장기 실행 요청 플러그인 배경 활동 (예: 재생 미디어), 수신기 또는 내부 상태를 구현 해야 합니다에 <code class="language-plaintext highlighter-rouge">onReset</code> 메서드 및 중지 또는 그 활동을 정리. 이 방법은 때 실행 되는 <code class="language-plaintext highlighter-rouge">UIWebView</code> 이동 새 페이지 또는 새로 고침, 자바 스크립트를 다시 로드 하는.</p>
 
-<p>우리는 플러그인 요청을 네이티브 쪽에서 자바 화재. 우리는 통해 제대로 매핑된 iOS 오브 젝 티브-C 플러그인은 <code>config.xml</code> <a href="../../../cordova/file/fileobj/fileobj.html">파일</a>. 그래서 무슨 최종 iOS 오브 젝 티브-C 플러그인 클래스 처럼 보여요?</p>
+<h2 id="ios-코르도바-플러그인-작성">IOS 코르도바 플러그인 작성</h2>
 
-<p>무슨 자바 스크립트를 통해 플러그인에 파견 되 면 <code>exec</code> 함수는 해당 플러그인 클래스에 전달 되 면 <code>action</code> 메서드. 플러그인 방법이이 서명을 했다:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">- (void)myMethod:(CDVInvokedUrlCommand*)command
+<p>우리는 플러그인 요청을 네이티브 쪽에서 자바 화재. 우리는 통해 제대로 매핑된 iOS 오브 젝 티브-C 플러그인은 <code class="language-plaintext highlighter-rouge">config.xml</code> <a href="../../../cordova/file/fileobj/fileobj.html">파일</a>. 그래서 무슨 최종 iOS 오브 젝 티브-C 플러그인 클래스 처럼 보여요?</p>
+
+<p>무슨 자바 스크립트를 통해 플러그인에 파견 되 면 <code class="language-plaintext highlighter-rouge">exec</code> 함수는 해당 플러그인 클래스에 전달 되 면 <code class="language-plaintext highlighter-rouge">action</code> 메서드. 플러그인 방법이이 서명을 했다:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- (void)myMethod:(CDVInvokedUrlCommand*)command
 {
     CDVPluginResult* pluginResult = nil;
     NSString* myarg = [command.arguments objectAtIndex:0];
@@ -1231,84 +1238,98 @@
     }
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
-</code></pre></div>
+</code></pre></div></div>
+
 <ol>
-<li><p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVInvokedUrlCommand.h">CDVInvokedUrlCommand.h</a></p></li>
-<li><p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPluginResult.h">CDVPluginResult.h</a></p></li>
-<li><p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVCommandDelegate.h">CDVCommandDelegate.h</a></p></li>
+  <li>
+    <p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVInvokedUrlCommand.h">CDVInvokedUrlCommand.h</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPluginResult.h">CDVPluginResult.h</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVCommandDelegate.h">CDVCommandDelegate.h</a></p>
+  </li>
 </ol>
 
-<h2>iOS CDVPluginResult 메시지 유형</h2>
+<h2 id="ios-cdvpluginresult-메시지-유형">iOS CDVPluginResult 메시지 유형</h2>
 
 <p>CDVPluginResult를 사용 하 여 돌아갈 수 있습니다 다양 한 결과 형식 다시 자바 스크립트 콜백을 처럼 클래스 메서드를 사용 하 여:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">+ (CDVPluginResult*)resultWithStatus:(CDVCommandStatus)statusOrdinal messageAs...
-</code></pre></div>
-<p>만들 수 있는 <code>String</code> , <code>Int</code> , <code>Double</code> , <code>Bool</code> , <code>Array</code> , <code>Dictionary</code> , <code>ArrayBuffer</code> , 및 <code>Multipart</code> 형식. 또는 인수 (그냥 송신 상태)를 첨부 하지 않습니다. 또는 오류를 반환 합니다. 선택할 수 있습니다 심지어 어떤 플러그인 결과 전혀 보내지를 어떤 경우에 콜백이 발생 하지 않습니다.</p>
 
-<h3>노트</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+ (CDVPluginResult*)resultWithStatus:(CDVCommandStatus)statusOrdinal messageAs...
+</code></pre></div></div>
 
-<ul>
-<li>  <code>messageAsArrayBuffer</code>기대 <code>NSData*</code> 를 변환 하 고는 <code>ArrayBuffer</code> JavaScript 콜백에 대 한 (그리고 <code>ArrayBuffers</code> 플러그인 자바에서 보낸 변환 됩니다<code>NSData*</code>).</li>
-<li>  <code>messageAsMultipart</code> 기대는 <code>NSArray *</code> 포함 된 다른 지원 되는 유형, 그리고로 전체 배열을 보냅니다에 <code>인수</code> 당신의 자바를. 
+<p>만들 수 있는 <code class="language-plaintext highlighter-rouge">String</code> , <code class="language-plaintext highlighter-rouge">Int</code> , <code class="language-plaintext highlighter-rouge">Double</code> , <code class="language-plaintext highlighter-rouge">Bool</code> , <code class="language-plaintext highlighter-rouge">Array</code> , <code class="language-plaintext highlighter-rouge">Dictionary</code> , <code class="language-plaintext highlighter-rouge">ArrayBuffer</code> , 및 <code class="language-plaintext highlighter-rouge">Multipart</code> 형식. 또는 인수 (그냥 송신 상태)를 첨부 하지 않습니다. 또는 오류를 반환 합니다. 선택할 수 있습니다 심지어 어떤 플러그인 결과 전혀 보내지를 어떤 경우에 콜백이 발생 하지 않습니다.</p>
+
+<h3 id="노트">노트</h3>
 
 <ul>
-<li>  특질: 이건 그냥 구문 설탕 (비록 그것은 달콤한)입니다. 이 방법의 모든 인수와 직렬화 또는 역직렬화 필요에 따라. 예를 들어, 그것은 반환 안전 <code>NSData*</code> 다중, 하지만 아니라 <code>Array</code> /<code>Dictionary</code>.</li>
-</ul></li>
+  <li><code class="language-plaintext highlighter-rouge">messageAsArrayBuffer</code>기대 <code class="language-plaintext highlighter-rouge">NSData*</code> 를 변환 하 고는 <code class="language-plaintext highlighter-rouge">ArrayBuffer</code> JavaScript 콜백에 대 한 (그리고 <code class="language-plaintext highlighter-rouge">ArrayBuffers</code> 플러그인 자바에서 보낸 변환 됩니다<code class="language-plaintext highlighter-rouge">NSData*</code>).</li>
+  <li><code class="language-plaintext highlighter-rouge">messageAsMultipart</code> 기대는 <code class="language-plaintext highlighter-rouge">NSArray *</code> 포함 된 다른 지원 되는 유형, 그리고로 전체 배열을 보냅니다에 <code class="language-plaintext highlighter-rouge">인수</code> 당신의 자바를.
+    <ul>
+      <li>특질: 이건 그냥 구문 설탕 (비록 그것은 달콤한)입니다. 이 방법의 모든 인수와 직렬화 또는 역직렬화 필요에 따라. 예를 들어, 그것은 반환 안전 <code class="language-plaintext highlighter-rouge">NSData*</code> 다중, 하지만 아니라 <code class="language-plaintext highlighter-rouge">Array</code> /<code class="language-plaintext highlighter-rouge">Dictionary</code>.</li>
+    </ul>
+  </li>
 </ul>
 
-<h2>에코 플러그인 iOS 플러그인</h2>
+<h2 id="에코-플러그인-ios-플러그인">에코 플러그인 iOS 플러그인</h2>
 
-<p>우리는 프로젝트의 다음에 추가할 <code>config.xml</code> <a href="../../../cordova/file/fileobj/fileobj.html">파일</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="Echo"&gt;
+<p>우리는 프로젝트의 다음에 추가할 <code class="language-plaintext highlighter-rouge">config.xml</code> <a href="../../../cordova/file/fileobj/fileobj.html">파일</a>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="Echo"&gt;
     &lt;param name="ios-package" value="Echo" /&gt;
 &lt;/feature&gt;
-</code></pre></div>
-<p>그 후에 다음 <a href="../../../cordova/file/fileobj/fileobj.html">파일</a> 추가 ( <code>Echo.h</code> 및 <code>Echo.m</code> ) 우리의 코르도바 iOS 응용 프로그램 디렉터리 안에 플러그인 디렉토리:</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cm">/********* Echo.h Cordova Plugin Header *******/</span>
+</code></pre></div></div>
 
-<span class="cp">#import &lt;Cordova/CDV.h&gt;
-</span>
-<span class="k">@interface</span> <span class="nc">Echo</span> <span class="p">:</span> <span class="nc">CDVPlugin</span>
+<p>그 후에 다음 <a href="../../../cordova/file/fileobj/fileobj.html">파일</a> 추가 ( <code class="language-plaintext highlighter-rouge">Echo.h</code> 및 <code class="language-plaintext highlighter-rouge">Echo.m</code> ) 우리의 코르도바 iOS 응용 프로그램 디렉터리 안에 플러그인 디렉토리:</p>
 
-<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">echo</span><span class="p">:(</span><span class="n">CDVInvokedUrlCommand</span><span class="o">*</span><span class="p">)</span><span class="nv">command</span><span class="p">;</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/********* Echo.h Cordova Plugin Header *******/
 
-<span class="k">@end</span>
-
-<span class="cm">/********* Echo.m Cordova Plugin Implementation *******/</span>
-
-<span class="cp">#import "Echo.h"
 #import &lt;Cordova/CDV.h&gt;
-</span>
-<span class="k">@implementation</span> <span class="nc">Echo</span>
 
-<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">echo</span><span class="p">:(</span><span class="n">CDVInvokedUrlCommand</span><span class="o">*</span><span class="p">)</span><span class="nv">command</span>
-<span class="p">{</span>
-    <span class="n">CDVPluginResult</span><span class="o">*</span> <span class="n">pluginResult</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
-    <span class="n">NSString</span><span class="o">*</span> <span class="n">echo</span> <span class="o">=</span> <span class="p">[</span><span class="n">command</span><span class="p">.</span><span class="n">arguments</span> <span class="nf">objectAtIndex</span><span class="p">:</span><span class="mi">0</span><span class="p">];</span>
+@interface Echo : CDVPlugin
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">echo</span> <span class="o">!=</span> <span class="nb">nil</span> <span class="o">&amp;&amp;</span> <span class="p">[</span><span class="n">echo</span> <span class="nf">length</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">pluginResult</span> <span class="o">=</span> <span class="p">[</span><span class="n">CDVPluginResult</span> <span class="nf">resultWithStatus</span><span class="p">:</span><span class="n">CDVCommandStatus_OK</span> <span class="nf">messageAsString</span><span class="p">:</span><span class="n">echo</span><span class="p">];</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="n">pluginResult</span> <span class="o">=</span> <span class="p">[</span><span class="n">CDVPluginResult</span> <span class="nf">resultWithStatus</span><span class="p">:</span><span class="n">CDVCommandStatus_ERROR</span><span class="p">];</span>
-    <span class="p">}</span>
+- (void)echo:(CDVInvokedUrlCommand*)command;
 
-    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">commandDelegate</span> <span class="nf">sendPluginResult</span><span class="p">:</span><span class="n">pluginResult</span> <span class="nf">callbackId</span><span class="p">:</span><span class="n">command</span><span class="p">.</span><span class="n">callbackId</span><span class="p">];</span>
-<span class="p">}</span>
+@end
 
-<span class="k">@end</span>
-</code></pre></div>
-<p>코드를 살펴 봅시다. 상단에 우리는 모든 필요한 코르 도우 바 수입. 우리의 클래스에서 확장 <code>CDVPlugin</code> (매우 중요).</p>
+/********* Echo.m Cordova Plugin Implementation *******/
 
-<p>이 플러그인만 지원 한 행동은 <code>echo</code> 작업. 첫째, 우리는 에코 문자열 사용 하 여 잡아는 <code>objectAtIndex</code> 방법에 우리의 <code>args</code> , 그것을 말하고 우리 싶어 일까 매개 <a href="../../../plugin_ref/spec.html">변수</a> 인수 배열. 우리가 매개 <a href="../../../plugin_ref/spec.html">변수</a> 검사의 조금을 할: 그것은 다는 것을 확인 <code>nil</code> , 그것은 길이가 0 인 문자열이 있는지 확인 하십시오.</p>
+#import "Echo.h"
+#import &lt;Cordova/CDV.h&gt;
 
-<p>경우 그것은, 우리는 반환 된 <code>PluginResult</code> 와 <code>ERROR</code> 상태. 모든 그 검사 통과 경우 우리가 반환는 <code>PluginResult</code> 와 <code>OK</code> 상태, 및 통과 <code>echo</code> 우리는 처음에 매개 변수로 받은 문자열.</p>
+@implementation Echo
 
-<p>마지막으로, 우리는 결과를 보낼 <code>self.commandDelegate</code> , 실행 하는 <code>exec</code> 메서드의 성공 또는 실패 콜백 JavaScript 측에. 성공 콜백 호출에 전달 된 <code>echo</code> 매개 <a href="../../../plugin_ref/spec.html">변수</a>.</p>
+- (void)echo:(CDVInvokedUrlCommand*)command
+{
+    CDVPluginResult* pluginResult = nil;
+    NSString* echo = [command.arguments objectAtIndex:0];
 
-<h2>스레딩</h2>
+    if (echo != nil &amp;&amp; [echo length] &gt; 0) {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:echo];
+    } else {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+    }
+
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
+@end
+</code></pre></div></div>
+
+<p>코드를 살펴 봅시다. 상단에 우리는 모든 필요한 코르 도우 바 수입. 우리의 클래스에서 확장 <code class="language-plaintext highlighter-rouge">CDVPlugin</code> (매우 중요).</p>
+
+<p>이 플러그인만 지원 한 행동은 <code class="language-plaintext highlighter-rouge">echo</code> 작업. 첫째, 우리는 에코 문자열 사용 하 여 잡아는 <code class="language-plaintext highlighter-rouge">objectAtIndex</code> 방법에 우리의 <code class="language-plaintext highlighter-rouge">args</code> , 그것을 말하고 우리 싶어 일까 매개 <a href="../../../plugin_ref/spec.html">변수</a> 인수 배열. 우리가 매개 <a href="../../../plugin_ref/spec.html">변수</a> 검사의 조금을 할: 그것은 다는 것을 확인 <code class="language-plaintext highlighter-rouge">nil</code> , 그것은 길이가 0 인 문자열이 있는지 확인 하십시오.</p>
+
+<p>경우 그것은, 우리는 반환 된 <code class="language-plaintext highlighter-rouge">PluginResult</code> 와 <code class="language-plaintext highlighter-rouge">ERROR</code> 상태. 모든 그 검사 통과 경우 우리가 반환는 <code class="language-plaintext highlighter-rouge">PluginResult</code> 와 <code class="language-plaintext highlighter-rouge">OK</code> 상태, 및 통과 <code class="language-plaintext highlighter-rouge">echo</code> 우리는 처음에 매개 변수로 받은 문자열.</p>
+
+<p>마지막으로, 우리는 결과를 보낼 <code class="language-plaintext highlighter-rouge">self.commandDelegate</code> , 실행 하는 <code class="language-plaintext highlighter-rouge">exec</code> 메서드의 성공 또는 실패 콜백 JavaScript 측에. 성공 콜백 호출에 전달 된 <code class="language-plaintext highlighter-rouge">echo</code> 매개 <a href="../../../plugin_ref/spec.html">변수</a>.</p>
+
+<h2 id="스레딩">스레딩</h2>
 
 <p>플러그인 메서드는 UI와 동일한 스레드에서 실행 됩니다. 귀하의 플러그인 처리의 큰 거래를 필요로 하거나 차단 호출, 백그라운드 스레드를 사용 해야 합니다. 예를 들어:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">- (void)myPluginMethod:(CDVInvokedUrlCommand*)command
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- (void)myPluginMethod:(CDVInvokedUrlCommand*)command
 {
     // Check command.arguments here.
     [self.commandDelegate runInBackground:^{
@@ -1319,29 +1340,38 @@
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }];
 }
-</code></pre></div>
-<h2>고급 플러그인 기능</h2>
+</code></pre></div></div>
+
+<h2 id="고급-플러그인-기능">고급 플러그인 기능</h2>
 
 <p>재정의할 수 있는 다른 방법을 참조 하십시오.</p>
 
 <ul>
-<li><p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.h">CDVPlugin.h</a></p></li>
-<li><p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.m">CDVPlugin.m</a></p></li>
+  <li>
+    <p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.h">CDVPlugin.h</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.m">CDVPlugin.m</a></p>
+  </li>
 </ul>
 
-<p>예를 들어에 연결할 수 있습니다는 <code>pause</code> , <code>resume</code> , 응용 프로그램 종료 및 <code>handleOpenURL</code> <a href="../../../cordova/events/events.html">이벤트</a>.</p>
+<p>예를 들어에 연결할 수 있습니다는 <code class="language-plaintext highlighter-rouge">pause</code> , <code class="language-plaintext highlighter-rouge">resume</code> , 응용 프로그램 종료 및 <code class="language-plaintext highlighter-rouge">handleOpenURL</code> <a href="../../../cordova/events/events.html">이벤트</a>.</p>
 
-<h2>플러그인을 디버깅</h2>
+<h2 id="플러그인을-디버깅">플러그인을 디버깅</h2>
 
 <p>오브 젝 티브-C 측을 디버깅 하려면 Xcode의 내장 디버거를 사용 합니다. 자바 스크립트, ios 5.0 사용할 수 있습니다 <a href="https://github.com/apache/cordova-weinre">Weinre, 아파치 코르도바 프로젝트</a> 또는 <a href="http://www.iwebinspector.com/">iWebInspector, 세 번째 파티 유틸리티</a></p>
 
 <p>IOS 6에 대 한 단순히 6 시뮬레이터는 iOS에서 실행 되는 응용 프로그램에 연결할 사파리 6.0를 사용 합니다.</p>
 
-<h2>일반적인 함정</h2>
+<h2 id="일반적인-함정">일반적인 함정</h2>
 
 <ul>
-<li><p>Config.xml에 플러그인의 매핑을 추가 하는 것을 잊지 마세요. 당신이 잊은 경우 Xcode 콘솔에 오류가 기록 됩니다.</p></li>
-<li><p>도메인 화이트 리스트 가이드에 설명 된 대로, whitelist에 연결할 호스트를 추가 하는 것을 잊지 마세요. 당신이 잊은 경우 Xcode 콘솔에 오류가 기록 됩니다.</p></li>
+  <li>
+    <p>Config.xml에 플러그인의 매핑을 추가 하는 것을 잊지 마세요. 당신이 잊은 경우 Xcode 콘솔에 오류가 기록 됩니다.</p>
+  </li>
+  <li>
+    <p>도메인 화이트 리스트 가이드에 설명 된 대로, whitelist에 연결할 호스트를 추가 하는 것을 잊지 마세요. 당신이 잊은 경우 Xcode 콘솔에 오류가 기록 됩니다.</p>
+  </li>
 </ul>
 
 

@@ -2112,80 +2112,88 @@
             
 
             <div id="page-toc-source">
-                <h1>BlackBerry Plugins</h1>
+                <h1 id="blackberry-plugins">BlackBerry Plugins</h1>
 
-<p>Questa guida illustra come sviluppare un plugin Echo sul BlackBerry. La guida allo sviluppo di Plugin fornisce un&#39;ampia panoramica con cui si dovrebbe già avere familiarità, e questa guida riprende da dove lascia fuori. Inoltre, scaricare la <a href="https://git-wip-us.apache.org/repos/asf?p=cordova-blackberry-webworks.git;a=summary">repository di Cordova BlackBerry</a>.</p>
+<p>Questa guida illustra come sviluppare un plugin Echo sul BlackBerry. La guida allo sviluppo di Plugin fornisce un’ampia panoramica con cui si dovrebbe già avere familiarità, e questa guida riprende da dove lascia fuori. Inoltre, scaricare la <a href="https://git-wip-us.apache.org/repos/asf?p=cordova-blackberry-webworks.git;a=summary">repository di Cordova BlackBerry</a>.</p>
 
-<p>Il <code>Cordova-BlackBerry</code> progetto consente di distribuire ai dispositivi BlackBerry come la torcia, grassetto e Playbook. Il Playbook utilizza un diverso codice base rispetto ad altri dispositivi palmari BlackBerry, per cui è necessario duplicare i vostri sforzi di sviluppo. Questa guida si concentra su dispositivi palmari anziché compresse. (In futuro, questa guida dovrebbe coprire entrambe le piattaforme).</p>
+<p>Il <code class="language-plaintext highlighter-rouge">Cordova-BlackBerry</code> progetto consente di distribuire ai dispositivi BlackBerry come la torcia, grassetto e Playbook. Il Playbook utilizza un diverso codice base rispetto ad altri dispositivi palmari BlackBerry, per cui è necessario duplicare i vostri sforzi di sviluppo. Questa guida si concentra su dispositivi palmari anziché compresse. (In futuro, questa guida dovrebbe coprire entrambe le piattaforme).</p>
 
-<p>Il plugin Echo restituisce essenzialmente qualunque messaggio un utente fornisce per la <code>window.echo</code> funzione:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">window.echo = function(str, callback) {
+<p>Il plugin Echo restituisce essenzialmente qualunque messaggio un utente fornisce per la <code class="language-plaintext highlighter-rouge">window.echo</code> funzione:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>window.echo = function(str, callback) {
     cordova.exec(callback, function(err) {
         callback('Nothing to echo.');
     }, "Echo", "echo", [str]);
 };
-</code></pre></div>
-<h2>Modifica plugins</h2>
+</code></pre></div></div>
 
-<p>Il progetto <code>www/plugins.xml</code> directory contiene tutti i riferimenti necessari plugins del vostro progetto di Cordova. Aggiungere un ulteriore riferimento così che quando <code>cordova.exec</code> è chiamato, Cordova conosce come mappare il <code>Echo</code> argomento di <code>cordova.exec</code> per la <code>Echo</code> classe che vogliamo scrivere nativamente:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="Echo"&gt;
+<h2 id="modifica-plugins">Modifica plugins</h2>
+
+<p>Il progetto <code class="language-plaintext highlighter-rouge">www/plugins.xml</code> directory contiene tutti i riferimenti necessari plugins del vostro progetto di Cordova. Aggiungere un ulteriore riferimento così che quando <code class="language-plaintext highlighter-rouge">cordova.exec</code> è chiamato, Cordova conosce come mappare il <code class="language-plaintext highlighter-rouge">Echo</code> argomento di <code class="language-plaintext highlighter-rouge">cordova.exec</code> per la <code class="language-plaintext highlighter-rouge">Echo</code> classe che vogliamo scrivere nativamente:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="Echo"&gt;
     &lt;param name="blackberry-package" value="org.apache.cordova.echo.Echo" /&gt;
 &lt;/feature&gt;
-</code></pre></div>
-<h2>L&#39;aggiunta di Echo.java</h2>
+</code></pre></div></div>
 
-<p>Se si nota la struttura dell&#39;attributo value, vedrete un percorso definito che conduce al plugin Echo. Nella directory radice del repo Cordova BlackBerry WebWorks, cercare una directory chiamata <code>framework</code> . Questa directory contiene tutto il codice sorgente che gira nativamente su BlackBerry. Passare a <code>framework/ext/src/org/apache/cordova</code> . A questo punto, vedrete tutti i plugin directorys, che all&#39;interno della quale è il codice sorgente. Quindi aggiungere l&#39;eco directory per <code>framework/ext/src/org/apache/cordova/echo</code> e creare un file chiamato <code>Echo.java</code> a<code>framework/ext/src/org/apache/cordova/echo/Echo.java</code>.</p>
+<h2 id="laggiunta-di-echojava">L’aggiunta di Echo.java</h2>
 
-<h2>Scrittura Echo.java</h2>
+<p>Se si nota la struttura dell’attributo value, vedrete un percorso definito che conduce al plugin Echo. Nella directory radice del repo Cordova BlackBerry WebWorks, cercare una directory chiamata <code class="language-plaintext highlighter-rouge">framework</code> . Questa directory contiene tutto il codice sorgente che gira nativamente su BlackBerry. Passare a <code class="language-plaintext highlighter-rouge">framework/ext/src/org/apache/cordova</code> . A questo punto, vedrete tutti i plugin directorys, che all’interno della quale è il codice sorgente. Quindi aggiungere l’eco directory per <code class="language-plaintext highlighter-rouge">framework/ext/src/org/apache/cordova/echo</code> e creare un file chiamato <code class="language-plaintext highlighter-rouge">Echo.java</code> a<code class="language-plaintext highlighter-rouge">framework/ext/src/org/apache/cordova/echo/Echo.java</code>.</p>
 
-<p>L&#39;idea base scrivendo un plugin è quello di creare una classe che estende la classe Plugin e un metodo chiamato <code>execute</code> per restituire un <code>PluginResult</code> classe. Tutte le chiamate a <code>cordova.exec</code> passa nell&#39;azione da eseguire all&#39;interno della classe, così come gli argomenti. In questo caso, &quot;eco&quot; è l&#39;azione che vogliamo eseguire all&#39;interno della classe &quot;Echo&quot; e [str] sono gli argomenti che stiamo passando in.</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="k">package</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">echo</span><span class="p">;</span>
+<h2 id="scrittura-echojava">Scrittura Echo.java</h2>
 
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="n">Plugin</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="n">PluginResult</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">json4j</span><span class="p">.</span><span class="n">JSONArray</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">json4j</span><span class="p">.</span><span class="n">JSONException</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">json4j</span><span class="p">.</span><span class="n">JSONObject</span><span class="p">;</span>
-<span class="p">/**</span>
- <span class="p">*</span> <span class="n">A</span> <span class="n">simple</span> <span class="n">plugin</span> <span class="k">to</span> <span class="n">demonstrate</span> <span class="n">how</span> <span class="k">to</span> <span class="n">build</span> <span class="n">a</span> <span class="n">plugin</span> <span class="n">for</span> <span class="n">BlackBerry</span>
- <span class="p">*</span> <span class="n">Basically</span> <span class="n">echos</span> <span class="n">back</span> <span class="n">the</span> <span class="n">msg</span> <span class="n">that</span> <span class="n">a</span> <span class="n">user</span> <span class="n">calls</span> <span class="k">to</span> <span class="n">this</span> <span class="n">plugin</span>
- <span class="p">*/</span>
-<span class="k">public</span> <span class="n">final</span> <span class="n">class</span> <span class="n">Echo</span> <span class="n">extends</span> <span class="n">Plugin</span> <span class="p">{</span>
+<p>L’idea base scrivendo un plugin è quello di creare una classe che estende la classe Plugin e un metodo chiamato <code class="language-plaintext highlighter-rouge">execute</code> per restituire un <code class="language-plaintext highlighter-rouge">PluginResult</code> classe. Tutte le chiamate a <code class="language-plaintext highlighter-rouge">cordova.exec</code> passa nell’azione da eseguire all’interno della classe, così come gli argomenti. In questo caso, “eco” è l’azione che vogliamo eseguire all’interno della classe “Echo” e [str] sono gli argomenti che stiamo passando in.</p>
 
-    <span class="k">public</span> <span class="n">static</span> <span class="n">final</span> <span class="k">String</span> <span class="n">echo</span> <span class="p">=</span> <span class="s2">"echo"</span><span class="p">;</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package org.apache.cordova.echo;
 
-    <span class="k">public</span> <span class="n">PluginResult</span> <span class="n">execute</span><span class="p">(</span><span class="k">String</span> <span class="n">action</span><span class="p">,</span> <span class="n">JSONArray</span> <span class="n">args</span><span class="p">,</span> <span class="k">String</span> <span class="n">callbackId</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">PluginResult</span> <span class="n">result</span> <span class="p">=</span> <span class="n">new</span> <span class="n">PluginResult</span><span class="p">(</span><span class="n">PluginResult</span><span class="p">.</span><span class="n">Status</span><span class="p">.</span><span class="n">INVALID_ACTION</span><span class="p">,</span> <span class="s2">"Echo: Invalid action:"</span> <span class="p">+</span> <span class="n">action</span><span class="p">);</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">action</span><span class="p">.</span><span class="n">equals</span><span class="p">(</span><span class="n">echo</span><span class="p">)){</span>
-            <span class="n">try</span> <span class="p">{</span>
-                <span class="k">String</span> <span class="n">theMsg</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
-                <span class="k">if</span><span class="p">(</span><span class="n">theMsg</span><span class="c1">!= null || theMsg.length()&gt;0){
-</span>                    <span class="n">result</span> <span class="p">=</span> <span class="n">new</span> <span class="n">PluginResult</span><span class="p">(</span><span class="n">PluginResult</span><span class="p">.</span><span class="n">Status</span><span class="p">.</span><span class="n">OK</span><span class="p">,</span> <span class="n">theMsg</span><span class="p">);</span>
-                <span class="p">}</span><span class="k">else</span><span class="p">{</span>
-                    <span class="n">result</span> <span class="p">=</span> <span class="n">new</span> <span class="n">PluginResult</span><span class="p">(</span><span class="n">PluginResult</span><span class="p">.</span><span class="n">Status</span><span class="p">.</span><span class="n">ERROR</span><span class="p">,</span> <span class="s2">"Nothing to echo."</span><span class="p">);</span>
-                <span class="p">}</span>
-            <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">JSONException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">result</span> <span class="p">=</span> <span class="n">new</span> <span class="n">PluginResult</span><span class="p">(</span><span class="n">PluginResult</span><span class="p">.</span><span class="n">Status</span><span class="p">.</span><span class="n">JSON_EXCEPTION</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="n">getMessage</span><span class="p">());</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
+import org.apache.cordova.api.Plugin;
+import org.apache.cordova.api.PluginResult;
+import org.apache.cordova.json4j.JSONArray;
+import org.apache.cordova.json4j.JSONException;
+import org.apache.cordova.json4j.JSONObject;
+/**
+ * A simple plugin to demonstrate how to build a plugin for BlackBerry
+ * Basically echos back the msg that a user calls to this plugin
+ */
+public final class Echo extends Plugin {
 
-        <span class="n">return</span> <span class="n">result</span><span class="p">;</span>
-    <span class="p">}</span>
+    public static final String echo = "echo";
 
-<span class="p">}</span>
-</code></pre></div>
-<p>Così se guardiamo il codice qui sopra, possiamo vedere che all&#39;interno del metodo execute, prima cerchiamo quali azioni stanno arrivando. Il plugin Echo ha solo una azione, <code>echo</code> , quindi ci sarà il solo check per quello. Se il nostro plugin aveva più azioni, è semplicemente una questione di aggiungere ulteriori test condizionali per verificare tali azioni.</p>
+    public PluginResult execute(String action, JSONArray args, String callbackId) {
+        PluginResult result = new PluginResult(PluginResult.Status.INVALID_ACTION, "Echo: Invalid action:" + action);
+        if(action.equals(echo)){
+            try {
+                String theMsg = args.getString(0);
+                if(theMsg!= null || theMsg.length()&gt;0){
+                    result = new PluginResult(PluginResult.Status.OK, theMsg);
+                }else{
+                    result = new PluginResult(PluginResult.Status.ERROR, "Nothing to echo.");
+                }
+            } catch (JSONException e) {
+                result = new PluginResult(PluginResult.Status.JSON_EXCEPTION, e.getMessage());
+            }
+        }
 
-<p>Abbiamo poi intenzione di afferrare il messaggio proveniente dal argomenti che viene fornito dal parametro args. Noi possiamo afferrare il primo argomento facendo semplicemente<code>String theMsg = args.getString(0);</code>.</p>
+        return result;
+    }
 
-<p>Faremo qualche errore controllo e se il messaggio sembra OK, ci sarà istanziare un nuovo PluginResult con uno status ok: <code>PluginResult.Status.OK</code> e restituire il messaggio: <code>theMsg</code> . Dopo questo, abbiamo restituito il risultato che da passare a JavaScript di essere licenziato nel callback di successo. Se qualcosa non riesce, possiamo tornare varie eccezioni di stato come <code>PluginResult.Status.ERROR</code> , <code>PluginResult.Status.JSON_EXCEPTION</code> , o <code>PluginResult.Status.INVALID_ACTION</code> . Quando passato indietro, questi tipi di risultati fuoco il callback di fallire in JavaScript.</p>
+}
+</code></pre></div></div>
 
-<h2>Aggiornando il. jar nella directory www del progetto</h2>
+<p>Così se guardiamo il codice qui sopra, possiamo vedere che all’interno del metodo execute, prima cerchiamo quali azioni stanno arrivando. Il plugin Echo ha solo una azione, <code class="language-plaintext highlighter-rouge">echo</code> , quindi ci sarà il solo check per quello. Se il nostro plugin aveva più azioni, è semplicemente una questione di aggiungere ulteriori test condizionali per verificare tali azioni.</p>
 
-<p>L&#39;aggiunto <code>Echo.java</code> deve essere aggiornato nel tuo progetto. Per costruire il <code>.jar</code> del file, passare alla directory principale di repo BlackBerry WebWorks ed eseguire il <code>ant</code> comando:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">ant update -Dproject.path="~/path_to_my_project"
-</code></pre></div>
-<p>Questo crea un nuovo <code>.jar</code> del file nella <code>build/ext</code> directory. Copia il <code>build/ext/cordova.jar</code> del file nel tuo <code>project/www/ext</code> directory.</p>
+<p>Abbiamo poi intenzione di afferrare il messaggio proveniente dal argomenti che viene fornito dal parametro args. Noi possiamo afferrare il primo argomento facendo semplicemente<code class="language-plaintext highlighter-rouge">String theMsg = args.getString(0);</code>.</p>
+
+<p>Faremo qualche errore controllo e se il messaggio sembra OK, ci sarà istanziare un nuovo PluginResult con uno status ok: <code class="language-plaintext highlighter-rouge">PluginResult.Status.OK</code> e restituire il messaggio: <code class="language-plaintext highlighter-rouge">theMsg</code> . Dopo questo, abbiamo restituito il risultato che da passare a JavaScript di essere licenziato nel callback di successo. Se qualcosa non riesce, possiamo tornare varie eccezioni di stato come <code class="language-plaintext highlighter-rouge">PluginResult.Status.ERROR</code> , <code class="language-plaintext highlighter-rouge">PluginResult.Status.JSON_EXCEPTION</code> , o <code class="language-plaintext highlighter-rouge">PluginResult.Status.INVALID_ACTION</code> . Quando passato indietro, questi tipi di risultati fuoco il callback di fallire in JavaScript.</p>
+
+<h2 id="aggiornando-il-jar-nella-directory-www-del-progetto">Aggiornando il. jar nella directory www del progetto</h2>
+
+<p>L’aggiunto <code class="language-plaintext highlighter-rouge">Echo.java</code> deve essere aggiornato nel tuo progetto. Per costruire il <code class="language-plaintext highlighter-rouge">.jar</code> del file, passare alla directory principale di repo BlackBerry WebWorks ed eseguire il <code class="language-plaintext highlighter-rouge">ant</code> comando:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ant update -Dproject.path="~/path_to_my_project"
+</code></pre></div></div>
+
+<p>Questo crea un nuovo <code class="language-plaintext highlighter-rouge">.jar</code> del file nella <code class="language-plaintext highlighter-rouge">build/ext</code> directory. Copia il <code class="language-plaintext highlighter-rouge">build/ext/cordova.jar</code> del file nel tuo <code class="language-plaintext highlighter-rouge">project/www/ext</code> directory.</p>
 
 <p>Se tutto va bene, che permette di utilizzare il plugin Echo in BlackBerry.</p>
 

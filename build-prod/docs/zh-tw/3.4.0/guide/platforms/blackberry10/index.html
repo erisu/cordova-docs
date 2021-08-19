@@ -1040,124 +1040,150 @@
             
 
             <div id="page-toc-source">
-                <h1>10 黑莓平臺指南</h1>
+                <h1 id="10-黑莓平臺指南">10 黑莓平臺指南</h1>
 
 <p>本指南介紹如何設置您的開發環境，以生成和部署科爾多瓦的黑莓 10 設備的應用程式。 對於以前版本的黑莓手機，你需要使用一組不同的命令列工具，黑莓平臺指南中所述。</p>
 
-<h2>要求</h2>
+<h2 id="要求">要求</h2>
 
 <p>在 Windows、 Mac 和 Linux 上提供的開發環境。</p>
 
-<p>開發人員應使用 <code>cordova</code> 實用程式與黑莓手機本機 SDK 一起。 命令列介面資訊，請參閱如何安裝 <code>cordova</code> ，添加專案，然後生成和部署每個平臺。</p>
+<p>開發人員應使用 <code class="language-plaintext highlighter-rouge">cordova</code> 實用程式與黑莓手機本機 SDK 一起。 命令列介面資訊，請參閱如何安裝 <code class="language-plaintext highlighter-rouge">cordova</code> ，添加專案，然後生成和部署每個平臺。</p>
 
-<h2>安裝黑莓手機本機 SDK</h2>
+<h2 id="安裝黑莓手機本機-sdk">安裝黑莓手機本機 SDK</h2>
 
 <p>黑莓手機本機 SDK 是可用的<a href="http://developer.blackberry.com/native/download/">developer.blackberry.com</a>。 安裝完成後，您需要將其命令列工具添加到您的系統路徑。</p>
 
 <p>關於視窗：</p>
 
 <ul>
-<li><p>轉到<strong>我的電腦 → 屬性 → 高級 → 環境變數</strong>.</p></li>
-<li><p>追加本機 SDK 安裝目錄的路徑，例如：</p>
+  <li>
+    <p>轉到<strong>我的電腦 → 屬性 → 高級 → 環境變數</strong>.</p>
+  </li>
+  <li>
+    <p>追加本機 SDK 安裝目錄的路徑，例如：</p>
 
-<p>;C:\bbndk\host_10_2_0_132\darwin\x86\usr\bin\</p></li>
+    <p>;C:\bbndk\host_10_2_0_132\darwin\x86\usr\bin\</p>
+  </li>
 </ul>
 
 <p>關於 Mac 和 Linux：</p>
 
 <ul>
-<li><p>編輯 <code>~/.bash_profile</code> 檔，添加如下所示，根據安裝本機的 SDK 了一行：</p>
+  <li>
+    <p>編輯 <code class="language-plaintext highlighter-rouge">~/.bash_profile</code> 檔，添加如下所示，根據安裝本機的 SDK 了一行：</p>
 
-<p>$ export PATH=${PATH}:/Applications/Momentics.app/host_10_2_0_15/darwin/x86/usr/bin/</p></li>
-<li><p>運行下面的命令將在當前會話中的更改應用：</p>
+    <p>$ export PATH=${PATH}:/Applications/Momentics.app/host_10_2_0_15/darwin/x86/usr/bin/</p>
+  </li>
+  <li>
+    <p>運行下面的命令將在當前會話中的更改應用：</p>
 
-<p>元源 ~/.bash_profile</p></li>
+    <p>元源 ~/.bash_profile</p>
+  </li>
 </ul>
 
-<h2>為簽章設定</h2>
+<h2 id="為簽章設定">為簽章設定</h2>
 
 <p>如果您希望在設備上測試或發佈通過黑莓應用程式，您的系統必須設置為代碼簽名。</p>
 
 <p>若要獲取簽名金鑰，請轉到 [黑莓鍵順序形式] (HTTPs://www.blackberry.com/SignedKeys/codesigning.html)。</p>
 
-<p>選擇第一個核取方塊：&quot;為 BlackBerry10 使用黑莓 NDK 開發的應用程式&quot;，然後登錄或創建 BBID。</p>
+<p>選擇第一個核取方塊：”為 BlackBerry10 使用黑莓 NDK 開發的應用程式”，然後登錄或創建 BBID。</p>
 
-<p>輸入密碼並按一下&quot;獲取權杖&quot;以下載 bbidtoken.csk。將此檔保存到您的作業系統，將會顯示在下載頁面上的預設位置。</p>
+<p>輸入密碼並按一下”獲取權杖”以下載 bbidtoken.csk。將此檔保存到您的作業系統，將會顯示在下載頁面上的預設位置。</p>
 
 <p>最後一步是生成簽名的證書：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ blackberry-keytool -genkeypair -storepass &lt;password&gt; -author 'Your Name’
-</code></pre></div>
-<h2>創建一個專案</h2>
 
-<p>使用 <code>cordova</code> 實用程式設置了一個新的專案，如所述的命令列介面。例如，在原始程式碼中的目錄：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova create hello com.example.hello
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ blackberry-keytool -genkeypair -storepass &lt;password&gt; -author 'Your Name’
+</code></pre></div></div>
+
+<h2 id="創建一個專案">創建一個專案</h2>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">cordova</code> 實用程式設置了一個新的專案，如所述的命令列介面。例如，在原始程式碼中的目錄：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova create hello com.example.hello
 $ cd hello
 $ cordova platform add blackberry10
 $ cordova build
-</code></pre></div>
-<h2>部署到模擬程式</h2>
+</code></pre></div></div>
+
+<h2 id="部署到模擬程式">部署到模擬程式</h2>
 
 <p>如果您想要運行的設備模擬程式，下載並安裝黑莓手機 10 模擬器。</p>
 
 <ul>
-<li>  <a href="http://developer.blackberry.com/native/download/">下載</a></li>
-<li>  <a href="http://developer.blackberry.com/devzone/develop/simulator/blackberry_10_simulator_start.html">入門</a></li>
+  <li><a href="http://developer.blackberry.com/native/download/">下載</a></li>
+  <li><a href="http://developer.blackberry.com/devzone/develop/simulator/blackberry_10_simulator_start.html">入門</a></li>
 </ul>
 
 <p>在測試之前在模擬器或設備上的應用程式，您需要啟用發展模式。</p>
 
 <p>啟動模擬程式映射，然後從主畫面中選擇<strong>設置</strong>：</p>
 
-<p><img src="/static/img/guide/platforms/blackberry10/bb_home.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/blackberry10/bb_home.png" alt="" /></p>
 
 <p>導航到<strong>的安全和隱私 → 發展模式</strong>節和啟用的選項：</p>
 
-<p><img src="/static/img/guide/platforms/blackberry10/bb_devel.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/blackberry10/bb_devel.png" alt="" /></p>
 
-<p>然後，運行 <code>emulate</code> 命令來查看該應用程式：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova emulate blackberry10 --devicepass &lt;password&gt;
-</code></pre></div>
-<h2>將部署到設備</h2>
+<p>然後，運行 <code class="language-plaintext highlighter-rouge">emulate</code> 命令來查看該應用程式：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova emulate blackberry10 --devicepass &lt;password&gt;
+</code></pre></div></div>
+
+<h2 id="將部署到設備">將部署到設備</h2>
 
 <p>要部署到一個設備，請確保它插入到您的電腦和發展模式已啟用。</p>
 
-<p>然後，運行 <code>run</code> 命令來查看該應用程式：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova run blackberry10 --devicepass &lt;password&gt;
-</code></pre></div>
+<p>然後，運行 <code class="language-plaintext highlighter-rouge">run</code> 命令來查看該應用程式：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova run blackberry10 --devicepass &lt;password&gt;
+</code></pre></div></div>
+
 <p>如果調試的權杖還沒有為該設備設置，錯誤訊息，提示您提供密碼您定義配置您的電腦以簽名的應用程式時。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova run blackberry10 --devicepass &lt;password&gt; --keystorepass &lt;signing password&gt;
-</code></pre></div>
-<h2>WebInspector 的調試</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova run blackberry10 --devicepass &lt;password&gt; --keystorepass &lt;signing password&gt;
+</code></pre></div></div>
+
+<h2 id="webinspector-的調試">WebInspector 的調試</h2>
 
 <p>在調試時在設備或模擬程式上，您可以運行 WebInspector 遠端來查看應用程式的內部狀態。 使您可以連接到您的應用程式使用標準 web 瀏覽器的 URL 顯示一個提示。 有關詳細資訊，請參見<a href="http://developer.blackberry.com/html5/documentation/web_inspector_overview_1553586_11.html">調試使用 WebInspector</a>.</p>
 
-<h2>生成發佈版本</h2>
+<h2 id="生成發佈版本">生成發佈版本</h2>
 
-<p>預設情況下，運行 <code>cordova build</code> 命令創建一個無符號的<em>.bar</em>包檔適用于設備或模擬器上測試。</p>
+<p>預設情況下，運行 <code class="language-plaintext highlighter-rouge">cordova build</code> 命令創建一個無符號的<em>.bar</em>包檔適用于設備或模擬器上測試。</p>
 
-<p>使用 <code>--release</code> 創建一個發佈版本適合通過黑莓手機世界分佈。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova build --release --keystorepass &lt;signing password&gt;
-</code></pre></div>
-<p><code>--keystorepass</code>選項指定定義配置您的電腦登錄時的密碼的應用程式。</p>
+<p>使用 <code class="language-plaintext highlighter-rouge">--release</code> 創建一個發佈版本適合通過黑莓手機世界分佈。</p>
 
-<h2>將部署到其他位置</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova build --release --keystorepass &lt;signing password&gt;
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">--keystorepass</code>選項指定定義配置您的電腦登錄時的密碼的應用程式。</p>
+
+<h2 id="將部署到其他位置">將部署到其他位置</h2>
 
 <p>上面的說明假定通過 USB 插入設備或模擬器運行在本地電腦上。它也是可能部署到其他位置。</p>
 
 <p>當您設置黑莓 10 平臺為您的專案包含一組額外的命令列實用程式。 下面的命令，在這種情況下調用從專案的頂級目錄中，將一個名為<em>動車組</em>與 IP 位址的目標相關聯。</p>
 
 <ul>
-<li><p>關於視窗：</p>
+  <li>
+    <p>關於視窗：</p>
 
-<p>$ platforms\blackberry10\cordova\target.bat add emu 192.168.2.24 -t simulator</p></li>
-<li><p>關於 Mac/Linux：</p>
+    <p>$ platforms\blackberry10\cordova\target.bat add emu 192.168.2.24 -t simulator</p>
+  </li>
+  <li>
+    <p>關於 Mac/Linux：</p>
 
-<p>$ platforms/blackberry10/cordova/target add emu 192.168.2.24 -t simulator</p></li>
+    <p>$ platforms/blackberry10/cordova/target add emu 192.168.2.24 -t simulator</p>
+  </li>
 </ul>
 
-<p>一旦定義了目標，你可以提供給運行的命令使用 <code>--target</code> ：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova run blackberry10 --target=emu
-</code></pre></div>
+<p>一旦定義了目標，你可以提供給運行的命令使用 <code class="language-plaintext highlighter-rouge">--target</code> ：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova run blackberry10 --target=emu
+</code></pre></div></div>
+
 
             </div>
         </div>

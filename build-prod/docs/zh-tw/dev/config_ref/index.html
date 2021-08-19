@@ -2112,34 +2112,39 @@
             
 
             <div id="page-toc-source">
-                <h1>Config.xml 檔</h1>
+                <h1 id="configxml-檔">Config.xml 檔</h1>
 
-<p>與全域設定檔，可以控制應用程式的行為的許多方面 <code>config.xml</code> 。 這與平臺無關的 XML 檔被安排基於 W3C 的<a href="http://www.w3.org/TR/widgets/">打包 Web 應用程式 （視窗小部件）</a>規範，並擴展指定核心科爾多瓦 API 功能、 外掛程式和平臺特定的設置。</p>
+<p>與全域設定檔，可以控制應用程式的行為的許多方面 <code class="language-plaintext highlighter-rouge">config.xml</code> 。 這與平臺無關的 XML 檔被安排基於 W3C 的<a href="http://www.w3.org/TR/widgets/">打包 Web 應用程式 （視窗小部件）</a>規範，並擴展指定核心科爾多瓦 API 功能、 外掛程式和平臺特定的設置。</p>
 
 <p>為專案創建與科爾多瓦 CLI （描述在命令列介面），可以在頂層目錄中找到此檔：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    app/config.xml
-</code></pre></div>
-<p>請注意之前的版本 3.3.1-0.2.0，該檔存在 <code>app/www/config.xml</code> ，並且仍然支援讓它在這裡。</p>
 
-<p>當使用 CLI 來生成專案時，此檔的版本被動地被覆制到各種 <code>platforms/</code> 子目錄，例如：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    app/platforms/ios/AppName/config.xml
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    app/config.xml
+</code></pre></div></div>
+
+<p>請注意之前的版本 3.3.1-0.2.0，該檔存在 <code class="language-plaintext highlighter-rouge">app/www/config.xml</code> ，並且仍然支援讓它在這裡。</p>
+
+<p>當使用 CLI 來生成專案時，此檔的版本被動地被覆制到各種 <code class="language-plaintext highlighter-rouge">platforms/</code> 子目錄，例如：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    app/platforms/ios/AppName/config.xml
     app/platforms/blackberry10/www/config.xml
     app/platforms/android/res/xml/config.xml
-</code></pre></div>
+</code></pre></div></div>
+
 <p>本節詳細介紹全球和跨平臺的配置選項。請參見以下各節為平臺特定的選項：</p>
 
 <ul>
-<li>  <a href="../guide/platforms/ios/config.html">iOS 配置</a></li>
-<li>  <a href="../guide/platforms/android/config.html">Android 系統組態</a></li>
-<li>  <a href="../guide/platforms/blackberry10/config.html">黑莓 10 配置</a></li>
+  <li><a href="../guide/platforms/ios/config.html">iOS 配置</a></li>
+  <li><a href="../guide/platforms/android/config.html">Android 系統組態</a></li>
+  <li><a href="../guide/platforms/blackberry10/config.html">黑莓 10 配置</a></li>
 </ul>
 
 <p>除了下面詳述的各種配置選項，您還可以配置每個目標平臺的圖像應用程式的核心的集。有關更多資訊，請參見圖示和啟動畫面。</p>
 
-<h2>核心配置元素</h2>
+<h2 id="核心配置元素">核心配置元素</h2>
 
-<p>此示例顯示了預設的 <code>config.xml</code> 生成的 CLI 的 <code>create</code> 命令，所述的命令列介面：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;widget id="com.example.hello" version="0.0.1"&gt;
+<p>此示例顯示了預設的 <code class="language-plaintext highlighter-rouge">config.xml</code> 生成的 CLI 的 <code class="language-plaintext highlighter-rouge">create</code> 命令，所述的命令列介面：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;widget id="com.example.hello" version="0.0.1"&gt;
         &lt;name&gt;HelloWorld&lt;/name&gt;
         &lt;description&gt;
             A sample Apache Cordova application that responds to the deviceready event.
@@ -2150,105 +2155,152 @@
         &lt;content src="index.html" /&gt;
         &lt;access origin="*" /&gt;
     &lt;/widget&gt;
-</code></pre></div>
-<p>以下的配置元素出現在頂級 <code>config.xml</code> 檔，並在所有受支援的科爾多瓦平臺支援：</p>
+</code></pre></div></div>
+
+<p>以下的配置元素出現在頂級 <code class="language-plaintext highlighter-rouge">config.xml</code> 檔，並在所有受支援的科爾多瓦平臺支援：</p>
 
 <ul>
-<li><p><code>&lt;widget&gt;</code>元素的 <code>id</code> 屬性提供了應用程式的反向域識別碼和 <code>version</code> 主要/次要/修補程式符號表示其完整版本號碼。</p>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">&lt;widget&gt;</code>元素的 <code class="language-plaintext highlighter-rouge">id</code> 屬性提供了應用程式的反向域識別碼和 <code class="language-plaintext highlighter-rouge">version</code> 主要/次要/修補程式符號表示其完整版本號碼。</p>
 
-<p>小部件標記也可以指定替代版本，即 versionCode 為安卓系統和 CFBundleVersion 的 iOS 的屬性。請參閱下面的附加版本控制部分的詳細資訊。</p></li>
-<li><p><code>&lt;name&gt;</code>元素指定應用程式的正式名稱，因為它出現在設備的主畫面上和在應用程式商店介面內。</p></li>
-<li><p><code>&lt;description&gt;</code>和 <code>&lt;author&gt;</code> 的元素指定的中繼資料和聯繫資訊，可能會出現在應用程式商店清單內。</p></li>
-<li><p>可選的 <code>&lt;content&gt;</code> 元素在頂級 web 資產目錄中定義應用程式的起始頁。 預設值是 <code>index.html</code> ，其中通常出現在一個專案中的頂級 <code>www</code> 目錄。</p></li>
-<li><p><code>&lt;access&gt;</code>元素定義應用程式能夠與進行通信的外部域的集。 如上所示的預設值允許它訪問任何伺服器。 請參閱域白名單指南的詳細資訊。</p></li>
-<li><p><code>&lt;preference&gt;</code>標記設置各種選項作為對 <code>name</code> / <code>value</code> 屬性。 每個首選項的 <code>name</code> 是不區分大小寫。 很多優惠是獨有的特定平臺上，如列于此頁的頂部。 以下各節詳細介紹了適用于多個平臺的首選項。</p></li>
+    <p>小部件標記也可以指定替代版本，即 versionCode 為安卓系統和 CFBundleVersion 的 iOS 的屬性。請參閱下面的附加版本控制部分的詳細資訊。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">&lt;name&gt;</code>元素指定應用程式的正式名稱，因為它出現在設備的主畫面上和在應用程式商店介面內。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">&lt;description&gt;</code>和 <code class="language-plaintext highlighter-rouge">&lt;author&gt;</code> 的元素指定的中繼資料和聯繫資訊，可能會出現在應用程式商店清單內。</p>
+  </li>
+  <li>
+    <p>可選的 <code class="language-plaintext highlighter-rouge">&lt;content&gt;</code> 元素在頂級 web 資產目錄中定義應用程式的起始頁。 預設值是 <code class="language-plaintext highlighter-rouge">index.html</code> ，其中通常出現在一個專案中的頂級 <code class="language-plaintext highlighter-rouge">www</code> 目錄。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">&lt;access&gt;</code>元素定義應用程式能夠與進行通信的外部域的集。 如上所示的預設值允許它訪問任何伺服器。 請參閱域白名單指南的詳細資訊。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">&lt;preference&gt;</code>標記設置各種選項作為對 <code class="language-plaintext highlighter-rouge">name</code> / <code class="language-plaintext highlighter-rouge">value</code> 屬性。 每個首選項的 <code class="language-plaintext highlighter-rouge">name</code> 是不區分大小寫。 很多優惠是獨有的特定平臺上，如列于此頁的頂部。 以下各節詳細介紹了適用于多個平臺的首選項。</p>
+  </li>
 </ul>
 
-<h3>其他的版本控制</h3>
+<h3 id="其他的版本控制">其他的版本控制</h3>
 
 <p>同時，Android 和 iOS iOS 支援第二個版本字串 （或數位） 除了一個可見在應用程式商店， <a href="http://developer.android.com/tools/publishing/versioning.html">versionCode</a>為安卓系統和<a href="http://stackoverflow.com/questions/4933093/cfbundleversion-in-the-info-plist-upload-error">CFBundleVersion</a> 。 下面是一個示例，顯式地設置 versionCode 和 CFBundleVersion</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;widget id="io.cordova.hellocordova"
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;widget id="io.cordova.hellocordova"
       version="0.0.1"
       android-versionCode="7"
       ios-CFBundleVersion="3.3.3"&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p>如果不指定替代版本，則將使用以下預設值：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    // assuming version = MAJOR.MINOR.PATCH-whatever
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    // assuming version = MAJOR.MINOR.PATCH-whatever
     versionCode = PATCH + MINOR * 100 + MAJOR * 10000
     CFBundleVersion = "MAJOR.MINOR.PATCH"
-</code></pre></div>
-<h2>全球首選項</h2>
+</code></pre></div></div>
+
+<h2 id="全球首選項">全球首選項</h2>
 
 <p>以下全球首選項適用于所有平臺：</p>
 
 <ul>
-<li><p><code>Fullscreen</code>使您可以隱藏在螢幕頂部的狀態列。預設值是 <code>false</code> 。示例：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="Fullscreen" value="true" /&gt;
-</code></pre></div></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Fullscreen</code>使您可以隱藏在螢幕頂部的狀態列。預設值是 <code class="language-plaintext highlighter-rouge">false</code> 。示例：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="Fullscreen" value="true" /&gt;
+</code></pre></div>    </div>
+  </li>
 </ul>
 
-<h2>多平臺首選項</h2>
+<h2 id="多平臺首選項">多平臺首選項</h2>
 
 <p>下面的首選項應用到多個平臺，但不是向他們：</p>
 
 <ul>
-<li><p><code>DisallowOverscroll</code>(boolean 類型的值，預設值為 <code>false</code> ）： 設置為 <code>true</code> 如果你不想要當使用者滾動過去的開頭或結尾的內容時顯示的任何回饋資訊的介面。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="DisallowOverscroll" value="true"/&gt;
-</code></pre></div>
-<p>適用于 Android 和 iOS。 在 iOS，overscroll 手勢事業內容反彈到其原始位置。 在 android 系統，它們產生一個更微妙的光暈效果沿的頂部或底部邊緣的內容。</p></li>
-<li><p><code>BackgroundColor</code>： 設置應用程式的背景色。 支援四個位元組的十六進位值，與第一個位元組代表一個 Alpha 色板、 和標準的 RGB 值為以下三個位元組。 此示例指定藍色：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="BackgroundColor" value="0xff0000ff"/&gt;
-</code></pre></div>
-<p>適用于 Android 和黑莓手機。覆蓋 CSS 否則為可跨<em>所有</em>平臺，例如：<code>body{background-color:blue}</code>.</p></li>
-<li><p><code>HideKeyboardFormAccessoryBar</code>(boolean 類型的值，預設值為 <code>false</code> ）： 設置為 <code>true</code> ，隱藏其他工具列出現在鍵盤上方説明使用者導航到另一個表單輸入從。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="HideKeyboardFormAccessoryBar" value="true"/&gt;
-</code></pre></div>
-<p>適用于黑莓手機。</p></li>
-<li><p><code>Orientation</code>（字串，預設值為 <code>default</code>）： 允許您鎖定方向並防止介面回應變化的方向旋轉。 可能的值是 <code>default</code>，<code>landscape</code> 或 <code>portrait</code>。 示例：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="Orientation" value="landscape" /&gt;
-</code></pre></div>
-<p>此外，您可以指定任何特定于平臺的定位值如果您放置 <code>&lt;preference&gt;</code> 元素中的 <code>&lt;platform&gt;</code> 元素：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;platform name="android"&gt;
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">DisallowOverscroll</code>(boolean 類型的值，預設值為 <code class="language-plaintext highlighter-rouge">false</code> ）： 設置為 <code class="language-plaintext highlighter-rouge">true</code> 如果你不想要當使用者滾動過去的開頭或結尾的內容時顯示的任何回饋資訊的介面。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="DisallowOverscroll" value="true"/&gt;
+</code></pre></div>    </div>
+
+    <p>適用于 Android 和 iOS。 在 iOS，overscroll 手勢事業內容反彈到其原始位置。 在 android 系統，它們產生一個更微妙的光暈效果沿的頂部或底部邊緣的內容。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">BackgroundColor</code>： 設置應用程式的背景色。 支援四個位元組的十六進位值，與第一個位元組代表一個 Alpha 色板、 和標準的 RGB 值為以下三個位元組。 此示例指定藍色：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="BackgroundColor" value="0xff0000ff"/&gt;
+</code></pre></div>    </div>
+
+    <p>適用于 Android 和黑莓手機。覆蓋 CSS 否則為可跨<em>所有</em>平臺，例如：<code class="language-plaintext highlighter-rouge">body{background-color:blue}</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">HideKeyboardFormAccessoryBar</code>(boolean 類型的值，預設值為 <code class="language-plaintext highlighter-rouge">false</code> ）： 設置為 <code class="language-plaintext highlighter-rouge">true</code> ，隱藏其他工具列出現在鍵盤上方説明使用者導航到另一個表單輸入從。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="HideKeyboardFormAccessoryBar" value="true"/&gt;
+</code></pre></div>    </div>
+
+    <p>適用于黑莓手機。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Orientation</code>（字串，預設值為 <code class="language-plaintext highlighter-rouge">default</code>）： 允許您鎖定方向並防止介面回應變化的方向旋轉。 可能的值是 <code class="language-plaintext highlighter-rouge">default</code>，<code class="language-plaintext highlighter-rouge">landscape</code> 或 <code class="language-plaintext highlighter-rouge">portrait</code>。 示例：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="Orientation" value="landscape" /&gt;
+</code></pre></div>    </div>
+
+    <p>此外，您可以指定任何特定于平臺的定位值如果您放置 <code class="language-plaintext highlighter-rouge">&lt;preference&gt;</code> 元素中的 <code class="language-plaintext highlighter-rouge">&lt;platform&gt;</code> 元素：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;platform name="android"&gt;
     &lt;preference name="Orientation" value="sensorLandscape" /&gt;
 &lt;/platform&gt;
-</code></pre></div>
-<p>適用于 Android、 iOS，WP8，亞馬遜火 OS 和火狐瀏覽器的作業系統。</p>
+</code></pre></div>    </div>
 
-<p><strong>注意</strong>： <code>default</code> 值意味著科爾多瓦將帶定位首選項條目從平臺的清單/設定檔允許回退到其預設行為的平臺。</p>
+    <p>適用于 Android、 iOS，WP8，亞馬遜火 OS 和火狐瀏覽器的作業系統。</p>
 
-<p>對於 iOS，指定縱向和橫向模式您將使用平臺特定的值<code>所有</code>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;platform name="ios"&gt;
+    <p><strong>注意</strong>： <code class="language-plaintext highlighter-rouge">default</code> 值意味著科爾多瓦將帶定位首選項條目從平臺的清單/設定檔允許回退到其預設行為的平臺。</p>
+
+    <p>對於 iOS，指定縱向和橫向模式您將使用平臺特定的值<code class="language-plaintext highlighter-rouge">所有</code>:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;platform name="ios"&gt;
     &lt;preference name="Orientation" value="all" /&gt;
 &lt;/platform&gt;
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ul>
 
-<h2><em>功能</em>元素</h2>
+<h2 id="功能元素"><em>功能</em>元素</h2>
 
-<p>如果你使用的 CLI 來構建應用程式，您將使用<code>外掛程式</code>命令來啟用設備的 Api。 這不修改頂級<code>config.xml</code>檔中，所以<code>&lt; 功能 &gt;</code>元素並不適用于您的工作流。 如果您直接在 SDK 和使用特定于平臺的<code>config.xml</code>檔作為源工作，你使用<code>&lt; 功能 &gt;</code>標記啟用設備級 Api 和外部外掛程式。 他們經常出現以特定于平臺的<code>config.xml</code>檔中的自訂值。 例如，下面是如何指定設備 API 為 Android 專案:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;feature name="Device"&gt;
+<p>如果你使用的 CLI 來構建應用程式，您將使用<code class="language-plaintext highlighter-rouge">外掛程式</code>命令來啟用設備的 Api。 這不修改頂級<code class="language-plaintext highlighter-rouge">config.xml</code>檔中，所以<code class="language-plaintext highlighter-rouge">&lt; 功能 &gt;</code>元素並不適用于您的工作流。 如果您直接在 SDK 和使用特定于平臺的<code class="language-plaintext highlighter-rouge">config.xml</code>檔作為源工作，你使用<code class="language-plaintext highlighter-rouge">&lt; 功能 &gt;</code>標記啟用設備級 Api 和外部外掛程式。 他們經常出現以特定于平臺的<code class="language-plaintext highlighter-rouge">config.xml</code>檔中的自訂值。 例如，下面是如何指定設備 API 為 Android 專案:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;feature name="Device"&gt;
         &lt;param name="android-package" value="org.apache.cordova.device.Device" /&gt;
     &lt;/feature&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p>這裡是 iOS 專案元素的顯示方式:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;feature name="Device"&gt;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;feature name="Device"&gt;
         &lt;param name="ios-package" value="CDVDevice" /&gt;
     &lt;/feature&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p>有關如何指定每個功能，請參閱 API 參考的詳細資訊。看到外掛程式的外掛程式開發指南的詳細資訊。</p>
 
-<h2><em>平臺</em>的元素</h2>
+<h2 id="平臺的元素"><em>平臺</em>的元素</h2>
 
-<p>使用 CLI 來構建應用程式，時，有時需要指定首選項或其他特定于特定平臺的元素。 <code>&lt;platform&gt;</code>元素用於指定應該只出現在一個特定于平臺的<code>config.xml</code>檔中的配置。 例如，下面是如何指定那唯一的 android 應該使用全屏顯示首選項:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;platform name="android"&gt;
+<p>使用 CLI 來構建應用程式，時，有時需要指定首選項或其他特定于特定平臺的元素。 <code class="language-plaintext highlighter-rouge">&lt;platform&gt;</code>元素用於指定應該只出現在一個特定于平臺的<code class="language-plaintext highlighter-rouge">config.xml</code>檔中的配置。 例如，下面是如何指定那唯一的 android 應該使用全屏顯示首選項:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;platform name="android"&gt;
         &lt;preference name="Fullscreen" value="true" /&gt;
     &lt;/platform&gt;
-</code></pre></div>
-<h2><em>hook</em>元</h2>
+</code></pre></div></div>
+
+<h2 id="hook元"><em>hook</em>元</h2>
 
 <p>表示您自訂的腳本，將調用由科爾多瓦發生某些操作時 (例如，添加外掛程式或平臺編寫邏輯之後調用)。 當您需要擴展預設科爾多瓦功能時，這很有用。 更多的資訊，請參閱掛鉤的指南。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;hook type="after_plugin_install" src="scripts/afterPluginInstall.js" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;hook type="after_plugin_install" src="scripts/afterPluginInstall.js" /&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

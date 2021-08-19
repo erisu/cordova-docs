@@ -1158,57 +1158,62 @@
             
 
             <div id="page-toc-source">
-                <h1>아마존 화재 OS 플러그인</h1>
+                <h1 id="아마존-화재-os-플러그인">아마존 화재 OS 플러그인</h1>
 
 <p>사용자 지정 플러그인 개발의 개요에 대 한 <a href="../android/plugin.html">안 드 로이드 플러그인</a> 가이드에 제공 된 지침을 따릅니다.</p>
 
-<h2>에코 아마존 화재 OS 플러그인 예제</h2>
+<h2 id="에코-아마존-화재-os-플러그인-예제">에코 아마존 화재 OS 플러그인 예제</h2>
 
-<p>응용 프로그램 플러그인에서 설명 하는 자바 인터페이스 <em>에코</em> 기능은 사용는 <code>plugin.xml</code> 를 삽입 하는 <code>feature</code> 로컬 플랫폼 사양 <code>config.xml</code> 파일:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;platform name="amazon-fireos"&gt;
+<p>응용 프로그램 플러그인에서 설명 하는 자바 인터페이스 <em>에코</em> 기능은 사용는 <code class="language-plaintext highlighter-rouge">plugin.xml</code> 를 삽입 하는 <code class="language-plaintext highlighter-rouge">feature</code> 로컬 플랫폼 사양 <code class="language-plaintext highlighter-rouge">config.xml</code> 파일:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;platform name="amazon-fireos"&gt;
     &lt;config-file target="config.xml" parent="/*"&gt;
         &lt;feature name="Echo"&gt;
             &lt;param name="android-package" value="org.apache.cordova.plugin.Echo"/&gt;
         &lt;/feature&gt;
     &lt;/config-file&gt;
 &lt;/platform&gt;
-</code></pre></div>
-<p>다음에 다음 추가 <code>src/org/apache/cordova/plugin/Echo.java</code> 파일:</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="k">package</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">plugin</span><span class="p">;</span>
+</code></pre></div></div>
 
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">CordovaPlugin</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">CallbackContext</span><span class="p">;</span>
+<p>다음에 다음 추가 <code class="language-plaintext highlighter-rouge">src/org/apache/cordova/plugin/Echo.java</code> 파일:</p>
 
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">JSONArray</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">JSONException</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">JSONObject</span><span class="p">;</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package org.apache.cordova.plugin;
 
-<span class="p">/**</span>
- <span class="p">*</span> <span class="n">This</span> <span class="n">class</span> <span class="n">echoes</span> <span class="n">a</span> <span class="k">string</span> <span class="n">called</span> <span class="k">from</span> <span class="n">JavaScript</span><span class="p">.</span>
- <span class="p">*/</span>
-<span class="k">public</span> <span class="n">class</span> <span class="n">Echo</span> <span class="n">extends</span> <span class="n">CordovaPlugin</span> <span class="p">{</span>
+import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CallbackContext;
 
-    <span class="p">@</span><span class="n">Override</span>
-    <span class="k">public</span> <span class="k">boolean</span> <span class="n">execute</span><span class="p">(</span><span class="k">String</span> <span class="n">action</span><span class="p">,</span> <span class="n">JSONArray</span> <span class="n">args</span><span class="p">,</span> <span class="n">CallbackContext</span> <span class="n">callbackContext</span><span class="p">)</span> <span class="n">throws</span> <span class="n">JSONException</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">action</span><span class="p">.</span><span class="n">equals</span><span class="p">(</span><span class="s2">"echo"</span><span class="p">))</span> <span class="p">{</span>
-            <span class="k">String</span> <span class="n">message</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
-            <span class="n">this</span><span class="p">.</span><span class="n">echo</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">callbackContext</span><span class="p">);</span>
-            <span class="n">return</span> <span class="nb">true</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">return</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="p">}</span>
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-    <span class="n">private</span> <span class="n">void</span> <span class="n">echo</span><span class="p">(</span><span class="k">String</span> <span class="n">message</span><span class="p">,</span> <span class="n">CallbackContext</span> <span class="n">callbackContext</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">message</span> <span class="c1">!= null &amp;&amp; message.length() &gt; 0) {
-</span>            <span class="n">callbackContext</span><span class="p">.</span><span class="n">success</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="n">callbackContext</span><span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="s2">"Expected one non-empty string argument."</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>아마존 화재 운영 체제 플랫폼에 대 한 <a href="../android/plugin.html">안 드 로이드 플러그인</a> 코드 재사용 다음 가리키도록 plugin.xml을 수정 하려는 경우는 <code>android</code> 특정 소스 파일. 예를 들어,</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;platform name="amazon-fireos"&gt;
+/**
+ * This class echoes a string called from JavaScript.
+ */
+public class Echo extends CordovaPlugin {
+
+    @Override
+    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+        if (action.equals("echo")) {
+            String message = args.getString(0);
+            this.echo(message, callbackContext);
+            return true;
+        }
+        return false;
+    }
+
+    private void echo(String message, CallbackContext callbackContext) {
+        if (message != null &amp;&amp; message.length() &gt; 0) {
+            callbackContext.success(message);
+        } else {
+            callbackContext.error("Expected one non-empty string argument.");
+        }
+    }
+}
+</code></pre></div></div>
+
+<p>아마존 화재 운영 체제 플랫폼에 대 한 <a href="../android/plugin.html">안 드 로이드 플러그인</a> 코드 재사용 다음 가리키도록 plugin.xml을 수정 하려는 경우는 <code class="language-plaintext highlighter-rouge">android</code> 특정 소스 파일. 예를 들어,</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;platform name="amazon-fireos"&gt;
     &lt;config-file target="config.xml" parent="/*"&gt;
         &lt;feature name="Echo"&gt;
             &lt;param name="android-package" value="org.apache.cordova.plugin.Echo"/&gt;
@@ -1216,9 +1221,11 @@
     &lt;/config-file&gt;
     &lt;source-file src="src/android/Echo.java" target-dir="src/org/apache/cordova/plugin" /&gt;
 &lt;/platform&gt;
-</code></pre></div>
-<p>아마존 화재 운영 체제 플랫폼에 대 한 사용자 정의 플러그인을 작성 한 다음 라는 폴더를 생성 하려는 경우 <code>amazon</code> 플러그인 src 밑 / 폴더를 가리키도록 plugin.xml을 수정 하 고는 <code>amazon</code> 특정 소스 파일. 예를 들어,</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;platform name="amazon-fireos"&gt;
+</code></pre></div></div>
+
+<p>아마존 화재 운영 체제 플랫폼에 대 한 사용자 정의 플러그인을 작성 한 다음 라는 폴더를 생성 하려는 경우 <code class="language-plaintext highlighter-rouge">amazon</code> 플러그인 src 밑 / 폴더를 가리키도록 plugin.xml을 수정 하 고는 <code class="language-plaintext highlighter-rouge">amazon</code> 특정 소스 파일. 예를 들어,</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;platform name="amazon-fireos"&gt;
     &lt;config-file target="config.xml" parent="/*"&gt;
         &lt;feature name="Echo"&gt;
             &lt;param name="android-package" value="org.apache.cordova.plugin.Echo"/&gt;
@@ -1226,12 +1233,14 @@
     &lt;/config-file&gt;
     &lt;source-file src="src/amazon/Echo.java" target-dir="src/org/apache/cordova/plugin" /&gt;
 &lt;/platform&gt;
-</code></pre></div>
-<h2>귀하의 플러그인에 아마존 WebView를 사용 하 여</h2>
+</code></pre></div></div>
+
+<h2 id="귀하의-플러그인에-아마존-webview를-사용-하-여">귀하의 플러그인에 아마존 WebView를 사용 하 여</h2>
 
 <p>코르도바 아마존 화재 운영 체제에 대 한 사용자 지정 아마존 WebView 오픈 소스 크롬 프로젝트에 내장 된 사용 합니다. GPU 가속 및 빛나 다 화재에 유체 성능을 위해 최적화 됩니다.</p>
 
 <p>최고의 프로젝트에서 아마존 WebView를 사용 하는 방법을 이해, 체크 아웃 <a href="https://developer.amazon.com/sdk/fire/IntegratingAWV.html">아마존 개발자 포털</a>.</p>
+
 
 
             </div>

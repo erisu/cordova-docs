@@ -1112,40 +1112,44 @@
             
 
             <div id="page-toc-source">
-                <h1>Sicherheitshandbuch</h1>
+                <h1 id="sicherheitshandbuch">Sicherheitshandbuch</h1>
 
-<p>Die folgende Anleitung beinhaltet einige bewährte Sicherheitsmethoden, die Sie, beim Entwickeln einer Anwendung von Cordova beachten sollten. Bitte beachten Sie, dass die Sicherheit ist ein sehr kompliziertes Thema und deshalb dieses Handbuch ist nicht erschöpfend. Wenn Sie, dass Sie zu diesem Leitfaden dazu beitragen können glauben, wenden Sie sich bitte ein Thema in Cordova&#39;s Bug-Tracker unter <a href="https://issues.apache.org/jira/browse/CB/component/12316407">&quot;Dokumentation&quot;</a>abzulegen. Dieser Leitfaden soll auf allgemeine Cordova Entwicklung (alle Plattformen) anwendbar, aber Plattform-spezifischen Besonderheiten zu beachten.</p>
+<p>Die folgende Anleitung beinhaltet einige bewährte Sicherheitsmethoden, die Sie, beim Entwickeln einer Anwendung von Cordova beachten sollten. Bitte beachten Sie, dass die Sicherheit ist ein sehr kompliziertes Thema und deshalb dieses Handbuch ist nicht erschöpfend. Wenn Sie, dass Sie zu diesem Leitfaden dazu beitragen können glauben, wenden Sie sich bitte ein Thema in Cordova’s Bug-Tracker unter <a href="https://issues.apache.org/jira/browse/CB/component/12316407">“Dokumentation”</a>abzulegen. Dieser Leitfaden soll auf allgemeine Cordova Entwicklung (alle Plattformen) anwendbar, aber Plattform-spezifischen Besonderheiten zu beachten.</p>
 
-<h2>Dieses Handbuch behandelt die folgenden Themen:</h2>
-
-<ul>
-<li>  Whitelist</li>
-<li>  Iframes und die Id Rückrufmechanismus</li>
-<li>  Zertifikat fixieren</li>
-<li>  Selbstsignierte Zertifikate</li>
-<li>  Verschlüsselte Speicherung</li>
-<li>  Allgemeine Tipps</li>
-<li>  Empfohlene Artikel und andere Ressourcen</li>
-</ul>
-
-<h2>Whitelist</h2>
+<h2 id="dieses-handbuch-behandelt-die-folgenden-themen">Dieses Handbuch behandelt die folgenden Themen:</h2>
 
 <ul>
-<li><p>Lesen und verstehen der <a href="../whitelist/index.html">Whitelist-Guide</a></p></li>
-<li><p>Domain-Whitelist funktioniert nicht auf Android API 10 und unten und WP8 für Iframes und XMLHttpRequest. Dies bedeutet ein Angreifer kann einer beliebigen Domäne in einem Iframe laden und jedes Skript auf dieser Seite in Iframe direkt auf Cordova JavaScript-Objekte und die entsprechenden native Java-Objekte zugreifen kann. Sie sollten dies in Betracht ziehen, beim Erstellen von Anwendungen für diese Plattformen. In der Praxis bedeutet dies, um sicherzustellen, dass Sie Ziel einer höher als 10 Android API und, wenn möglich nicht Iframe zu verwenden, um externe Inhalte - laden das InAppBrowser-Plugin oder andere Drittanbieter Plug-ins verwenden.</p></li>
+  <li>Whitelist</li>
+  <li>Iframes und die Id Rückrufmechanismus</li>
+  <li>Zertifikat fixieren</li>
+  <li>Selbstsignierte Zertifikate</li>
+  <li>Verschlüsselte Speicherung</li>
+  <li>Allgemeine Tipps</li>
+  <li>Empfohlene Artikel und andere Ressourcen</li>
 </ul>
 
-<h2>Iframes und die Id Rückrufmechanismus</h2>
+<h2 id="whitelist">Whitelist</h2>
+
+<ul>
+  <li>
+    <p>Lesen und verstehen der <a href="../whitelist/index.html">Whitelist-Guide</a></p>
+  </li>
+  <li>
+    <p>Domain-Whitelist funktioniert nicht auf Android API 10 und unten und WP8 für Iframes und XMLHttpRequest. Dies bedeutet ein Angreifer kann einer beliebigen Domäne in einem Iframe laden und jedes Skript auf dieser Seite in Iframe direkt auf Cordova JavaScript-Objekte und die entsprechenden native Java-Objekte zugreifen kann. Sie sollten dies in Betracht ziehen, beim Erstellen von Anwendungen für diese Plattformen. In der Praxis bedeutet dies, um sicherzustellen, dass Sie Ziel einer höher als 10 Android API und, wenn möglich nicht Iframe zu verwenden, um externe Inhalte - laden das InAppBrowser-Plugin oder andere Drittanbieter Plug-ins verwenden.</p>
+  </li>
+</ul>
+
+<h2 id="iframes-und-die-id-rückrufmechanismus">Iframes und die Id Rückrufmechanismus</h2>
 
 <p>Wenn Inhalte in einem Iframe aus einer Whitelist-Domäne bereitgestellt werden, haben diese Domäne Zugriff auf die native Cordova-Brücke. Dies bedeutet, dass Sie ein Drittanbieter-Werbe-Netzwerk Whitelist und dienen diese anzeigen über ein Iframe, ist es möglich, dass eine böswillige Anzeige ist aus Iframe ausbrechen und bösartige Aktionen ausführen können. Aus diesem Grund sollten Sie in der Regel nicht Iframes verwenden, wenn Sie den Server steuern, der den Iframe-Inhalt hostet. Beachten Sie, dass es Drittanbieter Plug-ins zur Verfügung gibt, um Werbe-Netzwerke zu unterstützen. Beachten Sie, dass diese Aussage nicht für iOS, nämlich alles gilt, einschließlich der Iframe Verbindungen abfängt.</p>
 
-<h2>Zertifikat fixieren</h2>
+<h2 id="zertifikat-fixieren">Zertifikat fixieren</h2>
 
 <p>Cordova unterstützt keine wahre Zertifikat zu fixieren. Das größte Hindernis für das ist ein Mangel an systemeigenen APIs in Android zum Abfangen des SSL-Verbindungen um die Überprüfung des Zertifikats des Servers ausführen. (Obwohl es fixieren auf Android in Java mit JSSE Zertifikat kann, die Webview auf Android in C++ geschrieben ist und Server-Verbindungen für Sie, indem die Webview verarbeitet werden, ist also es nicht möglich, Java und JSSE es zu verwenden.) Da Apache Cordova über mehrere Plattformen hinweg konsistent APIs bieten soll, bricht nicht mit einer Funktion in eine größere Plattform die Konsistenz.</p>
 
 <p>Es gibt Möglichkeiten zur Angleichung Zertifikat fixieren, z. B. Überprüfung, dass die öffentlichen Schlüssel des Servers (Fingerabdruck) der erwartete Wert ist, wenn die Anwendung gestartet wird oder zu anderen verschiedenen Zeiten während der Lebensdauer der Anwendung. Es gibt Drittanbieter Plug-ins zur Cordova, die das tun kann. Jedoch ist dies nicht dasselbe wie wahre Zertifikat fixieren, die automatisch den erwarteten Wert auf jede Verbindung zu dem Server überprüft.</p>
 
-<h2>Selbstsignierte Zertifikate</h2>
+<h2 id="selbstsignierte-zertifikate">Selbstsignierte Zertifikate</h2>
 
 <p>Verwendung selbstsignierter Zertifikate auf dem Server wird nicht empfohlen. Wenn Sie SSL wünschen, ist dann es dringend empfohlen, dass Ihr Server über ein Zertifikat verfügen, die von einer bekannten Zertifizierungsstelle (Certificate Authority) richtig signiert wurde. Die Unfähigkeit auf true Zertifikat festhalten, ist dies wichtiger.</p>
 
@@ -1153,60 +1157,61 @@
 
 <p>Die hier beschriebenen Prinzipien beziehen sich nicht auf Apache Cordova, sie gelten für alle Client-Server-Kommunikation.</p>
 
-<p>Beim Ausführen von Cordova auf Android verwenden <code>android:debuggable=&quot;true&quot;</code> in der Anwendung Manifest erlauben SSL-Fehler, z. B. Zertifikat Kette Validierungsfehler auf selbstsignierte Zertifikate. So Sie selbstsignierte Zertifikate in dieser Konfiguration können, aber dies keine Konfiguration, die verwendet werden soll ist, wenn die Anwendung in der Produktion ist. Es soll nur während der Anwendungsentwicklung verwendet werden.</p>
+<p>Beim Ausführen von Cordova auf Android verwenden <code class="language-plaintext highlighter-rouge">android:debuggable="true"</code> in der Anwendung Manifest erlauben SSL-Fehler, z. B. Zertifikat Kette Validierungsfehler auf selbstsignierte Zertifikate. So Sie selbstsignierte Zertifikate in dieser Konfiguration können, aber dies keine Konfiguration, die verwendet werden soll ist, wenn die Anwendung in der Produktion ist. Es soll nur während der Anwendungsentwicklung verwendet werden.</p>
 
-<h2>Verschlüsselte Speicherung</h2>
+<h2 id="verschlüsselte-speicherung">Verschlüsselte Speicherung</h2>
 
 <p>(TBD)</p>
 
-<h2>Allgemeine Tipps</h2>
+<h2 id="allgemeine-tipps">Allgemeine Tipps</h2>
 
-<h3>Verwenden Sie keine Android Gingerbread!</h3>
-
-<ul>
-<li>  Legen Sie Ihr höher als 10 min-Ziel-Sdk-Niveau. API 10 ist Lebkuchen und Lebkuchen wird nicht mehr von Google oder Geräte-Herstellern unterstützt und wird daher nicht empfohlen von Cordova-Team. </li>
-<li>  Lebkuchen nachweislich unsicher und einer der wichtigsten gezielte mobile OSs <a href="http://bgr.com/2012/11/06/android-security-gingerbread-malware/">http://www.mobilemag.com/2012/11/06/andriod-2-3-gingerbread-security/</a>. </li>
-<li>  Die Whitelist auf Android funktioniert nicht mit Lebkuchen oder niedriger. Dies bedeutet, dass ein Angreifer schädlichen Code in einem Iframe geladen werden kann, das müsste dann Zugriff auf alle von Cordova-APIs und können, dass der Zugang zu persönliche Daten stehlen, SMS-Nachrichten an Premium-Rate-Nummern zu schicken und andere böswillige Aktionen durchzuführen. </li>
-</ul>
-
-<h3>InAppBrowser für externe Links verwenden</h3>
+<h3 id="verwenden-sie-keine-android-gingerbread">Verwenden Sie keine Android Gingerbread!</h3>
 
 <ul>
-<li>  Verwenden Sie die InAppBrowser beim Öffnen von Links zu externen Websites. Das ist viel sicherer als Whitelisting eines Domain-namens und einschließlich der Inhalte direkt in der Anwendung, da die InAppBrowser der native Browser-Sicherheits-Features verwenden und nicht die Website geben auf Ihre Cordova-Umgebung Zugriff. Selbst wenn Sie der Website Dritter Vertrauen und direkt in Ihre Anwendung aufnehmen, kann diese Websites Dritter schädlichen Webinhalten verknüpfen. </li>
+  <li>Legen Sie Ihr höher als 10 min-Ziel-Sdk-Niveau. API 10 ist Lebkuchen und Lebkuchen wird nicht mehr von Google oder Geräte-Herstellern unterstützt und wird daher nicht empfohlen von Cordova-Team.</li>
+  <li>Lebkuchen nachweislich unsicher und einer der wichtigsten gezielte mobile OSs <a href="http://bgr.com/2012/11/06/android-security-gingerbread-malware/">http://www.mobilemag.com/2012/11/06/andriod-2-3-gingerbread-security/</a>.</li>
+  <li>Die Whitelist auf Android funktioniert nicht mit Lebkuchen oder niedriger. Dies bedeutet, dass ein Angreifer schädlichen Code in einem Iframe geladen werden kann, das müsste dann Zugriff auf alle von Cordova-APIs und können, dass der Zugang zu persönliche Daten stehlen, SMS-Nachrichten an Premium-Rate-Nummern zu schicken und andere böswillige Aktionen durchzuführen.</li>
 </ul>
 
-<h3>Validieren Sie alle Benutzereingaben</h3>
+<h3 id="inappbrowser-für-externe-links-verwenden">InAppBrowser für externe Links verwenden</h3>
 
 <ul>
-<li>  Überprüfen Sie immer alle Eingaben, die die Anwendung akzeptiert. Dazu gehören Benutzernamen, Kennwörter, Termine, hochgeladen Medien usw.. Da ein Angreifer Ihr HTML und JS Vermögen (entweder durch Dekompilierung der Anwendung oder mithilfe von debugging-Tools wie Chrome://inspect) manipulieren könnte, sollten diese Validierung auch auf Ihrem Server durchgeführt werden, insbesondere vor der Übergabe der Daten an einen Back-End-Dienst. </li>
-<li>  Andere Quellen, wo die Daten überprüft werden sollten: Benutzerdokumente, Kontakte, push-Benachrichtigungen</li>
+  <li>Verwenden Sie die InAppBrowser beim Öffnen von Links zu externen Websites. Das ist viel sicherer als Whitelisting eines Domain-namens und einschließlich der Inhalte direkt in der Anwendung, da die InAppBrowser der native Browser-Sicherheits-Features verwenden und nicht die Website geben auf Ihre Cordova-Umgebung Zugriff. Selbst wenn Sie der Website Dritter Vertrauen und direkt in Ihre Anwendung aufnehmen, kann diese Websites Dritter schädlichen Webinhalten verknüpfen.</li>
 </ul>
 
-<h3>Sensible Daten nicht zwischenspeichern</h3>
+<h3 id="validieren-sie-alle-benutzereingaben">Validieren Sie alle Benutzereingaben</h3>
 
 <ul>
-<li>  Wenn Benutzernamen, Kennwort, Geolocation-Informationen und andere sensiblen Daten werden zwischengespeichert, konnte dann es möglicherweise später durch ein nicht autorisierter Benutzer oder eine Anwendung abgerufen werden.</li>
+  <li>Überprüfen Sie immer alle Eingaben, die die Anwendung akzeptiert. Dazu gehören Benutzernamen, Kennwörter, Termine, hochgeladen Medien usw.. Da ein Angreifer Ihr HTML und JS Vermögen (entweder durch Dekompilierung der Anwendung oder mithilfe von debugging-Tools wie Chrome://inspect) manipulieren könnte, sollten diese Validierung auch auf Ihrem Server durchgeführt werden, insbesondere vor der Übergabe der Daten an einen Back-End-Dienst.</li>
+  <li>Andere Quellen, wo die Daten überprüft werden sollten: Benutzerdokumente, Kontakte, push-Benachrichtigungen</li>
 </ul>
 
-<h3>Verwenden Sie keine eval(), es sei denn, Sie wissen was Sie tun</h3>
+<h3 id="sensible-daten-nicht-zwischenspeichern">Sensible Daten nicht zwischenspeichern</h3>
 
 <ul>
-<li>  Die JavaScript-Funktion eval() hat eine lange Geschichte, die missbraucht werden. Benutze es falsch kann Ihren Code für Injection-Angriffen, Debuggen von Schwierigkeiten und langsamer Ausführung von Code öffnen. </li>
+  <li>Wenn Benutzernamen, Kennwort, Geolocation-Informationen und andere sensiblen Daten werden zwischengespeichert, konnte dann es möglicherweise später durch ein nicht autorisierter Benutzer oder eine Anwendung abgerufen werden.</li>
 </ul>
 
-<h3>Nicht davon ausgehen Sie, dass der Quellcode sicher ist</h3>
+<h3 id="verwenden-sie-keine-eval-es-sei-denn-sie-wissen-was-sie-tun">Verwenden Sie keine eval(), es sei denn, Sie wissen was Sie tun</h3>
 
 <ul>
-<li>  Da eine Anwendung von Cordova aus HTML und JavaScript basiert, die in einem einheitlichen Container gepackt bekommen, sollten Sie nicht Ihr Code sicher sein. Es ist möglich, reverse Engineering eine Cordova-Anwendung. </li>
+  <li>Die JavaScript-Funktion eval() hat eine lange Geschichte, die missbraucht werden. Benutze es falsch kann Ihren Code für Injection-Angriffen, Debuggen von Schwierigkeiten und langsamer Ausführung von Code öffnen.</li>
 </ul>
 
-<h2>Empfohlene Artikel und andere Ressourcen</h2>
+<h3 id="nicht-davon-ausgehen-sie-dass-der-quellcode-sicher-ist">Nicht davon ausgehen Sie, dass der Quellcode sicher ist</h3>
 
 <ul>
-<li>  <a href="https://www.owasp.org/index.php/HTML5_Security_Cheat_Sheet">HTML5-Sicherheit-Spickzettel, Detaillierung die HTML5-Anwendung sichern</a></li>
-<li>  <a href="https://github.com/phonegap/phonegap/wiki/Platform-Security">PhoneGap&#39;s Artikel auf Gerätesicherheit, wie die Verwendung von verschlüsselten Daten</a></li>
-<li>  <a href="http://www.cis.syr.edu/%7Ewedu/Research/paper/webview_acsac2011.pdf">Whitepaper über bekannte Sicherheitslücken in Webview basierte Hybridanwendungen</a></li>
+  <li>Da eine Anwendung von Cordova aus HTML und JavaScript basiert, die in einem einheitlichen Container gepackt bekommen, sollten Sie nicht Ihr Code sicher sein. Es ist möglich, reverse Engineering eine Cordova-Anwendung.</li>
 </ul>
+
+<h2 id="empfohlene-artikel-und-andere-ressourcen">Empfohlene Artikel und andere Ressourcen</h2>
+
+<ul>
+  <li><a href="https://www.owasp.org/index.php/HTML5_Security_Cheat_Sheet">HTML5-Sicherheit-Spickzettel, Detaillierung die HTML5-Anwendung sichern</a></li>
+  <li><a href="https://github.com/phonegap/phonegap/wiki/Platform-Security">PhoneGap’s Artikel auf Gerätesicherheit, wie die Verwendung von verschlüsselten Daten</a></li>
+  <li><a href="http://www.cis.syr.edu/~wedu/Research/paper/webview_acsac2011.pdf">Whitepaper über bekannte Sicherheitslücken in Webview basierte Hybridanwendungen</a></li>
+</ul>
+
 
 
             </div>

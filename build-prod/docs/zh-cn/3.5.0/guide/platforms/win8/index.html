@@ -1040,62 +1040,80 @@
             
 
             <div id="page-toc-source">
-                <h1>Windows 8 平臺指南</h1>
+                <h1 id="windows-8-平臺指南">Windows 8 平臺指南</h1>
 
 <p>本指南介紹如何設置您的 SDK 開發環境為 Windows 8 部署科爾多瓦的應用程式。請參閱下列特定于平臺的詳細資訊：</p>
 
 <ul>
-<li>  <a href="upgrading.html">升級 Windows 8</a></li>
-<li>  <a href="tools.html">Windows 8 的命令列工具</a></li>
+  <li><a href="upgrading.html">升級 Windows 8</a></li>
+  <li><a href="tools.html">Windows 8 的命令列工具</a></li>
 </ul>
 
 <p>上面的命令列工具請參閱科爾多瓦 3.0 以前的版本。關於當前介面的資訊，請參閱命令列介面。</p>
 
 <p>Microsoft 不推薦使用在 Windows 8 和 Windows 室溫下<em>地鐵風格的應用程式</em>名稱 MSDN 現在指的是這種類型的應用程式作為<em>Windows 應用商店</em>的應用程式，並且本指南跟隨該公約 》。 此外，在本指南中<em>Windows 8</em>表示 Windows 8 和 Windows 室溫下</p>
 
-<h2>要求</h2>
+<h2 id="要求">要求</h2>
 
 <ul>
-<li><p>Windows 8</p></li>
-<li><p>Visual Studio 2012 專業或更好或 Visual Studio 2012 表示為 Windows 8</p></li>
+  <li>
+    <p>Windows 8</p>
+  </li>
+  <li>
+    <p>Visual Studio 2012 專業或更好或 Visual Studio 2012 表示為 Windows 8</p>
+  </li>
 </ul>
 
 <p>按照在<a href="http://www.windowsstore.com/">windowsstore.com</a>的說明提交您對 Windows 應用商店的應用程式。</p>
 
-<h2>安裝 SDK 和科爾多瓦</h2>
+<h2 id="安裝-sdk-和科爾多瓦">安裝 SDK 和科爾多瓦</h2>
 
 <p>設置您的 Visual Studio 2012 的首選變形。 所有產品的付費版本 (專業、 等) 讓您構建 Windows 應用商店的應用程式。 你需要<strong>表達為 Windows 8</strong>來構建 Windows 應用商店應用程式使用的<a href="http://www.microsoft.com/visualstudio/eng/products/visual-studio-express-products">速成版</a>.</p>
 
-<p>下載並解壓縮<a href="http://phonegap.com/download">科爾多瓦</a>的最新副本。這些說明適用于 <code>lib\windows-8</code> 子目錄。</p>
+<p>下載並解壓縮<a href="http://phonegap.com/download">科爾多瓦</a>的最新副本。這些說明適用于 <code class="language-plaintext highlighter-rouge">lib\windows-8</code> 子目錄。</p>
 
-<h2>設立了一個新的專案</h2>
+<h2 id="設立了一個新的專案">設立了一個新的專案</h2>
 
 <p>你已經可以生成使用<em>HTML/JavaScript 跟蹤</em>在 Windows 應用商店的應用程式中可用的 Windows 8 應用程式。 在 Windows 應用商店的應用程式中使用科爾多瓦，正如在其他科爾多瓦支援的平臺上公開相同的 Api。</p>
 
 <ul>
-<li><p>打開 Visual Studio 2012 並選擇<strong>新的專案</strong>.</p></li>
-<li><p>從專案清單從樹，然後<strong>空白應用程式</strong>選擇<strong>安裝 → 範本 → 其它語言 → JavaScript → Windows 存儲區</strong>。 輸入你喜歡的如無論專案名稱 <code>CordovaWin8Foo</code> 如本示例所示：</p>
+  <li>
+    <p>打開 Visual Studio 2012 並選擇<strong>新的專案</strong>.</p>
+  </li>
+  <li>
+    <p>從專案清單從樹，然後<strong>空白應用程式</strong>選擇<strong>安裝 → 範本 → 其它語言 → JavaScript → Windows 存儲區</strong>。 輸入你喜歡的如無論專案名稱 <code class="language-plaintext highlighter-rouge">CordovaWin8Foo</code> 如本示例所示：</p>
 
-<p><img src="/static/img/guide/platforms/win8/wsnewproject.png" alt=""></p></li>
-<li><p>Microsoft 將繼續使用 <code>default.html</code> 作為預設的主頁，但大多數的 網頁程式開發人員使用 <code>index.html</code> 。 它是個好主意，這樣做，至少要匹配你有可能在其他平臺。 若要修復此問題，在<strong>解決方案資源管理器中</strong>重命名 <code>default.html</code> 檔到 <code>index.html</code> 。 然後按兩下 <code>package.appxmanifest</code> 檔，並將<strong>起始頁</strong>該值更改為 <code>index.html</code> ：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">![](/static/img/guide/platforms/win8/wschangemanifest.png)
-</code></pre></div></li>
-<li><p>要包括 <code>cordova.js</code> 在專案中，按右鍵 <code>js</code> 目錄在<strong>解決方案資源管理器</strong>並選擇<strong>添加 → 新專案</strong>。 找到 <code>cordova.js</code> 檔在 <code>lib\windows-8</code> 目錄。</p></li>
-<li><p>編輯的代碼為 <code>index.html</code> 。 將引用添加到 <code>cordova.js</code> 。 您可以手動，或通過從<strong>解決方案資源管理器中</strong>拖動檔。 添加以下其他應用程式的主頁上的依賴關係：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;!-- WinJS references --&gt;
+    <p><img src="/static/img/guide/platforms/win8/wsnewproject.png" alt="" /></p>
+  </li>
+  <li>
+    <p>Microsoft 將繼續使用 <code class="language-plaintext highlighter-rouge">default.html</code> 作為預設的主頁，但大多數的 網頁程式開發人員使用 <code class="language-plaintext highlighter-rouge">index.html</code> 。 它是個好主意，這樣做，至少要匹配你有可能在其他平臺。 若要修復此問題，在<strong>解決方案資源管理器中</strong>重命名 <code class="language-plaintext highlighter-rouge">default.html</code> 檔到 <code class="language-plaintext highlighter-rouge">index.html</code> 。 然後按兩下 <code class="language-plaintext highlighter-rouge">package.appxmanifest</code> 檔，並將<strong>起始頁</strong>該值更改為 <code class="language-plaintext highlighter-rouge">index.html</code> ：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>![](/static/img/guide/platforms/win8/wschangemanifest.png)
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>要包括 <code class="language-plaintext highlighter-rouge">cordova.js</code> 在專案中，按右鍵 <code class="language-plaintext highlighter-rouge">js</code> 目錄在<strong>解決方案資源管理器</strong>並選擇<strong>添加 → 新專案</strong>。 找到 <code class="language-plaintext highlighter-rouge">cordova.js</code> 檔在 <code class="language-plaintext highlighter-rouge">lib\windows-8</code> 目錄。</p>
+  </li>
+  <li>
+    <p>編輯的代碼為 <code class="language-plaintext highlighter-rouge">index.html</code> 。 將引用添加到 <code class="language-plaintext highlighter-rouge">cordova.js</code> 。 您可以手動，或通過從<strong>解決方案資源管理器中</strong>拖動檔。 添加以下其他應用程式的主頁上的依賴關係：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;!-- WinJS references --&gt;
     &lt;link href="//Microsoft.WinJS.1.0/css/ui-dark.css" rel="stylesheet" /&gt;
     &lt;script src="//Microsoft.WinJS.1.0/js/base.js"&gt;&lt;/script&gt;
     &lt;script src="//Microsoft.WinJS.1.0/js/ui.js"&gt;&lt;/script&gt;
-
+    
     &lt;!-- Cordova --&gt;
     &lt;script src="/js/cordova.js"&gt;&lt;/script&gt;
-
+    
     &lt;!-- CordovaWin8Foo references --&gt;
     &lt;link href="/css/default.css" rel="stylesheet" /&gt;
     &lt;script src="/js/default.js"&gt;&lt;/script&gt;
-</code></pre></div></li>
-<li><p>添加 <code>[deviceready](../../../cordova/events/events.deviceready.html)</code> 處理常式，以演示科爾多瓦工作：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;body&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>添加 <code class="language-plaintext highlighter-rouge">[deviceready](../../../cordova/events/events.deviceready.html)</code> 處理常式，以演示科爾多瓦工作：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;body&gt;
     &lt;p&gt;Content goes here&lt;/p&gt;
     &lt;script type="text/javascript"&gt;
         console.log("Subscribing...");
@@ -1104,14 +1122,17 @@
         });
     &lt;/script&gt;
 &lt;/body&gt;
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ul>
 
-<h2>測試專案</h2>
+<h2 id="測試專案">測試專案</h2>
 
 <p>從 Visual Studio 中運行該專案。你會看到顯示的訊息方塊：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    ![](/static/img/guide/platforms/win8/wsalert.png)
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ![](/static/img/guide/platforms/win8/wsalert.png)
+</code></pre></div></div>
+
 <p>這是它。你現在準備好建立 Windows 應用商店的應用，科爾多瓦。</p>
 
 

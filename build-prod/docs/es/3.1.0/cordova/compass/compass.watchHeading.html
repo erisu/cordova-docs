@@ -1304,32 +1304,35 @@
             
 
             <div id="page-toc-source">
-                <h1>compass.watchHeading</h1>
+                <h1 id="compasswatchheading">compass.watchHeading</h1>
 
 <p>A intervalos regulares, conseguir la brújula en grados.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">var watchID = navigator.compass.watchHeading(compassSuccess, compassError, [compassOptions]);
-</code></pre></div>
-<h2>Descripción</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var watchID = navigator.compass.watchHeading(compassSuccess, compassError, [compassOptions]);
+</code></pre></div></div>
+
+<h2 id="descripción">Descripción</h2>
 
 <p>La brújula es un sensor que detecta la dirección o rumbo que el dispositivo está apuntando. Mide el rumbo en grados de 0 a 359.99.</p>
 
-<p>El <code>compass.watchHeading</code> obtiene el rumbo actual del dispositivo a intervalos regulares. Cada vez que el título es obtenido, se ejecuta la función de devolución de llamada <code>headingSuccess</code>. Especificar el intervalo en milisegundos mediante el parámetro de <code>frecuencia</code> en el objeto <code>[compassOptions](parameters/compassOptions.html)</code>.</p>
+<p>El <code class="language-plaintext highlighter-rouge">compass.watchHeading</code> obtiene el rumbo actual del dispositivo a intervalos regulares. Cada vez que el título es obtenido, se ejecuta la función de devolución de llamada <code class="language-plaintext highlighter-rouge">headingSuccess</code>. Especificar el intervalo en milisegundos mediante el parámetro de <code class="language-plaintext highlighter-rouge">frecuencia</code> en el objeto <code class="language-plaintext highlighter-rouge">[compassOptions](parameters/compassOptions.html)</code>.</p>
 
-<p>El identificador devuelto reloj hace referencia al intervalo de reloj brújula. El ID del reloj puede utilizarse con <code>[compass.clearWatch](compass.clearWatch.html)</code> para dejar de mirar la brújula.</p>
+<p>El identificador devuelto reloj hace referencia al intervalo de reloj brújula. El ID del reloj puede utilizarse con <code class="language-plaintext highlighter-rouge">[compass.clearWatch](compass.clearWatch.html)</code> para dejar de mirar la brújula.</p>
 
-<h2>Plataformas soportadas</h2>
+<h2 id="plataformas-soportadas">Plataformas soportadas</h2>
 
 <ul>
-<li>  Android</li>
-<li>  BlackBerry 10</li>
-<li>  iOS</li>
-<li>  Tizen</li>
-<li>  Windows Phone 7 y 8 (si está disponible en el hardware)</li>
-<li>  Windows 8</li>
+  <li>Android</li>
+  <li>BlackBerry 10</li>
+  <li>iOS</li>
+  <li>Tizen</li>
+  <li>Windows Phone 7 y 8 (si está disponible en el hardware)</li>
+  <li>Windows 8</li>
 </ul>
 
-<h2>Ejemplo rápido</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">function onSuccess(heading) {
+<h2 id="ejemplo-rápido">Ejemplo rápido</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function onSuccess(heading) {
     var element = document.getElementById('heading');
     element.innerHTML = 'Heading: ' + heading.magneticHeading;
 };
@@ -1343,75 +1346,78 @@ var options = {
 }; // Update every 3 seconds
 
 var watchID = navigator.compass.watchHeading(onSuccess, onError, options);
-</code></pre></div>
-<h2>Ejemplo completo</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Compass Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="ejemplo-completo">Ejemplo completo</h2>
 
-    <span class="c1">// The watch id references the current `watchHeading`</span>
-    <span class="kd">var</span> <span class="nx">watchID</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Compass Example&lt;/title&gt;
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">startWatch</span><span class="p">();</span>
-    <span class="p">}</span>
+    // The watch id references the current `watchHeading`
+    var watchID = null;
 
-    <span class="c1">// Start watching the compass</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">startWatch</span><span class="p">()</span> <span class="p">{</span>
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
 
-        <span class="c1">// Update compass every 3 seconds</span>
-        <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span> <span class="na">frequency</span><span class="p">:</span> <span class="mi">3000</span> <span class="p">};</span>
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        startWatch();
+    }
 
-        <span class="nx">watchID</span> <span class="o">=</span> <span class="nb">navigator</span><span class="p">.</span><span class="nx">compass</span><span class="p">.</span><span class="nx">watchHeading</span><span class="p">(</span><span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onError</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
-    <span class="p">}</span>
+    // Start watching the compass
+    //
+    function startWatch() {
 
-    <span class="c1">// Stop watching the compass</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">stopWatch</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">watchID</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nb">navigator</span><span class="p">.</span><span class="nx">compass</span><span class="p">.</span><span class="nx">clearWatch</span><span class="p">(</span><span class="nx">watchID</span><span class="p">);</span>
-            <span class="nx">watchID</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+        // Update compass every 3 seconds
+        var options = { frequency: 3000 };
 
-    <span class="c1">// onSuccess: Get the current heading</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onSuccess</span><span class="p">(</span><span class="nx">heading</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">element</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'heading'</span><span class="p">);</span>
-        <span class="nx">element</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">'Heading: '</span> <span class="o">+</span> <span class="nx">heading</span><span class="p">.</span><span class="nx">magneticHeading</span><span class="p">;</span>
-    <span class="p">}</span>
+        watchID = navigator.compass.watchHeading(onSuccess, onError, options);
+    }
 
-    <span class="c1">// onError: Failed to get the heading</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onError</span><span class="p">(</span><span class="nx">compassError</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">alert</span><span class="p">(</span><span class="s1">'Compass error: '</span> <span class="o">+</span> <span class="nx">compassError</span><span class="p">.</span><span class="nx">code</span><span class="p">);</span>
-    <span class="p">}</span>
+    // Stop watching the compass
+    //
+    function stopWatch() {
+        if (watchID) {
+            navigator.compass.clearWatch(watchID);
+            watchID = null;
+        }
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"heading"</span><span class="nt">&gt;</span>Waiting for heading...<span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"startWatch();"</span><span class="nt">&gt;</span>Start Watching<span class="nt">&lt;/button&gt;</span>
-    <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"stopWatch();"</span><span class="nt">&gt;</span>Stop Watching<span class="nt">&lt;/button&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2>iOS rarezas</h2>
+    // onSuccess: Get the current heading
+    //
+    function onSuccess(heading) {
+        var element = document.getElementById('heading');
+        element.innerHTML = 'Heading: ' + heading.magneticHeading;
+    }
 
-<p>En iOS <code>compass.watchHeading</code> también puede obtener rumbo actual del dispositivo cuando cambia un número especificado de grados. Cada vez los cambios de rumbo el número especificado de grados o más, ejecuta la función de devolución de llamada <code>headingSuccess</code>. Especifique los grados de cambio a través del parámetro de <code>filtro</code> en el objeto <code>[compassOptions](parameters/compassOptions.html)</code>. Claro como siempre el reloj pasando el identificador devuelto reloj al <code>[compass.clearWatch](compass.clearWatch.html)</code>. Esta funcionalidad sustituye las funciones de <code>clearWatchFilter</code>, que fueron quitadas en la versión 1.6 y previamente separadas, sólo iOS <code>watchHeadingFilter</code>.</p>
+    // onError: Failed to get the heading
+    //
+    function onError(compassError) {
+        alert('Compass error: ' + compassError.code);
+    }
 
-<p>Sólo un <code>watchHeading</code> puede ser en efecto a la vez en iOS. Si un <code>watchHeading</code> utiliza un filtro, llamando al <code>getCurrentHeading</code> o <code>watchHeading</code> utiliza el valor existente de filtro para especificar los cambios de rumbo. Observando los cambios de rumbo con un filtro es más eficiente que con intervalos de tiempo.</p>
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="heading"&gt;Waiting for heading...&lt;/div&gt;
+    &lt;button onclick="startWatch();"&gt;Start Watching&lt;/button&gt;
+    &lt;button onclick="stopWatch();"&gt;Stop Watching&lt;/button&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h2 id="ios-rarezas">iOS rarezas</h2>
+
+<p>En iOS <code class="language-plaintext highlighter-rouge">compass.watchHeading</code> también puede obtener rumbo actual del dispositivo cuando cambia un número especificado de grados. Cada vez los cambios de rumbo el número especificado de grados o más, ejecuta la función de devolución de llamada <code class="language-plaintext highlighter-rouge">headingSuccess</code>. Especifique los grados de cambio a través del parámetro de <code class="language-plaintext highlighter-rouge">filtro</code> en el objeto <code class="language-plaintext highlighter-rouge">[compassOptions](parameters/compassOptions.html)</code>. Claro como siempre el reloj pasando el identificador devuelto reloj al <code class="language-plaintext highlighter-rouge">[compass.clearWatch](compass.clearWatch.html)</code>. Esta funcionalidad sustituye las funciones de <code class="language-plaintext highlighter-rouge">clearWatchFilter</code>, que fueron quitadas en la versión 1.6 y previamente separadas, sólo iOS <code class="language-plaintext highlighter-rouge">watchHeadingFilter</code>.</p>
+
+<p>Sólo un <code class="language-plaintext highlighter-rouge">watchHeading</code> puede ser en efecto a la vez en iOS. Si un <code class="language-plaintext highlighter-rouge">watchHeading</code> utiliza un filtro, llamando al <code class="language-plaintext highlighter-rouge">getCurrentHeading</code> o <code class="language-plaintext highlighter-rouge">watchHeading</code> utiliza el valor existente de filtro para especificar los cambios de rumbo. Observando los cambios de rumbo con un filtro es más eficiente que con intervalos de tiempo.</p>
 
 
             </div>

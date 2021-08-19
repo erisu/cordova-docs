@@ -1018,32 +1018,39 @@
             
 
             <div id="page-toc-source">
-                <h1>BlackBerry 10 Plugins</h1>
+                <h1 id="blackberry-10-plugins">BlackBerry 10 Plugins</h1>
 
 <p>Ta razdelek ponuja podrobnosti za kako izvajati native plugin kodo na platformi BlackBerry 10. Pred obravnavo tega, glejte Uporaba Plugins za pregled plugin strukturo in njene skupne JavaScript vmesnik. Ta oddelek še dokazati vzorec <em>echo</em> plugin, ki komunicira s spletni pogled Cordova native platformo in nazaj.</p>
 
-<p>Echo plugin je v bistvu vrne karkoli niz v <code>window.echo</code> funkcijo, ki se pošilja iz JavaScript:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    window.echo = function(str, callback) {
+<p>Echo plugin je v bistvu vrne karkoli niz v <code class="language-plaintext highlighter-rouge">window.echo</code> funkcijo, ki se pošilja iz JavaScript:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    window.echo = function(str, callback) {
         cordova.exec(callback, function(err) {
             callback('Nothing to echo.');
         }, "Echo", "echo", [str]);
     };
-</code></pre></div>
-<p>Cordova plugin za BlackBerry 10 vsebuje JavaScript in domorodno kodo, ki komunicirajo med seboj prek okvira, ki jih JNEXT. Vsak plugin mora vključevati tudi a <code>plugin.xml</code> pila.</p>
+</code></pre></div></div>
 
-<h2>Ustvarja Native razred</h2>
+<p>Cordova plugin za BlackBerry 10 vsebuje JavaScript in domorodno kodo, ki komunicirajo med seboj prek okvira, ki jih JNEXT. Vsak plugin mora vključevati tudi a <code class="language-plaintext highlighter-rouge">plugin.xml</code> pila.</p>
+
+<h2 id="ustvarja-native-razred">Ustvarja Native razred</h2>
 
 <p>Tvoriti avtohtone del vaše plugin, odprite BlackBerry 10 NDK IDE in izberite <strong>datoteko → New → BlackBerry projekt → Native razširitev → BlackBerry 10</strong>. In vnesite ime želenega projekt in mesto, pritisnite <strong>konča</strong>.</p>
 
 <p>Projekt ustvaril IDE vsebuje vzorčno kodo za plugin spomin. Lahko nadomestiti ali spremeniti te datoteke za izvajanje svoje funkcionalnosti:</p>
 
 <ul>
-<li><p><code>*name*_js.hpp</code>: C++ glava za JNEXT kodo.</p></li>
-<li><p><code>*name*_js.cpp</code>: C++ zbornik zakaj JNEXT.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">*name*_js.hpp</code>: C++ glava za JNEXT kodo.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">*name*_js.cpp</code>: C++ zbornik zakaj JNEXT.</p>
+  </li>
 </ul>
 
-<p>Izvorni vmesnik za razširitev JNEXT si lahko ogledate v datoteki glave plugin, ki se nahajajo v javnem imeniku projekta. Ima tudi konstante in uporabnost funkcije na voljo v domorodno kodo. Plugin mora izhajati iz <code>JSExt</code> , ki je opredeljena v <code>plugin.h</code> . To je mora izvajati naslednje kategorije:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    class JSExt
+<p>Izvorni vmesnik za razširitev JNEXT si lahko ogledate v datoteki glave plugin, ki se nahajajo v javnem imeniku projekta. Ima tudi konstante in uporabnost funkcije na voljo v domorodno kodo. Plugin mora izhajati iz <code class="language-plaintext highlighter-rouge">JSExt</code> , ki je opredeljena v <code class="language-plaintext highlighter-rouge">plugin.h</code> . To je mora izvajati naslednje kategorije:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    class JSExt
     {
     public:
         virtual ~JSExt() {};
@@ -1052,9 +1059,11 @@
     private:
         std::string m_id;
     };
-</code></pre></div>
-<p>Razširitev vključevati na <code>plugin.h</code> glavo datoteke. V v <code>Echo</code> na primer uporabljate <code>JSExt</code> takole v v <code>echo_js.hpp</code> datoteke:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    #include "../public/plugin.h"
+</code></pre></div></div>
+
+<p>Razširitev vključevati na <code class="language-plaintext highlighter-rouge">plugin.h</code> glavo datoteke. V v <code class="language-plaintext highlighter-rouge">Echo</code> na primer uporabljate <code class="language-plaintext highlighter-rouge">JSExt</code> takole v v <code class="language-plaintext highlighter-rouge">echo_js.hpp</code> datoteke:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    #include "../public/plugin.h"
     #include &lt;string&gt;
 
     #ifndef ECHO_JS_H_
@@ -1072,9 +1081,11 @@
     };
 
     #endif // ECHO_JS_H_
-</code></pre></div>
-<p>Na <code>m_id</code> atribut je <code>JNEXT</code> id predmeta, ki je prešla v razred kot argument gradbenik. To je potrebno za native strani prožilca dogodkov na strani JavaScript. Je <code>CanDelete</code> metoda določa, ali je mogoče izbrisati avtohtone predmeta. Je <code>InvokeMethod</code> funkcija se imenuje kot rezultat iz zahtevo iz JavaScript za priklic metode predmeta posebej. Edini argument, da ta funkcija je niz opravil od JavaScript, ki to metodo razčleni ugotoviti native predmeta metode mora izvršiti. Te metode se izvajajo v <code>echo_js.cpp</code> . Tukaj je na <code>InvokeMethod</code> funkcijo za v <code>Echo</code> primer:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    string Echo::InvokeMethod(const string&amp; command) {
+</code></pre></div></div>
+
+<p>Na <code class="language-plaintext highlighter-rouge">m_id</code> atribut je <code class="language-plaintext highlighter-rouge">JNEXT</code> id predmeta, ki je prešla v razred kot argument gradbenik. To je potrebno za native strani prožilca dogodkov na strani JavaScript. Je <code class="language-plaintext highlighter-rouge">CanDelete</code> metoda določa, ali je mogoče izbrisati avtohtone predmeta. Je <code class="language-plaintext highlighter-rouge">InvokeMethod</code> funkcija se imenuje kot rezultat iz zahtevo iz JavaScript za priklic metode predmeta posebej. Edini argument, da ta funkcija je niz opravil od JavaScript, ki to metodo razčleni ugotoviti native predmeta metode mora izvršiti. Te metode se izvajajo v <code class="language-plaintext highlighter-rouge">echo_js.cpp</code> . Tukaj je na <code class="language-plaintext highlighter-rouge">InvokeMethod</code> funkcijo za v <code class="language-plaintext highlighter-rouge">Echo</code> primer:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    string Echo::InvokeMethod(const string&amp; command) {
 
         //parse command and args from string
         int index = command.find_first_of(" ");
@@ -1088,39 +1099,53 @@
             return "Unsupported Method";
         }
     }
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Native plugin tudi izvajati naslednje povratni klic funkcije:</p>
 
 <ul>
-<li><p><code>extern char* onGetObjList( void );</code></p></li>
-<li><p><code>extern JSExt* onCreateObject( const string&amp; strClassName, const string&amp; strObjId );</code></p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">extern char* onGetObjList( void );</code></p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">extern JSExt* onCreateObject( const string&amp; strClassName, const string&amp; strObjId );</code></p>
+  </li>
 </ul>
 
-<p>Je <code>onGetObjList</code> funkcija vrne vejico ločen seznam razredov, ki podpira JNEXT. JNEXT ta funkcija ugotoviti izbiro razredov, ki JNEXT lahko sprožajo. V <code>Echo</code> plugin izvaja naslednje <code>echo_js.cpp</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    char* onGetObjList() {
+<p>Je <code class="language-plaintext highlighter-rouge">onGetObjList</code> funkcija vrne vejico ločen seznam razredov, ki podpira JNEXT. JNEXT ta funkcija ugotoviti izbiro razredov, ki JNEXT lahko sprožajo. V <code class="language-plaintext highlighter-rouge">Echo</code> plugin izvaja naslednje <code class="language-plaintext highlighter-rouge">echo_js.cpp</code> :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    char* onGetObjList() {
         static char name[] = "Echo";
         return name;
     }
-</code></pre></div>
-<p>Je <code>onCreateObject</code> funkcija ima dva parametra. Prvi je ime zahtevanega razreda, ustvarjenih s strani JavaScript z veljavna imena kot tiste vrnil v <code>onGetObjList</code> . Drugi parameter je enoličen predmet id razreda. Ta metoda vrne kazalec na predmetu ustvaril plugin. V <code>Echo</code> plugin izvaja naslednje <code>echo_js.cpp</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    JSExt* onCreateObject(const string&amp; className, const string&amp; id) {
+</code></pre></div></div>
+
+<p>Je <code class="language-plaintext highlighter-rouge">onCreateObject</code> funkcija ima dva parametra. Prvi je ime zahtevanega razreda, ustvarjenih s strani JavaScript z veljavna imena kot tiste vrnil v <code class="language-plaintext highlighter-rouge">onGetObjList</code> . Drugi parameter je enoličen predmet id razreda. Ta metoda vrne kazalec na predmetu ustvaril plugin. V <code class="language-plaintext highlighter-rouge">Echo</code> plugin izvaja naslednje <code class="language-plaintext highlighter-rouge">echo_js.cpp</code> :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    JSExt* onCreateObject(const string&amp; className, const string&amp; id) {
         if (className == "Echo") {
             return new Echo(id);
         }
         return NULL;
     }
-</code></pre></div>
-<h2>Ustvarjanje Plugin JavaScript</h2>
+</code></pre></div></div>
+
+<h2 id="ustvarjanje-plugin-javascript">Ustvarjanje Plugin JavaScript</h2>
 
 <p>Plugin mora vsebovati naslednje JavaScript datoteke:</p>
 
 <ul>
-<li><p><code>client.js</code>: To velja za strani odjemalca in vsebuje API na voljo Cordova aplikaciji. API v <code>client.js</code> klicev omogoča klice za <code>index.js</code> . API v <code>client.js</code> tudi povezuje povratni klic funkcije na dogodke, da ogenj je callbacks.</p></li>
-<li><p><code>index.js</code>: Obremenitve Cordova <code>index.js</code> in naredi dostopne preko cordova.exec mostu. V <code>client.js</code> datoteke omogoča klice za API v v <code>index.js</code> datoteko, česar pa klic na JNEXT komunicirati s strani domačih.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">client.js</code>: To velja za strani odjemalca in vsebuje API na voljo Cordova aplikaciji. API v <code class="language-plaintext highlighter-rouge">client.js</code> klicev omogoča klice za <code class="language-plaintext highlighter-rouge">index.js</code> . API v <code class="language-plaintext highlighter-rouge">client.js</code> tudi povezuje povratni klic funkcije na dogodke, da ogenj je callbacks.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">index.js</code>: Obremenitve Cordova <code class="language-plaintext highlighter-rouge">index.js</code> in naredi dostopne preko cordova.exec mostu. V <code class="language-plaintext highlighter-rouge">client.js</code> datoteke omogoča klice za API v v <code class="language-plaintext highlighter-rouge">index.js</code> datoteko, česar pa klic na JNEXT komunicirati s strani domačih.</p>
+  </li>
 </ul>
 
-<p>Odjemalca in strežnik strani ( <code>client.js</code> in <code>index.js</code> ) komunicira skozi na <code>Cordova.exec</code> funkcijo. V <code>client.js</code> treba sklicevati na <code>exec</code> delovanje in zagotovili potrebne argumente. V <code>Echo</code> plugin izvaja naslednje v v <code>client.js</code> datoteke:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    var service = "org.apache.cordova.blackberry.echo",
+<p>Odjemalca in strežnik strani ( <code class="language-plaintext highlighter-rouge">client.js</code> in <code class="language-plaintext highlighter-rouge">index.js</code> ) komunicira skozi na <code class="language-plaintext highlighter-rouge">Cordova.exec</code> funkcijo. V <code class="language-plaintext highlighter-rouge">client.js</code> treba sklicevati na <code class="language-plaintext highlighter-rouge">exec</code> delovanje in zagotovili potrebne argumente. V <code class="language-plaintext highlighter-rouge">Echo</code> plugin izvaja naslednje v v <code class="language-plaintext highlighter-rouge">client.js</code> datoteke:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    var service = "org.apache.cordova.blackberry.echo",
         exec = cordova.require("cordova/exec");
 
     module.exports = {
@@ -1128,23 +1153,33 @@
             exec(success, fail, service, "echo", { data: data });
         }
     };
-</code></pre></div>
-<p>Na <code>index.js</code> komponenta uporablja JNEXT za interakcijo s strani domačih. Pritrditev konstruktor funkcijo imenovan <code>Echo</code> JNEXT omogoča izvajanje naslednjih ključnih operacij, z uporabo je <code>init</code> funkcija:</p>
+</code></pre></div></div>
+
+<p>Na <code class="language-plaintext highlighter-rouge">index.js</code> komponenta uporablja JNEXT za interakcijo s strani domačih. Pritrditev konstruktor funkcijo imenovan <code class="language-plaintext highlighter-rouge">Echo</code> JNEXT omogoča izvajanje naslednjih ključnih operacij, z uporabo je <code class="language-plaintext highlighter-rouge">init</code> funkcija:</p>
 
 <ul>
-<li><p>Določite zahtevane modul, ki izvažajo na domači strani. Ime zahtevane modul mora ujemati z imenom datoteke skupne knjižnice ( <code>.so</code> datoteke):</p>
-<div class="highlight"><pre><code class="language-" data-lang="">JNEXT.require("libecho")
-</code></pre></div></li>
-<li><p>Ustvarjanje predmeta z uporabo pridobljene modul in Shrani ID, ki vrne klic:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">self.m_id = JNEXT.createObject("libecho.Echo");
-</code></pre></div>
-<p>Kdaj uporaba zahteva je <code>echo</code> deloval v <code>client.js</code> , da pokličete pa klice je <code>echo</code> deloval v <code>index.js</code> , kjer je <code>PluginResult</code> predmet pošlje podatke kot odgovor nazaj v <code>client.js</code> . Ker je <code>args</code> je bil pretvori argument v funkciji <code>JSON.stringfy()</code> in kodirano kot a <code>URIcomponent</code> , pokličete mora naslednje:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">data = JSON.parse(decodeURIComponent(args.data));
-</code></pre></div></li>
+  <li>
+    <p>Določite zahtevane modul, ki izvažajo na domači strani. Ime zahtevane modul mora ujemati z imenom datoteke skupne knjižnice ( <code class="language-plaintext highlighter-rouge">.so</code> datoteke):</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>JNEXT.require("libecho")
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Ustvarjanje predmeta z uporabo pridobljene modul in Shrani ID, ki vrne klic:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>self.m_id = JNEXT.createObject("libecho.Echo");
+</code></pre></div>    </div>
+
+    <p>Kdaj uporaba zahteva je <code class="language-plaintext highlighter-rouge">echo</code> deloval v <code class="language-plaintext highlighter-rouge">client.js</code> , da pokličete pa klice je <code class="language-plaintext highlighter-rouge">echo</code> deloval v <code class="language-plaintext highlighter-rouge">index.js</code> , kjer je <code class="language-plaintext highlighter-rouge">PluginResult</code> predmet pošlje podatke kot odgovor nazaj v <code class="language-plaintext highlighter-rouge">client.js</code> . Ker je <code class="language-plaintext highlighter-rouge">args</code> je bil pretvori argument v funkciji <code class="language-plaintext highlighter-rouge">JSON.stringfy()</code> in kodirano kot a <code class="language-plaintext highlighter-rouge">URIcomponent</code> , pokličete mora naslednje:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data = JSON.parse(decodeURIComponent(args.data));
+</code></pre></div>    </div>
+  </li>
 </ul>
 
 <p>Zdaj lahko pošiljate podatke nazaj, kot spodaj:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    module.exports = {
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    module.exports = {
         echo: function (success, fail, args, env) {
             var result = new PluginResult(args, env),
             data = JSON.parse(decodeURIComponent(args.data)),
@@ -1152,30 +1187,32 @@
             result.ok(response, false);
         }
     };
-</code></pre></div>
-<h2>Plugin arhitekturo</h2>
+</code></pre></div></div>
 
-<p>Lahko postavite na plugin artefakte, vključno na <code>plugin.xml</code> datoteke, JavaScript in C++ izvorne datoteke, in <code>.so</code> binary pila v poljuben imenik strukturo, tako dolgo, kot ste pravilno določili lokacije datotek v v <code>plugin.xml</code> datoteko. Tukaj je tipična struktura:</p>
+<h2 id="plugin-arhitekturo">Plugin arhitekturo</h2>
+
+<p>Lahko postavite na plugin artefakte, vključno na <code class="language-plaintext highlighter-rouge">plugin.xml</code> datoteke, JavaScript in C++ izvorne datoteke, in <code class="language-plaintext highlighter-rouge">.so</code> binary pila v poljuben imenik strukturo, tako dolgo, kot ste pravilno določili lokacije datotek v v <code class="language-plaintext highlighter-rouge">plugin.xml</code> datoteko. Tukaj je tipična struktura:</p>
 
 <p><strong><em>project_directory</em></strong> (&gt; plugin.xml)</p>
 
 <ul>
-<li>  <strong>www</strong> (&gt;client.js)</li>
-<li>  <strong>src</strong> 
-
-<ul>
-<li>  <strong>blackberry10</strong> (&gt; index.js, <strong>native</strong> &gt; *.cpp, *.hpp)</li>
-<li>  <strong>naprava</strong> (&gt;<em>binarno datoteko</em> * .so)</li>
-<li>  <strong>simulator</strong> (&gt;<em>binarno datoteko</em> * .so)</li>
-</ul></li>
+  <li><strong>www</strong> (&gt;client.js)</li>
+  <li><strong>src</strong>
+    <ul>
+      <li><strong>blackberry10</strong> (&gt; index.js, <strong>native</strong> &gt; *.cpp, *.hpp)</li>
+      <li><strong>naprava</strong> (&gt;<em>binarno datoteko</em> * .so)</li>
+      <li><strong>simulator</strong> (&gt;<em>binarno datoteko</em> * .so)</li>
+    </ul>
+  </li>
 </ul>
 
-<p>Seznam prikazuje hierarhične odnose med glavne mape. Oklepaju prikazuje vsebino podanem imeniku. Vse imenik imena so prikazana v krepki. Imena datotek so pred je <code>&gt;</code> znak.</p>
+<p>Seznam prikazuje hierarhične odnose med glavne mape. Oklepaju prikazuje vsebino podanem imeniku. Vse imenik imena so prikazana v krepki. Imena datotek so pred je <code class="language-plaintext highlighter-rouge">&gt;</code> znak.</p>
 
-<h2><em>Plugin.xml</em> datoteke</h2>
+<h2 id="pluginxml-datoteke"><em>Plugin.xml</em> datoteke</h2>
 
-<p>Na <code>plugin.xml</code> vsebuje imenski prostor za razširitev in drugimi metapodatki. Nastavite na <code>Echo</code> plugin kot sledi:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+<p>Na <code class="language-plaintext highlighter-rouge">plugin.xml</code> vsebuje imenski prostor za razširitev in drugimi metapodatki. Nastavite na <code class="language-plaintext highlighter-rouge">Echo</code> plugin kot sledi:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
         id="org.apache.cordova.blackberry.echo"
         version="1.0.0"&gt;
         &lt;js-module src="www/client.js"&gt;
@@ -1190,7 +1227,8 @@
             &lt;/config-file&gt;
         &lt;/platform&gt;
     &lt;/plugin&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 
             </div>
         </div>

@@ -1136,22 +1136,23 @@
             
 
             <div id="page-toc-source">
-                <h1>Guida di ganci</h1>
+                <h1 id="guida-di-ganci">Guida di ganci</h1>
 
-<p>Cordova Hooks rappresentano gli script speciali che potrebbero essere aggiunto dall&#39;applicazione e gli sviluppatori di plugin o anche da soli la propria costruire sistema per personalizzare comandi di cordova. Gancio script potrebbe essere definito aggiungendoli alla cartella speciale predefinita ( <code>/hooks</code> ) o tramite file di configurazione ( <code>config.xml</code> e <code>plugin.xml</code> ) ed eseguire in serie nell&#39;ordine seguente:</p>
+<p>Cordova Hooks rappresentano gli script speciali che potrebbero essere aggiunto dall’applicazione e gli sviluppatori di plugin o anche da soli la propria costruire sistema per personalizzare comandi di cordova. Gancio script potrebbe essere definito aggiungendoli alla cartella speciale predefinita ( <code class="language-plaintext highlighter-rouge">/hooks</code> ) o tramite file di configurazione ( <code class="language-plaintext highlighter-rouge">config.xml</code> e <code class="language-plaintext highlighter-rouge">plugin.xml</code> ) ed eseguire in serie nell’ordine seguente:</p>
 
 <ul>
-<li>Applicazione ganci da <code>/hooks</code> ;</li>
-<li>Applicazione ganci da <code>config.xml</code> ;</li>
-<li>Ganci di plugin da<code>plugins/.../plugin.xml</code>.</li>
+  <li>Applicazione ganci da <code class="language-plaintext highlighter-rouge">/hooks</code> ;</li>
+  <li>Applicazione ganci da <code class="language-plaintext highlighter-rouge">config.xml</code> ;</li>
+  <li>Ganci di plugin da<code class="language-plaintext highlighter-rouge">plugins/.../plugin.xml</code>.</li>
 </ul>
 
-<p><strong>Nota</strong>: <code>/hooks</code> directory è considerato deprecato a favore di elementi gancio in config. XML e plugin.</p>
+<p><strong>Nota</strong>: <code class="language-plaintext highlighter-rouge">/hooks</code> directory è considerato deprecato a favore di elementi gancio in config. XML e plugin.</p>
 
-<h2>Tipi supportati gancio</h2>
+<h2 id="tipi-supportati-gancio">Tipi supportati gancio</h2>
 
 <p>Sono supportati i seguenti tipi di gancio:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">after_build
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>after_build
 after_compile
 after_clean
 after_docs
@@ -1185,23 +1186,27 @@ before_prepare
 before_run
 before_serve
 pre_package // Windows and Windows Phone only
-</code></pre></div>
-<h2>Modi per definire ganci</h2>
+</code></pre></div></div>
 
-<h3>Via <code>/hooks</code> directory</h3>
+<h2 id="modi-per-definire-ganci">Modi per definire ganci</h2>
+
+<h3 id="via-hooks-directory">Via <code class="language-plaintext highlighter-rouge">/hooks</code> directory</h3>
 
 <p><strong>Nota</strong>: questo metodo è considerato deprecato a favore di elementi gancio in config. XML e plugin.</p>
 
-<p>Per eseguire l&#39;azione personalizzata quando viene generato il corrispondente tipo di gancio, utilizzare il gancio tipo come nome per una sottocartella all&#39;interno della directory &#39;ganci&#39; e posto si creano script file qui, ad esempio:</p>
-<div class="highlight"><pre><code class="language-" data-lang=""># script file will be automatically executed after each build
+<p>Per eseguire l’azione personalizzata quando viene generato il corrispondente tipo di gancio, utilizzare il gancio tipo come nome per una sottocartella all’interno della directory ‘ganci’ e posto si creano script file qui, ad esempio:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># script file will be automatically executed after each build
 hooks/after_build/after_build_custom_action.js
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Quando si utilizzano questi ganci, verrà sempre eseguiti come file eseguibili, non come moduli caricabili di JavaScript. <strong>Remember</strong>: rendere il vostro script eseguibile in questo caso.</p>
 
-<h3>Config. XML</h3>
+<h3 id="config-xml">Config. XML</h3>
 
-<p>Ganci possono essere definiti nel <code>config. XML</code> utilizzando <code>&lt; hook &gt;</code> elementi, ad esempio di progetto:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;hook type="before_build" src="scripts/appBeforeBuild.bat" /&gt;
+<p>Ganci possono essere definiti nel <code class="language-plaintext highlighter-rouge">config. XML</code> utilizzando <code class="language-plaintext highlighter-rouge">&lt; hook &gt;</code> elementi, ad esempio di progetto:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;hook type="before_build" src="scripts/appBeforeBuild.bat" /&gt;
 &lt;hook type="before_build" src="scripts/appBeforeBuild.js" /&gt;
 &lt;hook type="before_plugin_install" src="scripts/appBeforePluginInstall.js" /&gt;
 
@@ -1218,11 +1223,13 @@ hooks/after_build/after_build_custom_action.js
     &lt;hook type="before_plugin_install" src="scripts/windows8/appWin8BeforePluginInstall.js" /&gt;
     ...
 &lt;/platform&gt;
-</code></pre></div>
-<h3>hook di plugin (plugin.xml)</h3>
+</code></pre></div></div>
 
-<p>Come uno sviluppatore di plugin che è possibile definire gancio script utilizzando gli elementi <code>&lt; hook &gt;</code> in un <code>plugin</code> simile:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;hook type="before_plugin_install" src="scripts/beforeInstall.js" /&gt;
+<h3 id="hook-di-plugin-pluginxml">hook di plugin (plugin.xml)</h3>
+
+<p>Come uno sviluppatore di plugin che è possibile definire gancio script utilizzando gli elementi <code class="language-plaintext highlighter-rouge">&lt; hook &gt;</code> in un <code class="language-plaintext highlighter-rouge">plugin</code> simile:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;hook type="before_plugin_install" src="scripts/beforeInstall.js" /&gt;
 &lt;hook type="after_build" src="scripts/afterBuild.js" /&gt;
 
 &lt;platform name="wp8"&gt;
@@ -1230,91 +1237,105 @@ hooks/after_build/after_build_custom_action.js
     &lt;hook type="before_build" src="scripts/wp8BeforeBuild.js" /&gt;
     ...
 &lt;/platform&gt;
-</code></pre></div>
-<p><code>before_plugin_install</code>, <code>after_plugin_install</code>, <code>before_plugin_uninstall</code> plugin ganci saranno licenziati esclusivamente per il plugin viene installato/disinstallato.</p>
+</code></pre></div></div>
 
-<h2>Interfaccia di script</h2>
+<p><code class="language-plaintext highlighter-rouge">before_plugin_install</code>, <code class="language-plaintext highlighter-rouge">after_plugin_install</code>, <code class="language-plaintext highlighter-rouge">before_plugin_uninstall</code> plugin ganci saranno licenziati esclusivamente per il plugin viene installato/disinstallato.</p>
 
-<h3>Javascript</h3>
+<h2 id="interfaccia-di-script">Interfaccia di script</h2>
+
+<h3 id="javascript">Javascript</h3>
 
 <p>Se si sono scrivendo ganci utilizzando node. js è necessario utilizzare la seguente definizione di modulo:</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
     <span class="p">...</span>
 <span class="p">}</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Si può fare il vostro script async utilizzando d:</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">Q</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">requireCordovaModule</span><span class="p">(</span><span class="s1">'q'</span><span class="p">);</span>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">Q</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">requireCordovaModule</span><span class="p">(</span><span class="dl">'</span><span class="s1">q</span><span class="dl">'</span><span class="p">);</span>
     <span class="kd">var</span> <span class="nx">deferral</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Q</span><span class="p">.</span><span class="nx">defer</span><span class="p">();</span>
 
     <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'hook.js&gt;&gt; end'</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">hook.js&gt;&gt; end</span><span class="dl">'</span><span class="p">);</span>
     <span class="nx">deferral</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
     <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
 
     <span class="k">return</span> <span class="nx">deferral</span><span class="p">.</span><span class="nx">promise</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div>
-<p>oggetto di <code>context</code> contiene gancio tipo, percorso completo dello script eseguito, il gancio, argomenti della riga di comando passati a Cordova e oggetto di primo livello &quot;cordova&quot;:</p>
-<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"hook"</span><span class="p">:</span><span class="w"> </span><span class="s2">"before_plugin_install"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"scriptLocation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c:</span><span class="se">\\</span><span class="s2">script</span><span class="se">\\</span><span class="s2">full</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">appBeforePluginInstall.js"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cmdLine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The</span><span class="se">\\</span><span class="s2">exact</span><span class="se">\\</span><span class="s2">command</span><span class="se">\\</span><span class="s2">cordova</span><span class="se">\\</span><span class="s2">run</span><span class="se">\\</span><span class="s2">with arguments"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"opts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"projectRoot"</span><span class="p">:</span><span class="s2">"C:</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">to</span><span class="se">\\</span><span class="s2">the</span><span class="se">\\</span><span class="s2">project"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cordova"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"platforms"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"wp8"</span><span class="p">],</span><span class="w">
-      </span><span class="s2">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"com.plugin.withhooks"</span><span class="p">],</span><span class="w">
-      </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.21.7-dev"</span><span class="w">
+</code></pre></div></div>
+
+<p>oggetto di <code class="language-plaintext highlighter-rouge">context</code> contiene gancio tipo, percorso completo dello script eseguito, il gancio, argomenti della riga di comando passati a Cordova e oggetto di primo livello “cordova”:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"hook"</span><span class="p">:</span><span class="w"> </span><span class="s2">"before_plugin_install"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"scriptLocation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c:</span><span class="se">\\</span><span class="s2">script</span><span class="se">\\</span><span class="s2">full</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">appBeforePluginInstall.js"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"cmdLine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The</span><span class="se">\\</span><span class="s2">exact</span><span class="se">\\</span><span class="s2">command</span><span class="se">\\</span><span class="s2">cordova</span><span class="se">\\</span><span class="s2">run</span><span class="se">\\</span><span class="s2">with arguments"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"opts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"projectRoot"</span><span class="p">:</span><span class="s2">"C:</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">to</span><span class="se">\\</span><span class="s2">the</span><span class="se">\\</span><span class="s2">project"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"cordova"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"platforms"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"wp8"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"com.plugin.withhooks"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.21.7-dev"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"plugin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"com.plugin.withhooks"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"pluginInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"plugin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"com.plugin.withhooks"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"pluginInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="err">...</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wp8"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"dir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C:</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">to</span><span class="se">\\</span><span class="s2">the</span><span class="se">\\</span><span class="s2">project</span><span class="se">\\</span><span class="s2">plugins</span><span class="se">\\</span><span class="s2">com.plugin.withhooks"</span><span class="w">
+      </span><span class="nl">"platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wp8"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"dir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C:</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">to</span><span class="se">\\</span><span class="s2">the</span><span class="se">\\</span><span class="s2">project</span><span class="se">\\</span><span class="s2">plugins</span><span class="se">\\</span><span class="s2">com.plugin.withhooks"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"cordova"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+  </span><span class="nl">"cordova"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre></div>
-<p><code>context.opts.plugin</code> oggetto verrà ceduto solo agli script ganci plugin.</p>
+</span></code></pre></div></div>
 
-<p>È possibile anche richiedere ulteriori moduli di Cordova nel tuo script utilizzando <code>context.requireCordovaModule</code> nel modo seguente:</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">Q</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">requireCordovaModule</span><span class="p">(</span><span class="s1">'q'</span><span class="p">);</span>
-</code></pre></div>
-<p><strong>Nota</strong>: nuovo modulo caricatore script interfaccia viene utilizzata per i file <code>JS</code> definiti tramite <code>config. XML</code> o <code>plugin</code> solo. Per motivi di compatibilità gancio file specificati tramite le cartelle <code>/hooks</code> vengono eseguiti tramite nodo child_process spawn, vedi &#39;Non-javascript&#39; sezione riportata di seguito.</p>
+<p><code class="language-plaintext highlighter-rouge">context.opts.plugin</code> oggetto verrà ceduto solo agli script ganci plugin.</p>
 
-<h3>Non-javascript</h3>
+<p>È possibile anche richiedere ulteriori moduli di Cordova nel tuo script utilizzando <code class="language-plaintext highlighter-rouge">context.requireCordovaModule</code> nel modo seguente:</p>
 
-<p><strong>Nota</strong>: consigliamo vivamente di scrivere i vostri ganci utilizzando node. js, in modo che essi sono cross-platform, vedere la sezione &#39;Javascript&#39; sopra.</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Q</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">requireCordovaModule</span><span class="p">(</span><span class="dl">'</span><span class="s1">q</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>Nota</strong>: nuovo modulo caricatore script interfaccia viene utilizzata per i file <code class="language-plaintext highlighter-rouge">JS</code> definiti tramite <code class="language-plaintext highlighter-rouge">config. XML</code> o <code class="language-plaintext highlighter-rouge">plugin</code> solo. Per motivi di compatibilità gancio file specificati tramite le cartelle <code class="language-plaintext highlighter-rouge">/hooks</code> vengono eseguiti tramite nodo child_process spawn, vedi ‘Non-javascript’ sezione riportata di seguito.</p>
+
+<h3 id="non-javascript">Non-javascript</h3>
+
+<p><strong>Nota</strong>: consigliamo vivamente di scrivere i vostri ganci utilizzando node. js, in modo che essi sono cross-platform, vedere la sezione ‘Javascript’ sopra.</p>
 
 <p>Non-javascript script vengono eseguiti tramite spawn child_process nodo dalla directory principale del progetto e hanno la radice directory passa come primo argomento. Tutte le altre opzioni vengono passati allo script utilizzando le variabili di ambiente:</p>
 
 <ul>
-<li>CORDOVA_VERSION - la versione di Cordova-CLI.</li>
-<li>CORDOVA_PLATFORMS - elenco delle piattaforme che il comando si applica a separati da virgola (ad es.: android, ios).</li>
-<li>CORDOVA_PLUGINS - lista di plugin ID che il comando si applica a delimitato da virgole (ad esempio: org.apache.cordova.file, org.apache.cordova.file-transfer)</li>
-<li>CORDOVA_HOOK - percorso al gancio che è in fase di esecuzione.</li>
-<li>CORDOVA_CMDLINE - gli argomenti della riga di comando esatti passati a cordova (ad es.: emulare cordova eseguita ios...)</li>
+  <li>CORDOVA_VERSION - la versione di Cordova-CLI.</li>
+  <li>CORDOVA_PLATFORMS - elenco delle piattaforme che il comando si applica a separati da virgola (ad es.: android, ios).</li>
+  <li>CORDOVA_PLUGINS - lista di plugin ID che il comando si applica a delimitato da virgole (ad esempio: org.apache.cordova.file, org.apache.cordova.file-transfer)</li>
+  <li>CORDOVA_HOOK - percorso al gancio che è in fase di esecuzione.</li>
+  <li>CORDOVA_CMDLINE - gli argomenti della riga di comando esatti passati a cordova (ad es.: emulare cordova eseguita ios…)</li>
 </ul>
 
 <p>Se uno script restituisce un codice di uscita diverso da zero, quindi il comando di cordova padre verrà interrotta.</p>
 
-<p>Si noti inoltre che anche se si lavora su Windows, e nel caso in cui il vostro script di hook non file bat (che è consigliato, se si desidera che il vostro script per lavorare nei sistemi operativi non Windows) Cordova CLI si aspetta una linea la baracca come la prima linea per poter conoscere l&#39;interprete deve utilizzare per lanciare lo script. La linea la baracca dovrebbe corrisponda all&#39;esempio seguente:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">#!/usr/bin/env [name_of_interpreter_executable]
-</code></pre></div>
-<h2>Esempio di utilizzo</h2>
+<p>Si noti inoltre che anche se si lavora su Windows, e nel caso in cui il vostro script di hook non file bat (che è consigliato, se si desidera che il vostro script per lavorare nei sistemi operativi non Windows) Cordova CLI si aspetta una linea la baracca come la prima linea per poter conoscere l’interprete deve utilizzare per lanciare lo script. La linea la baracca dovrebbe corrisponda all’esempio seguente:</p>
 
-<p>In questo esempio viene illustrato l&#39;utilizzo di ganci di Cordova per traccia per l&#39;output della console le dimensioni del file. apk generato per piattaforma Android.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/usr/bin/env [name_of_interpreter_executable]
+</code></pre></div></div>
 
-<p>Crea app di Cordova vuota e aggiungere la seguente definizione di <code>config. XML</code> per dire a Cordova per eseguire script <code>afterBuild.js</code> dopo ogni generazione di piattaforma.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;hook type="after_build" src="scripts/afterBuild.js" /&gt;
-</code></pre></div>
-<p>Creare il file <code>scripts/afterBuild.js</code> e aggiungere la seguente implementazione. Usiamo la versione di async di <code>fs.stat</code> metodo per dimostrare come funzionalità async potrebbe essere fatto tramite ganci.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">module.exports = function(ctx) {
+<h2 id="esempio-di-utilizzo">Esempio di utilizzo</h2>
+
+<p>In questo esempio viene illustrato l’utilizzo di ganci di Cordova per traccia per l’output della console le dimensioni del file. apk generato per piattaforma Android.</p>
+
+<p>Crea app di Cordova vuota e aggiungere la seguente definizione di <code class="language-plaintext highlighter-rouge">config. XML</code> per dire a Cordova per eseguire script <code class="language-plaintext highlighter-rouge">afterBuild.js</code> dopo ogni generazione di piattaforma.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;hook type="after_build" src="scripts/afterBuild.js" /&gt;
+</code></pre></div></div>
+
+<p>Creare il file <code class="language-plaintext highlighter-rouge">scripts/afterBuild.js</code> e aggiungere la seguente implementazione. Usiamo la versione di async di <code class="language-plaintext highlighter-rouge">fs.stat</code> metodo per dimostrare come funzionalità async potrebbe essere fatto tramite ganci.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module.exports = function(ctx) {
     // make sure android platform is part of build 
     if (ctx.opts.platforms.indexOf('android') &lt; 0) {
         return;
@@ -1337,16 +1358,19 @@ hooks/after_build/after_build_custom_action.js
 
     return deferral.promise;
 };
-</code></pre></div>
-<p>Parametro <code>ctx</code> nell&#39;esempio sopra riportato viene passato da Cordova e rappresenta il contesto di esecuzione come percorso completo dello script, piattaforma di destinazione, gli argomenti della riga di comando, ecc e anche espone funzionalità di supporto aggiuntivi. Per maggiori dettagli, vedere la sezione <code>Script interfaccia</code> di sopra.</p>
+</code></pre></div></div>
+
+<p>Parametro <code class="language-plaintext highlighter-rouge">ctx</code> nell’esempio sopra riportato viene passato da Cordova e rappresenta il contesto di esecuzione come percorso completo dello script, piattaforma di destinazione, gli argomenti della riga di comando, ecc e anche espone funzionalità di supporto aggiuntivi. Per maggiori dettagli, vedere la sezione <code class="language-plaintext highlighter-rouge">Script interfaccia</code> di sopra.</p>
 
 <p>È ora possibile aggiungere piattaforma android ed eseguire la compilazione.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cordova platform add android
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova platform add android
 ..
 cordova build
 ..
 Size of path\to\app\platforms\android\build\outputs\apk\android-debug.apk is 1821193 bytes
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Ulteriori esempi di utilizzo buona potrebbero essere trovati qui:</p>
 
 <p><a href="http://devgirl.org/2013/11/12/three-hooks-your-cordovaphonegap-project-needs/">http://devgirl.org/2013/11/12/three-hooks-your-cordovaphonegap-project-needs/</a></p>

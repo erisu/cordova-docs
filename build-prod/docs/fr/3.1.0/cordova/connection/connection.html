@@ -1258,77 +1258,96 @@
             
 
             <div id="page-toc-source">
-                <h1>Connexion</h1>
+                <h1 id="connexion">Connexion</h1>
 
 <blockquote>
-<p>L&#39;objet <code>connection</code>, disponible via <code>navigator.connection</code>, fournit des informations sur la connection cellulaire/wifi de l&#39;appareil.</p>
+  <p>L’objet <code class="language-plaintext highlighter-rouge">connection</code>, disponible via <code class="language-plaintext highlighter-rouge">navigator.connection</code>, fournit des informations sur la connection cellulaire/wifi de l’appareil.</p>
 </blockquote>
 
-<h2>Propriétés</h2>
+<h2 id="propriétés">Propriétés</h2>
 
 <ul>
-<li>  <a href="connection.type.html">connection.type</a></li>
+  <li><a href="connection.type.html">connection.type</a></li>
 </ul>
 
-<h2>Constantes</h2>
+<h2 id="constantes">Constantes</h2>
 
 <ul>
-<li>  Connection.UNKNOWN</li>
-<li>  Connection.ETHERNET</li>
-<li>  Connection.WIFI</li>
-<li>  Connection.CELL_2G</li>
-<li>  Connection.CELL_3G</li>
-<li>  Connection.CELL_4G</li>
-<li>  Connection.CELL</li>
-<li>  Connection.NONE</li>
+  <li>Connection.UNKNOWN</li>
+  <li>Connection.ETHERNET</li>
+  <li>Connection.WIFI</li>
+  <li>Connection.CELL_2G</li>
+  <li>Connection.CELL_3G</li>
+  <li>Connection.CELL_4G</li>
+  <li>Connection.CELL</li>
+  <li>Connection.NONE</li>
 </ul>
 
-<h2>Accéder à la fonctionnalité</h2>
+<h2 id="accéder-à-la-fonctionnalité">Accéder à la fonctionnalité</h2>
 
-<p>Depuis la version 3.0, Cordova implémente les API liées à l&#39;appareil en tant que <em>plugins</em>. Utiliser la commande <code>plugin</code> de l&#39;Interface en Ligne de Commande, décrite dans la section intitulée L&#39;Interface en Ligne de Commande, afin d&#39;ajouter ou retirer cette fonctionnalité à un projet :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add org.apache.cordova.network-information
+<p>Depuis la version 3.0, Cordova implémente les API liées à l’appareil en tant que <em>plugins</em>. Utiliser la commande <code class="language-plaintext highlighter-rouge">plugin</code> de l’Interface en Ligne de Commande, décrite dans la section intitulée L’Interface en Ligne de Commande, afin d’ajouter ou retirer cette fonctionnalité à un projet :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add org.apache.cordova.network-information
     $ cordova plugin ls
     [ 'org.apache.cordova.network-information' ]
     $ cordova plugin rm org.apache.cordova.network-information
-</code></pre></div>
-<p>Ces commandes s&#39;appliquent à toutes les plates-formes ciblées mais modifient les paramètres de configuration spécifiques aux différentes plates-formes tel que décrit ci-dessous :</p>
+</code></pre></div></div>
+
+<p>Ces commandes s’appliquent à toutes les plates-formes ciblées mais modifient les paramètres de configuration spécifiques aux différentes plates-formes tel que décrit ci-dessous :</p>
 
 <ul>
-<li><p>Android</p>
-<div class="highlight"><pre><code class="language-" data-lang="">(in app/res/xml/config.xml)
+  <li>
+    <p>Android</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(in app/res/xml/config.xml)
 &lt;feature name="NetworkStatus"&gt;
     &lt;param name="android-package" value="org.apache.cordova.NetworkManager" /&gt;
 &lt;/feature&gt;
-
+    
 (in app/AndroidManifest.xml)
 &lt;uses-permission android:name="android.permission.INTERNET" /&gt;
 &lt;uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /&gt;
 &lt;uses-permission android:name="android.permission.READ_PHONE_STATE" /&gt;
-</code></pre></div></li>
-<li><p>BlackBerry WebWorks</p>
-<div class="highlight"><pre><code class="language-" data-lang="">(in www/plugins.xml)
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>BlackBerry WebWorks</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(in www/plugins.xml)
 &lt;feature name="Network Status"&gt;
     &lt;param name="blackberry-package" value="org.apache.cordova.network.Network" /&gt;
 &lt;/feature&gt;
-</code></pre></div></li>
-<li><p>iOS (en<code>config.xml</code>)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="NetworkStatus"&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>iOS (en<code class="language-plaintext highlighter-rouge">config.xml</code>)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="NetworkStatus"&gt;
     &lt;param name="ios-package" value="CDVConnection" /&gt;
 &lt;/feature&gt;
-</code></pre></div></li>
-<li><p>Windows Phone (en<code>Properties/WPAppManifest.xml</code>)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;Capabilities&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Windows Phone (en<code class="language-plaintext highlighter-rouge">Properties/WPAppManifest.xml</code>)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;Capabilities&gt;
     &lt;Capability Name="ID_CAP_NETWORKING" /&gt;
 &lt;/Capabilities&gt;
-</code></pre></div>
-<p>Référence : <a href="http://msdn.microsoft.com/en-us/library/ff769509%28v=vs.92%29.aspx">manifeste d&#39;Application pour Windows Phone</a></p></li>
-<li><p>Paciarelli (dans<code>config.xml</code>)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="http://tizen.org/api/systeminfo" required="true"/&gt;
-</code></pre></div>
-<p>Référence : <a href="https://developer.tizen.org/help/topic/org.tizen.help.gs/Creating%20a%20Project.html?path=0_1_1_3#8814682_CreatingaProject-EditingconfigxmlFeatures">manifeste d&#39;Application pour l&#39;Application Web paciarelli</a></p></li>
+</code></pre></div>    </div>
+
+    <p>Référence : <a href="http://msdn.microsoft.com/en-us/library/ff769509%28v=vs.92%29.aspx">manifeste d’Application pour Windows Phone</a></p>
+  </li>
+  <li>
+    <p>Paciarelli (dans<code class="language-plaintext highlighter-rouge">config.xml</code>)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="http://tizen.org/api/systeminfo" required="true"/&gt;
+</code></pre></div>    </div>
+
+    <p>Référence : <a href="https://developer.tizen.org/help/topic/org.tizen.help.gs/Creating%20a%20Project.html?path=0_1_1_3#8814682_CreatingaProject-EditingconfigxmlFeatures">manifeste d’Application pour l’Application Web paciarelli</a></p>
+  </li>
 </ul>
 
-<p>Certaines plates-formes peuvent prendre en charge cette fonctionnalité sans nécessiter aucune configuration spéciale. Voir <em>Support de plate-forme</em> dans la section vue d&#39;ensemble.</p>
+<p>Certaines plates-formes peuvent prendre en charge cette fonctionnalité sans nécessiter aucune configuration spéciale. Voir <em>Support de plate-forme</em> dans la section vue d’ensemble.</p>
 
 
             </div>

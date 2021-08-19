@@ -1292,41 +1292,46 @@
             
 
             <div id="page-toc-source">
-                <h1>Developing a Plugin on Android</h1>
+                <h1 id="developing-a-plugin-on-android">Developing a Plugin on Android</h1>
 
 <p>プラグインの開発には、 Cordova-Android のアーキテクチャの理解が必要です。
 Cordova-Android は Android WebView とそれに付属するコールバックから構成されます。
 これらのプラグインは config.xml ファイル内にクラスマッピングとして表されています。</p>
 
-<p>プラグインは <code>Pluguin</code> クラスを継承した少なくとも1つの Java クラスによって構成されます。
-プラグインは <code>PluginResult</code> オブジェクトを返す <code>execute</code> メソッドを *<em>必ず *</em>実装しなければなりません。
+<p>プラグインは <code class="language-plaintext highlighter-rouge">Pluguin</code> クラスを継承した少なくとも1つの Java クラスによって構成されます。
+プラグインは <code class="language-plaintext highlighter-rouge">PluginResult</code> オブジェクトを返す <code class="language-plaintext highlighter-rouge">execute</code> メソッドを **必ず **実装しなければなりません。
 加えて、プラグイン作成のベストプラクティスとして、プラグインは <a href="../../../cordova/events/events.pause.html">pause</a> と <a href="../../../cordova/events/events.resume.html">resume</a> イベントをサポートし、またプラグイン間のメッセージのやりとりもサポートしているべきです。</p>
 
-<h2>プラグインクラスのマッピング</h2>
+<h2 id="プラグインクラスのマッピング">プラグインクラスのマッピング</h2>
 
-<p>プラグインの JavaScript 部分は常に <code>cordova.exec</code> メソッドを以下のように使います:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">exec(&lt;successFunction&gt;, &lt;failFunction&gt;, &lt;service&gt;, &lt;action&gt;, [&lt;args&gt;]);
-</code></pre></div>
+<p>プラグインの JavaScript 部分は常に <code class="language-plaintext highlighter-rouge">cordova.exec</code> メソッドを以下のように使います:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exec(&lt;successFunction&gt;, &lt;failFunction&gt;, &lt;service&gt;, &lt;action&gt;, [&lt;args&gt;]);
+</code></pre></div></div>
+
 <p>これは WebView から Android ネイティブ側へのリクエストを整理し、
-おおよそ要約すると <code>service</code> クラスで <code>action</code> メソッドを、
-<code>args</code> 配列で渡された引数と一緒に呼び出すということになります。</p>
+おおよそ要約すると <code class="language-plaintext highlighter-rouge">service</code> クラスで <code class="language-plaintext highlighter-rouge">action</code> メソッドを、
+<code class="language-plaintext highlighter-rouge">args</code> 配列で渡された引数と一緒に呼び出すということになります。</p>
 
-<p>プラグインを Java ファイルで提供するしろ JAR でするにしろ、プラグインは必ず Cordova-Anroid アプリケーションの <code>res/xml</code> フォルダーにある <code>config.xml</code> ファイルに追加されていなければなりません。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;plugin name="&lt;service_name&gt;" value="&lt;full_name_including_namespace&gt;"/&gt;
-</code></pre></div>
-<p>サービス名 (name) は JavaScript の <code>exec</code> の中で定義したものと一致している必要があり、値 (value) は Java クラスへのネームスペースを含んだフルパスになります。これがないと、プラグインはコンパイルはされますが、
+<p>プラグインを Java ファイルで提供するしろ JAR でするにしろ、プラグインは必ず Cordova-Anroid アプリケーションの <code class="language-plaintext highlighter-rouge">res/xml</code> フォルダーにある <code class="language-plaintext highlighter-rouge">config.xml</code> ファイルに追加されていなければなりません。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;plugin name="&lt;service_name&gt;" value="&lt;full_name_including_namespace&gt;"/&gt;
+</code></pre></div></div>
+
+<p>サービス名 (name) は JavaScript の <code class="language-plaintext highlighter-rouge">exec</code> の中で定義したものと一致している必要があり、値 (value) は Java クラスへのネームスペースを含んだフルパスになります。これがないと、プラグインはコンパイルはされますが、
 Cordova からアクセスできない状態となります。</p>
 
-<h2>Android Java プラグインの作成</h2>
+<h2 id="android-java-プラグインの作成">Android Java プラグインの作成</h2>
 
 <p>私たちはプラグインリクエストをネイティブ側に送る JavaScript を作成しました。
-また、正しく <code>config.xml</code> ファイルでマッピングされた Android Java プラグインもあります。
+また、正しく <code class="language-plaintext highlighter-rouge">config.xml</code> ファイルでマッピングされた Android Java プラグインもあります。
 では、最終的に Android Java プラグインのクラスがどのようになるのか見ていきましょう。</p>
 
-<p>JavaScript の <code>exec</code> 関数によってプラグインに割り当てられたものは、
-プラグインのクラスの <code>execute</code> メソッドに渡されます。大半の <code>execute</code>
+<p>JavaScript の <code class="language-plaintext highlighter-rouge">exec</code> 関数によってプラグインに割り当てられたものは、
+プラグインのクラスの <code class="language-plaintext highlighter-rouge">execute</code> メソッドに渡されます。大半の <code class="language-plaintext highlighter-rouge">execute</code>
 の実装は以下のようになります:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">public PluginResult execute(String action, JSONArray args, String callbackId) {
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public PluginResult execute(String action, JSONArray args, String callbackId) {
     PluginResult.Status status = PluginResult.Status.OK;
     String result = "";
 
@@ -1339,89 +1344,94 @@ Cordova からアクセスできない状態となります。</p>
         return new PluginResult(PluginResult.Status.JSON_EXCEPTION);
     }
 }
-</code></pre></div>
-<p>基本的に <code>action</code> パラメーターの値を見て、クラス内の
+</code></pre></div></div>
+
+<p>基本的に <code class="language-plaintext highlighter-rouge">action</code> パラメーターの値を見て、クラス内の
 (プライベート) メソッドに割り振っていきます。
 また、任意でいくつかのパラメーターをそのメソッドに渡します。</p>
 
 <p>例外をキャッチしエラーを返すとき、 JavaScript へ返すエラーが Java で発生した例外に可能なかぎり近づけることは、明瞭さのためにも重要です。</p>
 
-<h3>Android プラグインの Echo プラグイン</h3>
+<h3 id="android-プラグインの-echo-プラグイン">Android プラグインの Echo プラグイン</h3>
 
 <p>次を config.xml に追加します:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;plugin name="Echo" value="org.apache.cordova.plugin.Echo" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;plugin name="Echo" value="org.apache.cordova.plugin.Echo" /&gt;
+</code></pre></div></div>
+
 <p>そして、次を Cordova-Android アプリケーションの中の
-<code>src/org/apache/cordova/plugin/Echo.java</code> に追加します:</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="k">package</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">plugin</span><span class="p">;</span>
+<code class="language-plaintext highlighter-rouge">src/org/apache/cordova/plugin/Echo.java</code> に追加します:</p>
 
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="n">Plugin</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="n">PluginResult</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">JSONArray</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">JSONException</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">JSONObject</span><span class="p">;</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package org.apache.cordova.plugin;
 
-<span class="p">/**</span>
- <span class="p">*</span> <span class="err">このクラスは</span> <span class="n">JavaScript</span> <span class="err">から呼び出された文字列を</span><span class="n">echo</span> <span class="err">します。</span>
- <span class="p">*/</span>
-<span class="k">public</span> <span class="n">class</span> <span class="n">App</span> <span class="n">extends</span> <span class="n">Plugin</span> <span class="p">{</span>
+import org.apache.cordova.api.Plugin;
+import org.apache.cordova.api.PluginResult;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-    <span class="p">/**</span>
-     <span class="p">*</span> <span class="err">リクエストを実行し、</span> <span class="n">PluginResult</span> <span class="err">を返します。</span>
-     <span class="p">*</span>
-     <span class="p">*</span> <span class="p">@</span><span class="n">param</span> <span class="n">action</span>        <span class="err">実行するアクション名です。</span>
-     <span class="p">*</span> <span class="p">@</span><span class="n">param</span> <span class="n">args</span>          <span class="err">プラグインへの引数の</span> <span class="n">JSONArry</span> <span class="err">です。</span>
-     <span class="p">*</span> <span class="p">@</span><span class="n">param</span> <span class="n">callbackId</span>    <span class="n">JavaScript</span> <span class="err">へコールバックするときに使うコールバック</span> <span class="n">id</span> <span class="err">です。</span>
-     <span class="p">*</span> <span class="p">@</span><span class="n">return</span>              <span class="err">ステータスとメッセージを伴った</span> <span class="n">PluginResult</span> <span class="err">オブジェクトです。</span>
-     <span class="p">*/</span>
-    <span class="k">public</span> <span class="n">PluginResult</span> <span class="n">execute</span><span class="p">(</span><span class="k">String</span> <span class="n">action</span><span class="p">,</span> <span class="n">JSONArray</span> <span class="n">args</span><span class="p">,</span> <span class="k">String</span> <span class="n">callbackId</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">try</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">action</span><span class="p">.</span><span class="n">equals</span><span class="p">(</span><span class="s2">"echo"</span><span class="p">))</span> <span class="p">{</span>
-                <span class="k">String</span> <span class="n">echo</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">echo</span> <span class="c1">!= null &amp;&amp; echo.length() &gt; 0) {
-</span>                    <span class="n">return</span> <span class="n">new</span> <span class="n">PluginResult</span><span class="p">(</span><span class="n">PluginResult</span><span class="p">.</span><span class="n">Status</span><span class="p">.</span><span class="n">OK</span><span class="p">,</span> <span class="n">echo</span><span class="p">);</span>
-                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                    <span class="n">return</span> <span class="n">new</span> <span class="n">PluginResult</span><span class="p">(</span><span class="n">PluginResult</span><span class="p">.</span><span class="n">Status</span><span class="p">.</span><span class="n">ERROR</span><span class="p">);</span>
-                <span class="p">}</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="n">return</span> <span class="n">new</span> <span class="n">PluginResult</span><span class="p">(</span><span class="n">PluginResult</span><span class="p">.</span><span class="n">Status</span><span class="p">.</span><span class="n">INVALID_ACTION</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">JSONException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">return</span> <span class="n">new</span> <span class="n">PluginResult</span><span class="p">(</span><span class="n">PluginResult</span><span class="p">.</span><span class="n">Status</span><span class="p">.</span><span class="n">JSON_EXCEPTION</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
+/**
+ * このクラスは JavaScript から呼び出された文字列をecho します。
+ */
+public class App extends Plugin {
+
+    /**
+     * リクエストを実行し、 PluginResult を返します。
+     *
+     * @param action        実行するアクション名です。
+     * @param args          プラグインへの引数の JSONArry です。
+     * @param callbackId    JavaScript へコールバックするときに使うコールバック id です。
+     * @return              ステータスとメッセージを伴った PluginResult オブジェクトです。
+     */
+    public PluginResult execute(String action, JSONArray args, String callbackId) {
+        try {
+            if (action.equals("echo")) {
+                String echo = args.getString(0);
+                if (echo != null &amp;&amp; echo.length() &gt; 0) {
+                    return new PluginResult(PluginResult.Status.OK, echo);
+                } else {
+                    return new PluginResult(PluginResult.Status.ERROR);
+                }
+            } else {
+                return new PluginResult(PluginResult.Status.INVALID_ACTION);
+            }
+        } catch (JSONException e) {
+            return new PluginResult(PluginResult.Status.JSON_EXCEPTION);
+        }
+    }
+}
+</code></pre></div></div>
+
 <p>コードを見ていきましょう。一番上には、必要なすべての Cordova に関する
-<code>import</code> 文が並んでいます。クラスは <code>Plugin</code> を継承しています - これはとても
-重要です。 <code>Plugin</code> インターフェースは <code>execute</code> メソッドを実装する必要が
-あります。メソッドは、最初に <code>action</code> を見ていきます。このプラグインは1つ
-のアクション <code>echo</code> のみをサポートしています。ほかのアクションは、ステータス
-が <code>INVALID_ACTION</code> となった <code>PluginResult</code> が返されます - これは JavaScript
-側でエラーコールバックへの呼び出しに変換されます。次に、 <code>args</code> に対して
-<code>getString</code> メソッドを使い、パラメーター配列から0番目のパラメーターを取得
+<code class="language-plaintext highlighter-rouge">import</code> 文が並んでいます。クラスは <code class="language-plaintext highlighter-rouge">Plugin</code> を継承しています - これはとても
+重要です。 <code class="language-plaintext highlighter-rouge">Plugin</code> インターフェースは <code class="language-plaintext highlighter-rouge">execute</code> メソッドを実装する必要が
+あります。メソッドは、最初に <code class="language-plaintext highlighter-rouge">action</code> を見ていきます。このプラグインは1つ
+のアクション <code class="language-plaintext highlighter-rouge">echo</code> のみをサポートしています。ほかのアクションは、ステータス
+が <code class="language-plaintext highlighter-rouge">INVALID_ACTION</code> となった <code class="language-plaintext highlighter-rouge">PluginResult</code> が返されます - これは JavaScript
+側でエラーコールバックへの呼び出しに変換されます。次に、 <code class="language-plaintext highlighter-rouge">args</code> に対して
+<code class="language-plaintext highlighter-rouge">getString</code> メソッドを使い、パラメーター配列から0番目のパラメーターを取得
 することにより、 echo する文字列を取り出します。ここで、少しパラメーターに
-対してチェックを行います: <code>null</code> チェックや文字列の長さが0でないかどうかなど
-です。もしそうであった場合は、ステータスが <code>ERROR</code> の <code>PluginResult</code> を
+対してチェックを行います: <code class="language-plaintext highlighter-rouge">null</code> チェックや文字列の長さが0でないかどうかなど
+です。もしそうであった場合は、ステータスが <code class="language-plaintext highlighter-rouge">ERROR</code> の <code class="language-plaintext highlighter-rouge">PluginResult</code> を
 返します (これはもうご存知の通り JavaScript 側でエラーコールバックを
-呼び出します)。もしこれらのチェックをパスしたら、ステータスが <code>OK</code> の
-<code>PluginResult</code> を返し、パラメーターとして受け取った <code>echo</code> 文字列を
+呼び出します)。もしこれらのチェックをパスしたら、ステータスが <code class="language-plaintext highlighter-rouge">OK</code> の
+<code class="language-plaintext highlighter-rouge">PluginResult</code> を返し、パラメーターとして受け取った <code class="language-plaintext highlighter-rouge">echo</code> 文字列を
 渡します。これが、 JavaScript 側で成功コールバック関数に変換されます。
-また、 <code>echo</code> パラメーターを JavaScript の成功コールバック関数に
+また、 <code class="language-plaintext highlighter-rouge">echo</code> パラメーターを JavaScript の成功コールバック関数に
 パラメーターとして渡します。</p>
 
-<h2>プラグインのデバッグ</h2>
+<h2 id="プラグインのデバッグ">プラグインのデバッグ</h2>
 
 <p>Eclipse は Android プロジェクトのデバッグに使用でき、 Java のソースファイルがプロジェクトに含まれている場合は、プラグインもデバッグできます。最新バージョンの Android Dev Tools のみ JAR にソースコードを付与でき、これは今回はフルでサポートされていません。</p>
 
-<h2>よくある落とし穴</h2>
+<h2 id="よくある落とし穴">よくある落とし穴</h2>
 
 <ul>
-<li>プラグインは <code>CordovaInterface</code> オブジェクトへのアクセス権を持っています。このオブジェクトはアプリケーションで走っている Android の <code>Activity</code> へのアクセス権を持っています。この <code>Activity</code> は新しい Android <code>Intent</code> を起動するために必要な <code>Context</code> です。
-<code>CordovaInterface</code> は、結果として <code>Activity</code> を開始すること、また <code>Intent</code> がアプリケーションに戻ってきたときにコールバックをセットすることをプラグインに許可します。
-<code>Intent</code> システムは Android のプロセス間の連携に使われるため、これは非常に重要です。</li>
-<li>プラグインは <code>Context</code> への直接アクセス権を以前のように持っていません。以前の <code>ctx</code> はもう廃止され、 2.0 リリースの6ヶ月後に削除されます。 <code>Context</code> にあった <code>ctx</code> が存在するすべてのメソッド、 <code>getContext()</code> と <code>getActivity()</code> は必要な正しいオブジェクトを返すことが可能です。</li>
-<li><code>webView.loadUrl()</code> を使って JavaScript を呼び出すことは避けてください。コールバックサーバーがある理由は、 JavaScript がスレッドセーフで実行されるためです。 <code>loadUrl</code> は明確に UI スレッドに割り込み、プラグインのユーザビリティーに影響します。</li>
+  <li>プラグインは <code class="language-plaintext highlighter-rouge">CordovaInterface</code> オブジェクトへのアクセス権を持っています。このオブジェクトはアプリケーションで走っている Android の <code class="language-plaintext highlighter-rouge">Activity</code> へのアクセス権を持っています。この <code class="language-plaintext highlighter-rouge">Activity</code> は新しい Android <code class="language-plaintext highlighter-rouge">Intent</code> を起動するために必要な <code class="language-plaintext highlighter-rouge">Context</code> です。
+<code class="language-plaintext highlighter-rouge">CordovaInterface</code> は、結果として <code class="language-plaintext highlighter-rouge">Activity</code> を開始すること、また <code class="language-plaintext highlighter-rouge">Intent</code> がアプリケーションに戻ってきたときにコールバックをセットすることをプラグインに許可します。
+<code class="language-plaintext highlighter-rouge">Intent</code> システムは Android のプロセス間の連携に使われるため、これは非常に重要です。</li>
+  <li>プラグインは <code class="language-plaintext highlighter-rouge">Context</code> への直接アクセス権を以前のように持っていません。以前の <code class="language-plaintext highlighter-rouge">ctx</code> はもう廃止され、 2.0 リリースの6ヶ月後に削除されます。 <code class="language-plaintext highlighter-rouge">Context</code> にあった <code class="language-plaintext highlighter-rouge">ctx</code> が存在するすべてのメソッド、 <code class="language-plaintext highlighter-rouge">getContext()</code> と <code class="language-plaintext highlighter-rouge">getActivity()</code> は必要な正しいオブジェクトを返すことが可能です。</li>
+  <li><code class="language-plaintext highlighter-rouge">webView.loadUrl()</code> を使って JavaScript を呼び出すことは避けてください。コールバックサーバーがある理由は、 JavaScript がスレッドセーフで実行されるためです。 <code class="language-plaintext highlighter-rouge">loadUrl</code> は明確に UI スレッドに割り込み、プラグインのユーザビリティーに影響します。</li>
 </ul>
 
 

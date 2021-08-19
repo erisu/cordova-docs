@@ -1172,124 +1172,150 @@
             
 
             <div id="page-toc-source">
-                <h1>BlackBerry 10 プラットフォーム ガイド</h1>
+                <h1 id="blackberry-10-プラットフォーム-ガイド">BlackBerry 10 プラットフォーム ガイド</h1>
 
 <p>このガイドは、開発環境にビルドおよび配置のブラックベリー 10 デバイス Cordova アプリを設定する方法を示します。 以前のバージョンのブラックベリー、ブラックベリーのプラットホームのガイドで説明されている、コマンド ライン ツールの異なるセットを使用する必要があります。</p>
 
-<h2>要件</h2>
+<h2 id="要件">要件</h2>
 
 <p>開発環境は、Windows、Mac および Linux で利用できます。</p>
 
-<p>開発者が使用する、 <code>cordova</code> 、ブラックベリーのネイティブ SDK と共にユーティリティ。 インストールする方法については、コマンド ライン インターフェイスを参照してください <code>cordova</code> 、プロジェクトを追加し、ビルドおよび各プラットフォームの配置。</p>
+<p>開発者が使用する、 <code class="language-plaintext highlighter-rouge">cordova</code> 、ブラックベリーのネイティブ SDK と共にユーティリティ。 インストールする方法については、コマンド ライン インターフェイスを参照してください <code class="language-plaintext highlighter-rouge">cordova</code> 、プロジェクトを追加し、ビルドおよび各プラットフォームの配置。</p>
 
-<h2>ブラックベリーのネイティブ SDK をインストールします。</h2>
+<h2 id="ブラックベリーのネイティブ-sdk-をインストールします">ブラックベリーのネイティブ SDK をインストールします。</h2>
 
 <p>ブラックベリーのネイティブ SDK は、 <a href="http://developer.blackberry.com/native/download/">developer.blackberry.com</a>から利用可能なです。 インストール直後は、そのコマンド ライン ツールをシステム パスに追加する必要があります。</p>
 
 <p>Windows:</p>
 
 <ul>
-<li><p><strong>私のコンピューター → プロパティ → 詳細設定 → 環境変数</strong>に行く.</p></li>
-<li><p>ネイティブ SDK のインストール ディレクトリ パスに追加、たとえば。</p>
+  <li>
+    <p><strong>私のコンピューター → プロパティ → 詳細設定 → 環境変数</strong>に行く.</p>
+  </li>
+  <li>
+    <p>ネイティブ SDK のインストール ディレクトリ パスに追加、たとえば。</p>
 
-<p>;C:\bbndk\host_10_2_0_132\darwin\x86\usr\bin\</p></li>
+    <p>;C:\bbndk\host_10_2_0_132\darwin\x86\usr\bin\</p>
+  </li>
 </ul>
 
 <p>Mac および Linux:</p>
 
 <ul>
-<li><p>編集、 <code>~/.bash_profile</code> ネイティブ SDK のインストール先に応じて、次のような行を追加するファイル。</p>
+  <li>
+    <p>編集、 <code class="language-plaintext highlighter-rouge">~/.bash_profile</code> ネイティブ SDK のインストール先に応じて、次のような行を追加するファイル。</p>
 
-<p>$ export PATH=${PATH}:/Applications/Momentics.app/host_10_2_0_15/darwin/x86/usr/bin/</p></li>
-<li><p>現在のセッションで変更を適用するのには、次を実行します。</p>
+    <p>$ export PATH=${PATH}:/Applications/Momentics.app/host_10_2_0_15/darwin/x86/usr/bin/</p>
+  </li>
+  <li>
+    <p>現在のセッションで変更を適用するのには、次を実行します。</p>
 
-<p>$ ソース ~/.bash_profile</p></li>
+    <p>$ ソース ~/.bash_profile</p>
+  </li>
 </ul>
 
-<h2>署名を設定します。</h2>
+<h2 id="署名を設定します">署名を設定します。</h2>
 
 <p>デバイスのテストやブラックベリーの世界を通じてアプリケーションを配布する場合、システムはコード署名用のセットアップをなければなりません。</p>
 
 <p>署名キーを取得するために、[ブラックベリー キー注文フォーム] (https://www.blackberry.com/SignedKeys/codesigning.html) に移動します。</p>
 
-<p>最初のチェック ボックスを選択します:&quot;ブラックベリー NDK を使用して開発された BlackBerry10 アプリ」のため署名し、BBID を作成することも。</p>
+<p>最初のチェック ボックスを選択します:”ブラックベリー NDK を使用して開発された BlackBerry10 アプリ」のため署名し、BBID を作成することも。</p>
 
 <p>パスワードを入力し、「トークンの取得」bbidtoken.csk をダウンロードする] をクリックします。ダウンロード ページに表示されますお使いの OS のデフォルトの場所にこのファイルを保存します。</p>
 
 <p>最後の手順は、署名証明書を生成します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ blackberry-keytool -genkeypair -storepass &lt;password&gt; -author 'Your Name’
-</code></pre></div>
-<h2>プロジェクトを作成します。</h2>
 
-<p>使用の <code>cordova</code> コマンド ライン インターフェイスで説明されているように、新しいプロジェクトを設定するユーティリティ。たとえば、ソース コード ディレクトリ: で</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova create hello com.example.hello
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ blackberry-keytool -genkeypair -storepass &lt;password&gt; -author 'Your Name’
+</code></pre></div></div>
+
+<h2 id="プロジェクトを作成します">プロジェクトを作成します。</h2>
+
+<p>使用の <code class="language-plaintext highlighter-rouge">cordova</code> コマンド ライン インターフェイスで説明されているように、新しいプロジェクトを設定するユーティリティ。たとえば、ソース コード ディレクトリ: で</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova create hello com.example.hello
 $ cd hello
 $ cordova platform add blackberry10
 $ cordova build
-</code></pre></div>
-<h2>エミュレーターへの展開します。</h2>
+</code></pre></div></div>
+
+<h2 id="エミュレーターへの展開します">エミュレーターへの展開します。</h2>
 
 <p>デバイス エミュレーターを実行する場合は、ダウンロードして、ブラックベリー 10 シミュレータをインストールします。</p>
 
 <ul>
-<li>  <a href="http://developer.blackberry.com/native/download/">ダウンロード</a></li>
-<li>  <a href="http://developer.blackberry.com/devzone/develop/simulator/blackberry_10_simulator_start.html">はじめに</a></li>
+  <li><a href="http://developer.blackberry.com/native/download/">ダウンロード</a></li>
+  <li><a href="http://developer.blackberry.com/devzone/develop/simulator/blackberry_10_simulator_start.html">はじめに</a></li>
 </ul>
 
 <p>デバイスまたはエミュレーターでアプリケーションをテストする前に開発モードを有効にする必要があります。</p>
 
 <p>エミュレーター イメージを起動し、ホーム画面から<strong>設定</strong>を選択します。</p>
 
-<p><img src="/static/img/guide/platforms/blackberry10/bb_home.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/blackberry10/bb_home.png" alt="" /></p>
 
 <p>移動し、<strong>セキュリティとプライバシー → 開発モード</strong>セクションし、オプションを有効にします。</p>
 
-<p><img src="/static/img/guide/platforms/blackberry10/bb_devel.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/blackberry10/bb_devel.png" alt="" /></p>
 
-<p>その後、実行、 <code>emulate</code> アプリケーションを表示するコマンド。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova emulate blackberry10 --devicepass &lt;password&gt;
-</code></pre></div>
-<h2>デバイスへの配置します。</h2>
+<p>その後、実行、 <code class="language-plaintext highlighter-rouge">emulate</code> アプリケーションを表示するコマンド。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova emulate blackberry10 --devicepass &lt;password&gt;
+</code></pre></div></div>
+
+<h2 id="デバイスへの配置します">デバイスへの配置します。</h2>
 
 <p>デバイスへの配備をお使いのコンピューターに接続されているし、開発モードが有効になってを確認します。</p>
 
-<p>その後、実行、 <code>run</code> アプリケーションを表示するコマンド。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova run blackberry10 --devicepass &lt;password&gt;
-</code></pre></div>
+<p>その後、実行、 <code class="language-plaintext highlighter-rouge">run</code> アプリケーションを表示するコマンド。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova run blackberry10 --devicepass &lt;password&gt;
+</code></pre></div></div>
+
 <p>デバッグ トークンがまだない場合、デバイスの設定、エラー メッセージされたらパスワードを入力するときにアプリケーションに署名するお使いのコンピューターの構成を定義しています。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova run blackberry10 --devicepass &lt;password&gt; --keystorepass &lt;signing password&gt;
-</code></pre></div>
-<h2>WebInspector とデバッグ</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova run blackberry10 --devicepass &lt;password&gt; --keystorepass &lt;signing password&gt;
+</code></pre></div></div>
+
+<h2 id="webinspector-とデバッグ">WebInspector とデバッグ</h2>
 
 <p>デバイスまたはエミュレーター上でのデバッグ、アプリケーションの内部状態を表示するリモート WebInspector を実行ことがあります。 プロンプトは標準の web ブラウザーを使ってアプリを接続することができます URL を表示します。 詳細については、<a href="http://developer.blackberry.com/html5/documentation/web_inspector_overview_1553586_11.html">デバッグ使用 WebInspector</a>を参照してください。.</p>
 
-<h2>リリース バージョンをビルド</h2>
+<h2 id="リリース-バージョンをビルド">リリース バージョンをビルド</h2>
 
-<p>既定では、実行して、 <code>cordova build</code> コマンドはデバイスまたはシミュレータにテストに適した符号なし<em>.bar</em>パッケージ ファイルを作成します。</p>
+<p>既定では、実行して、 <code class="language-plaintext highlighter-rouge">cordova build</code> コマンドはデバイスまたはシミュレータにテストに適した符号なし<em>.bar</em>パッケージ ファイルを作成します。</p>
 
-<p>使用する <code>--release</code> BlackBerry の世界を介して配信に適してリリース バージョンを作成します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova build --release --keystorepass &lt;signing password&gt;
-</code></pre></div>
-<p><code>--keystorepass</code>オプションに署名するお使いのコンピューターを構成するときに定義されたパスワードを指定しますアプリケーション。</p>
+<p>使用する <code class="language-plaintext highlighter-rouge">--release</code> BlackBerry の世界を介して配信に適してリリース バージョンを作成します。</p>
 
-<h2>他の場所に配置します。</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova build --release --keystorepass &lt;signing password&gt;
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">--keystorepass</code>オプションに署名するお使いのコンピューターを構成するときに定義されたパスワードを指定しますアプリケーション。</p>
+
+<h2 id="他の場所に配置します">他の場所に配置します。</h2>
 
 <p>上記の手順は、デバイスは USB 経由で接続されてまたはシミュレータが、ローカル コンピューターで実行されていると仮定します。また、他の場所に展開することが可能です。</p>
 
 <p>コマンド ライン ユーティリティのセットを追加、プロジェクトの BlackBerry 10 プラットフォームを設定するときに含められます。 この場合、プロジェクトの最上位ディレクトリから呼び出される、次のコマンドは<em>emu</em> IP アドレスを持つという名前のターゲットを関連付けます。</p>
 
 <ul>
-<li><p>Windows:</p>
+  <li>
+    <p>Windows:</p>
 
-<p>$ platforms\blackberry10\cordova\target.bat add emu 192.168.2.24 -t simulator</p></li>
-<li><p>Mac の/Linux: 上</p>
+    <p>$ platforms\blackberry10\cordova\target.bat add emu 192.168.2.24 -t simulator</p>
+  </li>
+  <li>
+    <p>Mac の/Linux: 上</p>
 
-<p>$ platforms/blackberry10/cordova/target add emu 192.168.2.24 -t simulator</p></li>
+    <p>$ platforms/blackberry10/cordova/target add emu 192.168.2.24 -t simulator</p>
+  </li>
 </ul>
 
-<p>ターゲットが定義されたら、実行するコマンドを使用する提供できます <code>--target</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova run blackberry10 --target=emu
-</code></pre></div>
+<p>ターゲットが定義されたら、実行するコマンドを使用する提供できます <code class="language-plaintext highlighter-rouge">--target</code> :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova run blackberry10 --target=emu
+</code></pre></div></div>
+
 
             </div>
         </div>

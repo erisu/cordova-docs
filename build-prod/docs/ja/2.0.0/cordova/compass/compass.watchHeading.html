@@ -1292,30 +1292,33 @@
             
 
             <div id="page-toc-source">
-                <h1>compass.watchHeading</h1>
+                <h1 id="compasswatchheading">compass.watchHeading</h1>
 
 <p>コンパス方位を一定の時間間隔で取得します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">var watchID = navigator.compass.watchHeading(compassSuccess, compassError, [compassOptions]);
-</code></pre></div>
-<h2>概要</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var watchID = navigator.compass.watchHeading(compassSuccess, compassError, [compassOptions]);
+</code></pre></div></div>
+
+<h2 id="概要">概要</h2>
 
 <p>コンパスはデバイスが向いている方向を感知するセンサーです。コンパスはその方角を0から359.99の範囲で計測します。</p>
 
-<p><code>compass.watchHeading</code> 関数は一定の時間間隔でデバイスの現在の方位を取得します。方位情報が取得されるごとに <code>headingSuccess</code> コールバック関数が実行されます。時間間隔は <code>[compassOptions](parameters/compassOptions.html)</code> オブジェクトの <code>frequency</code> パラメーターを通じてミリ秒単位で指定します。</p>
+<p><code class="language-plaintext highlighter-rouge">compass.watchHeading</code> 関数は一定の時間間隔でデバイスの現在の方位を取得します。方位情報が取得されるごとに <code class="language-plaintext highlighter-rouge">headingSuccess</code> コールバック関数が実行されます。時間間隔は <code class="language-plaintext highlighter-rouge">[compassOptions](parameters/compassOptions.html)</code> オブジェクトの <code class="language-plaintext highlighter-rouge">frequency</code> パラメーターを通じてミリ秒単位で指定します。</p>
 
-<p>本関数の戻り値である watch ID は、コンパスの監視間隔への参照を表します。 <code>[compass.clearWatch](compass.clearWatch.html)</code> 関数に watch ID を渡すことで、監視を停止できます。</p>
+<p>本関数の戻り値である watch ID は、コンパスの監視間隔への参照を表します。 <code class="language-plaintext highlighter-rouge">[compass.clearWatch](compass.clearWatch.html)</code> 関数に watch ID を渡すことで、監視を停止できます。</p>
 
-<h2>サポートされているプラットフォーム</h2>
+<h2 id="サポートされているプラットフォーム">サポートされているプラットフォーム</h2>
 
 <ul>
-<li>Android</li>
-<li>iPhone</li>
-<li>Windows Phone 7 ( Mango ) ハードウェア内で有効な場合</li>
-<li>Bada 1.2 &amp; 2.x</li>
+  <li>Android</li>
+  <li>iPhone</li>
+  <li>Windows Phone 7 ( Mango ) ハードウェア内で有効な場合</li>
+  <li>Bada 1.2 &amp; 2.x</li>
 </ul>
 
-<h2><a href="../storage/storage.opendatabase.html">使用例</a></h2>
-<div class="highlight"><pre><code class="language-" data-lang="">function onSuccess(heading) {
+<h2 id="使用例"><a href="../storage/storage.opendatabase.html">使用例</a></h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function onSuccess(heading) {
     var element = document.getElementById('heading');
     element.innerHTML = '方位: ' + heading.magneticHeading;
 };
@@ -1327,73 +1330,76 @@ function onError(compassError) {
 var options = { frequency: 3000 };  // 3秒ごとに更新
 
 var watchID = navigator.compass.watchHeading(onSuccess, onError, options);
-</code></pre></div>
-<h2>詳細な使用例</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>コンパスの使用例<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova-2.0.0.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="詳細な使用例">詳細な使用例</h2>
 
-    <span class="c1">// watch ID が現在の `watchHeading` を参照</span>
-    <span class="kd">var</span> <span class="nx">watchID</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;コンパスの使用例&lt;/title&gt;
 
-    <span class="c1">// Cordova の読み込み完了まで待機</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.0.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// Cordova 準備完了</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">startWatch</span><span class="p">();</span>
-    <span class="p">}</span>
+    // watch ID が現在の `watchHeading` を参照
+    var watchID = null;
 
-    <span class="c1">// コンパスの監視を開始</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">startWatch</span><span class="p">()</span> <span class="p">{</span>
+    // Cordova の読み込み完了まで待機
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
 
-        <span class="c1">// コンパスを3秒ごとに更新</span>
-        <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span> <span class="na">frequency</span><span class="p">:</span> <span class="mi">3000</span> <span class="p">};</span>
+    // Cordova 準備完了
+    //
+    function onDeviceReady() {
+        startWatch();
+    }
 
-        <span class="nx">watchID</span> <span class="o">=</span> <span class="nb">navigator</span><span class="p">.</span><span class="nx">compass</span><span class="p">.</span><span class="nx">watchHeading</span><span class="p">(</span><span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onError</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
-    <span class="p">}</span>
+    // コンパスの監視を開始
+    //
+    function startWatch() {
 
-    <span class="c1">// コンパスの監視を停止</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">stopWatch</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">watchID</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nb">navigator</span><span class="p">.</span><span class="nx">compass</span><span class="p">.</span><span class="nx">clearWatch</span><span class="p">(</span><span class="nx">watchID</span><span class="p">);</span>
-            <span class="nx">watchID</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+        // コンパスを3秒ごとに更新
+        var options = { frequency: 3000 };
 
-    <span class="c1">// onSuccess: 現在の方位を取得</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onSuccess</span><span class="p">(</span><span class="nx">heading</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">element</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'heading'</span><span class="p">);</span>
-        <span class="nx">element</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">'方位: '</span> <span class="o">+</span> <span class="nx">heading</span><span class="p">.</span><span class="nx">magneticHeading</span><span class="p">;</span>
-    <span class="p">}</span>
+        watchID = navigator.compass.watchHeading(onSuccess, onError, options);
+    }
 
-    <span class="c1">// onError: 方位の取得に失敗</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onError</span><span class="p">(</span><span class="nx">compassError</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">alert</span><span class="p">(</span><span class="s1">'コンパスのエラーが発生しました: '</span> <span class="o">+</span> <span class="nx">compassError</span><span class="p">.</span><span class="nx">code</span><span class="p">);</span>
-    <span class="p">}</span>
+    // コンパスの監視を停止
+    //
+    function stopWatch() {
+        if (watchID) {
+            navigator.compass.clearWatch(watchID);
+            watchID = null;
+        }
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"heading"</span><span class="nt">&gt;</span>方位を待機...<span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"startWatch();"</span><span class="nt">&gt;</span>監視開始<span class="nt">&lt;/button&gt;</span>
-    <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"stopWatch();"</span><span class="nt">&gt;</span>監視中止<span class="nt">&lt;/button&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2>iOS に関する注意点</h2>
+    // onSuccess: 現在の方位を取得
+    //
+    function onSuccess(heading) {
+        var element = document.getElementById('heading');
+        element.innerHTML = '方位: ' + heading.magneticHeading;
+    }
 
-<p>iOS では、指定された角度分だけデバイスの現在の方位が変更されたとき、 <code>compass.watchHeading</code> でそのデバイスの現在の向きを取得することもできます。方位が指定された角度以上で変更されるたび、 <code>headingSuccess</code> コールバック関数が呼び出されます。角度は、 <code>[compassOptions](parameters/compassOptions.html)</code> オブジェクトの <code>filter</code> パラメーターで指定します。 <code>[compass.clearWatch](compass.clearWatch.html)</code> に <code>watch ID</code> を渡すことで、通常と同じように監視を停止できます。この機能は、1.6で廃止になった iOS 限定の watchHeadingFilter 関数と clearWatchFilter 関数に置き換わるものです。</p>
+    // onError: 方位の取得に失敗
+    //
+    function onError(compassError) {
+        alert('コンパスのエラーが発生しました: ' + compassError.code);
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="heading"&gt;方位を待機...&lt;/div&gt;
+    &lt;button onclick="startWatch();"&gt;監視開始&lt;/button&gt;
+    &lt;button onclick="stopWatch();"&gt;監視中止&lt;/button&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h2 id="ios-に関する注意点">iOS に関する注意点</h2>
+
+<p>iOS では、指定された角度分だけデバイスの現在の方位が変更されたとき、 <code class="language-plaintext highlighter-rouge">compass.watchHeading</code> でそのデバイスの現在の向きを取得することもできます。方位が指定された角度以上で変更されるたび、 <code class="language-plaintext highlighter-rouge">headingSuccess</code> コールバック関数が呼び出されます。角度は、 <code class="language-plaintext highlighter-rouge">[compassOptions](parameters/compassOptions.html)</code> オブジェクトの <code class="language-plaintext highlighter-rouge">filter</code> パラメーターで指定します。 <code class="language-plaintext highlighter-rouge">[compass.clearWatch](compass.clearWatch.html)</code> に <code class="language-plaintext highlighter-rouge">watch ID</code> を渡すことで、通常と同じように監視を停止できます。この機能は、1.6で廃止になった iOS 限定の watchHeadingFilter 関数と clearWatchFilter 関数に置き換わるものです。</p>
 
 <p>iOS では、一度に一つの watchHeading のみが有効です。もし filter を用いて watchHeading が使用されている場合、 getCurrentHeading 関数または watchHeading 関数は既に存在している filter の値を、方位の角度変化量の指定に使用します。 iOS では、時間による監視より、 filter を用いた方位変化量による監視の方が効果的です。</p>
 

@@ -1172,62 +1172,80 @@
             
 
             <div id="page-toc-source">
-                <h1>Windows 8 プラットフォーム ガイド</h1>
+                <h1 id="windows-8-プラットフォーム-ガイド">Windows 8 プラットフォーム ガイド</h1>
 
 <p>このガイドは、Windows 8 向け Cordova アプリを展開する SDK の開発環境を設定する方法を示します。詳細なプラットフォーム固有の情報は、次を参照してください。</p>
 
 <ul>
-<li>  <a href="upgrading.html">Windows 8 アップグレード</a></li>
-<li>  <a href="tools.html">Windows 8 のコマンド ライン ツール</a></li>
+  <li><a href="upgrading.html">Windows 8 アップグレード</a></li>
+  <li><a href="tools.html">Windows 8 のコマンド ライン ツール</a></li>
 </ul>
 
 <p>上記のコマンド ライン ツールはコルドバ 3.0 より前のバージョンを参照してください。現在のインタ フェースについての情報は、コマンド ライン インターフェイスを参照してください。</p>
 
 <p>マイクロソフト推奨<em>Metro スタイル アプリ</em>の Windows 8 と Windows 左折し、ルートの名前 MSDN 今アプリを<em>Windows ストア</em>アプリのこのタイプとこのガイドに従って条約。 また、このガイドでは、 <em>Windows 8</em>意味 Windows 8 と Windows の右</p>
 
-<h2>要件</h2>
+<h2 id="要件">要件</h2>
 
 <ul>
-<li><p>Windows 8</p></li>
-<li><p>Visual Studio 2012 プロフェッショナルまたはより良い、または Visual Studio 2012 Express の Windows 8</p></li>
+  <li>
+    <p>Windows 8</p>
+  </li>
+  <li>
+    <p>Visual Studio 2012 プロフェッショナルまたはより良い、または Visual Studio 2012 Express の Windows 8</p>
+  </li>
 </ul>
 
 <p>アプリを Windows ストアに提出する<a href="http://www.windowsstore.com/">windowsstore.com</a>に記載された手順に従ってください。</p>
 
-<h2>SDK とコルドバをインストールします。</h2>
+<h2 id="sdk-とコルドバをインストールします">SDK とコルドバをインストールします。</h2>
 
 <p>Visual Studio 2012 の最寄りのバリアントを設定します。 製品の有償版 （プロなど） のすべての Windows ストア アプリを構築できます。 <strong>Windows 8 のエクスプレス</strong> <a href="http://www.microsoft.com/visualstudio/eng/products/visual-studio-express-products">Express エディション</a>を使用して Windows ストア アプリを構築する必要があります。.</p>
 
-<p>ダウンロードし、<a href="http://phonegap.com/download">コルドバ</a>の最新のコピーを抽出します。これら － に適用、 <code>lib\windows-8</code> サブディレクトリ。</p>
+<p>ダウンロードし、<a href="http://phonegap.com/download">コルドバ</a>の最新のコピーを抽出します。これら － に適用、 <code class="language-plaintext highlighter-rouge">lib\windows-8</code> サブディレクトリ。</p>
 
-<h2>新しいプロジェクトを設定します。</h2>
+<h2 id="新しいプロジェクトを設定します">新しいプロジェクトを設定します。</h2>
 
 <p>すでに、 <em>HTML/JavaScript 追跡</em>Windows ストア アプリで利用可能なを使用して Windows 8 アプリを構築できます。 として他のコルドバでサポートされているプラットフォームで同じ Api を公開する Windows ストア アプリでのコルドバを使用します。</p>
 
 <ul>
-<li><p>Visual Studio 2012 を開き、<strong>新しいプロジェクト</strong>を選択します.</p></li>
-<li><p>「プロジェクト」リストからツリーし<strong>空アプリケーション</strong>から<strong>インストール → テンプレート → その他の言語 → JavaScript → Windows ストア</strong>を選択します。 などのような任意のプロジェクトの名前を入力します <code>CordovaWin8Foo</code> この例のように：</p>
+  <li>
+    <p>Visual Studio 2012 を開き、<strong>新しいプロジェクト</strong>を選択します.</p>
+  </li>
+  <li>
+    <p>「プロジェクト」リストからツリーし<strong>空アプリケーション</strong>から<strong>インストール → テンプレート → その他の言語 → JavaScript → Windows ストア</strong>を選択します。 などのような任意のプロジェクトの名前を入力します <code class="language-plaintext highlighter-rouge">CordovaWin8Foo</code> この例のように：</p>
 
-<p><img src="/static/img/guide/platforms/win8/wsnewproject.png" alt=""></p></li>
-<li><p>マイクロソフトは引き続き使用 <code>default.html</code> 既定のホーム ページが、ほとんどの web 開発者向けとして <code>index.html</code> 。 ためには、少なくとも可能性が取り組んでいる他のプラットフォームと一致することをお勧めします。 これを修正する、名前を変更する<strong>ソリューション エクスプ ローラー</strong>で、 <code>default.html</code> ファイルを <code>index.html</code> 。 ダブルクリックし、 <code>package.appxmanifest</code> ファイルし、<strong>ページの開始</strong>値を変更する <code>index.html</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">![](/static/img/guide/platforms/win8/wschangemanifest.png)
-</code></pre></div></li>
-<li><p>含むように <code>cordova.js</code> を右クリックして、プロジェクトで、 <code>js</code> <strong>ソリューション エクスプ</strong>ローラーおよび<strong>追加 → 新規項目</strong>選択ディレクトリ。 検索、 <code>cordova.js</code> ファイルで、 <code>lib\windows-8</code> ディレクトリ。</p></li>
-<li><p>コードを編集の <code>index.html</code> 。 参照を追加 <code>cordova.js</code> 。 手動で、または<strong>ソリューション エクスプ ローラー</strong>からファイルをドラッグすることによってこれを行うことができます。 次の追加アプリのホーム ページに他の依存関係。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;!-- WinJS references --&gt;
+    <p><img src="/static/img/guide/platforms/win8/wsnewproject.png" alt="" /></p>
+  </li>
+  <li>
+    <p>マイクロソフトは引き続き使用 <code class="language-plaintext highlighter-rouge">default.html</code> 既定のホーム ページが、ほとんどの web 開発者向けとして <code class="language-plaintext highlighter-rouge">index.html</code> 。 ためには、少なくとも可能性が取り組んでいる他のプラットフォームと一致することをお勧めします。 これを修正する、名前を変更する<strong>ソリューション エクスプ ローラー</strong>で、 <code class="language-plaintext highlighter-rouge">default.html</code> ファイルを <code class="language-plaintext highlighter-rouge">index.html</code> 。 ダブルクリックし、 <code class="language-plaintext highlighter-rouge">package.appxmanifest</code> ファイルし、<strong>ページの開始</strong>値を変更する <code class="language-plaintext highlighter-rouge">index.html</code> :</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>![](/static/img/guide/platforms/win8/wschangemanifest.png)
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>含むように <code class="language-plaintext highlighter-rouge">cordova.js</code> を右クリックして、プロジェクトで、 <code class="language-plaintext highlighter-rouge">js</code> <strong>ソリューション エクスプ</strong>ローラーおよび<strong>追加 → 新規項目</strong>選択ディレクトリ。 検索、 <code class="language-plaintext highlighter-rouge">cordova.js</code> ファイルで、 <code class="language-plaintext highlighter-rouge">lib\windows-8</code> ディレクトリ。</p>
+  </li>
+  <li>
+    <p>コードを編集の <code class="language-plaintext highlighter-rouge">index.html</code> 。 参照を追加 <code class="language-plaintext highlighter-rouge">cordova.js</code> 。 手動で、または<strong>ソリューション エクスプ ローラー</strong>からファイルをドラッグすることによってこれを行うことができます。 次の追加アプリのホーム ページに他の依存関係。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;!-- WinJS references --&gt;
     &lt;link href="//Microsoft.WinJS.1.0/css/ui-dark.css" rel="stylesheet" /&gt;
     &lt;script src="//Microsoft.WinJS.1.0/js/base.js"&gt;&lt;/script&gt;
     &lt;script src="//Microsoft.WinJS.1.0/js/ui.js"&gt;&lt;/script&gt;
-
+    
     &lt;!-- Cordova --&gt;
     &lt;script src="/js/cordova.js"&gt;&lt;/script&gt;
-
+    
     &lt;!-- CordovaWin8Foo references --&gt;
     &lt;link href="/css/default.css" rel="stylesheet" /&gt;
     &lt;script src="/js/default.js"&gt;&lt;/script&gt;
-</code></pre></div></li>
-<li><p>追加、 <code>[deviceready](../../../cordova/events/events.deviceready.html)</code> コルドバを示すためにハンドラーの処理します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;body&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>追加、 <code class="language-plaintext highlighter-rouge">[deviceready](../../../cordova/events/events.deviceready.html)</code> コルドバを示すためにハンドラーの処理します。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;body&gt;
     &lt;p&gt;Content goes here&lt;/p&gt;
     &lt;script type="text/javascript"&gt;
         console.log("Subscribing...");
@@ -1236,14 +1254,17 @@
         });
     &lt;/script&gt;
 &lt;/body&gt;
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ul>
 
-<h2>プロジェクトをテストします</h2>
+<h2 id="プロジェクトをテストします">プロジェクトをテストします</h2>
 
 <p>Visual Studio から、プロジェクトを実行します。表示されるメッセージ ボックスが表示されます。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    ![](/static/img/guide/platforms/win8/wsalert.png)
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ![](/static/img/guide/platforms/win8/wsalert.png)
+</code></pre></div></div>
+
 <p>それだけです。コルドバでの Windows ストア アプリを構築する準備が整いました。</p>
 
 

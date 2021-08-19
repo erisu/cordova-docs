@@ -944,36 +944,45 @@
             
 
             <div id="page-toc-source">
-                <h1>Firefox OS Platform Guide</h1>
+                <h1 id="firefox-os-platform-guide">Firefox OS Platform Guide</h1>
 
 <p>Esta guía describe cómo configurar el entorno de desarrollo para crear Cordova aplicaciones para dispositivos de Firefox OS, entonces probar y publicar las aplicaciones.</p>
 
-<h2>Requerimientos y apoyo</h2>
+<h2 id="requerimientos-y-apoyo">Requerimientos y apoyo</h2>
 
 <p>Firefox las apps son básicamente sólo aplicaciones web, con la adición de un archivo manifest.webapp que define metadatos acerca de la aplicación y le permite ser instalado en dispositivos Firefox OS. Puede utilizarse cualquier plataforma que soporta Cordova.Para averiguar más sobre la construcción de aplicaciones web, consulte la <a href="https://developer.mozilla.org/en-US/Apps">App Center</a> en <a href="https://developer.mozilla.org/en-US/">MDN</a>.</p>
 
-<h2>Instalación y configuración del entorno</h2>
+<h2 id="instalación-y-configuración-del-entorno">Instalación y configuración del entorno</h2>
 
 <p>Primero instale <a href="http://nodejs.org/">Node.js</a>, luego instale el paquete Cordova así:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ npm install -g cordova
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ npm install -g cordova
+</code></pre></div></div>
+
 <p>A continuación, crear una aplicación de muestra Cordova luego navegar al directorio recién creado:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova create test-app
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova create test-app
 $ cd test-app
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Añadir Firefox OS como plataforma de apoyada a la aplicación con las siguientes:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova platform add firefoxos
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova platform add firefoxos
+</code></pre></div></div>
+
 <p>Esto crea una aplicación de Firefox OS en directorio de plataformas/firefoxos/www, que actualmente es la misma excepto que tiene un archivo de manifiesto de Firefox (manifest.webapp) dentro del directorio de www.</p>
 
-<h2>Desarrollo de su aplicación</h2>
+<h2 id="desarrollo-de-su-aplicación">Desarrollo de su aplicación</h2>
 
-<p>En este momento usted está listo para ir — cambiar el código dentro de prueba-app/www para lo que quieras tu app para ser. Puede agregar <a href="">plugins de apoyo</a> a la aplicación usando &quot;cordova plugin añade&quot;, por ejemplo:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cordova plugin add org.apache.cordova.device
+<p>En este momento usted está listo para ir — cambiar el código dentro de prueba-app/www para lo que quieras tu app para ser. Puede agregar <a href="">plugins de apoyo</a> a la aplicación usando “cordova plugin añade”, por ejemplo:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova plugin add org.apache.cordova.device
 cordova plugin add org.apache.cordova.vibration
-</code></pre></div>
+</code></pre></div></div>
+
 <p>También tienes que añadir un archivo personalizado manifest.webapp en tu directorio de prueba-app/www, que debe incluir al menos los siguientes:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">{ 
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{ 
     "launch_path":"/index.html",
     "installs_allowed_from":["*"],
     "version":"0.0.1",
@@ -983,27 +992,31 @@ cordova plugin add org.apache.cordova.vibration
         "128": "/img/logo.png"
     }
 }
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Para obtener más información acerca de Firefox App manifiestos, lea <a href="https://developer.mozilla.org/en-US/Apps/Developing/Manifest">App se manifiestan</a> en MDN.</p>
 
 <p>Cuando se escribe el código de la aplicación, implementar los cambios en la aplicación de Firefox OS con que ha agregado a su proyecto</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova prepare
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova prepare
+</code></pre></div></div>
+
 <p>Tenga en cuenta que un paso de compilación (es decir, construir cordova) no es necesario cuando se despliega a la plataforma de Firefox OS, como Firefox OS aplicaciones basadas en HTML y por lo tanto no compilados.</p>
 
-<h2>Pruebas y depuración</h2>
+<h2 id="pruebas-y-depuración">Pruebas y depuración</h2>
 
 <p>La aplicación puede ser probada usando el Firefox OS <a href="https://developer.mozilla.org/en-US/Firefox_OS/Using_the_App_Manager">App Manager</a>.</p>
 
-<p>Cuando conecte el administrador de la aplicación para tu dispositivo/simulador de prueba, seleccione la opción &quot;Añadir envasados App&quot;, entonces asegúrese de que usted señala a la prueba-app/plataformas/firefoxos/www/directorio para incluir la aplicación en la interfaz del administrador.</p>
+<p>Cuando conecte el administrador de la aplicación para tu dispositivo/simulador de prueba, seleccione la opción “Añadir envasados App”, entonces asegúrese de que usted señala a la prueba-app/plataformas/firefoxos/www/directorio para incluir la aplicación en la interfaz del administrador.</p>
 
-<p>Aquí usted puede instalar la aplicación en tu dispositivo/simulador de prueba (con el botón &quot;Actualizar&quot;). Usando el botón puede depurar la aplicación y modificar su código en vivo &quot;Debug&quot;.</p>
+<p>Aquí usted puede instalar la aplicación en tu dispositivo/simulador de prueba (con el botón “Actualizar”). Usando el botón puede depurar la aplicación y modificar su código en vivo “Debug”.</p>
 
 <p>Nota: Antes de intentar publicar su aplicación debe considerar validarlo utilizando el <a href="https://marketplace.firefox.com/developers/validator">validador App</a>.</p>
 
-<h2>Publican su aplicación en el mercado de Firefox</h2>
+<h2 id="publican-su-aplicación-en-el-mercado-de-firefox">Publican su aplicación en el mercado de Firefox</h2>
 
 <p>Puede enviar su aplicación al mercado de Firefox, o publicarlo mismo. Visite la <a href="https://developer.mozilla.org/en-US/Marketplace">Zona de mercado de Firefox</a> en MDN para averiguar más acerca de cómo hacer esto; <a href="https://developer.mozilla.org/en-US/Marketplace/Publishing/Publish_options">Opciones de publicación de la aplicación</a> es el mejor lugar para empezar.</p>
+
 
 
             </div>

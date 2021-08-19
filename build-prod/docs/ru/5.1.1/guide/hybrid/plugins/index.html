@@ -1190,7 +1190,7 @@
     }
 </style>
 
-<h1>Руководство по разработке плагинов</h1>
+<h1 id="руководство-по-разработке-плагинов">Руководство по разработке плагинов</h1>
 
 <p><em>Плагин</em> представляет собой пакет из встраиваемого кода, который позволяет WebView Cordova, в котором отображается приложение, взаимодействовать с платформой, на которой работает плагин. Плагины предоставляют доступ к функциям устройства и платформы, которые обычно недоступны для веб-приложений. Все основные функции Cordova API реализованы в виде плагинов, и многие другие доступны, что включение функций, таких как сканеры штрих-кодов, NFC-коммуникации, или адаптировать календарь интерфейсов. Существует <a href="http://plugins.cordova.io">реестр</a> доступных плагинов.</p>
 
@@ -1200,13 +1200,16 @@
 
 <p>В дополнение к этим инструкциям, при подготовке к написать плагин, то лучше посмотреть на <a href="http://cordova.apache.org/#contribute">Существующие плагины</a> для руководства.</p>
 
-<h2>Создание плагина</h2>
+<h2 id="создание-плагина">Создание плагина</h2>
 
-<p>Разработчики приложений используют команду CLI <code>plugin add</code> (обсуждается в разделе &quot;<a href="../../cli/index.html">Интерфейс командной строки</a>&quot;) чтобы применить плагин к проекту. Аргумент для этой команды является URL-адрес для <em>git</em> -репозиторий, содержащий код плагина. Этот пример реализует API устройств в Кордова:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git
-</code></pre></div>
-<p>Репозиторий плагинов должен предоставлять файл манифеста верхнего уровня <code>plugin.xml</code> . Есть много способов для настройки этого файла, подробности о которых доступны в &quot;<a href="../../../plugin_ref/spec.html">Спецификация расширений</a>&quot;. Эта сокращенная версия плагина <code>Device</code> обеспечивает простой пример для использования в качестве модели:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+<p>Разработчики приложений используют команду CLI <code class="language-plaintext highlighter-rouge">plugin add</code> (обсуждается в разделе “<a href="../../cli/index.html">Интерфейс командной строки</a>”) чтобы применить плагин к проекту. Аргумент для этой команды является URL-адрес для <em>git</em> -репозиторий, содержащий код плагина. Этот пример реализует API устройств в Кордова:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git
+</code></pre></div></div>
+
+<p>Репозиторий плагинов должен предоставлять файл манифеста верхнего уровня <code class="language-plaintext highlighter-rouge">plugin.xml</code> . Есть много способов для настройки этого файла, подробности о которых доступны в “<a href="../../../plugin_ref/spec.html">Спецификация расширений</a>”. Эта сокращенная версия плагина <code class="language-plaintext highlighter-rouge">Device</code> обеспечивает простой пример для использования в качестве модели:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
     &lt;plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
             id="cordova-plugin-device" version="0.2.3"&gt;
         &lt;name&gt;Device&lt;/name&gt;
@@ -1226,85 +1229,110 @@
             &lt;source-file src="src/ios/CDVDevice.m" /&gt;
         &lt;/platform&gt;
     &lt;/plugin&gt;
-</code></pre></div>
-<p>Атрибут <code>id</code> тега верхнего уровня <code>plugin</code> использует тот же формат реверс домена для идентификации плагина как и приложения, к которым он добавляется. Тег <code>js-module</code> указывает путь к общим интерфейсом JavaScript. Тег <code>platform</code> указывает соответствующий набор кода платформы, для платформы <code>ios</code> в данном случае. Тег <code>config-file</code> инкапсулирует тег <code>feature</code>, который вводится доабавляется в платформо-зависимый файл <code>config.xml</code>, чтобы уведомить платформу о дополнительном коде библиотеки. Теги <code>header-file</code> и <code>source-file</code> указывают путь к файлам библиотеки компонентов.</p>
+</code></pre></div></div>
 
-<h2>Проверка плагина</h2>
+<p>Атрибут <code class="language-plaintext highlighter-rouge">id</code> тега верхнего уровня <code class="language-plaintext highlighter-rouge">plugin</code> использует тот же формат реверс домена для идентификации плагина как и приложения, к которым он добавляется. Тег <code class="language-plaintext highlighter-rouge">js-module</code> указывает путь к общим интерфейсом JavaScript. Тег <code class="language-plaintext highlighter-rouge">platform</code> указывает соответствующий набор кода платформы, для платформы <code class="language-plaintext highlighter-rouge">ios</code> в данном случае. Тег <code class="language-plaintext highlighter-rouge">config-file</code> инкапсулирует тег <code class="language-plaintext highlighter-rouge">feature</code>, который вводится доабавляется в платформо-зависимый файл <code class="language-plaintext highlighter-rouge">config.xml</code>, чтобы уведомить платформу о дополнительном коде библиотеки. Теги <code class="language-plaintext highlighter-rouge">header-file</code> и <code class="language-plaintext highlighter-rouge">source-file</code> указывают путь к файлам библиотеки компонентов.</p>
 
-<p>Вы можете использовать <code>plugman</code> утилита для проверки, является ли плагин устанавливает правильно для каждой платформы. Установка <code>plugman</code> с помощью следующей команды <a href="http://nodejs.org/">node</a> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ npm install -g plugman
-</code></pre></div>
-<p>Вам нужен корректный каталог исходного кода приложения, например каталог верхнего уровня <code>www</code>, включенных в проект, созданный CLI, как описано в разделе &quot;<a href="../../cli/index.html">Интерфейс командной строки</a>&quot;. Убедитесь, что домашняя страница приложения <code>index.html</code> ссылаются на имя файла интерфейса плагина JavaScript, как будто он расположен в той же директории с исходным кодом:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;script src="myplugin.js"&gt;&lt;/script&gt;
-</code></pre></div>
+<h2 id="проверка-плагина">Проверка плагина</h2>
+
+<p>Вы можете использовать <code class="language-plaintext highlighter-rouge">plugman</code> утилита для проверки, является ли плагин устанавливает правильно для каждой платформы. Установка <code class="language-plaintext highlighter-rouge">plugman</code> с помощью следующей команды <a href="http://nodejs.org/">node</a> :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ npm install -g plugman
+</code></pre></div></div>
+
+<p>Вам нужен корректный каталог исходного кода приложения, например каталог верхнего уровня <code class="language-plaintext highlighter-rouge">www</code>, включенных в проект, созданный CLI, как описано в разделе “<a href="../../cli/index.html">Интерфейс командной строки</a>”. Убедитесь, что домашняя страница приложения <code class="language-plaintext highlighter-rouge">index.html</code> ссылаются на имя файла интерфейса плагина JavaScript, как будто он расположен в той же директории с исходным кодом:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;script src="myplugin.js"&gt;&lt;/script&gt;
+</code></pre></div></div>
+
 <p>Затем выполните команду, такую как нижеуказанную, для тестирования что iOS зависимости загрузились должным образом:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">     $ plugman install --platform ios --project /path/to/my/project/www --plugin /path/to/my/plugin
-</code></pre></div>
-<p>Для подробной информации о параметрах <code>plugman</code>, см. &quot;<a href="../../../plugin_ref/plugman.html">Использование Plugman для управления расширениями</a>&quot;. Для получения информации о том, как на самом деле <em>отладки</em> плагины увидеть родной интерфейс каждой из платформ, перечисленных в нижней части этой страницы.</p>
 
-<h2>Интерфейс JavaScript</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     $ plugman install --platform ios --project /path/to/my/project/www --plugin /path/to/my/plugin
+</code></pre></div></div>
 
-<p>JavaScript предоставляет интерфейс передней, что делает его может быть самой важной частью плагин. Ваш плагин JavaScript можно структурировать, однако вам нравится, но вам нужно вызвать <code>cordova.exec</code> для взаимодействия с родной платформой, используя следующий синтаксис:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    cordova.exec(function(winParam) {},
+<p>Для подробной информации о параметрах <code class="language-plaintext highlighter-rouge">plugman</code>, см. “<a href="../../../plugin_ref/plugman.html">Использование Plugman для управления расширениями</a>”. Для получения информации о том, как на самом деле <em>отладки</em> плагины увидеть родной интерфейс каждой из платформ, перечисленных в нижней части этой страницы.</p>
+
+<h2 id="интерфейс-javascript">Интерфейс JavaScript</h2>
+
+<p>JavaScript предоставляет интерфейс передней, что делает его может быть самой важной частью плагин. Ваш плагин JavaScript можно структурировать, однако вам нравится, но вам нужно вызвать <code class="language-plaintext highlighter-rouge">cordova.exec</code> для взаимодействия с родной платформой, используя следующий синтаксис:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    cordova.exec(function(winParam) {},
                  function(error) {},
                  "service",
                  "action",
                  ["firstArgument", "secondArgument", 42, false]);
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Вот как работает каждого параметра:</p>
 
 <ul>
-<li><p><code>function(winParam) {}</code>: Функция обратного вызова успех. Предполагая ваш <code>exec</code> вызов завершается успешно, эта функция выполняет наряду с каких-либо параметров, вы проходите к нему.</p></li>
-<li><p><code>function(error) {}</code>: Функция обратного вызова ошибки. Если операция не завершена успешно, эта функция выполняется с параметром необязательные ошибки.</p></li>
-<li><p><code>&quot;service&quot;</code>: Имя службы, для вызова на родной стороне. Это соответствует в родной класс, для которого более подробная информация доступна в родной гидов, перечисленных ниже.</p></li>
-<li><p><code>&quot;action&quot;</code>: Имя действия вызова на родной стороне. Это обычно соответствует методу собственного класса. Смотрите собственного руководства, перечисленных ниже.</p></li>
-<li><p><code>[/* arguments */]</code>: Массив аргументов для передачи в родной среде.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">function(winParam) {}</code>: Функция обратного вызова успех. Предполагая ваш <code class="language-plaintext highlighter-rouge">exec</code> вызов завершается успешно, эта функция выполняет наряду с каких-либо параметров, вы проходите к нему.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">function(error) {}</code>: Функция обратного вызова ошибки. Если операция не завершена успешно, эта функция выполняется с параметром необязательные ошибки.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">"service"</code>: Имя службы, для вызова на родной стороне. Это соответствует в родной класс, для которого более подробная информация доступна в родной гидов, перечисленных ниже.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">"action"</code>: Имя действия вызова на родной стороне. Это обычно соответствует методу собственного класса. Смотрите собственного руководства, перечисленных ниже.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">[/* arguments */]</code>: Массив аргументов для передачи в родной среде.</p>
+  </li>
 </ul>
 
-<h2>Пример JavaScript</h2>
+<h2 id="пример-javascript">Пример JavaScript</h2>
 
 <p>В этом примере показан один из способов реализовать интерфейс JavaScript плагин:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    window.echo = function(str, callback) {
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    window.echo = function(str, callback) {
         cordova.exec(callback, function(err) {
             callback('Nothing to echo.');
         }, "Echo", "echo", [str]);
     };
-</code></pre></div>
-<p>В этом примере плагин прикрепляется к <code>window</code> объект как <code>echo</code> функция, которая плагин пользователей назвал бы следующим образом:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    window.echo("echome", function(echoValue) {
+</code></pre></div></div>
+
+<p>В этом примере плагин прикрепляется к <code class="language-plaintext highlighter-rouge">window</code> объект как <code class="language-plaintext highlighter-rouge">echo</code> функция, которая плагин пользователей назвал бы следующим образом:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    window.echo("echome", function(echoValue) {
         alert(echoValue == "echome"); // should alert true.
     });
-</code></pre></div>
-<p>Посмотрите на три последние аргументы для <code>cordova.exec</code> функции. Первые звонки <code>Echo</code> <em>службы</em>, имя класса. Второй просит <code>echo</code> <em>действий</em>, метода в этом классе. В-третьих, массив аргументов, содержащих строку эхо, которая является <code>window.echo</code> функция в первый параметр.</p>
+</code></pre></div></div>
 
-<p>Успех обратного вызова передается в <code>exec</code> это просто ссылка на функцию обратного вызова <code>window.echo</code> принимает. Если родной платформе инициирует обратный вызов для ошибки, он просто вызывает успех обратного вызова и передает ему строку по умолчанию.</p>
+<p>Посмотрите на три последние аргументы для <code class="language-plaintext highlighter-rouge">cordova.exec</code> функции. Первые звонки <code class="language-plaintext highlighter-rouge">Echo</code> <em>службы</em>, имя класса. Второй просит <code class="language-plaintext highlighter-rouge">echo</code> <em>действий</em>, метода в этом классе. В-третьих, массив аргументов, содержащих строку эхо, которая является <code class="language-plaintext highlighter-rouge">window.echo</code> функция в первый параметр.</p>
 
-<h2>Интерфейсы</h2>
+<p>Успех обратного вызова передается в <code class="language-plaintext highlighter-rouge">exec</code> это просто ссылка на функцию обратного вызова <code class="language-plaintext highlighter-rouge">window.echo</code> принимает. Если родной платформе инициирует обратный вызов для ошибки, он просто вызывает успех обратного вызова и передает ему строку по умолчанию.</p>
+
+<h2 id="интерфейсы">Интерфейсы</h2>
 
 <p>После того, как вы определяете JavaScript для вашего плагина, необходимо дополнить его по крайней мере один собственной реализации. Детали для каждой платформы перечислены ниже, и каждый основывается на простой пример эхо плагин выше:</p>
 
 <ul>
-<li>  <a href="../../platforms/amazonfireos/plugin.html">Плагины для Amazon Fire OS</a></li>
-<li>  <a href="../../platforms/android/plugin.html">Плагины для Android</a></li>
-<li>  <a href="../../platforms/ios/plugin.html">Плагины для iOS</a></li>
-<li>  <a href="../../platforms/blackberry10/plugin.html">Плагины для BlackBerry 10</a></li>
-<li>  <a href="../../platforms/win8/plugin.html">Плагины Windows</a> Phone 8</li>
-<li>  <a href="../../platforms/win8/plugin.html">Плагины Windows</a></li>
+  <li><a href="../../platforms/amazonfireos/plugin.html">Плагины для Amazon Fire OS</a></li>
+  <li><a href="../../platforms/android/plugin.html">Плагины для Android</a></li>
+  <li><a href="../../platforms/ios/plugin.html">Плагины для iOS</a></li>
+  <li><a href="../../platforms/blackberry10/plugin.html">Плагины для BlackBerry 10</a></li>
+  <li><a href="../../platforms/win8/plugin.html">Плагины Windows</a> Phone 8</li>
+  <li><a href="../../platforms/win8/plugin.html">Плагины Windows</a></li>
 </ul>
 
 <p>Платформа Tizen не поддерживает плагины.</p>
 
-<h2>Публикации плагины</h2>
+<h2 id="публикации-плагины">Публикации плагины</h2>
 
-<p>После того как вы развивать ваш плагин, вы можете опубликовать и поделиться им с сообществом. Вы можете опубликовать ваш плагин в <a href="http://plugins.cordova.io">реестра</a> Cordova (на основе <a href="https://github.com/isaacs/npmjs.org"><code>npmjs</code></a>) или в любом другом основанном на <code>npmjs</code> реестре. Другие разработчики могут установить его автоматически с помощью <code>plugman</code> или Кордова CLI. (Подробную информацию о каждом пути разработки, см. &quot;<a href="../../../plugin_ref/plugman.html">Использование Plugman для управления расширениями</a>&quot; и &quot;<a href="../../cli/index.html">Интерфейс командной строки</a>&quot;.)</p>
+<p>После того как вы развивать ваш плагин, вы можете опубликовать и поделиться им с сообществом. Вы можете опубликовать ваш плагин в <a href="http://plugins.cordova.io">реестра</a> Cordova (на основе <a href="https://github.com/isaacs/npmjs.org"><code class="language-plaintext highlighter-rouge">npmjs</code></a>) или в любом другом основанном на <code class="language-plaintext highlighter-rouge">npmjs</code> реестре. Другие разработчики могут установить его автоматически с помощью <code class="language-plaintext highlighter-rouge">plugman</code> или Кордова CLI. (Подробную информацию о каждом пути разработки, см. “<a href="../../../plugin_ref/plugman.html">Использование Plugman для управления расширениями</a>” и “<a href="../../cli/index.html">Интерфейс командной строки</a>”.)</p>
 
-<p>Чтобы опубликовать плагин, вам нужно использовать <code>plugman</code> инструмент и пройти через следующие шаги:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ plugman adduser # that is if you don't have an account yet
+<p>Чтобы опубликовать плагин, вам нужно использовать <code class="language-plaintext highlighter-rouge">plugman</code> инструмент и пройти через следующие шаги:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ plugman adduser # that is if you don't have an account yet
 $ plugman publish /path/to/your/plugin
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Вот оно что!</p>
 
-<p>Запуск <code>plugman --help</code> перечислены другие доступные команды на основе реестра.</p>
+<p>Запуск <code class="language-plaintext highlighter-rouge">plugman --help</code> перечислены другие доступные команды на основе реестра.</p>
 
 
             </div>

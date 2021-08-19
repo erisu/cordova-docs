@@ -1304,35 +1304,46 @@
             
 
             <div id="page-toc-source">
-                <h1>Notification.Alert</h1>
+                <h1 id="notificationalert">Notification.Alert</h1>
 
 <p>Mostra una finestra di avviso o la finestra di dialogo personalizzata.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.notification.alert(message, alertCallback, [title], [buttonName])
-</code></pre></div>
-<ul>
-<li><p><strong>messaggio</strong>: messaggio finestra di dialogo. <em>(String)</em></p></li>
-<li><p><strong>alertCallback</strong>: Callback da richiamare quando viene chiusa la finestra di avviso. <em>(Funzione)</em></p></li>
-<li><p><strong>titolo</strong>: titolo di dialogo. <em>(String)</em> (Opzionale, default è<code>Alert</code>)</p></li>
-<li><p><strong>buttonName</strong>: nome del pulsante. <em>(String)</em> (Opzionale, default è<code>OK</code>)</p></li>
-</ul>
 
-<h2>Descrizione</h2>
-
-<p>La maggior parte delle implementazioni di Cordova una dialogo nativa per questa caratteristica, ma alcune piattaforme utilizzano il browser <code>alert</code> funzione, che è in genere meno personalizzabile.</p>
-
-<h2>Piattaforme supportate</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.notification.alert(message, alertCallback, [title], [buttonName])
+</code></pre></div></div>
 
 <ul>
-<li>  Android</li>
-<li>  BlackBerry WebWorks (OS 5.0 e superiori)</li>
-<li>  iOS</li>
-<li>  Tizen</li>
-<li>  Windows Phone 7 e 8</li>
-<li>  Windows 8</li>
+  <li>
+    <p><strong>messaggio</strong>: messaggio finestra di dialogo. <em>(String)</em></p>
+  </li>
+  <li>
+    <p><strong>alertCallback</strong>: Callback da richiamare quando viene chiusa la finestra di avviso. <em>(Funzione)</em></p>
+  </li>
+  <li>
+    <p><strong>titolo</strong>: titolo di dialogo. <em>(String)</em> (Opzionale, default è<code class="language-plaintext highlighter-rouge">Alert</code>)</p>
+  </li>
+  <li>
+    <p><strong>buttonName</strong>: nome del pulsante. <em>(String)</em> (Opzionale, default è<code class="language-plaintext highlighter-rouge">OK</code>)</p>
+  </li>
 </ul>
 
-<h2>Esempio rapido</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">// Android / BlackBerry WebWorks (OS 5.0 and higher) / iOS / Tizen
+<h2 id="descrizione">Descrizione</h2>
+
+<p>La maggior parte delle implementazioni di Cordova una dialogo nativa per questa caratteristica, ma alcune piattaforme utilizzano il browser <code class="language-plaintext highlighter-rouge">alert</code> funzione, che è in genere meno personalizzabile.</p>
+
+<h2 id="piattaforme-supportate">Piattaforme supportate</h2>
+
+<ul>
+  <li>Android</li>
+  <li>BlackBerry WebWorks (OS 5.0 e superiori)</li>
+  <li>iOS</li>
+  <li>Tizen</li>
+  <li>Windows Phone 7 e 8</li>
+  <li>Windows 8</li>
+</ul>
+
+<h2 id="esempio-rapido">Esempio rapido</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Android / BlackBerry WebWorks (OS 5.0 and higher) / iOS / Tizen
 //
 function alertDismissed() {
     // do something
@@ -1344,56 +1355,64 @@ navigator.notification.alert(
     'Game Over',            // title
     'Done'                  // buttonName
 );
-</code></pre></div>
-<h2>Esempio completo</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Notification Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="esempio-completo">Esempio completo</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Notification Example&lt;/title&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="c1">// Empty</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// alert dialog dismissed</span>
-        <span class="kd">function</span> <span class="nx">alertDismissed</span><span class="p">()</span> <span class="p">{</span>
-            <span class="c1">// do something</span>
-        <span class="p">}</span>
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
 
-    <span class="c1">// Show a custom alertDismissed</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">showAlert</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">navigator</span><span class="p">.</span><span class="nx">notification</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span>
-            <span class="s1">'You are the winner!'</span><span class="p">,</span>  <span class="c1">// message</span>
-            <span class="nx">alertDismissed</span><span class="p">,</span>         <span class="c1">// callback</span>
-            <span class="s1">'Game Over'</span><span class="p">,</span>            <span class="c1">// title</span>
-            <span class="s1">'Done'</span>                  <span class="c1">// buttonName</span>
-        <span class="p">);</span>
-    <span class="p">}</span>
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        // Empty
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">onclick=</span><span class="s">"showAlert(); return false;"</span><span class="nt">&gt;</span>Show Alert<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2>Windows Phone 7 e 8 stranezze</h2>
+    // alert dialog dismissed
+        function alertDismissed() {
+            // do something
+        }
+
+    // Show a custom alertDismissed
+    //
+    function showAlert() {
+        navigator.notification.alert(
+            'You are the winner!',  // message
+            alertDismissed,         // callback
+            'Game Over',            // title
+            'Done'                  // buttonName
+        );
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;&lt;a href="#" onclick="showAlert(); return false;"&gt;Show Alert&lt;/a&gt;&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h2 id="windows-phone-7-e-8-stranezze">Windows Phone 7 e 8 stranezze</h2>
 
 <ul>
-<li><p>Non non c&#39;è nessun avviso del browser integrato, ma è possibile associare uno come segue per chiamare <code>alert()</code> in ambito globale:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">window.alert = navigator.notification.alert;
-</code></pre></div></li>
-<li><p>Entrambi <code>alert</code> e <code>confirm</code> sono non di blocco chiamate, risultati di cui sono disponibili solo in modo asincrono.</p></li>
+  <li>
+    <p>Non non c’è nessun avviso del browser integrato, ma è possibile associare uno come segue per chiamare <code class="language-plaintext highlighter-rouge">alert()</code> in ambito globale:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>window.alert = navigator.notification.alert;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Entrambi <code class="language-plaintext highlighter-rouge">alert</code> e <code class="language-plaintext highlighter-rouge">confirm</code> sono non di blocco chiamate, risultati di cui sono disponibili solo in modo asincrono.</p>
+  </li>
 </ul>
 
 

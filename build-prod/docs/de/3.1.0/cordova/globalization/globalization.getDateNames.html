@@ -1328,37 +1328,42 @@
             
 
             <div id="page-toc-source">
-                <h1>globalization.getDateNames</h1>
+                <h1 id="globalizationgetdatenames">globalization.getDateNames</h1>
 
 <p>Gibt ein Array der Namen der Monate oder Tage der Woche, abhängig von dem Client Benutzereinstellungen und Kalender.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.globalization.getDateNames(successCallback, errorCallback, options);
-</code></pre></div>
-<h2>Beschreibung</h2>
 
-<p>Gibt das Array von Namen der <code>successCallback</code> mit einem <code>properties</code> -Objekt als Parameter. Dieses Objekt enthält eine <code>value</code> -Eigenschaft mit einer <code>Array</code> der <code>String</code> Werte. Die Namen von Array-Funktionen, entweder der erste Monat im Jahr oder der erste Tag der Woche, je nach der ausgewählten Option ab.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.globalization.getDateNames(successCallback, errorCallback, options);
+</code></pre></div></div>
 
-<p>Wenn es einen Fehler erhalten die Namen dann die <code>errorCallback</code> führt mit einem <code>[GlobalizationError](GlobalizationError/globalizationerror.html)</code> -Objekt als Parameter. Erwarteten Fehlercode ist<code>[GlobalizationError](GlobalizationError/globalizationerror.html).UNKNOWN\_ERROR</code>.</p>
+<h2 id="beschreibung">Beschreibung</h2>
 
-<p>Die <code>options</code> Parameter ist optional, und die Standardwerte sind:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">{Typ: "breit", Artikel: 'Monate'}
-</code></pre></div>
-<p>Der Wert des <code>options.type</code> kann <code>narrow</code> oder<code>wide</code>.</p>
+<p>Gibt das Array von Namen der <code class="language-plaintext highlighter-rouge">successCallback</code> mit einem <code class="language-plaintext highlighter-rouge">properties</code> -Objekt als Parameter. Dieses Objekt enthält eine <code class="language-plaintext highlighter-rouge">value</code> -Eigenschaft mit einer <code class="language-plaintext highlighter-rouge">Array</code> der <code class="language-plaintext highlighter-rouge">String</code> Werte. Die Namen von Array-Funktionen, entweder der erste Monat im Jahr oder der erste Tag der Woche, je nach der ausgewählten Option ab.</p>
 
-<p>Der Wert des <code>options.item</code> kann <code>months</code> oder<code>days</code>.</p>
+<p>Wenn es einen Fehler erhalten die Namen dann die <code class="language-plaintext highlighter-rouge">errorCallback</code> führt mit einem <code class="language-plaintext highlighter-rouge">[GlobalizationError](GlobalizationError/globalizationerror.html)</code> -Objekt als Parameter. Erwarteten Fehlercode ist<code class="language-plaintext highlighter-rouge">[GlobalizationError](GlobalizationError/globalizationerror.html).UNKNOWN\_ERROR</code>.</p>
 
-<h2>Unterstützte Plattformen</h2>
+<p>Die <code class="language-plaintext highlighter-rouge">options</code> Parameter ist optional, und die Standardwerte sind:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{Typ: "breit", Artikel: 'Monate'}
+</code></pre></div></div>
+
+<p>Der Wert des <code class="language-plaintext highlighter-rouge">options.type</code> kann <code class="language-plaintext highlighter-rouge">narrow</code> oder<code class="language-plaintext highlighter-rouge">wide</code>.</p>
+
+<p>Der Wert des <code class="language-plaintext highlighter-rouge">options.item</code> kann <code class="language-plaintext highlighter-rouge">months</code> oder<code class="language-plaintext highlighter-rouge">days</code>.</p>
+
+<h2 id="unterstützte-plattformen">Unterstützte Plattformen</h2>
 
 <ul>
-<li>  Android</li>
-<li>  BlackBerry WebWorks (OS 5.0 und höher)</li>
-<li>  iOS</li>
-<li>  Windows Phone 8</li>
+  <li>Android</li>
+  <li>BlackBerry WebWorks (OS 5.0 und höher)</li>
+  <li>iOS</li>
+  <li>Windows Phone 8</li>
 </ul>
 
-<h2>Kleines Beispiel</h2>
+<h2 id="kleines-beispiel">Kleines Beispiel</h2>
 
-<p>Wenn der Browser auf festgelegt ist die <code>en\_US</code> Gebietsschema, in diesem Beispiel wird eine Reihe von zwölf Popup-Dialoge, eine pro Monat, mit Text ähnlich <code>month: January</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.globalization.getDateNames(
+<p>Wenn der Browser auf festgelegt ist die <code class="language-plaintext highlighter-rouge">en\_US</code> Gebietsschema, in diesem Beispiel wird eine Reihe von zwölf Popup-Dialoge, eine pro Monat, mit Text ähnlich <code class="language-plaintext highlighter-rouge">month: January</code> :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.globalization.getDateNames(
     function (names) {
         for (var i = 0; i &lt; names.value.length; i++) {
             alert('month: ' + names.value[i] + '\n');
@@ -1367,34 +1372,37 @@
     function () { alert('Error getting names\n'); },
     { type: 'wide', item: 'months' }
 );
-</code></pre></div>
-<h2>Vollständiges Beispiel</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>getDateNames Example<span class="nt">&lt;/title&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
 
-    <span class="kd">function</span> <span class="nx">checkDateNames</span><span class="p">()</span> <span class="p">{</span>
-      <span class="nb">navigator</span><span class="p">.</span><span class="nx">globalization</span><span class="p">.</span><span class="nx">getDateNames</span><span class="p">(</span>
-        <span class="kd">function</span> <span class="p">(</span><span class="nx">names</span><span class="p">)</span> <span class="p">{</span>
-          <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">names</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">alert</span><span class="p">(</span><span class="s1">'month: '</span> <span class="o">+</span> <span class="nx">names</span><span class="p">.</span><span class="nx">value</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">+</span> <span class="s1">'\n'</span><span class="p">);</span>
-          <span class="p">}</span>
-        <span class="p">},</span>
-        <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'Error getting names\n'</span><span class="p">);},</span>
-        <span class="p">{</span><span class="na">type</span><span class="p">:</span><span class="s1">'wide'</span><span class="p">,</span> <span class="na">item</span><span class="p">:</span><span class="s1">'months'</span><span class="p">}</span>
-      <span class="p">);</span>
-    <span class="p">}</span>
+<h2 id="vollständiges-beispiel">Vollständiges Beispiel</h2>
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"checkDateNames()"</span><span class="nt">&gt;</span>Click for date names<span class="nt">&lt;/button&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;getDateNames Example&lt;/title&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
+
+    function checkDateNames() {
+      navigator.globalization.getDateNames(
+        function (names) {
+          for (var i=0; i&lt;names.value.length; i++) {
+            alert('month: ' + names.value[i] + '\n');
+          }
+        },
+        function () {alert('Error getting names\n');},
+        {type:'wide', item:'months'}
+      );
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;button onclick="checkDateNames()"&gt;Click for date names&lt;/button&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

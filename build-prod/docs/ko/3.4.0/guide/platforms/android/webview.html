@@ -1062,24 +1062,35 @@
             
 
             <div id="page-toc-source">
-                <h1>안 드 로이드 WebViews</h1>
+                <h1 id="안-드-로이드-webviews">안 드 로이드 WebViews</h1>
 
 <p>이 섹션에서는 더 큰 안 드 로이드 응용 프로그램 내에서 WebView 코르도바 활성화 구성 요소를 포함 하는 방법을 보여 줍니다. 어떻게 이러한 구성 요소가 서로 통신할 수 있습니다 응용 프로그램 플러그인을 참조.</p>
 
-<p>안 드 로이드에 익숙하지 당신은 먼저 안 드 로이드 플랫폼 가이드를 숙지 해야 및 설치는 WebView를 포함의 더 특이 한 개발 옵션을 시도 하기 전에 최신 안 드 로이드 SDK가. 코르도바 1.9 부터는 안 드 로이드 플랫폼에 의존 한 <code>CordovaWebView</code> 는 레거시 빌드 구성 요소 <code>CordovaActivity</code> 사전 1.9 릴리스 날짜 구성 요소.</p>
+<p>안 드 로이드에 익숙하지 당신은 먼저 안 드 로이드 플랫폼 가이드를 숙지 해야 및 설치는 WebView를 포함의 더 특이 한 개발 옵션을 시도 하기 전에 최신 안 드 로이드 SDK가. 코르도바 1.9 부터는 안 드 로이드 플랫폼에 의존 한 <code class="language-plaintext highlighter-rouge">CordovaWebView</code> 는 레거시 빌드 구성 요소 <code class="language-plaintext highlighter-rouge">CordovaActivity</code> 사전 1.9 릴리스 날짜 구성 요소.</p>
 
 <ol>
-<li><p>이러한 지침에 따라, 최신 코르도바 분포를가지고 있는지 확인 합니다. <a href="http://cordova.apache.org">Cordova.apache.org</a> 에서 다운로드 하 고 그것의 안 드 로이드 패키지의 압축을 풉니다.</p></li>
-<li><p>안 드 로이드 패키지 이동 <code>/framework</code> 디렉토리 및 실행 <code>ant jar</code> . 그것은 코르도바 만듭니다 <code>.jar</code> 로 형성 된 파일<code>/framework/cordova-x.x.x.jar</code>.</p></li>
-<li><p>복사는 <code>.jar</code> 파일을 안 드 로이드 프로젝트의 <code>/libs</code> 디렉터리.</p></li>
-<li><p>다음 응용 프로그램을 추가 합니다 <code>/res/xml/main.xml</code> 파일으로는 <code>layout_height</code> , <code>layout_width</code> 및 <code>id</code> 응용 프로그램에 맞게 수정:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;org.apache.cordova.CordovaWebView
+  <li>
+    <p>이러한 지침에 따라, 최신 코르도바 분포를가지고 있는지 확인 합니다. <a href="http://cordova.apache.org">Cordova.apache.org</a> 에서 다운로드 하 고 그것의 안 드 로이드 패키지의 압축을 풉니다.</p>
+  </li>
+  <li>
+    <p>안 드 로이드 패키지 이동 <code class="language-plaintext highlighter-rouge">/framework</code> 디렉토리 및 실행 <code class="language-plaintext highlighter-rouge">ant jar</code> . 그것은 코르도바 만듭니다 <code class="language-plaintext highlighter-rouge">.jar</code> 로 형성 된 파일<code class="language-plaintext highlighter-rouge">/framework/cordova-x.x.x.jar</code>.</p>
+  </li>
+  <li>
+    <p>복사는 <code class="language-plaintext highlighter-rouge">.jar</code> 파일을 안 드 로이드 프로젝트의 <code class="language-plaintext highlighter-rouge">/libs</code> 디렉터리.</p>
+  </li>
+  <li>
+    <p>다음 응용 프로그램을 추가 합니다 <code class="language-plaintext highlighter-rouge">/res/xml/main.xml</code> 파일으로는 <code class="language-plaintext highlighter-rouge">layout_height</code> , <code class="language-plaintext highlighter-rouge">layout_width</code> 및 <code class="language-plaintext highlighter-rouge">id</code> 응용 프로그램에 맞게 수정:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;org.apache.cordova.CordovaWebView
     android:id="@+id/tutorialView"
     android:layout_width="match_parent"
     android:layout_height="match_parent" /&gt;
-</code></pre></div></li>
-<li><p>활동 수정 구현 하는 <code>CordovaInterface</code> . 그것은 포함 된 메서드를 구현 해야 합니다. 복사를 하실 수 있습니다 <code>/framework/src/org/apache/cordova/CordovaActivity.java</code> , 또는 그 밖에 자신에 그들을 구현 합니다. 다음 코드 조각에서는 인터페이스에 의존 하는 기본 응용 프로그램을 보여 줍니다. 참조 된 뷰 id가 일치 하는 방법을 참고는 <code>id</code> 위의 XML 조각에서 지정 된 특성:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">public class CordovaViewTestActivity extends Activity implements CordovaInterface {
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>활동 수정 구현 하는 <code class="language-plaintext highlighter-rouge">CordovaInterface</code> . 그것은 포함 된 메서드를 구현 해야 합니다. 복사를 하실 수 있습니다 <code class="language-plaintext highlighter-rouge">/framework/src/org/apache/cordova/CordovaActivity.java</code> , 또는 그 밖에 자신에 그들을 구현 합니다. 다음 코드 조각에서는 인터페이스에 의존 하는 기본 응용 프로그램을 보여 줍니다. 참조 된 뷰 id가 일치 하는 방법을 참고는 <code class="language-plaintext highlighter-rouge">id</code> 위의 XML 조각에서 지정 된 특성:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class CordovaViewTestActivity extends Activity implements CordovaInterface {
     CordovaWebView cwv;
     /* Called when the activity is first created. */
     @Override
@@ -1090,9 +1101,12 @@
         Config.init(this);
         cwv.loadUrl(Config.getStartUrl());
     }
-</code></pre></div></li>
-<li><p>응용 프로그램이 카메라를 사용 하는 경우 다음을 구현 합니다.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">@Override
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>응용 프로그램이 카메라를 사용 하는 경우 다음을 구현 합니다.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Override
 public void setActivityResultCallback(CordovaPlugin plugin) {
     this.activityResultCallback = plugin;
 }
@@ -1107,16 +1121,16 @@ public void setActivityResultCallback(CordovaPlugin plugin) {
 public void startActivityForResult(CordovaPlugin command, Intent intent, int requestCode) {
     this.activityResultCallback = command;
     this.activityResultKeepRunning = this.keepRunning;
-
+    
     // If multitasking turned on, then disable it for activities that return results
     if (command != null) {
         this.keepRunning = false;
     }
-
+    
     // Start activity
     super.startActivityForResult(intent, requestCode);
 }   
-
+    
 @Override
 /**
  * Called when an activity you launched exits, giving you the requestCode you started it with,
@@ -1134,16 +1148,25 @@ protected void onActivityResult(int requestCode, int resultCode, Intent intent) 
         callback.onActivityResult(requestCode, resultCode, intent);
     }
 }
-</code></pre></div></li>
-<li><p>마지막으로, 스레드 풀에 추가 해야, 그렇지 않으면 플러그인을 실행 하는 스레드가 없으면:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">@Override
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>마지막으로, 스레드 풀에 추가 해야, 그렇지 않으면 플러그인을 실행 하는 스레드가 없으면:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Override
 public ExecutorService getThreadPool() {
     return threadPool;
 }
-</code></pre></div></li>
-<li><p>안 드 로이드 프로젝트의 응용 프로그램의 HTML과 자바 스크립트 파일을 복사 <code>/assets/www</code> 디렉터리.</p></li>
-<li><p>복사는 <code>config.xml</code> 파일에서 <code>/framework/res/xml</code> 프로젝트의 <code>/res/xml</code> 디렉터리.</p></li>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>안 드 로이드 프로젝트의 응용 프로그램의 HTML과 자바 스크립트 파일을 복사 <code class="language-plaintext highlighter-rouge">/assets/www</code> 디렉터리.</p>
+  </li>
+  <li>
+    <p>복사는 <code class="language-plaintext highlighter-rouge">config.xml</code> 파일에서 <code class="language-plaintext highlighter-rouge">/framework/res/xml</code> 프로젝트의 <code class="language-plaintext highlighter-rouge">/res/xml</code> 디렉터리.</p>
+  </li>
 </ol>
+
 
 
             </div>

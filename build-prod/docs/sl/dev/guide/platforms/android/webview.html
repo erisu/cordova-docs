@@ -2090,24 +2090,35 @@
             
 
             <div id="page-toc-source">
-                <h1>Spletni Android pogledi</h1>
+                <h1 id="spletni-android-pogledi">Spletni Android pogledi</h1>
 
 <p>To poglavje prikazuje kako vlagati Cordova omogočen spletni pogled komponente znotraj večje Android aplikacije. Podrobnosti o tem, kako te komponente lahko komunicirajo med seboj, si oglejte Uporaba Plugins.</p>
 
-<p>Če niste seznanjeni z Android, morate najprej seznanite z Android platformo vodnik in so najnovejši Android SDK nameščen, preden poskusite bolj nenavadnih razvoj možnost vdelave v spletni pogled. Začenši z 1,9 Cordova, platformo Android temelji na a <code>CordovaWebView</code> komponento, ki temelji na zapuščino <code>CordovaActivity</code> komponento, ki pred datumi 1.9 sprostitev.</p>
+<p>Če niste seznanjeni z Android, morate najprej seznanite z Android platformo vodnik in so najnovejši Android SDK nameščen, preden poskusite bolj nenavadnih razvoj možnost vdelave v spletni pogled. Začenši z 1,9 Cordova, platformo Android temelji na a <code class="language-plaintext highlighter-rouge">CordovaWebView</code> komponento, ki temelji na zapuščino <code class="language-plaintext highlighter-rouge">CordovaActivity</code> komponento, ki pred datumi 1.9 sprostitev.</p>
 
 <ol>
-<li><p>Sledite tem navodilom, poskrbite, da imate najnovejšo distribucijo Cordova. Travnato gričevje to s <a href="http://cordova.apache.org">cordova.apache.org</a> ter odpreti patentno zadrgo Android paket.</p></li>
-<li><p>Krmarite do Android paket <code>/framework</code> naslovnik ter prost dostop <code>ant jar</code> . Ustvarja na Cordova <code>.jar</code> datoteko, ki je nastala kot<code>/framework/cordova-x.x.x.jar</code>.</p></li>
-<li><p>Kopiraj v <code>.jar</code> datoteke v projektu Android <code>/libs</code> imenik.</p></li>
-<li><p>Dodajte naslednje aplikacije <code>/res/xml/main.xml</code> datoteko, z v <code>layout_height</code> , <code>layout_width</code> in <code>id</code> spremenjene, da ustrezajo uporabi:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;org.apache.cordova.CordovaWebView
+  <li>
+    <p>Sledite tem navodilom, poskrbite, da imate najnovejšo distribucijo Cordova. Travnato gričevje to s <a href="http://cordova.apache.org">cordova.apache.org</a> ter odpreti patentno zadrgo Android paket.</p>
+  </li>
+  <li>
+    <p>Krmarite do Android paket <code class="language-plaintext highlighter-rouge">/framework</code> naslovnik ter prost dostop <code class="language-plaintext highlighter-rouge">ant jar</code> . Ustvarja na Cordova <code class="language-plaintext highlighter-rouge">.jar</code> datoteko, ki je nastala kot<code class="language-plaintext highlighter-rouge">/framework/cordova-x.x.x.jar</code>.</p>
+  </li>
+  <li>
+    <p>Kopiraj v <code class="language-plaintext highlighter-rouge">.jar</code> datoteke v projektu Android <code class="language-plaintext highlighter-rouge">/libs</code> imenik.</p>
+  </li>
+  <li>
+    <p>Dodajte naslednje aplikacije <code class="language-plaintext highlighter-rouge">/res/xml/main.xml</code> datoteko, z v <code class="language-plaintext highlighter-rouge">layout_height</code> , <code class="language-plaintext highlighter-rouge">layout_width</code> in <code class="language-plaintext highlighter-rouge">id</code> spremenjene, da ustrezajo uporabi:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;org.apache.cordova.CordovaWebView
     android:id="@+id/tutorialView"
     android:layout_width="match_parent"
     android:layout_height="match_parent" /&gt;
-</code></pre></div></li>
-<li><p>Spreminjanje dejavnosti tako, da izvaja z <code>CordovaInterface</code> . To bi morale izvajati vključeni metodah. Želite kopirati jih iz <code>/framework/src/org/apache/cordova/CordovaActivity.java</code> , ali pa jih izvajati na svoje. Naslednji odlomek prikazuje osnovno aplikacijo, ki se opira na vmesniku. Opomba kako sklicevano pogled id ujema z <code>id</code> atributa, navedenega v XML fragment prikazan zgoraj:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">public class CordovaViewTestActivity extends Activity implements CordovaInterface {
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Spreminjanje dejavnosti tako, da izvaja z <code class="language-plaintext highlighter-rouge">CordovaInterface</code> . To bi morale izvajati vključeni metodah. Želite kopirati jih iz <code class="language-plaintext highlighter-rouge">/framework/src/org/apache/cordova/CordovaActivity.java</code> , ali pa jih izvajati na svoje. Naslednji odlomek prikazuje osnovno aplikacijo, ki se opira na vmesniku. Opomba kako sklicevano pogled id ujema z <code class="language-plaintext highlighter-rouge">id</code> atributa, navedenega v XML fragment prikazan zgoraj:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class CordovaViewTestActivity extends Activity implements CordovaInterface {
     CordovaWebView cwv;
     /* Called when the activity is first created. */
     @Override
@@ -2118,9 +2129,12 @@
         Config.init(this);
         cwv.loadUrl(Config.getStartUrl());
     }
-</code></pre></div></li>
-<li><p>Če uporabite kamero uporabo, izvajati naslednje:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">@Override
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Če uporabite kamero uporabo, izvajati naslednje:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Override
 public void setActivityResultCallback(CordovaPlugin plugin) {
     this.activityResultCallback = plugin;
 }
@@ -2135,16 +2149,16 @@ public void setActivityResultCallback(CordovaPlugin plugin) {
 public void startActivityForResult(CordovaPlugin command, Intent intent, int requestCode) {
     this.activityResultCallback = command;
     this.activityResultKeepRunning = this.keepRunning;
-
+    
     // If multitasking turned on, then disable it for activities that return results
     if (command != null) {
         this.keepRunning = false;
     }
-
+    
     // Start activity
     super.startActivityForResult(intent, requestCode);
 }   
-
+    
 @Override
 /**
  * Called when an activity you launched exits, giving you the requestCode you started it with,
@@ -2162,16 +2176,25 @@ protected void onActivityResult(int requestCode, int resultCode, Intent intent) 
         callback.onActivityResult(requestCode, resultCode, intent);
     }
 }
-</code></pre></div></li>
-<li><p>Nenazadnje, ne pozabite dodati zaloga niti, sicer plugins so nobenih niti, ko želite zagnati:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">@Override
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Nenazadnje, ne pozabite dodati zaloga niti, sicer plugins so nobenih niti, ko želite zagnati:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Override
 public ExecutorService getThreadPool() {
     return threadPool;
 }
-</code></pre></div></li>
-<li><p>Kopirajte HTML in JavaScript datotek programa Android projekt <code>/assets/www</code> imenik.</p></li>
-<li><p>Izvod v <code>config.xml</code> pila s <code>/framework/res/xml</code> v projekt <code>/res/xml</code> imenik.</p></li>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Kopirajte HTML in JavaScript datotek programa Android projekt <code class="language-plaintext highlighter-rouge">/assets/www</code> imenik.</p>
+  </li>
+  <li>
+    <p>Izvod v <code class="language-plaintext highlighter-rouge">config.xml</code> pila s <code class="language-plaintext highlighter-rouge">/framework/res/xml</code> v projekt <code class="language-plaintext highlighter-rouge">/res/xml</code> imenik.</p>
+  </li>
 </ol>
+
 
 
             </div>

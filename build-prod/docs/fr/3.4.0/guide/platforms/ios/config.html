@@ -944,50 +944,88 @@
             
 
             <div id="page-toc-source">
-                <h1>iOS Configuration</h1>
+                <h1 id="ios-configuration">iOS Configuration</h1>
 
-<p>Le <code>config.xml</code> fichier contrôle des paramètres de base de l&#39;application s&#39;appliquent à chaque demande et chaque instance de CordovaWebView. Cette section décrit en détail les préférences qui s&#39;appliquent uniquement aux versions d&#39;iOS. Voir le fichier config.xml File pour plus d&#39;informations sur les options de configuration globale.</p>
+<p>Le <code class="language-plaintext highlighter-rouge">config.xml</code> fichier contrôle des paramètres de base de l’application s’appliquent à chaque demande et chaque instance de CordovaWebView. Cette section décrit en détail les préférences qui s’appliquent uniquement aux versions d’iOS. Voir le fichier config.xml File pour plus d’informations sur les options de configuration globale.</p>
 
 <ul>
-<li><p><code>EnableViewportScale</code>(boolean, la valeur par défaut <code>false</code> ): la valeur <code>true</code> pour permettre une balise meta viewport désactiver ou limiter la plage de mise à l&#39;échelle de l&#39;utilisateur, qui est activée par défaut.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="EnableViewportScale" value="true"/&gt;
-</code></pre></div>
-<p>Placer une fenêtre semblable à la suivante dans le code HTML pour désactiver la mise à l&#39;échelle et de bonne forme contenu avec souplesse dans le rendu WebView :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt; nom meta = « fenêtre » content =' largeur = dispositif-largeur, échelle initial = 1, utilisateur évolutive = non ' / &gt;
-</code></pre></div></li>
-<li><p><code>MediaPlaybackRequiresUserAction</code>(boolean, la valeur par défaut <code>false</code> ): la valeur <code>true</code> pour empêcher les HTML5 vidéos ou audios de jouer automatiquement avec le <code>autoplay</code> attribut ou via JavaScript.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="MediaPlaybackRequiresUserAction" value="true"/&gt;
-</code></pre></div></li>
-<li><p><code>AllowInlineMediaPlayback</code>(boolean, la valeur par défaut <code>false</code> ): la valeur <code>true</code> pour permettre la lecture multimédia HTML5 à comparaître <em>inline</em> dans la disposition de l&#39;écran, à l&#39;aide de contrôles fournis par navigateur plutôt que des contrôles natifs. Pour ce faire, ajoutez les <code>webkit-playsinline</code> attribuent à aucun <code>&lt;video&gt;</code> éléments.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="AllowInlineMediaPlayback" value="true"/&gt;
-</code></pre></div></li>
-<li><p><code>BackupWebStorage</code>(cordes, soit <code>none</code> , <code>local</code> , ou la valeur par défaut <code>cloud</code> ): la valeur <code>cloud</code> afin que les données de stockage web de sauvegarde via iCloud. La valeur <code>local</code> pour permettre uniquement les sauvegardes locales via iTunes sync. La valeur <code>none</code> empêcher les sauvegardes de stockage web.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="BackupWebStorage" value="local"/&gt;
-</code></pre></div></li>
-<li><p><code>TopActivityIndicator</code>(string, la valeur par défaut <code>gray</code> ): contrôle l&#39;apparence de l&#39;icône de la petite filature dans la barre d&#39;État qui indique l&#39;activité du processeur importante. Les valeurs valides sont <code>whiteLarge</code> , <code>white</code> , et<code>gray</code>.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="TopActivityIndicator" value="white"/&gt;
-</code></pre></div></li>
-<li><p><code>KeyboardDisplayRequiresUserAction</code>(boolean, la valeur par défaut <code>true</code> ): la valeur <code>false</code> pour permettre le clavier à comparaître lors de l&#39;appel <code>focus()</code> sur les entrées de formulaire.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="KeyboardDisplayRequiresUserAction" value="false"/&gt;
-</code></pre></div></li>
-<li><p><code>SuppressesIncrementalRendering</code>(boolean, la valeur par défaut <code>false</code> ): la valeur <code>true</code> d&#39;attendre que tout le contenu a été reçu avant il restitue à l&#39;écran.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="SuppressesIncrementalRendering" value="true"/&gt;
-</code></pre></div></li>
-<li><p><code>GapBetweenPages</code>(float, la valeur par défaut `` ): la taille de l&#39;espace, en points, entre les pages.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="GapBetweenPages" value="0"/&gt;
-</code></pre></div></li>
-<li><p><code>PageLength</code>(float, la valeur par défaut `` ): la taille de chaque page, en points, dans le sens qui découlent des pages. Quand PaginationMode est juste à gauche ou de gauche à droite, cette propriété représente la largeur de chaque page. Lorsque PaginationMode est topToBottom ou bottomToTop, cette propriété représente la taille de chaque page. La valeur par défaut est 0, ce qui signifie que la disposition utilise la taille de la fenêtre d&#39;affichage pour déterminer les dimensions de la page.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="PageLength" value="0"/&gt;
-</code></pre></div></li>
-<li><p><code>PaginationBreakingMode</code>(string, la valeur par défaut <code>page</code> ): les valeurs valides sont <code>page</code> et <code>column</code> .La manière dans laquelle se produit la rupture de colonne ou de page. Cette propriété détermine si certaines propriétés CSS sur colonne et page-rupture sont à l&#39;honneur ou ignorées. Lorsque cette propriété est définie <code>column</code> , le contenu respecte les propriétés CSS associées à colonne-rupture au lieu de saut de page.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="PaginationBreakingMode" value="page"/&gt;
-</code></pre></div></li>
-<li><p><code>PaginationMode</code>(string, la valeur par défaut <code>unpaginated</code> ): les valeurs valides sont <code>unpaginated</code> , <code>leftToRight</code> , <code>topToBottom</code> , <code>bottomToTop</code> , et <code>rightToLeft</code> . Cette propriété détermine si contenu dans l&#39;affichage web est divisé en pages qui remplissent l&#39;une écran vue à la fois, ou montré comme un point de vue long défilement. Si un formulaire paginé, cette propriété la valeur active/désactive une présentation paginée sur le contenu, provoquant l&#39;affichage de web à utiliser les valeurs de LongueurPage et GapBetweenPages à la nouvelle disposition de son contenu.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="PaginationMode" value="unpaginated"/&gt;
-</code></pre></div></li>
-<li><p><code>UIWebViewDecelerationSpeed</code>(string, la valeur par défaut <code>normal</code> ): les valeurs valides sont <code>normal</code> , <code>fast</code> . Cette propriété contrôle la vitesse de décélération de défilement dynamique. <code>normal</code>est la vitesse par défaut pour les applications plus natives, et <code>fast</code> est la valeur par défaut pour Safari Mobile.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="UIWebViewDecelerationSpeed" value="fast" /&gt;
-</code></pre></div></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">EnableViewportScale</code>(boolean, la valeur par défaut <code class="language-plaintext highlighter-rouge">false</code> ): la valeur <code class="language-plaintext highlighter-rouge">true</code> pour permettre une balise meta viewport désactiver ou limiter la plage de mise à l’échelle de l’utilisateur, qui est activée par défaut.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="EnableViewportScale" value="true"/&gt;
+</code></pre></div>    </div>
+
+    <p>Placer une fenêtre semblable à la suivante dans le code HTML pour désactiver la mise à l’échelle et de bonne forme contenu avec souplesse dans le rendu WebView :</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt; nom meta = « fenêtre » content =' largeur = dispositif-largeur, échelle initial = 1, utilisateur évolutive = non ' / &gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">MediaPlaybackRequiresUserAction</code>(boolean, la valeur par défaut <code class="language-plaintext highlighter-rouge">false</code> ): la valeur <code class="language-plaintext highlighter-rouge">true</code> pour empêcher les HTML5 vidéos ou audios de jouer automatiquement avec le <code class="language-plaintext highlighter-rouge">autoplay</code> attribut ou via JavaScript.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="MediaPlaybackRequiresUserAction" value="true"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">AllowInlineMediaPlayback</code>(boolean, la valeur par défaut <code class="language-plaintext highlighter-rouge">false</code> ): la valeur <code class="language-plaintext highlighter-rouge">true</code> pour permettre la lecture multimédia HTML5 à comparaître <em>inline</em> dans la disposition de l’écran, à l’aide de contrôles fournis par navigateur plutôt que des contrôles natifs. Pour ce faire, ajoutez les <code class="language-plaintext highlighter-rouge">webkit-playsinline</code> attribuent à aucun <code class="language-plaintext highlighter-rouge">&lt;video&gt;</code> éléments.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="AllowInlineMediaPlayback" value="true"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">BackupWebStorage</code>(cordes, soit <code class="language-plaintext highlighter-rouge">none</code> , <code class="language-plaintext highlighter-rouge">local</code> , ou la valeur par défaut <code class="language-plaintext highlighter-rouge">cloud</code> ): la valeur <code class="language-plaintext highlighter-rouge">cloud</code> afin que les données de stockage web de sauvegarde via iCloud. La valeur <code class="language-plaintext highlighter-rouge">local</code> pour permettre uniquement les sauvegardes locales via iTunes sync. La valeur <code class="language-plaintext highlighter-rouge">none</code> empêcher les sauvegardes de stockage web.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="BackupWebStorage" value="local"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">TopActivityIndicator</code>(string, la valeur par défaut <code class="language-plaintext highlighter-rouge">gray</code> ): contrôle l’apparence de l’icône de la petite filature dans la barre d’État qui indique l’activité du processeur importante. Les valeurs valides sont <code class="language-plaintext highlighter-rouge">whiteLarge</code> , <code class="language-plaintext highlighter-rouge">white</code> , et<code class="language-plaintext highlighter-rouge">gray</code>.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="TopActivityIndicator" value="white"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">KeyboardDisplayRequiresUserAction</code>(boolean, la valeur par défaut <code class="language-plaintext highlighter-rouge">true</code> ): la valeur <code class="language-plaintext highlighter-rouge">false</code> pour permettre le clavier à comparaître lors de l’appel <code class="language-plaintext highlighter-rouge">focus()</code> sur les entrées de formulaire.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="KeyboardDisplayRequiresUserAction" value="false"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">SuppressesIncrementalRendering</code>(boolean, la valeur par défaut <code class="language-plaintext highlighter-rouge">false</code> ): la valeur <code class="language-plaintext highlighter-rouge">true</code> d’attendre que tout le contenu a été reçu avant il restitue à l’écran.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="SuppressesIncrementalRendering" value="true"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">GapBetweenPages</code>(float, la valeur par défaut `` ): la taille de l’espace, en points, entre les pages.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="GapBetweenPages" value="0"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">PageLength</code>(float, la valeur par défaut `` ): la taille de chaque page, en points, dans le sens qui découlent des pages. Quand PaginationMode est juste à gauche ou de gauche à droite, cette propriété représente la largeur de chaque page. Lorsque PaginationMode est topToBottom ou bottomToTop, cette propriété représente la taille de chaque page. La valeur par défaut est 0, ce qui signifie que la disposition utilise la taille de la fenêtre d’affichage pour déterminer les dimensions de la page.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="PageLength" value="0"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">PaginationBreakingMode</code>(string, la valeur par défaut <code class="language-plaintext highlighter-rouge">page</code> ): les valeurs valides sont <code class="language-plaintext highlighter-rouge">page</code> et <code class="language-plaintext highlighter-rouge">column</code> .La manière dans laquelle se produit la rupture de colonne ou de page. Cette propriété détermine si certaines propriétés CSS sur colonne et page-rupture sont à l’honneur ou ignorées. Lorsque cette propriété est définie <code class="language-plaintext highlighter-rouge">column</code> , le contenu respecte les propriétés CSS associées à colonne-rupture au lieu de saut de page.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="PaginationBreakingMode" value="page"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">PaginationMode</code>(string, la valeur par défaut <code class="language-plaintext highlighter-rouge">unpaginated</code> ): les valeurs valides sont <code class="language-plaintext highlighter-rouge">unpaginated</code> , <code class="language-plaintext highlighter-rouge">leftToRight</code> , <code class="language-plaintext highlighter-rouge">topToBottom</code> , <code class="language-plaintext highlighter-rouge">bottomToTop</code> , et <code class="language-plaintext highlighter-rouge">rightToLeft</code> . Cette propriété détermine si contenu dans l’affichage web est divisé en pages qui remplissent l’une écran vue à la fois, ou montré comme un point de vue long défilement. Si un formulaire paginé, cette propriété la valeur active/désactive une présentation paginée sur le contenu, provoquant l’affichage de web à utiliser les valeurs de LongueurPage et GapBetweenPages à la nouvelle disposition de son contenu.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="PaginationMode" value="unpaginated"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">UIWebViewDecelerationSpeed</code>(string, la valeur par défaut <code class="language-plaintext highlighter-rouge">normal</code> ): les valeurs valides sont <code class="language-plaintext highlighter-rouge">normal</code> , <code class="language-plaintext highlighter-rouge">fast</code> . Cette propriété contrôle la vitesse de décélération de défilement dynamique. <code class="language-plaintext highlighter-rouge">normal</code>est la vitesse par défaut pour les applications plus natives, et <code class="language-plaintext highlighter-rouge">fast</code> est la valeur par défaut pour Safari Mobile.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="UIWebViewDecelerationSpeed" value="fast" /&gt;
+</code></pre></div>    </div>
+  </li>
 </ul>
 
 

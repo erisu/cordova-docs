@@ -1018,23 +1018,23 @@
             
 
             <div id="page-toc-source">
-                <h1>Vodnik za platformo Android</h1>
+                <h1 id="vodnik-za-platformo-android">Vodnik za platformo Android</h1>
 
 <p>Ta vodič pokaže, kako zaiti ki gre gor vaš SDK razvojno okolje za uvajanje Cordova aplikacije za Android naprave. To vas popelje skozi postopek za namestitev Android SDK, odpiranje Android projekta v Eclipse SDK in uvajanje emulator ali napravo. Boste morali slediti to vodič umestiti vsaj Android SDK, ne glede na kateri poteka dela, ki si sledijo. ( <em>Spletni projekt Dev</em> in <em>Native platformo Dev</em> poteke zahtevajo Android SDK nameščen in dostopna preko vaše poti.)</p>
 
 <p>Glej naslednje podrobnejše informacije značilne za platformo:</p>
 
 <ul>
-<li>  <a href="config.html">Android konfiguracijo</a></li>
-<li>  <a href="webview.html">Spletni Android pogledi</a></li>
-<li>  <a href="plugin.html">Android Plugins</a></li>
-<li>  <a href="upgrading.html">Nadgradnji Android</a></li>
-<li>  <a href="tools.html">Android orodja ukazne vrstice</a></li>
+  <li><a href="config.html">Android konfiguracijo</a></li>
+  <li><a href="webview.html">Spletni Android pogledi</a></li>
+  <li><a href="plugin.html">Android Plugins</a></li>
+  <li><a href="upgrading.html">Nadgradnji Android</a></li>
+  <li><a href="tools.html">Android orodja ukazne vrstice</a></li>
 </ul>
 
 <p>Orodja ukazne vrstice zgoraj se nanašajo na različicah Cordova 3.0. Glej The vmesnik ukazne vrstice za informacije o trenutni vmesnik.</p>
 
-<h2>Zahteve in podporo</h2>
+<h2 id="zahteve-in-podporo">Zahteve in podporo</h2>
 
 <p>Si oglejte <a href="http://developer.android.com/sdk/index.html">sistemske zahteve</a> za Android SDK.</p>
 
@@ -1046,113 +1046,172 @@ NOTE, doc said:
 - Android 3.x (Deprecated May 2013)
 -->
 
-<p>Razvijalci uporabljajte z <code>cordova</code> utility, v povezavi z Android SDK. Glej The vmesnik ukazne vrstice za informacije kako umestiti to, dodajte projektov, nato gradite in objavljajte projekt.</p>
+<p>Razvijalci uporabljajte z <code class="language-plaintext highlighter-rouge">cordova</code> utility, v povezavi z Android SDK. Glej The vmesnik ukazne vrstice za informacije kako umestiti to, dodajte projektov, nato gradite in objavljajte projekt.</p>
 
-<p>Namestite Android SDK od <a href="http://developer.android.com/sdk/">Developer.Android.com/SDK</a>. Android sdk razdeli, kot je &quot;adt-snop -<os>-<arch>-<ver>&quot;datoteko. Na windows, adt-snop pakirani monter. Na OSX in Linux, nekomplicirano odmotati &quot;adt-snop&quot; v mesto hranite razvojna orodja. <a href="http://developer.android.com/sdk/installing/bundle.html">Podrobnejše informacije o Android SDK namestitveni program lahko najdete tukaj</a></p>
+<p>Namestite Android SDK od <a href="http://developer.android.com/sdk/">Developer.Android.com/SDK</a>. Android sdk razdeli, kot je “adt-snop -<os>-<arch>-<ver>"datoteko. Na windows, adt-snop pakirani monter. Na OSX in Linux, nekomplicirano odmotati "adt-snop" v mesto hranite razvojna orodja. [Podrobnejše informacije o Android SDK namestitveni program lahko najdete tukaj][4]</ver></arch></os></p>
 
-<p>Za Cordova orodja ukazne vrstice za delo, morate vključiti v SDK <code>tools</code> in <code>platform-tools</code> imenikov v vaš STEZA okolje. Na Mac, lahko uporabite urejevalnik besedil tvoriti ali ublažiti z <code>~/.bash_profile</code> datoteko, dodal vrstico, kot sledi, odvisno od tega, kjer SDK namesti:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">izvozite poti = ${pot}: / razvoj/adt-snop/sdk/platformo-orodja: / razvoj/adt-snop / / orodja sdk
-</code></pre></div>
+<p>Za Cordova orodja ukazne vrstice za delo, morate vključiti v SDK <code class="language-plaintext highlighter-rouge">tools</code> in <code class="language-plaintext highlighter-rouge">platform-tools</code> imenikov v vaš STEZA okolje. Na Mac, lahko uporabite urejevalnik besedil tvoriti ali ublažiti z <code class="language-plaintext highlighter-rouge">~/.bash_profile</code> datoteko, dodal vrstico, kot sledi, odvisno od tega, kjer SDK namesti:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>izvozite poti = ${pot}: / razvoj/adt-snop/sdk/platformo-orodja: / razvoj/adt-snop / / orodja sdk
+</code></pre></div></div>
+
 <p>To izpostavlja orodja SDK v Novoodprti terminalsko okno. Sicer zaženite to na voljo v trenutni seji:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ vir ~/.bash_profile
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ vir ~/.bash_profile
+</code></pre></div></div>
+
 <p>V ublažiti STEZA okolje na Windows 7:</p>
 
 <ul>
-<li><p>Kliknite na <strong>Start</strong> meniju v spodnjem levem kotu namizja, z desno miškino tipko na <strong>računalniku</strong>, kliknite <strong>lastnosti</strong>.</p></li>
-<li><p>Kliknite <strong>Dodatne nastavitve sistema</strong> v stolpcu na levi.</p></li>
-<li><p>V pogovornem oknu nastali pritisnite <strong>Spremenljivke okolja</strong>.</p></li>
-<li><p>Izberite spremenljivko <strong>PATH</strong> in pritisnite <strong>Uredi</strong>.</p></li>
-<li><p>Privesiti sledeč poti, kjer ste namestili SDK, na primer na osnovi:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">;C:\Development\adt-bundle\sdk\platform-tools;C:\Development\adt-bundle\sdk\tools
-</code></pre></div></li>
-<li><p>Vrednost shranite in zaprite obeh pogovornih oknih.</p></li>
+  <li>
+    <p>Kliknite na <strong>Start</strong> meniju v spodnjem levem kotu namizja, z desno miškino tipko na <strong>računalniku</strong>, kliknite <strong>lastnosti</strong>.</p>
+  </li>
+  <li>
+    <p>Kliknite <strong>Dodatne nastavitve sistema</strong> v stolpcu na levi.</p>
+  </li>
+  <li>
+    <p>V pogovornem oknu nastali pritisnite <strong>Spremenljivke okolja</strong>.</p>
+  </li>
+  <li>
+    <p>Izberite spremenljivko <strong>PATH</strong> in pritisnite <strong>Uredi</strong>.</p>
+  </li>
+  <li>
+    <p>Privesiti sledeč poti, kjer ste namestili SDK, na primer na osnovi:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>;C:\Development\adt-bundle\sdk\platform-tools;C:\Development\adt-bundle\sdk\tools
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Vrednost shranite in zaprite obeh pogovornih oknih.</p>
+  </li>
 </ul>
 
-<p>Prav tako morate omogočiti Java in Ant. plan a zapoved uren ter stavek <code>java</code> , in tudi vnesite <code>ant</code> . Dodaj pot kar uspelo teči:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    ;%JAVA_HOME%\bin;%ANT_HOME%\bin
-</code></pre></div>
-<h2>Odprite projekt v SDK</h2>
+<p>Prav tako morate omogočiti Java in Ant. plan a zapoved uren ter stavek <code class="language-plaintext highlighter-rouge">java</code> , in tudi vnesite <code class="language-plaintext highlighter-rouge">ant</code> . Dodaj pot kar uspelo teči:</p>
 
-<p>Uporaba na <code>cordova</code> korist zaiti ki gre gor a nov projekt, kot je opisano v The Cordova The vmesnik ukazne vrstice. Na primer, v a naslovnik izvorne kode:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova create hello com.example.hello "HelloWorld"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ;%JAVA_HOME%\bin;%ANT_HOME%\bin
+</code></pre></div></div>
+
+<h2 id="odprite-projekt-v-sdk">Odprite projekt v SDK</h2>
+
+<p>Uporaba na <code class="language-plaintext highlighter-rouge">cordova</code> korist zaiti ki gre gor a nov projekt, kot je opisano v The Cordova The vmesnik ukazne vrstice. Na primer, v a naslovnik izvorne kode:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova create hello com.example.hello "HelloWorld"
     $ cd hello
     $ cordova platform add android
     $ cordova build
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Ko ga enkrat ustvariš, tukaj je kako rabiti SDK spremeniti:</p>
 
 <ul>
-<li><p>Splavitev uporaba <strong>mrk</strong> .</p></li>
-<li><p>Izberite element menija <strong>Nov projekt</strong> .</p></li>
-<li><p>Izberite <strong>Android projekt iz obstoječe kode</strong> izhajajo pogovornem oknu in pritisnite <strong>naslednji</strong>: <img src="/static/img/guide/platforms/android/eclipse_new_project.png" alt=""></p></li>
-<li><p>Pluti v <code>hello</code> , ali katerikoli imenik ste ustvarili za projekt, nato da je <code>platforms/android</code> podimeniku.</p></li>
-<li><p>Poskrbite, da sta <code>hello</code> in <code>hello-CordovaLib</code> so za uvoz izbranih projektov. V <code>hello-CordovaLib</code> projekta je potrebno od Cordova 3.3.0 ker Cordova se sedaj uporablja kot Android knjižnica namesto datoteka s pripono .jar.</p></li>
-<li><p>Pritisnite <strong>konča</strong>.</p></li>
+  <li>
+    <p>Splavitev uporaba <strong>mrk</strong> .</p>
+  </li>
+  <li>
+    <p>Izberite element menija <strong>Nov projekt</strong> .</p>
+  </li>
+  <li>
+    <p>Izberite <strong>Android projekt iz obstoječe kode</strong> izhajajo pogovornem oknu in pritisnite <strong>naslednji</strong>: <img src="/static/img/guide/platforms/android/eclipse_new_project.png" alt="" /></p>
+  </li>
+  <li>
+    <p>Pluti v <code class="language-plaintext highlighter-rouge">hello</code> , ali katerikoli imenik ste ustvarili za projekt, nato da je <code class="language-plaintext highlighter-rouge">platforms/android</code> podimeniku.</p>
+  </li>
+  <li>
+    <p>Poskrbite, da sta <code class="language-plaintext highlighter-rouge">hello</code> in <code class="language-plaintext highlighter-rouge">hello-CordovaLib</code> so za uvoz izbranih projektov. V <code class="language-plaintext highlighter-rouge">hello-CordovaLib</code> projekta je potrebno od Cordova 3.3.0 ker Cordova se sedaj uporablja kot Android knjižnica namesto datoteka s pripono .jar.</p>
+  </li>
+  <li>
+    <p>Pritisnite <strong>konča</strong>.</p>
+  </li>
 </ul>
 
 <p>Ko se odpre okno Eclipse, rdeč <strong>X</strong> lahko zdi, da kažejo nerešenih problemov. Če je tako, sledite naslednjim korakom dodatne:</p>
 
 <ul>
-<li><p>Desni klik na imeniku projekta.</p></li>
-<li><p>V nastali <strong>premožen</strong> dialogičen, izbrati <strong>Android</strong> iz podokna za krmarjenje.</p></li>
-<li><p>Za projekt graditi ciljni, izberite najvišjo raven Android API ste namestili.</p></li>
-<li><p>Kliknite v <strong>redu</strong>.</p></li>
-<li><p>Izberite <strong>Clean</strong> iz menija <strong>projekt</strong> . To naj popravi vse napake v projektu.</p></li>
+  <li>
+    <p>Desni klik na imeniku projekta.</p>
+  </li>
+  <li>
+    <p>V nastali <strong>premožen</strong> dialogičen, izbrati <strong>Android</strong> iz podokna za krmarjenje.</p>
+  </li>
+  <li>
+    <p>Za projekt graditi ciljni, izberite najvišjo raven Android API ste namestili.</p>
+  </li>
+  <li>
+    <p>Kliknite v <strong>redu</strong>.</p>
+  </li>
+  <li>
+    <p>Izberite <strong>Clean</strong> iz menija <strong>projekt</strong> . To naj popravi vse napake v projektu.</p>
+  </li>
 </ul>
 
-<h2>Razporedi na Emulator</h2>
+<h2 id="razporedi-na-emulator">Razporedi na Emulator</h2>
 
-<p>Lahko uporabite na <code>cordova</code> korist teči app v emulator, ali vi moči prost dostop to v SDK. Kakorkoli, SDK najprej mora biti konfiguriran za prikaz vsaj eno napravo. Narediti, z upraviteljem Android SDK, Java aplikacija, ki poteka ločeno od mrk. Obstajata dva načina za odpiranje:</p>
+<p>Lahko uporabite na <code class="language-plaintext highlighter-rouge">cordova</code> korist teči app v emulator, ali vi moči prost dostop to v SDK. Kakorkoli, SDK najprej mora biti konfiguriran za prikaz vsaj eno napravo. Narediti, z upraviteljem Android SDK, Java aplikacija, ki poteka ločeno od mrk. Obstajata dva načina za odpiranje:</p>
 
 <ul>
-<li><p>Prost dostop <code>android</code> v ukazni vrstici.</p></li>
-<li><p>V mrk, pritisnite to ikono v orodni vrstici:</p>
+  <li>
+    <p>Prost dostop <code class="language-plaintext highlighter-rouge">android</code> v ukazni vrstici.</p>
+  </li>
+  <li>
+    <p>V mrk, pritisnite to ikono v orodni vrstici:</p>
 
-<p><img src="/static/img/guide/platforms/android/eclipse_android_sdk_button.png" alt=""></p></li>
+    <p><img src="/static/img/guide/platforms/android/eclipse_android_sdk_button.png" alt="" /></p>
+  </li>
 </ul>
 
 <p>Ko je odprt, Android SDK Manager prikaže različne knjižnicami:</p>
 
-<p><img src="/static/img/guide/platforms/android/asdk_window.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/android/asdk_window.png" alt="" /></p>
 
 <p>In izberite <strong>Orodja → upravljanje AVDs</strong> (Android navidezne naprave) izberite vsak element iz <strong>Opredelitve napravo</strong> v pogovornem oknu nastalo:</p>
 
-<p><img src="/static/img/guide/platforms/android/asdk_device.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/android/asdk_device.png" alt="" /></p>
 
 <p>Press <strong>Ustvarijo AVD</strong>, po želji spremenite ime, pritisnite <strong>OK</strong> , da bi sprejeli spremembe:</p>
 
-<p><img src="/static/img/guide/platforms/android/asdk_newAVD.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/android/asdk_newAVD.png" alt="" /></p>
 
 <p>Na AVD nato prikazano na seznamu <strong>Android virtualnih naprav</strong> :</p>
 
-<p><img src="/static/img/guide/platforms/android/asdk_avds.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/android/asdk_avds.png" alt="" /></p>
 
 <p>Odpreti emulator kot ločeno vlogo, izberite v AVD in pritisnite <strong>Start</strong>. Pobudnik toliko, kot bi na napravo, z dodatne kontrolnike, ki so na voljo za gumbe za strojno opremo:</p>
 
-<p><img src="/static/img/guide/platforms/android/asdk_emulator.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/android/asdk_emulator.png" alt="" /></p>
 
-<p>Na tej točki lahko uporabite v <code>cordova</code> korist za uvajanje uporabe tekmec iz ukazne vrstice:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova emulate android
-</code></pre></div>
+<p>Na tej točki lahko uporabite v <code class="language-plaintext highlighter-rouge">cordova</code> korist za uvajanje uporabe tekmec iz ukazne vrstice:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova emulate android
+</code></pre></div></div>
+
 <p>Če namesto tega dela v mrk, desno projekta in izberite <strong>Zaženi kot → Android aplikacij</strong>. Morda morali določiti je AVD, če ni že odprta.</p>
 
 <p>Za hitrejše izkušnje, uporabite celo število-osnova tekmec podoba:</p>
 
 <ul>
-<li><p>Namestite eno ali več <code>Intel x86 Atom</code> posnetkov sistema, kot tudi <code>Intel Hardware Accelerated Execution Manager</code> , je na voljo pod <strong>dodatki</strong>.</p></li>
-<li><p>Prost dostop umestiti Intel, ki je na voljo v vaš Android SDK na<code>extras/intel/Hardware_Accelerated_Execution_Manager</code>.</p></li>
-<li><p>Ustvarite nov AVD s ciljnim nastavljena na Intel sliko.</p></li>
-<li><p>Ob zagonu emulator, zagotoviti ni brez sporočil o napaki, ki označuje napako pri nalaganju modulov HAX.</p></li>
+  <li>
+    <p>Namestite eno ali več <code class="language-plaintext highlighter-rouge">Intel x86 Atom</code> posnetkov sistema, kot tudi <code class="language-plaintext highlighter-rouge">Intel Hardware Accelerated Execution Manager</code> , je na voljo pod <strong>dodatki</strong>.</p>
+  </li>
+  <li>
+    <p>Prost dostop umestiti Intel, ki je na voljo v vaš Android SDK na<code class="language-plaintext highlighter-rouge">extras/intel/Hardware_Accelerated_Execution_Manager</code>.</p>
+  </li>
+  <li>
+    <p>Ustvarite nov AVD s ciljnim nastavljena na Intel sliko.</p>
+  </li>
+  <li>
+    <p>Ob zagonu emulator, zagotoviti ni brez sporočil o napaki, ki označuje napako pri nalaganju modulov HAX.</p>
+  </li>
 </ul>
 
-<h2>Razporedi na napravo</h2>
+<h2 id="razporedi-na-napravo">Razporedi na napravo</h2>
 
 <p>Push app neposredno na napravo, poskrbite, USB debugging omogočena v napravi, kot je opisano na <a href="http://developer.android.com/tools/device.html">Android Developer Site</a>in uporabo mini kabel USB priključite na vaš sistem.</p>
 
 <p>Napravo lahko push app iz ukazne vrstice:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova run android
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova run android
+</code></pre></div></div>
+
 <p>Izmenično v mrk, desno projekta in izberite <strong>Zaženi kot → Android aplikacij</strong>.</p>
 
 

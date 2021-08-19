@@ -1328,132 +1328,177 @@
             
 
             <div id="page-toc-source">
-                <h1>Handbuch für die Plattform von Windows Phone-8</h1>
+                <h1 id="handbuch-für-die-plattform-von-windows-phone-8">Handbuch für die Plattform von Windows Phone-8</h1>
 
 <p>Diese Anleitung zeigt Ihre Entwicklungsumgebung SDK einrichten, Cordova apps für Windows Phone 8 Geräte bereitstellen. Wenn Sie 7,5 und 8 Geräte ansprechen möchten, entwickeln Sie für Windows Phone 7 stattdessen, wie detailliert die Windows Phone 7 Plattform-Guide. Version 7 verfügt nicht über die erweiterten Funktionen im IE10 enthalten, aber den gleichen Satz von APIs implementiert. Windows Phone 8 apps tun <em>nicht</em> laufen auf Windows Phone 7 Geräte.</p>
 
 <p>Finden Sie im folgenden detaillierte Plattform-spezifischen Informationen, die für beide Versionen gilt:</p>
 
 <ul>
-<li>  <a href="upgrading.html">Aktualisieren von Windows Phone</a></li>
-<li>  <a href="plugin.html">Windows Phone Plugins</a></li>
-<li>  <a href="tools.html">Windows Phone Befehlszeilentools</a></li>
+  <li><a href="upgrading.html">Aktualisieren von Windows Phone</a></li>
+  <li><a href="plugin.html">Windows Phone Plugins</a></li>
+  <li><a href="tools.html">Windows Phone Befehlszeilentools</a></li>
 </ul>
 
 <p>Die Befehlszeilentools, die oben beziehen sich auf Versionen vor 3.0 Cordova. Informationen über die aktuelle Schnittstelle finden Sie unter The Command-Line Interface.</p>
 
-<h2>1. Systemanforderungen</h2>
+<h2 id="1-systemanforderungen">1. Systemanforderungen</h2>
 
 <ul>
-<li><p>Betriebssystem:</p>
+  <li>
+    <p>Betriebssystem:</p>
 
-<ul>
-<li>  Windows 8 oder Windows 8 Pro 
+    <ul>
+      <li>Windows 8 oder Windows 8 Pro
+        <ul>
+          <li>Die 64-Bit Version (X 64) von Windows ist für das SDK erforderlich.</li>
+          <li>Die Pro-Version wird empfohlen, damit Sie einen Geräteemulator ausführen können.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Hardware:</p>
 
-<ul>
-<li>  Die 64-Bit Version (X 64) von Windows ist für das SDK erforderlich.</li>
-<li>  Die Pro-Version wird empfohlen, damit Sie einen Geräteemulator ausführen können.</li>
-</ul></li>
-</ul></li>
-<li><p>Hardware:</p>
+    <ul>
+      <li>6,5 GB freier Festplattenspeicher</li>
+      <li>4 GB RAM</li>
+      <li>64-Bit (x 64)-CPU</li>
+    </ul>
+  </li>
+  <li>
+    <p>Windows Phone 8 Emulator</p>
 
-<ul>
-<li>  6,5 GB freier Festplattenspeicher</li>
-<li>  4 GB RAM</li>
-<li>  64-Bit (x 64)-CPU</li>
-</ul></li>
-<li><p>Windows Phone 8 Emulator</p>
+    <ul>
+      <li>Der Telefon-Emulator verwendet Hyper-V, so dass diese Liste die Voraussetzungen enthält.</li>
+      <li>Pro 64-Bit-Edition von Windows 8 oder größer</li>
+      <li>Erfordert einen Prozessor die Virtualisierung unterstützt und <a href="http://en.wikipedia.org/wiki/Second_Level_Address_Translation">Zweite Level Address Translation (SLAT)</a>
+        <ul>
+          <li>Siehe auch die <a href="http://ark.intel.com/Products/VirtualizationTechnology">Liste der Intel-Prozessoren, die Unterstützung von VT-X (Virtualisierung) und EPT (Stab)</a></li>
+        </ul>
+      </li>
+      <li>Aktivieren Sie die Virtualisierungsfunktionen (d.h., VT-X auf Intel) in den BIOS-Einstellungen, wie dies in der Regel standardmäßig deaktiviert ist.</li>
+    </ul>
+  </li>
+  <li>
+    <p>SDK + IDE (Visual Studio)</p>
 
-<ul>
-<li>  Der Telefon-Emulator verwendet Hyper-V, so dass diese Liste die Voraussetzungen enthält.</li>
-<li>  Pro 64-Bit-Edition von Windows 8 oder größer</li>
-<li>  Erfordert einen Prozessor die Virtualisierung unterstützt und <a href="http://en.wikipedia.org/wiki/Second_Level_Address_Translation">Zweite Level Address Translation (SLAT)</a> 
-
-<ul>
-<li>  Siehe auch die <a href="http://ark.intel.com/Products/VirtualizationTechnology">Liste der Intel-Prozessoren, die Unterstützung von VT-X (Virtualisierung) und EPT (Stab)</a></li>
-</ul></li>
-<li>  Aktivieren Sie die Virtualisierungsfunktionen (d.h., VT-X auf Intel) in den BIOS-Einstellungen, wie dies in der Regel standardmäßig deaktiviert ist.</li>
-</ul></li>
-<li><p>SDK + IDE (Visual Studio)</p>
-
-<ul>
-<li>  Visual Studio 2012 Professional, Premium oder Ultimate. Beachten Sie, dass Visual Studio Express für Windows Phone (enthalten im SDK) ist nicht empfehlenswert da Sie nicht die Vorlage (siehe unten) mit VS Express erstellen können, da es nicht die <strong>Vorlage exportieren</strong> -Funktionalität, die nur in VS Pro oder höher ist.</li>
-</ul></li>
-<li><p>Anmelden und bezahlen für ein <a href="http://dev.windowsphone.com/en-us/publish">Windows Phone Dev Center</a> -Konto, wenn Sie Ihre app auf einem echten <a href="../../../cordova/device/device.html">Gerät</a> anbringen oder an Marktplatz übermitteln möchten.</p></li>
+    <ul>
+      <li>Visual Studio 2012 Professional, Premium oder Ultimate. Beachten Sie, dass Visual Studio Express für Windows Phone (enthalten im SDK) ist nicht empfehlenswert da Sie nicht die Vorlage (siehe unten) mit VS Express erstellen können, da es nicht die <strong>Vorlage exportieren</strong> -Funktionalität, die nur in VS Pro oder höher ist.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Anmelden und bezahlen für ein <a href="http://dev.windowsphone.com/en-us/publish">Windows Phone Dev Center</a> -Konto, wenn Sie Ihre app auf einem echten <a href="../../../cordova/device/device.html">Gerät</a> anbringen oder an Marktplatz übermitteln möchten.</p>
+  </li>
 </ul>
 
 <p><strong>Hinweis:</strong> Das SDK im virtuellen Maschine ausgeführt wird, könnte einige Herausforderung dar. Sie können dieses Blog-Post lesen, die Einblick auf die Lösungen zur Entwicklung für <a href="http://aka.ms/BuildaWP8apponaMac">Windows Phone auf einem Mac</a> gibt.</p>
 
-<h2>2. Installieren Sie SDK + Cordova</h2>
+<h2 id="2-installieren-sie-sdk--cordova">2. Installieren Sie SDK + Cordova</h2>
 
 <ul>
-<li><p><a href="http://www.microsoft.com/en-us/download/details.aspx?id=35471">Windows Phone SDK</a> herunterladen und installieren</p></li>
-<li><p>Herunterladen Sie und extrahieren Sie die neueste Kopie von <a href="http://phonegap.com/download">Cordova</a>. Arbeiten Sie der <code>lib\windows-phone-8\wp8</code> Unterverzeichnis <code>lib\windows-phone-8\wp7</code> enthält die Windwos Phone 7-Version von Cordova.</p></li>
-<li><p>Kopie der <code>CordovaWP8_x_x_x.zip</code> -Datei in das <code>\My Documents\Visual Studio 2012\Templates\ProjectTemplates\</code> Verzeichnis.</p></li>
+  <li>
+    <p><a href="http://www.microsoft.com/en-us/download/details.aspx?id=35471">Windows Phone SDK</a> herunterladen und installieren</p>
+  </li>
+  <li>
+    <p>Herunterladen Sie und extrahieren Sie die neueste Kopie von <a href="http://phonegap.com/download">Cordova</a>. Arbeiten Sie der <code class="language-plaintext highlighter-rouge">lib\windows-phone-8\wp8</code> Unterverzeichnis <code class="language-plaintext highlighter-rouge">lib\windows-phone-8\wp7</code> enthält die Windwos Phone 7-Version von Cordova.</p>
+  </li>
+  <li>
+    <p>Kopie der <code class="language-plaintext highlighter-rouge">CordovaWP8_x_x_x.zip</code> -Datei in das <code class="language-plaintext highlighter-rouge">\My Documents\Visual Studio 2012\Templates\ProjectTemplates\</code> Verzeichnis.</p>
+  </li>
 </ul>
 
-<h2>2.1. Aufbau der Vorlage</h2>
+<h2 id="21-aufbau-der-vorlage">2.1. Aufbau der Vorlage</h2>
 
 <p><strong>Hinweis:</strong> dieser Schritt kann nicht verlangt werden. Wenn das Lib\windows-Telefon-Verzeichnis bereits eine CordovaWP8_x_x_x.zip-Datei enthält, können Sie diesen Schritt überspringen.</p>
 
 <p>Um den Entwicklungsprozess zu vereinfachen, kommt Cordova mit einem Skript zum Erstellen der Visual Studio-Vorlagen. Dies ermöglicht schnelle Erstellung von Cordova-Anwendungen in Visual Studio. Diese Vorlage kann bei Bedarf geändert werden und die unten aufgeführten Schritte zeigen wie Sie vorgehen, wenn Sie die Vorlage generieren möchten.</p>
 
-<h3>Führen Sie die Batchdatei erstellen und installieren Sie die Vorlagen.</h3>
+<h3 id="führen-sie-die-batchdatei-erstellen-und-installieren-sie-die-vorlagen">Führen Sie die Batchdatei erstellen und installieren Sie die Vorlagen.</h3>
 
 <ul>
-<li><p>Der Stamm der Repo enthält eine <a href="../../../cordova/file/fileobj/fileobj.html">Datei</a> createTemplates.bat. Doppelklick auf diese <a href="../../../cordova/file/fileobj/fileobj.html">Datei</a> wird 2 Zip-Dateien generieren. (CordovaWP7_x_x_x.zip + CordovaWP8_x_x_x.zip wo x.x.x die aktuelle Versionsnummer ist) Um diese Dateien in Visual Studio kopieren leicht zu verwenden werden sie zu &quot;Mein Dateien\Visual Studio 2012\Templates\ProjectTemplates\&quot; Sie dann neue Apache Cordova Windows Phone apps aus der Visual Studio-Datei-&gt; neues Projekt im Menü erstellen können.</p></li>
-<li><p>Wenn Sie die Batch-Datei von der Befehlszeile aus ausführen, können Sie auch mit einem Parameter automatisch installieren aufrufen</p></li>
+  <li>
+    <p>Der Stamm der Repo enthält eine <a href="../../../cordova/file/fileobj/fileobj.html">Datei</a> createTemplates.bat. Doppelklick auf diese <a href="../../../cordova/file/fileobj/fileobj.html">Datei</a> wird 2 Zip-Dateien generieren. (CordovaWP7_x_x_x.zip + CordovaWP8_x_x_x.zip wo x.x.x die aktuelle Versionsnummer ist) Um diese Dateien in Visual Studio kopieren leicht zu verwenden werden sie zu “Mein Dateien\Visual Studio 2012\Templates\ProjectTemplates" Sie dann neue Apache Cordova Windows Phone apps aus der Visual Studio-Datei-&gt; neues Projekt im Menü erstellen können.</p>
+  </li>
+  <li>
+    <p>Wenn Sie die Batch-Datei von der Befehlszeile aus ausführen, können Sie auch mit einem Parameter automatisch installieren aufrufen</p>
+  </li>
 </ul>
 
 <p>Führen Sie das Skript:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&gt; createTemplates.bat-installieren
-</code></pre></div>
-<h2>3. Einrichten des neuen Projekts</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; createTemplates.bat-installieren
+</code></pre></div></div>
+
+<h2 id="3-einrichten-des-neuen-projekts">3. Einrichten des neuen Projekts</h2>
 
 <ul>
-<li><p>Öffnen Sie Visual Studio Express für Windows Phone, und wählen Sie <strong>Neues Projekt</strong>.</p></li>
-<li><p>Wählen Sie <strong>CordovaWP8</strong>. (Die Versionsnummer wird in der Vorlagenbeschreibung angezeigt.)</p></li>
-<li><p>Geben Sie dem Projekt einen Namen, und wählen Sie <strong>OK</strong>.</p></li>
+  <li>
+    <p>Öffnen Sie Visual Studio Express für Windows Phone, und wählen Sie <strong>Neues Projekt</strong>.</p>
+  </li>
+  <li>
+    <p>Wählen Sie <strong>CordovaWP8</strong>. (Die Versionsnummer wird in der Vorlagenbeschreibung angezeigt.)</p>
+  </li>
+  <li>
+    <p>Geben Sie dem Projekt einen Namen, und wählen Sie <strong>OK</strong>.</p>
+  </li>
 </ul>
 
-<p><img src="/static/img/guide/platforms/wp8/StandAloneTemplate.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/wp8/StandAloneTemplate.png" alt="" /></p>
 
-<h2>4. Überprüfung der Projektstruktur</h2>
+<h2 id="4-überprüfung-der-projektstruktur">4. Überprüfung der Projektstruktur</h2>
 
 <ul>
-<li><p>Das <code>www</code> Verzeichnis enthält Ihre Cordova <code>html/js/css</code> und andere Ressourcen, die in Ihrer Anwendung enthalten.</p></li>
-<li><p>Alle Inhalte, die Sie hinzufügen, muss hier ein Teil der Visual Studio-Projekt zu sein, und als Inhalt festgelegt werden.</p></li>
-<li><p>Hinweis: Diese Bildschirmaufnahme war aus dem Cordova-2.3.0-Download, Ihr Angebot variiert basierend auf der aktuellen Version installiert.</p></li>
+  <li>
+    <p>Das <code class="language-plaintext highlighter-rouge">www</code> Verzeichnis enthält Ihre Cordova <code class="language-plaintext highlighter-rouge">html/js/css</code> und andere Ressourcen, die in Ihrer Anwendung enthalten.</p>
+  </li>
+  <li>
+    <p>Alle Inhalte, die Sie hinzufügen, muss hier ein Teil der Visual Studio-Projekt zu sein, und als Inhalt festgelegt werden.</p>
+  </li>
+  <li>
+    <p>Hinweis: Diese Bildschirmaufnahme war aus dem Cordova-2.3.0-Download, Ihr Angebot variiert basierend auf der aktuellen Version installiert.</p>
+  </li>
 </ul>
 
-<p><img src="/static/img/guide/platforms/wp8/projectStructure.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/wp8/projectStructure.png" alt="" /></p>
 
-<h2>5. Erstellen und Bereitstellen von Emulator</h2>
+<h2 id="5-erstellen-und-bereitstellen-von-emulator">5. Erstellen und Bereitstellen von Emulator</h2>
 
 <ul>
-<li><p>Stellen Sie sicher, dass <strong>Windows Phone Emulator</strong> im wichtigsten Dropdown-Menü ausgewählt ist.</p></li>
-<li><p>Drücken Sie die Taste grün <strong>spielen</strong> neben dem Dropdown-Menü Debuggen zu beginnen, oder geben Sie <strong>F5</strong>.</p></li>
+  <li>
+    <p>Stellen Sie sicher, dass <strong>Windows Phone Emulator</strong> im wichtigsten Dropdown-Menü ausgewählt ist.</p>
+  </li>
+  <li>
+    <p>Drücken Sie die Taste grün <strong>spielen</strong> neben dem Dropdown-Menü Debuggen zu beginnen, oder geben Sie <strong>F5</strong>.</p>
+  </li>
 </ul>
 
-<p><img src="/static/img/guide/platforms/wp8/BuildEmulator.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/wp8/BuildEmulator.png" alt="" /></p>
 
-<h2>6. Erstellen Sie das Projekt für das Gerät</h2>
+<h2 id="6-erstellen-sie-das-projekt-für-das-gerät">6. Erstellen Sie das Projekt für das Gerät</h2>
 
 <p>Um die Anwendung auf einem <a href="../../../cordova/device/device.html">Gerät</a> zu testen, muss das <a href="../../../cordova/device/device.html">Gerät</a> registriert werden. Klicken Sie <a href="http://msdn.microsoft.com/en-us/library/windowsphone/develop/ff402565(v=vs.105).aspx">hier</a> , um auf bereitstellen und Testen auf Ihrem Windows Phone 8 die Dokumentation lesen.</p>
 
 <ul>
-<li><p>Stellen Sie sicher, Ihr Telefon angeschlossen ist, und der Bildschirm ist entsperrt.</p></li>
-<li><p>Wählen Sie in Visual Studio &#39;<a href="../../../cordova/device/device.html">Gerät</a>&#39; aus dem oberen Dropdown-Menü.</p></li>
-<li><p>Drücken Sie die Taste grün <strong>spielen</strong> neben dem wichtigsten Dropdown-Menü Debuggen zu beginnen, oder geben Sie <strong>F5</strong>.</p></li>
+  <li>
+    <p>Stellen Sie sicher, Ihr Telefon angeschlossen ist, und der Bildschirm ist entsperrt.</p>
+  </li>
+  <li>
+    <p>Wählen Sie in Visual Studio ‘<a href="../../../cordova/device/device.html">Gerät</a>’ aus dem oberen Dropdown-Menü.</p>
+  </li>
+  <li>
+    <p>Drücken Sie die Taste grün <strong>spielen</strong> neben dem wichtigsten Dropdown-Menü Debuggen zu beginnen, oder geben Sie <strong>F5</strong>.</p>
+  </li>
 </ul>
 
-<p><img src="/static/img/guide/platforms/wp7/wpd.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/wp7/wpd.png" alt="" /></p>
 
-<h2>Fertig!</h2>
+<h2 id="fertig">Fertig!</h2>
 
-<h2>Weiterführende Literatur</h2>
+<h2 id="weiterführende-literatur">Weiterführende Literatur</h2>
 
 <p>Für weitere Details über die spezifischen Unterschiede zwischen IE10 und WebKit-Browser und wie unterstützen beide MS hat eine hilfreiche <a href="http://blogs.windows.com/windows_phone/b/wpdev/archive/2012/11/15/adapting-your-webkit-optimized-site-for-internet-explorer-10.aspx">Anleitung hier</a></p>
+
 
 
             </div>

@@ -2236,142 +2236,196 @@
             
 
             <div id="page-toc-source">
-                <h1>アマゾン火 OS プラットフォーム ガイド</h1>
+                <h1 id="アマゾン火-os-プラットフォーム-ガイド">アマゾン火 OS プラットフォーム ガイド</h1>
 
 <p>このガイドの Kindle 火災 HDX などのアマゾン火 OS デバイス Cordova アプリを展開する SDK の開発環境を設定する方法を示します。</p>
 
 <p>詳細なプラットフォーム固有の情報は、次を参照してください。</p>
 
 <ul>
-<li>  <a href="config.html">アマゾン火 OS 構成</a></li>
-<li>  <a href="webview.html">アマゾン火 OS web 表示</a></li>
-<li>  <a href="plugin.html">アマゾン火 OS プラグイン</a></li>
+  <li><a href="config.html">アマゾン火 OS 構成</a></li>
+  <li><a href="webview.html">アマゾン火 OS web 表示</a></li>
+  <li><a href="plugin.html">アマゾン火 OS プラグイン</a></li>
 </ul>
 
-<h2>導入</h2>
+<h2 id="導入">導入</h2>
 
 <p>コルドバ開発者はアマゾン火 OS プラットフォームをターゲット Kindle の火災のデバイスに統合された高度な web エンジンを利用したハイブリッド web アプリを作成できます。 アマゾン WebView API (AWV) は火の OS に排他的なクロム派生 web ランタイムです。 WebView の Android デバイスに付属しているためのドロップイン置換 AWV それより高速な JavaScript エンジン （V8）、リモート デバッグ、およびハードウェアの Kindle の火災を含むのデバイス、加速された 2D キャンバスの最適化をサポートすることによりパフォーマンスの向上とより強力なハイブリッド web アプリを作成することが可能になり、Android がサポートしない HTML5 機能へのアクセスなど、WebView に建て: CSS Calc、フォーム検証、getUserMedia、IndexedDB、Web ワーカー、Websocket WebGL。</p>
 
 <p>アマゾン WebView API の詳細については、Amazon 開発者ポータルの<a href="https://developer.amazon.com/public/solutions/platforms/android-fireos/docs/building-and-testing-your-hybrid-app">HTML5 ハイブリッド アプリのページ</a>を参照してください。 開始および他を得ることについての質問の問題のサポートは、Amazon 開発者ポータル<a href="http://forums.developer.amazon.com/forums/category.jspa?categoryID=41">フォーラム - HTML5 ハイブリッド アプリ</a>を参照してください。.</p>
 
-<h2>要件、およびサポート</h2>
+<h2 id="要件およびサポート">要件、およびサポート</h2>
 
 <p>アマゾン火 OS 用 Cordova アプリの開発には様々 なアマゾン WebView SDK と同様に Android の開発に必要なすべてを含むサポート ファイルのインストールが必要です。 必要なインストールは、以下のリストを確認してください。</p>
 
 <ul>
-<li>  <a href="../../cli/index.html">コマンド ライン インターフェイス</a></li>
-<li>  <a href="http://developer.android.com/sdk/">Android の SDK</a></li>
-<li>  <a href="http://ant.apache.org">Apache Ant</a></li>
-<li>  <a href="https://developer.amazon.com/public/solutions/platforms/android-fireos/docs/building-and-testing-your-hybrid-app">アマゾン WebView SDK</a></li>
+  <li><a href="../../cli/index.html">コマンド ライン インターフェイス</a></li>
+  <li><a href="http://developer.android.com/sdk/">Android の SDK</a></li>
+  <li><a href="http://ant.apache.org">Apache Ant</a></li>
+  <li><a href="https://developer.amazon.com/public/solutions/platforms/android-fireos/docs/building-and-testing-your-hybrid-app">アマゾン WebView SDK</a></li>
 </ul>
 
-<h2>インストール</h2>
+<h2 id="インストール">インストール</h2>
 
-<h3>Android の SDK と Apache Ant</h3>
+<h3 id="android-の-sdk-と-apache-ant">Android の SDK と Apache Ant</h3>
 
-<p><a href="http://developer.android.com/sdk/">Developer.android.com/sdk</a>から Android SDK をインストールします。 それ以外の場合、ダウンロードした移動、SDK をインストールする場所の選択肢が表示されます <code>adt-bundle</code> ツリーの開発ツールを格納する場所を。</p>
+<p><a href="http://developer.android.com/sdk/">Developer.android.com/sdk</a>から Android SDK をインストールします。 それ以外の場合、ダウンロードした移動、SDK をインストールする場所の選択肢が表示されます <code class="language-plaintext highlighter-rouge">adt-bundle</code> ツリーの開発ツールを格納する場所を。</p>
 
-<p>アンドロイド SDK マネージャーを実行する必要があります ( <code>android</code> コマンド ・ ラインから） コルドバ プロジェクトを開始する前に、少なくとも 1 回。 Android の SDK ツールと SDK プラットフォーム<strong>API レベル 19 具体的</strong>の最新バージョンをインストールすることを確認します。 Kindle 火災 OS デバイスのための開発環境の設定に関する詳細については Amazon 開発者ポータル<a href="https://developer.amazon.com/public/resources/development-tools/ide-tools/tech-docs/01-setting-up-your-development-environment">開発環境の設定</a>を参照してください。</p>
+<p>アンドロイド SDK マネージャーを実行する必要があります ( <code class="language-plaintext highlighter-rouge">android</code> コマンド ・ ラインから） コルドバ プロジェクトを開始する前に、少なくとも 1 回。 Android の SDK ツールと SDK プラットフォーム<strong>API レベル 19 具体的</strong>の最新バージョンをインストールすることを確認します。 Kindle 火災 OS デバイスのための開発環境の設定に関する詳細については Amazon 開発者ポータル<a href="https://developer.amazon.com/public/resources/development-tools/ide-tools/tech-docs/01-setting-up-your-development-environment">開発環境の設定</a>を参照してください。</p>
 
 <p>Apache Ant ビルドツール<a href="http://ant.apache.org/bindownload.cgi">、Ant のバイナリ配布物をダウンロード</a>、解凍後を参照することができますディレクトリにインストールします。 多くの情報のための<a href="http://ant.apache.org/manual/index.html">Ant マニュアル</a>を参照してください。</p>
 
-<p>コルドバ動作するコマンド ライン ツール、人造人間 SDK を含める必要があります <code>tools</code> 、 <code>platform-tools</code> と <code>apache-ant/bin</code> パス環境のディレクトリ。</p>
+<p>コルドバ動作するコマンド ライン ツール、人造人間 SDK を含める必要があります <code class="language-plaintext highlighter-rouge">tools</code> 、 <code class="language-plaintext highlighter-rouge">platform-tools</code> と <code class="language-plaintext highlighter-rouge">apache-ant/bin</code> パス環境のディレクトリ。</p>
 
-<h4>Mac の/Linux のパス</h4>
+<h4 id="mac-のlinux-のパス">Mac の/Linux のパス</h4>
 
-<p>Mac、Linux または他の Unix ライクなプラットフォームで、テキストエディターを使用して作成または変更することができます、 <code>~/.bash_profile</code> ファイルは、SDK と Ant のインストール先に応じて、次のような行を追加します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">エクスポート パス ${PATH} を =:/開発/adt-バンドル/sdk/プラットフォーム固有のツール:/開発/adt-バンドル/sdk/ツール：/開発/apache ant/bin
-</code></pre></div>
+<p>Mac、Linux または他の Unix ライクなプラットフォームで、テキストエディターを使用して作成または変更することができます、 <code class="language-plaintext highlighter-rouge">~/.bash_profile</code> ファイルは、SDK と Ant のインストール先に応じて、次のような行を追加します。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>エクスポート パス ${PATH} を =:/開発/adt-バンドル/sdk/プラットフォーム固有のツール:/開発/adt-バンドル/sdk/ツール：/開発/apache ant/bin
+</code></pre></div></div>
+
 <p>これは新しくオープンしたターミナル ウィンドウで SDK ツールを公開します。それ以外の場合、現在のセッションで使用できるようにするこれを実行します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ source ~/.bash_profile
-</code></pre></div>
-<h4>Windows パス</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ source ~/.bash_profile
+</code></pre></div></div>
+
+<h4 id="windows-パス">Windows パス</h4>
 
 <p>Windows の PATH 環境を変更: する</p>
 
 <ul>
-<li><p>デスクトップの左下隅の [<strong>スタート</strong>] メニューをクリックして、<strong>コンピューター</strong>を右クリックし、<strong>プロパティ</strong>をクリックします.</p></li>
-<li><p>左側の列では、<strong>システムの詳細設定</strong>をクリックします。</p></li>
-<li><p>表示されたダイアログ ボックスで<strong>環境変数</strong>キーを押します。.</p></li>
-<li><p><strong>パス</strong>変数を選択し、キーを押して<strong>編集</strong>.</p></li>
-<li><p>次のパスに追加インストールした SDK と Ant、たとえばに基づいて：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">;C:\Development\adt-bundle\sdk\platform-tools;C:\Development\adt-bundle\sdk\tools;C:\Development\apache-ant\bin
-</code></pre></div></li>
-<li><p>値を保存して両方のダイアログ ボックスを閉じます。</p></li>
-<li><p>また、Java を有効にする必要があります。 コマンド プロンプトを開き、型 <code>java</code> 実行されない場合、同様にあなたのパスに Java バイナリの場所を追加します。 ％ JAVA<em>HOME が JDK のインストール ディレクトリを指していることを確認します。 JAVA</em>HOME 環境変数別途追加する必要があります。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">%JAVA_HOME%\bin
-</code></pre></div></li>
+  <li>
+    <p>デスクトップの左下隅の [<strong>スタート</strong>] メニューをクリックして、<strong>コンピューター</strong>を右クリックし、<strong>プロパティ</strong>をクリックします.</p>
+  </li>
+  <li>
+    <p>左側の列では、<strong>システムの詳細設定</strong>をクリックします。</p>
+  </li>
+  <li>
+    <p>表示されたダイアログ ボックスで<strong>環境変数</strong>キーを押します。.</p>
+  </li>
+  <li>
+    <p><strong>パス</strong>変数を選択し、キーを押して<strong>編集</strong>.</p>
+  </li>
+  <li>
+    <p>次のパスに追加インストールした SDK と Ant、たとえばに基づいて：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>;C:\Development\adt-bundle\sdk\platform-tools;C:\Development\adt-bundle\sdk\tools;C:\Development\apache-ant\bin
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>値を保存して両方のダイアログ ボックスを閉じます。</p>
+  </li>
+  <li>
+    <p>また、Java を有効にする必要があります。 コマンド プロンプトを開き、型 <code class="language-plaintext highlighter-rouge">java</code> 実行されない場合、同様にあなたのパスに Java バイナリの場所を追加します。 ％ JAVA_HOME が JDK のインストール ディレクトリを指していることを確認します。 JAVA_HOME 環境変数別途追加する必要があります。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%JAVA_HOME%\bin
+</code></pre></div>    </div>
+  </li>
 </ul>
 
-<h3>アマゾン WebView SDK</h3>
+<h3 id="アマゾン-webview-sdk">アマゾン WebView SDK</h3>
 
 <p>アマゾン火 OS プラットフォーム ターゲットを用いた Cordova アプリを作成するためにダウンロード、アンパック、アマゾン WebView SDK サポート ファイルをインストールする必要があります。 この手順はのみ行う必要があります最初のアマゾン火 OS プロジェクト。</p>
 
 <ul>
-<li><p><a href="https://developer.amazon.com/public/solutions/platforms/android-fireos/docs/building-and-testing-your-hybrid-app">Amazon 開発者ポータル</a>からアマゾン WebView SDK をダウンロードします。.</p></li>
-<li><p>コピー <code>awv_interface.jar</code> コルドバの作業ディレクトリにダウンロードした SDK から。それが存在しない場合は、commonlibs(shown below) フォルダーを作成します。</p>
+  <li>
+    <p><a href="https://developer.amazon.com/public/solutions/platforms/android-fireos/docs/building-and-testing-your-hybrid-app">Amazon 開発者ポータル</a>からアマゾン WebView SDK をダウンロードします。.</p>
+  </li>
+  <li>
+    <p>コピー <code class="language-plaintext highlighter-rouge">awv_interface.jar</code> コルドバの作業ディレクトリにダウンロードした SDK から。それが存在しない場合は、commonlibs(shown below) フォルダーを作成します。</p>
 
-<p><strong>Mac/Linux:</strong> <code>~/.cordova/lib/commonlibs/</code></p>
+    <p><strong>Mac/Linux:</strong> <code class="language-plaintext highlighter-rouge">~/.cordova/lib/commonlibs/</code></p>
 
-<p><strong>Windows:</strong> <code>%USERPROFILE%\.cordova\lib\commonlibs</code></p></li>
+    <p><strong>Windows:</strong> <code class="language-plaintext highlighter-rouge">%USERPROFILE%\.cordova\lib\commonlibs</code></p>
+  </li>
 </ul>
 
-<h2>アマゾン火 OS の新しいプロジェクトを作成します。</h2>
+<h2 id="アマゾン火-os-の新しいプロジェクトを作成します">アマゾン火 OS の新しいプロジェクトを作成します。</h2>
 
-<p>使用、 <code>cordova</code> 、コルドバのコマンド ライン インターフェイスでの説明に従って新しいプロジェクトを設定するためのユーティリティ。たとえば、ソース コード ディレクトリ: で</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova create hello com.example.hello "HelloWorld"
+<p>使用、 <code class="language-plaintext highlighter-rouge">cordova</code> 、コルドバのコマンド ライン インターフェイスでの説明に従って新しいプロジェクトを設定するためのユーティリティ。たとえば、ソース コード ディレクトリ: で</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova create hello com.example.hello "HelloWorld"
 $ cd hello
 $ cordova platform add amazon-fireos
 $ cordova build
-</code></pre></div>
-<p><strong><em>注：</em></strong>アマゾン fireos プラットフォームは、システムにインストールされている初めてコルドバの作業ディレクトリに適切なファイルをダウンロードするそれとして AWV SDK サポート ファイル (上記参照) が不足しては失敗します。 インストールするには、上記の手順に従って、 <code>awv_interface.jar</code> 、削除し、再度アマゾン fireos プラットフォームをプロジェクトに追加します。 この手順はのみ行う必要があります最初のアマゾン火 OS プロジェクト。</p>
+</code></pre></div></div>
 
-<h2>デバイスへの配置します。</h2>
+<p><strong><em>注：</em></strong>アマゾン fireos プラットフォームは、システムにインストールされている初めてコルドバの作業ディレクトリに適切なファイルをダウンロードするそれとして AWV SDK サポート ファイル (上記参照) が不足しては失敗します。 インストールするには、上記の手順に従って、 <code class="language-plaintext highlighter-rouge">awv_interface.jar</code> 、削除し、再度アマゾン fireos プラットフォームをプロジェクトに追加します。 この手順はのみ行う必要があります最初のアマゾン火 OS プロジェクト。</p>
+
+<h2 id="デバイスへの配置します">デバイスへの配置します。</h2>
 
 <p>デバイスに直接アプリをプッシュするには、 <a href="http://developer.android.com/tools/device.html">Android 開発者向けサイト</a>で説明されているようにあなたのデバイスで USB デバッグを有効にかどうかを確認し、ミニ USB ケーブルを使用してあなたのシステムにプラグインします。</p>
 
 <p>アプリをデバイスにプッシュするには、コマンド行から。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">アマゾン fireos 実行 $ コルドバ
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>アマゾン fireos 実行 $ コルドバ
+</code></pre></div></div>
+
 <p>交互 Eclipse、内でプロジェクトを右クリックし、 <strong>Android アプリケーション → として実行</strong>を選択します.</p>
 
 <p><strong>注</strong>: 現在、エミュレーターを介してテストはサポートされていませんアマゾン WebView ベースのアプリのため、さらにアマゾン WebView API は火 OS デバイスで利用できるのみです。 詳細については、<a href="https://developer.amazon.com/public/solutions/platforms/android-fireos/docs/building-and-testing-your-hybrid-app">アマゾン WebView API SDK</a>ドキュメントを参照してください。</p>
 
-<h3>フラグを実行します。</h3>
+<h3 id="フラグを実行します">フラグを実行します。</h3>
 
-<p>実行コマンドはコルドバ コマンド行インターフェースのドキュメントで指定されている省略可能なパラメーターを受け入れます、火災 OS はまた追加を受け入れる <code>--debug</code> リモート web デバッグ用のクロムの開発者ツールを有効にするフラグ。</p>
+<p>実行コマンドはコルドバ コマンド行インターフェースのドキュメントで指定されている省略可能なパラメーターを受け入れます、火災 OS はまた追加を受け入れる <code class="language-plaintext highlighter-rouge">--debug</code> リモート web デバッグ用のクロムの開発者ツールを有効にするフラグ。</p>
 
 <p>開発者ツールを使用するには、を入力します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova run --debug amazon-fireos
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova run --debug amazon-fireos
+</code></pre></div></div>
+
 <p>これは実行しているクライアント上のツールを有効になります。接続できますクライアントに Android のデバッグ橋 （adb） を使用してポート転送によって、アプリのパッケージ名を参照します。</p>
 
 <p>たとえば。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">adb 前方 tcp:9222 localabstract:com.example.helloworld.devtools
-</code></pre></div>
-<p>クロム ベースのブラウザーを介して DevTools に移動して使用することしてできます。<code>http://localhost:9222</code>.</p>
 
-<h3>省略可能な Eclipse サポート</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb 前方 tcp:9222 localabstract:com.example.helloworld.devtools
+</code></pre></div></div>
+
+<p>クロム ベースのブラウザーを介して DevTools に移動して使用することしてできます。<code class="language-plaintext highlighter-rouge">http://localhost:9222</code>.</p>
+
+<h3 id="省略可能な-eclipse-サポート">省略可能な Eclipse サポート</h3>
 
 <p>作成後、プロジェクトを変更する人造人間 SDK と一緒に来る Eclipse を使用できます。 コルドバのコマンド ライン ツールを使用し続ける場合に日食を介して行われた変更が上書きされることに注意してください。</p>
 
 <ul>
-<li><p><strong>Eclipse</strong>アプリケーションを起動します。</p></li>
-<li><p><strong>新しいプロジェクト</strong>のメニュー項目を選択します。</p></li>
-<li><p>表示されたダイアログ ボックスから<strong>既存のコードから Android プロジェクト</strong>を選択し、<strong>次</strong>キーを押します。 <img src="/static/img/guide/platforms/android/eclipse_new_project.png" alt=""></p></li>
-<li><p>移動する <code>hello</code> 、または好みのディレクトリに作成した、プロジェクトし、 <code>platforms/amazon-fireos</code> サブディレクトリ。</p></li>
-<li><p>Eclipse はこんにちは、こんにちは-CorddovaLib - 2 のプロジェクトを追加表示されます。両方を追加します。</p></li>
-<li><p><strong>終了</strong>キーを押します。.</p></li>
+  <li>
+    <p><strong>Eclipse</strong>アプリケーションを起動します。</p>
+  </li>
+  <li>
+    <p><strong>新しいプロジェクト</strong>のメニュー項目を選択します。</p>
+  </li>
+  <li>
+    <p>表示されたダイアログ ボックスから<strong>既存のコードから Android プロジェクト</strong>を選択し、<strong>次</strong>キーを押します。 <img src="/static/img/guide/platforms/android/eclipse_new_project.png" alt="" /></p>
+  </li>
+  <li>
+    <p>移動する <code class="language-plaintext highlighter-rouge">hello</code> 、または好みのディレクトリに作成した、プロジェクトし、 <code class="language-plaintext highlighter-rouge">platforms/amazon-fireos</code> サブディレクトリ。</p>
+  </li>
+  <li>
+    <p>Eclipse はこんにちは、こんにちは-CorddovaLib - 2 のプロジェクトを追加表示されます。両方を追加します。</p>
+  </li>
+  <li>
+    <p><strong>終了</strong>キーを押します。.</p>
+  </li>
 </ul>
 
 <p>Eclipse ウィンドウが開いたら、未解決の問題を示す赤い<strong>X</strong>が表示されます。もしそうなら、この追加の手順を実行します。</p>
 
 <ul>
-<li><p>プロジェクト ディレクトリを右クリックします。</p></li>
-<li><p>結果<strong>のプロパティ</strong>] ダイアログ [ <strong>Android</strong>ナビゲーション ウィンドウから。</p></li>
-<li><p>プロジェクトのビルド ターゲットのインストールされている最高の Android の API レベル (現在 API レベル 19) を選択します。</p></li>
-<li><p><strong>[Ok]</strong>をクリックします.</p></li>
-<li><p><strong>クリーン</strong><strong>をプロジェクト</strong>メニューから選択します。これは、プロジェクト内のすべてのエラーを修正する必要があります。</p></li>
+  <li>
+    <p>プロジェクト ディレクトリを右クリックします。</p>
+  </li>
+  <li>
+    <p>結果<strong>のプロパティ</strong>] ダイアログ [ <strong>Android</strong>ナビゲーション ウィンドウから。</p>
+  </li>
+  <li>
+    <p>プロジェクトのビルド ターゲットのインストールされている最高の Android の API レベル (現在 API レベル 19) を選択します。</p>
+  </li>
+  <li>
+    <p><strong>[Ok]</strong>をクリックします.</p>
+  </li>
+  <li>
+    <p><strong>クリーン</strong><strong>をプロジェクト</strong>メニューから選択します。これは、プロジェクト内のすべてのエラーを修正する必要があります。</p>
+  </li>
 </ul>
 
 

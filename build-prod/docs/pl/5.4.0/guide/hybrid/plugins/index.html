@@ -1022,7 +1022,7 @@
             
 
             <div id="page-toc-source">
-                <h1>Plugin rozwoju Przewodnik</h1>
+                <h1 id="plugin-rozwoju-przewodnik">Plugin rozwoju Przewodnik</h1>
 
 <p><em>Plugin</em> jest pakiet wstrzykuje kod, który pozwala webview Cordova, w którym aplikacja renderuje do komunikowania się z rodzimych platformy, na którym jest uruchomiony. Wtyczki dostęp do urządzeń i platform funkcji, które są zwykle niedostępne dla aplikacji opartych na sieci web. Wszystkie główne cechy Cordova API są implementowane jako wtyczki, i wiele innych są dostępne, że Włączanie funkcji, takich jak skanery kodów kreskowych, komunikacja NFC, lub dostosować kalendarz interfejsów. Ma <a href="http://plugins.cordova.io">rejestru</a> dostępnych wtyczek.</p>
 
@@ -1032,13 +1032,16 @@
 
 <p>Oprócz tych instrukcji, przygotowując się napisać taki plugin, że najlepiej jest patrzeć na <a href="http://cordova.apache.org/#contribute">istniejących wtyczek</a> dla orientacji.</p>
 
-<h2>Budynek taki Plugin</h2>
+<h2 id="budynek-taki-plugin">Budynek taki Plugin</h2>
 
-<p>Deweloperzy aplikacji za pomocą CLI <code>plugin add</code> polecenia (omówione w interfejs wiersza poleceń) aby zastosować plugin do projektu. Argument do tego polecenia jest adres URL dla repozytorium <em>git</em> , zawierające kod wtyczki. W tym przykładzie implementuje Cordova z urządzeń interfejsu API:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git
-</code></pre></div>
-<p>Repozytorium wtyczki muszą funkcji najwyższego poziomu <code>plugin.xml</code> pliku manifestu. Istnieje wiele sposobów, aby skonfigurować tego pliku, które dane są dostępne w specyfikacji Plugin. To skrócona wersja <code>Device</code> plugin zawiera prosty przykład do wykorzystania jako model:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+<p>Deweloperzy aplikacji za pomocą CLI <code class="language-plaintext highlighter-rouge">plugin add</code> polecenia (omówione w interfejs wiersza poleceń) aby zastosować plugin do projektu. Argument do tego polecenia jest adres URL dla repozytorium <em>git</em> , zawierające kod wtyczki. W tym przykładzie implementuje Cordova z urządzeń interfejsu API:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git
+</code></pre></div></div>
+
+<p>Repozytorium wtyczki muszą funkcji najwyższego poziomu <code class="language-plaintext highlighter-rouge">plugin.xml</code> pliku manifestu. Istnieje wiele sposobów, aby skonfigurować tego pliku, które dane są dostępne w specyfikacji Plugin. To skrócona wersja <code class="language-plaintext highlighter-rouge">Device</code> plugin zawiera prosty przykład do wykorzystania jako model:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
     &lt;plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
             id="cordova-plugin-device" version="0.2.3"&gt;
         &lt;name&gt;Device&lt;/name&gt;
@@ -1058,97 +1061,126 @@
             &lt;source-file src="src/ios/CDVDevice.m" /&gt;
         &lt;/platform&gt;
     &lt;/plugin&gt;
-</code></pre></div>
-<p>Najwyższego poziomu <code>plugin</code> znacznika <code>id</code> atrybut używa tego samego formatu domeny odwrotnej do identyfikacji pakietu plugin jak aplikacje są one dodawane. <code>js-module</code>Tag określa ścieżkę do wspólnego interfejsu JavaScript. <code>platform</code>Tag określa odpowiedni zestaw kodu macierzystego, do <code>ios</code> platformy w tym przypadku. <code>config-file</code>Znacznik hermetyzuje <code>feature</code> tagu, który jest wstrzykiwany do platformy <code>config.xml</code> plik, aby uświadomić platformie dodatkowy kod biblioteki. <code>header-file</code>i <code>source-file</code> Tagi Określ ścieżkę do biblioteki plików składowych.</p>
+</code></pre></div></div>
 
-<h2>Sprawdzanie poprawności Plugin</h2>
+<p>Najwyższego poziomu <code class="language-plaintext highlighter-rouge">plugin</code> znacznika <code class="language-plaintext highlighter-rouge">id</code> atrybut używa tego samego formatu domeny odwrotnej do identyfikacji pakietu plugin jak aplikacje są one dodawane. <code class="language-plaintext highlighter-rouge">js-module</code>Tag określa ścieżkę do wspólnego interfejsu JavaScript. <code class="language-plaintext highlighter-rouge">platform</code>Tag określa odpowiedni zestaw kodu macierzystego, do <code class="language-plaintext highlighter-rouge">ios</code> platformy w tym przypadku. <code class="language-plaintext highlighter-rouge">config-file</code>Znacznik hermetyzuje <code class="language-plaintext highlighter-rouge">feature</code> tagu, który jest wstrzykiwany do platformy <code class="language-plaintext highlighter-rouge">config.xml</code> plik, aby uświadomić platformie dodatkowy kod biblioteki. <code class="language-plaintext highlighter-rouge">header-file</code>i <code class="language-plaintext highlighter-rouge">source-file</code> Tagi Określ ścieżkę do biblioteki plików składowych.</p>
 
-<p>Można użyć <code>plugman</code> narzędzie, aby sprawdzić, czy plugin instaluje się poprawnie dla każdej platformy. Zainstaluj <code>plugman</code> rezygnować ten kolejne rozkazywać <a href="http://nodejs.org/">węzła</a> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ npm install -g plugman
-</code></pre></div>
-<p>Potrzebujesz katalog źródłowy ważnych aplikacji, takich jak najwyższego poziomu <code>www</code> katalogu zawarte w projekcie generowanych przez CLI domyślne zgodnie z opisem w interfejs wiersza poleceń. Upewnić się, że aplikacja <code>index.html</code> Strona odniesienia nazwa wtyczki interfejsu JavaScript, jakby to było w tym samym katalogu źródłowym:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;script src="myplugin.js"&gt;&lt;/script&gt;
-</code></pre></div>
+<h2 id="sprawdzanie-poprawności-plugin">Sprawdzanie poprawności Plugin</h2>
+
+<p>Można użyć <code class="language-plaintext highlighter-rouge">plugman</code> narzędzie, aby sprawdzić, czy plugin instaluje się poprawnie dla każdej platformy. Zainstaluj <code class="language-plaintext highlighter-rouge">plugman</code> rezygnować ten kolejne rozkazywać <a href="http://nodejs.org/">węzła</a> :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ npm install -g plugman
+</code></pre></div></div>
+
+<p>Potrzebujesz katalog źródłowy ważnych aplikacji, takich jak najwyższego poziomu <code class="language-plaintext highlighter-rouge">www</code> katalogu zawarte w projekcie generowanych przez CLI domyślne zgodnie z opisem w interfejs wiersza poleceń. Upewnić się, że aplikacja <code class="language-plaintext highlighter-rouge">index.html</code> Strona odniesienia nazwa wtyczki interfejsu JavaScript, jakby to było w tym samym katalogu źródłowym:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;script src="myplugin.js"&gt;&lt;/script&gt;
+</code></pre></div></div>
+
 <p>Uruchom polecenie, takie jak następujące aby sprawdzić, czy iOS zależności ciężar poprawnie:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">     $ plugman install --platform ios --project /path/to/my/project/www --plugin /path/to/my/plugin
-</code></pre></div>
-<p>Szczegółowe informacje na temat <code>plugman</code> opcji, zobacz za pomocą Plugman do zarządzania wtyczki. Dla informacji na temat faktycznie <em>debugowania</em> wtyczek Zobacz macierzysty interfejs każdej platformy wymienione na dole tej strony.</p>
 
-<h2>Interfejs JavaScript</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     $ plugman install --platform ios --project /path/to/my/project/www --plugin /path/to/my/plugin
+</code></pre></div></div>
 
-<p>JavaScript dostarcza interfejs przodem, co być może najważniejszą częścią plugin. Może struktura wtyczki JavaScript, jednak się, ale trzeba zadzwonić <code>cordova.exec</code> do komunikowania się z rodzimych platformy, używając następującej składni:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    cordova.exec(function(winParam) {},
+<p>Szczegółowe informacje na temat <code class="language-plaintext highlighter-rouge">plugman</code> opcji, zobacz za pomocą Plugman do zarządzania wtyczki. Dla informacji na temat faktycznie <em>debugowania</em> wtyczek Zobacz macierzysty interfejs każdej platformy wymienione na dole tej strony.</p>
+
+<h2 id="interfejs-javascript">Interfejs JavaScript</h2>
+
+<p>JavaScript dostarcza interfejs przodem, co być może najważniejszą częścią plugin. Może struktura wtyczki JavaScript, jednak się, ale trzeba zadzwonić <code class="language-plaintext highlighter-rouge">cordova.exec</code> do komunikowania się z rodzimych platformy, używając następującej składni:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    cordova.exec(function(winParam) {},
                  function(error) {},
                  "service",
                  "action",
                  ["firstArgument", "secondArgument", 42, false]);
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Oto jak działa każdego parametru:</p>
 
 <ul>
-<li><p><code>function(winParam) {}</code>: Sukcesu funkcji wywołania zwrotnego. Zakładając, że twój <code>exec</code> połączenie zakończy się pomyślnie, to funkcja wykonuje oraz wszystkie parametry można przekazać do niej.</p></li>
-<li><p><code>function(error) {}</code>: Funkcja wywołania zwrotnego błąd. Jeśli operacja nie zg³aszaæ reklamacjê pomyœlnie, ta funkcja wykonuje z parametrem opcjonalnym błąd.</p></li>
-<li><p><code>&quot;service&quot;</code>: Nazwa serwisu aby zadzwonić po stronie macierzystego. Odpowiada to macierzysta Klasa, dla której więcej informacji jest dostępne w macierzystym przewodników wymienionych poniżej.</p></li>
-<li><p><code>&quot;action&quot;</code>: Nazwa akcji aby zadzwonić po stronie macierzystego. Generalnie odpowiada metodzie macierzysta Klasa. Zobacz rodzinny przewodnicy wymienionych poniżej.</p></li>
-<li><p><code>[/* arguments */]</code>: Tablicę argumentów, aby przejść do macierzystego środowiska.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">function(winParam) {}</code>: Sukcesu funkcji wywołania zwrotnego. Zakładając, że twój <code class="language-plaintext highlighter-rouge">exec</code> połączenie zakończy się pomyślnie, to funkcja wykonuje oraz wszystkie parametry można przekazać do niej.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">function(error) {}</code>: Funkcja wywołania zwrotnego błąd. Jeśli operacja nie zg³aszaæ reklamacjê pomyœlnie, ta funkcja wykonuje z parametrem opcjonalnym błąd.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">"service"</code>: Nazwa serwisu aby zadzwonić po stronie macierzystego. Odpowiada to macierzysta Klasa, dla której więcej informacji jest dostępne w macierzystym przewodników wymienionych poniżej.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">"action"</code>: Nazwa akcji aby zadzwonić po stronie macierzystego. Generalnie odpowiada metodzie macierzysta Klasa. Zobacz rodzinny przewodnicy wymienionych poniżej.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">[/* arguments */]</code>: Tablicę argumentów, aby przejść do macierzystego środowiska.</p>
+  </li>
 </ul>
 
-<h2>Próbki JavaScript</h2>
+<h2 id="próbki-javascript">Próbki JavaScript</h2>
 
 <p>Ten przykład przedstawia sposób zaimplementować interfejs JavaScript wtyczki:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    window.echo = function(str, callback) {
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    window.echo = function(str, callback) {
         cordova.exec(callback, function(err) {
             callback('Nothing to echo.');
         }, "Echo", "echo", [str]);
     };
-</code></pre></div>
-<p>W tym przykładzie plugin dołącza się do <code>window</code> obiekt jako <code>echo</code> funkcja, który plugin użytkowników nazywają się następująco:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    window.echo("echome", function(echoValue) {
+</code></pre></div></div>
+
+<p>W tym przykładzie plugin dołącza się do <code class="language-plaintext highlighter-rouge">window</code> obiekt jako <code class="language-plaintext highlighter-rouge">echo</code> funkcja, który plugin użytkowników nazywają się następująco:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    window.echo("echome", function(echoValue) {
         alert(echoValue == "echome"); // should alert true.
     });
-</code></pre></div>
-<p>Spojrzeć na ostatnie trzy argumenty <code>cordova.exec</code> funkcja. Pierwsze rozmowy <code>Echo</code> <em>usługi</em>, nazwa klasy. Drugi żądania <code>echo</code> <em>działania</em>, metody w obrębie tej klasy. Trzeci jest szereg argumentów ciągami echa, który jest <code>window.echo</code> funkcja w pierwszym parametrze.</p>
+</code></pre></div></div>
 
-<p>Callback sukces przeszedł do <code>exec</code> jest po prostu odwołanie do funkcja wywołania zwrotnego <code>window.echo</code> trwa. Jeśli macierzystym platformy odpalam błąd wywołania zwrotnego, to po prostu wywołania zwrotnego sukces i przekazuje go ciąg domyślny.</p>
+<p>Spojrzeć na ostatnie trzy argumenty <code class="language-plaintext highlighter-rouge">cordova.exec</code> funkcja. Pierwsze rozmowy <code class="language-plaintext highlighter-rouge">Echo</code> <em>usługi</em>, nazwa klasy. Drugi żądania <code class="language-plaintext highlighter-rouge">echo</code> <em>działania</em>, metody w obrębie tej klasy. Trzeci jest szereg argumentów ciągami echa, który jest <code class="language-plaintext highlighter-rouge">window.echo</code> funkcja w pierwszym parametrze.</p>
 
-<h2>Macierzysty interfejs</h2>
+<p>Callback sukces przeszedł do <code class="language-plaintext highlighter-rouge">exec</code> jest po prostu odwołanie do funkcja wywołania zwrotnego <code class="language-plaintext highlighter-rouge">window.echo</code> trwa. Jeśli macierzystym platformy odpalam błąd wywołania zwrotnego, to po prostu wywołania zwrotnego sukces i przekazuje go ciąg domyślny.</p>
+
+<h2 id="macierzysty-interfejs">Macierzysty interfejs</h2>
 
 <p>Po zdefiniowaniu JavaScript dla wtyczki, trzeba uzupełnić z co najmniej jeden implementacji macierzystym. Poniżej przedstawiono szczegóły dotyczące każdej platformy, i każdy opiera się na prostym przykładzie wtyczce Echo powyżej:</p>
 
 <ul>
-<li>  <a href="../../platforms/amazonfireos/plugin.html">Amazon ogień OS Plugins</a></li>
-<li>  Wtyczki dla Androida</li>
-<li>  <a href="../../platforms/ios/plugin.html">iOS wtyczek</a></li>
-<li>  <a href="../../platforms/blackberry10/plugin.html">Jeżyna 10 wtyczek</a></li>
-<li>  <a href="../../platforms/wp8/plugin.html">Windows Phone 8 wtyczki</a></li>
-<li>  <a href="../../platforms/win8/plugin.html">Wtyczki Windows</a></li>
+  <li><a href="../../platforms/amazonfireos/plugin.html">Amazon ogień OS Plugins</a></li>
+  <li>Wtyczki dla Androida</li>
+  <li><a href="../../platforms/ios/plugin.html">iOS wtyczek</a></li>
+  <li><a href="../../platforms/blackberry10/plugin.html">Jeżyna 10 wtyczek</a></li>
+  <li><a href="../../platforms/wp8/plugin.html">Windows Phone 8 wtyczki</a></li>
+  <li><a href="../../platforms/win8/plugin.html">Wtyczki Windows</a></li>
 </ul>
 
 <p>Platforma Tizen nie obsługuje wtyczek.</p>
 
-<h2>Wydawnictwo wtyczek</h2>
+<h2 id="wydawnictwo-wtyczek">Wydawnictwo wtyczek</h2>
 
-<p>Po rozwijać wtyczki, może chcesz opublikować i podzielić się ze społecznością. Możesz opublikować swój plugin do dowolnego <code>npmjs</code> -oparty wpisywać do rejestru, ale zalecane jest <a href="https://www.npmjs.com">NPM rejestru</a>. Przeczytaj nasze <a href="http://plugins.cordova.io/npm/developers.html">wydawnictwa wtyczek do npm Przewodnik</a>.</p>
+<p>Po rozwijać wtyczki, może chcesz opublikować i podzielić się ze społecznością. Możesz opublikować swój plugin do dowolnego <code class="language-plaintext highlighter-rouge">npmjs</code> -oparty wpisywać do rejestru, ale zalecane jest <a href="https://www.npmjs.com">NPM rejestru</a>. Przeczytaj nasze <a href="http://plugins.cordova.io/npm/developers.html">wydawnictwa wtyczek do npm Przewodnik</a>.</p>
 
-<p><strong>Uwaga</strong>: <a href="https://plugins.cordova.io">Cordova plugin rejestru</a> jest przeprowadzka stanie tylko do odczytu. <code>publish</code>/ <code>unpublish</code> polecenia zostały usunięte z <code>plugman</code> , więc będziesz musiał użyć odpowiedniego <code>npm</code> polecenia.</p>
+<p><strong>Uwaga</strong>: <a href="https://plugins.cordova.io">Cordova plugin rejestru</a> jest przeprowadzka stanie tylko do odczytu. <code class="language-plaintext highlighter-rouge">publish</code>/ <code class="language-plaintext highlighter-rouge">unpublish</code> polecenia zostały usunięte z <code class="language-plaintext highlighter-rouge">plugman</code> , więc będziesz musiał użyć odpowiedniego <code class="language-plaintext highlighter-rouge">npm</code> polecenia.</p>
 
-<p>Inni deweloperzy można zainstalować wtyczki automatycznie przy użyciu <code>plugman</code> lub Cordova CLI. (Szczegóły na każdej ścieżki rozwoju, zobacz za pomocą Plugman do zarządzania wtyczki i interfejs wiersza poleceń).</p>
+<p>Inni deweloperzy można zainstalować wtyczki automatycznie przy użyciu <code class="language-plaintext highlighter-rouge">plugman</code> lub Cordova CLI. (Szczegóły na każdej ścieżki rozwoju, zobacz za pomocą Plugman do zarządzania wtyczki i interfejs wiersza poleceń).</p>
 
 <p>Do publikowania pluginu do rejestru NPM musisz wykonać poniższe czynności:</p>
 
 <ul>
-<li><p>Tworzenie <code>package.json</code> pliku do wtyczki:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ plugman createpackagejson /path/to/your/plugin
-</code></pre></div></li>
-<li><p>publikuje je:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ npm adduser # that is if you don't have an account yet
+  <li>
+    <p>Tworzenie <code class="language-plaintext highlighter-rouge">package.json</code> pliku do wtyczki:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ plugman createpackagejson /path/to/your/plugin
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>publikuje je:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ npm adduser # that is if you don't have an account yet
 $ npm publish /path/to/your/plugin
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ul>
 
 <p>To jest to!</p>
 
-<p>Kolejny <code>plugman --help</code> zawiera listę innych dostępnych poleceń opartych na rejestrze.</p>
+<p>Kolejny <code class="language-plaintext highlighter-rouge">plugman --help</code> zawiera listę innych dostępnych poleceń opartych na rejestrze.</p>
 
 
             </div>

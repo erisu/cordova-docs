@@ -2104,62 +2104,112 @@
             
 
             <div id="page-toc-source">
-                <h1>iOS 配置</h1>
+                <h1 id="ios-配置">iOS 配置</h1>
 
-<p><code>config.xml</code>檔控制應用於每個應用程式和 CordovaWebView 實例的應用程式的基本設置。 本節詳細說明僅適用于 iOS 版本的首選項。 有關全域配置選項的資訊，請參閱 <a href="config_ref_index.md.html#The%20config.xml%20File">config.xml 檔</a>。</p>
+<p><code class="language-plaintext highlighter-rouge">config.xml</code>檔控制應用於每個應用程式和 CordovaWebView 實例的應用程式的基本設置。 本節詳細說明僅適用于 iOS 版本的首選項。 有關全域配置選項的資訊，請參閱 <a href="config_ref_index.md.html#The%20config.xml%20File">config.xml 檔</a>。</p>
 
 <ul>
-<li><p><code>EnableViewportScale</code>(boolean 類型的值，預設值為 <code>false</code> ）： 設置為 <code>true</code> ，以便視區元標記來禁用或限制的範圍的使用者比例，這預設啟用的。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="EnableViewportScale" value="true"/&gt;
-</code></pre></div>
-<p>放置在 HTML 中禁用縮放和適合的視口，如下內容靈活地內呈現 web 視圖：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no' /&gt;
-</code></pre></div></li>
-<li><p><code>MediaPlaybackAllowsAirPlay</code>(預設為<code>true</code>的布林值): 設置為<code>false</code> ，以防止空氣發揮被使用在此視圖中。 在預設 UIWebView 和 WKWebView 中可用。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="MediaPlaybackAllowsAirPlay" value="false"/&gt;
-</code></pre></div></li>
-<li><p><code>MediaPlaybackRequiresUserAction</code>(預設為<code>false</code>的布林值): 設置為<code>true</code>以防止自動播放<code>自動播放</code>屬性或通過 JavaScript HTML5 視頻或音訊。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="MediaPlaybackRequiresUserAction" value="true"/&gt;
-</code></pre></div></li>
-<li><p><code>AllowInlineMediaPlayback</code>(預設為<code>false</code>的布林值): 設置為<code>true</code> ，允許 HTML5 媒體重播顯示<em>內聯</em>在螢幕佈局，使用瀏覽器提供的控制項，而不是本機控制項內。 這項工作，將添加到任何<code>&lt; video &gt;</code>元素的<code>webkit playsinline</code>屬性。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="AllowInlineMediaPlayback" value="true"/&gt;
-</code></pre></div></li>
-<li><p><code>BackupWebStorage</code>(字串，要麼<code>none</code>，<code>local</code>，或預設<code>雲</code>): 設置為<code>cloud</code>以允許通過 iCloud 備份 web 存儲資料。 設置為<code>local</code>以允許只有本地備份通過 iTunes 同步。 設置為<code>none</code>防止 web 存儲備份。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="BackupWebStorage" value="local"/&gt;
-</code></pre></div></li>
-<li><p><code>TopActivityIndicator</code>(字串，預設為<code>gray</code>): 控制狀態列指示大量的處理器活動中旋轉的小圖示的外觀。 有效值為<code>whiteLarge</code>、<code>white</code>和<code>gray</code>.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="TopActivityIndicator" value="white"/&gt;
-</code></pre></div></li>
-<li><p><code>KeyboardDisplayRequiresUserAction</code>(預設為<code>true</code>的布林值): 設置為<code>false</code>以允許鍵盤顯示表單輸入調用<code>focus ()</code>時。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="KeyboardDisplayRequiresUserAction" value="false"/&gt;
-</code></pre></div></li>
-<li><p><code>SuppressesIncrementalRendering</code>(預設為<code>false</code>的布林值): 設置為<code>true</code> ，等待，直到在呈現到螢幕之前已收到的所有內容。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="SuppressesIncrementalRendering" value="true"/&gt;
-</code></pre></div></li>
-<li><p><code>GapBetweenPages</code>(浮動，預設值為``): 的大小，以磅為單位，頁面之間的差距。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="GapBetweenPages" value="0"/&gt;
-</code></pre></div></li>
-<li><p><code>PageLength</code>(浮動，預設值為``): 每個頁面，在頁面流的方向點的大小。 當 PaginationMode 是從右至左或從左至右，此屬性工作表示每個頁面的寬度。 當 PaginationMode 是 topToBottom 或 bottomToTop 時，此屬性工作表示每個頁面的高度。 預設值為 0，這意味著佈局使用視區的大小來確定頁面的大小。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="PageLength" value="0"/&gt;
-</code></pre></div></li>
-<li><p><code>PaginationBreakingMode</code>(字串，預設為<code>頁面</code>): 有效值為<code>頁</code>和<code>列</code>。在列或頁破發生的方式。 此屬性確定是否某些 CSS 屬性關於列和頁破是榮幸還是忽略。 當此屬性設置為<code>列</code>時，內容方面與到位的頁破斷列相關的 CSS 屬性。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="PaginationBreakingMode" value="page"/&gt;
-</code></pre></div></li>
-<li><p><code>PaginationMode</code>(字串，預設為<code>unpaginated</code>): 有效值為<code>unpaginated</code>， <code>leftToRight</code>、 <code>topToBottom</code>、 <code>bottomToTop</code>和<code>rightToLeft</code>。 此屬性可確定是否在 web 視圖中的內容分解成頁面全屏顯示視圖一次，或一個長的滾動視圖所示。 如果設置為分頁的表單，此屬性切換分頁的佈局的內容，其內容造成 web 視圖使用場地的 PageLength 和 GapBetweenPages 的值。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="PaginationMode" value="unpaginated"/&gt;
-</code></pre></div></li>
-<li><p><code>UIWebViewDecelerationSpeed</code>(字串，預設為<code>normal</code>): 有效的值都是<code>normal</code>，<code>fast</code>。 此屬性控制減速的勢頭滾動。 對於大多數本機應用程式的預設速度是<code>normal</code>和<code>fast</code>是移動 Safari 的預設值。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="UIWebViewDecelerationSpeed" value="fast" /&gt;
-</code></pre></div></li>
-<li><p><code>ErrorUrl</code>(字串，預設情況下未設置): 如果設置，將顯示在應用程式中出現錯誤時所引用的本地網頁。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="ErrorUrl" value="myErrorPage.html"/&gt;
-</code></pre></div></li>
-<li><p><code>OverrideUserAgent</code>(字串，預設情況下未設置): 如果設置，值將替換舊使用者代理的 web 視圖。 它有利於從應用程式或瀏覽器請求時請求遠端頁面，識別。 使用持謹慎態度，這可能導致與 web 伺服器的 compitiable 問題。 對於大多數情況下，改用 AppendUserAgent。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="OverrideUserAgent" value="Mozilla/5.0 My Browser" /&gt;
-</code></pre></div></li>
-<li><p><code>AppendUserAgent</code>(字串，預設情況下未設置): 如果設置，值將附加到年底老使用者代理的 web 視圖。 當使用 OverrideUserAgent，此值將被忽略。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="AppendUserAgent" value="My Browser" /&gt;
-</code></pre></div></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">EnableViewportScale</code>(boolean 類型的值，預設值為 <code class="language-plaintext highlighter-rouge">false</code> ）： 設置為 <code class="language-plaintext highlighter-rouge">true</code> ，以便視區元標記來禁用或限制的範圍的使用者比例，這預設啟用的。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="EnableViewportScale" value="true"/&gt;
+</code></pre></div>    </div>
+
+    <p>放置在 HTML 中禁用縮放和適合的視口，如下內容靈活地內呈現 web 視圖：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no' /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">MediaPlaybackAllowsAirPlay</code>(預設為<code class="language-plaintext highlighter-rouge">true</code>的布林值): 設置為<code class="language-plaintext highlighter-rouge">false</code> ，以防止空氣發揮被使用在此視圖中。 在預設 UIWebView 和 WKWebView 中可用。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="MediaPlaybackAllowsAirPlay" value="false"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">MediaPlaybackRequiresUserAction</code>(預設為<code class="language-plaintext highlighter-rouge">false</code>的布林值): 設置為<code class="language-plaintext highlighter-rouge">true</code>以防止自動播放<code class="language-plaintext highlighter-rouge">自動播放</code>屬性或通過 JavaScript HTML5 視頻或音訊。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="MediaPlaybackRequiresUserAction" value="true"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">AllowInlineMediaPlayback</code>(預設為<code class="language-plaintext highlighter-rouge">false</code>的布林值): 設置為<code class="language-plaintext highlighter-rouge">true</code> ，允許 HTML5 媒體重播顯示<em>內聯</em>在螢幕佈局，使用瀏覽器提供的控制項，而不是本機控制項內。 這項工作，將添加到任何<code class="language-plaintext highlighter-rouge">&lt; video &gt;</code>元素的<code class="language-plaintext highlighter-rouge">webkit playsinline</code>屬性。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="AllowInlineMediaPlayback" value="true"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">BackupWebStorage</code>(字串，要麼<code class="language-plaintext highlighter-rouge">none</code>，<code class="language-plaintext highlighter-rouge">local</code>，或預設<code class="language-plaintext highlighter-rouge">雲</code>): 設置為<code class="language-plaintext highlighter-rouge">cloud</code>以允許通過 iCloud 備份 web 存儲資料。 設置為<code class="language-plaintext highlighter-rouge">local</code>以允許只有本地備份通過 iTunes 同步。 設置為<code class="language-plaintext highlighter-rouge">none</code>防止 web 存儲備份。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="BackupWebStorage" value="local"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">TopActivityIndicator</code>(字串，預設為<code class="language-plaintext highlighter-rouge">gray</code>): 控制狀態列指示大量的處理器活動中旋轉的小圖示的外觀。 有效值為<code class="language-plaintext highlighter-rouge">whiteLarge</code>、<code class="language-plaintext highlighter-rouge">white</code>和<code class="language-plaintext highlighter-rouge">gray</code>.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="TopActivityIndicator" value="white"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">KeyboardDisplayRequiresUserAction</code>(預設為<code class="language-plaintext highlighter-rouge">true</code>的布林值): 設置為<code class="language-plaintext highlighter-rouge">false</code>以允許鍵盤顯示表單輸入調用<code class="language-plaintext highlighter-rouge">focus ()</code>時。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="KeyboardDisplayRequiresUserAction" value="false"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">SuppressesIncrementalRendering</code>(預設為<code class="language-plaintext highlighter-rouge">false</code>的布林值): 設置為<code class="language-plaintext highlighter-rouge">true</code> ，等待，直到在呈現到螢幕之前已收到的所有內容。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="SuppressesIncrementalRendering" value="true"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">GapBetweenPages</code>(浮動，預設值為``): 的大小，以磅為單位，頁面之間的差距。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="GapBetweenPages" value="0"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">PageLength</code>(浮動，預設值為``): 每個頁面，在頁面流的方向點的大小。 當 PaginationMode 是從右至左或從左至右，此屬性工作表示每個頁面的寬度。 當 PaginationMode 是 topToBottom 或 bottomToTop 時，此屬性工作表示每個頁面的高度。 預設值為 0，這意味著佈局使用視區的大小來確定頁面的大小。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="PageLength" value="0"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">PaginationBreakingMode</code>(字串，預設為<code class="language-plaintext highlighter-rouge">頁面</code>): 有效值為<code class="language-plaintext highlighter-rouge">頁</code>和<code class="language-plaintext highlighter-rouge">列</code>。在列或頁破發生的方式。 此屬性確定是否某些 CSS 屬性關於列和頁破是榮幸還是忽略。 當此屬性設置為<code class="language-plaintext highlighter-rouge">列</code>時，內容方面與到位的頁破斷列相關的 CSS 屬性。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="PaginationBreakingMode" value="page"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">PaginationMode</code>(字串，預設為<code class="language-plaintext highlighter-rouge">unpaginated</code>): 有效值為<code class="language-plaintext highlighter-rouge">unpaginated</code>， <code class="language-plaintext highlighter-rouge">leftToRight</code>、 <code class="language-plaintext highlighter-rouge">topToBottom</code>、 <code class="language-plaintext highlighter-rouge">bottomToTop</code>和<code class="language-plaintext highlighter-rouge">rightToLeft</code>。 此屬性可確定是否在 web 視圖中的內容分解成頁面全屏顯示視圖一次，或一個長的滾動視圖所示。 如果設置為分頁的表單，此屬性切換分頁的佈局的內容，其內容造成 web 視圖使用場地的 PageLength 和 GapBetweenPages 的值。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="PaginationMode" value="unpaginated"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">UIWebViewDecelerationSpeed</code>(字串，預設為<code class="language-plaintext highlighter-rouge">normal</code>): 有效的值都是<code class="language-plaintext highlighter-rouge">normal</code>，<code class="language-plaintext highlighter-rouge">fast</code>。 此屬性控制減速的勢頭滾動。 對於大多數本機應用程式的預設速度是<code class="language-plaintext highlighter-rouge">normal</code>和<code class="language-plaintext highlighter-rouge">fast</code>是移動 Safari 的預設值。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="UIWebViewDecelerationSpeed" value="fast" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">ErrorUrl</code>(字串，預設情況下未設置): 如果設置，將顯示在應用程式中出現錯誤時所引用的本地網頁。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="ErrorUrl" value="myErrorPage.html"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">OverrideUserAgent</code>(字串，預設情況下未設置): 如果設置，值將替換舊使用者代理的 web 視圖。 它有利於從應用程式或瀏覽器請求時請求遠端頁面，識別。 使用持謹慎態度，這可能導致與 web 伺服器的 compitiable 問題。 對於大多數情況下，改用 AppendUserAgent。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="OverrideUserAgent" value="Mozilla/5.0 My Browser" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">AppendUserAgent</code>(字串，預設情況下未設置): 如果設置，值將附加到年底老使用者代理的 web 視圖。 當使用 OverrideUserAgent，此值將被忽略。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="AppendUserAgent" value="My Browser" /&gt;
+</code></pre></div>    </div>
+  </li>
 </ul>
 
 

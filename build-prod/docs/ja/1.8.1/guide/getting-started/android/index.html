@@ -1220,116 +1220,149 @@
             
 
             <div id="page-toc-source">
-                <h1>Getting Started with Android</h1>
+                <h1 id="getting-started-with-android">Getting Started with Android</h1>
 
 <p>このガイドは、 Cordova のための開発環境セットアップ方法、またシンプルなアプリの動かし方を解説します。 Cordova は以前は PhoneGap と呼ばれていたため、いくつかのサイトは PhoneGap という名前をまだ使用しています。</p>
 
-<h2>1. 必要なもの</h2>
+<ol>
+  <li>
+    <h2 id="必要なもの">必要なもの</h2>
+  </li>
+</ol>
 
 <ul>
-<li>Eclipse 3.4以上</li>
+  <li>Eclipse 3.4以上</li>
 </ul>
 
-<h2>2. SDK と Cordova のインストール</h2>
+<ol>
+  <li>
+    <h2 id="sdk-と-cordova-のインストール">SDK と Cordova のインストール</h2>
+  </li>
+</ol>
 
 <ul>
-<li><a href="http://www.eclipse.org/downloads/">Eclipse Classic</a> のダウンロードとインストール</li>
-<li><a href="http://developer.android.com/sdk/index.html">Android SDK</a> のダウンロードとインストール</li>
-<li><a href="http://developer.android.com/sdk/eclipse-adt.html#installing">ADT Plugin</a> のダウンロードとインストール</li>
-<li><a href="http://phonegap.com/download">Cordova</a> の最新版をダウンロードし解凍します。これから Android ディレクトリと一緒に作業を進めます。</li>
+  <li><a href="http://www.eclipse.org/downloads/">Eclipse Classic</a> のダウンロードとインストール</li>
+  <li><a href="http://developer.android.com/sdk/index.html">Android SDK</a> のダウンロードとインストール</li>
+  <li><a href="http://developer.android.com/sdk/eclipse-adt.html#installing">ADT Plugin</a> のダウンロードとインストール</li>
+  <li><a href="http://phonegap.com/download">Cordova</a> の最新版をダウンロードし解凍します。これから Android ディレクトリと一緒に作業を進めます。</li>
 </ul>
 
-<h2> 3. 新規プロジェクトの作成</h2>
+<ol>
+  <li>
+    <h2 id="新規プロジェクトの作成">新規プロジェクトの作成</h2>
+  </li>
+</ol>
 
 <ul>
-<li><p>Eclipse を起動し、メニューから <strong>ファイル新規 &gt; Android Project</strong> を選択します。 <strong>New Android Project</strong> ウィザードの3つの画面を、以下のとおり設定します。</p>
+  <li>
+    <p>Eclipse を起動し、メニューから <strong>ファイル新規 &gt; Android Project</strong> を選択します。 <strong>New Android Project</strong> ウィザードの3つの画面を、以下のとおり設定します。</p>
 
-<p><img src="/static/img/guide/getting-started/android/AndroidFlow.png" alt=""></p></li>
-<li><p>作成したプロジェクトのルートディレクトリに、以下の2つの新しいディレクトリを作成します:</p>
+    <p><img src="/static/img/guide/getting-started/android/AndroidFlow.png" alt="" /></p>
+  </li>
+  <li>作成したプロジェクトのルートディレクトリに、以下の2つの新しいディレクトリを作成します:
+    <ul>
+      <li><strong>/libs</strong></li>
+      <li><strong>assets/www</strong></li>
+    </ul>
+  </li>
+  <li>ダウンロードした Cordova から <strong>cordova-1.8.1.js</strong> を <strong>assets/www</strong> にコピーしてください。</li>
+  <li>ダウンロードした Cordova から <strong>cordova-1.8.1.jar</strong> を <strong>/libs</strong> にコピーしてください。</li>
+  <li>
+    <p>ダウンロードした Cordova から <strong>xml</strong> フォルダーを <strong>/res</strong> にコピーしてください。</p>
+  </li>
+  <li>
+    <p><strong>cordova-1.8.1.jar</strong> がプロジェクトのビルドパスに追加されていることを確認してください。 /libs フォルダーを右クリックし、 <strong>ビルド・パス &gt; ビルド・パスの構成</strong> を選択します。ライブラリータブで、 <strong>cordova-1.8.1.jar</strong> をプロジェクトに追加します。もしうまくいかない場合は、 F5 キーを押してプロジェクトをリフレッシュする必要があるかもしれません。</p>
 
-<ul>
-<li><strong>/libs</strong></li>
-<li><strong>assets/www</strong></li>
-</ul></li>
-<li><p>ダウンロードした Cordova から <strong>cordova-1.8.1.js</strong> を <strong>assets/www</strong> にコピーしてください。</p></li>
-<li><p>ダウンロードした Cordova から <strong>cordova-1.8.1.jar</strong> を <strong>/libs</strong> にコピーしてください。</p></li>
-<li><p>ダウンロードした Cordova から <strong>xml</strong> フォルダーを <strong>/res</strong> にコピーしてください。</p></li>
-<li><p><strong>cordova-1.8.1.jar</strong> がプロジェクトのビルドパスに追加されていることを確認してください。 /libs フォルダーを右クリックし、 <strong>ビルド・パス &gt; ビルド・パスの構成</strong> を選択します。ライブラリータブで、 <strong>cordova-1.8.1.jar</strong> をプロジェクトに追加します。もしうまくいかない場合は、 F5 キーを押してプロジェクトをリフレッシュする必要があるかもしれません。</p>
+    <p><img src="/static/img/guide/getting-started/android/buildPath.jpg" alt="" /></p>
+  </li>
+  <li>作成したプロジェクトの <strong>src</strong> フォルダーにあるメインの Java ファイルを編集します:
+    <ul>
+      <li><strong>import org.apache.cordova.*;</strong> を追加</li>
+      <li>クラスの継承元を <strong>Activity</strong> から <strong>DroidGap</strong> に変更</li>
+      <li><strong>setContentView()</strong> の行を <strong>super.loadUrl(“file:///android_asset/www/index.html”);</strong> に置き換え</li>
+    </ul>
 
-<p><img src="/static/img/guide/getting-started/android/buildPath.jpg" alt=""></p></li>
-<li><p>作成したプロジェクトの <strong>src</strong> フォルダーにあるメインの Java ファイルを編集します:</p>
+    <p><img src="/static/img/guide/getting-started/android/javaSrc.jpg" alt="" /></p>
+  </li>
+  <li>AndroidManifest.xml を右クリックし、 <strong>アプリケーションから開く &gt; XML エディター</strong> を選択します。</li>
+  <li>
+    <p>以下のコードを、 <strong>&lt;uses-sdk…/&gt;</strong> と <strong>&lt;application…/&gt;</strong> タグの間に貼り付けてください。</p>
 
-<ul>
-<li><strong>import org.apache.cordova.*;</strong> を追加</li>
-<li>クラスの継承元を <strong>Activity</strong> から <strong>DroidGap</strong> に変更</li>
-<li><strong>setContentView()</strong> の行を <strong>super.loadUrl(&quot;file:///android_asset/www/index.html&quot;);</strong> に置き換え </li>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &lt;supports-screens
+      android:largeScreens="true"
+      android:normalScreens="true"
+      android:smallScreens="true"
+      android:resizeable="true"
+      android:anyDensity="true" /&gt;
+  &lt;uses-permission android:name="android.permission.VIBRATE" /&gt;
+  &lt;uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /&gt;
+  &lt;uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /&gt;
+  &lt;uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /&gt;
+  &lt;uses-permission android:name="android.permission.READ_PHONE_STATE" /&gt;
+  &lt;uses-permission android:name="android.permission.INTERNET" /&gt;
+  &lt;uses-permission android:name="android.permission.RECEIVE_SMS" /&gt;
+  &lt;uses-permission android:name="android.permission.RECORD_AUDIO" /&gt;
+  &lt;uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" /&gt;
+  &lt;uses-permission android:name="android.permission.READ_CONTACTS" /&gt;
+  &lt;uses-permission android:name="android.permission.WRITE_CONTACTS" /&gt;
+  &lt;uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /&gt;
+  &lt;uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /&gt;
+  &lt;uses-permission android:name="android.permission.GET_ACCOUNTS" /&gt;
+  &lt;uses-permission android:name="android.permission.BROADCAST_STICKY" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>画面の回転をサポートするために、以下を <strong>&lt;activity&gt;</strong> タグの中に貼り付けてください。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  android:configChanges="orientation|keyboardHidden|screenSize"
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>AndroidManifest.xml は以下のようになります。</p>
+
+    <p><img src="/static/img/guide/getting-started/android/manifest.jpg" alt="" /></p>
+  </li>
 </ul>
 
-<p><img src="/static/img/guide/getting-started/android/javaSrc.jpg" alt=""></p></li>
-<li><p>AndroidManifest.xml を右クリックし、 <strong>アプリケーションから開く &gt; XML エディター</strong> を選択します。</p></li>
-<li><p>以下のコードを、 <strong>&lt;uses-sdk.../&gt;</strong> と <strong>&lt;application.../&gt;</strong> タグの間に貼り付けてください。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;supports-screens
-    android:largeScreens="true"
-    android:normalScreens="true"
-    android:smallScreens="true"
-    android:resizeable="true"
-    android:anyDensity="true" /&gt;
-&lt;uses-permission android:name="android.permission.VIBRATE" /&gt;
-&lt;uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /&gt;
-&lt;uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /&gt;
-&lt;uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /&gt;
-&lt;uses-permission android:name="android.permission.READ_PHONE_STATE" /&gt;
-&lt;uses-permission android:name="android.permission.INTERNET" /&gt;
-&lt;uses-permission android:name="android.permission.RECEIVE_SMS" /&gt;
-&lt;uses-permission android:name="android.permission.RECORD_AUDIO" /&gt;
-&lt;uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" /&gt;
-&lt;uses-permission android:name="android.permission.READ_CONTACTS" /&gt;
-&lt;uses-permission android:name="android.permission.WRITE_CONTACTS" /&gt;
-&lt;uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /&gt;
-&lt;uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /&gt;
-&lt;uses-permission android:name="android.permission.GET_ACCOUNTS" /&gt;
-&lt;uses-permission android:name="android.permission.BROADCAST_STICKY" /&gt;
-</code></pre></div></li>
-<li><p>画面の回転をサポートするために、以下を <strong>&lt;activity&gt;</strong> タグの中に貼り付けてください。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">android:configChanges="orientation|keyboardHidden|screenSize"
-</code></pre></div></li>
-<li><p>AndroidManifest.xml は以下のようになります。</p>
-
-<p><img src="/static/img/guide/getting-started/android/manifest.jpg" alt=""></p></li>
-</ul>
-
-<h2>4. <a href="../webos/index.html">Hello World</a> の作成</h2>
+<ol>
+  <li>
+    <h2 id="hello-world-の作成"><a href="../webos/index.html">Hello World</a> の作成</h2>
+  </li>
+</ol>
 
 <ul>
-<li><p><strong>index.html</strong> という名前のファイルを <strong>assets/www</strong> ディレクトリに新規作成します。 以下のコードを貼り付けます:</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-<span class="nt">&lt;head&gt;</span>
-<span class="nt">&lt;title&gt;</span>Cordova<span class="nt">&lt;/title&gt;</span>
-<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova-1.8.1.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
-<span class="nt">&lt;body&gt;</span>
-<span class="nt">&lt;h1&gt;</span>Hello World<span class="nt">&lt;/h1&gt;</span>
-<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div></li>
+  <li>
+    <p><strong>index.html</strong> という名前のファイルを <strong>assets/www</strong> ディレクトリに新規作成します。 以下のコードを貼り付けます:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &lt;!DOCTYPE HTML&gt;
+  &lt;html&gt;
+  &lt;head&gt;
+  &lt;title&gt;Cordova&lt;/title&gt;
+  &lt;script type="text/javascript" charset="utf-8" src="cordova-1.8.1.js"&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;h1&gt;Hello World&lt;/h1&gt;
+  &lt;/body&gt;
+  &lt;/html&gt;
+</code></pre></div>    </div>
+  </li>
 </ul>
 
-<h2>5A. シミュレーターへのデプロイ</h2>
+<h2 id="5a-シミュレーターへのデプロイ">5A. シミュレーターへのデプロイ</h2>
 
 <ul>
-<li>プロジェクトを右クリックし、次を <strong>実行 &gt; Android Application</strong> を選択</li>
-<li>適切な AVD を選択。 もしない場合は、作成する必要があります</li>
+  <li>プロジェクトを右クリックし、次を <strong>実行 &gt; Android Application</strong> を選択</li>
+  <li>適切な AVD を選択。 もしない場合は、作成する必要があります</li>
 </ul>
 
-<h2>5B. デバイスへのデプロイ</h2>
+<h2 id="5b-デバイスへのデプロイ">5B. デバイスへのデプロイ</h2>
 
 <ul>
-<li>デバイスの設定で USB デバッグが有効になっていること、またコンピュータに接続されていることを確認 (<strong>設定 &gt; アプリケーション &gt; 開発</strong>)</li>
-<li>プロジェクトを右クリックし、次を <strong>実行 &gt; Android Application</strong> を選択</li>
+  <li>デバイスの設定で USB デバッグが有効になっていること、またコンピュータに接続されていることを確認 (<strong>設定 &gt; アプリケーション &gt; 開発</strong>)</li>
+  <li>プロジェクトを右クリックし、次を <strong>実行 &gt; Android Application</strong> を選択</li>
 </ul>
 
-<h2>終了</h2>
+<h2 id="終了">終了</h2>
 
 
             </div>

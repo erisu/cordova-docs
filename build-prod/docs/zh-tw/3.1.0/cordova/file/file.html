@@ -1306,70 +1306,79 @@
             
 
             <div id="page-toc-source">
-                <h1>檔</h1>
+                <h1 id="檔">檔</h1>
 
 <blockquote>
-<p>一個 API，用於讀取、 寫入和導航基於<a href="http://www.w3.org/TR/FileAPI">w3c <a href="fileobj/fileobj.html">檔</a> api</a>的檔案系統層次結構.</p>
+  <p>一個 API，用於讀取、 寫入和導航基於<a href="http://www.w3.org/TR/FileAPI">w3c [檔](fileobj/fileobj.html) api</a>的檔案系統層次結構.</p>
 </blockquote>
 
-<h2>物件</h2>
+<h2 id="物件">物件</h2>
 
 <ul>
-<li>  <a href="directoryentry/directoryentry.html">枚舉指定工作組或</a></li>
-<li>  <a href="directoryreader/directoryreader.html">DirectoryReader</a></li>
-<li>  <a href="fileobj/fileobj.html">檔</a></li>
-<li>  <a href="fileentry/fileentry.html">FileEntry</a></li>
-<li>  <a href="fileerror/fileerror.html">FileError</a></li>
-<li>  <a href="filereader/filereader.html">FileReader</a></li>
-<li>  <a href="filesystem/filesystem.html">檔案系統</a></li>
-<li>  <a href="filetransfer/filetransfer.html">檔案傳輸</a></li>
-<li>  <a href="filetransfererror/filetransfererror.html">FileTransferError</a></li>
-<li>  <a href="fileuploadoptions/fileuploadoptions.html">FileUploadOptions</a></li>
-<li>  <a href="fileuploadresult/fileuploadresult.html">FileUploadResult</a></li>
-<li>  <a href="filewriter/filewriter.html">FileWriter</a></li>
-<li>  <a href="flags/flags.html">標誌</a></li>
-<li>  <a href="localfilesystem/localfilesystem.html">場合</a></li>
-<li>  <a href="metadata/metadata.html">中繼資料</a></li>
+  <li><a href="directoryentry/directoryentry.html">枚舉指定工作組或</a></li>
+  <li><a href="directoryreader/directoryreader.html">DirectoryReader</a></li>
+  <li><a href="fileobj/fileobj.html">檔</a></li>
+  <li><a href="fileentry/fileentry.html">FileEntry</a></li>
+  <li><a href="fileerror/fileerror.html">FileError</a></li>
+  <li><a href="filereader/filereader.html">FileReader</a></li>
+  <li><a href="filesystem/filesystem.html">檔案系統</a></li>
+  <li><a href="filetransfer/filetransfer.html">檔案傳輸</a></li>
+  <li><a href="filetransfererror/filetransfererror.html">FileTransferError</a></li>
+  <li><a href="fileuploadoptions/fileuploadoptions.html">FileUploadOptions</a></li>
+  <li><a href="fileuploadresult/fileuploadresult.html">FileUploadResult</a></li>
+  <li><a href="filewriter/filewriter.html">FileWriter</a></li>
+  <li><a href="flags/flags.html">標誌</a></li>
+  <li><a href="localfilesystem/localfilesystem.html">場合</a></li>
+  <li><a href="metadata/metadata.html">中繼資料</a></li>
 </ul>
 
-<h2>訪問功能</h2>
+<h2 id="訪問功能">訪問功能</h2>
 
-<p>從 3.0 版，科爾多瓦作為<em>外掛程式</em>實現了設備級 Api。 使用 CLI 的 <code>plugin</code> 命令，描述在命令列介面，可以添加或刪除一個專案，為此功能：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add org.apache.cordova.file
+<p>從 3.0 版，科爾多瓦作為<em>外掛程式</em>實現了設備級 Api。 使用 CLI 的 <code class="language-plaintext highlighter-rouge">plugin</code> 命令，描述在命令列介面，可以添加或刪除一個專案，為此功能：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add org.apache.cordova.file
     $ cordova plugin ls
     [ 'org.apache.cordova.file' ]
     $ cordova plugin rm org.apache.cordova.file
-</code></pre></div>
+</code></pre></div></div>
+
 <p>要使用的檔案傳輸外掛程式必須單獨添加的。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add org.apache.cordova.file-transfer
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add org.apache.cordova.file-transfer
     $ cordova plugin ls
     [ 'org.apache.cordova.file-transfer' ]
     $ cordova plugin rm org.apache.cordova.file-transfer
-</code></pre></div>
+</code></pre></div></div>
+
 <p>這些命令適用于所有有針對性的平臺，但修改如下所述的特定于平臺的配置設置：</p>
 
 <ul>
-<li><p>Android 系統</p>
-<div class="highlight"><pre><code class="language-" data-lang="">(in app/res/xml/config.xml)
+  <li>
+    <p>Android 系統</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(in app/res/xml/config.xml)
 &lt;feature name="File"&gt;
     &lt;param name="android-package" value="org.apache.cordova.FileUtils" /&gt;
 &lt;/feature&gt;
 &lt;feature name="FileTransfer"&gt;
     &lt;param name="android-package" value="org.apache.cordova.FileTransfer" /&gt;
 &lt;/feature&gt;
-
+    
 (in app/AndroidManifest.xml)
 &lt;uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /&gt;
-</code></pre></div></li>
-<li><p>黑莓手機 WebWorks</p>
-<div class="highlight"><pre><code class="language-" data-lang="">(in www/plugins.xml)
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>黑莓手機 WebWorks</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(in www/plugins.xml)
 &lt;feature name="File"&gt;
     &lt;param name="blackberry-package" value="org.apache.cordova.file.FileManager" /&gt;
 &lt;/feature&gt;
 &lt;feature name="FileTransfer"&gt;
     &lt;param name="blackberry-package" value="org.apache.cordova.http.FileTransfer" /&gt;
 &lt;/feature&gt;
-
+    
 (in www/config.xml)
 &lt;feature id="blackberry.io.file" required="true" version="1.0.0.0" /&gt;
 &lt;feature id="blackberry.utils"   required="true" version="1.0.0.0" /&gt;
@@ -1377,15 +1386,19 @@
 &lt;rim:permissions&gt;
     &lt;rim:permit&gt;access_shared&lt;/rim:permit&gt;
 &lt;/rim:permissions&gt;
-</code></pre></div></li>
-<li><p>（在 iOS<code>config.xml</code>)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="File"&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>（在 iOS<code class="language-plaintext highlighter-rouge">config.xml</code>)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="File"&gt;
     &lt;param name="ios-package" value="CDVFile" /&gt;
 &lt;/feature&gt;
 &lt;feature name="FileTransfer"&gt;
     &lt;param name="ios-package" value="CDVFileTransfer" /&gt;
 &lt;/feature&gt;
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ul>
 
 <p>一些平臺可能支援此功能，而無需任何特殊的配置。請參見在概述部分中<em>的平臺支援</em>。</p>

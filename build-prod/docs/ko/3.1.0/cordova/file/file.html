@@ -1184,70 +1184,79 @@
             
 
             <div id="page-toc-source">
-                <h1>파일</h1>
+                <h1 id="파일">파일</h1>
 
 <blockquote>
-<p>읽기, API 작성 하 고 <a href="http://www.w3.org/TR/FileAPI">w3c <a href="fileobj/fileobj.html">파일</a> api</a> 기반 <a href="fileobj/fileobj.html">파일</a> 시스템 계층 구조 탐색.</p>
+  <p>읽기, API 작성 하 고 <a href="http://www.w3.org/TR/FileAPI">w3c [파일](fileobj/fileobj.html) api</a> 기반 <a href="fileobj/fileobj.html">파일</a> 시스템 계층 구조 탐색.</p>
 </blockquote>
 
-<h2>개체</h2>
+<h2 id="개체">개체</h2>
 
 <ul>
-<li>  <a href="directoryentry/directoryentry.html">DirectoryEntry</a></li>
-<li>  <a href="directoryreader/directoryreader.html">DirectoryReader</a></li>
-<li>  <a href="fileobj/fileobj.html">파일</a></li>
-<li>  <a href="fileentry/fileentry.html">FileEntry</a></li>
-<li>  <a href="fileerror/fileerror.html">FileError</a></li>
-<li>  <a href="filereader/filereader.html">FileReader</a></li>
-<li>  <a href="fileobj/fileobj.html">파일</a> 시스템</li>
-<li>  <a href="filetransfer/filetransfer.html">FileTransfer</a></li>
-<li>  <a href="filetransfererror/filetransfererror.html">FileTransferError</a></li>
-<li>  <a href="fileuploadoptions/fileuploadoptions.html">FileUploadOptions</a></li>
-<li>  <a href="fileuploadresult/fileuploadresult.html">FileUploadResult</a></li>
-<li>  <a href="filewriter/filewriter.html">FileWriter</a></li>
-<li>  <a href="flags/flags.html">플래그</a></li>
-<li>  <a href="localfilesystem/localfilesystem.html">LocalFileSystem</a></li>
-<li>  <a href="metadata/metadata.html">메타 데이터</a></li>
+  <li><a href="directoryentry/directoryentry.html">DirectoryEntry</a></li>
+  <li><a href="directoryreader/directoryreader.html">DirectoryReader</a></li>
+  <li><a href="fileobj/fileobj.html">파일</a></li>
+  <li><a href="fileentry/fileentry.html">FileEntry</a></li>
+  <li><a href="fileerror/fileerror.html">FileError</a></li>
+  <li><a href="filereader/filereader.html">FileReader</a></li>
+  <li><a href="fileobj/fileobj.html">파일</a> 시스템</li>
+  <li><a href="filetransfer/filetransfer.html">FileTransfer</a></li>
+  <li><a href="filetransfererror/filetransfererror.html">FileTransferError</a></li>
+  <li><a href="fileuploadoptions/fileuploadoptions.html">FileUploadOptions</a></li>
+  <li><a href="fileuploadresult/fileuploadresult.html">FileUploadResult</a></li>
+  <li><a href="filewriter/filewriter.html">FileWriter</a></li>
+  <li><a href="flags/flags.html">플래그</a></li>
+  <li><a href="localfilesystem/localfilesystem.html">LocalFileSystem</a></li>
+  <li><a href="metadata/metadata.html">메타 데이터</a></li>
 </ul>
 
-<h2>기능 액세스</h2>
+<h2 id="기능-액세스">기능 액세스</h2>
 
-<p>버전 3.0, 코르도바 <em>플러그인</em>으로 <a href="../device/device.html">장치</a> 수준 Api를 구현합니다. CLI의 사용 <code>plugin</code> 명령 설명에 명령줄 인터페이스를 추가 하거나 프로젝트에 대 한이 기능을 제거 하려면:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add org.apache.cordova.file
+<p>버전 3.0, 코르도바 <em>플러그인</em>으로 <a href="../device/device.html">장치</a> 수준 Api를 구현합니다. CLI의 사용 <code class="language-plaintext highlighter-rouge">plugin</code> 명령 설명에 명령줄 인터페이스를 추가 하거나 프로젝트에 대 한이 기능을 제거 하려면:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add org.apache.cordova.file
     $ cordova plugin ls
     [ 'org.apache.cordova.file' ]
     $ cordova plugin rm org.apache.cordova.file
-</code></pre></div>
+</code></pre></div></div>
+
 <p><a href="fileobj/fileobj.html">파일</a> 전송 플러그인을 사용 하 여 추가 해야 합니다을 별도로.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add org.apache.cordova.file-transfer
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add org.apache.cordova.file-transfer
     $ cordova plugin ls
     [ 'org.apache.cordova.file-transfer' ]
     $ cordova plugin rm org.apache.cordova.file-transfer
-</code></pre></div>
+</code></pre></div></div>
+
 <p>이 명령은 모든 타겟된 플랫폼에 적용 하지만 플랫폼 관련 구성 설정을 아래에 설명 된 수정:</p>
 
 <ul>
-<li><p>안 드 로이드</p>
-<div class="highlight"><pre><code class="language-" data-lang="">(in app/res/xml/config.xml)
+  <li>
+    <p>안 드 로이드</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(in app/res/xml/config.xml)
 &lt;feature name="File"&gt;
     &lt;param name="android-package" value="org.apache.cordova.FileUtils" /&gt;
 &lt;/feature&gt;
 &lt;feature name="FileTransfer"&gt;
     &lt;param name="android-package" value="org.apache.cordova.FileTransfer" /&gt;
 &lt;/feature&gt;
-
+    
 (in app/AndroidManifest.xml)
 &lt;uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /&gt;
-</code></pre></div></li>
-<li><p>블랙베리 WebWorks</p>
-<div class="highlight"><pre><code class="language-" data-lang="">(in www/plugins.xml)
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>블랙베리 WebWorks</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(in www/plugins.xml)
 &lt;feature name="File"&gt;
     &lt;param name="blackberry-package" value="org.apache.cordova.file.FileManager" /&gt;
 &lt;/feature&gt;
 &lt;feature name="FileTransfer"&gt;
     &lt;param name="blackberry-package" value="org.apache.cordova.http.FileTransfer" /&gt;
 &lt;/feature&gt;
-
+    
 (in www/config.xml)
 &lt;feature id="blackberry.io.file" required="true" version="1.0.0.0" /&gt;
 &lt;feature id="blackberry.utils"   required="true" version="1.0.0.0" /&gt;
@@ -1255,15 +1264,19 @@
 &lt;rim:permissions&gt;
     &lt;rim:permit&gt;access_shared&lt;/rim:permit&gt;
 &lt;/rim:permissions&gt;
-</code></pre></div></li>
-<li><p>(iOS<code>config.xml</code>)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="File"&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>(iOS<code class="language-plaintext highlighter-rouge">config.xml</code>)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="File"&gt;
     &lt;param name="ios-package" value="CDVFile" /&gt;
 &lt;/feature&gt;
 &lt;feature name="FileTransfer"&gt;
     &lt;param name="ios-package" value="CDVFileTransfer" /&gt;
 &lt;/feature&gt;
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ul>
 
 <p>일부 플랫폼은 특별 한 구성이 필요 없이이 기능을 지원할 수 있습니다. <em>플랫폼 지원</em> <a href="../../guide/overview/index.html">개요</a> 섹션에서을 참조 하십시오.</p>

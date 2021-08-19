@@ -1436,75 +1436,109 @@
             
 
             <div id="page-toc-source">
-                <h1>Windows Phone のプラグイン</h1>
+                <h1 id="windows-phone-のプラグイン">Windows Phone のプラグイン</h1>
 
-<p>Windows Phone 上のコルドバのプラグインを書くには、コルドバのアーキテクチャの基本的な理解が必要です。 コルドバ WP7 WebBrowser をホスト アプリケーションの JavaScript コード、ネイティブ API 呼び出しを管理するから成っています。 BaseCommand ( <code>WP7CordovaClassLib.Cordova.Commands.BaseCommand</code> ) を拡張することができ、それは既にあなたのために建てられた &#39;配管&#39; の大半が付属しています c# でクラス。</p>
+<p>Windows Phone 上のコルドバのプラグインを書くには、コルドバのアーキテクチャの基本的な理解が必要です。 コルドバ WP7 WebBrowser をホスト アプリケーションの JavaScript コード、ネイティブ API 呼び出しを管理するから成っています。 BaseCommand ( <code class="language-plaintext highlighter-rouge">WP7CordovaClassLib.Cordova.Commands.BaseCommand</code> ) を拡張することができ、それは既にあなたのために建てられた ‘配管’ の大半が付属しています c# でクラス。</p>
 
 <ol>
-<li> あなたのプロジェクトを選択し、<strong>追加 → 新規アイテム...</strong>を選択するを右クリックしてください</li>
-</ol>
-<div class="highlight"><pre><code class="language-" data-lang="">*   'プラグイン' ディレクトリに追加できればしかしそれはあなた次第です。
-</code></pre></div>
-<ol>
-<li> &#39;Class&#39; を選択し、名前<code>Echo.cs</code></li>
-</ol>
-<div class="highlight"><pre><code class="language-" data-lang="">*   このクラスする必要があります*正確*の名前を呼び出すと一致します。`cordova.exec(win, fail, "Echo", ...)`
-</code></pre></div>
-<ol>
-<li><p>基本クラスの実装が含まれます。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">WPCordovaClassLib.Cordova; を使用します。WPCordovaClassLib.Cordova.Commands; を使用します。WPCordovaClassLib.Cordova.JSON; を使用します。
-</code></pre></div></li>
-<li><p>BaseCommand からあなたのクラスを拡張します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">パブリック クラス エコー: BaseCommand {//...}
-</code></pre></div></li>
-<li><p>JavaScript から呼び出せるメソッドを追加します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">パブリック クラス エコー: BaseCommand {公共ボイド エコー (文字列オプション) {//JS 呼び出し可能なプラグインのすべてのメソッドはこの署名を持っている必要があります ！
+  <li>
+    <p>あなたのプロジェクトを選択し、<strong>追加 → 新規アイテム…</strong>を選択するを右クリックしてください</p>
+
+    <ul>
+      <li>‘プラグイン’ ディレクトリに追加できればしかしそれはあなた次第です。</li>
+    </ul>
+  </li>
+  <li>
+    <p>‘Class’ を選択し、名前<code class="language-plaintext highlighter-rouge">Echo.cs</code></p>
+
+    <ul>
+      <li>このクラスする必要があります<em>正確</em>の名前を呼び出すと一致します。<code class="language-plaintext highlighter-rouge">cordova.exec(win, fail, "Echo", ...)</code></li>
+    </ul>
+  </li>
+  <li>
+    <p>基本クラスの実装が含まれます。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>WPCordovaClassLib.Cordova; を使用します。WPCordovaClassLib.Cordova.Commands; を使用します。WPCordovaClassLib.Cordova.JSON; を使用します。
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>BaseCommand からあなたのクラスを拡張します。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>パブリック クラス エコー: BaseCommand {//...}
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>JavaScript から呼び出せるメソッドを追加します。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>パブリック クラス エコー: BaseCommand {公共ボイド エコー (文字列オプション) {//JS 呼び出し可能なプラグインのすべてのメソッドはこの署名を持っている必要があります ！
         //パブリック、void、引数が文字列である 1 を返す}}
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ol>
 
-<h2>名前空間</h2>
+<h2 id="名前空間">名前空間</h2>
 
 <p>既定の名前空間が修飾されていないコマンドです。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">名前空間 Cordova.Extension.Commands {//...}
-</code></pre></div>
-<p>独自の名前空間を使用する場合、完全修飾に通話を発信する必要があります <code>cordova.exec</code> 。たとえば、このような c# クラスを定義します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">名前空間 com.mydomain.cordovaExtensions {パブリック クラス エコー: BaseCommand {//...}}
-</code></pre></div>
-<p>次に、JavaScript でを呼び出す必要が <code>exec</code> このような。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cordova.exec (勝利、失敗、"com.mydomain.cordovaExtensions.Echo"...);
-</code></pre></div>
-<h2>C では、引数を解釈します。</h2>
 
-<p>プラグイン方式によって受信されたデータは、文字列値が実際に JavaScript コードを見て、我々 我々 の意図は文字列の配列を渡すを参照してください。 私たちの JavaScript 呼び出しを見て <code>cordova.exec</code> 、我々 は渡されますを参照してください <code>[str]</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cordova.exec (勝つ、失敗する「エコー」、「エコー」、[「入力文字列」]);
-</code></pre></div>
-<p>我々 は検査に渡されるオプション文字列場合私たち <code>Echo.echo</code> メソッド、我々 値が実際に参照してください。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">"[\"input string\"]"
-</code></pre></div>
-<p>すべての JavaScript <code>exec</code> 引数は JSON c# に渡される前にエンコードされます。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>名前空間 Cordova.Extension.Commands {//...}
+</code></pre></div></div>
+
+<p>独自の名前空間を使用する場合、完全修飾に通話を発信する必要があります <code class="language-plaintext highlighter-rouge">cordova.exec</code> 。たとえば、このような c# クラスを定義します。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>名前空間 com.mydomain.cordovaExtensions {パブリック クラス エコー: BaseCommand {//...}}
+</code></pre></div></div>
+
+<p>次に、JavaScript でを呼び出す必要が <code class="language-plaintext highlighter-rouge">exec</code> このような。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova.exec (勝利、失敗、"com.mydomain.cordovaExtensions.Echo"...);
+</code></pre></div></div>
+
+<h2 id="c-では引数を解釈します">C では、引数を解釈します。</h2>
+
+<p>プラグイン方式によって受信されたデータは、文字列値が実際に JavaScript コードを見て、我々 我々 の意図は文字列の配列を渡すを参照してください。 私たちの JavaScript 呼び出しを見て <code class="language-plaintext highlighter-rouge">cordova.exec</code> 、我々 は渡されますを参照してください <code class="language-plaintext highlighter-rouge">[str]</code> :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova.exec (勝つ、失敗する「エコー」、「エコー」、[「入力文字列」]);
+</code></pre></div></div>
+
+<p>我々 は検査に渡されるオプション文字列場合私たち <code class="language-plaintext highlighter-rouge">Echo.echo</code> メソッド、我々 値が実際に参照してください。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"[\"input string\"]"
+</code></pre></div></div>
+
+<p>すべての JavaScript <code class="language-plaintext highlighter-rouge">exec</code> 引数は JSON c# に渡される前にエンコードされます。</p>
 
 <p>これは予想していた文字列として扱う場合は、それをデコードする必要があります。我々 は、単純な JSON の逆シリアル化を使用できます。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">optVal 文字列 = &lt; string[] &gt; JsonHelper.Deserialize (オプション) [0];//optVal になりました「入力文字列」の値
-</code></pre></div>
-<h2>Java スクリプトの設定を c# から結果を渡す</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>optVal 文字列 = &lt; string[] &gt; JsonHelper.Deserialize (オプション) [0];//optVal になりました「入力文字列」の値
+</code></pre></div></div>
+
+<h2 id="java-スクリプトの設定を-c-から結果を渡す">Java スクリプトの設定を c# から結果を渡す</h2>
 
 <p>基本クラス BaseCommand は、JavaScript コールバック ハンドラーにデータを渡すためのメソッドを提供します。 ときに追加の結果情報は必要ありません、コマンドが成功したことを単に信号を単に呼び出すことができます。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">DispatchCommandResult();//空のプラグインの結果に戻って電話を考慮成功時のコールバック
-</code></pre></div>
-<p>戻ってデータを渡すための別のバージョンを呼び出す必要があります <code>DispatchCommandResult</code> ：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">DispatchCommandResult (新しい PluginResult (PluginResult.Status.OK、「すべて計画通りに進んだ、これは成功のハンドラーに渡される結果」));
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DispatchCommandResult();//空のプラグインの結果に戻って電話を考慮成功時のコールバック
+</code></pre></div></div>
+
+<p>戻ってデータを渡すための別のバージョンを呼び出す必要があります <code class="language-plaintext highlighter-rouge">DispatchCommandResult</code> ：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DispatchCommandResult (新しい PluginResult (PluginResult.Status.OK、「すべて計画通りに進んだ、これは成功のハンドラーに渡される結果」));
+</code></pre></div></div>
+
 <p>構造化されたオブジェクト データを JavaScript に渡す、JSON 文字列としてエンコードする必要があります。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">DispatchCommandResult(new PluginResult(PluginResult.Status.OK, "{result:\"super awesome!\"}"));
-</code></pre></div>
-<p>呼び出すことができます、エラーが発生したことが通知する必要がある場合 <code>DispatchCommandResult</code> で、 <code>PluginResult</code> オブジェクト。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">DispatchCommandResult (新しい PluginResult （PluginResult.Status.ERROR、「エコー シグナル エラー」));
-</code></pre></div>
-<h2>あなたのプラグインの c# メソッドでシリアル化のエラーを処理</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DispatchCommandResult(new PluginResult(PluginResult.Status.OK, "{result:\"super awesome!\"}"));
+</code></pre></div></div>
+
+<p>呼び出すことができます、エラーが発生したことが通知する必要がある場合 <code class="language-plaintext highlighter-rouge">DispatchCommandResult</code> で、 <code class="language-plaintext highlighter-rouge">PluginResult</code> オブジェクト。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DispatchCommandResult (新しい PluginResult （PluginResult.Status.ERROR、「エコー シグナル エラー」));
+</code></pre></div></div>
+
+<h2 id="あなたのプラグインの-c-メソッドでシリアル化のエラーを処理">あなたのプラグインの c# メソッドでシリアル化のエラーを処理</h2>
 
 <p>あなたの引数を解釈するときの不正な入力がある場合、試行/キャッチ ブロックを使用することをお勧め。これはコルドバ c# コード全体で使用されるパターンです。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">string optVal = null;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>string optVal = null;
 
 try
 {
@@ -1522,56 +1556,73 @@ if (optVal == null)
 else
 {
     // ... 我々 の仕事する上で続行}
-</code></pre></div>
-<h2>プラグインの XML</h2>
+</code></pre></div></div>
+
+<h2 id="プラグインの-xml">プラグインの XML</h2>
 
 <p>これらの windows 携帯電話具体的 plugin.xml ファイルを使用して、詳細についてプラグインの仕様を参照してください。</p>
 
-<h3><code>&lt;source-file&gt;</code></h3>
+<h3 id="source-file"><code class="language-plaintext highlighter-rouge">&lt;source-file&gt;</code></h3>
 
-<p>Windows phone で、 <code>&lt;source-file&gt;</code> プラグインのすべてのリソースを定義する要素を使用して現在 (すなわち。 .cs、.xaml、。 xaml.cs, .dll, 画像資産など)。</p>
+<p>Windows phone で、 <code class="language-plaintext highlighter-rouge">&lt;source-file&gt;</code> プラグインのすべてのリソースを定義する要素を使用して現在 (すなわち。 .cs、.xaml、。 xaml.cs, .dll, 画像資産など)。</p>
 
-<h3><code>&lt;config-file&gt;</code></h3>
+<h3 id="config-file"><code class="language-plaintext highlighter-rouge">&lt;config-file&gt;</code></h3>
 
-<p><code>&lt;config-file&gt;</code>要素をどのような要素が構成ファイルに入れられる定義します。プラットフォーム config.xml にプラグインを追加するなど、このような何か：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt; 設定ファイル target="config.xml"親 ="/*"&gt;&lt; 機能名 ="PluginName"&gt;&lt; param の名前「wp-パッケージ」値を = ="PluginName"/&gt;&lt;/機能 &gt;&lt;/config ファイル &gt;
-</code></pre></div>
+<p><code class="language-plaintext highlighter-rouge">&lt;config-file&gt;</code>要素をどのような要素が構成ファイルに入れられる定義します。プラットフォーム config.xml にプラグインを追加するなど、このような何か：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt; 設定ファイル target="config.xml"親 ="/*"&gt;&lt; 機能名 ="PluginName"&gt;&lt; param の名前「wp-パッケージ」値を = ="PluginName"/&gt;&lt;/機能 &gt;&lt;/config ファイル &gt;
+</code></pre></div></div>
+
 <p>我々 は、WMAppManifest.xml に連絡先を追加する場合は、それはようになります。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;config-file target="Properties/WMAppManifest.xml" parent="/Deployment/App/Capabilities"&gt;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;config-file target="Properties/WMAppManifest.xml" parent="/Deployment/App/Capabilities"&gt;
     &lt;Capability Name="ID_CAP_CONTACTS" /&gt;
 &lt;/config-file&gt;
-</code></pre></div>
-<h2>高度なプラグイン機能</h2>
+</code></pre></div></div>
+
+<h2 id="高度なプラグイン機能">高度なプラグイン機能</h2>
 
 <p>他のメソッドでオーバーライドすることができますを参照してください。</p>
 
 <ul>
-<li>  <a href="https://github.com/apache/cordova-wp7/blob/master/templates/standalone/cordovalib/Commands/BaseCommand.cs">BaseCommand.cs</a></li>
+  <li><a href="https://github.com/apache/cordova-wp7/blob/master/templates/standalone/cordovalib/Commands/BaseCommand.cs">BaseCommand.cs</a></li>
 </ul>
 
-<p>たとえば、&#39;一時停止&#39; と &#39;<a href="../../../cordova/events/events.resume.html">再開</a>&#39; アプリケーション イベントにフックすることができます。</p>
+<p>たとえば、’一時停止’ と ‘<a href="../../../cordova/events/events.resume.html">再開</a>’ アプリケーション イベントにフックすることができます。</p>
 
-<h3>プラグインのデバッグ</h3>
+<h3 id="プラグインのデバッグ">プラグインのデバッグ</h3>
 
 <p>C# 側をデバッグするに Visual Studio デバッガーを使用して、ちょうどあなたのクラスによって公開されるメソッドのいずれかでブレークポイントを設定できます。</p>
 
-<p>Java スクリプトの設定は、Windows Phone 上でデバッグするより少し難しいです。使用する必要があります <code>console.log</code> 出力、プラグインの状態やエラーのことは自分に通知します。</p>
+<p>Java スクリプトの設定は、Windows Phone 上でデバッグするより少し難しいです。使用する必要があります <code class="language-plaintext highlighter-rouge">console.log</code> 出力、プラグインの状態やエラーのことは自分に通知します。</p>
 
-<h2>一般的な落とし穴</h2>
+<h2 id="一般的な落とし穴">一般的な落とし穴</h2>
 
 <ul>
-<li><p>JavaScript の実装でネイティブに渡す引数を決定する際に注意します。 ほとんどのデバイス プラットフォーム配列として cordova.exec に渡された args を期待するが、この配列内のオブジェクトの種類を有すれば、逆シリアル化を困難または不可能になります。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cordova.exec (勝利、失敗すると、「電子メール」、"MethodName"[「これは文字列です」、54、{リテラル： 'トラブル'}]);
-</code></pre></div>
-<ul>
-<li><p>つまり、次の c# コード受信などの文字列値をデコードすることは困難。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">"[\"this は、string\"、54、{リテラル： 'トラブル'}]」
-</code></pre></div></li>
-<li><p>Exec を呼び出す前にすべてのパラメーターを文字列に変換を考えてみます。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cordova.exec (勝利、失敗すると、「電子メール」、"MethodName"[「これは文字列です」、「54」、"{リテラル： 'トラブル'}"]);文字列 optValues JsonHelper.Deserialize &lt; string[] &gt; = （オプション）;
-</code></pre></div></li>
-</ul></li>
-<li><p>それは通常、パラメーターを呼び出す前に、JavaScript コードでチェックを行うことをお勧め <code>exec</code> 。 これはプラグインの様々 なネイティブ実装の中でより多くの JavaScript コードを再利用することができます。</p></li>
+  <li>
+    <p>JavaScript の実装でネイティブに渡す引数を決定する際に注意します。 ほとんどのデバイス プラットフォーム配列として cordova.exec に渡された args を期待するが、この配列内のオブジェクトの種類を有すれば、逆シリアル化を困難または不可能になります。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova.exec (勝利、失敗すると、「電子メール」、"MethodName"[「これは文字列です」、54、{リテラル： 'トラブル'}]);
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p>つまり、次の c# コード受信などの文字列値をデコードすることは困難。</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"[\"this は、string\"、54、{リテラル： 'トラブル'}]」
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>Exec を呼び出す前にすべてのパラメーターを文字列に変換を考えてみます。</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova.exec (勝利、失敗すると、「電子メール」、"MethodName"[「これは文字列です」、「54」、"{リテラル： 'トラブル'}"]);文字列 optValues JsonHelper.Deserialize &lt; string[] &gt; = （オプション）;
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>それは通常、パラメーターを呼び出す前に、JavaScript コードでチェックを行うことをお勧め <code class="language-plaintext highlighter-rouge">exec</code> 。 これはプラグインの様々 なネイティブ実装の中でより多くの JavaScript コードを再利用することができます。</p>
+  </li>
 </ul>
 
 

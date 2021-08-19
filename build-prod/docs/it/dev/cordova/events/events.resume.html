@@ -2112,86 +2112,98 @@
             
 
             <div id="page-toc-source">
-                <h1>resume</h1>
+                <h1 id="resume">resume</h1>
 
-<p>L&#39;evento viene generato quando un&#39;applicazione viene recuperata dallo sfondo.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">document.addEventListener("resume", yourCallbackFunction, false);
-</code></pre></div>
-<h2>Dettagli</h2>
+<p>L’evento viene generato quando un’applicazione viene recuperata dallo sfondo.</p>
 
-<p>Il <code>resume</code> evento viene generato quando la piattaforma nativa tira l&#39;applicazione fuori dallo sfondo.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>document.addEventListener("resume", yourCallbackFunction, false);
+</code></pre></div></div>
 
-<p>Applicazioni in genere è necessario utilizzare <code>document.addEventListener</code> per fissare un listener di eventi una volta il <code>[deviceready](events.deviceready.html)</code> evento incendi.</p>
+<h2 id="dettagli">Dettagli</h2>
 
-<h2>Piattaforme supportate</h2>
+<p>Il <code class="language-plaintext highlighter-rouge">resume</code> evento viene generato quando la piattaforma nativa tira l’applicazione fuori dallo sfondo.</p>
+
+<p>Applicazioni in genere è necessario utilizzare <code class="language-plaintext highlighter-rouge">document.addEventListener</code> per fissare un listener di eventi una volta il <code class="language-plaintext highlighter-rouge">[deviceready](events.deviceready.html)</code> evento incendi.</p>
+
+<h2 id="piattaforme-supportate">Piattaforme supportate</h2>
 
 <ul>
-<li>  Amazon fuoco OS</li>
-<li>  Android</li>
-<li>  BlackBerry 10</li>
-<li>  iOS</li>
-<li>  Windows Phone 8</li>
-<li>  Windows 8</li>
+  <li>Amazon fuoco OS</li>
+  <li>Android</li>
+  <li>BlackBerry 10</li>
+  <li>iOS</li>
+  <li>Windows Phone 8</li>
+  <li>Windows 8</li>
 </ul>
 
-<h2>Esempio rapido</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">document.addEventListener("resume", onResume, false);
+<h2 id="esempio-rapido">Esempio rapido</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>document.addEventListener("resume", onResume, false);
 
 function onResume() {
     // Handle the resume event
 }
-</code></pre></div>
-<h2>Esempio completo</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Resume Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="esempio-completo">Esempio completo</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onLoad</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="p">}</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Resume Example&lt;/title&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"resume"</span><span class="p">,</span> <span class="nx">onResume</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// Handle the resume event</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onResume</span><span class="p">()</span> <span class="p">{</span>
-    <span class="p">}</span>
+    // Wait for device API libraries to load
+    //
+    function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body</span> <span class="na">onload=</span><span class="s">"onLoad()"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2>iOS stranezze</h2>
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        document.addEventListener("resume", onResume, false);
+    }
 
-<p>Eventuali funzioni interattive, chiamate da un <code>[pause](events.pause.html)</code> gestore eventi eseguire più tardi quando l&#39;app riprende, come segnalato dal <code>resume</code> evento. Questi includono avvisi, <code>console.log()</code> e tutte le chiamate da plugin o le API, Cordova che passano attraverso l&#39;Objective-C.</p>
+    // Handle the resume event
+    //
+    function onResume() {
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body onload="onLoad()"&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h2 id="ios-stranezze">iOS stranezze</h2>
+
+<p>Eventuali funzioni interattive, chiamate da un <code class="language-plaintext highlighter-rouge">[pause](events.pause.html)</code> gestore eventi eseguire più tardi quando l’app riprende, come segnalato dal <code class="language-plaintext highlighter-rouge">resume</code> evento. Questi includono avvisi, <code class="language-plaintext highlighter-rouge">console.log()</code> e tutte le chiamate da plugin o le API, Cordova che passano attraverso l’Objective-C.</p>
 
 <ul>
-<li><p>evento <strong>attivo</strong></p>
+  <li>
+    <p>evento <strong>attivo</strong></p>
 
-<p>L&#39;iOS specifiche <code>active</code> evento è disponibile come alternativa a <code>resume</code> e rileva quando gli utenti di disabilitano il pulsante di <strong>blocco</strong> per sbloccare il dispositivo con l&#39;applicazione in esecuzione in primo piano. Se l&#39;app (e dispositivo) è abilitate per il multi-tasking, questo è accoppiato con una successiva <code>resume</code> evento, ma solo sotto iOS 5. In effetti, tutte le applicazioni bloccate in iOS 5 che hanno abilitato multitasking sono spinti allo sfondo. Per le applicazioni di rimanere in esecuzione quando bloccato sotto iOS 5, disabilitare multitasking dell&#39;app impostando <a href="http://developer.apple.com/library/ios/#documentation/general/Reference/InfoPlistKeyReference/Articles/iPhoneOSKeys.html">UIApplicationExitsOnSuspend</a> su <code>YES</code> . Da eseguire quando bloccato su iOS 4, che questa impostazione non importa.</p></li>
-<li><p>evento di <strong>riprendere</strong></p>
+    <p>L’iOS specifiche <code class="language-plaintext highlighter-rouge">active</code> evento è disponibile come alternativa a <code class="language-plaintext highlighter-rouge">resume</code> e rileva quando gli utenti di disabilitano il pulsante di <strong>blocco</strong> per sbloccare il dispositivo con l’applicazione in esecuzione in primo piano. Se l’app (e dispositivo) è abilitate per il multi-tasking, questo è accoppiato con una successiva <code class="language-plaintext highlighter-rouge">resume</code> evento, ma solo sotto iOS 5. In effetti, tutte le applicazioni bloccate in iOS 5 che hanno abilitato multitasking sono spinti allo sfondo. Per le applicazioni di rimanere in esecuzione quando bloccato sotto iOS 5, disabilitare multitasking dell’app impostando <a href="http://developer.apple.com/library/ios/#documentation/general/Reference/InfoPlistKeyReference/Articles/iPhoneOSKeys.html">UIApplicationExitsOnSuspend</a> su <code class="language-plaintext highlighter-rouge">YES</code> . Da eseguire quando bloccato su iOS 4, che questa impostazione non importa.</p>
+  </li>
+  <li>
+    <p>evento di <strong>riprendere</strong></p>
 
-<p>Quando viene chiamato da un <code>resume</code> gestore eventi, funzioni interattive come <code>alert()</code> bisogno di essere avvolto in un <code>setTimeout()</code> con un valore di timeout di zero, altrimenti l&#39;app si blocca. Ad esempio:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">document.addEventListener("resume", onResume, false);
+    <p>Quando viene chiamato da un <code class="language-plaintext highlighter-rouge">resume</code> gestore eventi, funzioni interattive come <code class="language-plaintext highlighter-rouge">alert()</code> bisogno di essere avvolto in un <code class="language-plaintext highlighter-rouge">setTimeout()</code> con un valore di timeout di zero, altrimenti l’app si blocca. Ad esempio:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>document.addEventListener("resume", onResume, false);
 function onResume() {
    setTimeout(function() {
           // TODO: do your thing!
         }, 0);
 }
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ul>
+
 
 
             </div>

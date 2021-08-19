@@ -1310,156 +1310,194 @@
     }
 </style>
 
-<h1>Руководство по платформы blackBerry 10</h1>
+<h1 id="руководство-по-платформы-blackberry-10">Руководство по платформы blackBerry 10</h1>
 
 <p>В этом руководстве показано, как настроить среду разработки для создания и развертывания приложений Cordova для устройств BlackBerry 10. Для предыдущих версий BlackBerry вам нужно использовать другой набор средств командной строки, описанные в руководстве платформы ежевики.</p>
 
-<h2>Требования к</h2>
+<h2 id="требования-к">Требования к</h2>
 
 <p>Среда разработки доступна на Windows, Mac и Linux.</p>
 
-<p>Разработчики должны использовать <code>cordova</code> утилита в сочетании с родного SDK ежевики. <a href="../../cli/index.html">Интерфейс командной строки</a> информацию смотрите в разделе как установить <code>cordova</code> , добавить проекты, а затем построить и развернуть для каждой платформы.</p>
+<p>Разработчики должны использовать <code class="language-plaintext highlighter-rouge">cordova</code> утилита в сочетании с родного SDK ежевики. <a href="../../cli/index.html">Интерфейс командной строки</a> информацию смотрите в разделе как установить <code class="language-plaintext highlighter-rouge">cordova</code> , добавить проекты, а затем построить и развернуть для каждой платформы.</p>
 
-<h2>Установите SDK ежевики родной</h2>
+<h2 id="установите-sdk-ежевики-родной">Установите SDK ежевики родной</h2>
 
 <p>Ежевики родной пакет SDK доступен от <a href="http://developer.blackberry.com/native/download/">developer.blackberry.com</a>. После установки вам нужно добавить его средства командной строки в системном пути.</p>
 
 <p>На Windows:</p>
 
 <ul>
-<li><p>Перейти к <strong>переменным среды → мой компьютер → свойства → расширенный</strong>.</p></li>
-<li><p>Добавьте каталог установки собственного SDK путь, например:</p>
+  <li>
+    <p>Перейти к <strong>переменным среды → мой компьютер → свойства → расширенный</strong>.</p>
+  </li>
+  <li>
+    <p>Добавьте каталог установки собственного SDK путь, например:</p>
 
-<p>;C:\bbndk\host_10_1_0_132\darwin\x86\usr\bin\</p></li>
+    <p>;C:\bbndk\host_10_1_0_132\darwin\x86\usr\bin\</p>
+  </li>
 </ul>
 
 <p>На Mac и Linux:</p>
 
 <ul>
-<li><p>Редактировать <code>~/.bash_profile</code> файл, добавив строку, например, в зависимости от того, где была установлена родного SDK:</p>
+  <li>
+    <p>Редактировать <code class="language-plaintext highlighter-rouge">~/.bash_profile</code> файл, добавив строку, например, в зависимости от того, где была установлена родного SDK:</p>
 
-<p>экспорт $ PATH = ${путь}: / приложения/bbndk/host_10_1_0_132/Дарвина/x 86/usr/bin /</p>
+    <p>экспорт $ PATH = ${путь}: / приложения/bbndk/host_10_1_0_132/Дарвина/x 86/usr/bin /</p>
 
-<p>или для 10,2 родного SDK:</p>
+    <p>или для 10,2 родного SDK:</p>
 
-<p>экспорт $ PATH=${PATH}:/Applications/Momentics.app/host_10_2_0_15/darwin/x86/usr/bin/</p></li>
-<li><p>Выполните следующие действия, чтобы применить изменения в текущем сеансе:</p>
+    <p>экспорт $ PATH=${PATH}:/Applications/Momentics.app/host_10_2_0_15/darwin/x86/usr/bin/</p>
+  </li>
+  <li>
+    <p>Выполните следующие действия, чтобы применить изменения в текущем сеансе:</p>
 
-<p>$ Источник ~/.bash_profile</p></li>
+    <p>$ Источник ~/.bash_profile</p>
+  </li>
 </ul>
 
-<h2>Для подписи</h2>
+<h2 id="для-подписи">Для подписи</h2>
 
 <p>Если вы хотите проверить на устройстве или распространять приложения через BlackBerry World, ваша система должна быть установка для подписи кода.</p>
 
-<p>Для получения ключа подписи, перейдите на сайт BlackBerry и убедитесь в том сохранить пароль, указанный вами. Затем запустите <code>blackberry-signer</code> Утилита, которая входит в SDK родной BlackBerry.</p>
+<p>Для получения ключа подписи, перейдите на сайт BlackBerry и убедитесь в том сохранить пароль, указанный вами. Затем запустите <code class="language-plaintext highlighter-rouge">blackberry-signer</code> Утилита, которая входит в SDK родной BlackBerry.</p>
 
 <p>Подробная инструкция можно найти здесь:</p>
 
 <ul>
-<li><p><a href="https://www.blackberry.com/SignedKeys/codesigning.html">Зарегистрироваться для вашего кода ключа подписи.</a></p></li>
-<li><p><a href="https://developer.blackberry.com/html5/documentation/signing_setup_bb10_apps_2008396_11.html">Настройка системы для подписи кода.</a></p></li>
+  <li>
+    <p><a href="https://www.blackberry.com/SignedKeys/codesigning.html">Зарегистрироваться для вашего кода ключа подписи.</a></p>
+  </li>
+  <li>
+    <p><a href="https://developer.blackberry.com/html5/documentation/signing_setup_bb10_apps_2008396_11.html">Настройка системы для подписи кода.</a></p>
+  </li>
 </ul>
 
-<h2>Создание проекта</h2>
+<h2 id="создание-проекта">Создание проекта</h2>
 
-<p>Использование <code>cordova</code> утилита для настройки нового проекта, как описано в интерфейс командной строки. Например в каталоге исходного кода:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova create hello com.example.hello
+<p>Использование <code class="language-plaintext highlighter-rouge">cordova</code> утилита для настройки нового проекта, как описано в интерфейс командной строки. Например в каталоге исходного кода:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova create hello com.example.hello
 $ cd hello
 $ cordova platform add blackberry10
 $ cordova build
-</code></pre></div>
-<h2>Развертывание в эмулятор</h2>
+</code></pre></div></div>
+
+<h2 id="развертывание-в-эмулятор">Развертывание в эмулятор</h2>
 
 <p>Если вы хотите запустить эмулятор устройства, загрузите и установите 10 имитатор ежевики.</p>
 
 <ul>
-<li>  <a href="http://developer.blackberry.com/native/download/">Скачать</a></li>
-<li>  <a href="http://developer.blackberry.com/devzone/develop/simulator/blackberry_10_simulator_start.html">Приступая к работе</a></li>
+  <li><a href="http://developer.blackberry.com/native/download/">Скачать</a></li>
+  <li><a href="http://developer.blackberry.com/devzone/develop/simulator/blackberry_10_simulator_start.html">Приступая к работе</a></li>
 </ul>
 
 <p>Перед тестированием приложения на эмуляторе или устройстве, необходимо добавить <em>целевой</em> проект. Каждый с уникальным именем и связанные с IP-адресом. Вам нужно получить IP-адрес из эмулятора, прежде чем использовать его для просмотра приложений.</p>
 
 <p>Запустить образ эмулятора, затем выберите <strong>настройки</strong> на главном экране:</p>
 
-<p><img src="/static/img/guide/platforms/blackberry10/bb_home.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/blackberry10/bb_home.png" alt="" /></p>
 
 <p>Перейдите к <strong>безопасности и конфиденциальности → режим развития</strong> раздел, включите опцию и получить IP-адрес:</p>
 
-<p><img src="/static/img/guide/platforms/blackberry10/bb_devel.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/blackberry10/bb_devel.png" alt="" /></p>
 
 <p>Дополнительный набор утилит командной строки включаются при установке платформы BlackBerry 10 для вашего проекта. Следующая команда, в этом случае вызывается из каталога верхнего уровня проекта, связывает целевой объект с именем <em>эму</em> с IP-адресом отображается выше.</p>
 
 <ul>
-<li><p>На Windows:</p>
+  <li>
+    <p>На Windows:</p>
 
-<p>$ platforms\blackberry10\cordova\target.bat add emu 169.254.0.1 -t simulator</p></li>
-<li><p>На Mac/Linux:</p>
+    <p>$ platforms\blackberry10\cordova\target.bat add emu 169.254.0.1 -t simulator</p>
+  </li>
+  <li>
+    <p>На Mac/Linux:</p>
 
-<p>$ platforms/blackberry10/cordova/target add emu 169.254.0.1 -t simulator</p></li>
+    <p>$ platforms/blackberry10/cordova/target add emu 169.254.0.1 -t simulator</p>
+  </li>
 </ul>
 
-<p>Затем запустите <code>emulate</code> команду для просмотра приложений:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova emulate blackberry10
-</code></pre></div>
-<h2>Развернуть устройстве</h2>
+<p>Затем запустите <code class="language-plaintext highlighter-rouge">emulate</code> команду для просмотра приложений:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova emulate blackberry10
+</code></pre></div></div>
+
+<h2 id="развернуть-устройстве">Развернуть устройстве</h2>
 
 <p>Чтобы развернуть на устройстве, убедитесь, что он подключен к компьютеру. Включите режим разработки и получить IP-адрес как desribed эмулятор выше в разделе. Вам также нужно получить ПИН-код от <strong>настройки</strong> приложения под <strong>о → оборудование</strong>:</p>
 
-<p><img src="/static/img/guide/platforms/blackberry10/bb_pin.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/blackberry10/bb_pin.png" alt="" /></p>
 
 <p>Запустите утилиту командной строки целевой, чтобы связать имя с IP адрес, пароль и PIN-код.</p>
 
 <ul>
-<li><p>На Windows:</p>
+  <li>
+    <p>На Windows:</p>
 
-<p>$ platforms\blackberry10\cordova\target.bat add mydevice 169.254.0.1 -t device --password 123456 --pin FFFF972E</p></li>
-<li><p>На Mac/Linux:</p>
+    <p>$ platforms\blackberry10\cordova\target.bat add mydevice 169.254.0.1 -t device –password 123456 –pin FFFF972E</p>
+  </li>
+  <li>
+    <p>На Mac/Linux:</p>
 
-<p>$ platforms/blackberry10/cordova/target add mydevice 169.254.0.1 -t device --password 123456 --pin FFFF972E</p></li>
+    <p>$ platforms/blackberry10/cordova/target add mydevice 169.254.0.1 -t device –password 123456 –pin FFFF972E</p>
+  </li>
 </ul>
 
 <p>где:</p>
 
 <ul>
-<li><p><code>--password</code>относится к пароль, чтобы разблокировать устройство.</p></li>
-<li><p><code>--pin</code>относится к устройству PIN, полученные из <strong>параметров</strong> приложения.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">--password</code>относится к пароль, чтобы разблокировать устройство.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">--pin</code>относится к устройству PIN, полученные из <strong>параметров</strong> приложения.</p>
+  </li>
 </ul>
 
-<p>Затем запустите <code>run</code> команду для просмотра приложений:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova run blackberry10
-</code></pre></div>
+<p>Затем запустите <code class="language-plaintext highlighter-rouge">run</code> команду для просмотра приложений:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova run blackberry10
+</code></pre></div></div>
+
 <p>Если маркер отладки еще не установлен для устройства, сообщение об ошибке предложит использовать платформу, запустить сценарий с паролем, который вы указали при регистрации для ключей подписи.</p>
 
 <ul>
-<li><p>На Windows:</p>
+  <li>
+    <p>На Windows:</p>
 
-<p>$ platforms\blackberry10\cordova\run.bat --device --keystorepass mysecret</p></li>
-<li><p>На Mac/Linux:</p>
+    <p>$ platforms\blackberry10\cordova\run.bat –device –keystorepass mysecret</p>
+  </li>
+  <li>
+    <p>На Mac/Linux:</p>
 
-<p>$ platforms/blackberry10/cordova/run --device --keystorepass mysecret</p></li>
+    <p>$ platforms/blackberry10/cordova/run –device –keystorepass mysecret</p>
+  </li>
 </ul>
 
-<h2>Отладка с WebInspector</h2>
+<h2 id="отладка-с-webinspector">Отладка с WebInspector</h2>
 
 <p>При отладке на устройстве или эмуляторе, вы можете запустить WebInspector удаленно для просмотра внутреннего состояния приложения. Запрос отображает URL-адрес, который позволяет вам подключаться к приложения с помощью стандартного веб-браузера. Для получения дополнительной информации смотрите в разделе <a href="http://developer.blackberry.com/html5/documentation/web_inspector_overview_1553586_11.html">Отладка использование WebInspector</a>.</p>
 
-<h2>Создание версии выпуска</h2>
+<h2 id="создание-версии-выпуска">Создание версии выпуска</h2>
 
-<p>По умолчанию, работает <code>cordova build</code> команда создает файл пакета неподписанные <em>.bar</em> подходит для тестирования на устройстве или симулятор.</p>
+<p>По умолчанию, работает <code class="language-plaintext highlighter-rouge">cordova build</code> команда создает файл пакета неподписанные <em>.bar</em> подходит для тестирования на устройстве или симулятор.</p>
 
-<p>Вам необходимо запустить другой <code>build</code> команду для создания окончательной версии подходит для распространения через BlackBerry World. Он не полагается на <code>cordova</code> CLI инструмент и вместо этого использует следующий синтаксис:</p>
+<p>Вам необходимо запустить другой <code class="language-plaintext highlighter-rouge">build</code> команду для создания окончательной версии подходит для распространения через BlackBerry World. Он не полагается на <code class="language-plaintext highlighter-rouge">cordova</code> CLI инструмент и вместо этого использует следующий синтаксис:</p>
 
 <ul>
-<li><p>На Windows:</p>
+  <li>
+    <p>На Windows:</p>
 
-<p>$ platforms\blackberry10\cordova\build.bat --release --keystorepass mysecret</p></li>
-<li><p>На Mac/Linux:</p>
+    <p>$ platforms\blackberry10\cordova\build.bat –release –keystorepass mysecret</p>
+  </li>
+  <li>
+    <p>На Mac/Linux:</p>
 
-<p>$ platforms/blackberry10/cordova/build --release --keystorepass mysecret</p></li>
+    <p>$ platforms/blackberry10/cordova/build –release –keystorepass mysecret</p>
+  </li>
 </ul>
 
-<p><code>--keystorepass</code>Параметр указывает пароль, заданные при настройке компьютера для подписи приложения.</p>
+<p><code class="language-plaintext highlighter-rouge">--keystorepass</code>Параметр указывает пароль, заданные при настройке компьютера для подписи приложения.</p>
 
 
             </div>

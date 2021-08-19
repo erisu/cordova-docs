@@ -1304,137 +1304,181 @@
             
 
             <div id="page-toc-source">
-                <h1>Guida di whitelist</h1>
+                <h1 id="guida-di-whitelist">Guida di whitelist</h1>
 
-<h2>Panoramica</h2>
+<h2 id="panoramica">Panoramica</h2>
 
-<p>Risorsa whitelisting è un modello di sicurezza che controlla accesso alle risorse di rete esterni, come ad esempio <code>http://google.com</code> . Criteri di protezione predefiniti di Cordova Apache consentono l&#39;accesso a qualsiasi risorsa su qualsiasi sito su Internet. Prima di spostare l&#39;applicazione di produzione, si dovrebbe rivedere la sua whitelist e dichiarare l&#39;accesso alla rete specifici domini e sottodomini.</p>
+<p>Risorsa whitelisting è un modello di sicurezza che controlla accesso alle risorse di rete esterni, come ad esempio <code class="language-plaintext highlighter-rouge">http://google.com</code> . Criteri di protezione predefiniti di Cordova Apache consentono l’accesso a qualsiasi risorsa su qualsiasi sito su Internet. Prima di spostare l’applicazione di produzione, si dovrebbe rivedere la sua whitelist e dichiarare l’accesso alla rete specifici domini e sottodomini.</p>
 
-<h2>Specifica</h2>
+<h2 id="specifica">Specifica</h2>
 
-<p>Dominio whitelisting getta le basi per la specifica <a href="http://www.w3.org/TR/widgets-access/">W3C Widget accesso</a> . Nella specifica di Widget accesso il <code>&lt;access&gt;</code> elemento viene utilizzato per dichiarare l&#39;accesso alle risorse di rete specifici. Apache Cordova si estende questo concetto per consentire whitelisting delle singole risorse di rete (URL). In futuro, Apache Cordova sarà astratta le implementazioni di whitelisting piattaforma. Tuttavia, per ora ogni piattaforma implementa un proprio dominio o risorsa whitelisting. Le differenze tra le implementazioni della piattaforma sono descritti più avanti in questo documento.</p>
+<p>Dominio whitelisting getta le basi per la specifica <a href="http://www.w3.org/TR/widgets-access/">W3C Widget accesso</a> . Nella specifica di Widget accesso il <code class="language-plaintext highlighter-rouge">&lt;access&gt;</code> elemento viene utilizzato per dichiarare l’accesso alle risorse di rete specifici. Apache Cordova si estende questo concetto per consentire whitelisting delle singole risorse di rete (URL). In futuro, Apache Cordova sarà astratta le implementazioni di whitelisting piattaforma. Tuttavia, per ora ogni piattaforma implementa un proprio dominio o risorsa whitelisting. Le differenze tra le implementazioni della piattaforma sono descritti più avanti in questo documento.</p>
 
-<p>Il formato generico per le voci whitelist segue la specifica &quot;<a href="http://developer.chrome.com/apps/match_patterns.html">corrispondenza modello</a>&quot; per Google Chrome confezionato Apps. Le risorse sono specificate da URL, ma un asterisco (*) personaggio può essere utilizzato come un &quot;jolly&quot; in luoghi diversi per indicare &quot;qualsiasi valore può andare qui&quot;. Seguito sono riportati esempi specifici.</p>
+<p>Il formato generico per le voci whitelist segue la specifica “<a href="http://developer.chrome.com/apps/match_patterns.html">corrispondenza modello</a>” per Google Chrome confezionato Apps. Le risorse sono specificate da URL, ma un asterisco (*) personaggio può essere utilizzato come un “jolly” in luoghi diversi per indicare “qualsiasi valore può andare qui”. Seguito sono riportati esempi specifici.</p>
 
-<h2>Sintassi</h2>
+<h2 id="sintassi">Sintassi</h2>
 
 <p>Accesso a tutte le risorse su <a href="http://google.com">google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">http://google.com/*
-</code></pre></div>
-<p>Accesso a tutte le risorse al sicuro <a href="https://google.com">google.com</a> ( <code>https://</code> ):</p>
-<div class="highlight"><pre><code class="language-" data-lang="">https://Google.com/ *
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://google.com/*
+</code></pre></div></div>
+
+<p>Accesso a tutte le risorse al sicuro <a href="https://google.com">google.com</a> ( <code class="language-plaintext highlighter-rouge">https://</code> ):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://Google.com/ *
+</code></pre></div></div>
+
 <p>Accesso per il sottodominio specifico <a href="http://maps.google.com">maps.google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">http://maps.google.com/*
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://maps.google.com/*
+</code></pre></div></div>
+
 <p>Accesso a tutti i sottodomini su <a href="http://google.com">google.com</a> (ad esempio, <a href="http://mail.google.com">mail.google.com</a> e <a href="http://docs.google.com">docs.google.com</a>):</p>
-<div class="highlight"><pre><code class="language-" data-lang="">http://*.google.com/*
-</code></pre></div>
-<p>Accesso a tutte le risorse su <a href="http://www.google.com">www.google.com</a> &quot;/ mobile&quot; nel percorso:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">http://www.google.com/mobile/*
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://*.google.com/*
+</code></pre></div></div>
+
+<p>Accesso a tutte le risorse su <a href="http://www.google.com">www.google.com</a> “/ mobile” nel percorso:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://www.google.com/mobile/*
+</code></pre></div></div>
+
 <p>Accesso a <a href="http://google.com">google.com</a> su qualsiasi protocollo (ad esempio, HTTP, HTTPS, FTP, ecc.):</p>
-<div class="highlight"><pre><code class="language-" data-lang="">*://google.com/*
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*://google.com/*
+</code></pre></div></div>
+
 <p>Accesso a tutte le risorse su Internet (ad esempio, <a href="http://google.com">google.com</a> e <a href="http://developer.mozilla.org">developer.mozilla.org</a>):</p>
-<div class="highlight"><pre><code class="language-" data-lang="">*
-</code></pre></div>
-<h2>Android</h2>
 
-<h3>Dettagli</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*
+</code></pre></div></div>
 
-<p>Le regole di whitelisting si trovano in <code>res/xml/config.xml</code> e dichiarata con l&#39;elemento<code>&lt;access origin=&quot;...&quot; /&gt;</code>.</p>
+<h2 id="android">Android</h2>
+
+<h3 id="dettagli">Dettagli</h3>
+
+<p>Le regole di whitelisting si trovano in <code class="language-plaintext highlighter-rouge">res/xml/config.xml</code> e dichiarata con l’elemento<code class="language-plaintext highlighter-rouge">&lt;access origin="..." /&gt;</code>.</p>
 
 <p>Android supporta pienamente la sintassi di whitelisting.</p>
 
-<h3>Sintassi</h3>
+<h3 id="sintassi-1">Sintassi</h3>
 
 <p>Accesso a <a href="http://google.com">google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com/*" /&gt;
-</code></pre></div>
-<h2>BlackBerry 10</h2>
 
-<h3>Dettagli</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com/*" /&gt;
+</code></pre></div></div>
 
-<p>Le regole di whitelisting si trovano in <code>www/config.xml</code> e dichiarata con l&#39;elemento<code>&lt;access origin=&quot;...&quot; /&gt;</code>.</p>
+<h2 id="blackberry-10">BlackBerry 10</h2>
+
+<h3 id="dettagli-1">Dettagli</h3>
+
+<p>Le regole di whitelisting si trovano in <code class="language-plaintext highlighter-rouge">www/config.xml</code> e dichiarata con l’elemento<code class="language-plaintext highlighter-rouge">&lt;access origin="..." /&gt;</code>.</p>
 
 <p>BlackBerry 10 gestisce i caratteri jolly in modo diverso da altre piattaforme in due modi:</p>
 
-<p>1) Contenuto accessibile da XMLHttpRequest deve essere dichiarato in modo esplicito. origine = &quot;*&quot; non saranno rispettati per questo caso di utilizzo. In alternativa, tutta la sicurezza web può essere disattivata utilizzando una preferenza.</p>
+<p>1) Contenuto accessibile da XMLHttpRequest deve essere dichiarato in modo esplicito. origine = “*” non saranno rispettati per questo caso di utilizzo. In alternativa, tutta la sicurezza web può essere disattivata utilizzando una preferenza.</p>
 
-<p>2) sottodomini = &quot;true&quot; può essere usato al posto di &quot;* .domain&quot;</p>
+<p>2) sottodomini = “true” può essere usato al posto di “* .domain”</p>
 
-<h3>Sintassi</h3>
+<h3 id="sintassi-2">Sintassi</h3>
 
 <p>Accesso a <a href="http://google.com">google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" subdomains="false" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" subdomains="false" /&gt;
+</code></pre></div></div>
+
 <p>Accesso a <a href="http://maps.google.com">maps.google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://maps.google.com" subdomains="false" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://maps.google.com" subdomains="false" /&gt;
+</code></pre></div></div>
+
 <p>Accesso a tutti i sottodomini su <a href="http://google.com">Google.it</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" subdomains="true" /&gt;
-</code></pre></div>
-<p>Accesso a tutti i domini, tra cui <code>file://</code> protocollo:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="*" subdomains="true" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" subdomains="true" /&gt;
+</code></pre></div></div>
+
+<p>Accesso a tutti i domini, tra cui <code class="language-plaintext highlighter-rouge">file://</code> protocollo:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="*" subdomains="true" /&gt;
+</code></pre></div></div>
+
 <p>Disattivare tutti i web security:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="websecurity" value="disable" /&gt;
-</code></pre></div>
-<h2>iOS</h2>
 
-<h3>Dettagli</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="websecurity" value="disable" /&gt;
+</code></pre></div></div>
 
-<p>Le regole di whitelisting si trovano in <code>AppName/config.xml</code> e dichiarata con l&#39;elemento<code>&lt;access origin=&quot;...&quot; /&gt;</code>.</p>
+<h2 id="ios">iOS</h2>
+
+<h3 id="dettagli-2">Dettagli</h3>
+
+<p>Le regole di whitelisting si trovano in <code class="language-plaintext highlighter-rouge">AppName/config.xml</code> e dichiarata con l’elemento<code class="language-plaintext highlighter-rouge">&lt;access origin="..." /&gt;</code>.</p>
 
 <p>iOS supporta pienamente la sintassi di whitelisting.</p>
 
-<h3>Cambiato in 3.1.0:</h3>
+<h3 id="cambiato-in-310">Cambiato in 3.1.0:</h3>
 
-<p>Prima della versione 3.1.0, Cordova-iOS incluso alcune estensioni non standard per il dominio whilelisting regime sostenuto da altre piattaforme di Cordova. A partire da 3.1.0, whitelist iOS ora conforme alla sintassi whitelist risorsa descritta nella parte superiore di questo documento. Se si aggiorna da pre-3.1.0, e si sono utilizzando queste estensioni, potrebbe essere necessario cambiare il <code>config.xml</code> file al fine di continuare come prima, lo stesso insieme di risorse di whitelisting.</p>
+<p>Prima della versione 3.1.0, Cordova-iOS incluso alcune estensioni non standard per il dominio whilelisting regime sostenuto da altre piattaforme di Cordova. A partire da 3.1.0, whitelist iOS ora conforme alla sintassi whitelist risorsa descritta nella parte superiore di questo documento. Se si aggiorna da pre-3.1.0, e si sono utilizzando queste estensioni, potrebbe essere necessario cambiare il <code class="language-plaintext highlighter-rouge">config.xml</code> file al fine di continuare come prima, lo stesso insieme di risorse di whitelisting.</p>
 
 <p>In particolare, questi modelli devono essere aggiornati:</p>
 
 <ul>
-<li><p>&quot; <code>apache.org</code> &quot; (nessun protocollo): questo sarebbe partita precedentemente <code>http</code> , <code>https</code> , <code>ftp</code> , e <code>ftps</code> protocolli. Modificare in &quot; <code>*://apache.org/*</code> &quot; per includere tutti i protocolli, o includere una riga per ogni protocollo è necessario supportare.</p></li>
-<li><p>&quot; <code>http://apache.*</code> &quot; (jolly alla fine del dominio): questo sarebbe partita in precedenza tutti i top-level-domini, tra cui possibili due lettere tutti i TLD (ma come non utili domini. co.uk). Includere una riga per ogni TLD che in realtà è possibile controllare e bisogno di whitelist.</p></li>
-<li><p>&quot; <code>h*t*://ap*he.o*g</code> &quot; (i caratteri jolly per lettere mancanti casuali): questi non sono più supportati; cambiamento di includere una riga per ogni dominio e protocollo che tu effettivamente necessario whitelist.</p></li>
+  <li>
+    <p>” <code class="language-plaintext highlighter-rouge">apache.org</code> “ (nessun protocollo): questo sarebbe partita precedentemente <code class="language-plaintext highlighter-rouge">http</code> , <code class="language-plaintext highlighter-rouge">https</code> , <code class="language-plaintext highlighter-rouge">ftp</code> , e <code class="language-plaintext highlighter-rouge">ftps</code> protocolli. Modificare in “ <code class="language-plaintext highlighter-rouge">*://apache.org/*</code> “ per includere tutti i protocolli, o includere una riga per ogni protocollo è necessario supportare.</p>
+  </li>
+  <li>
+    <p>” <code class="language-plaintext highlighter-rouge">http://apache.*</code> “ (jolly alla fine del dominio): questo sarebbe partita in precedenza tutti i top-level-domini, tra cui possibili due lettere tutti i TLD (ma come non utili domini. co.uk). Includere una riga per ogni TLD che in realtà è possibile controllare e bisogno di whitelist.</p>
+  </li>
+  <li>
+    <p>” <code class="language-plaintext highlighter-rouge">h*t*://ap*he.o*g</code> “ (i caratteri jolly per lettere mancanti casuali): questi non sono più supportati; cambiamento di includere una riga per ogni dominio e protocollo che tu effettivamente necessario whitelist.</p>
+  </li>
 </ul>
 
-<h3>Sintassi</h3>
+<h3 id="sintassi-3">Sintassi</h3>
 
 <p>Accesso a <a href="http://google.com">google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com/*" /&gt;
-</code></pre></div>
-<h2>Windows Phone (7 &amp; 8)</h2>
 
-<p>Le regole di whitelisting si trovano in <code>config.xml</code> e dichiarata con l&#39;elemento<code>&lt;access origin=&quot;...&quot; /&gt;</code>.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com/*" /&gt;
+</code></pre></div></div>
 
-<h3>Sintassi</h3>
+<h2 id="windows-phone-7--8">Windows Phone (7 &amp; 8)</h2>
 
-<p>Accesso a <a href="http://google.com">google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" /&gt;
-</code></pre></div>
-<h2>Tizen</h2>
+<p>Le regole di whitelisting si trovano in <code class="language-plaintext highlighter-rouge">config.xml</code> e dichiarata con l’elemento<code class="language-plaintext highlighter-rouge">&lt;access origin="..." /&gt;</code>.</p>
 
-<h3>Dettagli</h3>
-
-<p>Directory radice dell&#39;applicazione <code>config.xml</code> file specifica le regole di whitelisting dominio, utilizzando il <code>&lt;access origin=&quot;...&quot; /&gt;</code> elemento. Per un riferimento completo, vedere la <a href="https://developer.tizen.org/help/topic/org.tizen.help.gs/Creating%20a%20Project.html?path=0_1_1_4#8814682_CreatingaProject-AccessingExternalNetworkResources">documentazione di Tizen l&#39;accesso esterno risorse di rete</a>.</p>
-
-<h3>Sintassi</h3>
+<h3 id="sintassi-4">Sintassi</h3>
 
 <p>Accesso a <a href="http://google.com">google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" subdomains="false" /&gt;
-</code></pre></div>
-<p>Accesso al sicuro <a href="https://google.com">google.com</a> ( <code>https://</code> ):</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="https://google.com" subdomains="false" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" /&gt;
+</code></pre></div></div>
+
+<h2 id="tizen">Tizen</h2>
+
+<h3 id="dettagli-3">Dettagli</h3>
+
+<p>Directory radice dell’applicazione <code class="language-plaintext highlighter-rouge">config.xml</code> file specifica le regole di whitelisting dominio, utilizzando il <code class="language-plaintext highlighter-rouge">&lt;access origin="..." /&gt;</code> elemento. Per un riferimento completo, vedere la <a href="https://developer.tizen.org/help/topic/org.tizen.help.gs/Creating%20a%20Project.html?path=0_1_1_4#8814682_CreatingaProject-AccessingExternalNetworkResources">documentazione di Tizen l’accesso esterno risorse di rete</a>.</p>
+
+<h3 id="sintassi-5">Sintassi</h3>
+
+<p>Accesso a <a href="http://google.com">google.com</a>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" subdomains="false" /&gt;
+</code></pre></div></div>
+
+<p>Accesso al sicuro <a href="https://google.com">google.com</a> ( <code class="language-plaintext highlighter-rouge">https://</code> ):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="https://google.com" subdomains="false" /&gt;
+</code></pre></div></div>
+
 <p>Accesso a tutti i sottodomini su <a href="http://google.com">Google.it</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" subdomains="true" /&gt;
-</code></pre></div>
-<p>Accesso a tutti i domini, tra cui <code>file://</code> protocollo:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="*" subdomains="true" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" subdomains="true" /&gt;
+</code></pre></div></div>
+
+<p>Accesso a tutti i domini, tra cui <code class="language-plaintext highlighter-rouge">file://</code> protocollo:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="*" subdomains="true" /&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

@@ -1040,39 +1040,52 @@
             
 
             <div id="page-toc-source">
-                <h1>SQLResultSet</h1>
+                <h1 id="sqlresultset">SQLResultSet</h1>
 
-<p>Quand un <code>[SQLTransaction](../sqltransaction/sqltransaction.html)</code> de l&#39;objet <code>executeSql</code> est appelée, le callback spécifié s&#39;exécute avec un <code>SQLResultSet</code> paramètre.</p>
+<p>Quand un <code class="language-plaintext highlighter-rouge">[SQLTransaction](../sqltransaction/sqltransaction.html)</code> de l’objet <code class="language-plaintext highlighter-rouge">executeSql</code> est appelée, le callback spécifié s’exécute avec un <code class="language-plaintext highlighter-rouge">SQLResultSet</code> paramètre.</p>
 
-<h2>Propriétés</h2>
-
-<ul>
-<li><p><strong>insertId</strong>: l&#39;ID de ligne de la ligne qui la <code>SQLResultSet</code> instruction de SQL de l&#39;objet insérée dans la base de données.</p></li>
-<li><p><strong>rowsAffected</strong>: le nombre de lignes modifiées par l&#39;instruction SQL, zéro si l&#39;instruction n&#39;a pas affecté toutes les lignes.</p></li>
-<li><p><strong>lignes</strong>: un <code>[SQLResultSetRowList](../sqlresultsetrowlist/sqlresultsetrowlist.html)</code> qui représente les lignes retournées, vide si aucune ligne n&#39;est retournée.</p></li>
-</ul>
-
-<h2>Détails</h2>
-
-<p>Quand un <code>[SQLTransaction](../sqltransaction/sqltransaction.html)</code> de l&#39;objet <code>executeSql</code> est appelée, le callback spécifié s&#39;exécute avec un <code>SQLResultSet</code> paramètre contenant trois propriétés :</p>
+<h2 id="propriétés">Propriétés</h2>
 
 <ul>
-<li><p>Le <code>insertId</code> retourne le numéro de ligne d&#39;une instruction d&#39;insertion SQL successly. Si le code SQL n&#39;insère pas de toutes les lignes, le <code>insertId</code> n&#39;est pas définie.</p></li>
-<li><p>Le <code>rowsAffected</code> est toujours `<code>pour un SQL</code>select<code>déclaration. Pour</code>insert<code>ou</code>update` déclarations, elle retourne le nombre de modification lignes.</p></li>
-<li><p>La finale <code>SQLResultSetList</code> contient les données renvoyées par une instruction SQL select.</p></li>
+  <li>
+    <p><strong>insertId</strong>: l’ID de ligne de la ligne qui la <code class="language-plaintext highlighter-rouge">SQLResultSet</code> instruction de SQL de l’objet insérée dans la base de données.</p>
+  </li>
+  <li>
+    <p><strong>rowsAffected</strong>: le nombre de lignes modifiées par l’instruction SQL, zéro si l’instruction n’a pas affecté toutes les lignes.</p>
+  </li>
+  <li>
+    <p><strong>lignes</strong>: un <code class="language-plaintext highlighter-rouge">[SQLResultSetRowList](../sqlresultsetrowlist/sqlresultsetrowlist.html)</code> qui représente les lignes retournées, vide si aucune ligne n’est retournée.</p>
+  </li>
 </ul>
 
-<h2>Plates-formes prises en charge</h2>
+<h2 id="détails">Détails</h2>
+
+<p>Quand un <code class="language-plaintext highlighter-rouge">[SQLTransaction](../sqltransaction/sqltransaction.html)</code> de l’objet <code class="language-plaintext highlighter-rouge">executeSql</code> est appelée, le callback spécifié s’exécute avec un <code class="language-plaintext highlighter-rouge">SQLResultSet</code> paramètre contenant trois propriétés :</p>
 
 <ul>
-<li>  Android</li>
-<li>  BlackBerry WebWorks (OS 6.0 et supérieur)</li>
-<li>  iOS</li>
-<li>  Paciarelli</li>
+  <li>
+    <p>Le <code class="language-plaintext highlighter-rouge">insertId</code> retourne le numéro de ligne d’une instruction d’insertion SQL successly. Si le code SQL n’insère pas de toutes les lignes, le <code class="language-plaintext highlighter-rouge">insertId</code> n’est pas définie.</p>
+  </li>
+  <li>
+    <p>Le <code class="language-plaintext highlighter-rouge">rowsAffected</code> est toujours `` pour un SQL <code class="language-plaintext highlighter-rouge">select</code> déclaration. Pour <code class="language-plaintext highlighter-rouge">insert</code> ou <code class="language-plaintext highlighter-rouge">update</code> déclarations, elle retourne le nombre de modification lignes.</p>
+  </li>
+  <li>
+    <p>La finale <code class="language-plaintext highlighter-rouge">SQLResultSetList</code> contient les données renvoyées par une instruction SQL select.</p>
+  </li>
 </ul>
 
-<h2>Exécuter SQL exemple rapide</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">function queryDB(tx) {tx.executeSql ("SELECT * de démo ', [], querySuccess, errorCB);}
+<h2 id="plates-formes-prises-en-charge">Plates-formes prises en charge</h2>
+
+<ul>
+  <li>Android</li>
+  <li>BlackBerry WebWorks (OS 6.0 et supérieur)</li>
+  <li>iOS</li>
+  <li>Paciarelli</li>
+</ul>
+
+<h2 id="exécuter-sql-exemple-rapide">Exécuter SQL exemple rapide</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function queryDB(tx) {tx.executeSql ("SELECT * de démo ', [], querySuccess, errorCB);}
 
 function querySuccess (tx, résultats) {console.log ("retourner des lignes =" + results.rows.length) ;
     / / ce sera vrai puisqu'il s'agissait d'une instruction select et donc rowsAffected était 0 si (! results.rowsAffected) {console.log ("aucune lignes affectées!') ;
@@ -1083,26 +1096,29 @@ function errorCB(err) {alert ("erreur lors du traitement SQL:" + err.code);}
 
 var db = window.openDatabase ("Database", "1.0", "Cordova Demo", 200000) ;
 DB.transaction (queryDB, errorCB) ;
-</code></pre></div>
-<h2>Exemple complet</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="nt">&lt;</span> <span class="err">!</span><span class="na">DOCTYPE</span> <span class="na">html</span> <span class="nt">&gt;&lt;</span> <span class="nt">html</span> <span class="nt">&gt;&lt;</span> <span class="nt">t</span><span class="err">ê</span><span class="na">te</span> <span class="nt">&gt;&lt;</span> <span class="nt">titre</span> <span class="nt">&gt;</span> stockage exemple <span class="nt">&lt;</span> <span class="err">/</span> <span class="na">titre</span> <span class="nt">&gt;&lt; script </span><span class="na">type =</span><span class="err"> </span><span class="s">"text/javascript"</span> <span class="na">charset =</span><span class="err"> </span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span> <span class="nt">&gt;&lt; / script &gt;&lt; script </span><span class="na">type =</span><span class="err"> </span><span class="s">"text/javascript"</span> <span class="na">charset =</span><span class="err"> </span><span class="s">"utf-8"</span> <span class="nt">&gt;</span> <span class="o">/</span> <span class="sr">/ attendre pour les bibliothèques de périphérique API charger /</span> <span class="o">/</span> <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span> <span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">)</span> <span class="p">;</span>
+</code></pre></div></div>
 
-    <span class="sr">/ /</span> <span class="nx">Remplir</span> <span class="nx">la</span> <span class="nx">base</span> <span class="nx">de</span> <span class="nx">donn</span><span class="err">é</span><span class="nx">es</span> <span class="o">/</span> <span class="sr">/ function populateDB</span><span class="se">(</span><span class="sr">tx</span><span class="se">)</span><span class="sr"> {tx.executeSql </span><span class="se">(</span><span class="sr">"DROP TABLE IF EXISTS démo"</span><span class="se">)</span><span class="sr"> </span><span class="err">;
-</span>        <span class="nx">tx</span><span class="p">.</span><span class="nx">executeSql</span> <span class="p">(</span><span class="s2">"créer TABLE IF NOT existe démo (données uniques, id)"</span><span class="p">)</span> <span class="p">;</span>
-        <span class="nx">tx</span><span class="p">.</span><span class="nx">executeSql</span> <span class="p">(</span><span class="s1">' insérer en démo (id, données) valeurs (1, "première ligne")'</span><span class="p">)</span> <span class="p">;</span>
-        <span class="nx">tx</span><span class="p">.</span><span class="nx">executeSql</span> <span class="p">(</span><span class="s2">"insérer en démo (id, données) valeurs (2,"</span><span class="nx">Seconde</span> <span class="nx">ligne</span><span class="s2">")"</span><span class="p">)</span> <span class="p">;</span>
-    <span class="p">}</span> <span class="sr">/ /</span> <span class="nx">Interroger</span> <span class="nx">la</span> <span class="nx">base</span> <span class="nx">de</span> <span class="nx">donn</span><span class="err">é</span><span class="nx">es</span> <span class="o">/</span> <span class="sr">/ function queryDB</span><span class="se">(</span><span class="sr">tx</span><span class="se">)</span><span class="sr"> {tx.executeSql </span><span class="se">(</span><span class="sr">"SELECT * de démo ', </span><span class="se">[]</span><span class="sr">, querySuccess, errorCB</span><span class="se">)</span><span class="sr"> </span><span class="err">;
-</span>    <span class="p">}</span> <span class="sr">/ /</span> <span class="nx">Interroger</span> <span class="nx">le</span> <span class="nx">rappel</span> <span class="nx">r</span><span class="err">é</span><span class="nx">ussi</span> <span class="o">/</span> <span class="sr">/ function querySuccess </span><span class="se">(</span><span class="sr">tx, résultats</span><span class="se">)</span><span class="sr"> {console.log </span><span class="se">(</span><span class="sr">"retourner des lignes =" + results.rows.length</span><span class="se">)</span><span class="sr"> </span><span class="err">;
-</span>        <span class="o">/</span> <span class="sr">/ ce sera vrai puisqu'il s'agissait d'une instruction select et donc rowsAffected était 0 si </span><span class="se">(</span><span class="sr">! results.rowsAffected</span><span class="se">)</span><span class="sr"> {console.log </span><span class="se">(</span><span class="sr">"aucune lignes affectées!'</span><span class="se">)</span><span class="sr"> </span><span class="err">;
-</span>            <span class="nx">retourne</span> <span class="nx">la</span> <span class="nx">valeur</span> <span class="kc">false</span> <span class="p">;</span>
-        <span class="p">}</span> <span class="sr">/ /</span> <span class="nx">une</span> <span class="nx">instruction</span> <span class="nx">insert</span><span class="p">,</span> <span class="nx">cette</span> <span class="nx">propri</span><span class="err">é</span><span class="nx">t</span><span class="err">é</span> <span class="nx">retourne</span> <span class="nx">l</span><span class="err">'</span><span class="nx">ID</span> <span class="nx">de</span> <span class="nx">la</span> <span class="nx">derni</span><span class="err">è</span><span class="nx">re</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">ligne</span> <span class="nx">ins</span><span class="err">é</span><span class="nx">r</span><span class="err">é</span><span class="nx">e</span> <span class="p">(</span><span class="s2">"inséré dernière ligne ID ="</span> <span class="o">+</span> <span class="nx">results</span><span class="p">.</span><span class="nx">insertId</span><span class="p">)</span> <span class="p">;</span>
-    <span class="p">}</span> <span class="sr">/ /</span> <span class="nx">Rappel</span> <span class="nx">erreur</span> <span class="nx">de</span> <span class="nx">transaction</span> <span class="o">/</span> <span class="sr">/ function errorCB</span><span class="se">(</span><span class="sr">err</span><span class="se">)</span><span class="sr"> {console.log </span><span class="se">(</span><span class="sr">"erreur lors du traitement SQL:" + err.code</span><span class="se">)</span><span class="sr"> </span><span class="err">;
-</span>    <span class="p">}</span> <span class="sr">/ /</span> <span class="nx">Rappel</span> <span class="nx">r</span><span class="err">é</span><span class="nx">ussi</span> <span class="nx">de</span> <span class="nx">transaction</span> <span class="o">/</span> <span class="sr">/ function successCB</span><span class="se">()</span><span class="sr"> {var db = window.openDatabase </span><span class="se">(</span><span class="sr">"Database", "1.0", "Cordova Demo", 200000</span><span class="se">)</span><span class="sr"> </span><span class="err">;
-</span>        <span class="nx">DB</span><span class="p">.</span><span class="nx">transaction</span> <span class="p">(</span><span class="nx">queryDB</span><span class="p">,</span> <span class="nx">errorCB</span><span class="p">)</span> <span class="p">;</span>
-    <span class="p">}</span> <span class="sr">/ /</span> <span class="nx">p</span><span class="err">é</span><span class="nx">riph</span><span class="err">é</span><span class="nx">rique</span> <span class="nx">API</span> <span class="nx">sont</span> <span class="nx">disponibles</span> <span class="o">/</span> <span class="sr">/ function onDeviceReady</span><span class="se">()</span><span class="sr"> {var db = window.openDatabase </span><span class="se">(</span><span class="sr">"Database", "1.0", "Cordova Demo", 200000</span><span class="se">)</span><span class="sr"> </span><span class="err">;
-</span>        <span class="nx">DB</span><span class="p">.</span><span class="nx">transaction</span> <span class="p">(</span><span class="nx">populateDB</span><span class="p">,</span> <span class="nx">errorCB</span><span class="p">,</span> <span class="nx">successCB</span><span class="p">)</span> <span class="p">;</span>
-    <span class="p">}</span> <span class="nt">&lt; /script &gt;&lt;</span> <span class="err">/</span> <span class="na">chef</span> <span class="nt">&gt;&lt;</span> <span class="nt">corps</span> <span class="nt">&gt;&lt;</span> <span class="nt">h1</span> <span class="nt">&gt;</span> exemple <span class="nt">&lt;</span> <span class="err">/</span> <span class="na">h1</span> <span class="nt">&gt;&lt;</span> <span class="nt">p</span> <span class="nt">&gt;</span> base de données <span class="nt">&lt;</span> <span class="err">/</span><span class="na">p</span> <span class="nt">&gt;&lt;</span> <span class="err">/</span> <span class="na">body</span> <span class="nt">&gt;&lt;</span> <span class="err">/</span> <span class="na">html</span> <span class="nt">&gt;</span>
-</code></pre></div>
+<h2 id="exemple-complet">Exemple complet</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt; !DOCTYPE html &gt;&lt; html &gt;&lt; tête &gt;&lt; titre &gt; stockage exemple &lt; / titre &gt;&lt; script type = "text/javascript" charset = "utf-8" src="cordova.js" &gt;&lt; / script &gt;&lt; script type = "text/javascript" charset = "utf-8" &gt; / / attendre pour les bibliothèques de périphérique API charger / / document.addEventListener ("deviceready", onDeviceReady, false) ;
+
+    / / Remplir la base de données / / function populateDB(tx) {tx.executeSql ("DROP TABLE IF EXISTS démo") ;
+        tx.executeSql ("créer TABLE IF NOT existe démo (données uniques, id)") ;
+        tx.executeSql (' insérer en démo (id, données) valeurs (1, "première ligne")') ;
+        tx.executeSql ("insérer en démo (id, données) valeurs (2,"Seconde ligne")") ;
+    } / / Interroger la base de données / / function queryDB(tx) {tx.executeSql ("SELECT * de démo ', [], querySuccess, errorCB) ;
+    } / / Interroger le rappel réussi / / function querySuccess (tx, résultats) {console.log ("retourner des lignes =" + results.rows.length) ;
+        / / ce sera vrai puisqu'il s'agissait d'une instruction select et donc rowsAffected était 0 si (! results.rowsAffected) {console.log ("aucune lignes affectées!') ;
+            retourne la valeur false ;
+        } / / une instruction insert, cette propriété retourne l'ID de la dernière console.log ligne insérée ("inséré dernière ligne ID =" + results.insertId) ;
+    } / / Rappel erreur de transaction / / function errorCB(err) {console.log ("erreur lors du traitement SQL:" + err.code) ;
+    } / / Rappel réussi de transaction / / function successCB() {var db = window.openDatabase ("Database", "1.0", "Cordova Demo", 200000) ;
+        DB.transaction (queryDB, errorCB) ;
+    } / / périphérique API sont disponibles / / function onDeviceReady() {var db = window.openDatabase ("Database", "1.0", "Cordova Demo", 200000) ;
+        DB.transaction (populateDB, errorCB, successCB) ;
+    } &lt; /script &gt;&lt; / chef &gt;&lt; corps &gt;&lt; h1 &gt; exemple &lt; / h1 &gt;&lt; p &gt; base de données &lt; /p &gt;&lt; / body &gt;&lt; / html &gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

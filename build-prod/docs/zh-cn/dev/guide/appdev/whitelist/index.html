@@ -2112,95 +2112,126 @@
             
 
             <div id="page-toc-source">
-                <h1>白名單指南</h1>
+                <h1 id="白名單指南">白名單指南</h1>
 
 <p>域白名單是一種控制訪問的安全模型向外部域，您的應用程式已不能控制。 科爾多瓦提供了一個可配置的安全性原則來定義可以訪問外部網站。 預設情況下，新的應用程式被配置為允許訪問任何網站。 在您的應用程式到生產之前，應制訂白名單和允許訪問特定的網路域和子域。</p>
 
 <p>對於 Android 和 iOS （如其 4.0 的版本），科爾多瓦的安全性原則是可擴展的通過一個外掛程式介面。 您的應用程式應使用 <a href="https://github.com/apache/cordova-plugin-whitelist">cordova-plugin-whitelist</a>，因為它提供了更好的安全性和可配置性比早期版本的科爾多瓦。 雖然有可能實現自己的白名單外掛程式，它不建議除非您的應用程式有非常具體的安全性原則要求。 有關用法和配置，請參閱 <a href="https://github.com/apache/cordova-plugin-whitelist">cordova-plugin-whitelist</a> 的詳細資訊。</p>
 
-<p>對於其他平臺，科爾多瓦遵循 <a href="http://www.w3.org/TR/widgets-access/">W3C 部件訪問</a> 規範，這依賴于應用程式的 <code>config.xml</code> 檔以啟用對特定域的網路訪問中的 <code>&lt;access&gt;</code> 元素。 對於依賴于描述在命令列介面的 CLI 工作流程的專案，此檔位於專案的頂級目錄。 否則對於特定于平臺的發展路徑，以下各節列出的位置。 （每個平臺上見各種平臺指南的詳細資訊）。</p>
+<p>對於其他平臺，科爾多瓦遵循 <a href="http://www.w3.org/TR/widgets-access/">W3C 部件訪問</a> 規範，這依賴于應用程式的 <code class="language-plaintext highlighter-rouge">config.xml</code> 檔以啟用對特定域的網路訪問中的 <code class="language-plaintext highlighter-rouge">&lt;access&gt;</code> 元素。 對於依賴于描述在命令列介面的 CLI 工作流程的專案，此檔位於專案的頂級目錄。 否則對於特定于平臺的發展路徑，以下各節列出的位置。 （每個平臺上見各種平臺指南的詳細資訊）。</p>
 
-<p>下面的示例演示 <code>&lt;access&gt;</code> 白名單語法：</p>
+<p>下面的示例演示 <code class="language-plaintext highlighter-rouge">&lt;access&gt;</code> 白名單語法：</p>
 
 <ul>
-<li><p><a href="http://google.com">Google.com</a>訪問：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" /&gt;
-</code></pre></div></li>
-<li><p>對安全<a href="https://google.com">google.com</a>的訪問 ( <code>https://</code> ):</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="https://google.com" /&gt;
-</code></pre></div></li>
-<li><p>子域<a href="http://maps.google.com">maps.google.com</a>訪問：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://maps.google.com" /&gt;
-</code></pre></div></li>
-<li><p>對所有子域<a href="http://google.com">google.com</a>，例如<a href="http://mail.google.com">mail.google.com</a>和<a href="http://docs.google.com">docs.google.com</a>的訪問：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://*.google.com" /&gt;
-</code></pre></div></li>
-<li><p>到<em>所有</em>的域，例如， <a href="http://google.com">google.com</a>和<a href="http://developer.mozilla.org">developer.mozilla.org</a>的訪問：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="*" /&gt;
-</code></pre></div>
-<p>這是新創建的 CLI 專案的預設值。</p></li>
+  <li>
+    <p><a href="http://google.com">Google.com</a>訪問：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>對安全<a href="https://google.com">google.com</a>的訪問 ( <code class="language-plaintext highlighter-rouge">https://</code> ):</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="https://google.com" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>子域<a href="http://maps.google.com">maps.google.com</a>訪問：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://maps.google.com" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>對所有子域<a href="http://google.com">google.com</a>，例如<a href="http://mail.google.com">mail.google.com</a>和<a href="http://docs.google.com">docs.google.com</a>的訪問：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://*.google.com" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>到<em>所有</em>的域，例如， <a href="http://google.com">google.com</a>和<a href="http://developer.mozilla.org">developer.mozilla.org</a>的訪問：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="*" /&gt;
+</code></pre></div>    </div>
+
+    <p>這是新創建的 CLI 專案的預設值。</p>
+  </li>
 </ul>
 
 <p>要知道有些網站可以自動從其主頁定向到不同的 url，例如，使用 HTTPs 協定或具體國家域。 例如 HTTP://www.google.com 將重定向在 HTTPs://www.google.com，使用 SSL/TLS，然後可能進一步將重定向到一個地理位置，例如 HTTPs://www.google.co.uk。 這樣的場景可能需要修改或額外的白名單的作品可以超越你所需的初期。 請考慮這您構建您的白名單。</p>
 
 <p>請注意白名單僅適用于主要的科爾多瓦 web 視圖，不適用於 InAppBrowser web 視圖或系統 web 瀏覽器中的打開連結。</p>
 
-<h2>亞馬遜火 OS 白</h2>
+<h2 id="亞馬遜火-os-白">亞馬遜火 OS 白</h2>
 
-<p>在 <code>res/xml/config.xml</code> 中找到特定于平臺的白名單規則.</p>
+<p>在 <code class="language-plaintext highlighter-rouge">res/xml/config.xml</code> 中找到特定于平臺的白名單規則.</p>
 
-<h2>Android 白</h2>
+<h2 id="android-白">Android 白</h2>
 
 <p>如上所述，看到 <a href="https://github.com/apache/cordova-plugin-whitelist">cordova-plugin-whitelist</a> 的詳細資訊。科爾多瓦 android 4.0.0 之前，請參閱本文檔的舊版本。</p>
 
-<h2>iOS 白名單</h2>
+<h2 id="ios-白名單">iOS 白名單</h2>
 
 <p>如上所述，看到 <a href="https://github.com/apache/cordova-plugin-whitelist">cordova-plugin-whitelist</a> 的詳細資訊。科爾多瓦 ios 4.0.0 之前，請參閱本文檔的舊版本。</p>
 
-<h2>黑莓 10 白名單</h2>
+<h2 id="黑莓-10-白名單">黑莓 10 白名單</h2>
 
-<p>在 <code>www/config.xml</code> 中找到白名單規則.</p>
+<p>在 <code class="language-plaintext highlighter-rouge">www/config.xml</code> 中找到白名單規則.</p>
 
 <p>黑莓 10年使用萬用字元有別于其他平臺兩種方式：</p>
 
 <ul>
-<li><p>必須顯式聲明由 <code>XMLHttpRequest</code> 訪問的任何內容。 設置 <code>origin=&quot;*&quot;</code> 不能在這種情況下。 或者，可能使用黑莓手機配置中所述的 <code>WebSecurity</code> 偏好禁用所有 web 安全性：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="websecurity" value="disable" /&gt;
-</code></pre></div></li>
-<li><p>作為設置 <code>*.domain</code> 的替代方法，將其他 <code>subdomains</code> 屬性設置為 <code>true</code>。 它應該被預設設置為 <code>false</code>。 例如，下面的允許訪問 <code>google.com</code>，<code>maps.google.com</code> 和 <code>docs.google.com</code>：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" subdomains="true" /&gt;
-</code></pre></div>
-<p><code>Google.com</code> 以下縮小存取權限：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" subdomains="false" /&gt;
-</code></pre></div>
-<p>指定訪問到所有的域，包括本地 <code>file://</code> 協定：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="*" subdomains="true" /&gt;
-</code></pre></div></li>
+  <li>
+    <p>必須顯式聲明由 <code class="language-plaintext highlighter-rouge">XMLHttpRequest</code> 訪問的任何內容。 設置 <code class="language-plaintext highlighter-rouge">origin="*"</code> 不能在這種情況下。 或者，可能使用黑莓手機配置中所述的 <code class="language-plaintext highlighter-rouge">WebSecurity</code> 偏好禁用所有 web 安全性：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="websecurity" value="disable" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>作為設置 <code class="language-plaintext highlighter-rouge">*.domain</code> 的替代方法，將其他 <code class="language-plaintext highlighter-rouge">subdomains</code> 屬性設置為 <code class="language-plaintext highlighter-rouge">true</code>。 它應該被預設設置為 <code class="language-plaintext highlighter-rouge">false</code>。 例如，下面的允許訪問 <code class="language-plaintext highlighter-rouge">google.com</code>，<code class="language-plaintext highlighter-rouge">maps.google.com</code> 和 <code class="language-plaintext highlighter-rouge">docs.google.com</code>：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" subdomains="true" /&gt;
+</code></pre></div>    </div>
+
+    <p><code class="language-plaintext highlighter-rouge">Google.com</code> 以下縮小存取權限：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" subdomains="false" /&gt;
+</code></pre></div>    </div>
+
+    <p>指定訪問到所有的域，包括本地 <code class="language-plaintext highlighter-rouge">file://</code> 協定：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="*" subdomains="true" /&gt;
+</code></pre></div>    </div>
+  </li>
 </ul>
 
 <p>（有關支援的詳細資訊，請參閱黑莓的文檔 <a href="https://developer.blackberry.com/html5/documentation/ww_developing/Access_element_834677_11.html">訪問元素</a> 上.)</p>
 
-<h2>火狐瀏覽器作業系統</h2>
+<h2 id="火狐瀏覽器作業系統">火狐瀏覽器作業系統</h2>
 
-<p>火狐瀏覽器作業系統特定的域還有白名單沒有概念。 相反，有特殊的許可權稱為 <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest#Permissions">SystemXHR</a>。 有必要將此許可權添加到 <code>config.xml</code>：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;platform name="firefoxos"&gt;
+<p>火狐瀏覽器作業系統特定的域還有白名單沒有概念。 相反，有特殊的許可權稱為 <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest#Permissions">SystemXHR</a>。 有必要將此許可權添加到 <code class="language-plaintext highlighter-rouge">config.xml</code>：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;platform name="firefoxos"&gt;
     &lt;permission name="systemXHR" privileged="true" description="load data from server" /&gt;
 &lt;/platform&gt;
-</code></pre></div>
-<p><code>XMLHttpRequest</code> 物件需要使用兩個參數 <code>mozAnon</code> 和 <code>mozSystem</code> 進行具現化：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">var request = new XMLHttpRequest({
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">XMLHttpRequest</code> 物件需要使用兩個參數 <code class="language-plaintext highlighter-rouge">mozAnon</code> 和 <code class="language-plaintext highlighter-rouge">mozSystem</code> 進行具現化：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var request = new XMLHttpRequest({
     mozAnon: true,
     mozSystem: true});
-</code></pre></div>
+</code></pre></div></div>
+
 <p>此解決方案是透明的因此沒有其他平臺的區別。</p>
 
-<h2>Windows Phone 白名單</h2>
+<h2 id="windows-phone-白名單">Windows Phone 白名單</h2>
 
-<p>Windows Phone 8 的白名單規則是在應用程式的 <code>config.xml</code> 檔中找到的。</p>
+<p>Windows Phone 8 的白名單規則是在應用程式的 <code class="language-plaintext highlighter-rouge">config.xml</code> 檔中找到的。</p>
 
-<h2>泰白名單</h2>
+<h2 id="泰白名單">泰白名單</h2>
 
-<p>白名單規則是在應用程式的 <code>config.xml</code> 檔中找到的。 平臺依靠相同的 <code>subdomains</code> 屬性作為黑莓平臺。 （有關支援的詳細資訊，請參閱 Tizen 的文檔 <a href="https://developer.tizen.org/help/index.jsp?topic=%2Forg.tizen.web.appprogramming%2Fhtml%2Fide_sdk_tools%2Fconfig_editor_w3celements.htm">訪問元素</a> 上.)</p>
+<p>白名單規則是在應用程式的 <code class="language-plaintext highlighter-rouge">config.xml</code> 檔中找到的。 平臺依靠相同的 <code class="language-plaintext highlighter-rouge">subdomains</code> 屬性作為黑莓平臺。 （有關支援的詳細資訊，請參閱 Tizen 的文檔 <a href="https://developer.tizen.org/help/index.jsp?topic=%2Forg.tizen.web.appprogramming%2Fhtml%2Fide_sdk_tools%2Fconfig_editor_w3celements.htm">訪問元素</a> 上.)</p>
+
 
 
             </div>

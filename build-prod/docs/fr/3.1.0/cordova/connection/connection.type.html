@@ -1256,27 +1256,28 @@
             
 
             <div id="page-toc-source">
-                <h1>connection.type</h1>
+                <h1 id="connectiontype">connection.type</h1>
 
-<p>Vérifie la connexion réseau en cours d&#39;activité.</p>
+<p>Vérifie la connexion réseau en cours d’activité.</p>
 
-<h2>Description</h2>
+<h2 id="description">Description</h2>
 
-<p>Cette propriété offre un moyen rapide pour déterminer l&#39;état et le type de la connexion réseau de l&#39;appareil.</p>
+<p>Cette propriété offre un moyen rapide pour déterminer l’état et le type de la connexion réseau de l’appareil.</p>
 
-<h2>Plates-formes supportées</h2>
+<h2 id="plates-formes-supportées">Plates-formes supportées</h2>
 
 <ul>
-<li>  iOS</li>
-<li>  Android</li>
-<li>  BlackBerry WebWorks (OS 5.0 et plus)</li>
-<li>  Paciarelli</li>
-<li>  Windows Phone 7 et 8</li>
-<li>  Windows 8</li>
+  <li>iOS</li>
+  <li>Android</li>
+  <li>BlackBerry WebWorks (OS 5.0 et plus)</li>
+  <li>Paciarelli</li>
+  <li>Windows Phone 7 et 8</li>
+  <li>Windows 8</li>
 </ul>
 
-<h2>Exemple court</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">function checkConnection() {
+<h2 id="exemple-court">Exemple court</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function checkConnection() {
     var networkState = navigator.connection.type;
 
     var states = {};
@@ -1293,82 +1294,89 @@
 }
 
 checkConnection();
-</code></pre></div>
-<h2>Exemple complet</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>navigator.connection.type Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="exemple-complet">Exemple complet</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;navigator.connection.type Example&lt;/title&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">checkConnection</span><span class="p">();</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-        <span class="kd">function</span> <span class="nx">checkConnection</span><span class="p">()</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">networkState</span> <span class="o">=</span> <span class="nb">navigator</span><span class="p">.</span><span class="nx">connection</span><span class="p">.</span><span class="nx">type</span><span class="p">;</span>
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
 
-            <span class="kd">var</span> <span class="nx">states</span> <span class="o">=</span> <span class="p">{};</span>
-            <span class="nx">states</span><span class="p">[</span><span class="nx">Connection</span><span class="p">.</span><span class="nx">UNKNOWN</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'Unknown connection'</span><span class="p">;</span>
-            <span class="nx">states</span><span class="p">[</span><span class="nx">Connection</span><span class="p">.</span><span class="nx">ETHERNET</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Ethernet connection'</span><span class="p">;</span>
-            <span class="nx">states</span><span class="p">[</span><span class="nx">Connection</span><span class="p">.</span><span class="nx">WIFI</span><span class="p">]</span>     <span class="o">=</span> <span class="s1">'WiFi connection'</span><span class="p">;</span>
-            <span class="nx">states</span><span class="p">[</span><span class="nx">Connection</span><span class="p">.</span><span class="nx">CELL_2G</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'Cell 2G connection'</span><span class="p">;</span>
-            <span class="nx">states</span><span class="p">[</span><span class="nx">Connection</span><span class="p">.</span><span class="nx">CELL_3G</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'Cell 3G connection'</span><span class="p">;</span>
-            <span class="nx">states</span><span class="p">[</span><span class="nx">Connection</span><span class="p">.</span><span class="nx">CELL_4G</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'Cell 4G connection'</span><span class="p">;</span>
-            <span class="nx">states</span><span class="p">[</span><span class="nx">Connection</span><span class="p">.</span><span class="nx">CELL</span><span class="p">]</span>     <span class="o">=</span> <span class="s1">'Cell generic connection'</span><span class="p">;</span>
-            <span class="nx">states</span><span class="p">[</span><span class="nx">Connection</span><span class="p">.</span><span class="nx">NONE</span><span class="p">]</span>     <span class="o">=</span> <span class="s1">'No network connection'</span><span class="p">;</span>
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        checkConnection();
+    }
 
-            <span class="nx">alert</span><span class="p">(</span><span class="s1">'Connection type: '</span> <span class="o">+</span> <span class="nx">states</span><span class="p">[</span><span class="nx">networkState</span><span class="p">]);</span>
-        <span class="p">}</span>
+        function checkConnection() {
+            var networkState = navigator.connection.type;
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;p&gt;</span>A dialog box will report the network state.<span class="nt">&lt;/p&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2>Changement d&#39;API</h2>
+            var states = {};
+            states[Connection.UNKNOWN]  = 'Unknown connection';
+            states[Connection.ETHERNET] = 'Ethernet connection';
+            states[Connection.WIFI]     = 'WiFi connection';
+            states[Connection.CELL_2G]  = 'Cell 2G connection';
+            states[Connection.CELL_3G]  = 'Cell 3G connection';
+            states[Connection.CELL_4G]  = 'Cell 4G connection';
+            states[Connection.CELL]     = 'Cell generic connection';
+            states[Connection.NONE]     = 'No network connection';
 
-<p>Jusqu&#39;à Cordova 2.3.0, l&#39;objet <code>Connection</code> était accessible via <code>navigator.network.connection</code> ; ceci a été changé pour <code>navigator.connection</code> afin de concorder avec la spécification du W3C. L&#39;accès est toujours possible à l&#39;emplacement d&#39;origine, mais est considéré comme obsolète et sera bientôt supprimé.</p>
+            alert('Connection type: ' + states[networkState]);
+        }
 
-<h2>Notes au sujet d&#39;iOS</h2>
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;A dialog box will report the network state.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h2 id="changement-dapi">Changement d’API</h2>
+
+<p>Jusqu’à Cordova 2.3.0, l’objet <code class="language-plaintext highlighter-rouge">Connection</code> était accessible via <code class="language-plaintext highlighter-rouge">navigator.network.connection</code> ; ceci a été changé pour <code class="language-plaintext highlighter-rouge">navigator.connection</code> afin de concorder avec la spécification du W3C. L’accès est toujours possible à l’emplacement d’origine, mais est considéré comme obsolète et sera bientôt supprimé.</p>
+
+<h2 id="notes-au-sujet-dios">Notes au sujet d’iOS</h2>
 
 <ul>
-<li>  iOS ne permet pas de détecter le type de connexion pour un réseau cellulaire. 
-
-<ul>
-<li>  <code>navigator.connection.type</code> is set to <code>Connection.CELL</code> for all cellular data.</li>
-</ul></li>
+  <li>iOS ne permet pas de détecter le type de connexion pour un réseau cellulaire.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">navigator.connection.type</code> is set to <code class="language-plaintext highlighter-rouge">Connection.CELL</code> for all cellular data.</li>
+    </ul>
+  </li>
 </ul>
 
-<h2>Notes au sujet de Windows Phone</h2>
+<h2 id="notes-au-sujet-de-windows-phone">Notes au sujet de Windows Phone</h2>
 
 <ul>
-<li><p>When running in the emulator, always detects <code>navigator.connection.type</code> as <code>Connection.UNKNOWN</code>.</p></li>
-<li><p>Windows Phone ne permet pas de détecter le type de connexion pour un réseau cellulaire.</p>
+  <li>
+    <p>When running in the emulator, always detects <code class="language-plaintext highlighter-rouge">navigator.connection.type</code> as <code class="language-plaintext highlighter-rouge">Connection.UNKNOWN</code>.</p>
+  </li>
+  <li>
+    <p>Windows Phone ne permet pas de détecter le type de connexion pour un réseau cellulaire.</p>
 
-<ul>
-<li>  <code>navigator.connection.type</code> is set to <code>Connection.CELL</code> for all cellular data.</li>
-</ul></li>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">navigator.connection.type</code> is set to <code class="language-plaintext highlighter-rouge">Connection.CELL</code> for all cellular data.</li>
+    </ul>
+  </li>
 </ul>
 
-<h2>Notes au sujet de Paciarelli</h2>
+<h2 id="notes-au-sujet-de-paciarelli">Notes au sujet de Paciarelli</h2>
 
 <ul>
-<li>  Paciarelli peut uniquement détecter une connexion cellulaire ou bien WiFi. 
-
-<ul>
-<li>  <code>navigator.connection.type</code> is set to <code>Connection.CELL_2G</code> for all cellular data.</li>
-</ul></li>
+  <li>Paciarelli peut uniquement détecter une connexion cellulaire ou bien WiFi.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">navigator.connection.type</code> is set to <code class="language-plaintext highlighter-rouge">Connection.CELL_2G</code> for all cellular data.</li>
+    </ul>
+  </li>
 </ul>
 
 

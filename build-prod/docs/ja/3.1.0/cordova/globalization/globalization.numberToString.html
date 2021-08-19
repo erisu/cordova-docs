@@ -1436,65 +1436,73 @@
             
 
             <div id="page-toc-source">
-                <h1>globalization.numberToString</h1>
+                <h1 id="globalizationnumbertostring">globalization.numberToString</h1>
 
 <p>クライアントのユーザーの設定に従って文字列として書式設定された数を返します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.globalization.numberToString(number, successCallback, errorCallback, options);
-</code></pre></div>
-<h2>説明</h2>
 
-<p>番号の書式設定された文字列を返します、 <code>successCallback</code> と、 <code>properties</code> オブジェクトをパラメーターとして。 そのオブジェクトが必要な <code>value</code> を持つプロパティ、 <code>String</code> 値。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.globalization.numberToString(number, successCallback, errorCallback, options);
+</code></pre></div></div>
 
-<p>番号、書式設定エラーがある場合、 <code>errorCallback</code> で実行する、 <code>[GlobalizationError](GlobalizationError/globalizationerror.html)</code> オブジェクトをパラメーターとして。 予想されるエラーコードです。<code>[GlobalizationError](GlobalizationError/globalizationerror.html).FORMATTING\_ERROR</code>.</p>
+<h2 id="説明">説明</h2>
 
-<p><code>options</code>パラメーターはオプションであり、既定値は。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">{0} 型: 'decimal'}
-</code></pre></div>
-<p><code>options.type</code>&#39;Decimal&#39;、&#39;%&#39; または &#39;通貨&#39; にすることができます。</p>
+<p>番号の書式設定された文字列を返します、 <code class="language-plaintext highlighter-rouge">successCallback</code> と、 <code class="language-plaintext highlighter-rouge">properties</code> オブジェクトをパラメーターとして。 そのオブジェクトが必要な <code class="language-plaintext highlighter-rouge">value</code> を持つプロパティ、 <code class="language-plaintext highlighter-rouge">String</code> 値。</p>
 
-<h2>サポートされているプラットフォーム</h2>
+<p>番号、書式設定エラーがある場合、 <code class="language-plaintext highlighter-rouge">errorCallback</code> で実行する、 <code class="language-plaintext highlighter-rouge">[GlobalizationError](GlobalizationError/globalizationerror.html)</code> オブジェクトをパラメーターとして。 予想されるエラーコードです。<code class="language-plaintext highlighter-rouge">[GlobalizationError](GlobalizationError/globalizationerror.html).FORMATTING\_ERROR</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">options</code>パラメーターはオプションであり、既定値は。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{0} 型: 'decimal'}
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">options.type</code>‘Decimal’、’%’ または ‘通貨’ にすることができます。</p>
+
+<h2 id="サポートされているプラットフォーム">サポートされているプラットフォーム</h2>
 
 <ul>
-<li>  アンドロイド</li>
-<li>  ブラックベリー WebWorks (OS 5.0 およびより高い)</li>
-<li>  iOS</li>
-<li>  Windows Phone 8</li>
+  <li>アンドロイド</li>
+  <li>ブラックベリー WebWorks (OS 5.0 およびより高い)</li>
+  <li>iOS</li>
+  <li>Windows Phone 8</li>
 </ul>
 
-<h2>簡単な例</h2>
+<h2 id="簡単な例">簡単な例</h2>
 
-<p>ブラウザーに設定すると、 <code>en\_US</code> のロケールのようなテキストとポップアップ ダイアログが表示されます <code>number: 3.142</code> ：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.globalization.numberToString(
+<p>ブラウザーに設定すると、 <code class="language-plaintext highlighter-rouge">en\_US</code> のロケールのようなテキストとポップアップ ダイアログが表示されます <code class="language-plaintext highlighter-rouge">number: 3.142</code> ：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.globalization.numberToString(
     3.1415926,
     function (number) {alert('number: ' + number.value + '\n');},
     function () {alert('Error getting number\n');},
     {type:'decimal'}
 );
-</code></pre></div>
-<h2>完全な例</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>numberToString Example<span class="nt">&lt;/title&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
 
-    <span class="kd">function</span> <span class="nx">checkNumber</span><span class="p">()</span> <span class="p">{</span>
-      <span class="nb">navigator</span><span class="p">.</span><span class="nx">globalization</span><span class="p">.</span><span class="nx">numberToString</span><span class="p">(</span>
-        <span class="mf">3.1415926</span><span class="p">,</span>
-        <span class="kd">function</span> <span class="p">(</span><span class="nx">number</span><span class="p">)</span> <span class="p">{</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'number: '</span> <span class="o">+</span> <span class="nx">number</span><span class="p">.</span><span class="nx">value</span> <span class="o">+</span> <span class="s1">'\n'</span><span class="p">);},</span>
-        <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'Error getting number\n'</span><span class="p">);},</span>
-        <span class="p">{</span><span class="na">type</span><span class="p">:</span><span class="s1">'decimal'</span><span class="p">}</span>
-      <span class="p">);</span>
-    <span class="p">}</span>
+<h2 id="完全な例">完全な例</h2>
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"checkNumber()"</span><span class="nt">&gt;</span>Click for number<span class="nt">&lt;/button&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;numberToString Example&lt;/title&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
+
+    function checkNumber() {
+      navigator.globalization.numberToString(
+        3.1415926,
+        function (number) {alert('number: ' + number.value + '\n');},
+        function () {alert('Error getting number\n');},
+        {type:'decimal'}
+      );
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;button onclick="checkNumber()"&gt;Click for number&lt;/button&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

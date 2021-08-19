@@ -1304,72 +1304,80 @@
             
 
             <div id="page-toc-source">
-                <h1>globalization.dateToString</h1>
+                <h1 id="globalizationdatetostring">globalization.dateToString</h1>
 
 <p>Devuelve una fecha con formato como una cadena según la configuración regional del cliente y zona horaria.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.globalization.dateToString(date, successCallback, errorCallback, options);
-</code></pre></div>
-<h2>Descripción</h2>
 
-<p>Devuelve la fecha con formato <code>String</code> mediante una propiedad de <code>value</code> accesible desde el objeto pasado como parámetro a la <code>successCallback</code>.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.globalization.dateToString(date, successCallback, errorCallback, options);
+</code></pre></div></div>
 
-<p>El parámetro entrantes <code>date</code> debe ser de tipo <code>Date</code>.</p>
+<h2 id="descripción">Descripción</h2>
 
-<p>Si hay un error de formato de la fecha, entonces el <code>errorCallback</code> ejecuta con un objeto <code>[GlobalizationError](GlobalizationError/globalizationerror.html)</code> como un parámetro. Código esperado del error es <code>[GlobalizationError](GlobalizationError/globalizationerror.html).FORMATTING\_ERROR</code>.</p>
+<p>Devuelve la fecha con formato <code class="language-plaintext highlighter-rouge">String</code> mediante una propiedad de <code class="language-plaintext highlighter-rouge">value</code> accesible desde el objeto pasado como parámetro a la <code class="language-plaintext highlighter-rouge">successCallback</code>.</p>
 
-<p>El <code>options</code> parámetro es opcional, y sus valores por defecto son:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">{formatLength: selector de 'corto',: 'fecha y hora'}
-</code></pre></div>
-<p>El <code>options.formatLength</code> puede ser de <code>short</code>, <code>medium</code>, <code>long</code> o <code>full</code>.</p>
+<p>El parámetro entrantes <code class="language-plaintext highlighter-rouge">date</code> debe ser de tipo <code class="language-plaintext highlighter-rouge">Date</code>.</p>
 
-<p>El <code>options.selector</code> puede ser la <code>date</code>, la <code>time</code> o la <code>date and time</code>.</p>
+<p>Si hay un error de formato de la fecha, entonces el <code class="language-plaintext highlighter-rouge">errorCallback</code> ejecuta con un objeto <code class="language-plaintext highlighter-rouge">[GlobalizationError](GlobalizationError/globalizationerror.html)</code> como un parámetro. Código esperado del error es <code class="language-plaintext highlighter-rouge">[GlobalizationError](GlobalizationError/globalizationerror.html).FORMATTING\_ERROR</code>.</p>
 
-<h2>Plataformas soportadas</h2>
+<p>El <code class="language-plaintext highlighter-rouge">options</code> parámetro es opcional, y sus valores por defecto son:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{formatLength: selector de 'corto',: 'fecha y hora'}
+</code></pre></div></div>
+
+<p>El <code class="language-plaintext highlighter-rouge">options.formatLength</code> puede ser de <code class="language-plaintext highlighter-rouge">short</code>, <code class="language-plaintext highlighter-rouge">medium</code>, <code class="language-plaintext highlighter-rouge">long</code> o <code class="language-plaintext highlighter-rouge">full</code>.</p>
+
+<p>El <code class="language-plaintext highlighter-rouge">options.selector</code> puede ser la <code class="language-plaintext highlighter-rouge">date</code>, la <code class="language-plaintext highlighter-rouge">time</code> o la <code class="language-plaintext highlighter-rouge">date and time</code>.</p>
+
+<h2 id="plataformas-soportadas">Plataformas soportadas</h2>
 
 <ul>
-<li>  Android</li>
-<li>  BlackBerry WebWorks (OS 5.0 y superiores)</li>
-<li>  iOS</li>
-<li>  Windows Phone 8</li>
+  <li>Android</li>
+  <li>BlackBerry WebWorks (OS 5.0 y superiores)</li>
+  <li>iOS</li>
+  <li>Windows Phone 8</li>
 </ul>
 
-<h2>Ejemplo rápido</h2>
+<h2 id="ejemplo-rápido">Ejemplo rápido</h2>
 
-<p>Si el navegador está configurado para la localidad de <code>en\_US</code>, muestra un cuadro de diálogo emergente con texto similar a <code>date: 09/25/2012 16:21</code> utilizando las opciones predeterminadas:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.globalization.dateToString(
+<p>Si el navegador está configurado para la localidad de <code class="language-plaintext highlighter-rouge">en\_US</code>, muestra un cuadro de diálogo emergente con texto similar a <code class="language-plaintext highlighter-rouge">date: 09/25/2012 16:21</code> utilizando las opciones predeterminadas:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.globalization.dateToString(
     new Date(),
     function (date) { alert('date: ' + date.value + '\n'); },
     function () { alert('Error getting dateString\n'); },
     { formatLength: 'short', selector: 'date and time' }
 );
-</code></pre></div>
-<h2>Ejemplo completo</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>dateToString Example<span class="nt">&lt;/title&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
 
-    <span class="kd">function</span> <span class="nx">checkDateString</span><span class="p">()</span> <span class="p">{</span>
-      <span class="nb">navigator</span><span class="p">.</span><span class="nx">globalization</span><span class="p">.</span><span class="nx">dateToString</span><span class="p">(</span>
-        <span class="k">new</span> <span class="nb">Date</span><span class="p">(),</span>
-        <span class="kd">function</span> <span class="p">(</span><span class="nx">date</span><span class="p">)</span> <span class="p">{</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'date: '</span> <span class="o">+</span> <span class="nx">date</span><span class="p">.</span><span class="nx">value</span> <span class="o">+</span> <span class="s1">'\n'</span><span class="p">);},</span>
-        <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'Error getting dateString\n'</span><span class="p">);,</span>
-        <span class="p">{</span><span class="na">formatLength</span><span class="p">:</span><span class="s1">'short'</span><span class="p">,</span> <span class="na">selector</span><span class="p">:</span><span class="s1">'date and time'</span><span class="p">}}</span>
-      <span class="p">);</span>
-    <span class="p">}</span>
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"checkDateString()"</span><span class="nt">&gt;</span>Click for date string<span class="nt">&lt;/button&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2>Windows Phone 8 rarezas</h2>
+<h2 id="ejemplo-completo">Ejemplo completo</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;dateToString Example&lt;/title&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
+
+    function checkDateString() {
+      navigator.globalization.dateToString(
+        new Date(),
+        function (date) {alert('date: ' + date.value + '\n');},
+        function () {alert('Error getting dateString\n');,
+        {formatLength:'short', selector:'date and time'}}
+      );
+    }
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;button onclick="checkDateString()"&gt;Click for date string&lt;/button&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h2 id="windows-phone-8-rarezas">Windows Phone 8 rarezas</h2>
 
 <ul>
-<li>  El <code>formatLength</code> sólo admite la opción <code>short</code> y <code>full</code> valores.</li>
+  <li>El <code class="language-plaintext highlighter-rouge">formatLength</code> sólo admite la opción <code class="language-plaintext highlighter-rouge">short</code> y <code class="language-plaintext highlighter-rouge">full</code> valores.</li>
 </ul>
 
 

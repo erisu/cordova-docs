@@ -1112,139 +1112,159 @@
             
 
             <div id="page-toc-source">
-                <h1>平臺和外掛程式版本管理</h1>
+                <h1 id="平臺和外掛程式版本管理">平臺和外掛程式版本管理</h1>
 
 <p>從版 4.3.0 開始，科爾多瓦提供保存和還原平臺和外掛程式的能力。</p>
 
 <p>此功能允許開發人員保存，並將他們的應用程式還原到已知狀態，而無需檢查在所有的平臺和外掛程式的原始程式碼。</p>
 
-<p>保存命令在 config.xml 中存儲應用程式的平臺和外掛程式版本的詳細資訊。 &#39;還原&#39; 一步會自動發生<strong>&#39;cordova prepare&#39;</strong>發出，製作時使用以前保存的 config.xml 檔中的資訊。</p>
+<p>保存命令在 config.xml 中存儲應用程式的平臺和外掛程式版本的詳細資訊。 ‘還原’ 一步會自動發生<strong>‘cordova prepare’</strong>發出，製作時使用以前保存的 config.xml 檔中的資訊。</p>
 
 <p>在哪裡保存/恢復功能派上用場的一個方案是在處理一個應用程式，專注于一個平臺或者外掛程式每個團隊成員的大型團隊。 此功能很容易地共用專案和減少冗余檢查存儲庫中的代碼的數量。</p>
 
-<h2>平臺版本控制</h2>
+<h2 id="平臺版本控制">平臺版本控制</h2>
 
-<h3>儲蓄的平臺</h3>
+<h3 id="儲蓄的平臺">儲蓄的平臺</h3>
 
 <p>若要保存一個平臺，你可以發出以下命令:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova platform add &lt;platform[@&lt;version&gt;] | directory | git_url&gt; --save
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova platform add &lt;platform[@&lt;version&gt;] | directory | git_url&gt; --save
+</code></pre></div></div>
+
 <p>運行上述命令後，由此產生的 config.xml 看起來像:</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;?xml version='1.0' encoding='utf-8'?&gt;</span>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version='1.0' encoding='utf-8'?&gt;
     ...
-    <span class="nt">&lt;engine</span> <span class="na">name=</span><span class="s">"android"</span> <span class="na">spec=</span><span class="s">"~4.0.0"</span> <span class="nt">/&gt;</span>
+    &lt;engine name="android" spec="~4.0.0" /&gt;
     ...
-<span class="nt">&lt;/xml&gt;</span>
-</code></pre></div>
+&lt;/xml&gt;
+</code></pre></div></div>
+
 <p>一些例子:</p>
 
 <ul>
-<li><strong>&#39;cordova platform add android --save&#39;</strong> =&gt; 檢索固定的版本的 android 平臺，將其添加到該專案，然後更新 config.xml。</li>
-<li><strong>&#39;cordova platform add android@3.7.0 --save&#39;</strong> =&gt; 檢索 android 平臺上，從新公共管理，版本 3.7.0 將它添加到專案，然後更新 config.xml。</li>
-<li><strong>&#39;cordova platform add android@https://github.com/apache/cordova-android.git​ --save&#39;</strong> =&gt; 克隆指定的科爾多瓦 android git 倉庫，將 android 平臺添加到專案中，然後更新 config.xml 並指向指定的 git url 及其版本。</li>
-<li><strong>cordova platform add C:/path/to/android/platform --save</strong> =&gt; 從指定的目錄中檢索的 android 平臺，將其添加到專案中，然後更新 config.xml 和指向的目錄。</li>
+  <li><strong>‘cordova platform add android –save’</strong> =&gt; 檢索固定的版本的 android 平臺，將其添加到該專案，然後更新 config.xml。</li>
+  <li><strong>‘cordova platform add android@3.7.0 –save’</strong> =&gt; 檢索 android 平臺上，從新公共管理，版本 3.7.0 將它添加到專案，然後更新 config.xml。</li>
+  <li><strong>‘cordova platform add android@https://github.com/apache/cordova-android.git​ –save’</strong> =&gt; 克隆指定的科爾多瓦 android git 倉庫，將 android 平臺添加到專案中，然後更新 config.xml 並指向指定的 git url 及其版本。</li>
+  <li><strong>cordova platform add C:/path/to/android/platform –save</strong> =&gt; 從指定的目錄中檢索的 android 平臺，將其添加到專案中，然後更新 config.xml 和指向的目錄。</li>
 </ul>
 
-<h3>保存對現有專案的平臺的大眾</h3>
+<h3 id="保存對現有專案的平臺的大眾">保存對現有專案的平臺的大眾</h3>
 
-<p>&#39;--save&#39; 上文所述的旗幟只是有用的你只要記得使用平臺添加期間。 如果你有一個預先存在的專案，並且您想要保存您的專案中的所有當前添加的平臺，您可以使用:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova platform save
-</code></pre></div>
-<h3>更新/刪除平臺</h3>
+<p>’–save’ 上文所述的旗幟只是有用的你只要記得使用平臺添加期間。 如果你有一個預先存在的專案，並且您想要保存您的專案中的所有當前添加的平臺，您可以使用:</p>
 
-<p>它也是可能更新或刪除從 config.xml 命令 &#39;科爾多瓦平臺更新&#39; 和 &#39;科爾多瓦平臺刪除&#39; 期間:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova platform update &lt;platform[@&lt;version&gt;] | directory | git_url&gt; --save
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova platform save
+</code></pre></div></div>
+
+<h3 id="更新刪除平臺">更新/刪除平臺</h3>
+
+<p>它也是可能更新或刪除從 config.xml 命令 ‘科爾多瓦平臺更新’ 和 ‘科爾多瓦平臺刪除’ 期間:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova platform update &lt;platform[@&lt;version&gt;] | directory | git_url&gt; --save
 $ cordova platform remove &lt;platform&gt; --save
-</code></pre></div>
+</code></pre></div></div>
+
 <p>一些例子:</p>
 
 <ul>
-<li>除了到固定的版本，更新 config.xml 條目更新 android 平臺<strong>&#39;cordova platform update android --save&#39;</strong> =&gt;</li>
-<li>除了 android 平臺更新到版本 3.8.0，更新 config.xml 條目<strong>&#39;cordova platform update android@3.8.0 --save&#39;</strong> =&gt;</li>
-<li>除了 android 平臺更新到版本更新資料夾，更新 config.xml 條目中<strong>&#39;cordova platform update /path/to/android/platform --save&#39;</strong> =&gt;</li>
-<li>=&gt;<strong>&#39;cordova platform remove android --save&#39;</strong>從專案中移除的 android 平臺，從 config.xml 中刪除其專案。</li>
+  <li>除了到固定的版本，更新 config.xml 條目更新 android 平臺<strong>‘cordova platform update android –save’</strong> =&gt;</li>
+  <li>除了 android 平臺更新到版本 3.8.0，更新 config.xml 條目<strong>‘cordova platform update android@3.8.0 –save’</strong> =&gt;</li>
+  <li>除了 android 平臺更新到版本更新資料夾，更新 config.xml 條目中<strong>‘cordova platform update /path/to/android/platform –save’</strong> =&gt;</li>
+  <li>=&gt;<strong>‘cordova platform remove android –save’</strong>從專案中移除的 android 平臺，從 config.xml 中刪除其專案。</li>
 </ul>
 
-<h3>恢復平臺</h3>
+<h3 id="恢復平臺">恢復平臺</h3>
 
-<p><strong>&#39;cordova prepare&#39;</strong>命令運行時，將會從 config.xml 自動還原平臺。</p>
+<p><strong>‘cordova prepare’</strong>命令運行時，將會從 config.xml 自動還原平臺。</p>
 
 <p>如果沒有指定版本的資料夾/git_url 中添加一個平臺，要安裝的版本取自 config.xml，<strong>如果發現</strong>.</p>
 
 <p>示例:</p>
 
 <p>假設您的 config.xml 檔包含以下項:</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;?xml version='1.0' encoding='utf-8'?&gt;</span>
-    ...
-    <span class="nt">&lt;engine</span> <span class="na">name=</span><span class="s">"android"</span> <span class="na">spec=</span><span class="s">"3.7.0"</span> <span class="nt">/&gt;</span>
-    ...
-<span class="nt">&lt;/xml&gt;</span>
-</code></pre></div>
-<p>&lt; / xml &gt; 如果你運行命令<strong>&#39;cordova platform add android&#39;</strong> (沒有版本/資料夾/git_url 指定)，將安裝平臺 &#39;android@3.7.0&#39; (如從 config.xml 中檢索)。</p>
 
-<hr>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version='1.0' encoding='utf-8'?&gt;
+    ...
+    &lt;engine name="android" spec="3.7.0" /&gt;
+    ...
+&lt;/xml&gt;
+</code></pre></div></div>
 
-<h2>外掛程式版本控制</h2>
+<p>&lt; / xml &gt; 如果你運行命令<strong>‘cordova platform add android’</strong> (沒有版本/資料夾/git_url 指定)，將安裝平臺 ‘android@3.7.0’ (如從 config.xml 中檢索)。</p>
+
+<hr />
+
+<h2 id="外掛程式版本控制">外掛程式版本控制</h2>
 
 <p><em>(外掛程式命令是外掛程式命令鏡像)</em></p>
 
-<h3>保存外掛程式</h3>
+<h3 id="保存外掛程式">保存外掛程式</h3>
 
 <p>若要保存外掛程式，您可以發出以下命令:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin add &lt;plugin[@&lt;version&gt;] | directory | git_url&gt; --save
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin add &lt;plugin[@&lt;version&gt;] | directory | git_url&gt; --save
+</code></pre></div></div>
+
 <p>運行上述命令後，由此產生的 config.xml 看起來像:</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;?xml version='1.0' encoding='utf-8'?&gt;</span>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version='1.0' encoding='utf-8'?&gt;
     ...
-    <span class="nt">&lt;plugin</span> <span class="na">name=</span><span class="s">"cordova-plugin-console"</span> <span class="na">spec=</span><span class="s">"~1.0.0"</span> <span class="nt">/&gt;</span>
+    &lt;plugin name="cordova-plugin-console" spec="~1.0.0" /&gt;
     ...
-<span class="nt">&lt;/xml&gt;</span>
-</code></pre></div>
+&lt;/xml&gt;
+</code></pre></div></div>
+
 <p>一些例子:</p>
 
 <ul>
-<li>=&gt; <strong>&#39;cordova plugin add cordova-plugin-console --save&#39;</strong>檢索固定的版本的主控台外掛程式，將其添加到該專案，然後更新 config.xml。</li>
-<li><strong>cordova plugin add cordova-plugin-console@0.2.13 --save</strong> =&gt; 檢索 android 外掛程式，版本 0.2.13 從新公共管理，將其添加到該專案，然後更新 config.xml。</li>
-<li>=&gt; <strong>&#39;cordova plugin add https://github.com/apache/cordova-plugin-console.git --save&#39;</strong>克隆指定的主控台外掛程式 git 倉庫、 將主控台外掛程式添加到該專案，然後更新 config.xml 和指向指定的 git url 及其版本。</li>
-<li><strong>cordova plugin add C:/path/to/console/plugin --save</strong>=&gt; 從指定的目錄中檢索該主控台外掛程式，將其添加到專案中，然後更新 config.xml 和指向的目錄。</li>
+  <li>=&gt; <strong>‘cordova plugin add cordova-plugin-console –save’</strong>檢索固定的版本的主控台外掛程式，將其添加到該專案，然後更新 config.xml。</li>
+  <li><strong>cordova plugin add cordova-plugin-console@0.2.13 –save</strong> =&gt; 檢索 android 外掛程式，版本 0.2.13 從新公共管理，將其添加到該專案，然後更新 config.xml。</li>
+  <li>=&gt; <strong>‘cordova plugin add https://github.com/apache/cordova-plugin-console.git –save’</strong>克隆指定的主控台外掛程式 git 倉庫、 將主控台外掛程式添加到該專案，然後更新 config.xml 和指向指定的 git url 及其版本。</li>
+  <li><strong>cordova plugin add C:/path/to/console/plugin –save</strong>=&gt; 從指定的目錄中檢索該主控台外掛程式，將其添加到專案中，然後更新 config.xml 和指向的目錄。</li>
 </ul>
 
-<h3>大眾在現有專案保存外掛程式</h3>
+<h3 id="大眾在現有專案保存外掛程式">大眾在現有專案保存外掛程式</h3>
 
-<p>&#39;--save&#39; 上文所述的旗幟只是有用的你只要記得使用外掛程式添加期間。 如果你有一個預先存在的專案，並且您想要保存所有當前專案中添加的外掛程式，您可以使用:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin save
-</code></pre></div>
-<h3>更新/刪除外掛程式</h3>
+<p>’–save’ 上文所述的旗幟只是有用的你只要記得使用外掛程式添加期間。 如果你有一個預先存在的專案，並且您想要保存所有當前專案中添加的外掛程式，您可以使用:</p>
 
-<p>它也是可能更新或刪除從 config.xml 命令 &#39;科爾多瓦外掛程式更新&#39; 和 &#39;科爾多瓦外掛程式刪除&#39; 期間:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin update &lt;plugin[@&lt;version&gt;] | directory | git_url&gt; --save
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin save
+</code></pre></div></div>
+
+<h3 id="更新刪除外掛程式">更新/刪除外掛程式</h3>
+
+<p>它也是可能更新或刪除從 config.xml 命令 ‘科爾多瓦外掛程式更新’ 和 ‘科爾多瓦外掛程式刪除’ 期間:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin update &lt;plugin[@&lt;version&gt;] | directory | git_url&gt; --save
 $ cordova plugin remove &lt;plugin&gt; --save
-</code></pre></div>
+</code></pre></div></div>
+
 <p>一些例子:</p>
 
 <ul>
-<li>除了到固定的版本，更新 config.xml 條目更新主控台外掛程式<strong>&#39;cordova plugin update cordova-plugin-console --save&#39;</strong> =&gt;</li>
-<li>除了 android 外掛程式更新到版本 3.8.0，更新 config.xml 條目<strong>&#39;cordova plugin update cordova-plugin-console@0.2.13 --save&#39;</strong> =&gt;</li>
-<li>除了更新到版本資料夾，更新 config.xml 條目中的主控台外掛程式<strong>&#39;cordova plugin update /path/to/console/plugin --save&#39;</strong> =&gt;</li>
-<li>=&gt;<strong>&#39;cordova plugin remove cordova-plugin-console --save&#39;</strong>從專案中移除該主控台外掛程式和從 config.xml 中刪除它的條目。</li>
+  <li>除了到固定的版本，更新 config.xml 條目更新主控台外掛程式<strong>‘cordova plugin update cordova-plugin-console –save’</strong> =&gt;</li>
+  <li>除了 android 外掛程式更新到版本 3.8.0，更新 config.xml 條目<strong>‘cordova plugin update cordova-plugin-console@0.2.13 –save’</strong> =&gt;</li>
+  <li>除了更新到版本資料夾，更新 config.xml 條目中的主控台外掛程式<strong>‘cordova plugin update /path/to/console/plugin –save’</strong> =&gt;</li>
+  <li>=&gt;<strong>‘cordova plugin remove cordova-plugin-console –save’</strong>從專案中移除該主控台外掛程式和從 config.xml 中刪除它的條目。</li>
 </ul>
 
-<h3>恢復外掛程式</h3>
+<h3 id="恢復外掛程式">恢復外掛程式</h3>
 
-<p>從 config.xml 的外掛程式會自動復原， <strong>&#39;cordova prepare&#39;</strong>命令運行時。</p>
+<p>從 config.xml 的外掛程式會自動復原， <strong>‘cordova prepare’</strong>命令運行時。</p>
 
 <p>如果沒有指定版本的資料夾/git_url 添加一個外掛程式，要安裝的版本取自 config.xml，<strong>如果發現</strong>.</p>
 
 <p>示例:</p>
 
 <p>假設您的 config.xml 檔包含以下項:</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;?xml version='1.0' encoding='utf-8'?&gt;</span>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version='1.0' encoding='utf-8'?&gt;
     ...
-    <span class="nt">&lt;plugin</span> <span class="na">name=</span><span class="s">"cordova-plugin-console"</span> <span class="na">spec=</span><span class="s">"0.2.11"</span> <span class="nt">/&gt;</span>
+    &lt;plugin name="cordova-plugin-console" spec="0.2.11" /&gt;
     ...
-<span class="nt">&lt;/ xml&gt;</span>
-</code></pre></div>
-<p>&lt; / xml &gt; 如果你運行命令<strong>&#39;cordova plugin add cordova-plugin-console&#39;</strong> (沒veresion/folder/git_url 指定)，將安裝該外掛程式 &#39;cordova-plugin-console@0.2.11&#39; (如從 config.xml 中檢索)。</p>
+&lt;/ xml&gt;
+</code></pre></div></div>
+
+<p>&lt; / xml &gt; 如果你運行命令<strong>‘cordova plugin add cordova-plugin-console’</strong> (沒veresion/folder/git_url 指定)，將安裝該外掛程式 ‘cordova-plugin-console@0.2.11’ (如從 config.xml 中檢索)。</p>
 
 
             </div>

@@ -1112,42 +1112,49 @@
             
 
             <div id="page-toc-source">
-                <h1>iOS 外掛程式</h1>
+                <h1 id="ios-外掛程式">iOS 外掛程式</h1>
 
 <p>此部分提供了如何在 iOS 平臺上實現本機外掛程式代碼的詳細資訊。 之前讀這篇文章，請參閱應用程式外掛程式外掛程式的結構和其共同的 JavaScript 介面的概述。 這一節繼續表明通信從科爾多瓦 web 視圖的本機平臺和後面的示例<em>回聲</em>外掛程式。</p>
 
-<p>IOS 外掛程式作為擴展目標 C 類實現 <code>CDVPlugin</code> 類。 對於 JavaScript 的 <code>exec</code> 方法的 <code>service</code> 參數將映射到一個目標 C 類，每個外掛程式必須註冊為 <code>&lt;feature&gt;</code> 標記命名的應用程式目錄中 <code>config.xml</code> 檔。</p>
+<p>IOS 外掛程式作為擴展目標 C 類實現 <code class="language-plaintext highlighter-rouge">CDVPlugin</code> 類。 對於 JavaScript 的 <code class="language-plaintext highlighter-rouge">exec</code> 方法的 <code class="language-plaintext highlighter-rouge">service</code> 參數將映射到一個目標 C 類，每個外掛程式必須註冊為 <code class="language-plaintext highlighter-rouge">&lt;feature&gt;</code> 標記命名的應用程式目錄中 <code class="language-plaintext highlighter-rouge">config.xml</code> 檔。</p>
 
-<h2>外掛程式類映射</h2>
+<h2 id="外掛程式類映射">外掛程式類映射</h2>
 
-<p>一個外掛程式的 JavaScript 部分使用 <code>cordova.exec</code> 方法，如下所示：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    exec(&lt;successFunction&gt;, &lt;failFunction&gt;, &lt;service&gt;, &lt;action&gt;, [&lt;args&gt;]);
-</code></pre></div>
-<p>這封送一個請求從 <code>UIWebView</code> 到 iOS 本機一側，有效地調用 <code>action</code> 方法在 <code>service</code> 類，傳入的參數中的 <code>args</code> 陣列。</p>
+<p>一個外掛程式的 JavaScript 部分使用 <code class="language-plaintext highlighter-rouge">cordova.exec</code> 方法，如下所示：</p>
 
-<p>指定作為外掛程式 <code>&lt;feature&gt;</code> 科爾多瓦 iOS 應用程式專案中的標記 <code>config.xml</code> 檔，使用 <code>plugin.xml</code> 檔來自動應用程式外掛程式中所述注入此標記：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;feature name="LocalStorage"&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    exec(&lt;successFunction&gt;, &lt;failFunction&gt;, &lt;service&gt;, &lt;action&gt;, [&lt;args&gt;]);
+</code></pre></div></div>
+
+<p>這封送一個請求從 <code class="language-plaintext highlighter-rouge">UIWebView</code> 到 iOS 本機一側，有效地調用 <code class="language-plaintext highlighter-rouge">action</code> 方法在 <code class="language-plaintext highlighter-rouge">service</code> 類，傳入的參數中的 <code class="language-plaintext highlighter-rouge">args</code> 陣列。</p>
+
+<p>指定作為外掛程式 <code class="language-plaintext highlighter-rouge">&lt;feature&gt;</code> 科爾多瓦 iOS 應用程式專案中的標記 <code class="language-plaintext highlighter-rouge">config.xml</code> 檔，使用 <code class="language-plaintext highlighter-rouge">plugin.xml</code> 檔來自動應用程式外掛程式中所述注入此標記：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;feature name="LocalStorage"&gt;
         &lt;param name="ios-package" value="CDVLocalStorage" /&gt;
     &lt;/feature&gt;
-</code></pre></div>
-<p>該功能的 <code>name</code> 屬性應匹配您所指定的作為 JavaScript <code>exec</code> 調用的 <code>service</code> 參數。 <code>value</code>屬性應與外掛程式的目標 C 類的名稱相匹配。 <code>&lt;param&gt;</code>元素的 <code>name</code> 應始終是 <code>ios-package</code> 。 如果你不遵守這些準則，該外掛程式可能會編譯，但科爾多瓦可能仍然不能夠訪問它。</p>
+</code></pre></div></div>
 
-<h2>外掛程式初始化和存留期</h2>
+<p>該功能的 <code class="language-plaintext highlighter-rouge">name</code> 屬性應匹配您所指定的作為 JavaScript <code class="language-plaintext highlighter-rouge">exec</code> 調用的 <code class="language-plaintext highlighter-rouge">service</code> 參數。 <code class="language-plaintext highlighter-rouge">value</code>屬性應與外掛程式的目標 C 類的名稱相匹配。 <code class="language-plaintext highlighter-rouge">&lt;param&gt;</code>元素的 <code class="language-plaintext highlighter-rouge">name</code> 應始終是 <code class="language-plaintext highlighter-rouge">ios-package</code> 。 如果你不遵守這些準則，該外掛程式可能會編譯，但科爾多瓦可能仍然不能夠訪問它。</p>
 
-<p>外掛程式物件的一個實例創建為生活的每個 <code>UIWebView</code> 。 首先從 JavaScript 的調用的引用時，通常被具現化外掛程式。 否則他們可以通過設置具現化 <code>param</code> 命名為 <code>onload</code> 到 <code>true</code> 在 <code>config.xml</code> 檔：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;feature name="Echo"&gt;
+<h2 id="外掛程式初始化和存留期">外掛程式初始化和存留期</h2>
+
+<p>外掛程式物件的一個實例創建為生活的每個 <code class="language-plaintext highlighter-rouge">UIWebView</code> 。 首先從 JavaScript 的調用的引用時，通常被具現化外掛程式。 否則他們可以通過設置具現化 <code class="language-plaintext highlighter-rouge">param</code> 命名為 <code class="language-plaintext highlighter-rouge">onload</code> 到 <code class="language-plaintext highlighter-rouge">true</code> 在 <code class="language-plaintext highlighter-rouge">config.xml</code> 檔：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;feature name="Echo"&gt;
         &lt;param name="ios-package" value="Echo" /&gt;
         &lt;param name="onload" value="true" /&gt;
     &lt;/feature&gt;
-</code></pre></div>
-<p>有<em>沒有</em>指定外掛程式的初始值設定項。相反，應使用外掛程式 <code>pluginInitialize</code> 為其啟動邏輯方法。</p>
+</code></pre></div></div>
 
-<p>外掛程式需要長時間運行的請求，如媒體重播、 聽眾，保持內部狀態應執行的背景活動 <code>onReset</code> 方法來清理這些活動。 在方法運行時 <code>UIWebView</code> 定位到新的一頁或刷新，重新載入 JavaScript。</p>
+<p>有<em>沒有</em>指定外掛程式的初始值設定項。相反，應使用外掛程式 <code class="language-plaintext highlighter-rouge">pluginInitialize</code> 為其啟動邏輯方法。</p>
 
-<h2>寫作 iOS 科爾多瓦外掛程式</h2>
+<p>外掛程式需要長時間運行的請求，如媒體重播、 聽眾，保持內部狀態應執行的背景活動 <code class="language-plaintext highlighter-rouge">onReset</code> 方法來清理這些活動。 在方法運行時 <code class="language-plaintext highlighter-rouge">UIWebView</code> 定位到新的一頁或刷新，重新載入 JavaScript。</p>
 
-<p>JavaScript 調用觸發外掛程式請求到本機的一邊，和相應的 iOS 目標 C 外掛程式映射正確地在 <code>config.xml</code> 檔中，但最後 iOS 目標 C 外掛程式類看起來像什麼？ 無論派往與 JavaScript 的外掛程式 <code>exec</code> 函數傳遞到相應的外掛程式類的 <code>action</code> 方法。 外掛程式的方法有此簽名：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    - (void)myMethod:(CDVInvokedUrlCommand*)command
+<h2 id="寫作-ios-科爾多瓦外掛程式">寫作 iOS 科爾多瓦外掛程式</h2>
+
+<p>JavaScript 調用觸發外掛程式請求到本機的一邊，和相應的 iOS 目標 C 外掛程式映射正確地在 <code class="language-plaintext highlighter-rouge">config.xml</code> 檔中，但最後 iOS 目標 C 外掛程式類看起來像什麼？ 無論派往與 JavaScript 的外掛程式 <code class="language-plaintext highlighter-rouge">exec</code> 函數傳遞到相應的外掛程式類的 <code class="language-plaintext highlighter-rouge">action</code> 方法。 外掛程式的方法有此簽名：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    - (void)myMethod:(CDVInvokedUrlCommand*)command
     {
         CDVPluginResult* pluginResult = nil;
         NSString* myarg = [command.arguments objectAtIndex:0];
@@ -1159,80 +1166,92 @@
         }
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }
-</code></pre></div>
-<p>有關更多詳細資訊，請參見 <code>[CDVInvokedUrlCommand.h](https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVInvokedUrlCommand.h)</code> ， <code>[CDVPluginResult.h](https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPluginResult.h)</code> ，和<code>[CDVCommandDelegate.h](https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVCommandDelegate.h)</code>.</p>
+</code></pre></div></div>
 
-<h2>iOS CDVPluginResult 訊息類型</h2>
+<p>有關更多詳細資訊，請參見 <code class="language-plaintext highlighter-rouge">[CDVInvokedUrlCommand.h](https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVInvokedUrlCommand.h)</code> ， <code class="language-plaintext highlighter-rouge">[CDVPluginResult.h](https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPluginResult.h)</code> ，和<code class="language-plaintext highlighter-rouge">[CDVCommandDelegate.h](https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVCommandDelegate.h)</code>.</p>
 
-<p>您可以使用 <code>CDVPluginResult</code> 來返回結果的多種類型回 JavaScript 回呼函數，使用類的方法，它們遵循這種模式：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    + (CDVPluginResult*)resultWithStatus:(CDVCommandStatus)statusOrdinal messageAs...
-</code></pre></div>
-<p>您可以創建 <code>String</code> ， <code>Int</code> ， <code>Double</code> ， <code>Bool</code> ， <code>Array</code> ， <code>Dictionary</code> ， <code>ArrayBuffer</code> ，和 <code>Multipart</code> 類型。 你可以也離開了任何參數來發送狀態，或返回錯誤，或甚至選擇不發送任何外掛程式的結果，在這種情況下既不回撥火。</p>
+<h2 id="ios-cdvpluginresult-訊息類型">iOS CDVPluginResult 訊息類型</h2>
+
+<p>您可以使用 <code class="language-plaintext highlighter-rouge">CDVPluginResult</code> 來返回結果的多種類型回 JavaScript 回呼函數，使用類的方法，它們遵循這種模式：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    + (CDVPluginResult*)resultWithStatus:(CDVCommandStatus)statusOrdinal messageAs...
+</code></pre></div></div>
+
+<p>您可以創建 <code class="language-plaintext highlighter-rouge">String</code> ， <code class="language-plaintext highlighter-rouge">Int</code> ， <code class="language-plaintext highlighter-rouge">Double</code> ， <code class="language-plaintext highlighter-rouge">Bool</code> ， <code class="language-plaintext highlighter-rouge">Array</code> ， <code class="language-plaintext highlighter-rouge">Dictionary</code> ， <code class="language-plaintext highlighter-rouge">ArrayBuffer</code> ，和 <code class="language-plaintext highlighter-rouge">Multipart</code> 類型。 你可以也離開了任何參數來發送狀態，或返回錯誤，或甚至選擇不發送任何外掛程式的結果，在這種情況下既不回撥火。</p>
 
 <p>請注意以下複雜的傳回值為：</p>
 
 <ul>
-<li><p><code>messageAsArrayBuffer</code>預計 <code>NSData*</code> 並將轉換為 <code>ArrayBuffer</code> 在 JavaScript 回檔。 同樣，任何 <code>ArrayBuffer</code> JavaScript 發送到一個外掛程式都將轉換為<code>NSData*</code>.</p></li>
-<li><p><code>messageAsMultipart</code>預計， <code>NSArray*</code> 包含任何其他支援類型，並將發送整個陣列作為 <code>arguments</code> 給您的 JavaScript 回檔。 這種方式，所有參數在序列化或反序列化作為必要的所以它是能夠安全返回 <code>NSData*</code> 作為多部分，但不是 <code>Array</code> /<code>Dictionary</code>.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">messageAsArrayBuffer</code>預計 <code class="language-plaintext highlighter-rouge">NSData*</code> 並將轉換為 <code class="language-plaintext highlighter-rouge">ArrayBuffer</code> 在 JavaScript 回檔。 同樣，任何 <code class="language-plaintext highlighter-rouge">ArrayBuffer</code> JavaScript 發送到一個外掛程式都將轉換為<code class="language-plaintext highlighter-rouge">NSData*</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">messageAsMultipart</code>預計， <code class="language-plaintext highlighter-rouge">NSArray*</code> 包含任何其他支援類型，並將發送整個陣列作為 <code class="language-plaintext highlighter-rouge">arguments</code> 給您的 JavaScript 回檔。 這種方式，所有參數在序列化或反序列化作為必要的所以它是能夠安全返回 <code class="language-plaintext highlighter-rouge">NSData*</code> 作為多部分，但不是 <code class="language-plaintext highlighter-rouge">Array</code> /<code class="language-plaintext highlighter-rouge">Dictionary</code>.</p>
+  </li>
 </ul>
 
-<h2>回聲 iOS 外掛程式示例</h2>
+<h2 id="回聲-ios-外掛程式示例">回聲 iOS 外掛程式示例</h2>
 
-<p>若要匹配的 JavaScript 介面<em>回波</em>特徵描述的應用程式外掛程式，使用 <code>plugin.xml</code> 來注入 <code>feature</code> 到本地平臺規範 <code>config.xml</code> 檔：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;platform name="ios"&gt;
+<p>若要匹配的 JavaScript 介面<em>回波</em>特徵描述的應用程式外掛程式，使用 <code class="language-plaintext highlighter-rouge">plugin.xml</code> 來注入 <code class="language-plaintext highlighter-rouge">feature</code> 到本地平臺規範 <code class="language-plaintext highlighter-rouge">config.xml</code> 檔：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;platform name="ios"&gt;
         &lt;config-file target="config.xml" parent="/*"&gt;
             &lt;feature name="Echo"&gt;
                 &lt;param name="ios-package" value="Echo" /&gt;
             &lt;/feature&gt;
         &lt;/config-file&gt;
     &lt;/platform&gt;
-</code></pre></div>
-<p>然後我們將添加以下 <code>Echo.h</code> 和 <code>Echo.m</code> 檔到 <code>Plugins</code> 內科爾多瓦 iOS 應用程式目錄的資料夾：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    <span class="cm">/********* Echo.h Cordova Plugin Header *******/</span>
+</code></pre></div></div>
 
-    <span class="cp">#import &lt;Cordova/CDV.h&gt;
-</span>
-    <span class="k">@interface</span> <span class="nc">Echo</span> <span class="p">:</span> <span class="nc">CDVPlugin</span>
+<p>然後我們將添加以下 <code class="language-plaintext highlighter-rouge">Echo.h</code> 和 <code class="language-plaintext highlighter-rouge">Echo.m</code> 檔到 <code class="language-plaintext highlighter-rouge">Plugins</code> 內科爾多瓦 iOS 應用程式目錄的資料夾：</p>
 
-    <span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">echo</span><span class="p">:(</span><span class="n">CDVInvokedUrlCommand</span><span class="o">*</span><span class="p">)</span><span class="nv">command</span><span class="p">;</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    /********* Echo.h Cordova Plugin Header *******/
 
-    <span class="k">@end</span>
+    #import &lt;Cordova/CDV.h&gt;
 
-    <span class="cm">/********* Echo.m Cordova Plugin Implementation *******/</span>
+    @interface Echo : CDVPlugin
 
-    <span class="cp">#import "Echo.h"
-</span>    <span class="cp">#import &lt;Cordova/CDV.h&gt;
-</span>
-    <span class="k">@implementation</span> <span class="nc">Echo</span>
+    - (void)echo:(CDVInvokedUrlCommand*)command;
 
-    <span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">echo</span><span class="p">:(</span><span class="n">CDVInvokedUrlCommand</span><span class="o">*</span><span class="p">)</span><span class="nv">command</span>
-    <span class="p">{</span>
-        <span class="n">CDVPluginResult</span><span class="o">*</span> <span class="n">pluginResult</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
-        <span class="n">NSString</span><span class="o">*</span> <span class="n">echo</span> <span class="o">=</span> <span class="p">[</span><span class="n">command</span><span class="p">.</span><span class="n">arguments</span> <span class="nf">objectAtIndex</span><span class="p">:</span><span class="mi">0</span><span class="p">];</span>
+    @end
 
-        <span class="k">if</span> <span class="p">(</span><span class="n">echo</span> <span class="o">!=</span> <span class="nb">nil</span> <span class="o">&amp;&amp;</span> <span class="p">[</span><span class="n">echo</span> <span class="nf">length</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">pluginResult</span> <span class="o">=</span> <span class="p">[</span><span class="n">CDVPluginResult</span> <span class="nf">resultWithStatus</span><span class="p">:</span><span class="n">CDVCommandStatus_OK</span> <span class="nf">messageAsString</span><span class="p">:</span><span class="n">echo</span><span class="p">];</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="n">pluginResult</span> <span class="o">=</span> <span class="p">[</span><span class="n">CDVPluginResult</span> <span class="nf">resultWithStatus</span><span class="p">:</span><span class="n">CDVCommandStatus_ERROR</span><span class="p">];</span>
-        <span class="p">}</span>
+    /********* Echo.m Cordova Plugin Implementation *******/
 
-        <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">commandDelegate</span> <span class="nf">sendPluginResult</span><span class="p">:</span><span class="n">pluginResult</span> <span class="nf">callbackId</span><span class="p">:</span><span class="n">command</span><span class="p">.</span><span class="n">callbackId</span><span class="p">];</span>
-    <span class="p">}</span>
+    #import "Echo.h"
+    #import &lt;Cordova/CDV.h&gt;
 
-    <span class="k">@end</span>
-</code></pre></div>
-<p>在檔的頂部必要的進口商品擴展從類 <code>CDVPlugin</code> 。 在這種情況下，該外掛程式只支援單個 <code>echo</code> 行動。 它獲取 echo 字串通過調用 <code>objectAtIndex</code> 方法獲取的第一個參數 <code>arguments</code> 對應于參數的陣列通過 JavaScript 在 <code>exec()</code> 函數。</p>
+    @implementation Echo
 
-<p>它會檢查該參數，以確保它不是 <code>nil</code> 或空字串，返回 <code>PluginResult</code> 與 <code>ERROR</code> 如果是這樣的狀態。 如果該參數通過檢查，它返回 <code>PluginResult</code> 與 <code>OK</code> 狀態，在原始中傳遞 <code>echo</code> 的字串。 最後，它將發送結果到 <code>self.commandDelegate</code> ，其中執行 <code>exec</code> 方法的成功或失敗回檔 JavaScript 一邊。 如果成功回檔被調用，它將通過在 <code>echo</code> 參數。</p>
+    - (void)echo:(CDVInvokedUrlCommand*)command
+    {
+        CDVPluginResult* pluginResult = nil;
+        NSString* echo = [command.arguments objectAtIndex:0];
 
-<h2>iOS 一體化</h2>
+        if (echo != nil &amp;&amp; [echo length] &gt; 0) {
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:echo];
+        } else {
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+        }
 
-<p><code>CDVPlugin</code>類功能其他你的外掛程式可以重寫的方法。 例如，您可以捕獲 <code>[pause](../../../cordova/events/events.pause.html)</code> ， <code>[resume](../../../cordova/events/events.resume.html)</code> ，應用程式終止和 <code>handleOpenURL</code> 事件。 請參見<a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.h">CDVPlugin.h</a>和<a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.m">CDVPlugin.m</a>類的指導。</p>
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }
 
-<h2>執行緒</h2>
+    @end
+</code></pre></div></div>
+
+<p>在檔的頂部必要的進口商品擴展從類 <code class="language-plaintext highlighter-rouge">CDVPlugin</code> 。 在這種情況下，該外掛程式只支援單個 <code class="language-plaintext highlighter-rouge">echo</code> 行動。 它獲取 echo 字串通過調用 <code class="language-plaintext highlighter-rouge">objectAtIndex</code> 方法獲取的第一個參數 <code class="language-plaintext highlighter-rouge">arguments</code> 對應于參數的陣列通過 JavaScript 在 <code class="language-plaintext highlighter-rouge">exec()</code> 函數。</p>
+
+<p>它會檢查該參數，以確保它不是 <code class="language-plaintext highlighter-rouge">nil</code> 或空字串，返回 <code class="language-plaintext highlighter-rouge">PluginResult</code> 與 <code class="language-plaintext highlighter-rouge">ERROR</code> 如果是這樣的狀態。 如果該參數通過檢查，它返回 <code class="language-plaintext highlighter-rouge">PluginResult</code> 與 <code class="language-plaintext highlighter-rouge">OK</code> 狀態，在原始中傳遞 <code class="language-plaintext highlighter-rouge">echo</code> 的字串。 最後，它將發送結果到 <code class="language-plaintext highlighter-rouge">self.commandDelegate</code> ，其中執行 <code class="language-plaintext highlighter-rouge">exec</code> 方法的成功或失敗回檔 JavaScript 一邊。 如果成功回檔被調用，它將通過在 <code class="language-plaintext highlighter-rouge">echo</code> 參數。</p>
+
+<h2 id="ios-一體化">iOS 一體化</h2>
+
+<p><code class="language-plaintext highlighter-rouge">CDVPlugin</code>類功能其他你的外掛程式可以重寫的方法。 例如，您可以捕獲 <code class="language-plaintext highlighter-rouge">[pause](../../../cordova/events/events.pause.html)</code> ， <code class="language-plaintext highlighter-rouge">[resume](../../../cordova/events/events.resume.html)</code> ，應用程式終止和 <code class="language-plaintext highlighter-rouge">handleOpenURL</code> 事件。 請參見<a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.h">CDVPlugin.h</a>和<a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.m">CDVPlugin.m</a>類的指導。</p>
+
+<h2 id="執行緒">執行緒</h2>
 
 <p>外掛程式方法通常在主介面相同的執行緒中執行。 如果你的外掛程式需要大量的處理，或者需要一個阻塞調用，則應使用後臺執行緒。 例如：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    - (void)myPluginMethod:(CDVInvokedUrlCommand*)command
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    - (void)myPluginMethod:(CDVInvokedUrlCommand*)command
     {
         // Check command.arguments here.
         [self.commandDelegate runInBackground:^{
@@ -1243,16 +1262,21 @@
             [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
         }];
     }
-</code></pre></div>
-<h2>調試 iOS 外掛程式</h2>
+</code></pre></div></div>
+
+<h2 id="調試-ios-外掛程式">調試 iOS 外掛程式</h2>
 
 <p>若要調試的目標 C 一邊，你需要 Xcode 的內置調試器。 對於 JavaScript，在 iOS 5.0 或更高版本上你可以使用 <a href="https://github.com/apache/cordova-weinre">Weinre、 Apache 科爾多瓦專案</a> 或 <a href="http://www.iwebinspector.com/">iWebInspector、 一個協力廠商實用程式</a>。 Ios 8，您可以附加 Safari 8.0 8 模擬器在 iOS 中運行的應用程式。</p>
 
-<h2>常見的陷阱</h2>
+<h2 id="常見的陷阱">常見的陷阱</h2>
 
 <ul>
-<li><p>別忘了添加到您的腳本映射 <code>config.xml</code> 。如果你忘記了，是在 Xcode 主控台中記錄錯誤。</p></li>
-<li><p>別忘了添加任何主機，您在白名單中，連接到域白名單指南中所述。如果你忘記了，是在 Xcode 主控台中記錄錯誤。</p></li>
+  <li>
+    <p>別忘了添加到您的腳本映射 <code class="language-plaintext highlighter-rouge">config.xml</code> 。如果你忘記了，是在 Xcode 主控台中記錄錯誤。</p>
+  </li>
+  <li>
+    <p>別忘了添加任何主機，您在白名單中，連接到域白名單指南中所述。如果你忘記了，是在 Xcode 主控台中記錄錯誤。</p>
+  </li>
 </ul>
 
 

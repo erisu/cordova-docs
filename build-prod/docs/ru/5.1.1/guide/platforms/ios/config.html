@@ -1190,59 +1190,106 @@
     }
 </style>
 
-<h1>Конфигурация iOS</h1>
+<h1 id="конфигурация-ios">Конфигурация iOS</h1>
 
-<p>Файл <code>config.xml</code> управляет основные параметрами приложения, которые применяются к каждому приложению и экземпляру CordovaWebView. Этот раздел описывает настройки, которые применяются только к платформе iOS. Смотрите <a href="config_ref_index.md.html#The%20config.xml%20File">Файл config.xml</a> для получения информации о глобальных параметрах конфигурации.</p>
+<p>Файл <code class="language-plaintext highlighter-rouge">config.xml</code> управляет основные параметрами приложения, которые применяются к каждому приложению и экземпляру CordovaWebView. Этот раздел описывает настройки, которые применяются только к платформе iOS. Смотрите <a href="config_ref_index.md.html#The%20config.xml%20File">Файл config.xml</a> для получения информации о глобальных параметрах конфигурации.</p>
 
 <ul>
-<li><p><code>EnableViewportScale</code> (логическое значение, по умолчанию <code>false</code>): Установите <code>true</code> чтобы разрешить тегу meta viewport либо отключить или ограничить диапазон масштабирования экрана пользователем, который включен по умолчанию.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="EnableViewportScale" value="true"/&gt;
-</code></pre></div>
-<p>Установите viewport следующим образом в HTML, чтобы отключить масштабирование и гибко подстраивать содержимое в WebView во время отрисовывания:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no' /&gt;
-</code></pre></div></li>
-<li><p><code>MediaPlaybackRequiresUserAction</code> (логическое значение, по умолчанию <code>false</code> ): Установите <code>true</code> чтобы запретить автоматическое воспроизведение HTML5 видео или аудио с использованием атрибуте <code>autoplay</code> или через JavaScript.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="MediaPlaybackRequiresUserAction" value="true"/&gt;
-</code></pre></div></li>
-<li><p><code>AllowInlineMediaPlayback</code> (логическое значение, по умолчанию <code>false</code> ): Установите <code>true</code> чтобы разрешить воспроизведение мультимедиа HTML5 появляться <em>встроено</em> в пределах экрана, с помощью стандартных элементов управления браузера, а не элементы управления платформы. Чтобы это работало, добавьте атрибут <code>webkit-playsinline</code> к любому элементу <code>&lt;video&gt;</code>.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="AllowInlineMediaPlayback" value="true"/&gt;
-</code></pre></div></li>
-<li><p><code>BackupWebStorage</code> (строка, либо <code>none</code>, <code>local</code>, или значение по умолчанию <code>cloud</code>): Установите <code>cloud</code> чтобы разрешить сохранение веб-данных при резервном копировании через iCloud. Установите <code>local</code> для того чтобы разрешить только в локальных резервных копия при синхронизации через iTunes. Установите <code>none</code> чтобы предотвратить создание резервных копий веб-данных.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="BackupWebStorage" value="local"/&gt;
-</code></pre></div></li>
-<li><p><code>TopActivityIndicator</code> (строка, по умолчанию <code>gray</code> ): контролирует появление небольшого вращающийся значка в строке состояния, указывающее значительную активность процессора. Допустимыми значениями являются <code>whiteLarge</code>, <code>white</code>, и <code>gray</code>.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="TopActivityIndicator" value="white"/&gt;
-</code></pre></div></li>
-<li><p><code>KeyboardDisplayRequiresUserAction</code> (логическое значение, по умолчанию <code>true</code>): Установите <code>false</code> чтобы разрешить клавиатуре появляются при вызове <code>focus()</code> на формах ввода.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="KeyboardDisplayRequiresUserAction" value="false"/&gt;
-</code></pre></div></li>
-<li><p><code>SuppressesIncrementalRendering</code> (логическое значение, по умолчанию <code>false</code> ): Установите <code>true</code> чтобы ожидать, пока все содержимое будет получено до того, как оно будет отображаться на экране.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="SuppressesIncrementalRendering" value="true"/&gt;
-</code></pre></div></li>
-<li><p><code>GapBetweenPages</code> (float, значение по умолчанию <code>0</code> ): размер разрыва, в точках, между страницами.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="GapBetweenPages" value="0"/&gt;
-</code></pre></div></li>
-<li><p><code>PageLength</code> (float, значение по умолчанию <code>0</code>): размер каждой страницы, в точках, в направление протяженности страницы. Когда PaginationMode — справа налево или слева направо, это свойство представляет ширину каждой страницы. Когда PaginationMode сверху вниз или снизу вверх, это свойство представляет высоту каждой страницы. Значение по умолчанию равно 0, что означает, что макет использует размер viewport-а, чтобы определить размеры страницы.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="PageLength" value="0"/&gt;
-</code></pre></div></li>
-<li><p><code>PaginationBreakingMode</code> (строки, по умолчанию <code>page</code>): допустимые значения <code>page</code> и <code>column</code>. Порядок, в котором происходит разрыв столбца или страницы. Это свойство определяет, будут ли определенные CSS свойства относительно разрыва столбца и страницы применяться или игнорироваться. Когда это свойство имеет значение <code>column</code>, содержимое страницы обрабатывает CSS свойства, относящиеся к разрыву колонки в месте разрыва страницы.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="PaginationBreakingMode" value="page"/&gt;
-</code></pre></div></li>
-<li><p><code>PaginationMode</code> (строка, по умолчанию <code>unpaginated</code>): допустимые значения <code>unpaginated</code>, <code>leftToRight</code>, <code>topToBottom</code>, <code>bottomToTop</code>, и <code>rightToLeft</code>. Это свойство определяет является ли содержимое в WebView разбитым на страницы, которые заполняют один экран одновременно, или как представлены один длинный прокручиваемый список. Если установить paginated, это свойство переключает страничный макет содержимого, заставляя WebView использовать значения использования значения PageLength и GapBetweenPages для перерисовки его содержимого.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="PaginationMode" value="unpaginated"/&gt;
-</code></pre></div></li>
-<li><p><code>UIWebViewDecelerationSpeed</code> (строка, по умолчанию <code>normal</code> ): допустимые значения <code>normal</code>, <code>fast</code>. Это свойство контролирует скорость замедления импульса прокрутки. <code>normal</code> это скорость по умолчанию для большиства приложений платформы, и <code>fast</code> является значением по умолчанию для Mobile Safari.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="UIWebViewDecelerationSpeed" value="fast" /&gt;
-</code></pre></div></li>
-<li><p><code>ErrorUrl</code> (строка, не установлено по умолчанию): Если установлено, будет отображать указанную локальную страницу, при ошибке в приложении.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="ErrorUrl" value="myErrorPage.html"/&gt;
-</code></pre></div></li>
-<li><p><code>OverrideUserAgent</code> (строка, не определен по умолчанию): Если параметр установлен, значение заменит старое значение UserAgent для webview. Это полезно для идентификации запроса из приложения/браузера при запросе удаленных страниц. Используйте с осторожностью, в мае этого года вызывает проблемы совместимости с веб-серверами. В большинстве случаев вместо этого параметра используйте AppendUserAgent.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="OverrideUserAgent" value="Mozilla/5.0 My Browser" /&gt;
-</code></pre></div></li>
-<li><p><code>AppendUserAgent</code> (строка, не задан по умолчанию): Если параметр установлен, значение будет добавляться в конец старого значения UserAgent для webview. При использовании с OverrideUserAgent, это значение будет игнорироваться.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="AppendUserAgent" value="My Browser" /&gt;
-</code></pre></div></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">EnableViewportScale</code> (логическое значение, по умолчанию <code class="language-plaintext highlighter-rouge">false</code>): Установите <code class="language-plaintext highlighter-rouge">true</code> чтобы разрешить тегу meta viewport либо отключить или ограничить диапазон масштабирования экрана пользователем, который включен по умолчанию.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="EnableViewportScale" value="true"/&gt;
+</code></pre></div>    </div>
+
+    <p>Установите viewport следующим образом в HTML, чтобы отключить масштабирование и гибко подстраивать содержимое в WebView во время отрисовывания:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no' /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">MediaPlaybackRequiresUserAction</code> (логическое значение, по умолчанию <code class="language-plaintext highlighter-rouge">false</code> ): Установите <code class="language-plaintext highlighter-rouge">true</code> чтобы запретить автоматическое воспроизведение HTML5 видео или аудио с использованием атрибуте <code class="language-plaintext highlighter-rouge">autoplay</code> или через JavaScript.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="MediaPlaybackRequiresUserAction" value="true"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">AllowInlineMediaPlayback</code> (логическое значение, по умолчанию <code class="language-plaintext highlighter-rouge">false</code> ): Установите <code class="language-plaintext highlighter-rouge">true</code> чтобы разрешить воспроизведение мультимедиа HTML5 появляться <em>встроено</em> в пределах экрана, с помощью стандартных элементов управления браузера, а не элементы управления платформы. Чтобы это работало, добавьте атрибут <code class="language-plaintext highlighter-rouge">webkit-playsinline</code> к любому элементу <code class="language-plaintext highlighter-rouge">&lt;video&gt;</code>.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="AllowInlineMediaPlayback" value="true"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">BackupWebStorage</code> (строка, либо <code class="language-plaintext highlighter-rouge">none</code>, <code class="language-plaintext highlighter-rouge">local</code>, или значение по умолчанию <code class="language-plaintext highlighter-rouge">cloud</code>): Установите <code class="language-plaintext highlighter-rouge">cloud</code> чтобы разрешить сохранение веб-данных при резервном копировании через iCloud. Установите <code class="language-plaintext highlighter-rouge">local</code> для того чтобы разрешить только в локальных резервных копия при синхронизации через iTunes. Установите <code class="language-plaintext highlighter-rouge">none</code> чтобы предотвратить создание резервных копий веб-данных.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="BackupWebStorage" value="local"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">TopActivityIndicator</code> (строка, по умолчанию <code class="language-plaintext highlighter-rouge">gray</code> ): контролирует появление небольшого вращающийся значка в строке состояния, указывающее значительную активность процессора. Допустимыми значениями являются <code class="language-plaintext highlighter-rouge">whiteLarge</code>, <code class="language-plaintext highlighter-rouge">white</code>, и <code class="language-plaintext highlighter-rouge">gray</code>.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="TopActivityIndicator" value="white"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">KeyboardDisplayRequiresUserAction</code> (логическое значение, по умолчанию <code class="language-plaintext highlighter-rouge">true</code>): Установите <code class="language-plaintext highlighter-rouge">false</code> чтобы разрешить клавиатуре появляются при вызове <code class="language-plaintext highlighter-rouge">focus()</code> на формах ввода.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="KeyboardDisplayRequiresUserAction" value="false"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">SuppressesIncrementalRendering</code> (логическое значение, по умолчанию <code class="language-plaintext highlighter-rouge">false</code> ): Установите <code class="language-plaintext highlighter-rouge">true</code> чтобы ожидать, пока все содержимое будет получено до того, как оно будет отображаться на экране.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="SuppressesIncrementalRendering" value="true"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">GapBetweenPages</code> (float, значение по умолчанию <code class="language-plaintext highlighter-rouge">0</code> ): размер разрыва, в точках, между страницами.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="GapBetweenPages" value="0"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">PageLength</code> (float, значение по умолчанию <code class="language-plaintext highlighter-rouge">0</code>): размер каждой страницы, в точках, в направление протяженности страницы. Когда PaginationMode — справа налево или слева направо, это свойство представляет ширину каждой страницы. Когда PaginationMode сверху вниз или снизу вверх, это свойство представляет высоту каждой страницы. Значение по умолчанию равно 0, что означает, что макет использует размер viewport-а, чтобы определить размеры страницы.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="PageLength" value="0"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">PaginationBreakingMode</code> (строки, по умолчанию <code class="language-plaintext highlighter-rouge">page</code>): допустимые значения <code class="language-plaintext highlighter-rouge">page</code> и <code class="language-plaintext highlighter-rouge">column</code>. Порядок, в котором происходит разрыв столбца или страницы. Это свойство определяет, будут ли определенные CSS свойства относительно разрыва столбца и страницы применяться или игнорироваться. Когда это свойство имеет значение <code class="language-plaintext highlighter-rouge">column</code>, содержимое страницы обрабатывает CSS свойства, относящиеся к разрыву колонки в месте разрыва страницы.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="PaginationBreakingMode" value="page"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">PaginationMode</code> (строка, по умолчанию <code class="language-plaintext highlighter-rouge">unpaginated</code>): допустимые значения <code class="language-plaintext highlighter-rouge">unpaginated</code>, <code class="language-plaintext highlighter-rouge">leftToRight</code>, <code class="language-plaintext highlighter-rouge">topToBottom</code>, <code class="language-plaintext highlighter-rouge">bottomToTop</code>, и <code class="language-plaintext highlighter-rouge">rightToLeft</code>. Это свойство определяет является ли содержимое в WebView разбитым на страницы, которые заполняют один экран одновременно, или как представлены один длинный прокручиваемый список. Если установить paginated, это свойство переключает страничный макет содержимого, заставляя WebView использовать значения использования значения PageLength и GapBetweenPages для перерисовки его содержимого.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="PaginationMode" value="unpaginated"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">UIWebViewDecelerationSpeed</code> (строка, по умолчанию <code class="language-plaintext highlighter-rouge">normal</code> ): допустимые значения <code class="language-plaintext highlighter-rouge">normal</code>, <code class="language-plaintext highlighter-rouge">fast</code>. Это свойство контролирует скорость замедления импульса прокрутки. <code class="language-plaintext highlighter-rouge">normal</code> это скорость по умолчанию для большиства приложений платформы, и <code class="language-plaintext highlighter-rouge">fast</code> является значением по умолчанию для Mobile Safari.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="UIWebViewDecelerationSpeed" value="fast" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">ErrorUrl</code> (строка, не установлено по умолчанию): Если установлено, будет отображать указанную локальную страницу, при ошибке в приложении.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="ErrorUrl" value="myErrorPage.html"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">OverrideUserAgent</code> (строка, не определен по умолчанию): Если параметр установлен, значение заменит старое значение UserAgent для webview. Это полезно для идентификации запроса из приложения/браузера при запросе удаленных страниц. Используйте с осторожностью, в мае этого года вызывает проблемы совместимости с веб-серверами. В большинстве случаев вместо этого параметра используйте AppendUserAgent.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="OverrideUserAgent" value="Mozilla/5.0 My Browser" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">AppendUserAgent</code> (строка, не задан по умолчанию): Если параметр установлен, значение будет добавляться в конец старого значения UserAgent для webview. При использовании с OverrideUserAgent, это значение будет игнорироваться.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="AppendUserAgent" value="My Browser" /&gt;
+</code></pre></div>    </div>
+  </li>
 </ul>
 
 

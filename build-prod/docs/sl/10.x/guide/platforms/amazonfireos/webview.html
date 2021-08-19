@@ -2082,31 +2082,46 @@
             
 
             <div id="page-toc-source">
-                <h1>Amazon ogenj OS spletni pogledi</h1>
+                <h1 id="amazon-ogenj-os-spletni-pogledi">Amazon ogenj OS spletni pogledi</h1>
 
-<p>Začenši z 3.0.0, uporabite Cordova kot komponenta v Amazon ogenj OS aplikacije. Amazon ogenj OS se nanaša na to komponento, kot <code>CordovaWebView</code> . <code>CordovaWebView</code>razširja Amazon spletni pogled, ki je zgrajen na odprtokodni projekt kroma. Z premikanje z vzvodom to funkcijo, lahko vaše spletne aplikacije uporabljajo najnovejše HTML5 spletnih standardov vožnjo v sodobni spletni izvajalnik motor.</p>
+<p>Začenši z 3.0.0, uporabite Cordova kot komponenta v Amazon ogenj OS aplikacije. Amazon ogenj OS se nanaša na to komponento, kot <code class="language-plaintext highlighter-rouge">CordovaWebView</code> . <code class="language-plaintext highlighter-rouge">CordovaWebView</code>razširja Amazon spletni pogled, ki je zgrajen na odprtokodni projekt kroma. Z premikanje z vzvodom to funkcijo, lahko vaše spletne aplikacije uporabljajo najnovejše HTML5 spletnih standardov vožnjo v sodobni spletni izvajalnik motor.</p>
 
-<h2>Predpogoji</h2>
+<h2 id="predpogoji">Predpogoji</h2>
 
 <ul>
-<li><p>Cordova 3.0.0 ali večje</p></li>
-<li><p>Android SDK, posodobljen na najnovejšo SDK</p></li>
-<li><p>Amazon spletni pogled SDK</p></li>
+  <li>
+    <p>Cordova 3.0.0 ali večje</p>
+  </li>
+  <li>
+    <p>Android SDK, posodobljen na najnovejšo SDK</p>
+  </li>
+  <li>
+    <p>Amazon spletni pogled SDK</p>
+  </li>
 </ul>
 
-<h2>Vodnik za uporabo CordovaWebView v projektu Amazon ogenj OS</h2>
+<h2 id="vodnik-za-uporabo-cordovawebview-v-projektu-amazon-ogenj-os">Vodnik za uporabo CordovaWebView v projektu Amazon ogenj OS</h2>
 
 <ol>
-<li><p>Download in razširite <a href="https://developer.amazon.com/sdk/fire/IntegratingAWV.html#installawv">Amazon spletni pogled SDK</a> , torej ulitek awv_interface.jar v <code>/framework/libs</code> naslovnik. Ustvarite a libs / mapo, če ne obstaja.</p></li>
-<li><p><code>cd</code>v <code>/framework</code> ter prost dostop <code>ant jar</code> zgraditi cordova kozarec. Ustvari datoteka s pripono .jar ustanovljena kot <code>cordova-x.x.x.jar</code> v v <code>/framework</code> naslovnik.</p></li>
-<li><p>Urejanje aplikacije <code>main.xml</code> datoteko (pod <code>/res/layout</code> ) videti kot naslednje, z v <code>layout_height</code> , <code>layout_width</code> in <code>id</code> spremenjene, da ustrezajo aplikacijo:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;org.apache.cordova.CordovaWebView
+  <li>
+    <p>Download in razširite <a href="https://developer.amazon.com/sdk/fire/IntegratingAWV.html#installawv">Amazon spletni pogled SDK</a> , torej ulitek awv_interface.jar v <code class="language-plaintext highlighter-rouge">/framework/libs</code> naslovnik. Ustvarite a libs / mapo, če ne obstaja.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cd</code>v <code class="language-plaintext highlighter-rouge">/framework</code> ter prost dostop <code class="language-plaintext highlighter-rouge">ant jar</code> zgraditi cordova kozarec. Ustvari datoteka s pripono .jar ustanovljena kot <code class="language-plaintext highlighter-rouge">cordova-x.x.x.jar</code> v v <code class="language-plaintext highlighter-rouge">/framework</code> naslovnik.</p>
+  </li>
+  <li>
+    <p>Urejanje aplikacije <code class="language-plaintext highlighter-rouge">main.xml</code> datoteko (pod <code class="language-plaintext highlighter-rouge">/res/layout</code> ) videti kot naslednje, z v <code class="language-plaintext highlighter-rouge">layout_height</code> , <code class="language-plaintext highlighter-rouge">layout_width</code> in <code class="language-plaintext highlighter-rouge">id</code> spremenjene, da ustrezajo aplikacijo:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;org.apache.cordova.CordovaWebView
     android:id="@+id/tutorialView"
     android:layout_width="match_parent"
     android:layout_height="match_parent" /&gt;
-</code></pre></div></li>
-<li><p>Spremenijo svoje dejavnosti tako, da izvaja z <code>CordovaInterface</code> . Bi bilo izvajala vključeni metodah. Želite kopirati jih iz <code>/framework/src/org/apache/cordova/CordovaActivity.java</code> , ali jih izvajajo na svoje. Kodeks fragment spodaj prikazuje osnovno aplikacijo, ki uporablja vmesnik. Opomba kako sklicevano pogled id ujema z <code>id</code> atributa, navedenega v XML fragment prikazan zgoraj:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">public class CordovaViewTestActivity extends Activity implements CordovaInterface {
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Spremenijo svoje dejavnosti tako, da izvaja z <code class="language-plaintext highlighter-rouge">CordovaInterface</code> . Bi bilo izvajala vključeni metodah. Želite kopirati jih iz <code class="language-plaintext highlighter-rouge">/framework/src/org/apache/cordova/CordovaActivity.java</code> , ali jih izvajajo na svoje. Kodeks fragment spodaj prikazuje osnovno aplikacijo, ki uporablja vmesnik. Opomba kako sklicevano pogled id ujema z <code class="language-plaintext highlighter-rouge">id</code> atributa, navedenega v XML fragment prikazan zgoraj:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class CordovaViewTestActivity extends Activity implements CordovaInterface {
     CordovaWebView cwv;
     /* Called when the activity is first created. */
     @Override
@@ -2117,11 +2132,13 @@
         Config.init(this);
         cwv.loadUrl(Config.getStartUrl());
     }
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ol>
 
 <p>Če uporabljate fotoaparat, bi tudi izvajati to:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    @Override
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @Override
     public void setActivityResultCallback(CordovaPlugin plugin) {
         this.activityResultCallback = plugin;
     }
@@ -2163,16 +2180,23 @@
             callback.onActivityResult(requestCode, resultCode, intent);
         }
     }
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Nenazadnje, ne pozabite dodati zaloga niti, sicer plugins so ni niti teči:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    @Override
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @Override
     public ExecutorService getThreadPool() {
         return threadPool;
     }
-</code></pre></div>
+</code></pre></div></div>
+
 <ol>
-<li><p>Kopiranje vaše prijave HTML in JavaScript datotek na Amazon ogenj OS projekta <code>/assets/www</code> imenik.</p></li>
-<li><p>Kopija <code>config.xml</code> od <code>/framework/res/xml</code> za vaš projekt <code>/res/xml</code> imenik.</p></li>
+  <li>
+    <p>Kopiranje vaše prijave HTML in JavaScript datotek na Amazon ogenj OS projekta <code class="language-plaintext highlighter-rouge">/assets/www</code> imenik.</p>
+  </li>
+  <li>
+    <p>Kopija <code class="language-plaintext highlighter-rouge">config.xml</code> od <code class="language-plaintext highlighter-rouge">/framework/res/xml</code> za vaš projekt <code class="language-plaintext highlighter-rouge">/res/xml</code> imenik.</p>
+  </li>
 </ol>
 
 

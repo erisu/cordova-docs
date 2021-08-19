@@ -1306,86 +1306,101 @@
             
 
             <div id="page-toc-source">
-                <h1>地理定位</h1>
+                <h1 id="地理定位">地理定位</h1>
 
 <blockquote>
-<p><code>geolocation</code>物件提供對基於設備的 GPS 感應器或推斷網路信號的位置資料的訪問。</p>
+  <p><code class="language-plaintext highlighter-rouge">geolocation</code>物件提供對基於設備的 GPS 感應器或推斷網路信號的位置資料的訪問。</p>
 </blockquote>
 
-<p><code>Geolocation</code>提供有關該設備的位置，例如緯度和經度資訊。 常見的位置資訊來源包括全球定位系統 (GPS) 和網路信號，如 IP 位址、 RFID、 WiFi 和藍牙 MAC 位址和 GSM/CDMA 儲存格 Id 從推斷出的位置。 沒有任何保證，API 返回設備的實際位置。</p>
+<p><code class="language-plaintext highlighter-rouge">Geolocation</code>提供有關該設備的位置，例如緯度和經度資訊。 常見的位置資訊來源包括全球定位系統 (GPS) 和網路信號，如 IP 位址、 RFID、 WiFi 和藍牙 MAC 位址和 GSM/CDMA 儲存格 Id 從推斷出的位置。 沒有任何保證，API 返回設備的實際位置。</p>
 
 <p>此 API 基於<a href="http://dev.w3.org/geo/api/spec-source.html">W3C 地理定位 API 規範</a>，並只執行已經不提供實現的設備上。</p>
 
 <p><strong>重要的隱私注：</strong>地理定位資料的收集和使用提出了重要的隱私問題。 您的應用程式的隱私權原則應該討論這款應用程式如何使用地理定位資料，資料是否共用它的任何其他締約方和的資料 （例如，粗、 細，ZIP 代碼級別，等等） 的精度水準。 地理定位資料被普遍認為敏感的因為它能揭示一個人的下落，如果存儲中，他或她的旅行史。 因此，除了您的應用程式的隱私權原則，您應強烈考慮提供在您的應用程式訪問地理定位資料 （如果設備作業系統不會這樣做已經） 之前的時間只是通知。 該通知應提供相同的資訊上文指出的並獲取該使用者的許可權 （例如，通過為<strong>確定</strong>並<strong>不感謝</strong>提出的選擇）。 有關詳細資訊，請參閱隱私指南。</p>
 
-<h2>方法</h2>
+<h2 id="方法">方法</h2>
 
 <ul>
-<li>  <a href="geolocation.getCurrentPosition.html">geolocation.getCurrentPosition</a></li>
-<li>  <a href="geolocation.watchPosition.html">geolocation.watchPosition</a></li>
-<li>  <a href="geolocation.clearWatch.html">geolocation.clearWatch</a></li>
+  <li><a href="geolocation.getCurrentPosition.html">geolocation.getCurrentPosition</a></li>
+  <li><a href="geolocation.watchPosition.html">geolocation.watchPosition</a></li>
+  <li><a href="geolocation.clearWatch.html">geolocation.clearWatch</a></li>
 </ul>
 
-<h2>參數</h2>
+<h2 id="參數">參數</h2>
 
 <ul>
-<li>  <a href="parameters/geolocationSuccess.html">geolocationSuccess</a></li>
-<li>  <a href="parameters/geolocationError.html">geolocationError</a></li>
-<li>  <a href="parameters/geolocation.options.html">geolocationOptions</a></li>
+  <li><a href="parameters/geolocationSuccess.html">geolocationSuccess</a></li>
+  <li><a href="parameters/geolocationError.html">geolocationError</a></li>
+  <li><a href="parameters/geolocation.options.html">geolocationOptions</a></li>
 </ul>
 
-<h2>物件 （唯讀）</h2>
+<h2 id="物件-唯讀">物件 （唯讀）</h2>
 
 <ul>
-<li>  Position</li>
-<li>  <a href="PositionError/positionError.html">PositionError</a></li>
-<li>  Coordinates</li>
+  <li>Position</li>
+  <li><a href="PositionError/positionError.html">PositionError</a></li>
+  <li>Coordinates</li>
 </ul>
 
-<h2>訪問功能</h2>
+<h2 id="訪問功能">訪問功能</h2>
 
-<p>從 3.0 版，科爾多瓦作為<em>外掛程式</em>實現了設備級 Api。 使用 CLI 的 <code>plugin</code> 命令，描述在命令列介面，可以添加或刪除一個專案，為此功能：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add org.apache.cordova.geolocation
+<p>從 3.0 版，科爾多瓦作為<em>外掛程式</em>實現了設備級 Api。 使用 CLI 的 <code class="language-plaintext highlighter-rouge">plugin</code> 命令，描述在命令列介面，可以添加或刪除一個專案，為此功能：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add org.apache.cordova.geolocation
     $ cordova plugin ls
     [ 'org.apache.cordova.geolocation' ]
     $ cordova plugin rm org.apache.cordova.geolocation
-</code></pre></div>
+</code></pre></div></div>
+
 <p>這些命令適用于所有有針對性的平臺，但修改如下所述的特定于平臺的配置設置：</p>
 
 <ul>
-<li><p>Android 系統</p>
-<div class="highlight"><pre><code class="language-" data-lang="">(in app/res/xml/config.xml)
+  <li>
+    <p>Android 系統</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(in app/res/xml/config.xml)
 &lt;feature name="Geolocation"&gt;
     &lt;param name="android-package" value="org.apache.cordova.GeoBroker" /&gt;
 &lt;/feature&gt;
-
+    
 (in app/AndroidManifest.xml)
 &lt;uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /&gt;
 &lt;uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /&gt;
 &lt;uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /&gt;
-</code></pre></div></li>
-<li><p>黑莓手機 WebWorks</p>
-<div class="highlight"><pre><code class="language-" data-lang="">(in www/plugins.xml)
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>黑莓手機 WebWorks</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(in www/plugins.xml)
 &lt;feature name="Geolocation"&gt;
     &lt;param name="blackberry-package" value="org.apache.cordova.geolocation.Geolocation" /&gt;
 &lt;/feature&gt;
-
+    
 (in www/config.xml)
 &lt;rim:permissions&gt;
     &lt;rim:permit&gt;read_geolocation&lt;/rim:permit&gt;
 &lt;/rim:permissions&gt;
-</code></pre></div></li>
-<li><p>（在 iOS<code>config.xml</code>)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="Geolocation"&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>（在 iOS<code class="language-plaintext highlighter-rouge">config.xml</code>)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="Geolocation"&gt;
     &lt;param name="ios-package" value="CDVLocation" /&gt;
 &lt;/feature&gt;
-</code></pre></div></li>
-<li><p>（在 Windows Phone<code>Properties/WPAppManifest.xml</code>)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;Capabilities&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>（在 Windows Phone<code class="language-plaintext highlighter-rouge">Properties/WPAppManifest.xml</code>)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;Capabilities&gt;
     &lt;Capability Name="ID_CAP_LOCATION" /&gt;
 &lt;/Capabilities&gt;
-</code></pre></div>
-<p>引用：<a href="http://msdn.microsoft.com/en-us/library/ff769509%28v=vs.92%29.aspx">為 Windows Phone 應用程式清單</a></p></li>
+</code></pre></div>    </div>
+
+    <p>引用：<a href="http://msdn.microsoft.com/en-us/library/ff769509%28v=vs.92%29.aspx">為 Windows Phone 應用程式清單</a></p>
+  </li>
 </ul>
 
 <p>一些平臺可能支援此功能，而無需任何特殊的配置。請參見在概述部分中<em>的平臺支援</em>。</p>

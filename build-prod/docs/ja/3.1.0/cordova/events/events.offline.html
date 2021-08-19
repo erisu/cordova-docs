@@ -1436,78 +1436,84 @@
             
 
             <div id="page-toc-source">
-                <h1>オフライン</h1>
+                <h1 id="オフライン">オフライン</h1>
 
 <p>アプリケーションがオフラインになり、デバイスがインターネットに接続されていないときに発生します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">document.addEventListener("offline", yourCallbackFunction, false);
-</code></pre></div>
-<h2>詳細</h2>
 
-<p><code>offline</code>アプリケーションはもはや、インターネットにアクセスできるように、以前接続されたデバイスは、ネットワーク接続が失われたときに発生します。 <a href="../connection/connection.html">接続</a> API と同じ情報に依存しており、場合に適用されます、 <code>[connection.type](../connection/connection.type.html)</code> から変更 <code>NONE</code> 以外の値にします。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>document.addEventListener("offline", yourCallbackFunction, false);
+</code></pre></div></div>
 
-<p>通常アプリケーションに使用する必要があります <code>document.addEventListener</code> 一度のイベント リスナーをアタッチし、 <code>[deviceready](events.deviceready.html)</code> イベントが発生します。</p>
+<h2 id="詳細">詳細</h2>
 
-<h2>サポートされているプラットフォーム</h2>
+<p><code class="language-plaintext highlighter-rouge">offline</code>アプリケーションはもはや、インターネットにアクセスできるように、以前接続されたデバイスは、ネットワーク接続が失われたときに発生します。 <a href="../connection/connection.html">接続</a> API と同じ情報に依存しており、場合に適用されます、 <code class="language-plaintext highlighter-rouge">[connection.type](../connection/connection.type.html)</code> から変更 <code class="language-plaintext highlighter-rouge">NONE</code> 以外の値にします。</p>
+
+<p>通常アプリケーションに使用する必要があります <code class="language-plaintext highlighter-rouge">document.addEventListener</code> 一度のイベント リスナーをアタッチし、 <code class="language-plaintext highlighter-rouge">[deviceready](events.deviceready.html)</code> イベントが発生します。</p>
+
+<h2 id="サポートされているプラットフォーム">サポートされているプラットフォーム</h2>
 
 <ul>
-<li>  アンドロイド</li>
-<li>  ブラックベリー WebWorks (OS 5.0 およびより高い)</li>
-<li>  iOS</li>
-<li>  Windows Phone 7 と 8</li>
-<li>  Tizen</li>
-<li>  Windows 8</li>
+  <li>アンドロイド</li>
+  <li>ブラックベリー WebWorks (OS 5.0 およびより高い)</li>
+  <li>iOS</li>
+  <li>Windows Phone 7 と 8</li>
+  <li>Tizen</li>
+  <li>Windows 8</li>
 </ul>
 
-<h2>簡単な例</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">document.addEventListener("offline", onOffline, false);
+<h2 id="簡単な例">簡単な例</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>document.addEventListener("offline", onOffline, false);
 
 function onOffline() {
     // Handle the offline event
 }
-</code></pre></div>
-<h2>完全な例</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Offline Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="完全な例">完全な例</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onLoad</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="p">}</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Offline Example&lt;/title&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"offline"</span><span class="p">,</span> <span class="nx">onOffline</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// Handle the offline event</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onOffline</span><span class="p">()</span> <span class="p">{</span>
-    <span class="p">}</span>
+    // Wait for device API libraries to load
+    //
+    function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body</span> <span class="na">onload=</span><span class="s">"onLoad()"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2>iOS の癖</h2>
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        document.addEventListener("offline", onOffline, false);
+    }
+
+    // Handle the offline event
+    //
+    function onOffline() {
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body onload="onLoad()"&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h2 id="ios-の癖">iOS の癖</h2>
 
 <p>初回起動時 (当てはまる場合) の最初のオフライン イベントは火に 1 秒以上かかります。</p>
 
-<h2>Windows Phone 7 の癖</h2>
+<h2 id="windows-phone-7-の癖">Windows Phone 7 の癖</h2>
 
-<p>エミュレーターで実行しているとき、 <code>connection.status</code> は常に知られている、このイベントは<em>ない</em>火。</p>
+<p>エミュレーターで実行しているとき、 <code class="language-plaintext highlighter-rouge">connection.status</code> は常に知られている、このイベントは<em>ない</em>火。</p>
 
-<h2>Windows Phone 8 癖</h2>
+<h2 id="windows-phone-8-癖">Windows Phone 8 癖</h2>
 
-<p>エミュレーターと接続の種類のレポート <code>Cellular</code> は変化しません、イベントは<em>ない</em>火。</p>
+<p>エミュレーターと接続の種類のレポート <code class="language-plaintext highlighter-rouge">Cellular</code> は変化しません、イベントは<em>ない</em>火。</p>
 
 
             </div>

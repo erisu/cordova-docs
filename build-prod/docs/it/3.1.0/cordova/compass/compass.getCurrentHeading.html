@@ -1304,30 +1304,33 @@
             
 
             <div id="page-toc-source">
-                <h1>compass.getCurrentHeading</h1>
+                <h1 id="compassgetcurrentheading">compass.getCurrentHeading</h1>
 
 <p>Ottenere la corrente della bussola.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.compass.getCurrentHeading(compassSuccess, compassError, compassOptions);
-</code></pre></div>
-<h2>Descrizione</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.compass.getCurrentHeading(compassSuccess, compassError, compassOptions);
+</code></pre></div></div>
+
+<h2 id="descrizione">Descrizione</h2>
 
 <p>La bussola è un sensore che rileva la direzione o la voce che il dispositivo è puntato, in genere dalla parte superiore del dispositivo. Esso misura la rotta in gradi da 0 a 359.99, dove 0 è a nord.</p>
 
-<p>Le informazioni della bussola viene restituite tramite una <code>CompassHeading</code> oggetto utilizzando il <code>[compassSuccess](parameters/compassSuccess.html)</code> funzione di callback.</p>
+<p>Le informazioni della bussola viene restituite tramite una <code class="language-plaintext highlighter-rouge">CompassHeading</code> oggetto utilizzando il <code class="language-plaintext highlighter-rouge">[compassSuccess](parameters/compassSuccess.html)</code> funzione di callback.</p>
 
-<h2>Piattaforme supportate</h2>
+<h2 id="piattaforme-supportate">Piattaforme supportate</h2>
 
 <ul>
-<li>  Android</li>
-<li>  BlackBerry 10</li>
-<li>  iOS</li>
-<li>  Tizen</li>
-<li>  Windows Phone 7 e 8 (se disponibili nell&#39;hardware)</li>
-<li>  Windows 8</li>
+  <li>Android</li>
+  <li>BlackBerry 10</li>
+  <li>iOS</li>
+  <li>Tizen</li>
+  <li>Windows Phone 7 e 8 (se disponibili nell’hardware)</li>
+  <li>Windows 8</li>
 </ul>
 
-<h2>Esempio rapido</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">function onSuccess(heading) {
+<h2 id="esempio-rapido">Esempio rapido</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function onSuccess(heading) {
     alert('Heading: ' + heading.magneticHeading);
 };
 
@@ -1336,46 +1339,49 @@ function onError(error) {
 };
 
 navigator.compass.getCurrentHeading(onSuccess, onError);
-</code></pre></div>
-<h2>Esempio completo</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Compass Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="esempio-completo">Esempio completo</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Compass Example&lt;/title&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">navigator</span><span class="p">.</span><span class="nx">compass</span><span class="p">.</span><span class="nx">getCurrentHeading</span><span class="p">(</span><span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onError</span><span class="p">);</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// onSuccess: Get the current heading</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onSuccess</span><span class="p">(</span><span class="nx">heading</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">alert</span><span class="p">(</span><span class="s1">'Heading: '</span> <span class="o">+</span> <span class="nx">heading</span><span class="p">.</span><span class="nx">magneticHeading</span><span class="p">);</span>
-    <span class="p">}</span>
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
 
-    <span class="c1">// onError: Failed to get the heading</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onError</span><span class="p">(</span><span class="nx">compassError</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">alert</span><span class="p">(</span><span class="s1">'Compass Error: '</span> <span class="o">+</span> <span class="nx">compassError</span><span class="p">.</span><span class="nx">code</span><span class="p">);</span>
-    <span class="p">}</span>
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        navigator.compass.getCurrentHeading(onSuccess, onError);
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;h1&gt;</span>Example<span class="nt">&lt;/h1&gt;</span>
-    <span class="nt">&lt;p&gt;</span>getCurrentHeading<span class="nt">&lt;/p&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+    // onSuccess: Get the current heading
+    //
+    function onSuccess(heading) {
+        alert('Heading: ' + heading.magneticHeading);
+    }
+
+    // onError: Failed to get the heading
+    //
+    function onError(compassError) {
+        alert('Compass Error: ' + compassError.code);
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Example&lt;/h1&gt;
+    &lt;p&gt;getCurrentHeading&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

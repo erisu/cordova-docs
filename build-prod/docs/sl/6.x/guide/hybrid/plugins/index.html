@@ -2082,7 +2082,7 @@
             
 
             <div id="page-toc-source">
-                <h1>Plugin razvoj vodnik</h1>
+                <h1 id="plugin-razvoj-vodnik">Plugin razvoj vodnik</h1>
 
 <p><em>Plugin</em> je paket vstavljeno kodo, ki omogoča Cordova spletni pogled, v katerem postane vaš app komunicirati z native platforme, na katerih teče. Plugins zagotoviti dostop do naprave in platformo funkcionalnosti, ki je običajno na voljo za spletne aplikacije. Vse glavne funkcije Cordova API, ki se izvajajo kot plugins, in mnogi drugi so na voljo, da omogoči funkcije, kot so Čitalniki črtne kode, NFC komunikacije, ali za prilagajanje koledarja vmesniki.</p>
 
@@ -2090,13 +2090,16 @@
 
 <p>Poleg teh navodil, pri pripravi pisati čep, je najbolje, da gledajo čez <a href="https://github.com/apache/cordova-android/tree/master/framework/src/org/apache/cordova">obstoječe plugins</a> za usmerjanje.</p>
 
-<h2>Izgradnjo Plugin</h2>
+<h2 id="izgradnjo-plugin">Izgradnjo Plugin</h2>
 
-<p>Razvijalcem uporabo CLI je <code>plugin add</code> ukaz (razpravljali v vmesnik ukazne vrstice) uporabi plugin za projekt. Argument temu ukazu je URL za <em>git</em> skladišče, ki vsebuje plugin kodo. Ta primer izvaja API Cordova&#39;s naprave:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git
-</code></pre></div>
-<p>Plugin skladišču mora funkcija na najvišji ravni <code>plugin.xml</code> Datoteka manifesta. Obstaja veliko načinov za konfiguracijo datoteke, podrobnosti, za katere so na voljo v specifikaciji Plugin. Tej skrajšani različici je <code>Device</code> plugin zagotavlja preprost primer uporabiti kot model:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+<p>Razvijalcem uporabo CLI je <code class="language-plaintext highlighter-rouge">plugin add</code> ukaz (razpravljali v vmesnik ukazne vrstice) uporabi plugin za projekt. Argument temu ukazu je URL za <em>git</em> skladišče, ki vsebuje plugin kodo. Ta primer izvaja API Cordova’s naprave:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git
+</code></pre></div></div>
+
+<p>Plugin skladišču mora funkcija na najvišji ravni <code class="language-plaintext highlighter-rouge">plugin.xml</code> Datoteka manifesta. Obstaja veliko načinov za konfiguracijo datoteke, podrobnosti, za katere so na voljo v specifikaciji Plugin. Tej skrajšani različici je <code class="language-plaintext highlighter-rouge">Device</code> plugin zagotavlja preprost primer uporabiti kot model:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
     &lt;plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
             id="org.apache.cordova.device" version="0.2.3"&gt;
         &lt;name&gt;Device&lt;/name&gt;
@@ -2116,84 +2119,109 @@
             &lt;source-file src="src/ios/CDVDevice.m" /&gt;
         &lt;/platform&gt;
     &lt;/plugin&gt;
-</code></pre></div>
-<p>Najvišje ravni <code>plugin</code> oznake <code>id</code> atribut uporablja enako obliko povratne domene za identifikacijo plugin paket, kot ste apps so dodani. Na <code>js-module</code> oznaka določa pot do skupnega vmesnika JavaScript. Na <code>platform</code> oznaka določa niz ustreznih domorodno kodo, za v <code>ios</code> platformo v tem primeru. Na <code>config-file</code> tag enkapsulira a <code>feature</code> oznako, ki se vbrizga v plosčad-poseben <code>config.xml</code> datoteko ozavestiti platformi dodatna oznaka knjižnice. Na <code>header-file</code> in <code>source-file</code> tags določite pot do datoteke v knjižnico.</p>
+</code></pre></div></div>
 
-<h2>Preverjanje Plugin</h2>
+<p>Najvišje ravni <code class="language-plaintext highlighter-rouge">plugin</code> oznake <code class="language-plaintext highlighter-rouge">id</code> atribut uporablja enako obliko povratne domene za identifikacijo plugin paket, kot ste apps so dodani. Na <code class="language-plaintext highlighter-rouge">js-module</code> oznaka določa pot do skupnega vmesnika JavaScript. Na <code class="language-plaintext highlighter-rouge">platform</code> oznaka določa niz ustreznih domorodno kodo, za v <code class="language-plaintext highlighter-rouge">ios</code> platformo v tem primeru. Na <code class="language-plaintext highlighter-rouge">config-file</code> tag enkapsulira a <code class="language-plaintext highlighter-rouge">feature</code> oznako, ki se vbrizga v plosčad-poseben <code class="language-plaintext highlighter-rouge">config.xml</code> datoteko ozavestiti platformi dodatna oznaka knjižnice. Na <code class="language-plaintext highlighter-rouge">header-file</code> in <code class="language-plaintext highlighter-rouge">source-file</code> tags določite pot do datoteke v knjižnico.</p>
 
-<p>Lahko uporabite na <code>plugman</code> korist v ček ali plugin namesti pravilno za vsako platformo. Namestite <code>plugman</code> s sledeč zapoved <a href="http://nodejs.org/">vozlišča</a> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ npm install -g plugman
-</code></pre></div>
-<p>Potrebujete veljavno app Izvorni imenik, kot so najvišje ravni <code>www</code> imenik, ki je vključen v privzeto ustvari CLI projekt, kot je opisano v vmesnik ukazne vrstice. Poskrbite, da app je <code>index.html</code> domača stran reference ime plugin JavaScript vmesnik, kot če bi v istem imeniku vir:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;script src="myplugin.js"&gt;&lt;/script&gt;
-</code></pre></div>
+<h2 id="preverjanje-plugin">Preverjanje Plugin</h2>
+
+<p>Lahko uporabite na <code class="language-plaintext highlighter-rouge">plugman</code> korist v ček ali plugin namesti pravilno za vsako platformo. Namestite <code class="language-plaintext highlighter-rouge">plugman</code> s sledeč zapoved <a href="http://nodejs.org/">vozlišča</a> :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ npm install -g plugman
+</code></pre></div></div>
+
+<p>Potrebujete veljavno app Izvorni imenik, kot so najvišje ravni <code class="language-plaintext highlighter-rouge">www</code> imenik, ki je vključen v privzeto ustvari CLI projekt, kot je opisano v vmesnik ukazne vrstice. Poskrbite, da app je <code class="language-plaintext highlighter-rouge">index.html</code> domača stran reference ime plugin JavaScript vmesnik, kot če bi v istem imeniku vir:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;script src="myplugin.js"&gt;&lt;/script&gt;
+</code></pre></div></div>
+
 <p>Nato zaženite ukaz kot sledi testiranje ali pravilno obremenitev iOS odvisnosti:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ plugman -platform ios /path/to/my/project/www /path/to/my/plugin
-</code></pre></div>
-<p>Za podrobnosti o <code>plugman</code> možnosti, glejte <a href="../../../plugin_ref/plugman.html">Uporaba Plugman za upravljanje Plugins</a>. Informacije o tem, kako dejansko <em>debug</em> plugins, glejte vsako platformo izvorni vmesnik, naštetih na dnu te strani.</p>
 
-<h2>JavaScript vmesnik</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ plugman -platform ios /path/to/my/project/www /path/to/my/plugin
+</code></pre></div></div>
 
-<p>JavaScript zagotavlja prednja vmesnik, zaradi česar je morda najpomembnejši del plugin. Vaš plugin JavaScript lahko strukturo, pa vam je všeč, vendar morate poklicati <code>cordova.exec</code> komunicirati z native platformo, uporabite to sintakso:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    cordova.exec(function(winParam) {},
+<p>Za podrobnosti o <code class="language-plaintext highlighter-rouge">plugman</code> možnosti, glejte <a href="../../../plugin_ref/plugman.html">Uporaba Plugman za upravljanje Plugins</a>. Informacije o tem, kako dejansko <em>debug</em> plugins, glejte vsako platformo izvorni vmesnik, naštetih na dnu te strani.</p>
+
+<h2 id="javascript-vmesnik">JavaScript vmesnik</h2>
+
+<p>JavaScript zagotavlja prednja vmesnik, zaradi česar je morda najpomembnejši del plugin. Vaš plugin JavaScript lahko strukturo, pa vam je všeč, vendar morate poklicati <code class="language-plaintext highlighter-rouge">cordova.exec</code> komunicirati z native platformo, uporabite to sintakso:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    cordova.exec(function(winParam) {},
                  function(error) {},
                  "service",
                  "action",
                  ["firstArgument", "secondArgument", 42, false]);
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Tukaj je, kako deluje vsak parameter:</p>
 
 <ul>
-<li><p><code>function(winParam) {}</code>: Uspeh povratni klic funkcije. Ob predpostavki, da vaš <code>exec</code> klic konča uspešno, ta funkcija izvede ob s poljuben parametar to podaš.</p></li>
-<li><p><code>function(error) {}</code>: Povratni klic funkcije je napaka. Če operacija ni uspešno dokončala, ta funkcija izvede s poljuben zmota parameter.</p></li>
-<li><p><code>&quot;service&quot;</code>: Ime storitve za klic na domači strani. To ustreza native razred, za katerega več informacij je na voljo v rojsten vodič spodaj.</p></li>
-<li><p><code>&quot;action&quot;</code>: Ime dejanja, da pokličete na domači strani. To na splošno ustreza native razred metoda. Glej rojsten vodič spodaj.</p></li>
-<li><p><code>[/* arguments */]</code>: Niz argumentov prenesti v rodni okolje.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">function(winParam) {}</code>: Uspeh povratni klic funkcije. Ob predpostavki, da vaš <code class="language-plaintext highlighter-rouge">exec</code> klic konča uspešno, ta funkcija izvede ob s poljuben parametar to podaš.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">function(error) {}</code>: Povratni klic funkcije je napaka. Če operacija ni uspešno dokončala, ta funkcija izvede s poljuben zmota parameter.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">"service"</code>: Ime storitve za klic na domači strani. To ustreza native razred, za katerega več informacij je na voljo v rojsten vodič spodaj.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">"action"</code>: Ime dejanja, da pokličete na domači strani. To na splošno ustreza native razred metoda. Glej rojsten vodič spodaj.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">[/* arguments */]</code>: Niz argumentov prenesti v rodni okolje.</p>
+  </li>
 </ul>
 
-<h2>Vzorec JavaScript</h2>
+<h2 id="vzorec-javascript">Vzorec JavaScript</h2>
 
 <p>Ta primer prikazuje en način za izvajanje plugin JavaScript vmesnik:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    window.echo = function(str, callback) {
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    window.echo = function(str, callback) {
         cordova.exec(callback, function(err) {
             callback('Nothing to echo.');
         }, "Echo", "echo", [str]);
     };
-</code></pre></div>
-<p>V tem primeru plugin pripisuje sama na <code>window</code> predmet kot na <code>echo</code> funkcijo, ki uporabnikom plugin bi klic takole:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    window.echo("echome", function(echoValue) {
+</code></pre></div></div>
+
+<p>V tem primeru plugin pripisuje sama na <code class="language-plaintext highlighter-rouge">window</code> predmet kot na <code class="language-plaintext highlighter-rouge">echo</code> funkcijo, ki uporabnikom plugin bi klic takole:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    window.echo("echome", function(echoValue) {
         alert(echoValue == "echome"); // should alert true.
     });
-</code></pre></div>
-<p>Pogled na zadnje tri argumente, da je <code>cordova.exec</code> funkcija. Prvi klice na <code>Echo</code> <em>storitev</em>, ime razreda. Druga zahteva je <code>echo</code> <em>dejanje</em>, metode znotraj razreda. Tretji je niz argumentov echo nizom, ki je v <code>window.echo</code> funkcija je prvi parameter.</p>
+</code></pre></div></div>
 
-<p>Uspeh callback prešla v <code>exec</code> je preprosto sklicevanje na povratni klic funkcije <code>window.echo</code> traja. Če native platformo požari napake povratni klic, ga preprosto zahteva povratni klic uspeha ter ga privzeti niz.</p>
+<p>Pogled na zadnje tri argumente, da je <code class="language-plaintext highlighter-rouge">cordova.exec</code> funkcija. Prvi klice na <code class="language-plaintext highlighter-rouge">Echo</code> <em>storitev</em>, ime razreda. Druga zahteva je <code class="language-plaintext highlighter-rouge">echo</code> <em>dejanje</em>, metode znotraj razreda. Tretji je niz argumentov echo nizom, ki je v <code class="language-plaintext highlighter-rouge">window.echo</code> funkcija je prvi parameter.</p>
 
-<h2>Native vmesniki</h2>
+<p>Uspeh callback prešla v <code class="language-plaintext highlighter-rouge">exec</code> je preprosto sklicevanje na povratni klic funkcije <code class="language-plaintext highlighter-rouge">window.echo</code> traja. Če native platformo požari napake povratni klic, ga preprosto zahteva povratni klic uspeha ter ga privzeti niz.</p>
+
+<h2 id="native-vmesniki">Native vmesniki</h2>
 
 <p>Ko določite JavaScript za vaše plugin, morate dopolniti z vsaj enega izvajanju native. Spodaj so navedene podrobnosti za vsako platformo, in vsak gradi na preprost Echo Plugin primer zgoraj:</p>
 
 <ul>
-<li>  <a href="../../platforms/amazonfireos/plugin.html">Amazon ogenj OS Plugins</a></li>
-<li>  <a href="../../platforms/android/plugin.html">Android Plugins</a></li>
-<li>  <a href="../../platforms/ios/plugin.html">iOS Plugins</a></li>
-<li>  <a href="../../platforms/blackberry10/plugin.html">BlackBerry 10 Plugins</a></li>
-<li>  <a href="../../platforms/wp8/plugin.html">Windows Phone Plugins</a></li>
+  <li><a href="../../platforms/amazonfireos/plugin.html">Amazon ogenj OS Plugins</a></li>
+  <li><a href="../../platforms/android/plugin.html">Android Plugins</a></li>
+  <li><a href="../../platforms/ios/plugin.html">iOS Plugins</a></li>
+  <li><a href="../../platforms/blackberry10/plugin.html">BlackBerry 10 Plugins</a></li>
+  <li><a href="../../platforms/wp8/plugin.html">Windows Phone Plugins</a></li>
 </ul>
 
 <p>Tizen platforma podpira plugins.</p>
 
-<h2>Objavljanje Plugins</h2>
+<h2 id="objavljanje-plugins">Objavljanje Plugins</h2>
 
-<p>Ko ste razviti vaše plugin, morda želite objavite in ga delite s skupnostjo. Lahko objavite vaše plugin cordova registra (na <a href="https://github.com/isaacs/npmjs.org"> <code>npmjs</code> </a>) ali katero koli drugo <code>npmjs</code> -osnova registracija. Drugi razvijalci lahko namestite samodejno z uporabo bodisi <code>plugman</code> ali Cordova CLI. (Podrobnosti o vsakem razvojno pot, glejte <a href="../../../plugin_ref/plugman.html">Uporaba Plugman za upravljanje Plugins</a> in The vmesnik ukazne vrstice.)</p>
+<p>Ko ste razviti vaše plugin, morda želite objavite in ga delite s skupnostjo. Lahko objavite vaše plugin cordova registra (na <a href="https://github.com/isaacs/npmjs.org"> <code class="language-plaintext highlighter-rouge">npmjs</code> </a>) ali katero koli drugo <code class="language-plaintext highlighter-rouge">npmjs</code> -osnova registracija. Drugi razvijalci lahko namestite samodejno z uporabo bodisi <code class="language-plaintext highlighter-rouge">plugman</code> ali Cordova CLI. (Podrobnosti o vsakem razvojno pot, glejte <a href="../../../plugin_ref/plugman.html">Uporaba Plugman za upravljanje Plugins</a> in The vmesnik ukazne vrstice.)</p>
 
-<p>Objaviti plugin morate uporabiti na <code>plugman</code> orodje in iti skozi naslednje korake:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ plugman adduser # that is if you don't have an account yet
+<p>Objaviti plugin morate uporabiti na <code class="language-plaintext highlighter-rouge">plugman</code> orodje in iti skozi naslednje korake:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ plugman adduser # that is if you don't have an account yet
 $ plugman publish /path/to/your/plugin
-</code></pre></div>
+</code></pre></div></div>
+
 <p>To je to!</p>
 
-<p>Tekmovanje v teku <code>plugman --help</code> seznami drugih ukazov osnovi registra.</p>
+<p>Tekmovanje v teku <code class="language-plaintext highlighter-rouge">plugman --help</code> seznami drugih ukazov osnovi registra.</p>
 
 
             </div>

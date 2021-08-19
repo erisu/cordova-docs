@@ -1256,14 +1256,14 @@
             
 
             <div id="page-toc-source">
-                <h1>ContactOrganization</h1>
+                <h1 id="contactorganization">ContactOrganization</h1>
 
-<p>Contient les propriétés de l&#39;entreprise de l&#39;objet `<a href="../Contact/contact.html">Contact</a></code.></p></p>
+<p>Contient les propriétés de l’entreprise de l’objet `<a href="../Contact/contact.html">Contact</a>&lt;/code.&gt;&lt;/p&gt;</p>
 
 <h2>Propriétés</h2>
 
 <ul>
-<li><p><strong>pref</strong> : fixé à <code>true` si `ContactOrganization` contient la valeur préférée de l'utilisateur. *(booléen)*</li> 
+<li><p><strong>pref</strong> : fixé à <code>true` si `ContactOrganization` contient la valeur préférée de l'utilisateur. *(booléen)*&lt;/li&gt; 
 
 *   **type** : une chaîne qui indique le type de champ, *home* par exemple. _(DOMString)
 
@@ -1271,119 +1271,124 @@
 
 *   **department** : le département pour lequel travaille le contact. *(DOMString)*
 
-*   **title** : titre du contact au sein de l'organisation. *(DOMString)*</ul> 
+*   **title** : titre du contact au sein de l'organisation. *(DOMString)*&lt;/ul&gt; 
 
-<h2>Détails</h2>
+## Détails
 
-<p>L&#39;objet <code>ContactOrganization</code> stocke des propriétés de l&#39;entreprise d&#39;un contact. Un objet <code>[Contact](../Contact/contact.html)</code> contient un ou plusieurs objets <code>ContactOrganization</code> dans un tableau.</p>
+L'objet `ContactOrganization` stocke des propriétés de l'entreprise d'un contact. Un objet `[Contact](../Contact/contact.html)` contient un ou plusieurs objets `ContactOrganization` dans un tableau.
 
-<h2>Plates-formes prises en charge</h2>
+## Plates-formes prises en charge
 
-<ul>
-<li>  Android</li>
-<li>  BlackBerry WebWorks (OS 5.0 et plus)</li>
-<li>  iOS</li>
-<li>  Windows Phone 7 et 8</li>
-<li>  Windows 8</li>
-</ul>
+*   Android
+*   BlackBerry WebWorks (OS 5.0 et plus)
+*   iOS
+*   Windows Phone 7 et 8
+*   Windows 8
 
-<h2>Petit exemple</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">function onSuccess(contacts) {
-    for (var i = 0; i &lt; contacts.length; i++) {
-        for (var j = 0; j &lt; contacts[i].organizations.length; j++) {
-            alert("Pref: "      + contacts[i].organizations[j].pref       + "\n" +
-                "Type: "        + contacts[i].organizations[j].type       + "\n" +
-                "Name: "        + contacts[i].organizations[j].name       + "\n" +
-                "Department: "  + contacts[i].organizations[j].department + "\n" +
-                "Title: "       + contacts[i].organizations[j].title);
+## Petit exemple
+
+    function onSuccess(contacts) {
+        for (var i = 0; i &lt; contacts.length; i++) {
+            for (var j = 0; j &lt; contacts[i].organizations.length; j++) {
+                alert("Pref: "      + contacts[i].organizations[j].pref       + "\n" +
+                    "Type: "        + contacts[i].organizations[j].type       + "\n" +
+                    "Name: "        + contacts[i].organizations[j].name       + "\n" +
+                    "Department: "  + contacts[i].organizations[j].department + "\n" +
+                    "Title: "       + contacts[i].organizations[j].title);
+            }
         }
-    }
-};
+    };
+    
+    function onError(contactError) {
+        alert('onError!');
+    };
+    
+    var options = new ContactFindOptions();
+    options.filter = "";
+    filter = ["displayName", "organizations"];
+    navigator.contacts.find(filter, onSuccess, onError, options);
+    
 
-function onError(contactError) {
-    alert('onError!');
-};
+## Exemple complet
 
-var options = new ContactFindOptions();
-options.filter = "";
-filter = ["displayName", "organizations"];
-navigator.contacts.find(filter, onSuccess, onError, options);
-</code></pre></div>
-<h2>Exemple complet</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Contact Example<span class="nt">&lt;/title&gt;</span>
+    &lt;!DOCTYPE html&gt;
+    <html>
+      <head>
+        <title>Contact Example</title>
+    
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script type="text/javascript" charset="utf-8">
+    
+        // Wait for device API libraries to load
+        //
+        document.addEventListener("deviceready", onDeviceReady, false);
+    
+        // device APIs are available
+        //
+        function onDeviceReady() {
+            var options = new ContactFindOptions();
+            options.filter="";
+            filter = ["displayName","organizations"];
+            navigator.contacts.find(filter, onSuccess, onError, options);
+        }
+    
+        // onSuccess: Get a snapshot of the current contacts
+        //
+        function onSuccess(contacts) {
+            for (var i = 0; i < contacts.length; i++) {
+                for (var j = 0; j < contacts[i].organizations.length; j++) {
+                    alert("Pref: "     + contacts[i].organizations[j].pref       + "\n" +
+                        "Type: "       + contacts[i].organizations[j].type       + "\n" +
+                        "Name: "       + contacts[i].organizations[j].name       + "\n" +
+                        "Department: " + contacts[i].organizations[j].department + "\n" +
+                        "Title: "      + contacts[i].organizations[j].title);
+                }
+            }
+        };
+    
+        // onError: Failed to get the contacts
+        //
+        function onError(contactError) {
+            alert('onError!');
+        }
+    
+        </script>
+      </head>
+      <body>
+        <h1>Example</h1>
+        <p>Find Contacts</p>
+      </body>
+    </html>
+    
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+## Spécificités Android 2.X
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+*   **pref** : non pris en charge par des appareils Android 2.X, retourne `false`.
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ContactFindOptions</span><span class="p">();</span>
-        <span class="nx">options</span><span class="p">.</span><span class="nx">filter</span><span class="o">=</span><span class="s2">""</span><span class="p">;</span>
-        <span class="nx">filter</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"displayName"</span><span class="p">,</span><span class="s2">"organizations"</span><span class="p">];</span>
-        <span class="nb">navigator</span><span class="p">.</span><span class="nx">contacts</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">filter</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onError</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
-    <span class="p">}</span>
+## Spécificités BlackBerry WebWorks (OS 5.0 et plus)
 
-    <span class="c1">// onSuccess: Get a snapshot of the current contacts</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onSuccess</span><span class="p">(</span><span class="nx">contacts</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">contacts</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">contacts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">organizations</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">alert</span><span class="p">(</span><span class="s2">"Pref: "</span>     <span class="o">+</span> <span class="nx">contacts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">organizations</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">pref</span>       <span class="o">+</span> <span class="s2">"\n"</span> <span class="o">+</span>
-                    <span class="s2">"Type: "</span>       <span class="o">+</span> <span class="nx">contacts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">organizations</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">type</span>       <span class="o">+</span> <span class="s2">"\n"</span> <span class="o">+</span>
-                    <span class="s2">"Name: "</span>       <span class="o">+</span> <span class="nx">contacts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">organizations</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">name</span>       <span class="o">+</span> <span class="s2">"\n"</span> <span class="o">+</span>
-                    <span class="s2">"Department: "</span> <span class="o">+</span> <span class="nx">contacts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">organizations</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">department</span> <span class="o">+</span> <span class="s2">"\n"</span> <span class="o">+</span>
-                    <span class="s2">"Title: "</span>      <span class="o">+</span> <span class="nx">contacts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">organizations</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">title</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">};</span>
+*   **pref** : non pris en charge par les appareils BlackBerry, retourne `false`.
 
-    <span class="c1">// onError: Failed to get the contacts</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onError</span><span class="p">(</span><span class="nx">contactError</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">alert</span><span class="p">(</span><span class="s1">'onError!'</span><span class="p">);</span>
-    <span class="p">}</span>
+*   **type**: non pris en charge par les appareils BlackBerry, retourne `null`.
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;h1&gt;</span>Example<span class="nt">&lt;/h1&gt;</span>
-    <span class="nt">&lt;p&gt;</span>Find Contacts<span class="nt">&lt;/p&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2>Spécificités Android 2.X</h2>
+*   **name** : partiellement pris en charge. Le premier nom de l'entreprise est stocké dans le champ **company** de BlackBerry.
 
-<ul>
-<li>  <strong>pref</strong> : non pris en charge par des appareils Android 2.X, retourne <code>false</code>.</li>
-</ul>
+*   **department** : non pris en charge, retourne `null`.
 
-<h2>Spécificités BlackBerry WebWorks (OS 5.0 et plus)</h2>
+*   **title** : partiellement pris en charge. Le premier titre de l'entreprise est stocké dans le champ de **jobTitle** BlackBerry.
 
-<ul>
-<li><p><strong>pref</strong> : non pris en charge par les appareils BlackBerry, retourne <code>false</code>.</p></li>
-<li><p><strong>type</strong>: non pris en charge par les appareils BlackBerry, retourne <code>null</code>.</p></li>
-<li><p><strong>name</strong> : partiellement pris en charge. Le premier nom de l&#39;entreprise est stocké dans le champ <strong>company</strong> de BlackBerry.</p></li>
-<li><p><strong>department</strong> : non pris en charge, retourne <code>null</code>.</p></li>
-<li><p><strong>title</strong> : partiellement pris en charge. Le premier titre de l&#39;entreprise est stocké dans le champ de <strong>jobTitle</strong> BlackBerry.</p></li>
-</ul>
+## Spécificités iOS
 
-<h2>Spécificités iOS</h2>
+*   **pref** : non pris en charge sur les appareils iOS, retourne `false`.
 
-<ul>
-<li><p><strong>pref</strong> : non pris en charge sur les appareils iOS, retourne <code>false</code>.</p></li>
-<li><p><strong>type</strong> : non pris en charge sur les appareils iOS, retourne <code>null</code>.</p></li>
-<li><p><strong>name</strong> : partiellement pris en charge. Le premier nom de l&#39;entreprise est stocké dans le champ de <strong>kABPersonOrganizationProperty</strong> iOS.</p></li>
-<li><p><strong>department</strong> : partiellement pris en charge. Le premier nom de département est stocké dans le champ de <strong>kABPersonDepartmentProperty</strong> iOS.</p></li>
-<li><p><strong>title</strong> : partiellement pris en charge. Le premier titre est stocké dans le champ <strong>kABPersonJobTitleProperty</strong> iOS.</p></li>
-</ul>
+*   **type** : non pris en charge sur les appareils iOS, retourne `null`.
+
+*   **name** : partiellement pris en charge. Le premier nom de l'entreprise est stocké dans le champ de **kABPersonOrganizationProperty** iOS.
+
+*   **department** : partiellement pris en charge. Le premier nom de département est stocké dans le champ de **kABPersonDepartmentProperty** iOS.
+
+*   **title** : partiellement pris en charge. Le premier titre est stocké dans le champ **kABPersonJobTitleProperty** iOS.
+</code></p></li></ul>
 
 
             </div>

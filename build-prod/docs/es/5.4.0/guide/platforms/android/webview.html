@@ -1112,24 +1112,35 @@
             
 
             <div id="page-toc-source">
-                <h1>Android WebViews</h1>
+                <h1 id="android-webviews">Android WebViews</h1>
 
 <p>Esta guía le muestra cómo incrustar un componente WebView Cordova habilitado dentro de una aplicación para Android más grande. Para más detalles sobre cómo estos componentes pueden comunicarse entre sí, vea aplicación Plugins.</p>
 
-<p>Si no está familiarizado con Android, primero debe familiarizarse con la guía de la plataforma Android y tiene el SDK de Android más reciente instalado antes de intentar la opción de desarrollo más inusual de incrustar un WebView. A partir de Córdoba 1.9, la plataforma Android se basa en una <code>CordovaWebView</code> componente, que se basa en un legado <code>CordovaActivity</code> componente que data de antes de la versión 1.9.</p>
+<p>Si no está familiarizado con Android, primero debe familiarizarse con la guía de la plataforma Android y tiene el SDK de Android más reciente instalado antes de intentar la opción de desarrollo más inusual de incrustar un WebView. A partir de Córdoba 1.9, la plataforma Android se basa en una <code class="language-plaintext highlighter-rouge">CordovaWebView</code> componente, que se basa en un legado <code class="language-plaintext highlighter-rouge">CordovaActivity</code> componente que data de antes de la versión 1.9.</p>
 
 <ol>
-<li><p>Para seguir estas instrucciones, asegúrate de que tienes la última distribución de Córdoba. Descargar desde <a href="http://cordova.apache.org">cordova.apache.org</a> y descomprime su paquete de Android.</p></li>
-<li><p>Desplácese hasta el paquete Android <code>/framework</code> Directorio y ejecute <code>ant jar</code> . Crea el Cordova <code>.jar</code> archivo, formado como<code>/framework/cordova-x.x.x.jar</code>.</p></li>
-<li><p>Copia el <code>.jar</code> archivo del proyecto Android <code>/libs</code> Directorio.</p></li>
-<li><p>Agregar lo siguiente a la aplicación <code>/res/xml/main.xml</code> archivo, con el <code>layout_height</code> , <code>layout_width</code> y <code>id</code> modificado para adaptarse al uso:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;org.apache.cordova.CordovaWebView
+  <li>
+    <p>Para seguir estas instrucciones, asegúrate de que tienes la última distribución de Córdoba. Descargar desde <a href="http://cordova.apache.org">cordova.apache.org</a> y descomprime su paquete de Android.</p>
+  </li>
+  <li>
+    <p>Desplácese hasta el paquete Android <code class="language-plaintext highlighter-rouge">/framework</code> Directorio y ejecute <code class="language-plaintext highlighter-rouge">ant jar</code> . Crea el Cordova <code class="language-plaintext highlighter-rouge">.jar</code> archivo, formado como<code class="language-plaintext highlighter-rouge">/framework/cordova-x.x.x.jar</code>.</p>
+  </li>
+  <li>
+    <p>Copia el <code class="language-plaintext highlighter-rouge">.jar</code> archivo del proyecto Android <code class="language-plaintext highlighter-rouge">/libs</code> Directorio.</p>
+  </li>
+  <li>
+    <p>Agregar lo siguiente a la aplicación <code class="language-plaintext highlighter-rouge">/res/xml/main.xml</code> archivo, con el <code class="language-plaintext highlighter-rouge">layout_height</code> , <code class="language-plaintext highlighter-rouge">layout_width</code> y <code class="language-plaintext highlighter-rouge">id</code> modificado para adaptarse al uso:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;org.apache.cordova.CordovaWebView
     android:id="@+id/tutorialView"
     android:layout_width="match_parent"
     android:layout_height="match_parent" /&gt;
-</code></pre></div></li>
-<li><p>Modificar la actividad de modo que implementa el <code>CordovaInterface</code> . Se deben implementar los métodos incluidos. Puede que desee copiar desde <code>/framework/src/org/apache/cordova/CordovaActivity.java</code> , o más implementarlas en tu propio. El siguiente fragmento de código muestra una aplicación básica que se basa en la interfaz. Observe cómo coincide con el id de referencia ver el <code>id</code> atributo especificado en el fragmento de XML se muestra arriba:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">public class CordovaViewTestActivity extends Activity implements CordovaInterface {
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Modificar la actividad de modo que implementa el <code class="language-plaintext highlighter-rouge">CordovaInterface</code> . Se deben implementar los métodos incluidos. Puede que desee copiar desde <code class="language-plaintext highlighter-rouge">/framework/src/org/apache/cordova/CordovaActivity.java</code> , o más implementarlas en tu propio. El siguiente fragmento de código muestra una aplicación básica que se basa en la interfaz. Observe cómo coincide con el id de referencia ver el <code class="language-plaintext highlighter-rouge">id</code> atributo especificado en el fragmento de XML se muestra arriba:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class CordovaViewTestActivity extends Activity implements CordovaInterface {
     CordovaWebView cwv;
     /* Called when the activity is first created. */
     @Override
@@ -1140,9 +1151,12 @@
         Config.init(this);
         cwv.loadUrl(Config.getStartUrl());
     }
-</code></pre></div></li>
-<li><p>Si la aplicación necesita usar la cámara, implementar los siguientes:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">@Override
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Si la aplicación necesita usar la cámara, implementar los siguientes:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Override
 public void setActivityResultCallback(CordovaPlugin plugin) {
     this.activityResultCallback = plugin;
 }
@@ -1157,16 +1171,16 @@ public void setActivityResultCallback(CordovaPlugin plugin) {
 public void startActivityForResult(CordovaPlugin command, Intent intent, int requestCode) {
     this.activityResultCallback = command;
     this.activityResultKeepRunning = this.keepRunning;
-
+    
     // If multitasking turned on, then disable it for activities that return results
     if (command != null) {
         this.keepRunning = false;
     }
-
+    
     // Start activity
     super.startActivityForResult(intent, requestCode);
 }   
-
+    
 @Override
 /**
  * Called when an activity you launched exits, giving you the requestCode you started it with,
@@ -1184,16 +1198,25 @@ protected void onActivityResult(int requestCode, int resultCode, Intent intent) 
         callback.onActivityResult(requestCode, resultCode, intent);
     }
 }
-</code></pre></div></li>
-<li><p>Finalmente, no olvide añadir el grupo de subprocesos, de lo contrario plugins no tienen ningún subproceso en el que se ejecute:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">@Override
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Finalmente, no olvide añadir el grupo de subprocesos, de lo contrario plugins no tienen ningún subproceso en el que se ejecute:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Override
 public ExecutorService getThreadPool() {
     return threadPool;
 }
-</code></pre></div></li>
-<li><p>Copia archivos HTML y JavaScript de la aplicación del proyecto Android <code>/assets/www</code> Directorio.</p></li>
-<li><p>Copia el <code>config.xml</code> archivo de <code>/framework/res/xml</code> para el proyecto <code>/res/xml</code> Directorio.</p></li>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Copia archivos HTML y JavaScript de la aplicación del proyecto Android <code class="language-plaintext highlighter-rouge">/assets/www</code> Directorio.</p>
+  </li>
+  <li>
+    <p>Copia el <code class="language-plaintext highlighter-rouge">config.xml</code> archivo de <code class="language-plaintext highlighter-rouge">/framework/res/xml</code> para el proyecto <code class="language-plaintext highlighter-rouge">/res/xml</code> Directorio.</p>
+  </li>
 </ol>
+
 
 
             </div>

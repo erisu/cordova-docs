@@ -1304,37 +1304,42 @@
             
 
             <div id="page-toc-source">
-                <h1>globalization.getDateNames</h1>
+                <h1 id="globalizationgetdatenames">globalization.getDateNames</h1>
 
 <p>返回一個陣列的幾個月的名稱或一周內，根據用戶端的使用者首選項和日曆天。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.globalization.getDateNames(successCallback, errorCallback, options);
-</code></pre></div>
-<h2>說明</h2>
 
-<p>返回的陣列的名稱為 <code>successCallback</code> 與 <code>properties</code> 物件作為參數。 該物件包含 <code>value</code> 屬性與 <code>Array</code> 的 <code>String</code> 的值。 從任一開始一年或一周內，根據所選的選項的第一天中的第一個月的陣列功能名稱。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.globalization.getDateNames(successCallback, errorCallback, options);
+</code></pre></div></div>
 
-<p>如果有錯誤取得名字，然後 <code>errorCallback</code> 執行與 <code>[GlobalizationError](GlobalizationError/globalizationerror.html)</code> 物件作為參數。 錯誤的期望的代碼<code>[GlobalizationError](GlobalizationError/globalizationerror.html).UNKNOWN\_ERROR</code>.</p>
+<h2 id="說明">說明</h2>
 
-<p><code>options</code>參數是可選的且其預設值：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">{類型： '寬'、 專案： '月'}
-</code></pre></div>
-<p>值 <code>options.type</code> 可以是 <code>narrow</code> 或<code>wide</code>.</p>
+<p>返回的陣列的名稱為 <code class="language-plaintext highlighter-rouge">successCallback</code> 與 <code class="language-plaintext highlighter-rouge">properties</code> 物件作為參數。 該物件包含 <code class="language-plaintext highlighter-rouge">value</code> 屬性與 <code class="language-plaintext highlighter-rouge">Array</code> 的 <code class="language-plaintext highlighter-rouge">String</code> 的值。 從任一開始一年或一周內，根據所選的選項的第一天中的第一個月的陣列功能名稱。</p>
 
-<p>值 <code>options.item</code> 可以是 <code>months</code> 或<code>days</code>.</p>
+<p>如果有錯誤取得名字，然後 <code class="language-plaintext highlighter-rouge">errorCallback</code> 執行與 <code class="language-plaintext highlighter-rouge">[GlobalizationError](GlobalizationError/globalizationerror.html)</code> 物件作為參數。 錯誤的期望的代碼<code class="language-plaintext highlighter-rouge">[GlobalizationError](GlobalizationError/globalizationerror.html).UNKNOWN\_ERROR</code>.</p>
 
-<h2>支援的平臺</h2>
+<p><code class="language-plaintext highlighter-rouge">options</code>參數是可選的且其預設值：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{類型： '寬'、 專案： '月'}
+</code></pre></div></div>
+
+<p>值 <code class="language-plaintext highlighter-rouge">options.type</code> 可以是 <code class="language-plaintext highlighter-rouge">narrow</code> 或<code class="language-plaintext highlighter-rouge">wide</code>.</p>
+
+<p>值 <code class="language-plaintext highlighter-rouge">options.item</code> 可以是 <code class="language-plaintext highlighter-rouge">months</code> 或<code class="language-plaintext highlighter-rouge">days</code>.</p>
+
+<h2 id="支援的平臺">支援的平臺</h2>
 
 <ul>
-<li>  Android 系統</li>
-<li>  黑莓手機 WebWorks （OS 5.0 和更高）</li>
-<li>  iOS</li>
-<li>  Windows Phone 8</li>
+  <li>Android 系統</li>
+  <li>黑莓手機 WebWorks （OS 5.0 和更高）</li>
+  <li>iOS</li>
+  <li>Windows Phone 8</li>
 </ul>
 
-<h2>快速的示例</h2>
+<h2 id="快速的示例">快速的示例</h2>
 
-<p>當瀏覽器設置為 <code>en\_US</code> 的地區設定，本示例顯示一系列的十二個彈出對話方塊，每個月，與類似的文本一個 <code>month: January</code> ：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.globalization.getDateNames(
+<p>當瀏覽器設置為 <code class="language-plaintext highlighter-rouge">en\_US</code> 的地區設定，本示例顯示一系列的十二個彈出對話方塊，每個月，與類似的文本一個 <code class="language-plaintext highlighter-rouge">month: January</code> ：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.globalization.getDateNames(
     function (names) {
         for (var i = 0; i &lt; names.value.length; i++) {
             alert('month: ' + names.value[i] + '\n');
@@ -1343,34 +1348,37 @@
     function () { alert('Error getting names\n'); },
     { type: 'wide', item: 'months' }
 );
-</code></pre></div>
-<h2>完整的示例</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>getDateNames Example<span class="nt">&lt;/title&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
 
-    <span class="kd">function</span> <span class="nx">checkDateNames</span><span class="p">()</span> <span class="p">{</span>
-      <span class="nb">navigator</span><span class="p">.</span><span class="nx">globalization</span><span class="p">.</span><span class="nx">getDateNames</span><span class="p">(</span>
-        <span class="kd">function</span> <span class="p">(</span><span class="nx">names</span><span class="p">)</span> <span class="p">{</span>
-          <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">names</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">alert</span><span class="p">(</span><span class="s1">'month: '</span> <span class="o">+</span> <span class="nx">names</span><span class="p">.</span><span class="nx">value</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">+</span> <span class="s1">'\n'</span><span class="p">);</span>
-          <span class="p">}</span>
-        <span class="p">},</span>
-        <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'Error getting names\n'</span><span class="p">);},</span>
-        <span class="p">{</span><span class="na">type</span><span class="p">:</span><span class="s1">'wide'</span><span class="p">,</span> <span class="na">item</span><span class="p">:</span><span class="s1">'months'</span><span class="p">}</span>
-      <span class="p">);</span>
-    <span class="p">}</span>
+<h2 id="完整的示例">完整的示例</h2>
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"checkDateNames()"</span><span class="nt">&gt;</span>Click for date names<span class="nt">&lt;/button&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;getDateNames Example&lt;/title&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
+
+    function checkDateNames() {
+      navigator.globalization.getDateNames(
+        function (names) {
+          for (var i=0; i&lt;names.value.length; i++) {
+            alert('month: ' + names.value[i] + '\n');
+          }
+        },
+        function () {alert('Error getting names\n');},
+        {type:'wide', item:'months'}
+      );
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;button onclick="checkDateNames()"&gt;Click for date names&lt;/button&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

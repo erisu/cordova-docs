@@ -1304,70 +1304,76 @@
             
 
             <div id="page-toc-source">
-                <h1>device.uuid</h1>
+                <h1 id="deviceuuid">device.uuid</h1>
 
 <p>獲取設備的通用唯一識別碼 (<a href="http://en.wikipedia.org/wiki/Universally_Unique_Identifier">UUID</a>).</p>
-<div class="highlight"><pre><code class="language-" data-lang="">var string = device.uuid;
-</code></pre></div>
-<h2>說明</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var string = device.uuid;
+</code></pre></div></div>
+
+<h2 id="說明">說明</h2>
 
 <p>UUID 如何生成的詳細資訊由設備製造商和特定于設備的平臺或模型。</p>
 
-<h2>支援的平臺</h2>
+<h2 id="支援的平臺">支援的平臺</h2>
 
 <ul>
-<li>  Android 系統</li>
-<li>  黑莓手機 WebWorks （OS 5.0 和更高）</li>
-<li>  iOS</li>
-<li>  Tizen</li>
-<li>  Windows Phone 7 和 8</li>
-<li>  Windows 8</li>
+  <li>Android 系統</li>
+  <li>黑莓手機 WebWorks （OS 5.0 和更高）</li>
+  <li>iOS</li>
+  <li>Tizen</li>
+  <li>Windows Phone 7 和 8</li>
+  <li>Windows 8</li>
 </ul>
 
-<h2>快速的示例</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">/ / Android： 一個隨機的 64 位整數 （作為字串返回，再次!) / / 上設備的第一次啟動生成的整數 / / / / 黑莓手機： 返回設備的 PIN 號碼 / / 這是九個數字的唯一整數 （作為字串，雖然!) / / / / iPhone： （從 UIDevice 類文檔解釋） / / 返回一個字串的雜湊值創建的多個硬體標識。
+<h2 id="快速的示例">快速的示例</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/ / Android： 一個隨機的 64 位整數 （作為字串返回，再次!) / / 上設備的第一次啟動生成的整數 / / / / 黑莓手機： 返回設備的 PIN 號碼 / / 這是九個數字的唯一整數 （作為字串，雖然!) / / / / iPhone： （從 UIDevice 類文檔解釋） / / 返回一個字串的雜湊值創建的多個硬體標識。
 / / 它保證是唯一的每個設備並不能綁 / / 到使用者帳戶。
 / / Windows Phone 7： 返回的雜湊代碼的設備 + 當前使用者，/ / 如果未定義使用者，則一個 guid 生成的並且將會保留直到卸載該應用程式 / / Tizen： 返回設備 IMEI （國際行動裝置身份或 IMEI 是一個數位 / / 獨有的每一個 UMTS 和 GSM 行動電話。
 var deviceID = device.uuid;
-</code></pre></div>
-<h2>完整的示例</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Device Properties Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="完整的示例">完整的示例</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Device Properties Example&lt;/title&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">element</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'deviceProperties'</span><span class="p">);</span>
-        <span class="nx">element</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">'Device Model: '</span>    <span class="o">+</span> <span class="nx">device</span><span class="p">.</span><span class="nx">model</span>    <span class="o">+</span> <span class="err">'</span><span class="o">&lt;</span><span class="nx">br</span> <span class="o">/&gt;</span><span class="s1">' +
-                            '</span><span class="nx">Device</span> <span class="nx">Cordova</span><span class="p">:</span> <span class="s1">'  + device.cordova  + '</span><span class="o">&lt;</span><span class="nx">br</span> <span class="o">/&gt;</span><span class="s1">' +
-                            '</span><span class="nx">Device</span> <span class="nx">Platform</span><span class="p">:</span> <span class="s1">' + device.platform + '</span><span class="o">&lt;</span><span class="nx">br</span> <span class="o">/&gt;</span><span class="s1">' +
-                            '</span><span class="nx">Device</span> <span class="nx">UUID</span><span class="p">:</span> <span class="s1">'     + device.uuid     + '</span><span class="o">&lt;</span><span class="nx">br</span> <span class="o">/&gt;</span><span class="s1">' +
-                            '</span><span class="nx">Device</span> <span class="nx">Version</span><span class="p">:</span> <span class="s1">'  + device.version  + '</span><span class="o">&lt;</span><span class="nx">br</span> <span class="o">/&gt;</span><span class="err">'</span><span class="p">;</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">"deviceProperties"</span><span class="nt">&gt;</span>Loading device properties...<span class="nt">&lt;/p&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2>iOS 怪癖</h2>
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
 
-<p><code>uuid</code>在 iOS 上不是獨有的一種設備，但對於每個應用程式，為每個安裝各不相同。 如果您刪除並重新安裝應用程式，它會更改和可能還當你升級 iOS，或甚至升級您的應用程式每個版本 (明顯在 iOS 5.1 中)。 <code>uuid</code>不是一個可靠的值。</p>
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        var element = document.getElementById('deviceProperties');
+        element.innerHTML = 'Device Model: '    + device.model    + '&lt;br /&gt;' +
+                            'Device Cordova: '  + device.cordova  + '&lt;br /&gt;' +
+                            'Device Platform: ' + device.platform + '&lt;br /&gt;' +
+                            'Device UUID: '     + device.uuid     + '&lt;br /&gt;' +
+                            'Device Version: '  + device.version  + '&lt;br /&gt;';
+    }
 
-<h2>Windows Phone 7 和 8 怪癖</h2>
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p id="deviceProperties"&gt;Loading device properties...&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
 
-<p><code>uuid</code>為 Windows Phone 7 需要許可權 <code>ID_CAP_IDENTITY_DEVICE</code> 。 Microsoft 可能會很快就棄用此屬性。 如果能力不是可用的應用程式將生成一個持久性的 guid 並保持應用程式的安裝在設備上的持續時間。</p>
+<h2 id="ios-怪癖">iOS 怪癖</h2>
+
+<p><code class="language-plaintext highlighter-rouge">uuid</code>在 iOS 上不是獨有的一種設備，但對於每個應用程式，為每個安裝各不相同。 如果您刪除並重新安裝應用程式，它會更改和可能還當你升級 iOS，或甚至升級您的應用程式每個版本 (明顯在 iOS 5.1 中)。 <code class="language-plaintext highlighter-rouge">uuid</code>不是一個可靠的值。</p>
+
+<h2 id="windows-phone-7-和-8-怪癖">Windows Phone 7 和 8 怪癖</h2>
+
+<p><code class="language-plaintext highlighter-rouge">uuid</code>為 Windows Phone 7 需要許可權 <code class="language-plaintext highlighter-rouge">ID_CAP_IDENTITY_DEVICE</code> 。 Microsoft 可能會很快就棄用此屬性。 如果能力不是可用的應用程式將生成一個持久性的 guid 並保持應用程式的安裝在設備上的持續時間。</p>
 
 
             </div>

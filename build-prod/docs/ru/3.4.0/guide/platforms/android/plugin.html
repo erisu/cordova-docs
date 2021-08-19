@@ -1094,58 +1094,69 @@
     }
 </style>
 
-<h1>Android плагины</h1>
+<h1 id="android-плагины">Android плагины</h1>
 
 <p>Этот раздел содержит сведения о том, как реализовать код родной плагин на платформе Android. Прежде чем читать это, увидеть приложения плагины обзор структуры плагина и его общий интерфейс JavaScript. Этот раздел продолжает демонстрировать образец <em>эхо</em> плагин, который общается с webview Кордова на родной платформе и обратно. Еще один пример см. также комментарии в <a href="https://github.com/apache/cordova-android/blob/master/framework/src/org/apache/cordova/CordovaPlugin.java">CordovaPlugin.java</a>.</p>
 
-<p>Android плагины основаны на Cordova-андроида, который состоит из Android WebView с крючками, прилагается к нему. Плагины представляются в виде сопоставления класса в <code>config.xml</code> файл. Модуль состоит из по крайней мере один Java-класса, который расширяет <code>CordovaPlugin</code> класс, переопределение одной из его <code>execute</code> методы. Как лучшая практика, плагин также должен обрабатывать <code>pause</code> и <code>resume</code> события, наряду с любой передачи между плагины сообщений. Плагины с длительные запросы, фоновой активности как воспроизведение мультимедиа, слушателей или внутреннее состояние следует осуществить <code>onReset()</code> метод также. Он выполняется, когда <code>WebView</code> переходит на новую страницу или обновления, которая перезагружает JavaScript.</p>
+<p>Android плагины основаны на Cordova-андроида, который состоит из Android WebView с крючками, прилагается к нему. Плагины представляются в виде сопоставления класса в <code class="language-plaintext highlighter-rouge">config.xml</code> файл. Модуль состоит из по крайней мере один Java-класса, который расширяет <code class="language-plaintext highlighter-rouge">CordovaPlugin</code> класс, переопределение одной из его <code class="language-plaintext highlighter-rouge">execute</code> методы. Как лучшая практика, плагин также должен обрабатывать <code class="language-plaintext highlighter-rouge">pause</code> и <code class="language-plaintext highlighter-rouge">resume</code> события, наряду с любой передачи между плагины сообщений. Плагины с длительные запросы, фоновой активности как воспроизведение мультимедиа, слушателей или внутреннее состояние следует осуществить <code class="language-plaintext highlighter-rouge">onReset()</code> метод также. Он выполняется, когда <code class="language-plaintext highlighter-rouge">WebView</code> переходит на новую страницу или обновления, которая перезагружает JavaScript.</p>
 
-<h2>Сопоставление классов плагина</h2>
+<h2 id="сопоставление-классов-плагина">Сопоставление классов плагина</h2>
 
-<p>Интерфейс JavaScript плагин использует <code>cordova.exec</code> метод следующим образом:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    Exec (&lt;successFunction&gt;, &lt;failFunction&gt;, &lt;service&gt;, &lt;action&gt;, [&lt;args&gt;]);
-</code></pre></div>
-<p>Это маршалирует запрос от WebView Android родной стороне, эффективно вызова <code>action</code> метод <code>service</code> класса, с дополнительные аргументы, передаваемые в <code>args</code> массив.</p>
+<p>Интерфейс JavaScript плагин использует <code class="language-plaintext highlighter-rouge">cordova.exec</code> метод следующим образом:</p>
 
-<p>Ли вы распространяете плагин Java-файл или файл <em>jar</em> своих собственных, плагин должен быть указан в вашем приложении Cordova-Android <code>res/xml/config.xml</code> файл. См приложение плагины для получения дополнительной информации о том, как использовать <code>plugin.xml</code> файл для вставки это <code>feature</code> элемент:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;feature name="&lt;service_name&gt;"&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    Exec (&lt;successFunction&gt;, &lt;failFunction&gt;, &lt;service&gt;, &lt;action&gt;, [&lt;args&gt;]);
+</code></pre></div></div>
+
+<p>Это маршалирует запрос от WebView Android родной стороне, эффективно вызова <code class="language-plaintext highlighter-rouge">action</code> метод <code class="language-plaintext highlighter-rouge">service</code> класса, с дополнительные аргументы, передаваемые в <code class="language-plaintext highlighter-rouge">args</code> массив.</p>
+
+<p>Ли вы распространяете плагин Java-файл или файл <em>jar</em> своих собственных, плагин должен быть указан в вашем приложении Cordova-Android <code class="language-plaintext highlighter-rouge">res/xml/config.xml</code> файл. См приложение плагины для получения дополнительной информации о том, как использовать <code class="language-plaintext highlighter-rouge">plugin.xml</code> файл для вставки это <code class="language-plaintext highlighter-rouge">feature</code> элемент:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;feature name="&lt;service_name&gt;"&gt;
         &lt;param name="android-package" value="&lt;full_name_including_namespace&gt;" /&gt;
     &lt;/feature&gt;
-</code></pre></div>
-<p>Имя службы соответствует той, которая используется в JavaScript <code>exec</code> вызов. Значение является идентификатором полного пространства имен класса Java. В противном случае плагин может компилировать, но по-прежнему недоступным для Кордова.</p>
+</code></pre></div></div>
 
-<h2>Плагин инициализации и жизни</h2>
+<p>Имя службы соответствует той, которая используется в JavaScript <code class="language-plaintext highlighter-rouge">exec</code> вызов. Значение является идентификатором полного пространства имен класса Java. В противном случае плагин может компилировать, но по-прежнему недоступным для Кордова.</p>
 
-<p>Один экземпляр объекта плагин создан для жизни каждого <code>WebView</code> . Плагины не создаются до тех пор, пока они сначала ссылается вызов из JavaScript, если не <code>&lt;param&gt;</code> с <code>onload</code> <code>name</code> атрибут имеет значение <code>&quot;true&quot;</code> в <code>config.xml</code> . Например:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="Echo"&gt;
+<h2 id="плагин-инициализации-и-жизни">Плагин инициализации и жизни</h2>
+
+<p>Один экземпляр объекта плагин создан для жизни каждого <code class="language-plaintext highlighter-rouge">WebView</code> . Плагины не создаются до тех пор, пока они сначала ссылается вызов из JavaScript, если не <code class="language-plaintext highlighter-rouge">&lt;param&gt;</code> с <code class="language-plaintext highlighter-rouge">onload</code> <code class="language-plaintext highlighter-rouge">name</code> атрибут имеет значение <code class="language-plaintext highlighter-rouge">"true"</code> в <code class="language-plaintext highlighter-rouge">config.xml</code> . Например:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="Echo"&gt;
     &lt;param name="android-package" value="&lt;full_name_including_namespace&gt;" /&gt;
     &lt;param name="onload" value="true" /&gt;
 &lt;/feature&gt;
-</code></pre></div>
-<p>Следует использовать плагины <code>initialize</code> метод для их запуска логики.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">@Override
+</code></pre></div></div>
+
+<p>Следует использовать плагины <code class="language-plaintext highlighter-rouge">initialize</code> метод для их запуска логики.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Override
 public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     super.initialize(cordova, webView);
     // your init code here
 }
-</code></pre></div>
-<h2>Написание Android Java плагин</h2>
+</code></pre></div></div>
 
-<p>Вызов JavaScript запускает запрос плагин к родной стороне, и плагин Java correspoinding отображается правильно в <code>config.xml</code> файл, но как окончательный вид класса Android Java плагин? Все, что отправляется в плагин с JavaScript в <code>exec</code> функция передается в модуль класса <code>execute</code> метод. Большинство <code>execute</code> реализаций выглядеть следующим образом:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    @Override общественного boolean выполнение (строка действия, JSONArray args, CallbackContext callbackContext) бросает JSONException {если («beep".equals(action)) {this.beep(args.getLong(0));
+<h2 id="написание-android-java-плагин">Написание Android Java плагин</h2>
+
+<p>Вызов JavaScript запускает запрос плагин к родной стороне, и плагин Java correspoinding отображается правильно в <code class="language-plaintext highlighter-rouge">config.xml</code> файл, но как окончательный вид класса Android Java плагин? Все, что отправляется в плагин с JavaScript в <code class="language-plaintext highlighter-rouge">exec</code> функция передается в модуль класса <code class="language-plaintext highlighter-rouge">execute</code> метод. Большинство <code class="language-plaintext highlighter-rouge">execute</code> реализаций выглядеть следующим образом:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @Override общественного boolean выполнение (строка действия, JSONArray args, CallbackContext callbackContext) бросает JSONException {если («beep".equals(action)) {this.beep(args.getLong(0));
             callbackContext.success();
             Возвращает значение true;
         } Возвращает значение false;  / / Возвращения ложные результаты в сообщение об ошибке «MethodNotFound».
     }
-</code></pre></div>
-<p>JavaScript <code>exec</code> функции <code>action</code> параметр соответствует параметру метода частного класса направить с необязательными параметрами.</p>
+</code></pre></div></div>
+
+<p>JavaScript <code class="language-plaintext highlighter-rouge">exec</code> функции <code class="language-plaintext highlighter-rouge">action</code> параметр соответствует параметру метода частного класса направить с необязательными параметрами.</p>
 
 <p>Когда перехват исключений и возвращение ошибки, важно для ясности, что ошибки возвращены имена исключений JavaScript матч Java как можно больше.</p>
 
-<h2>Работа с потоками</h2>
+<h2 id="работа-с-потоками">Работа с потоками</h2>
 
-<p>Плагин JavaScript делает <em>не</em> выполняются в основном потоке <code>WebView</code> интерфейс, вместо этого, он работает на <code>WebCore</code> поток, как это делает <code>execute</code> метод. Если вам нужно взаимодействовать с интерфейсом пользователя, следует использовать следующие изменения:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    @Override
+<p>Плагин JavaScript делает <em>не</em> выполняются в основном потоке <code class="language-plaintext highlighter-rouge">WebView</code> интерфейс, вместо этого, он работает на <code class="language-plaintext highlighter-rouge">WebCore</code> поток, как это делает <code class="language-plaintext highlighter-rouge">execute</code> метод. Если вам нужно взаимодействовать с интерфейсом пользователя, следует использовать следующие изменения:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @Override
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
         if ("beep".equals(action)) {
             final long duration = args.getLong(0);
@@ -1159,9 +1170,11 @@ public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         }
         return false;
     }
-</code></pre></div>
-<p>Использовать следующее, если вам не нужно запускать в главном интерфейсе в нить, но не хотите блокировать <code>WebCore</code> нить либо:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    @Override
+</code></pre></div></div>
+
+<p>Использовать следующее, если вам не нужно запускать в главном интерфейсе в нить, но не хотите блокировать <code class="language-plaintext highlighter-rouge">WebCore</code> нить либо:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @Override
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
         if ("beep".equals(action)) {
             final long duration = args.getLong(0);
@@ -1175,63 +1188,68 @@ public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         }
         return false;
     }
-</code></pre></div>
-<h2>Эхо Android плагин пример</h2>
+</code></pre></div></div>
 
-<p>Для сопоставления интерфейса JavaScript <em>эхо</em> функция, описанная в плагины приложения, используйте <code>plugin.xml</code> для вставки <code>feature</code> спецификации локальной платформы <code>config.xml</code> файл:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;platform name="android"&gt;
+<h2 id="эхо-android-плагин-пример">Эхо Android плагин пример</h2>
+
+<p>Для сопоставления интерфейса JavaScript <em>эхо</em> функция, описанная в плагины приложения, используйте <code class="language-plaintext highlighter-rouge">plugin.xml</code> для вставки <code class="language-plaintext highlighter-rouge">feature</code> спецификации локальной платформы <code class="language-plaintext highlighter-rouge">config.xml</code> файл:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;platform name="android"&gt;
         &lt;config-file target="config.xml" parent="/*"&gt;
             &lt;feature name="Echo"&gt;
                 &lt;param name="android-package" value="org.apache.cordova.plugin.Echo"/&gt;
             &lt;/feature&gt;
         &lt;/config-file&gt;
     &lt;/platform&gt;
-</code></pre></div>
-<p>Затем добавить следующий <code>src/org/apache/cordova/plugin/Echo.java</code> файл:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    <span class="k">package</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">plugin</span><span class="p">;</span>
+</code></pre></div></div>
 
-    <span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">CordovaPlugin</span><span class="p">;</span>
-    <span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">CallbackContext</span><span class="p">;</span>
+<p>Затем добавить следующий <code class="language-plaintext highlighter-rouge">src/org/apache/cordova/plugin/Echo.java</code> файл:</p>
 
-    <span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">JSONArray</span><span class="p">;</span>
-    <span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">JSONException</span><span class="p">;</span>
-    <span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">JSONObject</span><span class="p">;</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    package org.apache.cordova.plugin;
 
-    <span class="p">/**</span>
-     <span class="p">*</span> <span class="n">This</span> <span class="n">class</span> <span class="n">echoes</span> <span class="n">a</span> <span class="k">string</span> <span class="n">called</span> <span class="k">from</span> <span class="n">JavaScript</span><span class="p">.</span>
-     <span class="p">*/</span>
-    <span class="k">public</span> <span class="n">class</span> <span class="n">Echo</span> <span class="n">extends</span> <span class="n">CordovaPlugin</span> <span class="p">{</span>
+    import org.apache.cordova.CordovaPlugin;
+    import org.apache.cordova.CallbackContext;
 
-        <span class="p">@</span><span class="n">Override</span>
-        <span class="k">public</span> <span class="k">boolean</span> <span class="n">execute</span><span class="p">(</span><span class="k">String</span> <span class="n">action</span><span class="p">,</span> <span class="n">JSONArray</span> <span class="n">args</span><span class="p">,</span> <span class="n">CallbackContext</span> <span class="n">callbackContext</span><span class="p">)</span> <span class="n">throws</span> <span class="n">JSONException</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">action</span><span class="p">.</span><span class="n">equals</span><span class="p">(</span><span class="s2">"echo"</span><span class="p">))</span> <span class="p">{</span>
-                <span class="k">String</span> <span class="n">message</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
-                <span class="n">this</span><span class="p">.</span><span class="n">echo</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">callbackContext</span><span class="p">);</span>
-                <span class="n">return</span> <span class="nb">true</span><span class="p">;</span>
-            <span class="p">}</span>
-            <span class="n">return</span> <span class="nb">false</span><span class="p">;</span>
-        <span class="p">}</span>
+    import org.json.JSONArray;
+    import org.json.JSONException;
+    import org.json.JSONObject;
 
-        <span class="n">private</span> <span class="n">void</span> <span class="n">echo</span><span class="p">(</span><span class="k">String</span> <span class="n">message</span><span class="p">,</span> <span class="n">CallbackContext</span> <span class="n">callbackContext</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">message</span> <span class="c1">!= null &amp;&amp; message.length() &gt; 0) {
-</span>                <span class="n">callbackContext</span><span class="p">.</span><span class="n">success</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="n">callbackContext</span><span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="s2">"Expected one non-empty string argument."</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-</code></pre></div>
-<p>Необходимого импорта в верхней части файла расширяет класс из <code>CordovaPlugin</code> , чья <code>execute()</code> метод переопределяет для получения сообщений от <code>exec()</code> . <code>execute()</code>Метод сначала проверяет значение <code>action</code> , для которого в этом случае есть только один действительный <code>echo</code> значение. Любой другой Возвращает действие <code>false</code> и приводит к <code>INVALID_ACTION</code> ошибка, которая переводится как ошибка обратного вызова на стороне JavaScript.</p>
+    /**
+     * This class echoes a string called from JavaScript.
+     */
+    public class Echo extends CordovaPlugin {
 
-<p>Далее, этот метод извлекает эхо строку, используя <code>args</code> объекта <code>getString</code> метод, первый параметр передается методу. После того, как значение передается в частный <code>echo</code> метод, это параметр проверяется, чтобы убедиться, что это не <code>null</code> или является пустой строкой, в этом случае <code>callbackContext.error()</code> вызывает ошибка обратного вызова JavaScript. Если проходит различные проверки, <code>callbackContext.success()</code> передает оригинал <code>message</code> строки обратно в JavaScript успех обратного вызова как параметр.</p>
+        @Override
+        public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+            if (action.equals("echo")) {
+                String message = args.getString(0);
+                this.echo(message, callbackContext);
+                return true;
+            }
+            return false;
+        }
 
-<h2>Android интеграции</h2>
+        private void echo(String message, CallbackContext callbackContext) {
+            if (message != null &amp;&amp; message.length() &gt; 0) {
+                callbackContext.success(message);
+            } else {
+                callbackContext.error("Expected one non-empty string argument.");
+            }
+        }
+    }
+</code></pre></div></div>
 
-<p>Android функции <code>Intent</code> системы, что позволяет процессам взаимодействовать друг с другом. Плагины имеют доступ к <code>CordovaInterface</code> объект, который можно получить доступ к Android <code>Activity</code> для запуска приложения. Это <code>Context</code> необходимые для запуска нового Android <code>Intent</code> . <code>CordovaInterface</code>Позволяет плагины для запуска <code>Activity</code> на результат и установить плагин обратного вызова для когда <code>Intent</code> возвращается к приложению.</p>
+<p>Необходимого импорта в верхней части файла расширяет класс из <code class="language-plaintext highlighter-rouge">CordovaPlugin</code> , чья <code class="language-plaintext highlighter-rouge">execute()</code> метод переопределяет для получения сообщений от <code class="language-plaintext highlighter-rouge">exec()</code> . <code class="language-plaintext highlighter-rouge">execute()</code>Метод сначала проверяет значение <code class="language-plaintext highlighter-rouge">action</code> , для которого в этом случае есть только один действительный <code class="language-plaintext highlighter-rouge">echo</code> значение. Любой другой Возвращает действие <code class="language-plaintext highlighter-rouge">false</code> и приводит к <code class="language-plaintext highlighter-rouge">INVALID_ACTION</code> ошибка, которая переводится как ошибка обратного вызова на стороне JavaScript.</p>
 
-<p>По состоянию на Cordova 2.0, плагины могут больше не прямой доступ к <code>Context</code> и наследие <code>ctx</code> член является устаревшим. Все <code>ctx</code> методы существуют на <code>Context</code> , так как <code>getContext()</code> и <code>getActivity()</code> может возвращать требуемый объект.</p>
+<p>Далее, этот метод извлекает эхо строку, используя <code class="language-plaintext highlighter-rouge">args</code> объекта <code class="language-plaintext highlighter-rouge">getString</code> метод, первый параметр передается методу. После того, как значение передается в частный <code class="language-plaintext highlighter-rouge">echo</code> метод, это параметр проверяется, чтобы убедиться, что это не <code class="language-plaintext highlighter-rouge">null</code> или является пустой строкой, в этом случае <code class="language-plaintext highlighter-rouge">callbackContext.error()</code> вызывает ошибка обратного вызова JavaScript. Если проходит различные проверки, <code class="language-plaintext highlighter-rouge">callbackContext.success()</code> передает оригинал <code class="language-plaintext highlighter-rouge">message</code> строки обратно в JavaScript успех обратного вызова как параметр.</p>
 
-<h2>Отладка Android плагины</h2>
+<h2 id="android-интеграции">Android интеграции</h2>
+
+<p>Android функции <code class="language-plaintext highlighter-rouge">Intent</code> системы, что позволяет процессам взаимодействовать друг с другом. Плагины имеют доступ к <code class="language-plaintext highlighter-rouge">CordovaInterface</code> объект, который можно получить доступ к Android <code class="language-plaintext highlighter-rouge">Activity</code> для запуска приложения. Это <code class="language-plaintext highlighter-rouge">Context</code> необходимые для запуска нового Android <code class="language-plaintext highlighter-rouge">Intent</code> . <code class="language-plaintext highlighter-rouge">CordovaInterface</code>Позволяет плагины для запуска <code class="language-plaintext highlighter-rouge">Activity</code> на результат и установить плагин обратного вызова для когда <code class="language-plaintext highlighter-rouge">Intent</code> возвращается к приложению.</p>
+
+<p>По состоянию на Cordova 2.0, плагины могут больше не прямой доступ к <code class="language-plaintext highlighter-rouge">Context</code> и наследие <code class="language-plaintext highlighter-rouge">ctx</code> член является устаревшим. Все <code class="language-plaintext highlighter-rouge">ctx</code> методы существуют на <code class="language-plaintext highlighter-rouge">Context</code> , так как <code class="language-plaintext highlighter-rouge">getContext()</code> и <code class="language-plaintext highlighter-rouge">getActivity()</code> может возвращать требуемый объект.</p>
+
+<h2 id="отладка-android-плагины">Отладка Android плагины</h2>
 
 <p>Eclipse позволяет отлаживать плагины как исходный код Java, включенный в проект. Только последняя версия Android Developer Tools позволяет вам прикрепить исходный код к <em>банку</em> зависимостей, так что эта функция пока не поддерживается полностью.</p>
 

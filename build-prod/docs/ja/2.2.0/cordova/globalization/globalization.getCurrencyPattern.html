@@ -1364,40 +1364,43 @@
             
 
             <div id="page-toc-source">
-                <h1>globalization.getCurrencyPattern</h1>
+                <h1 id="globalizationgetcurrencypattern">globalization.getCurrencyPattern</h1>
 
 <p>クライアントのユーザー設定と ISO 4217 通貨コードを元に、通貨の値のフォーマットと変換のためのパターン文字列を返します。</p>
-<div class="highlight"><pre><code class="language-" data-lang=""> navigator.globalization.getCurrencyPattern(currencyCode, successCB, errorCB);
-</code></pre></div>
-<h2>概要</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> navigator.globalization.getCurrencyPattern(currencyCode, successCB, errorCB);
+</code></pre></div></div>
+
+<h2 id="概要">概要</h2>
 
 <p>successCB コールバック関数に、プロパティーオブジェクトをパラメーターとしてパターンを返します。このオブジェクトは以下のプロパティーを持っています:</p>
 
 <ul>
-<li>pattern {String}: 通貨の値のフォーマットと変換のためのパターンを表します。このパターンは Unicode Technical Standard #35 に従っています。 <a href="http://unicode.org/reports/tr35/tr35-4.html">http://unicode.org/reports/tr35/tr35-4.html</a></li>
-<li>code {String}: パターンのための The ISO 4217 の通貨コードを表します。</li>
-<li>fraction {Number}: フォーマットおよび変換時に使う小数の桁数を表します。</li>
-<li>rounding {Number}: フォーマットおよび変換時に使う丸めの単位を表します。</li>
-<li>decimal: {String}: フォーマットおよび変換時に使う小数の記号を表します。</li>
-<li>grouping: {String}: フォーマットおよび変換時に使うグルーピング時の記号を表します。</li>
+  <li>pattern {String}: 通貨の値のフォーマットと変換のためのパターンを表します。このパターンは Unicode Technical Standard #35 に従っています。 <a href="http://unicode.org/reports/tr35/tr35-4.html">http://unicode.org/reports/tr35/tr35-4.html</a></li>
+  <li>code {String}: パターンのための The ISO 4217 の通貨コードを表します。</li>
+  <li>fraction {Number}: フォーマットおよび変換時に使う小数の桁数を表します。</li>
+  <li>rounding {Number}: フォーマットおよび変換時に使う丸めの単位を表します。</li>
+  <li>decimal: {String}: フォーマットおよび変換時に使う小数の記号を表します。</li>
+  <li>grouping: {String}: フォーマットおよび変換時に使うグルーピング時の記号を表します。</li>
 </ul>
 
-<p>引数の <code>currencyCode</code> パラメーターは、例えば &#39;USD&#39; などの、 ISO 4217 通貨コードのうちの1つである必要があります。</p>
+<p>引数の <code class="language-plaintext highlighter-rouge">currencyCode</code> パラメーターは、例えば ‘USD’ などの、 ISO 4217 通貨コードのうちの1つである必要があります。</p>
 
 <p>もしパターン取得中にエラーが発生した場合、 errorCB コールバックが <a href="GlobalizationError/globalizationerror.html">GlobalizationError</a> オブジェクトをパラメーターとして呼び出されます。このエラーに対するエラーコードは <a href="GlobalizationError/globalizationerror.html">GlobalizationError</a>.FORMATTING_ERROR です。</p>
 
-<h2>サポートされているプラットフォーム</h2>
+<h2 id="サポートされているプラットフォーム">サポートされているプラットフォーム</h2>
 
 <ul>
-<li>Android</li>
-<li>BlackBerry WebWorks (OS 5.0 以上)</li>
-<li>iPhone</li>
+  <li>Android</li>
+  <li>BlackBerry WebWorks (OS 5.0 以上)</li>
+  <li>iPhone</li>
 </ul>
 
-<h2><a href="../storage/storage.opendatabase.html">使用例</a></h2>
+<h2 id="使用例"><a href="../storage/storage.opendatabase.html">使用例</a></h2>
 
 <p>ブラウザーのロケールが en_US に設定され、通貨には US ドルが選択された場合、以下のような文字列をポップアップダイアログに表示します:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">pattern: $#,##0.##;($#,##0.##)
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pattern: $#,##0.##;($#,##0.##)
 code: USD
 fraction: 2
 rounding: 0
@@ -1416,35 +1419,39 @@ navigator.globalization.getCurrencyPattern(
                             'grouping: ' + pattern.grouping);},
   function () {alert('Error getting pattern\n');}
 );
-</code></pre></div>
-<h2>詳細な使用例</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Cordova<span class="nt">&lt;/title&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova-2.2.0.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
 
-    <span class="kd">function</span> <span class="nx">checkPattern</span><span class="p">()</span> <span class="p">{</span>
-      <span class="nb">navigator</span><span class="p">.</span><span class="nx">globalization</span><span class="p">.</span><span class="nx">getCurrencyPattern</span><span class="p">(</span>
-        <span class="s1">'USD'</span><span class="p">,</span>
-        <span class="kd">function</span> <span class="p">(</span><span class="nx">pattern</span><span class="p">)</span> <span class="p">{</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'pattern: '</span> <span class="o">+</span> <span class="nx">pattern</span><span class="p">.</span><span class="nx">pattern</span> <span class="o">+</span> <span class="s1">'\n'</span> <span class="o">+</span>
-                                  <span class="s1">'code: '</span> <span class="o">+</span> <span class="nx">pattern</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s1">'\n'</span> <span class="o">+</span>
-                                  <span class="s1">'fraction: '</span> <span class="o">+</span> <span class="nx">pattern</span><span class="p">.</span><span class="nx">fraction</span> <span class="o">+</span> <span class="s1">'\n'</span> <span class="o">+</span>
-                                  <span class="s1">'rounding: '</span> <span class="o">+</span> <span class="nx">pattern</span><span class="p">.</span><span class="nx">rounding</span> <span class="o">+</span> <span class="s1">'\n'</span> <span class="o">+</span>
-                                  <span class="s1">'decimal: '</span> <span class="o">+</span> <span class="nx">pattern</span><span class="p">.</span><span class="nx">decimal</span> <span class="o">+</span> <span class="s1">'\n'</span> <span class="o">+</span>
-                                  <span class="s1">'grouping: '</span> <span class="o">+</span> <span class="nx">pattern</span><span class="p">.</span><span class="nx">grouping</span><span class="p">);},</span>
-        <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'Error getting pattern\n'</span><span class="p">);}</span>
-      <span class="p">);</span>
-    <span class="p">}</span>
+<h2 id="詳細な使用例">詳細な使用例</h2>
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"checkPattern()"</span><span class="nt">&gt;</span>クリックしてパターンを表示<span class="nt">&lt;/button&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Cordova&lt;/title&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.2.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
+
+    function checkPattern() {
+      navigator.globalization.getCurrencyPattern(
+        'USD',
+        function (pattern) {alert('pattern: ' + pattern.pattern + '\n' +
+                                  'code: ' + pattern.code + '\n' +
+                                  'fraction: ' + pattern.fraction + '\n' +
+                                  'rounding: ' + pattern.rounding + '\n' +
+                                  'decimal: ' + pattern.decimal + '\n' +
+                                  'grouping: ' + pattern.grouping);},
+        function () {alert('Error getting pattern\n');}
+      );
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;button onclick="checkPattern()"&gt;クリックしてパターンを表示&lt;/button&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+
 
             </div>
         </div>

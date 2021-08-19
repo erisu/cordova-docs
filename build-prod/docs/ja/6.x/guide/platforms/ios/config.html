@@ -2236,62 +2236,112 @@
             
 
             <div id="page-toc-source">
-                <h1>iOS 構成</h1>
+                <h1 id="ios-構成">iOS 構成</h1>
 
-<p><code>config.xml</code>ファイルは、各アプリケーションと CordovaWebView のインスタンス全体に適用される、アプリの基本的な設定を制御します。 このセクションの詳細設定を iOS のビルドにのみ適用されます。 グローバル構成オプションの詳細については、<a href="config_ref_index.md.html#The%20config.xml%20File">config.xml ファイル</a> を参照してください。</p>
+<p><code class="language-plaintext highlighter-rouge">config.xml</code>ファイルは、各アプリケーションと CordovaWebView のインスタンス全体に適用される、アプリの基本的な設定を制御します。 このセクションの詳細設定を iOS のビルドにのみ適用されます。 グローバル構成オプションの詳細については、<a href="config_ref_index.md.html#The%20config.xml%20File">config.xml ファイル</a> を参照してください。</p>
 
 <ul>
-<li><p><code>EnableViewportScale</code>(ブール値、既定値は <code>false</code> ): に設定されている <code>true</code> が既定で有効になっているビューポート メタ タグを無効にするかユーザーがスケーリングの範囲を制限できるようにします。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="EnableViewportScale" value="true"/&gt;
-</code></pre></div>
-<p>次のように、ビューポートのスケーリングを無効にしてフィットする HTML レンダリング WebView 内柔軟にコンテンツ。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt; メタ名 = 'ビューポート' コンテンツ =' 幅初期スケール デバイス幅を = = 1、ユーザー スケーラブル = no'/&gt;
-</code></pre></div></li>
-<li><p><code>MediaPlaybackAllowsAirPlay</code>(ブール値、デフォルト <code>true</code> ): に設定 <code>false</code> このビューで使用されている空気を再生しないようにします。 既定 UIWebView と WKWebView で利用可能です。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="MediaPlaybackAllowsAirPlay" value="false"/&gt;
-</code></pre></div></li>
-<li><p><code>MediaPlaybackRequiresUserAction</code>(ブール値、デフォルト <code>false</code> ): に設定 <code>true</code> 自動的に遊んでから HTML5 ビデオまたはオーディオを防ぐために、 <code>autoplay</code> 属性または JavaScript を使用。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="MediaPlaybackRequiresUserAction" value="true"/&gt;
-</code></pre></div></li>
-<li><p><code>AllowInlineMediaPlayback</code>(ブール値、デフォルト <code>false</code> ): に設定 <code>true</code> ネイティブ コントロールではなく、ブラウザーが指定したコントロールを使用して、画面レイアウト内で<em>インライン</em>表示する HTML5 メディアの再生を許可します。 動作するようにこれを追加、 <code>webkit-playsinline</code> 属性のいずれかに <code>&lt;video&gt;</code> 要素。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="AllowInlineMediaPlayback" value="true"/&gt;
-</code></pre></div></li>
-<li><p><code>BackupWebStorage</code>(文字列、どちらか <code>none</code> 、 <code>local</code> 、またはデフォルト <code>cloud</code> ): に設定 <code>cloud</code> web <a href="../../../cordova/storage/storage.html">ストレージ</a> データを iCloud 経由でのバックアップを許可します。 設定 <code>local</code> iTunes 同期を介してローカル バックアップのみを許可します。 設定 <code>none</code> web <a href="../../../cordova/storage/storage.html">ストレージ</a> バックアップを防止。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="BackupWebStorage" value="local"/&gt;
-</code></pre></div></li>
-<li><p><code>TopActivityIndicator</code>(文字列、既定値は <code>gray</code> ): 重要なプロセッサの活動状況を示すステータス バーに回転する小さいアイコンの外観をコントロールします。 有効な値は、 <code>whiteLarge</code> 、 <code>white</code> と<code>gray</code>.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="TopActivityIndicator" value="white"/&gt;
-</code></pre></div></li>
-<li><p><code>KeyboardDisplayRequiresUserAction</code>(ブール値、デフォルト <code>true</code> ): に設定 <code>false</code> を呼び出すときに表示するキーボードを許可する <code>focus()</code> フォームの入力。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="KeyboardDisplayRequiresUserAction" value="false"/&gt;
-</code></pre></div></li>
-<li><p><code>SuppressesIncrementalRendering</code>(ブール値、デフォルト <code>false</code> ): に設定されて <code>true</code> それは、画面にレンダリングされる前にすべてのコンテンツを受信するまで待機します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="SuppressesIncrementalRendering" value="true"/&gt;
-</code></pre></div></li>
-<li><p><code>GapBetweenPages</code>(フロート、デフォルト `` ): ページ間のポイントで、ギャップの大きさ。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="GapBetweenPages" value="0"/&gt;
-</code></pre></div></li>
-<li><p><code>PageLength</code>(フロート、デフォルト `` ): ページ フロー方向のポイントで、各ページのサイズ。 とき PaginationMode が右左からまたは左から右に、このプロパティは、各ページの幅を表します。 PaginationMode が topToBottom または bottomToTop の場合、このプロパティは各ページの高さを表します。 既定値は 0、つまり、レイアウト ページのサイズを決定するビューポートのサイズを使用します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="PageLength" value="0"/&gt;
-</code></pre></div></li>
-<li><p><code>PaginationBreakingMode</code>(文字列、既定値は <code>page</code> ): 有効な値は、 <code>page</code> と <code>column</code> 。列またはページ分割が発生する方法です。 このプロパティは、特定の CSS プロパティ列とページ分割に関するを表彰するか無視するかを決定します。 このプロパティに設定するとき <code>column</code> 、コンテンツが改ページの場所の柱破壊に関連する CSS プロパティを尊重します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="PaginationBreakingMode" value="page"/&gt;
-</code></pre></div></li>
-<li><p><code>PaginationMode</code>(文字列、既定値は <code>unpaginated</code> ): 有効な値は、 <code>unpaginated</code> 、 <code>leftToRight</code> 、 <code>topToBottom</code> 、 <code>bottomToTop</code> 、および <code>rightToLeft</code> 。 このプロパティは、web ビューのコンテンツは、時に、ビューの 1 つの画面を入力するページに分割または 1 つの長いスクロール ビューとして表示かどうかを決定します。 場合は改ページされたフォームは、このプロパティを設定は、コンテンツは、そのコンテンツを再配置する PageLength と GapBetweenPages の値を使用して web 表示の原因のページ レイアウトを切り替えます。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="PaginationMode" value="unpaginated"/&gt;
-</code></pre></div></li>
-<li><p><code>UIWebViewDecelerationSpeed</code>(文字列、既定値は <code>normal</code> ): 有効な値は、 <code>normal</code> 、 <code>fast</code> 。 このプロパティは、運動量のスクローリング減速速度を制御します。 <code>normal</code>ほとんどのネイティブ アプリケーションのデフォルトの速度と <code>fast</code> 既定値は、移動式のサファリ。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="UIWebViewDecelerationSpeed" value="fast" /&gt;
-</code></pre></div></li>
-<li><p><code>ErrorUrl</code>(文字列、既定では設定されていない): 場合設定、アプリケーションのエラー時に参照されるローカル ページが表示されます。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="ErrorUrl" value="myErrorPage.html"/&gt;
-</code></pre></div></li>
-<li><p><code>OverrideUserAgent</code>(文字列、既定では設定されていない): 設定すると、値は webview の古い UserAgent を交換します。 リモート ページを要求するときに、アプリ ・ ブラウザーから要求を識別すると便利です。 注意して使用、これは web サーバーと compitiable 問題を原因します。 ほとんどの場合、AppendUserAgent を代わりに使用します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="OverrideUserAgent" value="Mozilla/5.0 My Browser" /&gt;
-</code></pre></div></li>
-<li><p><code>AppendUserAgent</code>(文字列、既定では設定されていない): 設定、webview の古いユーザ エージェントの末尾に値が追加されます。 OverrideUserAgent を使用する場合は、この値が無視されます。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="AppendUserAgent" value="My Browser" /&gt;
-</code></pre></div></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">EnableViewportScale</code>(ブール値、既定値は <code class="language-plaintext highlighter-rouge">false</code> ): に設定されている <code class="language-plaintext highlighter-rouge">true</code> が既定で有効になっているビューポート メタ タグを無効にするかユーザーがスケーリングの範囲を制限できるようにします。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="EnableViewportScale" value="true"/&gt;
+</code></pre></div>    </div>
+
+    <p>次のように、ビューポートのスケーリングを無効にしてフィットする HTML レンダリング WebView 内柔軟にコンテンツ。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt; メタ名 = 'ビューポート' コンテンツ =' 幅初期スケール デバイス幅を = = 1、ユーザー スケーラブル = no'/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">MediaPlaybackAllowsAirPlay</code>(ブール値、デフォルト <code class="language-plaintext highlighter-rouge">true</code> ): に設定 <code class="language-plaintext highlighter-rouge">false</code> このビューで使用されている空気を再生しないようにします。 既定 UIWebView と WKWebView で利用可能です。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="MediaPlaybackAllowsAirPlay" value="false"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">MediaPlaybackRequiresUserAction</code>(ブール値、デフォルト <code class="language-plaintext highlighter-rouge">false</code> ): に設定 <code class="language-plaintext highlighter-rouge">true</code> 自動的に遊んでから HTML5 ビデオまたはオーディオを防ぐために、 <code class="language-plaintext highlighter-rouge">autoplay</code> 属性または JavaScript を使用。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="MediaPlaybackRequiresUserAction" value="true"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">AllowInlineMediaPlayback</code>(ブール値、デフォルト <code class="language-plaintext highlighter-rouge">false</code> ): に設定 <code class="language-plaintext highlighter-rouge">true</code> ネイティブ コントロールではなく、ブラウザーが指定したコントロールを使用して、画面レイアウト内で<em>インライン</em>表示する HTML5 メディアの再生を許可します。 動作するようにこれを追加、 <code class="language-plaintext highlighter-rouge">webkit-playsinline</code> 属性のいずれかに <code class="language-plaintext highlighter-rouge">&lt;video&gt;</code> 要素。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="AllowInlineMediaPlayback" value="true"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">BackupWebStorage</code>(文字列、どちらか <code class="language-plaintext highlighter-rouge">none</code> 、 <code class="language-plaintext highlighter-rouge">local</code> 、またはデフォルト <code class="language-plaintext highlighter-rouge">cloud</code> ): に設定 <code class="language-plaintext highlighter-rouge">cloud</code> web <a href="../../../cordova/storage/storage.html">ストレージ</a> データを iCloud 経由でのバックアップを許可します。 設定 <code class="language-plaintext highlighter-rouge">local</code> iTunes 同期を介してローカル バックアップのみを許可します。 設定 <code class="language-plaintext highlighter-rouge">none</code> web <a href="../../../cordova/storage/storage.html">ストレージ</a> バックアップを防止。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="BackupWebStorage" value="local"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">TopActivityIndicator</code>(文字列、既定値は <code class="language-plaintext highlighter-rouge">gray</code> ): 重要なプロセッサの活動状況を示すステータス バーに回転する小さいアイコンの外観をコントロールします。 有効な値は、 <code class="language-plaintext highlighter-rouge">whiteLarge</code> 、 <code class="language-plaintext highlighter-rouge">white</code> と<code class="language-plaintext highlighter-rouge">gray</code>.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="TopActivityIndicator" value="white"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">KeyboardDisplayRequiresUserAction</code>(ブール値、デフォルト <code class="language-plaintext highlighter-rouge">true</code> ): に設定 <code class="language-plaintext highlighter-rouge">false</code> を呼び出すときに表示するキーボードを許可する <code class="language-plaintext highlighter-rouge">focus()</code> フォームの入力。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="KeyboardDisplayRequiresUserAction" value="false"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">SuppressesIncrementalRendering</code>(ブール値、デフォルト <code class="language-plaintext highlighter-rouge">false</code> ): に設定されて <code class="language-plaintext highlighter-rouge">true</code> それは、画面にレンダリングされる前にすべてのコンテンツを受信するまで待機します。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="SuppressesIncrementalRendering" value="true"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">GapBetweenPages</code>(フロート、デフォルト `` ): ページ間のポイントで、ギャップの大きさ。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="GapBetweenPages" value="0"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">PageLength</code>(フロート、デフォルト `` ): ページ フロー方向のポイントで、各ページのサイズ。 とき PaginationMode が右左からまたは左から右に、このプロパティは、各ページの幅を表します。 PaginationMode が topToBottom または bottomToTop の場合、このプロパティは各ページの高さを表します。 既定値は 0、つまり、レイアウト ページのサイズを決定するビューポートのサイズを使用します。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="PageLength" value="0"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">PaginationBreakingMode</code>(文字列、既定値は <code class="language-plaintext highlighter-rouge">page</code> ): 有効な値は、 <code class="language-plaintext highlighter-rouge">page</code> と <code class="language-plaintext highlighter-rouge">column</code> 。列またはページ分割が発生する方法です。 このプロパティは、特定の CSS プロパティ列とページ分割に関するを表彰するか無視するかを決定します。 このプロパティに設定するとき <code class="language-plaintext highlighter-rouge">column</code> 、コンテンツが改ページの場所の柱破壊に関連する CSS プロパティを尊重します。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="PaginationBreakingMode" value="page"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">PaginationMode</code>(文字列、既定値は <code class="language-plaintext highlighter-rouge">unpaginated</code> ): 有効な値は、 <code class="language-plaintext highlighter-rouge">unpaginated</code> 、 <code class="language-plaintext highlighter-rouge">leftToRight</code> 、 <code class="language-plaintext highlighter-rouge">topToBottom</code> 、 <code class="language-plaintext highlighter-rouge">bottomToTop</code> 、および <code class="language-plaintext highlighter-rouge">rightToLeft</code> 。 このプロパティは、web ビューのコンテンツは、時に、ビューの 1 つの画面を入力するページに分割または 1 つの長いスクロール ビューとして表示かどうかを決定します。 場合は改ページされたフォームは、このプロパティを設定は、コンテンツは、そのコンテンツを再配置する PageLength と GapBetweenPages の値を使用して web 表示の原因のページ レイアウトを切り替えます。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="PaginationMode" value="unpaginated"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">UIWebViewDecelerationSpeed</code>(文字列、既定値は <code class="language-plaintext highlighter-rouge">normal</code> ): 有効な値は、 <code class="language-plaintext highlighter-rouge">normal</code> 、 <code class="language-plaintext highlighter-rouge">fast</code> 。 このプロパティは、運動量のスクローリング減速速度を制御します。 <code class="language-plaintext highlighter-rouge">normal</code>ほとんどのネイティブ アプリケーションのデフォルトの速度と <code class="language-plaintext highlighter-rouge">fast</code> 既定値は、移動式のサファリ。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="UIWebViewDecelerationSpeed" value="fast" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">ErrorUrl</code>(文字列、既定では設定されていない): 場合設定、アプリケーションのエラー時に参照されるローカル ページが表示されます。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="ErrorUrl" value="myErrorPage.html"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">OverrideUserAgent</code>(文字列、既定では設定されていない): 設定すると、値は webview の古い UserAgent を交換します。 リモート ページを要求するときに、アプリ ・ ブラウザーから要求を識別すると便利です。 注意して使用、これは web サーバーと compitiable 問題を原因します。 ほとんどの場合、AppendUserAgent を代わりに使用します。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="OverrideUserAgent" value="Mozilla/5.0 My Browser" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">AppendUserAgent</code>(文字列、既定では設定されていない): 設定、webview の古いユーザ エージェントの末尾に値が追加されます。 OverrideUserAgent を使用する場合は、この値が無視されます。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="AppendUserAgent" value="My Browser" /&gt;
+</code></pre></div>    </div>
+  </li>
 </ul>
 
 

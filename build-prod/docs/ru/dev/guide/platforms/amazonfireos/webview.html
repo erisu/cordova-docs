@@ -2166,35 +2166,54 @@
     }
 </style>
 
-<h1>WebView в Amazon Fire OS</h1>
+<h1 id="webview-в-amazon-fire-os">WebView в Amazon Fire OS</h1>
 
-<p>Начиная с 3.3.0, Cordova можно использовать в качестве компонента приложений Amazon Fire OS. Amazon Fire ОС ссылается на этот компонент как <code>CordovaWebView</code> . <code>CordovaWebView</code> расширяет Amazon WebView, который построен на открытом исходном коде проекта Chromium. Используя эту функцию, веб-приложений можно использовать последние веб-стандарты HTML5, работающие в современной веб среде.</p>
+<p>Начиная с 3.3.0, Cordova можно использовать в качестве компонента приложений Amazon Fire OS. Amazon Fire ОС ссылается на этот компонент как <code class="language-plaintext highlighter-rouge">CordovaWebView</code> . <code class="language-plaintext highlighter-rouge">CordovaWebView</code> расширяет Amazon WebView, который построен на открытом исходном коде проекта Chromium. Используя эту функцию, веб-приложений можно использовать последние веб-стандарты HTML5, работающие в современной веб среде.</p>
 
-<p>Если вы не знакомы с Amazon Fire ОС, необходимо сначала ознакомиться с разделом &quot;<a href="index.html">Руководство для платформы Amazon Fire OS</a>&quot; и установить последнюю SDK, прежде чем пытаться использовать такой более необычный вариант как встраивания WebView.</p>
+<p>Если вы не знакомы с Amazon Fire ОС, необходимо сначала ознакомиться с разделом “<a href="index.html">Руководство для платформы Amazon Fire OS</a>” и установить последнюю SDK, прежде чем пытаться использовать такой более необычный вариант как встраивания WebView.</p>
 
-<h2>Необходимые условия</h2>
+<h2 id="необходимые-условия">Необходимые условия</h2>
 
 <ul>
-<li><p>Кордова 3.3.0 или больше</p></li>
-<li><p>Android SDK, последней версии</p></li>
-<li><p>Amazon WebView SDK</p></li>
+  <li>
+    <p>Кордова 3.3.0 или больше</p>
+  </li>
+  <li>
+    <p>Android SDK, последней версии</p>
+  </li>
+  <li>
+    <p>Amazon WebView SDK</p>
+  </li>
 </ul>
 
-<h2>Руководство по использованию CordovaWebView в проекте OS Amazon Fire</h2>
+<h2 id="руководство-по-использованию-cordovawebview-в-проекте-os-amazon-fire">Руководство по использованию CordovaWebView в проекте OS Amazon Fire</h2>
 
 <ol>
-<li><p>Следовать этим инструкциям, убедитесь, что у вас есть дистрибутив последней Кордова. Скачать его с <a href="http://cordova.apache.org">cordova.apache.org</a> и распакуйте его пакет Amazon Fire OS.</p></li>
-<li><p>Скачать и распаковать <a href="https://developer.amazon.com/sdk/fire/IntegratingAWV.html#installawv">Amazon WebView SDK</a>, затем скопируйте awv_interface.jar в каталог <code>/framework/libs</code>. Создайте каталог libs/, если он не существует.</p></li>
-<li><p>Перейдите к пакету <code>/framework</code> директорию и запустить <code>ant jar</code> . Он создаёт Кордова <code>.jar</code> файл, как<code>/framework/cordova-x.x.x.jar</code>.</p></li>
-<li><p>Скопируйте файл <code>.jar</code> в каталог <code>/libs</code> Android-проекта.</p></li>
-<li><p>Добавьте в приложение следующий файл <code>/res/xml/main.xml</code>, с <code>layout_height</code>, <code>layout_width</code> и <code>id</code> модицифированными в соответствии с нуждами приложения:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;org.apache.cordova.CordovaWebView
+  <li>
+    <p>Следовать этим инструкциям, убедитесь, что у вас есть дистрибутив последней Кордова. Скачать его с <a href="http://cordova.apache.org">cordova.apache.org</a> и распакуйте его пакет Amazon Fire OS.</p>
+  </li>
+  <li>
+    <p>Скачать и распаковать <a href="https://developer.amazon.com/sdk/fire/IntegratingAWV.html#installawv">Amazon WebView SDK</a>, затем скопируйте awv_interface.jar в каталог <code class="language-plaintext highlighter-rouge">/framework/libs</code>. Создайте каталог libs/, если он не существует.</p>
+  </li>
+  <li>
+    <p>Перейдите к пакету <code class="language-plaintext highlighter-rouge">/framework</code> директорию и запустить <code class="language-plaintext highlighter-rouge">ant jar</code> . Он создаёт Кордова <code class="language-plaintext highlighter-rouge">.jar</code> файл, как<code class="language-plaintext highlighter-rouge">/framework/cordova-x.x.x.jar</code>.</p>
+  </li>
+  <li>
+    <p>Скопируйте файл <code class="language-plaintext highlighter-rouge">.jar</code> в каталог <code class="language-plaintext highlighter-rouge">/libs</code> Android-проекта.</p>
+  </li>
+  <li>
+    <p>Добавьте в приложение следующий файл <code class="language-plaintext highlighter-rouge">/res/xml/main.xml</code>, с <code class="language-plaintext highlighter-rouge">layout_height</code>, <code class="language-plaintext highlighter-rouge">layout_width</code> и <code class="language-plaintext highlighter-rouge">id</code> модицифированными в соответствии с нуждами приложения:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;org.apache.cordova.CordovaWebView
     android:id="@+id/tutorialView"
     android:layout_width="match_parent"
     android:layout_height="match_parent" /&gt;
-</code></pre></div></li>
-<li><p>Измените вашу деятельность так, чтобы этот класс реализовал <code>CordovaInterface</code> . Вы должны реализовать описанные методы этого интерфейса. Вы можете скопировать их из <code>/framework/src/org/apache/cordova/CordovaActivity.java</code>, или реализовать их самостоятельно. Нижеуказанный фрагмент кода показывает простое приложение , которое использует интерфейс. Обратите внимание, что id упоминаемого окна соответствует <code>id</code> атрибут, указанный в XML-фрагменте показаном выше:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">public class CordovaViewTestActivity extends Activity implements CordovaInterface {
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Измените вашу деятельность так, чтобы этот класс реализовал <code class="language-plaintext highlighter-rouge">CordovaInterface</code> . Вы должны реализовать описанные методы этого интерфейса. Вы можете скопировать их из <code class="language-plaintext highlighter-rouge">/framework/src/org/apache/cordova/CordovaActivity.java</code>, или реализовать их самостоятельно. Нижеуказанный фрагмент кода показывает простое приложение , которое использует интерфейс. Обратите внимание, что id упоминаемого окна соответствует <code class="language-plaintext highlighter-rouge">id</code> атрибут, указанный в XML-фрагменте показаном выше:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class CordovaViewTestActivity extends Activity implements CordovaInterface {
     CordovaWebView cwv;
     /* Called when the activity is first created. */
     @Override
@@ -2205,11 +2224,13 @@
         Config.init(this);
         cwv.loadUrl(Config.getStartUrl());
     }
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ol>
 
 <p>Если вы используете камеру, следует также реализовать следующее:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    @Override
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @Override
     public void setActivityResultCallback(CordovaPlugin plugin) {
         this.activityResultCallback = plugin;
     }
@@ -2251,16 +2272,23 @@
             callback.onActivityResult(requestCode, resultCode, intent);
         }
     }
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Наконец, не забудьте добавить пул потоков, в противном случае у плагинов не будет потоков где можно будет выполняться:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    @Override
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @Override
     public ExecutorService getThreadPool() {
         return threadPool;
     }
-</code></pre></div>
+</code></pre></div></div>
+
 <ol>
-<li><p>Скопировать HTML и JavaScript файлы приложения в каталог <code>/assets/www</code> проекта Amazon Fire OS.</p></li>
-<li><p>Скопируйте <code>config.xml</code> из <code>/framework/res/xml</code> для в каталог <code>/res/xml</code> вашего проекта.</p></li>
+  <li>
+    <p>Скопировать HTML и JavaScript файлы приложения в каталог <code class="language-plaintext highlighter-rouge">/assets/www</code> проекта Amazon Fire OS.</p>
+  </li>
+  <li>
+    <p>Скопируйте <code class="language-plaintext highlighter-rouge">config.xml</code> из <code class="language-plaintext highlighter-rouge">/framework/res/xml</code> для в каталог <code class="language-plaintext highlighter-rouge">/res/xml</code> вашего проекта.</p>
+  </li>
 </ol>
 
 

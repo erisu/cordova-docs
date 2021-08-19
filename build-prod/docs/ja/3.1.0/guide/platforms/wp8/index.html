@@ -1436,132 +1436,177 @@
             
 
             <div id="page-toc-source">
-                <h1>Windows Phone 8 プラットフォーム ガイド</h1>
+                <h1 id="windows-phone-8-プラットフォーム-ガイド">Windows Phone 8 プラットフォーム ガイド</h1>
 
 <p>このガイドは、Windows Phone 8 デバイス用 Cordova アプリを展開する SDK の開発環境を設定する方法を示します。 7.5 および 8 のデバイスをターゲットにする場合は、代わりに Windows Phone 7 プラットフォームのガイド詳細 Windows Phone 7 の開発します。 バージョン 7 は、IE10 に含まれているすべての高度な機能を持っていないが、同じ Api のセットを実装します。 Windows Phone 8 アプリは<em>ない</em>Windows Phone 7 デバイス上で実行します。</p>
 
 <p>詳細なプラットフォーム固有の情報を両方のバージョンに適用される次を参照してください。</p>
 
 <ul>
-<li>  <a href="upgrading.html">Windows Phone のアップグレード</a></li>
-<li>  <a href="plugin.html">Windows Phone のプラグイン</a></li>
-<li>  <a href="tools.html">Windows Phone のコマンド ライン ツール</a></li>
+  <li><a href="upgrading.html">Windows Phone のアップグレード</a></li>
+  <li><a href="plugin.html">Windows Phone のプラグイン</a></li>
+  <li><a href="tools.html">Windows Phone のコマンド ライン ツール</a></li>
 </ul>
 
 <p>上記のコマンド ライン ツールはコルドバ 3.0 より前のバージョンを参照してください。現在のインタ フェースについての情報は、コマンド ライン インターフェイスを参照してください。</p>
 
-<h2>1. システム要件</h2>
+<h2 id="1-システム要件">1. システム要件</h2>
 
 <ul>
-<li><p>オペレーティング システム：</p>
+  <li>
+    <p>オペレーティング システム：</p>
 
-<ul>
-<li>  Windows 8 または Windows 8 Pro 
+    <ul>
+      <li>Windows 8 または Windows 8 Pro
+        <ul>
+          <li>64 ビット バージョンの Windows の （64） が、SDK に必要です。</li>
+          <li>デバイス エミュレーターを実行できるようには、Pro バージョンの使用をお勧めします。</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>ハードウェア:</p>
 
-<ul>
-<li>  64 ビット バージョンの Windows の （64） が、SDK に必要です。</li>
-<li>  デバイス エミュレーターを実行できるようには、Pro バージョンの使用をお勧めします。</li>
-</ul></li>
-</ul></li>
-<li><p>ハードウェア:</p>
+    <ul>
+      <li>6.5 GB のハード ディスク空き容量</li>
+      <li>4 GB の RAM</li>
+      <li>64 ビット (x64) の CPU</li>
+    </ul>
+  </li>
+  <li>
+    <p>Windows Phone 8 エミュレーター</p>
 
-<ul>
-<li>  6.5 GB のハード ディスク空き容量</li>
-<li>  4 GB の RAM</li>
-<li>  64 ビット (x64) の CPU</li>
-</ul></li>
-<li><p>Windows Phone 8 エミュレーター</p>
+    <ul>
+      <li>電話エミュレーター使用ハイパー-V は、このリストにはこれらの前提が含まれています。</li>
+      <li>Windows 8 Pro の 64 ビット エディションまたはそれ以上</li>
+      <li>仮想化をサポートするプロセッサが必要ですと <a href="http://en.wikipedia.org/wiki/Second_Level_Address_Translation">2 番目のレベル アドレス変換 (SLAT)</a>
+        <ul>
+          <li><a href="http://ark.intel.com/Products/VirtualizationTechnology">VT-x （仮想化） と EPT (SLAT) をサポートする Intel プロセッサのリスト</a>を見なさい</li>
+        </ul>
+      </li>
+      <li>通常これは既定で無効になっていると、BIOS 設定で仮想化機能 (すなわち、VT-x インテル) を有効にします。</li>
+    </ul>
+  </li>
+  <li>
+    <p>SDK + IDE (Visual Studio)</p>
 
-<ul>
-<li>  電話エミュレーター使用ハイパー-V は、このリストにはこれらの前提が含まれています。</li>
-<li>  Windows 8 Pro の 64 ビット エディションまたはそれ以上</li>
-<li>  仮想化をサポートするプロセッサが必要ですと <a href="http://en.wikipedia.org/wiki/Second_Level_Address_Translation">2 番目のレベル アドレス変換 (SLAT)</a> 
-
-<ul>
-<li>  <a href="http://ark.intel.com/Products/VirtualizationTechnology">VT-x （仮想化） と EPT (SLAT) をサポートする Intel プロセッサのリスト</a>を見なさい</li>
-</ul></li>
-<li>  通常これは既定で無効になっていると、BIOS 設定で仮想化機能 (すなわち、VT-x インテル) を有効にします。</li>
-</ul></li>
-<li><p>SDK + IDE (Visual Studio)</p>
-
-<ul>
-<li>  Visual Studio 2012 プロ、プレミアム、または究極の。 メモ Visual Studio Express の Windows Phone (SDK に同梱) はお勧めできません VS Express を使ってテンプレート （下記参照） を築くことができないのでのみ VS プロまたはそれ以上は、<strong>テンプレートのエクスポート</strong>機能を持っていないので。</li>
-</ul></li>
-<li><p>登録し、実際のデバイスでアプリをインストールまたは市場の場所に送信する場合に<a href="http://dev.windowsphone.com/en-us/publish">Windows Phone デベロッパー センター</a>アカウントのお支払い。</p></li>
+    <ul>
+      <li>Visual Studio 2012 プロ、プレミアム、または究極の。 メモ Visual Studio Express の Windows Phone (SDK に同梱) はお勧めできません VS Express を使ってテンプレート （下記参照） を築くことができないのでのみ VS プロまたはそれ以上は、<strong>テンプレートのエクスポート</strong>機能を持っていないので。</li>
+    </ul>
+  </li>
+  <li>
+    <p>登録し、実際のデバイスでアプリをインストールまたは市場の場所に送信する場合に<a href="http://dev.windowsphone.com/en-us/publish">Windows Phone デベロッパー センター</a>アカウントのお支払い。</p>
+  </li>
 </ul>
 
 <p><strong>注：</strong>SDK には、仮想マシンで実行されているいくつかの課題を提示可能性があります。 <a href="http://aka.ms/BuildaWP8apponaMac">Mac 上の Windows Phone</a>を開発するソリューションに洞察力を与えるこのブログの記事を読むことができます。.</p>
 
-<h2>2. SDK + コルドバをインストールします。</h2>
+<h2 id="2-sdk--コルドバをインストールします">2. SDK + コルドバをインストールします。</h2>
 
 <ul>
-<li><p>ダウンロードし、 <a href="http://www.microsoft.com/en-us/download/details.aspx?id=35471">Windows Phone SDK</a>のインストール</p></li>
-<li><p>ダウンロードし、<a href="http://phonegap.com/download">コルドバ</a>の最新のコピーを抽出します。 作業をして、 <code>lib\windows-phone-8\wp8</code> サブディレクトリ、 <code>lib\windows-phone-8\wp7</code> コルドバの Windwos Phone 7 バージョンが含まれています。</p></li>
-<li><p>コピー、 <code>CordovaWP8_x_x_x.zip</code> ファイルを <code>\My Documents\Visual Studio 2012\Templates\ProjectTemplates\</code> ディレクトリ。</p></li>
+  <li>
+    <p>ダウンロードし、 <a href="http://www.microsoft.com/en-us/download/details.aspx?id=35471">Windows Phone SDK</a>のインストール</p>
+  </li>
+  <li>
+    <p>ダウンロードし、<a href="http://phonegap.com/download">コルドバ</a>の最新のコピーを抽出します。 作業をして、 <code class="language-plaintext highlighter-rouge">lib\windows-phone-8\wp8</code> サブディレクトリ、 <code class="language-plaintext highlighter-rouge">lib\windows-phone-8\wp7</code> コルドバの Windwos Phone 7 バージョンが含まれています。</p>
+  </li>
+  <li>
+    <p>コピー、 <code class="language-plaintext highlighter-rouge">CordovaWP8_x_x_x.zip</code> ファイルを <code class="language-plaintext highlighter-rouge">\My Documents\Visual Studio 2012\Templates\ProjectTemplates\</code> ディレクトリ。</p>
+  </li>
 </ul>
 
-<h2>2.1 のテンプレートを作成します。</h2>
+<h2 id="21-のテンプレートを作成します">2.1 のテンプレートを作成します。</h2>
 
 <p><strong>注：</strong>この手順は必要ありません。Lib\windows 携帯電話のディレクトリはすでにファイル CordovaWP8_x_x_x.zip が含まれている場合は、この手順をスキップ可能性があります。</p>
 
 <p>開発プロセスを簡略化するためコルドバは Visual Studio テンプレートを作成するスクリプトが付属しています。 コルドバ Visual Studio アプリケーションを迅速に作成をできます。 必要な場合、このテンプレートを変更することができ、以下の手順、テンプレートを生成する場合を続行する方法を示します。</p>
 
-<h3>作成し、テンプレートをインストールするバッチ ファイルを実行します。</h3>
+<h3 id="作成しテンプレートをインストールするバッチ-ファイルを実行します">作成し、テンプレートをインストールするバッチ ファイルを実行します。</h3>
 
 <ul>
-<li><p>レポのルートには、ファイル createTemplates.bat が含まれています。 このファイルをダブルクリック 2 .zip ファイルが生成されます。 (CordovaWP7_x_x_x.zip + CordovaWP8_x_x_x.zip x.x.x は現在のバージョン番号)Visual Studio では、コピーこれらのファイルを簡単に使用するには、&quot;私の Documents\Visual Studio 2012\Templates\ProjectTemplates\&quot;をし、ことができます新しいプロジェクト メニュー-&gt; Visual Studio ファイルから新しい Apache コルドバ Windows Phone アプリを作成します。</p></li>
-<li><p>自動的にインストールするパラメーターで呼び出すことができますも、コマンドラインからバッチ ファイルを実行する場合</p></li>
+  <li>
+    <p>レポのルートには、ファイル createTemplates.bat が含まれています。 このファイルをダブルクリック 2 .zip ファイルが生成されます。 (CordovaWP7_x_x_x.zip + CordovaWP8_x_x_x.zip x.x.x は現在のバージョン番号)Visual Studio では、コピーこれらのファイルを簡単に使用するには、”私の Documents\Visual Studio 2012\Templates\ProjectTemplates"をし、ことができます新しいプロジェクト メニュー-&gt; Visual Studio ファイルから新しい Apache コルドバ Windows Phone アプリを作成します。</p>
+  </li>
+  <li>
+    <p>自動的にインストールするパラメーターで呼び出すことができますも、コマンドラインからバッチ ファイルを実行する場合</p>
+  </li>
 </ul>
 
 <p>スクリプトを実行します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&gt; createTemplates.bat-インストール
-</code></pre></div>
-<h2>3. 新しいプロジェクトをセットアップします。</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; createTemplates.bat-インストール
+</code></pre></div></div>
+
+<h2 id="3-新しいプロジェクトをセットアップします">3. 新しいプロジェクトをセットアップします。</h2>
 
 <ul>
-<li><p>Visual Studio Express の Windows Phone を開き、<strong>新しいプロジェクト</strong>を選択します.</p></li>
-<li><p><strong>CordovaWP8</strong>を選択します。(バージョン番号は、テンプレートの説明に表示されます。)</p></li>
-<li><p>プロジェクト名を指定し、 <strong>[ok]</strong>を選択します.</p></li>
+  <li>
+    <p>Visual Studio Express の Windows Phone を開き、<strong>新しいプロジェクト</strong>を選択します.</p>
+  </li>
+  <li>
+    <p><strong>CordovaWP8</strong>を選択します。(バージョン番号は、テンプレートの説明に表示されます。)</p>
+  </li>
+  <li>
+    <p>プロジェクト名を指定し、 <strong>[ok]</strong>を選択します.</p>
+  </li>
 </ul>
 
-<p><img src="/static/img/guide/platforms/wp8/StandAloneTemplate.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/wp8/StandAloneTemplate.png" alt="" /></p>
 
-<h2>4. プロジェクトの構造を確認します。</h2>
+<h2 id="4-プロジェクトの構造を確認します">4. プロジェクトの構造を確認します。</h2>
 
 <ul>
-<li><p><code>www</code>ディレクトリには、コルドバが含まれています <code>html/js/css</code> と、アプリに含まれるその他のリソース。</p></li>
-<li><p>Visual Studio プロジェクトの一部である必要がありますここで追加するコンテンツとコンテンツとして設定する必要があります。</p></li>
-<li><p>メモ： この画面キャプチャはコルドバ 2.3.0 ダウンロードから、あなたのリストは異なります、実際のバージョンがインストールされています。</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">www</code>ディレクトリには、コルドバが含まれています <code class="language-plaintext highlighter-rouge">html/js/css</code> と、アプリに含まれるその他のリソース。</p>
+  </li>
+  <li>
+    <p>Visual Studio プロジェクトの一部である必要がありますここで追加するコンテンツとコンテンツとして設定する必要があります。</p>
+  </li>
+  <li>
+    <p>メモ： この画面キャプチャはコルドバ 2.3.0 ダウンロードから、あなたのリストは異なります、実際のバージョンがインストールされています。</p>
+  </li>
 </ul>
 
-<p><img src="/static/img/guide/platforms/wp8/projectStructure.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/wp8/projectStructure.png" alt="" /></p>
 
-<h2>5. ビルドし、エミュレーターへの展開</h2>
+<h2 id="5-ビルドしエミュレーターへの展開">5. ビルドし、エミュレーターへの展開</h2>
 
 <ul>
-<li><p><strong>Windows Phone エミュレーター</strong>がメインのドロップ ダウン メニューで選択されていることを確認してください。</p></li>
-<li><p>、デバッグを開始するドロップ ダウン メニューの横に緑の<strong>再生</strong>ボタンを押すか、 <strong>f5 キーを押してください</strong>.</p></li>
+  <li>
+    <p><strong>Windows Phone エミュレーター</strong>がメインのドロップ ダウン メニューで選択されていることを確認してください。</p>
+  </li>
+  <li>
+    <p>、デバッグを開始するドロップ ダウン メニューの横に緑の<strong>再生</strong>ボタンを押すか、 <strong>f5 キーを押してください</strong>.</p>
+  </li>
 </ul>
 
-<p><img src="/static/img/guide/platforms/wp8/BuildEmulator.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/wp8/BuildEmulator.png" alt="" /></p>
 
-<h2>6. プロジェクトをビルドし、デバイスの</h2>
+<h2 id="6-プロジェクトをビルドしデバイスの">6. プロジェクトをビルドし、デバイスの</h2>
 
 <p>デバイス上でアプリケーションをテストするために、デバイスを登録する必要があります。 クリックして<a href="http://msdn.microsoft.com/en-us/library/windowsphone/develop/ff402565(v=vs.105).aspx">ここで</a>を展開すると、Windows Phone 8 でテスト ドキュメントを読みます。</p>
 
 <ul>
-<li><p>あなたの携帯電話は接続され、画面がロックされていることを確認します。</p></li>
-<li><p>Visual Studio では、上部のドロップ ダウン メニューから「デバイス」を選択します。</p></li>
-<li><p>、デバッグを開始する主要なドロップ ダウン メニューの横に緑の<strong>再生</strong>ボタンを押すか、 <strong>f5 キーを押してください</strong>.</p></li>
+  <li>
+    <p>あなたの携帯電話は接続され、画面がロックされていることを確認します。</p>
+  </li>
+  <li>
+    <p>Visual Studio では、上部のドロップ ダウン メニューから「デバイス」を選択します。</p>
+  </li>
+  <li>
+    <p>、デバッグを開始する主要なドロップ ダウン メニューの横に緑の<strong>再生</strong>ボタンを押すか、 <strong>f5 キーを押してください</strong>.</p>
+  </li>
 </ul>
 
-<p><img src="/static/img/guide/platforms/wp7/wpd.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/wp7/wpd.png" alt="" /></p>
 
-<h2>やった ！</h2>
+<h2 id="やった-">やった ！</h2>
 
-<h2>詳細を読む</h2>
+<h2 id="詳細を読む">詳細を読む</h2>
 
 <p>IE10 と WebKit のブラウザー、およびサポートする方法の特定の相違に関する詳細については両方の MS は<a href="http://blogs.windows.com/windows_phone/b/wpdev/archive/2012/11/15/adapting-your-webkit-optimized-site-for-internet-explorer-10.aspx">ここのガイド</a>に役立つ</p>
+
 
 
             </div>

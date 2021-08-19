@@ -2112,22 +2112,23 @@
             
 
             <div id="page-toc-source">
-                <h1>鉤子指南</h1>
+                <h1 id="鉤子指南">鉤子指南</h1>
 
-<p>科爾多瓦鉤表示特別的腳本可以由應用程式和外掛程式開發人員添加或甚至由您自己構建體系，以自訂科爾多瓦命令。 鉤腳本可以通過將其添加到特殊的預定義資料夾 (<code>/hooks</code>) 或通過設定檔 (<code>config.xml</code>和<code>plugin.xml</code>) 定義和連續運行順序如下:</p>
+<p>科爾多瓦鉤表示特別的腳本可以由應用程式和外掛程式開發人員添加或甚至由您自己構建體系，以自訂科爾多瓦命令。 鉤腳本可以通過將其添加到特殊的預定義資料夾 (<code class="language-plaintext highlighter-rouge">/hooks</code>) 或通過設定檔 (<code class="language-plaintext highlighter-rouge">config.xml</code>和<code class="language-plaintext highlighter-rouge">plugin.xml</code>) 定義和連續運行順序如下:</p>
 
 <ul>
-<li>應用程式掛鉤從<code>/hooks</code>;</li>
-<li>應用鉤子從<code>config.xml</code>;</li>
-<li>從<code>plugins/.../plugin.xml</code>外掛程式鉤子.</li>
+  <li>應用程式掛鉤從<code class="language-plaintext highlighter-rouge">/hooks</code>;</li>
+  <li>應用鉤子從<code class="language-plaintext highlighter-rouge">config.xml</code>;</li>
+  <li>從<code class="language-plaintext highlighter-rouge">plugins/.../plugin.xml</code>外掛程式鉤子.</li>
 </ul>
 
-<p><strong>注</strong>: <code>/hooks</code>目錄被認為是支援在 config.xml 和 plugin.xml 鉤元素，否決。</p>
+<p><strong>注</strong>: <code class="language-plaintext highlighter-rouge">/hooks</code>目錄被認為是支援在 config.xml 和 plugin.xml 鉤元素，否決。</p>
 
-<h2>支援的鉤類型</h2>
+<h2 id="支援的鉤類型">支援的鉤類型</h2>
 
 <p>支援以下的鉤子類型:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">after_build
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>after_build
 after_compile
 after_clean
 after_docs
@@ -2161,23 +2162,27 @@ before_prepare
 before_run
 before_serve
 pre_package // Windows and Windows Phone only
-</code></pre></div>
-<h2>如何定義鉤子</h2>
+</code></pre></div></div>
 
-<h3>通過<code>/hooks</code>目錄</h3>
+<h2 id="如何定義鉤子">如何定義鉤子</h2>
+
+<h3 id="通過hooks目錄">通過<code class="language-plaintext highlighter-rouge">/hooks</code>目錄</h3>
 
 <p><strong>注意</strong>: 此方法被認為是支援在 config.xml 和 plugin.xml 鉤元素，否決。</p>
 
-<p>在相應的鉤子類型觸發時執行自訂操作、 使用鉤型作為 &#39;鉤&#39; 目錄內的子資料夾的名稱和地方您編寫的指令檔在這裡，例如:</p>
-<div class="highlight"><pre><code class="language-" data-lang=""># script file will be automatically executed after each build
+<p>在相應的鉤子類型觸發時執行自訂操作、 使用鉤型作為 ‘鉤’ 目錄內的子資料夾的名稱和地方您編寫的指令檔在這裡，例如:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># script file will be automatically executed after each build
 hooks/after_build/after_build_custom_action.js
-</code></pre></div>
+</code></pre></div></div>
+
 <p>當使用這些鉤子，他們總是將作為不作為可載入 JavaScript 模組的可執行檔運行。 <strong>記住</strong>: 在這種情況下使您的腳本可執行。</p>
 
-<h3>Config.xml</h3>
+<h3 id="configxml">Config.xml</h3>
 
-<p>鉤子可以定義在專案的<code>config.xml</code>使用<code>&lt; 鉤 &gt;</code>元素，例如:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;hook type="before_build" src="scripts/appBeforeBuild.bat" /&gt;
+<p>鉤子可以定義在專案的<code class="language-plaintext highlighter-rouge">config.xml</code>使用<code class="language-plaintext highlighter-rouge">&lt; 鉤 &gt;</code>元素，例如:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;hook type="before_build" src="scripts/appBeforeBuild.bat" /&gt;
 &lt;hook type="before_build" src="scripts/appBeforeBuild.js" /&gt;
 &lt;hook type="before_plugin_install" src="scripts/appBeforePluginInstall.js" /&gt;
 
@@ -2194,11 +2199,13 @@ hooks/after_build/after_build_custom_action.js
     &lt;hook type="before_plugin_install" src="scripts/windows8/appWin8BeforePluginInstall.js" /&gt;
     ...
 &lt;/platform&gt;
-</code></pre></div>
-<h3>外掛程式鉤子 (plugin.xml)</h3>
+</code></pre></div></div>
 
-<p>作為外掛程式的開發人員，您可以定義掛接在<code>plugin.xml</code>中那樣使用<code>&lt; 鉤 &gt;</code>元素的腳本:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;hook type="before_plugin_install" src="scripts/beforeInstall.js" /&gt;
+<h3 id="外掛程式鉤子-pluginxml">外掛程式鉤子 (plugin.xml)</h3>
+
+<p>作為外掛程式的開發人員，您可以定義掛接在<code class="language-plaintext highlighter-rouge">plugin.xml</code>中那樣使用<code class="language-plaintext highlighter-rouge">&lt; 鉤 &gt;</code>元素的腳本:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;hook type="before_plugin_install" src="scripts/beforeInstall.js" /&gt;
 &lt;hook type="after_build" src="scripts/afterBuild.js" /&gt;
 
 &lt;platform name="wp8"&gt;
@@ -2206,91 +2213,105 @@ hooks/after_build/after_build_custom_action.js
     &lt;hook type="before_build" src="scripts/wp8BeforeBuild.js" /&gt;
     ...
 &lt;/platform&gt;
-</code></pre></div>
-<p><code>before_plugin_install</code>， <code>after_plugin_install</code>， <code>before_plugin_uninstall</code>外掛程式鉤子將發射專門為正在安裝卸載該外掛程式。</p>
+</code></pre></div></div>
 
-<h2>指令碼介面</h2>
+<p><code class="language-plaintext highlighter-rouge">before_plugin_install</code>， <code class="language-plaintext highlighter-rouge">after_plugin_install</code>， <code class="language-plaintext highlighter-rouge">before_plugin_uninstall</code>外掛程式鉤子將發射專門為正在安裝卸載該外掛程式。</p>
 
-<h3>JAVAscript</h3>
+<h2 id="指令碼介面">指令碼介面</h2>
+
+<h3 id="javascript">JAVAscript</h3>
 
 <p>如果您正在編寫鉤使用 Node.js，應使用下列模組定義:</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
     <span class="p">...</span>
 <span class="p">}</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>您可以使用問: 你 scipts 非同步</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">Q</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">requireCordovaModule</span><span class="p">(</span><span class="s1">'q'</span><span class="p">);</span>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">Q</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">requireCordovaModule</span><span class="p">(</span><span class="dl">'</span><span class="s1">q</span><span class="dl">'</span><span class="p">);</span>
     <span class="kd">var</span> <span class="nx">deferral</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Q</span><span class="p">.</span><span class="nx">defer</span><span class="p">();</span>
 
     <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'hook.js&gt;&gt; end'</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">hook.js&gt;&gt; end</span><span class="dl">'</span><span class="p">);</span>
     <span class="nx">deferral</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
     <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
 
     <span class="k">return</span> <span class="nx">deferral</span><span class="p">.</span><span class="nx">promise</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div>
-<p><code>上下文</code>物件包含的鉤子類型，執行的腳本的完整路徑，鉤選項，命令列參數傳遞給科爾多瓦和頂級的&quot;科爾多瓦&quot;物件:</p>
-<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"hook"</span><span class="p">:</span><span class="w"> </span><span class="s2">"before_plugin_install"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"scriptLocation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c:</span><span class="se">\\</span><span class="s2">script</span><span class="se">\\</span><span class="s2">full</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">appBeforePluginInstall.js"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cmdLine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The</span><span class="se">\\</span><span class="s2">exact</span><span class="se">\\</span><span class="s2">command</span><span class="se">\\</span><span class="s2">cordova</span><span class="se">\\</span><span class="s2">run</span><span class="se">\\</span><span class="s2">with arguments"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"opts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"projectRoot"</span><span class="p">:</span><span class="s2">"C:</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">to</span><span class="se">\\</span><span class="s2">the</span><span class="se">\\</span><span class="s2">project"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cordova"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"platforms"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"wp8"</span><span class="p">],</span><span class="w">
-      </span><span class="s2">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"com.plugin.withhooks"</span><span class="p">],</span><span class="w">
-      </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.21.7-dev"</span><span class="w">
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">上下文</code>物件包含的鉤子類型，執行的腳本的完整路徑，鉤選項，命令列參數傳遞給科爾多瓦和頂級的”科爾多瓦”物件:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"hook"</span><span class="p">:</span><span class="w"> </span><span class="s2">"before_plugin_install"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"scriptLocation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c:</span><span class="se">\\</span><span class="s2">script</span><span class="se">\\</span><span class="s2">full</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">appBeforePluginInstall.js"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"cmdLine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The</span><span class="se">\\</span><span class="s2">exact</span><span class="se">\\</span><span class="s2">command</span><span class="se">\\</span><span class="s2">cordova</span><span class="se">\\</span><span class="s2">run</span><span class="se">\\</span><span class="s2">with arguments"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"opts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"projectRoot"</span><span class="p">:</span><span class="s2">"C:</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">to</span><span class="se">\\</span><span class="s2">the</span><span class="se">\\</span><span class="s2">project"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"cordova"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"platforms"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"wp8"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"com.plugin.withhooks"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.21.7-dev"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"plugin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"com.plugin.withhooks"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"pluginInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"plugin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"com.plugin.withhooks"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"pluginInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="err">...</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wp8"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"dir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C:</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">to</span><span class="se">\\</span><span class="s2">the</span><span class="se">\\</span><span class="s2">project</span><span class="se">\\</span><span class="s2">plugins</span><span class="se">\\</span><span class="s2">com.plugin.withhooks"</span><span class="w">
+      </span><span class="nl">"platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wp8"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"dir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C:</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">to</span><span class="se">\\</span><span class="s2">the</span><span class="se">\\</span><span class="s2">project</span><span class="se">\\</span><span class="s2">plugins</span><span class="se">\\</span><span class="s2">com.plugin.withhooks"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"cordova"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+  </span><span class="nl">"cordova"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre></div>
-<p><code>coNtext.opts.plugin</code>物件僅將傳遞到外掛程式鉤子腳本。</p>
+</span></code></pre></div></div>
 
-<p>您還可以通過以下方式使用<code>coNtext.requireCordovaModule</code>腳本中要求科爾多瓦的附加模組:</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">Q</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">requireCordovaModule</span><span class="p">(</span><span class="s1">'q'</span><span class="p">);</span>
-</code></pre></div>
-<p><strong>注意</strong>: 新模組載入程式指令碼介面用於定義通過<code>config.xml</code>或<code>plugin.xml</code>只的<code>.js</code>檔。 出於相容性原因鉤檔指定通過<code>/hooks</code>資料夾運行通過節點 child_process 菌種，見 &#39; 非 javascript 一節。</p>
+<p><code class="language-plaintext highlighter-rouge">coNtext.opts.plugin</code>物件僅將傳遞到外掛程式鉤子腳本。</p>
 
-<h3>非 javascript</h3>
+<p>您還可以通過以下方式使用<code class="language-plaintext highlighter-rouge">coNtext.requireCordovaModule</code>腳本中要求科爾多瓦的附加模組:</p>
 
-<p><strong>注意</strong>: 我們強烈推薦寫你鉤使用 Node.js，所以，他們都是跨平臺的見上面的 &#39;JAVAscript 一節。</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Q</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">requireCordovaModule</span><span class="p">(</span><span class="dl">'</span><span class="s1">q</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>注意</strong>: 新模組載入程式指令碼介面用於定義通過<code class="language-plaintext highlighter-rouge">config.xml</code>或<code class="language-plaintext highlighter-rouge">plugin.xml</code>只的<code class="language-plaintext highlighter-rouge">.js</code>檔。 出於相容性原因鉤檔指定通過<code class="language-plaintext highlighter-rouge">/hooks</code>資料夾運行通過節點 child_process 菌種，見 ‘ 非 javascript 一節。</p>
+
+<h3 id="非-javascript">非 javascript</h3>
+
+<p><strong>注意</strong>: 我們強烈推薦寫你鉤使用 Node.js，所以，他們都是跨平臺的見上面的 ‘JAVAscript 一節。</p>
 
 <p>非 javascript 腳本從專案的根目錄中通過節點 child_process 菌種運行，並且都經過目錄根作為第一個參數。 所有其他選項都傳遞到腳本使用環境變數:</p>
 
 <ul>
-<li>CORDOVA_VERSION-科爾多瓦 CLI 的版本。</li>
-<li>CORDOVA_PLATFORMS-的逗號分隔清單命令適用于的平臺 (例如: android、 ios)。</li>
-<li>CORDOVA_PLUGINS-以逗號分隔的清單中的外掛程式 Id 命令適用于 (如: org.apache.cordova.file、 org.apache.cordova.file 轉讓)</li>
-<li>CORDOVA_HOOK-的掛鉤上正在執行的路徑。</li>
-<li>CORDOVA_CMDLINE-傳遞到科爾多瓦的確切的命令列參數 (例如: 科爾多瓦運行 ios — — 模仿)</li>
+  <li>CORDOVA_VERSION-科爾多瓦 CLI 的版本。</li>
+  <li>CORDOVA_PLATFORMS-的逗號分隔清單命令適用于的平臺 (例如: android、 ios)。</li>
+  <li>CORDOVA_PLUGINS-以逗號分隔的清單中的外掛程式 Id 命令適用于 (如: org.apache.cordova.file、 org.apache.cordova.file 轉讓)</li>
+  <li>CORDOVA_HOOK-的掛鉤上正在執行的路徑。</li>
+  <li>CORDOVA_CMDLINE-傳遞到科爾多瓦的確切的命令列參數 (例如: 科爾多瓦運行 ios — — 模仿)</li>
 </ul>
 
 <p>如果一個腳本返回一個非零結束代碼，然後將中止父科爾多瓦命令。</p>
 
 <p>此外請注意，即使您正在在 Windows 上，以防你鉤腳本並不是蝙蝠檔 (這建議，如果你想要你上班非 Windows 作業系統中的腳本) 科爾多瓦 CLI 將期望一切線作為第一行才知道翻譯它需要使用啟動腳本。 一切行應匹配下面的示例:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">#!/usr/bin/env [name_of_interpreter_executable]
-</code></pre></div>
-<h2>示例用法</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/usr/bin/env [name_of_interpreter_executable]
+</code></pre></div></div>
+
+<h2 id="示例用法">示例用法</h2>
 
 <p>此示例演示科爾多瓦鉤用法跟蹤到主控台輸出為 Android 平臺生成的.apk 檔的大小。</p>
 
-<p>創建空白科爾多瓦 app 並向<code>config.xml</code>來告訴科爾多瓦在每個平臺生成後運行<code>afterBuild.js</code>腳本添加下面的定義。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;hook type="after_build" src="scripts/afterBuild.js" /&gt;
-</code></pre></div>
-<p>創建<code>scripts/afterBuild.js</code>檔並添加下面的實現。 我們使用<code>fs.stat</code>方法的非同步版本來演示如何非同步功能可以通過掛鉤。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">module.exports = function(ctx) {
+<p>創建空白科爾多瓦 app 並向<code class="language-plaintext highlighter-rouge">config.xml</code>來告訴科爾多瓦在每個平臺生成後運行<code class="language-plaintext highlighter-rouge">afterBuild.js</code>腳本添加下面的定義。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;hook type="after_build" src="scripts/afterBuild.js" /&gt;
+</code></pre></div></div>
+
+<p>創建<code class="language-plaintext highlighter-rouge">scripts/afterBuild.js</code>檔並添加下面的實現。 我們使用<code class="language-plaintext highlighter-rouge">fs.stat</code>方法的非同步版本來演示如何非同步功能可以通過掛鉤。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module.exports = function(ctx) {
     // make sure android platform is part of build 
     if (ctx.opts.platforms.indexOf('android') &lt; 0) {
         return;
@@ -2313,16 +2334,19 @@ hooks/after_build/after_build_custom_action.js
 
     return deferral.promise;
 };
-</code></pre></div>
-<p>參數<code>環磷醯胺</code>在上面例子中通過科爾多瓦和表示腳本的完整路徑、 目標平臺、 命令列參數等的執行上下文，也暴露出額外的協助工具。 有關更多詳細資訊請參見<code>指令碼介面</code>節以上。</p>
+</code></pre></div></div>
+
+<p>參數<code class="language-plaintext highlighter-rouge">環磷醯胺</code>在上面例子中通過科爾多瓦和表示腳本的完整路徑、 目標平臺、 命令列參數等的執行上下文，也暴露出額外的協助工具。 有關更多詳細資訊請參見<code class="language-plaintext highlighter-rouge">指令碼介面</code>節以上。</p>
 
 <p>現在可以添加 android 平臺，並執行生成。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cordova platform add android
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova platform add android
 ..
 cordova build
 ..
 Size of path\to\app\platforms\android\build\outputs\apk\android-debug.apk is 1821193 bytes
-</code></pre></div>
+</code></pre></div></div>
+
 <p>可以在這裡找到更多好的用法示例:</p>
 
 <p><a href="http://devgirl.org/2013/11/12/three-hooks-your-cordovaphonegap-project-needs/">http://devgirl.org/2013/11/12/three-hooks-your-cordovaphonegap-project-needs/</a></p>

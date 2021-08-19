@@ -1256,137 +1256,181 @@
             
 
             <div id="page-toc-source">
-                <h1>Guide de la liste blanche</h1>
+                <h1 id="guide-de-la-liste-blanche">Guide de la liste blanche</h1>
 
-<h2>Vue d&#39;ensemble</h2>
+<h2 id="vue-densemble">Vue d’ensemble</h2>
 
-<p>Ressources liste blanche est un modèle de sécurité qui contrôle l&#39;accès aux ressources réseau externe, tel que <code>http://google.com</code> . Stratégie de sécurité par défaut de Apache Cordova permet d&#39;accéder à toute ressource sur n&#39;importe quel site sur Internet. Avant de déplacer votre application à la production, vous devriez revoir la liste blanche et déclarer l&#39;accès au réseau des domaines et sous-domaines.</p>
+<p>Ressources liste blanche est un modèle de sécurité qui contrôle l’accès aux ressources réseau externe, tel que <code class="language-plaintext highlighter-rouge">http://google.com</code> . Stratégie de sécurité par défaut de Apache Cordova permet d’accéder à toute ressource sur n’importe quel site sur Internet. Avant de déplacer votre application à la production, vous devriez revoir la liste blanche et déclarer l’accès au réseau des domaines et sous-domaines.</p>
 
-<h2>Spécification</h2>
+<h2 id="spécification">Spécification</h2>
 
-<p>Domaine whitelisting jette les bases pour la spécification <a href="http://www.w3.org/TR/widgets-access/">W3C Widget accès</a> . Dans la spécification de l&#39;accès de Widget, le <code>&lt;access&gt;</code> élément est utilisé pour déclarer l&#39;accès aux ressources de réseau spécifiques. Apache Cordova s&#39;étend ce concept afin de permettre la liste blanche des ressources réseau individuel (URLs). À l&#39;avenir, Apache Cordova va résumer les implémentations de liste blanche de plate-forme. Toutefois, pour l&#39;instant chaque plate-forme implémente sa propre liste blanche de ressource ou de domaine. Les différences entre les implémentations de plate-forme sont décrites plus loin dans ce document.</p>
+<p>Domaine whitelisting jette les bases pour la spécification <a href="http://www.w3.org/TR/widgets-access/">W3C Widget accès</a> . Dans la spécification de l’accès de Widget, le <code class="language-plaintext highlighter-rouge">&lt;access&gt;</code> élément est utilisé pour déclarer l’accès aux ressources de réseau spécifiques. Apache Cordova s’étend ce concept afin de permettre la liste blanche des ressources réseau individuel (URLs). À l’avenir, Apache Cordova va résumer les implémentations de liste blanche de plate-forme. Toutefois, pour l’instant chaque plate-forme implémente sa propre liste blanche de ressource ou de domaine. Les différences entre les implémentations de plate-forme sont décrites plus loin dans ce document.</p>
 
-<p>Le modèle général pour les entrées de la liste blanche conforme à la spécification &quot;<a href="http://developer.chrome.com/apps/match_patterns.html">correspondre modèle</a>&quot; pour Google Chrome emballés Apps. Les ressources sont spécifiées par l&#39;URL, mais un astérisque (*) caractère peut être utilisé comme « Joker » dans plusieurs endroits pour indiquer « n&#39;importe quelle valeur peut aller ici ». Des exemples précis sont indiqués ci-dessous.</p>
+<p>Le modèle général pour les entrées de la liste blanche conforme à la spécification “<a href="http://developer.chrome.com/apps/match_patterns.html">correspondre modèle</a>” pour Google Chrome emballés Apps. Les ressources sont spécifiées par l’URL, mais un astérisque (*) caractère peut être utilisé comme « Joker » dans plusieurs endroits pour indiquer « n’importe quelle valeur peut aller ici ». Des exemples précis sont indiqués ci-dessous.</p>
 
-<h2>Syntaxe</h2>
+<h2 id="syntaxe">Syntaxe</h2>
 
 <p>Accès à toutes les ressources à <a href="http://google.com">google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">http://google.com/*
-</code></pre></div>
-<p>Accès à toutes les ressources à sûr <a href="https://google.com">google.com</a> ( <code>https://</code> ) :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">https://Google.com/ *
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://google.com/*
+</code></pre></div></div>
+
+<p>Accès à toutes les ressources à sûr <a href="https://google.com">google.com</a> ( <code class="language-plaintext highlighter-rouge">https://</code> ) :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://Google.com/ *
+</code></pre></div></div>
+
 <p>Accès pour le sous-domaine spécifique <a href="http://maps.google.com">maps.google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">http://maps.google.com/*
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://maps.google.com/*
+</code></pre></div></div>
+
 <p>Accès à tous les sous-domaines sur <a href="http://google.com">google.com</a> (p. ex., <a href="http://mail.google.com">mail.google.com</a> et <a href="http://docs.google.com">docs.google.com</a>) :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">http://*.google.com/*
-</code></pre></div>
-<p>Accès à toutes les ressources sur <a href="http://www.google.com">www.google.com</a> sous le chemin d&#39;accès &quot;/ mobile&quot; :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">http://www.google.com/mobile/*
-</code></pre></div>
-<p>Accès à <a href="http://google.com">google.com</a> sur n&#39;importe quel protocole (HTTP, HTTPS, FTP, etc.) :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">*://google.com/*
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://*.google.com/*
+</code></pre></div></div>
+
+<p>Accès à toutes les ressources sur <a href="http://www.google.com">www.google.com</a> sous le chemin d’accès “/ mobile” :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://www.google.com/mobile/*
+</code></pre></div></div>
+
+<p>Accès à <a href="http://google.com">google.com</a> sur n’importe quel protocole (HTTP, HTTPS, FTP, etc.) :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*://google.com/*
+</code></pre></div></div>
+
 <p>Accès à toutes les ressources sur Internet (par exemple, <a href="http://google.com">google.com</a> et <a href="http://developer.mozilla.org">developer.mozilla.org</a>) :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">*
-</code></pre></div>
-<h2>Android</h2>
 
-<h3>Détails</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*
+</code></pre></div></div>
 
-<p>Les règles de liste blanche se trouvent dans <code>res/xml/config.xml</code> et déclarée avec l&#39;élément<code>&lt;access origin=&quot;...&quot; /&gt;</code>.</p>
+<h2 id="android">Android</h2>
+
+<h3 id="détails">Détails</h3>
+
+<p>Les règles de liste blanche se trouvent dans <code class="language-plaintext highlighter-rouge">res/xml/config.xml</code> et déclarée avec l’élément<code class="language-plaintext highlighter-rouge">&lt;access origin="..." /&gt;</code>.</p>
 
 <p>Android soutient pleinement la syntaxe de la liste blanche.</p>
 
-<h3>Syntaxe</h3>
+<h3 id="syntaxe-1">Syntaxe</h3>
 
 <p>Accès à <a href="http://google.com">google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com/*" /&gt;
-</code></pre></div>
-<h2>BlackBerry 10</h2>
 
-<h3>Détails</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com/*" /&gt;
+</code></pre></div></div>
 
-<p>Les règles de liste blanche se trouvent dans <code>www/config.xml</code> et déclarée avec l&#39;élément<code>&lt;access origin=&quot;...&quot; /&gt;</code>.</p>
+<h2 id="blackberry-10">BlackBerry 10</h2>
+
+<h3 id="détails-1">Détails</h3>
+
+<p>Les règles de liste blanche se trouvent dans <code class="language-plaintext highlighter-rouge">www/config.xml</code> et déclarée avec l’élément<code class="language-plaintext highlighter-rouge">&lt;access origin="..." /&gt;</code>.</p>
 
 <p>BlackBerry 10 gère les caractères génériques différemment des autres plates-formes de deux façons :</p>
 
-<p>1) Contenu accédé par XMLHttpRequest doit être déclarée explicitement. origine = &quot;*&quot; on respectera pas pour ce cas d&#39;utilisation. Sinon, toute sécurité web peut être désactivée à l&#39;aide d&#39;une préférence.</p>
+<p>1) Contenu accédé par XMLHttpRequest doit être déclarée explicitement. origine = “*” on respectera pas pour ce cas d’utilisation. Sinon, toute sécurité web peut être désactivée à l’aide d’une préférence.</p>
 
-<p>2) sous-domaines = &quot;true&quot; peut être utilisé à la place de &quot;* *.domain&quot;</p>
+<p>2) sous-domaines = “true” peut être utilisé à la place de “* *.domain”</p>
 
-<h3>Syntaxe</h3>
+<h3 id="syntaxe-2">Syntaxe</h3>
 
 <p>Accès à <a href="http://google.com">google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" subdomains="false" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" subdomains="false" /&gt;
+</code></pre></div></div>
+
 <p>Accès à <a href="http://maps.google.com">maps.google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://maps.google.com" subdomains="false" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://maps.google.com" subdomains="false" /&gt;
+</code></pre></div></div>
+
 <p>Accès à tous les sous-domaines sur <a href="http://google.com">Google.fr</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" subdomains="true" /&gt;
-</code></pre></div>
-<p>Accès à tous les domaines, y compris <code>file://</code> protocole :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="*" subdomains="true" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" subdomains="true" /&gt;
+</code></pre></div></div>
+
+<p>Accès à tous les domaines, y compris <code class="language-plaintext highlighter-rouge">file://</code> protocole :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="*" subdomains="true" /&gt;
+</code></pre></div></div>
+
 <p>Désactiver toute sécurité web :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="websecurity" value="disable" /&gt;
-</code></pre></div>
-<h2>iOS</h2>
 
-<h3>Détails</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="websecurity" value="disable" /&gt;
+</code></pre></div></div>
 
-<p>Les règles de liste blanche se trouvent dans <code>AppName/config.xml</code> et déclarée avec l&#39;élément<code>&lt;access origin=&quot;...&quot; /&gt;</code>.</p>
+<h2 id="ios">iOS</h2>
+
+<h3 id="détails-2">Détails</h3>
+
+<p>Les règles de liste blanche se trouvent dans <code class="language-plaintext highlighter-rouge">AppName/config.xml</code> et déclarée avec l’élément<code class="language-plaintext highlighter-rouge">&lt;access origin="..." /&gt;</code>.</p>
 
 <p>iOS soutient pleinement la syntaxe de la liste blanche.</p>
 
-<h3>Changé en 3.1.0 :</h3>
+<h3 id="changé-en-310-">Changé en 3.1.0 :</h3>
 
-<p>Avant la version 3.1.0, Cordova-iOS inclus quelques extensions non standards pour le régime de whilelisting de domaine pris en charge par les autres plateformes de Cordova. En 3.1.0, le whitelist iOS est maintenant conforme à la syntaxe de liste blanche de ressource décrite en haut de ce document. Si vous mettez à niveau pre-3.1.0, et que vous utilisiez ces extensions, vous devrez peut-être modifier votre <code>config.xml</code> fichier afin de continuer la liste blanche du même ensemble de ressources comme avant.</p>
+<p>Avant la version 3.1.0, Cordova-iOS inclus quelques extensions non standards pour le régime de whilelisting de domaine pris en charge par les autres plateformes de Cordova. En 3.1.0, le whitelist iOS est maintenant conforme à la syntaxe de liste blanche de ressource décrite en haut de ce document. Si vous mettez à niveau pre-3.1.0, et que vous utilisiez ces extensions, vous devrez peut-être modifier votre <code class="language-plaintext highlighter-rouge">config.xml</code> fichier afin de continuer la liste blanche du même ensemble de ressources comme avant.</p>
 
 <p>Plus précisément, ces motifs doivent être actualisés :</p>
 
 <ul>
-<li><p>&quot; <code>apache.org</code> &quot; (pas de protocole): cela correspondrait précédemment <code>http</code> , <code>https</code> , <code>ftp</code> , et <code>ftps</code> des protocoles. Remplacez &quot; <code>*://apache.org/*</code> &quot; d&#39;inclure tous les protocoles, ou inclure une ligne pour chaque protocole, vous devez appuyer.</p></li>
-<li><p>&quot; <code>http://apache.*</code> &quot; (caractère générique à la fin du domaine): cela correspondrait auparavant tous les top domaines niveau, y compris tous les TLDs possibles de deux lettres (mais pas utiles domaines aiment. co.uk). Inclure une ligne pour chaque TLD qui vous en fait Contrôlez et devez whitelist.</p></li>
-<li><p>&quot; <code>h*t*://ap*he.o*g</code> &quot; (caractères génériques pour les lettres manquantes au hasard): ceux-ci ne sont plus supportés ; changement à inclure une ligne pour chaque domaine et protocole que vous avez réellement besoin de liste blanche.</p></li>
+  <li>
+    <p>” <code class="language-plaintext highlighter-rouge">apache.org</code> “ (pas de protocole): cela correspondrait précédemment <code class="language-plaintext highlighter-rouge">http</code> , <code class="language-plaintext highlighter-rouge">https</code> , <code class="language-plaintext highlighter-rouge">ftp</code> , et <code class="language-plaintext highlighter-rouge">ftps</code> des protocoles. Remplacez “ <code class="language-plaintext highlighter-rouge">*://apache.org/*</code> “ d’inclure tous les protocoles, ou inclure une ligne pour chaque protocole, vous devez appuyer.</p>
+  </li>
+  <li>
+    <p>” <code class="language-plaintext highlighter-rouge">http://apache.*</code> “ (caractère générique à la fin du domaine): cela correspondrait auparavant tous les top domaines niveau, y compris tous les TLDs possibles de deux lettres (mais pas utiles domaines aiment. co.uk). Inclure une ligne pour chaque TLD qui vous en fait Contrôlez et devez whitelist.</p>
+  </li>
+  <li>
+    <p>” <code class="language-plaintext highlighter-rouge">h*t*://ap*he.o*g</code> “ (caractères génériques pour les lettres manquantes au hasard): ceux-ci ne sont plus supportés ; changement à inclure une ligne pour chaque domaine et protocole que vous avez réellement besoin de liste blanche.</p>
+  </li>
 </ul>
 
-<h3>Syntaxe</h3>
+<h3 id="syntaxe-3">Syntaxe</h3>
 
 <p>Accès à <a href="http://google.com">google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com/*" /&gt;
-</code></pre></div>
-<h2>Windows Phone (7 &amp; 8)</h2>
 
-<p>Les règles de liste blanche se trouvent dans <code>config.xml</code> et déclarée avec l&#39;élément<code>&lt;access origin=&quot;...&quot; /&gt;</code>.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com/*" /&gt;
+</code></pre></div></div>
 
-<h3>Syntaxe</h3>
+<h2 id="windows-phone-7--8">Windows Phone (7 &amp; 8)</h2>
 
-<p>Accès à <a href="http://google.com">google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" /&gt;
-</code></pre></div>
-<h2>Paciarelli</h2>
+<p>Les règles de liste blanche se trouvent dans <code class="language-plaintext highlighter-rouge">config.xml</code> et déclarée avec l’élément<code class="language-plaintext highlighter-rouge">&lt;access origin="..." /&gt;</code>.</p>
 
-<h3>Détails</h3>
-
-<p>Du répertoire racine l&#39;application <code>config.xml</code> fichier spécifie les règles de liste blanche de domaine, en utilisant le <code>&lt;access origin=&quot;...&quot; /&gt;</code> élément. Pour une référence complète, consultez la <a href="https://developer.tizen.org/help/topic/org.tizen.help.gs/Creating%20a%20Project.html?path=0_1_1_4#8814682_CreatingaProject-AccessingExternalNetworkResources">documentation de paciarelli accès à des ressources du réseau externe</a>.</p>
-
-<h3>Syntaxe</h3>
+<h3 id="syntaxe-4">Syntaxe</h3>
 
 <p>Accès à <a href="http://google.com">google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" subdomains="false" /&gt;
-</code></pre></div>
-<p>Accès sécurisé <a href="https://google.com">google.com</a> ( <code>https://</code> ) :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="https://google.com" subdomains="false" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" /&gt;
+</code></pre></div></div>
+
+<h2 id="paciarelli">Paciarelli</h2>
+
+<h3 id="détails-3">Détails</h3>
+
+<p>Du répertoire racine l’application <code class="language-plaintext highlighter-rouge">config.xml</code> fichier spécifie les règles de liste blanche de domaine, en utilisant le <code class="language-plaintext highlighter-rouge">&lt;access origin="..." /&gt;</code> élément. Pour une référence complète, consultez la <a href="https://developer.tizen.org/help/topic/org.tizen.help.gs/Creating%20a%20Project.html?path=0_1_1_4#8814682_CreatingaProject-AccessingExternalNetworkResources">documentation de paciarelli accès à des ressources du réseau externe</a>.</p>
+
+<h3 id="syntaxe-5">Syntaxe</h3>
+
+<p>Accès à <a href="http://google.com">google.com</a>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" subdomains="false" /&gt;
+</code></pre></div></div>
+
+<p>Accès sécurisé <a href="https://google.com">google.com</a> ( <code class="language-plaintext highlighter-rouge">https://</code> ) :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="https://google.com" subdomains="false" /&gt;
+</code></pre></div></div>
+
 <p>Accès à tous les sous-domaines sur <a href="http://google.com">Google.fr</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" subdomains="true" /&gt;
-</code></pre></div>
-<p>Accès à tous les domaines, y compris <code>file://</code> protocole :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="*" subdomains="true" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" subdomains="true" /&gt;
+</code></pre></div></div>
+
+<p>Accès à tous les domaines, y compris <code class="language-plaintext highlighter-rouge">file://</code> protocole :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="*" subdomains="true" /&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

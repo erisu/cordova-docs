@@ -1094,86 +1094,98 @@
     }
 </style>
 
-<h1>Руководство по платформы Windows Phone 8</h1>
+<h1 id="руководство-по-платформы-windows-phone-8">Руководство по платформы Windows Phone 8</h1>
 
 <p>В этом руководстве показано, как настроить среду разработки SDK для развертывания приложений Cordova для устройств Windows Phone 8. Если вы хотите 7,5 и 8 устройств, разработка для Windows Phone 7 вместо подробно в Windows Phone 7 руководство платформы. Версия 7 не имеют всех продвинутых функций, включенных в Internet Explorer 10, но реализует тот же набор API-интерфейсов. Приложения Windows Phone 8 делать <em>не</em> запускаются на устройствах Windows Phone 7.</p>
 
 <p>Смотрите ниже для более подробной информации конкретной платформы, которая применяется для обеих версий:</p>
 
 <ul>
-<li>  <a href="upgrading.html">Обновление Windows Phone</a></li>
-<li>  <a href="plugin.html">Windows Phone плагины</a></li>
-<li>  <a href="tools.html">Windows Phone средств командной строки</a></li>
+  <li><a href="upgrading.html">Обновление Windows Phone</a></li>
+  <li><a href="plugin.html">Windows Phone плагины</a></li>
+  <li><a href="tools.html">Windows Phone средств командной строки</a></li>
 </ul>
 
 <p>Средства командной строки относятся к версии до 3.0 Кордова. Смотрите информацию о текущем интерфейсе интерфейс командной строки.</p>
 
-<h2>Системные требования</h2>
+<h2 id="системные-требования">Системные требования</h2>
 
 <ul>
-<li><p>Операционная система:</p>
+  <li>
+    <p>Операционная система:</p>
 
-<ul>
-<li>  Windows 8 или Windows 8 Pro 
+    <ul>
+      <li>Windows 8 или Windows 8 Pro
+        <ul>
+          <li>Для SDK требуется 64-разрядная версия (x 64) Windows.</li>
+          <li>Рекомендуется использовать версию Pro, так что вы можете запустить эмулятор устройства.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Аппаратное обеспечение:</p>
 
-<ul>
-<li>  Для SDK требуется 64-разрядная версия (x 64) Windows.</li>
-<li>  Рекомендуется использовать версию Pro, так что вы можете запустить эмулятор устройства.</li>
-</ul></li>
-</ul></li>
-<li><p>Аппаратное обеспечение:</p>
+    <ul>
+      <li>6,5 ГБ свободного дискового пространства</li>
+      <li>4 ГБ ОПЕРАТИВНОЙ ПАМЯТИ</li>
+      <li>64-разрядный (x 64) процессор</li>
+    </ul>
+  </li>
+  <li>
+    <p>Эмулятор Windows Phone 8</p>
 
-<ul>
-<li>  6,5 ГБ свободного дискового пространства</li>
-<li>  4 ГБ ОПЕРАТИВНОЙ ПАМЯТИ</li>
-<li>  64-разрядный (x 64) процессор</li>
-</ul></li>
-<li><p>Эмулятор Windows Phone 8</p>
+    <ul>
+      <li>Телефон Эмулятор использует Hyper-V, поэтому этот список включает те предпосылки.</li>
+      <li>Про 64-разрядная версия Windows 8 или больше</li>
+      <li>Требуется процессор поддерживает виртуализацию и <a href="http://en.wikipedia.org/wiki/Second_Level_Address_Translation">Второй перевод адреса уровня (SLAT)</a>
+        <ul>
+          <li>Смотрите <a href="http://ark.intel.com/Products/VirtualizationTechnology">список процессоров Intel, которые поддерживают VT-x (виртуализация) и EPT (SLAT)</a></li>
+        </ul>
+      </li>
+      <li>Включите возможность виртуализации (например, VT-x на Intel) в настройках BIOS, как обычно, эта возможность отключена по умолчанию.</li>
+    </ul>
+  </li>
+  <li>
+    <p>SDK и IDE (Visual Studio)</p>
 
-<ul>
-<li>  Телефон Эмулятор использует Hyper-V, поэтому этот список включает те предпосылки.</li>
-<li>  Про 64-разрядная версия Windows 8 или больше</li>
-<li>  Требуется процессор поддерживает виртуализацию и <a href="http://en.wikipedia.org/wiki/Second_Level_Address_Translation">Второй перевод адреса уровня (SLAT)</a> 
-
-<ul>
-<li>  Смотрите <a href="http://ark.intel.com/Products/VirtualizationTechnology">список процессоров Intel, которые поддерживают VT-x (виртуализация) и EPT (SLAT)</a></li>
-</ul></li>
-<li>  Включите возможность виртуализации (например, VT-x на Intel) в настройках BIOS, как обычно, эта возможность отключена по умолчанию.</li>
-</ul></li>
-<li><p>SDK и IDE (Visual Studio)</p>
-
-<ul>
-<li>  Visual Studio 2012 Professional, Premium или Ultimate. Обратите внимание что Visual Studio Express для Windows Phone (входит в пакет SDK) не рекомендуется, потому что вы не можете построить шаблон (см. ниже) с VS Express, как он не имеет функциональность <strong>Экспорт шаблона</strong> , который является только в VS Pro или выше.</li>
-</ul></li>
-<li><p>Зарегистрироваться и оплатить для учетной записи <a href="http://dev.windowsphone.com/en-us/publish">Windows Phone Dev центр</a> , если вы хотите установить приложение на реальном устройстве или представить его на рынке.</p></li>
+    <ul>
+      <li>Visual Studio 2012 Professional, Premium или Ultimate. Обратите внимание что Visual Studio Express для Windows Phone (входит в пакет SDK) не рекомендуется, потому что вы не можете построить шаблон (см. ниже) с VS Express, как он не имеет функциональность <strong>Экспорт шаблона</strong> , который является только в VS Pro или выше.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Зарегистрироваться и оплатить для учетной записи <a href="http://dev.windowsphone.com/en-us/publish">Windows Phone Dev центр</a> , если вы хотите установить приложение на реальном устройстве или представить его на рынке.</p>
+  </li>
 </ul>
 
 <p><strong>Примечание</strong>: выполнение пакета SDK в виртуальной машине может представлять определенные трудности. Вы можете читать этот блог, который дает представление о решениях по разработке для <a href="http://aka.ms/BuildaWP8apponaMac">Windows Phone на Mac</a>.</p>
 
-<h2>Установить SDK и Кордова</h2>
+<h2 id="установить-sdk-и-кордова">Установить SDK и Кордова</h2>
 
 <p>Скачать и установить <a href="http://www.microsoft.com/en-us/download/details.aspx?id=35471">Windows Phone SDK</a>.</p>
 
-<p>Загрузите и распакуйте последнюю копию <a href="http://phonegap.com/download">Кордова</a>. <code>lib\windows-phone-8\wp8</code>Подкаталог, где вы должны сделать вашу работу.</p>
+<p>Загрузите и распакуйте последнюю копию <a href="http://phonegap.com/download">Кордова</a>. <code class="language-plaintext highlighter-rouge">lib\windows-phone-8\wp8</code>Подкаталог, где вы должны сделать вашу работу.</p>
 
-<p>Копия <code>CordovaWP8_x_x_x.zip</code> файл <code>\My Documents\Visual
+<p>Копия <code class="language-plaintext highlighter-rouge">CordovaWP8_x_x_x.zip</code> файл <code class="language-plaintext highlighter-rouge">\My Documents\Visual
 Studio 2012\Templates\ProjectTemplates\</code> каталог.</p>
 
-<h2>Создание шаблона</h2>
+<h2 id="создание-шаблона">Создание шаблона</h2>
 
-<p><strong>Примечание</strong>: этот шаг пропустить, если <code>lib\windows-phone</code> уже содержит каталог <code>CordovaWP8_x_x_x.zip</code> файлов.</p>
+<p><strong>Примечание</strong>: этот шаг пропустить, если <code class="language-plaintext highlighter-rouge">lib\windows-phone</code> уже содержит каталог <code class="language-plaintext highlighter-rouge">CordovaWP8_x_x_x.zip</code> файлов.</p>
 
 <p>Для упрощения разработки Cordova расслоения сценарий для создания шаблонов Visual Studio. Они позволяют вам быстро создавать Cordova apps, и при необходимости их можно изменить. Ниже шаги показывают, как создать его.</p>
 
-<h3>Запустите пакетный файл для создания и установки шаблонов</h3>
+<h3 id="запустите-пакетный-файл-для-создания-и-установки-шаблонов">Запустите пакетный файл для создания и установки шаблонов</h3>
 
-<p>Репо корневой каталог содержит <code>createTemplates.bat</code> файл. Дважды щелкните это для создания двух <code>.zip</code> файлы: <code>CordovaWP7_x_x_x.zip</code> и <code>CordovaWP8_x_x_x.zip</code> , где <em>ххх</em> — номер текущей версии. Чтобы использовать эти файлы в Visual Studio, скопируйте их в <code>My
+<p>Репо корневой каталог содержит <code class="language-plaintext highlighter-rouge">createTemplates.bat</code> файл. Дважды щелкните это для создания двух <code class="language-plaintext highlighter-rouge">.zip</code> файлы: <code class="language-plaintext highlighter-rouge">CordovaWP7_x_x_x.zip</code> и <code class="language-plaintext highlighter-rouge">CordovaWP8_x_x_x.zip</code> , где <em>ххх</em> — номер текущей версии. Чтобы использовать эти файлы в Visual Studio, скопируйте их в <code class="language-plaintext highlighter-rouge">My
 Documents\Visual Studio 2012\Templates\ProjectTemplates\</code> . Вы могл после этого создание новых приложений Apache Cordova Windows Phone из меню <strong>Visual Studio файл → новый проект</strong> .</p>
 
 <p>Если вы запустите пакетный файл из командной строки, можно также вызвать его с параметром для автоматической установки:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &gt;createTemplates.bat -install
-</code></pre></div>
-<h2>Создание нового проекта</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &gt;createTemplates.bat -install
+</code></pre></div></div>
+
+<h2 id="создание-нового-проекта">Создание нового проекта</h2>
 
 <p>Откройте Visual Studio Express для Windows Phone и выберите <strong>Новый проект</strong>.</p>
 
@@ -1181,41 +1193,48 @@ Documents\Visual Studio 2012\Templates\ProjectTemplates\</code> . Вы могл 
 
 <p>Присвойте проекту имя и нажмите <strong>OK</strong>.</p>
 
-<p><img src="/static/img/guide/platforms/wp8/StandAloneTemplate.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/wp8/StandAloneTemplate.png" alt="" /></p>
 
-<h2>Обзор структуры проекта</h2>
+<h2 id="обзор-структуры-проекта">Обзор структуры проекта</h2>
 
-<p><code>www</code>Каталог функции <code>html</code> , <code>js</code> , и <code>css</code> подкаталоги и любые другие ресурсы требует вашего приложения. Любое дополнительное содержимое должно быть частью проекта Visual Studio, и он должен быть задан как содержание.</p>
+<p><code class="language-plaintext highlighter-rouge">www</code>Каталог функции <code class="language-plaintext highlighter-rouge">html</code> , <code class="language-plaintext highlighter-rouge">js</code> , и <code class="language-plaintext highlighter-rouge">css</code> подкаталоги и любые другие ресурсы требует вашего приложения. Любое дополнительное содержимое должно быть частью проекта Visual Studio, и он должен быть задан как содержание.</p>
 
 <p>Следующий пример структуры представляет собой 2.3.0 проекта, но могут варьироваться в зависимости от установленной версии:</p>
 
-<p><img src="/static/img/guide/platforms/wp8/projectStructure.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/wp8/projectStructure.png" alt="" /></p>
 
-<h2>Построение и развертывание в эмулятор</h2>
+<h2 id="построение-и-развертывание-в-эмулятор">Построение и развертывание в эмулятор</h2>
 
 <p>Убедитесь, что <strong>Эмулятор Windows Phone</strong> установлен в главном меню раскрывающегося списка.</p>
 
 <p>Затем нажмите на кнопку зеленую <strong>играть</strong> рядом раскрывающегося меню, чтобы начать отладку, или введите <strong>F5</strong>.</p>
 
-<p><img src="/static/img/guide/platforms/wp8/BuildEmulator.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/wp8/BuildEmulator.png" alt="" /></p>
 
-<h2>Постройте проект для устройства</h2>
+<h2 id="постройте-проект-для-устройства">Постройте проект для устройства</h2>
 
 <p>Перед тестированием приложения на устройстве, устройство должно быть зарегистрировано. Документации <a href="http://msdn.microsoft.com/en-us/library/windowsphone/develop/ff402565(v=vs.105).aspx">корпорации Майкрософт</a> сведения о том, как развернуть и протестировать на Windows Phone 8. Таковы основные шаги:</p>
 
 <ul>
-<li><p>Убедитесь, что ваш телефон подключен, и экран разблокируется.</p></li>
-<li><p>В Visual Studio выберите <strong>устройство</strong> в раскрывающемся меню в верхней.</p></li>
-<li><p>Нажмите кнопку зеленый <strong>играть</strong> рядом с главного меню раскрывающегося списка для запуска отладки, или же введите <strong>F5</strong>.</p></li>
+  <li>
+    <p>Убедитесь, что ваш телефон подключен, и экран разблокируется.</p>
+  </li>
+  <li>
+    <p>В Visual Studio выберите <strong>устройство</strong> в раскрывающемся меню в верхней.</p>
+  </li>
+  <li>
+    <p>Нажмите кнопку зеленый <strong>играть</strong> рядом с главного меню раскрывающегося списка для запуска отладки, или же введите <strong>F5</strong>.</p>
+  </li>
 </ul>
 
-<p><img src="/static/img/guide/platforms/wp7/wpd.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/wp7/wpd.png" alt="" /></p>
 
 <p>На данный момент вы сделали.</p>
 
-<h2>Дальнейшее чтение</h2>
+<h2 id="дальнейшее-чтение">Дальнейшее чтение</h2>
 
 <p>Блог разработчиков Windows Phone предоставляет <a href="http://blogs.windows.com/windows_phone/b/wpdev/archive/2012/11/15/adapting-your-webkit-optimized-site-for-internet-explorer-10.aspx">полезные сведения</a> о различиях между IE10 и WebKit браузеров и как поддержать оба.</p>
+
 
 
             </div>

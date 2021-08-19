@@ -2046,101 +2046,106 @@
             
 
             <div id="page-toc-source">
-                <h1>Przewodnik bezpieczeństwa</h1>
+                <h1 id="przewodnik-bezpieczeństwa">Przewodnik bezpieczeństwa</h1>
 
-<p>Niniejszy Przewodnik obejmuje kilka zabezpieczeń najlepszych praktyk, które należy wziąć pod uwagę podczas opracowywania aplikacji Cordova. Należy pamiętać, że bezpieczeństwo jest bardzo skomplikowany temat i dlatego ten przewodnik nie jest wyczerpująca. Jeśli uważasz, że możesz przyczynić się do tego poradnika, uprzejmie prosimy o plik problemu Cordova w śledzenia błędów pod <a href="https://issues.apache.org/jira/browse/CB/component/12316407">&quot;Dokumentacja&quot;</a>. Ten przewodnik ma na celu zastosowanie do ogólnego rozwoju Cordova (wszystkie platformy), ale zauważyć, specyfika poszczególnych platform.</p>
+<p>Niniejszy Przewodnik obejmuje kilka zabezpieczeń najlepszych praktyk, które należy wziąć pod uwagę podczas opracowywania aplikacji Cordova. Należy pamiętać, że bezpieczeństwo jest bardzo skomplikowany temat i dlatego ten przewodnik nie jest wyczerpująca. Jeśli uważasz, że możesz przyczynić się do tego poradnika, uprzejmie prosimy o plik problemu Cordova w śledzenia błędów pod <a href="https://issues.apache.org/jira/browse/CB/component/12316407">“Dokumentacja”</a>. Ten przewodnik ma na celu zastosowanie do ogólnego rozwoju Cordova (wszystkie platformy), ale zauważyć, specyfika poszczególnych platform.</p>
 
-<h2>Ten przewodnik omawia następujące tematy:</h2>
-
-<ul>
-<li>  Biała</li>
-<li>  Ramek i mechanizmu zwrotnego Id</li>
-<li>  Przypinanie certyfikat</li>
-<li>  Certyfikaty z podpisem własnym</li>
-<li>  Przechowywanie zaszyfrowanych</li>
-<li>  Wskazówki ogólne</li>
-<li>  Polecamy artykuły i inne zasoby</li>
-</ul>
-
-<h2>Biała</h2>
+<h2 id="ten-przewodnik-omawia-następujące-tematy">Ten przewodnik omawia następujące tematy:</h2>
 
 <ul>
-<li><p>Przeczytać i zrozumieć <a href="../whitelist/index.html">Przewodnik białej listy</a></p></li>
-<li><p>Białą domeny nie działa na Android API 10 i poniżej i WP8 dla ramek i XMLHttpRequest. Oznacza to, osoba atakująca może załadować dowolnej domeny w iframe i dowolny skrypt na tej stronie w iframe bezpośrednio dostęp do obiektów Cordova JavaScript i odpowiadających im obiektów Java native. Należy wziąć to pod uwagę podczas tworzenia aplikacji dla tych platform. W praktyce oznacza to, upewniając się, że cel Android API wyższe niż 10, i że jeśli to możliwe nie używasz iframe załadować zawartość zewnętrzna - inAppBrowser plugin lub inne pluginy trzeciej.</p></li>
+  <li>Biała</li>
+  <li>Ramek i mechanizmu zwrotnego Id</li>
+  <li>Przypinanie certyfikat</li>
+  <li>Certyfikaty z podpisem własnym</li>
+  <li>Przechowywanie zaszyfrowanych</li>
+  <li>Wskazówki ogólne</li>
+  <li>Polecamy artykuły i inne zasoby</li>
 </ul>
 
-<h2>Ramek i mechanizmu zwrotnego Id</h2>
+<h2 id="biała">Biała</h2>
+
+<ul>
+  <li>
+    <p>Przeczytać i zrozumieć <a href="../whitelist/index.html">Przewodnik białej listy</a></p>
+  </li>
+  <li>
+    <p>Białą domeny nie działa na Android API 10 i poniżej i WP8 dla ramek i XMLHttpRequest. Oznacza to, osoba atakująca może załadować dowolnej domeny w iframe i dowolny skrypt na tej stronie w iframe bezpośrednio dostęp do obiektów Cordova JavaScript i odpowiadających im obiektów Java native. Należy wziąć to pod uwagę podczas tworzenia aplikacji dla tych platform. W praktyce oznacza to, upewniając się, że cel Android API wyższe niż 10, i że jeśli to możliwe nie używasz iframe załadować zawartość zewnętrzna - inAppBrowser plugin lub inne pluginy trzeciej.</p>
+  </li>
+</ul>
+
+<h2 id="ramek-i-mechanizmu-zwrotnego-id">Ramek i mechanizmu zwrotnego Id</h2>
 
 <p>Jeśli zawartość jest dostarczana w ramce z domeny Białej liście, że domeny będą mieli dostęp do mostu rodzimych Cordova. Oznacza to, że jeśli whitelist sieci reklamy firm i te reklamy poprzez iframe, to jest możliwe, że złośliwe reklamy będą mogli zerwać z iframe i wykonania szkodliwego działania. W związku z tym ogólnie nie należy używać ramek chyba kontrola serwera obsługującego zawartości iframe. Należy również pamiętać, że istnieją pluginy trzeciej dostępne do obsługi sieci reklamowych. Należy pamiętać, że to stwierdzenie nie jest prawdziwe dla iOS, który przechwytuje wszystko łącznie z połączeniami iframe.</p>
 
-<h2>Przypinanie certyfikat</h2>
+<h2 id="przypinanie-certyfikat">Przypinanie certyfikat</h2>
 
 <p>Cordova obsługuje prawdziwe świadectwo Przypinanie. Główną przeszkodą jest brak native API Androida na przechwytywanie połączeń SSL do wykonać sprawdzenie certyfikatu serwera. (Choć jest możliwe do certyfikatu, przypinanie na Android w Java przy użyciu JSSE, Widok sieci Web na Androida jest napisany w C++ i połączenia z serwerem są obsługiwane dla Ciebie przez webview, więc to nie możliwe do wykorzystania Java i JSSE tam.) Ponieważ Apache Cordova ma do zaoferowania spójne API na wielu platformach, nie mając możliwości w głównych platform przerwy tej spójności.</p>
 
 <p>Istnieją sposoby na zbliżenie, certyfikat przypinanie, takich jak sprawdzanie, że klucz publiczny serwera (odcisk palca) jest wartością oczekiwaną podczas uruchamiania aplikacji lub w innych różnych momentach życia aplikacji. Ma innej wtyczki dla Cordova, który może to zrobić. Jednak to nie jest taki sam jak prawdziwe świadectwo przypinanie, który automatycznie sprawdza wartość oczekiwana na każde połączenie z serwerem.</p>
 
-<h2>Certyfikaty z podpisem własnym</h2>
+<h2 id="certyfikaty-z-podpisem-własnym">Certyfikaty z podpisem własnym</h2>
 
 <p>Za pomocą certyfikatów z podpisem własnym na serwerze nie jest zalecane. Jeśli pragniesz SSL, a następnie zaleca że twój serwer ma certyfikat, który został prawidłowo podpisany przez znany urząd certyfikacji (urząd certyfikacji). Niezdolność do true certyfikat Przypinanie sprawia, że jest to ważne.</p>
 
-<p>Powodem jest to, że przyjmując certyfikatów z podpisem własnym pomija sprawdzanie poprawności łańcucha certyfikatu, który pozwala każdego certyfikatu serwera być uznawane przez urządzenie. To otwiera się komunikatu na ataki man-in--middle. To staje się bardzo łatwe dla hakerów nie tylko przechwycić i przeczytać wszystkie komunikacji między urządzeniem i serwerem, ale także modyfikować komunikacji. Urządzenie nigdy nie będzie wiedział, że to się dzieje, bo to nie sprawdza, czy certyfikat serwera jest podpisany przez zaufany urząd certyfikacji. Urządzenie ma żadnego dowodu, że serwer jest kto oczekuje. Ze względu na łatwość prowadzenia ataku man-in--middle przyjmowania certyfikatów z podpisem własnym jest tylko nieznacznie lepszy niż tylko z protokołu http zamiast https sieci niezaufanej. Tak, chcieliby być zaszyfrowany ruch, ale to może być szyfrowane za pomocą klucz z man-in--middle, więc man-in--middle można dostęp do wszystkiego, więc szyfrowanie jest bezużyteczny wyjątkiem biernymi obserwatorami. Użytkownicy zaufania protokołu SSL do zabezpieczania i to celowo co to niebezpieczne, więc użycie SSL staje się mylące. Jeśli to będzie używany w sieci zaufanych (tj, jesteś całkowicie wewnątrz kontrolowanych przedsiębiorstw), a następnie certyfikatów z podpisem własnym nie są nadal zalecane. Zalecenia w zaufanej sieci są po prostu za pomocą protokołu http bo samej sieci jest zaufany, lub aby uzyskać zaświadczenie podpisane przez zaufanego urzędu certyfikacji (nie podpisany). Sieć jest zaufany, albo nie jest.</p>
+<p>Powodem jest to, że przyjmując certyfikatów z podpisem własnym pomija sprawdzanie poprawności łańcucha certyfikatu, który pozwala każdego certyfikatu serwera być uznawane przez urządzenie. To otwiera się komunikatu na ataki man-in–middle. To staje się bardzo łatwe dla hakerów nie tylko przechwycić i przeczytać wszystkie komunikacji między urządzeniem i serwerem, ale także modyfikować komunikacji. Urządzenie nigdy nie będzie wiedział, że to się dzieje, bo to nie sprawdza, czy certyfikat serwera jest podpisany przez zaufany urząd certyfikacji. Urządzenie ma żadnego dowodu, że serwer jest kto oczekuje. Ze względu na łatwość prowadzenia ataku man-in–middle przyjmowania certyfikatów z podpisem własnym jest tylko nieznacznie lepszy niż tylko z protokołu http zamiast https sieci niezaufanej. Tak, chcieliby być zaszyfrowany ruch, ale to może być szyfrowane za pomocą klucz z man-in–middle, więc man-in–middle można dostęp do wszystkiego, więc szyfrowanie jest bezużyteczny wyjątkiem biernymi obserwatorami. Użytkownicy zaufania protokołu SSL do zabezpieczania i to celowo co to niebezpieczne, więc użycie SSL staje się mylące. Jeśli to będzie używany w sieci zaufanych (tj, jesteś całkowicie wewnątrz kontrolowanych przedsiębiorstw), a następnie certyfikatów z podpisem własnym nie są nadal zalecane. Zalecenia w zaufanej sieci są po prostu za pomocą protokołu http bo samej sieci jest zaufany, lub aby uzyskać zaświadczenie podpisane przez zaufanego urzędu certyfikacji (nie podpisany). Sieć jest zaufany, albo nie jest.</p>
 
 <p>Zasad opisanych tutaj nie są specyficzne dla Apache Cordova, stosują się do wszystkich komunikacji klient serwer.</p>
 
-<p>Po uruchomieniu Cordova na Android, za pomocą <code>android:debuggable=&quot;true&quot;</code> w aplikacji manifestu pozwolą SSL błędy takie jak świadectwo błędy sprawdzania poprawności łańcucha na certyfikatów z podpisem własnym. Tak można używać certyfikatów z podpisem własnym w tej konfiguracji, ale nie jest to konfiguracja, która powinna być używana, gdy aplikacja jest w produkcji. To ma być używana tylko podczas tworzenia aplikacji.</p>
+<p>Po uruchomieniu Cordova na Android, za pomocą <code class="language-plaintext highlighter-rouge">android:debuggable="true"</code> w aplikacji manifestu pozwolą SSL błędy takie jak świadectwo błędy sprawdzania poprawności łańcucha na certyfikatów z podpisem własnym. Tak można używać certyfikatów z podpisem własnym w tej konfiguracji, ale nie jest to konfiguracja, która powinna być używana, gdy aplikacja jest w produkcji. To ma być używana tylko podczas tworzenia aplikacji.</p>
 
-<h2>Przechowywanie zaszyfrowanych</h2>
+<h2 id="przechowywanie-zaszyfrowanych">Przechowywanie zaszyfrowanych</h2>
 
 <p>(TBD)</p>
 
-<h2>Wskazówki ogólne</h2>
+<h2 id="wskazówki-ogólne">Wskazówki ogólne</h2>
 
-<h3>Nie należy używać Android Gingerbread!</h3>
-
-<ul>
-<li>  Ustaw poziom wyższy niż 10 min cel sdk. API 10 jest Piernik, i Gingerbread jest już obsługiwany przez Google lub urządzenia producentów i dlatego nie polecam zespołu Cordova. </li>
-<li>  Piernik okazały się być niepewny i jednym z najbardziej ukierunkowane mobilnych OSs <a href="http://bgr.com/2012/11/06/android-security-gingerbread-malware/">http://www.mobilemag.com/2012/11/06/andriod-2-3-gingerbread-security/</a>. </li>
-<li>  Biała na Androida nie działa z piernika lub niższym. Oznacza to, że osoba atakująca może załadować złośliwego kodu w iframe następnie mieć dostęp do wszystkich interfejsów API Cordova i przydałby się dostęp do kradzieży danych osobowych, wysyłanie wiadomości SMS do numerów premium rate i wykonać inne szkodliwe działania. </li>
-</ul>
-
-<h3>Użyj InAppBrowser do linków zewnętrznych</h3>
+<h3 id="nie-należy-używać-android-gingerbread">Nie należy używać Android Gingerbread!</h3>
 
 <ul>
-<li>  Przy otwieraniu linków na każdej zewnętrznej stronie, należy użyć InAppBrowser. To jest o wiele bezpieczniejsze niż białą nazwę domeny i tym treści bezpośrednio w aplikacji, ponieważ InAppBrowser będzie korzystać z funkcji zabezpieczeń wbudowana przeglądarka i nie daje stronie dostęp do środowiska Cordova. Nawet jeśli ufasz na trzeciej stronie internetowej i umieścić go bezpośrednio w aplikacji, że witryny osób trzecich może link do zrobiony w złej intencji tkanina treść. </li>
+  <li>Ustaw poziom wyższy niż 10 min cel sdk. API 10 jest Piernik, i Gingerbread jest już obsługiwany przez Google lub urządzenia producentów i dlatego nie polecam zespołu Cordova.</li>
+  <li>Piernik okazały się być niepewny i jednym z najbardziej ukierunkowane mobilnych OSs <a href="http://bgr.com/2012/11/06/android-security-gingerbread-malware/">http://www.mobilemag.com/2012/11/06/andriod-2-3-gingerbread-security/</a>.</li>
+  <li>Biała na Androida nie działa z piernika lub niższym. Oznacza to, że osoba atakująca może załadować złośliwego kodu w iframe następnie mieć dostęp do wszystkich interfejsów API Cordova i przydałby się dostęp do kradzieży danych osobowych, wysyłanie wiadomości SMS do numerów premium rate i wykonać inne szkodliwe działania.</li>
 </ul>
 
-<h3>Sprawdzanie poprawności wszystkie dane wejściowe użytkownika</h3>
+<h3 id="użyj-inappbrowser-do-linków-zewnętrznych">Użyj InAppBrowser do linków zewnętrznych</h3>
 
 <ul>
-<li>  Zawsze sprawdzić wszelkie dane wejściowe, że aplikacja akceptuje. Dotyczy to nazw użytkowników, haseł, daty, przesłane mediów, itp. Ponieważ osoba atakująca może manipulować HTML i JS aktywów (zarówno przez dekompilacji aplikacji lub przy użyciu narzędzia debugowania, takie jak chrome://inspect), ten uprawomocnienie powinny także wykonywane na serwerze, zwłaszcza przed przekazaniem danych do dowolnej usługi zaplecza. </li>
-<li>  Inne źródła, gdzie dane powinny zostać zatwierdzone: użytkownik dokumenty, kontakty, popychać notyfikacja</li>
+  <li>Przy otwieraniu linków na każdej zewnętrznej stronie, należy użyć InAppBrowser. To jest o wiele bezpieczniejsze niż białą nazwę domeny i tym treści bezpośrednio w aplikacji, ponieważ InAppBrowser będzie korzystać z funkcji zabezpieczeń wbudowana przeglądarka i nie daje stronie dostęp do środowiska Cordova. Nawet jeśli ufasz na trzeciej stronie internetowej i umieścić go bezpośrednio w aplikacji, że witryny osób trzecich może link do zrobiony w złej intencji tkanina treść.</li>
 </ul>
 
-<h3>Nie Buforuj dane poufne</h3>
+<h3 id="sprawdzanie-poprawności-wszystkie-dane-wejściowe-użytkownika">Sprawdzanie poprawności wszystkie dane wejściowe użytkownika</h3>
 
 <ul>
-<li>  Jeśli nazwy użytkowników, hasła, geolokalizacja informacji i innych poufnych danych jest buforowany, wtedy to może potencjalnie być Źródło później przez nieautoryzowanego użytkownika lub aplikacji.</li>
+  <li>Zawsze sprawdzić wszelkie dane wejściowe, że aplikacja akceptuje. Dotyczy to nazw użytkowników, haseł, daty, przesłane mediów, itp. Ponieważ osoba atakująca może manipulować HTML i JS aktywów (zarówno przez dekompilacji aplikacji lub przy użyciu narzędzia debugowania, takie jak chrome://inspect), ten uprawomocnienie powinny także wykonywane na serwerze, zwłaszcza przed przekazaniem danych do dowolnej usługi zaplecza.</li>
+  <li>Inne źródła, gdzie dane powinny zostać zatwierdzone: użytkownik dokumenty, kontakty, popychać notyfikacja</li>
 </ul>
 
-<h3>Nie używaj eval(), chyba że wiesz co robisz</h3>
+<h3 id="nie-buforuj-dane-poufne">Nie Buforuj dane poufne</h3>
 
 <ul>
-<li>  JavaScript funkcja eval() ma długą historię nadużywane. Niepoprawne użycie można otworzyć kod na ataki, debugowanie trudności i wolniejsze wykonywanie kodu. </li>
+  <li>Jeśli nazwy użytkowników, hasła, geolokalizacja informacji i innych poufnych danych jest buforowany, wtedy to może potencjalnie być Źródło później przez nieautoryzowanego użytkownika lub aplikacji.</li>
 </ul>
 
-<h3>Nie zakładaj, że kod źródłowy jest bezpieczne</h3>
+<h3 id="nie-używaj-eval-chyba-że-wiesz-co-robisz">Nie używaj eval(), chyba że wiesz co robisz</h3>
 
 <ul>
-<li>  Ponieważ aplikacja Cordova składa się z aktywów HTML i JavaScript, które dostać zapakowane w zbiornik ojczystym, nie warto swój kod aby być bezpieczne. Jest to możliwe do odtworzenia aplikacja Cordova. </li>
+  <li>JavaScript funkcja eval() ma długą historię nadużywane. Niepoprawne użycie można otworzyć kod na ataki, debugowanie trudności i wolniejsze wykonywanie kodu.</li>
 </ul>
 
-<h2>Polecamy artykuły i inne zasoby</h2>
+<h3 id="nie-zakładaj-że-kod-źródłowy-jest-bezpieczne">Nie zakładaj, że kod źródłowy jest bezpieczne</h3>
 
 <ul>
-<li>  <a href="https://www.owasp.org/index.php/HTML5_Security_Cheat_Sheet">HTML5 bezpieczeństwa ściągawki, szczegółowo jak zabezpieczyć aplikacji HTML5</a></li>
-<li>  <a href="https://github.com/phonegap/phonegap/wiki/Platform-Security">Telefon jest artykuł na temat bezpieczeństwa urządzenia, takie jak przy użyciu zaszyfrowanych danych</a></li>
-<li>  <a href="http://www.cis.syr.edu/%7Ewedu/Research/paper/webview_acsac2011.pdf">Hybrydowych aplikacji opartych na oficjalny dokument o dobrze znanych luk w zabezpieczeniach w widoku sieci Web</a></li>
+  <li>Ponieważ aplikacja Cordova składa się z aktywów HTML i JavaScript, które dostać zapakowane w zbiornik ojczystym, nie warto swój kod aby być bezpieczne. Jest to możliwe do odtworzenia aplikacja Cordova.</li>
 </ul>
+
+<h2 id="polecamy-artykuły-i-inne-zasoby">Polecamy artykuły i inne zasoby</h2>
+
+<ul>
+  <li><a href="https://www.owasp.org/index.php/HTML5_Security_Cheat_Sheet">HTML5 bezpieczeństwa ściągawki, szczegółowo jak zabezpieczyć aplikacji HTML5</a></li>
+  <li><a href="https://github.com/phonegap/phonegap/wiki/Platform-Security">Telefon jest artykuł na temat bezpieczeństwa urządzenia, takie jak przy użyciu zaszyfrowanych danych</a></li>
+  <li><a href="http://www.cis.syr.edu/~wedu/Research/paper/webview_acsac2011.pdf">Hybrydowych aplikacji opartych na oficjalny dokument o dobrze znanych luk w zabezpieczeniach w widoku sieci Web</a></li>
+</ul>
+
 
 
             </div>

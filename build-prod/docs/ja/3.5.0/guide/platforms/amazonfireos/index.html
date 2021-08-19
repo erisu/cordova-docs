@@ -1172,101 +1172,148 @@
             
 
             <div id="page-toc-source">
-                <h1>アマゾン火 OS プラットフォーム ガイド</h1>
+                <h1 id="アマゾン火-os-プラットフォーム-ガイド">アマゾン火 OS プラットフォーム ガイド</h1>
 
 <p>このガイドの Kindle 火災 HDX などのアマゾン火 OS デバイス Cordova アプリを展開する SDK の開発環境を設定する方法を示します。</p>
 
 <p>詳細なプラットフォーム固有の情報は、次を参照してください。</p>
 
 <ul>
-<li>  <a href="config.html">アマゾン火 OS 構成</a></li>
-<li>  <a href="webview.html">アマゾン火 OS web 表示</a></li>
-<li>  <a href="plugin.html">アマゾン火 OS プラグイン</a></li>
+  <li><a href="config.html">アマゾン火 OS 構成</a></li>
+  <li><a href="webview.html">アマゾン火 OS web 表示</a></li>
+  <li><a href="plugin.html">アマゾン火 OS プラグイン</a></li>
 </ul>
 
-<h2>要件、およびサポート</h2>
+<h2 id="要件およびサポート">要件、およびサポート</h2>
 
 <p>アマゾン火 OS 用 Cordova アプリの開発には Android の SDK とアマゾン WebView SDK が必要です。以下のリンクでこれらの Sdk の要件を確認してください。</p>
 
 <ul>
-<li><p><a href="http://developer.android.com/sdk/">Android の SDK システム</a></p></li>
-<li><p><a href="https://developer.amazon.com/sdk/fire/IntegratingAWV.html#installawv">アマゾン WebView SDK</a></p></li>
+  <li>
+    <p><a href="http://developer.android.com/sdk/">Android の SDK システム</a></p>
+  </li>
+  <li>
+    <p><a href="https://developer.amazon.com/sdk/fire/IntegratingAWV.html#installawv">アマゾン WebView SDK</a></p>
+  </li>
 </ul>
 
-<h2>インストール</h2>
+<h2 id="インストール">インストール</h2>
 
-<h3>Android の SDK</h3>
+<h3 id="android-の-sdk">Android の SDK</h3>
 
-<p><a href="http://developer.android.com/sdk/">Developer.android.com/sdk</a>から Android SDK をインストールします。 それ以外の場合、ダウンロードした移動、SDK をインストールする場所の選択肢が表示されます <code>adt-bundle</code> ツリーの開発ツールを格納する場所を。</p>
+<p><a href="http://developer.android.com/sdk/">Developer.android.com/sdk</a>から Android SDK をインストールします。 それ以外の場合、ダウンロードした移動、SDK をインストールする場所の選択肢が表示されます <code class="language-plaintext highlighter-rouge">adt-bundle</code> ツリーの開発ツールを格納する場所を。</p>
 
-<p>コルドバ動作するコマンド ライン ツール、SDK の含まする必要があります <code>tools</code> と <code>platform-tools</code> パス環境のディレクトリ。</p>
+<p>コルドバ動作するコマンド ライン ツール、SDK の含まする必要があります <code class="language-plaintext highlighter-rouge">tools</code> と <code class="language-plaintext highlighter-rouge">platform-tools</code> パス環境のディレクトリ。</p>
 
-<p>Mac、Linux または他の Unix ライクなプラットフォームで、テキストエディターを使用して作成または変更することができます、 <code>~/.bash_profile</code> ファイルは、SDK のインストールに応じて、次のような行を追加します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">エクスポート パス ${path} を =:/開発/adt-バンドル/sdk/プラットフォーム固有のツール:/開発/adt-バンドル/sdk/ツール
-</code></pre></div>
+<p>Mac、Linux または他の Unix ライクなプラットフォームで、テキストエディターを使用して作成または変更することができます、 <code class="language-plaintext highlighter-rouge">~/.bash_profile</code> ファイルは、SDK のインストールに応じて、次のような行を追加します。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>エクスポート パス ${path} を =:/開発/adt-バンドル/sdk/プラットフォーム固有のツール:/開発/adt-バンドル/sdk/ツール
+</code></pre></div></div>
+
 <p>これは、SDK で新しくオープンしたターミナル windows のツールを公開します。それ以外の場合、現在のセッションで使用できるようにするこれを実行します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ ソース ~/.bash_profile
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ソース ~/.bash_profile
+</code></pre></div></div>
+
 <p>Windows 7 を道の環境を変更: する</p>
 
 <ul>
-<li><p>デスクトップの左下隅の [<strong>スタート</strong>] メニューをクリックして、<strong>コンピューター</strong>を右クリックし、<strong>プロパティ</strong>をクリックします.</p></li>
-<li><p>左側の列では、<strong>システムの詳細設定</strong>をクリックします。</p></li>
-<li><p>表示されたダイアログ ボックスで<strong>環境変数</strong>キーを押します。.</p></li>
-<li><p><strong>パス</strong>変数を選択し、キーを押して<strong>編集</strong>.</p></li>
-<li><p>たとえば、SDK をインストールしたに基づくパスに次を追加します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">;C:\Development\adt-bundle\sdk\platform-tools;C:\Development\adt-bundle\sdk\tools
-</code></pre></div></li>
-<li><p>値を保存して両方のダイアログ ボックスを閉じます。</p></li>
+  <li>
+    <p>デスクトップの左下隅の [<strong>スタート</strong>] メニューをクリックして、<strong>コンピューター</strong>を右クリックし、<strong>プロパティ</strong>をクリックします.</p>
+  </li>
+  <li>
+    <p>左側の列では、<strong>システムの詳細設定</strong>をクリックします。</p>
+  </li>
+  <li>
+    <p>表示されたダイアログ ボックスで<strong>環境変数</strong>キーを押します。.</p>
+  </li>
+  <li>
+    <p><strong>パス</strong>変数を選択し、キーを押して<strong>編集</strong>.</p>
+  </li>
+  <li>
+    <p>たとえば、SDK をインストールしたに基づくパスに次を追加します。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>;C:\Development\adt-bundle\sdk\platform-tools;C:\Development\adt-bundle\sdk\tools
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>値を保存して両方のダイアログ ボックスを閉じます。</p>
+  </li>
 </ul>
 
-<p>また、コマンド ・ プロンプトとタイプ Java および Ant. オープンを有効にする必要があります <code>java</code> 、また入力と <code>ant</code> 。パスに追加いずれかを実行する失敗します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">;%JAVA_HOME%\bin;%ANT_HOME%\bin
-</code></pre></div>
-<h3>アマゾン WebView SDK</h3>
+<p>また、コマンド ・ プロンプトとタイプ Java および Ant. オープンを有効にする必要があります <code class="language-plaintext highlighter-rouge">java</code> 、また入力と <code class="language-plaintext highlighter-rouge">ant</code> 。パスに追加いずれかを実行する失敗します。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>;%JAVA_HOME%\bin;%ANT_HOME%\bin
+</code></pre></div></div>
+
+<h3 id="アマゾン-webview-sdk">アマゾン WebView SDK</h3>
 
 <p><a href="https://developer.amazon.com/sdk/fire/IntegratingAWV.html#installawv">Amazon 開発者ポータル</a>からアマゾン WebView SDK をダウンロードします。.</p>
 
 <ul>
-<li>  作成、 <code>libs/</code> フォルダーに <code>~/.cordova/lib/amazon-fireos/cordova/3.1.0/</code> フォルダー。</li>
-<li>  追加の <code>awv_interface.jar</code> をダウンロードした SDK から<code>~/.cordova/lib/amazon-fireos/cordova/3.1.0/libs/</code></li>
+  <li>作成、 <code class="language-plaintext highlighter-rouge">libs/</code> フォルダーに <code class="language-plaintext highlighter-rouge">~/.cordova/lib/amazon-fireos/cordova/3.1.0/</code> フォルダー。</li>
+  <li>追加の <code class="language-plaintext highlighter-rouge">awv_interface.jar</code> をダウンロードした SDK から<code class="language-plaintext highlighter-rouge">~/.cordova/lib/amazon-fireos/cordova/3.1.0/libs/</code></li>
 </ul>
 
-<h2>SDK でプロジェクトを開く</h2>
+<h2 id="sdk-でプロジェクトを開く">SDK でプロジェクトを開く</h2>
 
-<p>使用、 <code>cordova</code> コルドバのコマンド ライン インターフェイスで説明されているように、新しいプロジェクトを設定するユーティリティ。たとえば、ソース コード ディレクトリ: で</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova create hello com.example.hello "HelloWorld"
+<p>使用、 <code class="language-plaintext highlighter-rouge">cordova</code> コルドバのコマンド ライン インターフェイスで説明されているように、新しいプロジェクトを設定するユーティリティ。たとえば、ソース コード ディレクトリ: で</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova create hello com.example.hello "HelloWorld"
 $ cd hello
 $ cordova platform add amazon-fireos
 $ cordova build
-</code></pre></div>
+</code></pre></div></div>
+
 <p>作成したらここでは、SDK を使用して、それを変更する方法です。</p>
 
 <ul>
-<li><p><strong>Eclipse</strong>アプリケーションを起動します。</p></li>
-<li><p><strong>新しいプロジェクト</strong>のメニュー項目を選択します。</p></li>
-<li><p>表示されたダイアログ ボックスから<strong>既存のコードから Android プロジェクト</strong>を選択し、<strong>次</strong>キーを押します。 <img src="/static/img/guide/platforms//eclipse_new_project.png" alt=""></p></li>
-<li><p>移動する <code>hello</code> 、または好みのディレクトリに作成した、プロジェクトし、 <code>platforms/amazon-fireos</code> サブディレクトリ。</p></li>
-<li><p><strong>終了</strong>キーを押します。.</p></li>
+  <li>
+    <p><strong>Eclipse</strong>アプリケーションを起動します。</p>
+  </li>
+  <li>
+    <p><strong>新しいプロジェクト</strong>のメニュー項目を選択します。</p>
+  </li>
+  <li>
+    <p>表示されたダイアログ ボックスから<strong>既存のコードから Android プロジェクト</strong>を選択し、<strong>次</strong>キーを押します。 <img src="/static/img/guide/platforms//eclipse_new_project.png" alt="" /></p>
+  </li>
+  <li>
+    <p>移動する <code class="language-plaintext highlighter-rouge">hello</code> 、または好みのディレクトリに作成した、プロジェクトし、 <code class="language-plaintext highlighter-rouge">platforms/amazon-fireos</code> サブディレクトリ。</p>
+  </li>
+  <li>
+    <p><strong>終了</strong>キーを押します。.</p>
+  </li>
 </ul>
 
 <p>Eclipse ウィンドウが開いたら、未解決の問題を示す赤い<strong>X</strong>が表示されます。もしそうなら、この追加の手順を実行します。</p>
 
 <ul>
-<li><p>プロジェクト ディレクトリを右クリックします。</p></li>
-<li><p>結果<strong>のプロパティ</strong>] ダイアログ [ <strong>Android</strong>ナビゲーション ウィンドウから。</p></li>
-<li><p>プロジェクトのビルド ターゲットは、インストールされている最高の Android の API レベルを選択します。</p></li>
-<li><p><strong>[Ok]</strong>をクリックします.</p></li>
-<li><p><strong>クリーン</strong><strong>をプロジェクト</strong>メニューから選択します。これは、プロジェクト内のすべてのエラーを修正する必要があります。</p></li>
+  <li>
+    <p>プロジェクト ディレクトリを右クリックします。</p>
+  </li>
+  <li>
+    <p>結果<strong>のプロパティ</strong>] ダイアログ [ <strong>Android</strong>ナビゲーション ウィンドウから。</p>
+  </li>
+  <li>
+    <p>プロジェクトのビルド ターゲットは、インストールされている最高の Android の API レベルを選択します。</p>
+  </li>
+  <li>
+    <p><strong>[Ok]</strong>をクリックします.</p>
+  </li>
+  <li>
+    <p><strong>クリーン</strong><strong>をプロジェクト</strong>メニューから選択します。これは、プロジェクト内のすべてのエラーを修正する必要があります。</p>
+  </li>
 </ul>
 
-<h2>デバイスへの配置します。</h2>
+<h2 id="デバイスへの配置します">デバイスへの配置します。</h2>
 
 <p>デバイスに直接アプリをプッシュするには、 <a href="http://developer.android.com/tools/device.html">Android 開発者向けサイト</a>で説明されているようにあなたのデバイスで USB デバッグを有効にかどうかを確認し、ミニ USB ケーブルを使用してあなたのシステムにプラグインします。</p>
 
 <p>アプリをデバイスにプッシュするには、コマンド行から。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova run amazon-fireos
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova run amazon-fireos
+</code></pre></div></div>
+
 <p>Eclipse、内でプロジェクトを右クリックし、<strong>人造人間アプリケーション → として実行</strong>を選択します.</p>
 
 <p><strong>注</strong>: 現在、エミュレーターを介してテストはサポートされていませんアマゾン WebView ベースのアプリ。</p>

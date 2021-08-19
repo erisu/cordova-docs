@@ -1216,155 +1216,213 @@
     }
 </style>
 
-<h1>Использование Plugman для управления расширениями</h1>
+<h1 id="использование-plugman-для-управления-расширениями">Использование Plugman для управления расширениями</h1>
 
-<p>Начиная с версии 3.0 Cordova реализует все API устройства как плагины и оставляет их по умолчанию отключенными. Она также поддерживает два различных способа добавления и удаления плагинов, в зависимости от вашего выбора рабочего процесса, как описано в разделе &quot;<a href="../guide/overview/index.html">Введение</a>&quot;:</p>
+<p>Начиная с версии 3.0 Cordova реализует все API устройства как плагины и оставляет их по умолчанию отключенными. Она также поддерживает два различных способа добавления и удаления плагинов, в зависимости от вашего выбора рабочего процесса, как описано в разделе “<a href="../guide/overview/index.html">Введение</a>”:</p>
 
 <ul>
-<li><p>Если вы используете кросс платформенный рабочий процесс, используйте утилиту CLI <code>cordova</code> для добавления плагинов, как описано в разделе &quot;<a href="../guide/cli/index.html">Интерфейс командной строки</a>&quot;. CLI изменяет плагины для всех платформ одновременно.</p></li>
-<li><p>Если вы используете платформо-ориентированный процесс разработки, вы используете низкоуровневый инструмент командной строки <a href="https://github.com/apache/cordova-plugman/">Plugman</a>, индивидуально для каждой целевой платформы.</p></li>
+  <li>
+    <p>Если вы используете кросс платформенный рабочий процесс, используйте утилиту CLI <code class="language-plaintext highlighter-rouge">cordova</code> для добавления плагинов, как описано в разделе “<a href="../guide/cli/index.html">Интерфейс командной строки</a>”. CLI изменяет плагины для всех платформ одновременно.</p>
+  </li>
+  <li>
+    <p>Если вы используете платформо-ориентированный процесс разработки, вы используете низкоуровневый инструмент командной строки <a href="https://github.com/apache/cordova-plugman/">Plugman</a>, индивидуально для каждой целевой платформы.</p>
+  </li>
 </ul>
 
 <p>В этом разделе описывается утилита Plugman. Для более детальной информации об использовании Plugman как node модуля или изменения исходного кода см. <a href="https://github.com/apache/cordova-plugman/blob/master/README.md">README файл в его репозитории</a>.</p>
 
-<h2>Установка Plugman</h2>
+<h2 id="установка-plugman">Установка Plugman</h2>
 
 <p>Чтобы установить plugman, вам потребуется установить <a href="http://nodejs.org/">node.js</a> на свою машину. Затем можно запустить следующую команду в вашем окружении, чтобы установить plugman глобально, так чтобы он был доступен из любого каталога:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ npm install -g plugman
-</code></pre></div>
-<p>Вы также должны иметь <code>git</code> добавленный в переменную окружения <code>PATH</code>, для того чтобы иметь возможность устанавливать плагины непосредственно из удаленных репозитариев Git.</p>
 
-<p><strong>Подсказка</strong>: Если вы обнаружили что после установки plugman с помощью <code>npm</code> вы по прежнему не можете запустить никакую из команд <code>plugman</code>,удостоверьтесь что вы добавили каталог <code>/npm/</code> в вашу переменную <code>PATH</code>.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ npm install -g plugman
+</code></pre></div></div>
 
-<p><strong>Примечание</strong>: этот шаг можно пропустить, если вы не хотите загрязнять глобальное пространство имен <code>npm</code>, устанавливая Plugman глобально. Если это ваш случай, то когда вы создаете проект Cordova с использованием командной строки, создастся каталог <code>node_modules</code> внутри вашего проекта, которая содержит Plugman. Посколько вы не установили глобально, вам необходимо вызывать <code>node</code> для каждой команды Plugman, к примеру <code>node
-./node_modules/plugman/main.js -version</code>. Остальная часть этой инструкции предполагает что вы установили Plugman глобально, что означает что вы можете вызывать его с использованием просто <code>plugman</code>.</p>
+<p>Вы также должны иметь <code class="language-plaintext highlighter-rouge">git</code> добавленный в переменную окружения <code class="language-plaintext highlighter-rouge">PATH</code>, для того чтобы иметь возможность устанавливать плагины непосредственно из удаленных репозитариев Git.</p>
 
-<h2>Создайте проект Cordova</h2>
+<p><strong>Подсказка</strong>: Если вы обнаружили что после установки plugman с помощью <code class="language-plaintext highlighter-rouge">npm</code> вы по прежнему не можете запустить никакую из команд <code class="language-plaintext highlighter-rouge">plugman</code>,удостоверьтесь что вы добавили каталог <code class="language-plaintext highlighter-rouge">/npm/</code> в вашу переменную <code class="language-plaintext highlighter-rouge">PATH</code>.</p>
 
-<p>Перед тем как использовать Plugman, вы должны создать проект Cordova. Вы можете сделать это либо с использование Интерфейса командной строки или с использованием низкоуровневых утилит командной строки. <a href="../index.html">Инструкции</a> по использованию утилит командной строки для создания вашего проекта, расположены в различных разделах &quot;Инструменты командной строки&quot; указанных на странице &quot;<a href="../guide/platforms/index.html">Руководство по поддерживаемым платформам</a>&quot;.</p>
+<p><strong>Примечание</strong>: этот шаг можно пропустить, если вы не хотите загрязнять глобальное пространство имен <code class="language-plaintext highlighter-rouge">npm</code>, устанавливая Plugman глобально. Если это ваш случай, то когда вы создаете проект Cordova с использованием командной строки, создастся каталог <code class="language-plaintext highlighter-rouge">node_modules</code> внутри вашего проекта, которая содержит Plugman. Посколько вы не установили глобально, вам необходимо вызывать <code class="language-plaintext highlighter-rouge">node</code> для каждой команды Plugman, к примеру <code class="language-plaintext highlighter-rouge">node
+./node_modules/plugman/main.js -version</code>. Остальная часть этой инструкции предполагает что вы установили Plugman глобально, что означает что вы можете вызывать его с использованием просто <code class="language-plaintext highlighter-rouge">plugman</code>.</p>
 
-<h2>Добавление плагина</h2>
+<h2 id="создайте-проект-cordova">Создайте проект Cordova</h2>
+
+<p>Перед тем как использовать Plugman, вы должны создать проект Cordova. Вы можете сделать это либо с использование Интерфейса командной строки или с использованием низкоуровневых утилит командной строки. <a href="../index.html">Инструкции</a> по использованию утилит командной строки для создания вашего проекта, расположены в различных разделах “Инструменты командной строки” указанных на странице “<a href="../guide/platforms/index.html">Руководство по поддерживаемым платформам</a>”.</p>
+
+<h2 id="добавление-плагина">Добавление плагина</h2>
 
 <p>После того как вы установили Plugman и создали проект Cordova, вы можете начать добавлять плагины к платформе с помощью:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin &lt;name|url|path&gt; [--plugins_dir &lt;directory&gt;] [--www &lt;directory&gt;] [--variable &lt;name&gt;=&lt;value&gt; [--variable &lt;name&gt;=&lt;value&gt; ...]]
-</code></pre></div>
-<p>Используя минимальные параметры эта команда установит плагин в проект Cordova. Вы должны указать платформу и расположение проекта Cordоva для этой платформы. Также вы должны указать добавляемый плагин, с использованием различных форм параметра <code>--plugin</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin &lt;name|url|path&gt; [--plugins_dir &lt;directory&gt;] [--www &lt;directory&gt;] [--variable &lt;name&gt;=&lt;value&gt; [--variable &lt;name&gt;=&lt;value&gt; ...]]
+</code></pre></div></div>
+
+<p>Используя минимальные параметры эта команда установит плагин в проект Cordova. Вы должны указать платформу и расположение проекта Cordоva для этой платформы. Также вы должны указать добавляемый плагин, с использованием различных форм параметра <code class="language-plaintext highlighter-rouge">--plugin</code>:</p>
 
 <ul>
-<li>  <code>name</code>: Имя каталога где расположено содержимое плагина. Имя должно соответствовать существующему каталогу расположенному по пути, указанному в параметре <code>--plugins_dir</code> (смотрите ниже за подробной информацией) или имени плагина в реестре плагинов Cordova.</li>
-<li>  <code>url</code>: URL начинающийся с https:// или git://, и указывающий на существующий репозиторий Git который можно клонировать, и который содержит файл <code>plugin.xml</code>. Содержимое этого репозитория будет скопировано в <code>--plugins_dir</code>.</li>
-<li>  <code>path</code>: Путь к каталогу, содержащему плагин, который включает в себя файл <code>plugin.xml</code>. Содержимое расположенное по этому пути будет скопировано в <code>--plugins_dir</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">name</code>: Имя каталога где расположено содержимое плагина. Имя должно соответствовать существующему каталогу расположенному по пути, указанному в параметре <code class="language-plaintext highlighter-rouge">--plugins_dir</code> (смотрите ниже за подробной информацией) или имени плагина в реестре плагинов Cordova.</li>
+  <li><code class="language-plaintext highlighter-rouge">url</code>: URL начинающийся с https:// или git://, и указывающий на существующий репозиторий Git который можно клонировать, и который содержит файл <code class="language-plaintext highlighter-rouge">plugin.xml</code>. Содержимое этого репозитория будет скопировано в <code class="language-plaintext highlighter-rouge">--plugins_dir</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">path</code>: Путь к каталогу, содержащему плагин, который включает в себя файл <code class="language-plaintext highlighter-rouge">plugin.xml</code>. Содержимое расположенное по этому пути будет скопировано в <code class="language-plaintext highlighter-rouge">--plugins_dir</code>.</li>
 </ul>
 
 <p>Другие параметры:</p>
 
 <ul>
-<li>  <code>--plugins_dir</code> по умолчанию, <code>&lt;project&gt;/cordova/plugins</code>, но может быть любым каталогом, котобый содержит подкаталог для каждого загруженного плагина.</li>
-<li>  <code>--www</code> поумолчанию каталог <code>www</code>, но может быть любой директорией которая будет использоваться проектом Cordova как каталог содержащий веб ресурсы приложения.</li>
-<li>  <code>--variable</code> позволяет указывать определенные переменные во время установки, для некоторых плагинов необходимо указывать ключи API или другие настраиваемые параметры. Обратитесь к <a href="plugin_ref_spec.md.html#Plugin%20Specification">спецификации плагинов</a> для получения дополнительной информации.</li>
+  <li><code class="language-plaintext highlighter-rouge">--plugins_dir</code> по умолчанию, <code class="language-plaintext highlighter-rouge">&lt;project&gt;/cordova/plugins</code>, но может быть любым каталогом, котобый содержит подкаталог для каждого загруженного плагина.</li>
+  <li><code class="language-plaintext highlighter-rouge">--www</code> поумолчанию каталог <code class="language-plaintext highlighter-rouge">www</code>, но может быть любой директорией которая будет использоваться проектом Cordova как каталог содержащий веб ресурсы приложения.</li>
+  <li><code class="language-plaintext highlighter-rouge">--variable</code> позволяет указывать определенные переменные во время установки, для некоторых плагинов необходимо указывать ключи API или другие настраиваемые параметры. Обратитесь к <a href="plugin_ref_spec.md.html#Plugin%20Specification">спецификации плагинов</a> для получения дополнительной информации.</li>
 </ul>
 
-<h2>Удаление плагина</h2>
+<h2 id="удаление-плагина">Удаление плагина</h2>
 
-<p>Для удаления плагина, вы должны просто указать флаг <code>--uninstall</code> и указать код плагина (ID плагина).</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ plugman --uninstall --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin &lt;id&gt; [--www &lt;directory&gt;] [--plugins_dir &lt;directory&gt;]
-</code></pre></div>
-<h2>Команды справки</h2>
+<p>Для удаления плагина, вы должны просто указать флаг <code class="language-plaintext highlighter-rouge">--uninstall</code> и указать код плагина (ID плагина).</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ plugman --uninstall --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin &lt;id&gt; [--www &lt;directory&gt;] [--plugins_dir &lt;directory&gt;]
+</code></pre></div></div>
+
+<h2 id="команды-справки">Команды справки</h2>
 
 <p>Plugman поддерживает общую команду help которая может помочь вам если вы в тупике или испытываете проблемы. Она отобразит список доступных команд Plugman и их синтаксис:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">plugman -help
-plugman  # same as above
-</code></pre></div>
-<p><strong>Примечание</strong>: <code>plugman -help</code> может показывать некоторые дополнительные команды по работе с реестром плагинов. Эти команды предназначены для разработчиков плагинов и могут быть не реализованы в реестрах плагинов третьих сторон.</p>
 
-<p>Вы также можете добавить флаг <code>--debug|-d</code> к любой команде Plugman для того чтобы запустить эту команду в диагностическом режиме, который будет отображать внутренние отладочные сообщения, по мере их формирования, что может помочь вам отследить проблемы, как например отсутствующие файлы в плагине.</p>
-<div class="highlight"><pre><code class="language-" data-lang=""># Adding Android battery-status plugin to "myProject":
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plugman -help
+plugman  # same as above
+</code></pre></div></div>
+
+<p><strong>Примечание</strong>: <code class="language-plaintext highlighter-rouge">plugman -help</code> может показывать некоторые дополнительные команды по работе с реестром плагинов. Эти команды предназначены для разработчиков плагинов и могут быть не реализованы в реестрах плагинов третьих сторон.</p>
+
+<p>Вы также можете добавить флаг <code class="language-plaintext highlighter-rouge">--debug|-d</code> к любой команде Plugman для того чтобы запустить эту команду в диагностическом режиме, который будет отображать внутренние отладочные сообщения, по мере их формирования, что может помочь вам отследить проблемы, как например отсутствующие файлы в плагине.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Adding Android battery-status plugin to "myProject":
 plugman -d --platform android --project myProject --plugin cordova-plugin-battery-status
-</code></pre></div>
-<p>Наконец, вы можете использовать флаг <code>--version|-v</code> для того чтобы узнать какую версию Plugman вы используете.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">plugman -v
-</code></pre></div>
-<h2>Действия с реестром плагинов</h2>
+</code></pre></div></div>
+
+<p>Наконец, вы можете использовать флаг <code class="language-plaintext highlighter-rouge">--version|-v</code> для того чтобы узнать какую версию Plugman вы используете.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plugman -v
+</code></pre></div></div>
+
+<h2 id="действия-с-реестром-плагинов">Действия с реестром плагинов</h2>
 
 <p>Существует несколько команд plugman которые могут быть использованы для взаимодействия с <a href="http://plugins.cordova.io">Реестром плагинов</a>. Пожалуйста обратите внимание что эти команды реестра специфичны для реестра плагинов <em>plugins.cordova.io</em> и могут не быть реализованы реестрами плагинов от посторонних поставщиков.</p>
 
-<h3>Поиск плагина</h3>
+<h3 id="поиск-плагина">Поиск плагина</h3>
 
 <p>Вы можете использовать Plugman для поиска в <a href="http://plugins.cordova.io">Реестре плагинов</a> плагинов, которые соответствуют указанному списку ключевых слов, разделенных между собой запятыми.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">plugman search &lt;plugin keywords&gt;
-</code></pre></div>
-<h3>Смена реестра плагинов</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plugman search &lt;plugin keywords&gt;
+</code></pre></div></div>
+
+<h3 id="смена-реестра-плагинов">Смена реестра плагинов</h3>
 
 <p>Вы можете получить или установить URL текущего реестра плагинов который использует plugman. Большей частью вы должны оставить это значение установленным в http://registry.cordova.io за исключением если вы хотите использовать реестр плагинов постороннего поставщика.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">plugman config set registry &lt;url-to-registry&gt;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plugman config set registry &lt;url-to-registry&gt;
 plugman config get registry
-</code></pre></div>
-<h3>Получение информации о плагине</h3>
+</code></pre></div></div>
+
+<h3 id="получение-информации-о-плагине">Получение информации о плагине</h3>
 
 <p>Вы можете получить информацию о определенном плагине, сохраненном в реестре с помощью:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">plugman info &lt;id&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plugman info &lt;id&gt;
+</code></pre></div></div>
+
 <p>Эта команда свяжется с реестром плагинов и получит информацию, такую как номер версии плагина.</p>
 
-<h2>Установка базовых плагинов</h2>
+<h2 id="установка-базовых-плагинов">Установка базовых плагинов</h2>
 
 <p>Приведенные ниже примеры показывают, как добавлять плагины по мере необходимости, так чтобы любая часть Cordova API, которую вы используете в вашем проекте, по-прежнему продолжала работать после обновления до версии 3.0. Для каждой команды, необходимо выбрать целевую платформы, и ссылаться на каталог проекта платформы.</p>
 
 <ul>
-<li><p>cordova-plugin-battery-status</p>
+  <li>
+    <p>cordova-plugin-battery-status</p>
 
-<p><code>plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-battery-status</code></p></li>
-<li><p>cordova-plugin-camera</p>
+    <p><code class="language-plaintext highlighter-rouge">plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-battery-status</code></p>
+  </li>
+  <li>
+    <p>cordova-plugin-camera</p>
 
-<p><code>plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-camera</code></p></li>
-<li><p>cordova-plugin-console</p>
+    <p><code class="language-plaintext highlighter-rouge">plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-camera</code></p>
+  </li>
+  <li>
+    <p>cordova-plugin-console</p>
 
-<p><code>plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-console</code></p></li>
-<li><p>cordova-plugin-contacts</p>
+    <p><code class="language-plaintext highlighter-rouge">plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-console</code></p>
+  </li>
+  <li>
+    <p>cordova-plugin-contacts</p>
 
-<p><code>plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-contacts</code></p></li>
-<li><p>cordova-plugin-device</p>
+    <p><code class="language-plaintext highlighter-rouge">plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-contacts</code></p>
+  </li>
+  <li>
+    <p>cordova-plugin-device</p>
 
-<p><code>plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-device</code></p></li>
-<li><p>cordova-plugin-device-motion (accelerometer)</p>
+    <p><code class="language-plaintext highlighter-rouge">plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-device</code></p>
+  </li>
+  <li>
+    <p>cordova-plugin-device-motion (accelerometer)</p>
 
-<p><code>plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-device-motion</code></p></li>
-<li><p>cordova-plugin-device-orientation (compass)</p>
+    <p><code class="language-plaintext highlighter-rouge">plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-device-motion</code></p>
+  </li>
+  <li>
+    <p>cordova-plugin-device-orientation (compass)</p>
 
-<p><code>plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-device-orientation</code></p></li>
-<li><p>cordova-plugin-dialogs</p>
+    <p><code class="language-plaintext highlighter-rouge">plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-device-orientation</code></p>
+  </li>
+  <li>
+    <p>cordova-plugin-dialogs</p>
 
-<p><code>plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-dialogs</code></p></li>
-<li><p>cordova-plugin-file</p>
+    <p><code class="language-plaintext highlighter-rouge">plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-dialogs</code></p>
+  </li>
+  <li>
+    <p>cordova-plugin-file</p>
 
-<p><code>plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-file</code></p></li>
-<li><p>cordova-plugin-file-transfer</p>
+    <p><code class="language-plaintext highlighter-rouge">plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-file</code></p>
+  </li>
+  <li>
+    <p>cordova-plugin-file-transfer</p>
 
-<p><code>plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-file-transfer</code></p></li>
-<li><p>cordova-plugin-geolocation</p>
+    <p><code class="language-plaintext highlighter-rouge">plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-file-transfer</code></p>
+  </li>
+  <li>
+    <p>cordova-plugin-geolocation</p>
 
-<p><code>plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-geolocation</code></p></li>
-<li><p>cordova-plugin-globalization</p>
+    <p><code class="language-plaintext highlighter-rouge">plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-geolocation</code></p>
+  </li>
+  <li>
+    <p>cordova-plugin-globalization</p>
 
-<p><code>plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-globalization</code></p></li>
-<li><p>cordova-plugin-inappbrowser</p>
+    <p><code class="language-plaintext highlighter-rouge">plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-globalization</code></p>
+  </li>
+  <li>
+    <p>cordova-plugin-inappbrowser</p>
 
-<p><code>plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-inappbrowser</code></p></li>
-<li><p>cordova-plugin-media</p>
+    <p><code class="language-plaintext highlighter-rouge">plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-inappbrowser</code></p>
+  </li>
+  <li>
+    <p>cordova-plugin-media</p>
 
-<p><code>plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-media</code></p></li>
-<li><p>cordova-plugin-media-capture</p>
+    <p><code class="language-plaintext highlighter-rouge">plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-media</code></p>
+  </li>
+  <li>
+    <p>cordova-plugin-media-capture</p>
 
-<p><code>plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-media-capture</code></p></li>
-<li><p>cordova-plugin-network-information</p>
+    <p><code class="language-plaintext highlighter-rouge">plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-media-capture</code></p>
+  </li>
+  <li>
+    <p>cordova-plugin-network-information</p>
 
-<p><code>plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-network-information</code></p></li>
-<li><p>cordova-plugin-splashscreen</p>
+    <p><code class="language-plaintext highlighter-rouge">plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-network-information</code></p>
+  </li>
+  <li>
+    <p>cordova-plugin-splashscreen</p>
 
-<p><code>plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-splashscreen</code></p></li>
-<li><p>cordova-plugin-vibration</p>
+    <p><code class="language-plaintext highlighter-rouge">plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-splashscreen</code></p>
+  </li>
+  <li>
+    <p>cordova-plugin-vibration</p>
 
-<p><code>plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-vibration</code></p></li>
+    <p><code class="language-plaintext highlighter-rouge">plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp8&gt; --project &lt;directory&gt; --plugin cordova-plugin-vibration</code></p>
+  </li>
 </ul>
 
 

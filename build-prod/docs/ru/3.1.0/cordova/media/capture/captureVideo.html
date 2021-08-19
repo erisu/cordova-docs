@@ -1310,35 +1310,38 @@
     }
 </style>
 
-<h1>capture.captureVideo</h1>
+<h1 id="capturecapturevideo">capture.captureVideo</h1>
 
 <blockquote>
-<p>Запустите приложение видеомагнитофон и возвращают сведения о файлах захваченного видео клип.</p>
+  <p>Запустите приложение видеомагнитофон и возвращают сведения о файлах захваченного видео клип.</p>
 </blockquote>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.device.capture.captureVideo(
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.device.capture.captureVideo(
     CaptureCB captureSuccess, CaptureErrorCB captureError, [CaptureVideoOptions options]
 );
-</code></pre></div>
-<h2>Описание</h2>
+</code></pre></div></div>
+
+<h2 id="описание">Описание</h2>
 
 <p>Начинает асинхронную операцию, чтобы захватить видео записи с помощью устройства записи видео приложения. Операция позволяет пользователю захватить более чем одной записи в течение одной сессии.</p>
 
-<p>Операции захвата заканчивается, когда либо пользователь выходит из приложения записи видео, или максимальное количество записей, указанный <code>[CaptureVideoOptions](captureVideoOptions.html).limit</code> достигается. Если не <code>limit</code> значение параметра указывается, по умолчанию он один (1) и захвата операция прекращается после того, как пользователь записывает один видео клип.</p>
+<p>Операции захвата заканчивается, когда либо пользователь выходит из приложения записи видео, или максимальное количество записей, указанный <code class="language-plaintext highlighter-rouge">[CaptureVideoOptions](captureVideoOptions.html).limit</code> достигается. Если не <code class="language-plaintext highlighter-rouge">limit</code> значение параметра указывается, по умолчанию он один (1) и захвата операция прекращается после того, как пользователь записывает один видео клип.</p>
 
-<p>По завершении операции захвата его <code>[CaptureCB](CaptureCB.html)</code> обратного вызова выполняется с массивом <code>[MediaFile](MediaFile.html)</code> объекты, описывающие каждый захвачен файл видео клип. Если пользователь завершает операцию до захвата видео клип, <code>[CaptureErrorCB](CaptureErrorCB.html)</code> обратного вызова выполняется с <code>[CaptureError](CaptureError.html)</code> объекта с изображением <code>[CaptureError](CaptureError.html).CAPTURE_NO_MEDIA_FILES</code> код ошибки.</p>
+<p>По завершении операции захвата его <code class="language-plaintext highlighter-rouge">[CaptureCB](CaptureCB.html)</code> обратного вызова выполняется с массивом <code class="language-plaintext highlighter-rouge">[MediaFile](MediaFile.html)</code> объекты, описывающие каждый захвачен файл видео клип. Если пользователь завершает операцию до захвата видео клип, <code class="language-plaintext highlighter-rouge">[CaptureErrorCB](CaptureErrorCB.html)</code> обратного вызова выполняется с <code class="language-plaintext highlighter-rouge">[CaptureError](CaptureError.html)</code> объекта с изображением <code class="language-plaintext highlighter-rouge">[CaptureError](CaptureError.html).CAPTURE_NO_MEDIA_FILES</code> код ошибки.</p>
 
-<h2>Поддерживаемые платформы</h2>
+<h2 id="поддерживаемые-платформы">Поддерживаемые платформы</h2>
 
 <ul>
-<li>  Андроид</li>
-<li>  WebWorks ежевики (OS 5.0 и выше)</li>
-<li>  iOS</li>
-<li>  Windows Phone 7 и 8</li>
-<li>  ОС Windows 8</li>
+  <li>Андроид</li>
+  <li>WebWorks ежевики (OS 5.0 и выше)</li>
+  <li>iOS</li>
+  <li>Windows Phone 7 и 8</li>
+  <li>ОС Windows 8</li>
 </ul>
 
-<h2>Быстрый пример</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">// capture callback
+<h2 id="быстрый-пример">Быстрый пример</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// capture callback
 var captureSuccess = function(mediaFiles) {
     var i, path, len;
     for (i = 0, len = mediaFiles.length; i &lt; len; i += 1) {
@@ -1354,70 +1357,73 @@ var captureError = function(error) {
 
 // start video capture
 navigator.device.capture.captureVideo(captureSuccess, captureError, {limit:2});
-</code></pre></div>
-<h2>Полный пример</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Capture Video<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"json2.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="полный-пример">Полный пример</h2>
 
-    <span class="c1">// Called when capture operation is finished</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">captureSuccess</span><span class="p">(</span><span class="nx">mediaFiles</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">len</span><span class="p">;</span>
-        <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">mediaFiles</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">uploadFile</span><span class="p">(</span><span class="nx">mediaFiles</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Capture Video&lt;/title&gt;
 
-    <span class="c1">// Called if something bad happens.</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">captureError</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">msg</span> <span class="o">=</span> <span class="s1">'An error occurred during capture: '</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span><span class="p">;</span>
-        <span class="nb">navigator</span><span class="p">.</span><span class="nx">notification</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="nx">msg</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="s1">'Uh oh!'</span><span class="p">);</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="json2.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// A button will call this function</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">captureVideo</span><span class="p">()</span> <span class="p">{</span>
-        <span class="c1">// Launch device video recording application,</span>
-        <span class="c1">// allowing user to capture up to 2 video clips</span>
-        <span class="nb">navigator</span><span class="p">.</span><span class="nx">device</span><span class="p">.</span><span class="nx">capture</span><span class="p">.</span><span class="nx">captureVideo</span><span class="p">(</span><span class="nx">captureSuccess</span><span class="p">,</span> <span class="nx">captureError</span><span class="p">,</span> <span class="p">{</span><span class="na">limit</span><span class="p">:</span> <span class="mi">2</span><span class="p">});</span>
-    <span class="p">}</span>
+    // Called when capture operation is finished
+    //
+    function captureSuccess(mediaFiles) {
+        var i, len;
+        for (i = 0, len = mediaFiles.length; i &lt; len; i += 1) {
+            uploadFile(mediaFiles[i]);
+        }
+    }
 
-    <span class="c1">// Upload files to server</span>
-    <span class="kd">function</span> <span class="nx">uploadFile</span><span class="p">(</span><span class="nx">mediaFile</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">ft</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileTransfer</span><span class="p">(),</span>
-            <span class="nx">path</span> <span class="o">=</span> <span class="nx">mediaFile</span><span class="p">.</span><span class="nx">fullPath</span><span class="p">,</span>
-            <span class="nx">name</span> <span class="o">=</span> <span class="nx">mediaFile</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+    // Called if something bad happens.
+    //
+    function captureError(error) {
+        var msg = 'An error occurred during capture: ' + error.code;
+        navigator.notification.alert(msg, null, 'Uh oh!');
+    }
 
-        <span class="nx">ft</span><span class="p">.</span><span class="nx">upload</span><span class="p">(</span><span class="nx">path</span><span class="p">,</span>
-            <span class="s2">"http://my.domain.com/upload.php"</span><span class="p">,</span>
-            <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Upload success: '</span> <span class="o">+</span> <span class="nx">result</span><span class="p">.</span><span class="nx">responseCode</span><span class="p">);</span>
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">bytesSent</span> <span class="o">+</span> <span class="s1">' bytes sent'</span><span class="p">);</span>
-            <span class="p">},</span>
-            <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Error uploading file '</span> <span class="o">+</span> <span class="nx">path</span> <span class="o">+</span> <span class="s1">': '</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span><span class="p">);</span>
-            <span class="p">},</span>
-            <span class="p">{</span> <span class="na">fileName</span><span class="p">:</span> <span class="nx">name</span> <span class="p">});</span>
-    <span class="p">}</span>
+    // A button will call this function
+    //
+    function captureVideo() {
+        // Launch device video recording application,
+        // allowing user to capture up to 2 video clips
+        navigator.device.capture.captureVideo(captureSuccess, captureError, {limit: 2});
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-    <span class="nt">&lt;/head&gt;</span>
-    <span class="nt">&lt;body&gt;</span>
-        <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"captureVideo();"</span><span class="nt">&gt;</span>Capture Video<span class="nt">&lt;/button&gt;</span> <span class="nt">&lt;br&gt;</span>
-    <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2>Ежевика WebWorks совместимости</h2>
+    // Upload files to server
+    function uploadFile(mediaFile) {
+        var ft = new FileTransfer(),
+            path = mediaFile.fullPath,
+            name = mediaFile.name;
+
+        ft.upload(path,
+            "http://my.domain.com/upload.php",
+            function(result) {
+                console.log('Upload success: ' + result.responseCode);
+                console.log(result.bytesSent + ' bytes sent');
+            },
+            function(error) {
+                console.log('Error uploading file ' + path + ': ' + error.code);
+            },
+            { fileName: name });
+    }
+
+    &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;button onclick="captureVideo();"&gt;Capture Video&lt;/button&gt; &lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h2 id="ежевика-webworks-совместимости">Ежевика WebWorks совместимости</h2>
 
 <ul>
-<li>  Cordova для BlackBerry WebWorks пытается запустить приложение <strong>Видеомагнитофон</strong> , предоставляемых RIM, чтобы захватить видео записи. Приложение получает <code>[CaptureError](CaptureError.html).CAPTURE_NOT_SUPPORTED</code> код ошибки, если приложение не установлено на устройстве.</li>
+  <li>Cordova для BlackBerry WebWorks пытается запустить приложение <strong>Видеомагнитофон</strong> , предоставляемых RIM, чтобы захватить видео записи. Приложение получает <code class="language-plaintext highlighter-rouge">[CaptureError](CaptureError.html).CAPTURE_NOT_SUPPORTED</code> код ошибки, если приложение не установлено на устройстве.</li>
 </ul>
 
 

@@ -1094,50 +1094,88 @@
     }
 </style>
 
-<h1>iOS конфигурации</h1>
+<h1 id="ios-конфигурации">iOS конфигурации</h1>
 
-<p><code>config.xml</code>Файл управляет app основные параметры, которые применяются через каждое приложение и экземпляр CordovaWebView. Этот раздел описывает настройки, которые применяются только к iOS построений. Смотрите информацию в файле config.xml на параметры глобальной конфигурации.</p>
+<p><code class="language-plaintext highlighter-rouge">config.xml</code>Файл управляет app основные параметры, которые применяются через каждое приложение и экземпляр CordovaWebView. Этот раздел описывает настройки, которые применяются только к iOS построений. Смотрите информацию в файле config.xml на параметры глобальной конфигурации.</p>
 
 <ul>
-<li><p><code>EnableViewportScale</code>(логическое значение, по умолчанию <code>false</code> ): набор <code>true</code> Разрешить метатег видового экрана либо отключить или ограничить диапазон масштабирования пользователь, который включен по умолчанию.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="EnableViewportScale" value="true"/&gt;
-</code></pre></div>
-<p>Место просмотра следующих в HTML, чтобы отключить масштабирование и подходят гибко в WebView рендеринга контента:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt; мета имя = «просмотра» содержание =' ширина = устройства ширина, первоначальный масштаб = 1, пользователь масштабируемых = no' / &gt;
-</code></pre></div></li>
-<li><p><code>MediaPlaybackRequiresUserAction</code>(логическое значение, по умолчанию <code>false</code> ): набор <code>true</code> чтобы запретить автоматическое воспроизведение с HTML5 видео или аудио <code>autoplay</code> атрибут или через JavaScript.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="MediaPlaybackRequiresUserAction" value="true"/&gt;
-</code></pre></div></li>
-<li><p><code>AllowInlineMediaPlayback</code>(логическое значение, по умолчанию <code>false</code> ): набор <code>true</code> чтобы разрешить воспроизведение мультимедиа HTML5 появляться <em>inline</em> в пределах экрана, с помощью элементов управления браузера поставляется, а не собственные элементы управления. Для этой работы, добавить <code>webkit-playsinline</code> атрибута к любому <code>&lt;video&gt;</code> элементов.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="AllowInlineMediaPlayback" value="true"/&gt;
-</code></pre></div></li>
-<li><p><code>BackupWebStorage</code>(строка, либо <code>none</code> , <code>local</code> , или значение по умолчанию <code>cloud</code> ): набор <code>cloud</code> чтобы разрешить веб-хранения данных для резервного копирования через iCloud. Установите <code>local</code> Разрешить только в местных резервные копии через iTunes синхронизации. Установите <code>none</code> предотвратить веб хранения резервных копий.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="BackupWebStorage" value="local"/&gt;
-</code></pre></div></li>
-<li><p><code>TopActivityIndicator</code>(строка, по умолчанию <code>gray</code> ): контролирует появление небольшой вращающийся значок в строке состояния, указывающее активность значительные процессора. Допустимыми значениями являются <code>whiteLarge</code> , <code>white</code> , и<code>gray</code>.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="TopActivityIndicator" value="white"/&gt;
-</code></pre></div></li>
-<li><p><code>KeyboardDisplayRequiresUserAction</code>(логическое значение, по умолчанию <code>true</code> ): набор <code>false</code> Разрешить клавиатуры появляются при вызове <code>focus()</code> на форм ввода.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="KeyboardDisplayRequiresUserAction" value="false"/&gt;
-</code></pre></div></li>
-<li><p><code>SuppressesIncrementalRendering</code>(логическое значение, по умолчанию <code>false</code> ): набор <code>true</code> ждать, пока все содержимое был получен до того, как он отображается на экране.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="SuppressesIncrementalRendering" value="true"/&gt;
-</code></pre></div></li>
-<li><p><code>GapBetweenPages</code>(float, значение по умолчанию `` ): размер разрыва, в точках, между страницами.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="GapBetweenPages" value="0"/&gt;
-</code></pre></div></li>
-<li><p><code>PageLength</code>(float, значение по умолчанию `` ): размер каждой страницы, в точках, в направление потока страниц. Когда PaginationMode — справа налево или слева направо, это свойство представляет ширину каждой страницы. Когда PaginationMode topToBottom или bottomToTop, это свойство представляет высоту каждой страницы. Значение по умолчанию равно 0, что означает, что макет использует размер окна просмотра, чтобы определить размеры страницы.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="PageLength" value="0"/&gt;
-</code></pre></div></li>
-<li><p><code>PaginationBreakingMode</code>(строки, по умолчанию <code>page</code> ): допустимые значения <code>page</code> и <code>column</code> .Порядок, в котором происходит разрыв столбца или страницы. Это свойство определяет, заслуженный или игнорируются некоторые CSS свойства относительно разрыва столбца и страницы. Когда это свойство имеет значение <code>column</code> , содержание уважает CSS свойства, относящиеся к колонке разрыв в месте разрыва страницы.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="PaginationBreakingMode" value="page"/&gt;
-</code></pre></div></li>
-<li><p><code>PaginationMode</code>(строки, по умолчанию <code>unpaginated</code> ): допустимые значения <code>unpaginated</code> , <code>leftToRight</code> , <code>topToBottom</code> , <code>bottomToTop</code> , и <code>rightToLeft</code> . Это свойство определяет ли содержимое в представлении веб-разбиты на страницы, которые заполняют один экран в то время, или как один длинный прокрутки представления. Если набор в разбитой на страницы форме, это свойство Переключение страничного макета на контент, вызывая веб-представление для использования значения PageLength и GapBetweenPages relayout его содержание.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="PaginationMode" value="unpaginated"/&gt;
-</code></pre></div></li>
-<li><p><code>UIWebViewDecelerationSpeed</code>(строки, по умолчанию <code>normal</code> ): допустимые значения <code>normal</code> , <code>fast</code> . Это свойство контролирует скорость замедления прокрутки импульса. <code>normal</code>по умолчанию скорость для наиболее родные apps, и <code>fast</code> является значением по умолчанию для Mobile Safari.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="UIWebViewDecelerationSpeed" value="fast" /&gt;
-</code></pre></div></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">EnableViewportScale</code>(логическое значение, по умолчанию <code class="language-plaintext highlighter-rouge">false</code> ): набор <code class="language-plaintext highlighter-rouge">true</code> Разрешить метатег видового экрана либо отключить или ограничить диапазон масштабирования пользователь, который включен по умолчанию.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="EnableViewportScale" value="true"/&gt;
+</code></pre></div>    </div>
+
+    <p>Место просмотра следующих в HTML, чтобы отключить масштабирование и подходят гибко в WebView рендеринга контента:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt; мета имя = «просмотра» содержание =' ширина = устройства ширина, первоначальный масштаб = 1, пользователь масштабируемых = no' / &gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">MediaPlaybackRequiresUserAction</code>(логическое значение, по умолчанию <code class="language-plaintext highlighter-rouge">false</code> ): набор <code class="language-plaintext highlighter-rouge">true</code> чтобы запретить автоматическое воспроизведение с HTML5 видео или аудио <code class="language-plaintext highlighter-rouge">autoplay</code> атрибут или через JavaScript.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="MediaPlaybackRequiresUserAction" value="true"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">AllowInlineMediaPlayback</code>(логическое значение, по умолчанию <code class="language-plaintext highlighter-rouge">false</code> ): набор <code class="language-plaintext highlighter-rouge">true</code> чтобы разрешить воспроизведение мультимедиа HTML5 появляться <em>inline</em> в пределах экрана, с помощью элементов управления браузера поставляется, а не собственные элементы управления. Для этой работы, добавить <code class="language-plaintext highlighter-rouge">webkit-playsinline</code> атрибута к любому <code class="language-plaintext highlighter-rouge">&lt;video&gt;</code> элементов.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="AllowInlineMediaPlayback" value="true"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">BackupWebStorage</code>(строка, либо <code class="language-plaintext highlighter-rouge">none</code> , <code class="language-plaintext highlighter-rouge">local</code> , или значение по умолчанию <code class="language-plaintext highlighter-rouge">cloud</code> ): набор <code class="language-plaintext highlighter-rouge">cloud</code> чтобы разрешить веб-хранения данных для резервного копирования через iCloud. Установите <code class="language-plaintext highlighter-rouge">local</code> Разрешить только в местных резервные копии через iTunes синхронизации. Установите <code class="language-plaintext highlighter-rouge">none</code> предотвратить веб хранения резервных копий.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="BackupWebStorage" value="local"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">TopActivityIndicator</code>(строка, по умолчанию <code class="language-plaintext highlighter-rouge">gray</code> ): контролирует появление небольшой вращающийся значок в строке состояния, указывающее активность значительные процессора. Допустимыми значениями являются <code class="language-plaintext highlighter-rouge">whiteLarge</code> , <code class="language-plaintext highlighter-rouge">white</code> , и<code class="language-plaintext highlighter-rouge">gray</code>.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="TopActivityIndicator" value="white"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">KeyboardDisplayRequiresUserAction</code>(логическое значение, по умолчанию <code class="language-plaintext highlighter-rouge">true</code> ): набор <code class="language-plaintext highlighter-rouge">false</code> Разрешить клавиатуры появляются при вызове <code class="language-plaintext highlighter-rouge">focus()</code> на форм ввода.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="KeyboardDisplayRequiresUserAction" value="false"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">SuppressesIncrementalRendering</code>(логическое значение, по умолчанию <code class="language-plaintext highlighter-rouge">false</code> ): набор <code class="language-plaintext highlighter-rouge">true</code> ждать, пока все содержимое был получен до того, как он отображается на экране.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="SuppressesIncrementalRendering" value="true"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">GapBetweenPages</code>(float, значение по умолчанию `` ): размер разрыва, в точках, между страницами.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="GapBetweenPages" value="0"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">PageLength</code>(float, значение по умолчанию `` ): размер каждой страницы, в точках, в направление потока страниц. Когда PaginationMode — справа налево или слева направо, это свойство представляет ширину каждой страницы. Когда PaginationMode topToBottom или bottomToTop, это свойство представляет высоту каждой страницы. Значение по умолчанию равно 0, что означает, что макет использует размер окна просмотра, чтобы определить размеры страницы.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="PageLength" value="0"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">PaginationBreakingMode</code>(строки, по умолчанию <code class="language-plaintext highlighter-rouge">page</code> ): допустимые значения <code class="language-plaintext highlighter-rouge">page</code> и <code class="language-plaintext highlighter-rouge">column</code> .Порядок, в котором происходит разрыв столбца или страницы. Это свойство определяет, заслуженный или игнорируются некоторые CSS свойства относительно разрыва столбца и страницы. Когда это свойство имеет значение <code class="language-plaintext highlighter-rouge">column</code> , содержание уважает CSS свойства, относящиеся к колонке разрыв в месте разрыва страницы.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="PaginationBreakingMode" value="page"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">PaginationMode</code>(строки, по умолчанию <code class="language-plaintext highlighter-rouge">unpaginated</code> ): допустимые значения <code class="language-plaintext highlighter-rouge">unpaginated</code> , <code class="language-plaintext highlighter-rouge">leftToRight</code> , <code class="language-plaintext highlighter-rouge">topToBottom</code> , <code class="language-plaintext highlighter-rouge">bottomToTop</code> , и <code class="language-plaintext highlighter-rouge">rightToLeft</code> . Это свойство определяет ли содержимое в представлении веб-разбиты на страницы, которые заполняют один экран в то время, или как один длинный прокрутки представления. Если набор в разбитой на страницы форме, это свойство Переключение страничного макета на контент, вызывая веб-представление для использования значения PageLength и GapBetweenPages relayout его содержание.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="PaginationMode" value="unpaginated"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">UIWebViewDecelerationSpeed</code>(строки, по умолчанию <code class="language-plaintext highlighter-rouge">normal</code> ): допустимые значения <code class="language-plaintext highlighter-rouge">normal</code> , <code class="language-plaintext highlighter-rouge">fast</code> . Это свойство контролирует скорость замедления прокрутки импульса. <code class="language-plaintext highlighter-rouge">normal</code>по умолчанию скорость для наиболее родные apps, и <code class="language-plaintext highlighter-rouge">fast</code> является значением по умолчанию для Mobile Safari.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="UIWebViewDecelerationSpeed" value="fast" /&gt;
+</code></pre></div>    </div>
+  </li>
 </ul>
 
 

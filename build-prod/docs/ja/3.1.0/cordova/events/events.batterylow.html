@@ -1436,74 +1436,84 @@
             
 
             <div id="page-toc-source">
-                <h1>batterylow</h1>
+                <h1 id="batterylow">batterylow</h1>
 
 <p>バッテリは、低レベルのしきい値に達したときに発生します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">window.addEventListener("batterylow", yourCallbackFunction, false);
-</code></pre></div>
-<h2>詳細</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>window.addEventListener("batterylow", yourCallbackFunction, false);
+</code></pre></div></div>
+
+<h2 id="詳細">詳細</h2>
 
 <p>バッテリーの充電の割合がバッテリ低下しきい値、デバイス固有の値に達したときに発生します。</p>
 
-<p><code>batterylow</code>ハンドラーは 2 つのプロパティを格納しているオブジェクトに渡されます。</p>
+<p><code class="language-plaintext highlighter-rouge">batterylow</code>ハンドラーは 2 つのプロパティを格納しているオブジェクトに渡されます。</p>
 
 <ul>
-<li><p><strong>レベル</strong>： バッテリーの充電量 （0-100) の割合。<em>(数)</em></p></li>
-<li><p><strong>起こしたり</strong>： デバイスが接続されてインチ<em>(ブール値)</em>かどうかを示すブール値</p></li>
+  <li>
+    <p><strong>レベル</strong>： バッテリーの充電量 （0-100) の割合。<em>(数)</em></p>
+  </li>
+  <li>
+    <p><strong>起こしたり</strong>： デバイスが接続されてインチ<em>(ブール値)</em>かどうかを示すブール値</p>
+  </li>
 </ul>
 
-<p>通常アプリケーションに使用する必要があります <code>document.addEventListener</code> 一度のイベント リスナーをアタッチし、 <code>[deviceready](events.deviceready.html)</code> イベントが発生します。</p>
+<p>通常アプリケーションに使用する必要があります <code class="language-plaintext highlighter-rouge">document.addEventListener</code> 一度のイベント リスナーをアタッチし、 <code class="language-plaintext highlighter-rouge">[deviceready](events.deviceready.html)</code> イベントが発生します。</p>
 
-<h2>サポートされているプラットフォーム</h2>
+<h2 id="サポートされているプラットフォーム">サポートされているプラットフォーム</h2>
 
 <ul>
-<li>  iOS</li>
-<li>  アンドロイド</li>
-<li>  ブラックベリー WebWorks (OS 5.0 およびより高い)</li>
-<li>  Tizen</li>
+  <li>iOS</li>
+  <li>アンドロイド</li>
+  <li>ブラックベリー WebWorks (OS 5.0 およびより高い)</li>
+  <li>Tizen</li>
 </ul>
 
-<h2>簡単な例</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">window.addEventListener("batterylow", onBatteryLow, false);
+<h2 id="簡単な例">簡単な例</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>window.addEventListener("batterylow", onBatteryLow, false);
 
 function onBatteryLow(info) {
     // Handle the battery low event
     alert("Battery Level Low " + info.level + "%");
 }
-</code></pre></div>
-<h2>完全な例</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Device Ready Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="完全な例">完全な例</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onLoad</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="p">}</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Device Ready Example&lt;/title&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"batterylow"</span><span class="p">,</span> <span class="nx">onBatteryLow</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// Handle the batterylow event</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onBatteryLow</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">alert</span><span class="p">(</span><span class="s2">"Battery Level Low "</span> <span class="o">+</span> <span class="nx">info</span><span class="p">.</span><span class="nx">level</span> <span class="o">+</span> <span class="s2">"%"</span><span class="p">);</span>
-    <span class="p">}</span>
+    // Wait for device API libraries to load
+    //
+    function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body</span> <span class="na">onload=</span><span class="s">"onLoad()"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        window.addEventListener("batterylow", onBatteryLow, false);
+    }
+
+    // Handle the batterylow event
+    //
+    function onBatteryLow(info) {
+        alert("Battery Level Low " + info.level + "%");
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body onload="onLoad()"&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

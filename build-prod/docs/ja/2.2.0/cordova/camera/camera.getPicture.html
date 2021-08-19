@@ -1364,64 +1364,69 @@
             
 
             <div id="page-toc-source">
-                <h1>camera.getPicture</h1>
+                <h1 id="cameragetpicture">camera.getPicture</h1>
 
 <p>デバイスのカメラで写真を撮る、またはデバイスのアルバム内にある写真を検索します。 Base64 形式でエンコードされたフォトイメージを表す文字列、またはイメージファイルの URI が返されます。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.camera.getPicture( cameraSuccess, cameraError, [ cameraOptions ] );
-</code></pre></div>
-<h2>概要</h2>
 
-<p><code>camera.getPicture</code> 関数はユーザーが写真を撮れるように、デバイスが標準で備えるカメラアプリを起動します (もしデフォルト設定である <code>[Camera](camera.html).sourceType = [Camera](camera.html).PictureSourceType.CAMERA</code> の場合) 。写真の撮影が完了するとカメラアプリは終了し、アプリケーションに戻ります。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.camera.getPicture( cameraSuccess, cameraError, [ cameraOptions ] );
+</code></pre></div></div>
 
-<p>もし <code>[Camera](camera.html).sourceType = [Camera](camera.html).PictureSourceType.PHOTOLIBRARY</code> もしくは <code>[Camera](camera.html).PictureSourceType.SAVEDPHOTOALBUM</code> が指定された場合、写真選択ダイアログが表示され、アルバムから写真を選択できるようになります。</p>
+<h2 id="概要">概要</h2>
 
-<p>返り値は <code>[cameraSuccess](parameter/cameraSuccess.html)</code> 関数に送信されます。値は <code>[cameraOptions](parameter/cameraOptions.html)</code> の設定に従い、以下のいずれかのフォーマットで送られます:</p>
+<p><code class="language-plaintext highlighter-rouge">camera.getPicture</code> 関数はユーザーが写真を撮れるように、デバイスが標準で備えるカメラアプリを起動します (もしデフォルト設定である <code class="language-plaintext highlighter-rouge">[Camera](camera.html).sourceType = [Camera](camera.html).PictureSourceType.CAMERA</code> の場合) 。写真の撮影が完了するとカメラアプリは終了し、アプリケーションに戻ります。</p>
+
+<p>もし <code class="language-plaintext highlighter-rouge">[Camera](camera.html).sourceType = [Camera](camera.html).PictureSourceType.PHOTOLIBRARY</code> もしくは <code class="language-plaintext highlighter-rouge">[Camera](camera.html).PictureSourceType.SAVEDPHOTOALBUM</code> が指定された場合、写真選択ダイアログが表示され、アルバムから写真を選択できるようになります。</p>
+
+<p>返り値は <code class="language-plaintext highlighter-rouge">[cameraSuccess](parameter/cameraSuccess.html)</code> 関数に送信されます。値は <code class="language-plaintext highlighter-rouge">[cameraOptions](parameter/cameraOptions.html)</code> の設定に従い、以下のいずれかのフォーマットで送られます:</p>
 
 <ul>
-<li>Base64 形式でエンコードされたフォトイメージを表す文字列 (デフォルト)</li>
-<li>ローカルストレージ内に記録されたファイルの場所を表す文字列</li>
+  <li>Base64 形式でエンコードされたフォトイメージを表す文字列 (デフォルト)</li>
+  <li>ローカルストレージ内に記録されたファイルの場所を表す文字列</li>
 </ul>
 
 <p>エンコードされたイメージや URI をもとに、以下のような処理の記述が可能です:</p>
 
 <ul>
-<li><code>&lt;img&gt;</code> タグで画像を表示 <em>(下記の使用例を参考にしてください)</em></li>
-<li>データをローカルに保存 (<code>LocalStorage</code> や <a href="http://brianleroux.github.com/lawnchair/">Lawnchair</a> など)</li>
-<li>データをリモートサーバーに送信</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;img&gt;</code> タグで画像を表示 <em>(下記の使用例を参考にしてください)</em></li>
+  <li>データをローカルに保存 (<code class="language-plaintext highlighter-rouge">LocalStorage</code> や <a href="http://brianleroux.github.com/lawnchair/">Lawnchair</a> など)</li>
+  <li>データをリモートサーバーに送信</li>
 </ul>
 
-<p><strong>注意:</strong> 最新のデバイスで撮影したイメージの画質は良好で、フォトアルバムから取得する画像はたとえ quality パラメーターで画質を指定したとしても、縮小されません。 <strong><em>そのような画像を Base64 でエンコードすると、メモリーの問題が発生します。よって、 FILE</em>URI を &#39;<a href="camera.html">Camera</a>.destinationType&#39; として使用することが推奨されます。</strong>_</p>
+<p><strong>注意:</strong> 最新のデバイスで撮影したイメージの画質は良好で、フォトアルバムから取得する画像はたとえ quality パラメーターで画質を指定したとしても、縮小されません。 <strong><em>そのような画像を Base64 でエンコードすると、メモリーの問題が発生します。よって、 FILE_URI を ‘<a href="camera.html">Camera</a>.destinationType’ として使用することが推奨されます。</em></strong></p>
 
-<h2>サポートされているプラットフォーム</h2>
+<h2 id="サポートされているプラットフォーム">サポートされているプラットフォーム</h2>
 
 <ul>
-<li>Android</li>
-<li>BlackBerry WebWorks (OS 5.0 以上) </li>
-<li>iOS</li>
-<li>Windows Phone 7 (Mango)</li>
-<li>Bada 1.2</li>
-<li>Tizen</li>
+  <li>Android</li>
+  <li>BlackBerry WebWorks (OS 5.0 以上)</li>
+  <li>iOS</li>
+  <li>Windows Phone 7 (Mango)</li>
+  <li>Bada 1.2</li>
+  <li>Tizen</li>
 </ul>
 
-<h2>iOS に関する注意点</h2>
+<h2 id="ios-に関する注意点">iOS に関する注意点</h2>
 
 <p>JavaScript の alert() をコールバック関数に含めると、問題が生じる可能性があります。 alert を setTimeout() でラップすることで、 alert が表示される前に iOS の image picker または popover が完全に閉じるようにします:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">setTimeout(function() {
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setTimeout(function() {
     // 任意のコード
 }, 0);
-</code></pre></div>
-<h2>Windows Phone 7 に関する注意点</h2>
+</code></pre></div></div>
+
+<h2 id="windows-phone-7-に関する注意点">Windows Phone 7 に関する注意点</h2>
 
 <p>Zune とデバイスが接続している間は、ネイティブカメラアプリケーションは起動せずに、エラーコールバックが呼び出されます。</p>
 
-<h2>Tizen に関する注意点</h2>
+<h2 id="tizen-に関する注意点">Tizen に関する注意点</h2>
 
-<p>&#39;destinationType: <a href="camera.html">Camera</a>.DestinationType.FILE_URI&#39; と &#39;sourceType: <a href="camera.html">Camera</a>.PictureSourceType.PHOTOLIBRARY&#39; のみサポートされています。</p>
+<p>‘destinationType: <a href="camera.html">Camera</a>.DestinationType.FILE_URI’ と ‘sourceType: <a href="camera.html">Camera</a>.PictureSourceType.PHOTOLIBRARY’ のみサポートされています。</p>
 
-<h2><a href="../storage/storage.opendatabase.html">使用例</a></h2>
+<h2 id="使用例"><a href="../storage/storage.opendatabase.html">使用例</a></h2>
 
 <p>写真を撮影し、 Base64 形式のイメージとして取得します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
     destinationType: Camera.DestinationType.DATA_URL
  });
 
@@ -1433,9 +1438,11 @@ function onSuccess(imageData) {
 function onFail(message) {
     alert('エラーが発生しました: ' + message);
 }
-</code></pre></div>
+</code></pre></div></div>
+
 <p>撮影した写真の URI を取得します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
     destinationType: Camera.DestinationType.FILE_URI });
 
 function onSuccess(imageURI) {
@@ -1446,113 +1453,116 @@ function onSuccess(imageURI) {
 function onFail(message) {
     alert('エラーが発生しました: ' + message);
 }
-</code></pre></div>
-<h2>詳細な使用例</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>写真を撮ってみよう<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova-2.2.0.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="詳細な使用例">詳細な使用例</h2>
 
-    <span class="kd">var</span> <span class="nx">pictureSource</span><span class="p">;</span>   <span class="c1">// 写真ソース</span>
-    <span class="kd">var</span> <span class="nx">destinationType</span><span class="p">;</span> <span class="c1">// 戻り値のフォーマット</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;写真を撮ってみよう&lt;/title&gt;
 
-    <span class="c1">// Cordova がデバイスと接続するまで待機</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span><span class="nx">onDeviceReady</span><span class="p">,</span><span class="kc">false</span><span class="p">);</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.2.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// Cordova 準備完了</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">pictureSource</span><span class="o">=</span><span class="nb">navigator</span><span class="p">.</span><span class="nx">camera</span><span class="p">.</span><span class="nx">PictureSourceType</span><span class="p">;</span>
-        <span class="nx">destinationType</span><span class="o">=</span><span class="nb">navigator</span><span class="p">.</span><span class="nx">camera</span><span class="p">.</span><span class="nx">DestinationType</span><span class="p">;</span>
-    <span class="p">}</span>
+    var pictureSource;   // 写真ソース
+    var destinationType; // 戻り値のフォーマット
 
-    <span class="c1">// 写真の撮影に成功した場合 (URI 形式)</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onPhotoDataSuccess</span><span class="p">(</span><span class="nx">imageData</span><span class="p">)</span> <span class="p">{</span>
-      <span class="c1">// 下記のコメントを外すことで Base64 形式のデータをログに出力</span>
-      <span class="c1">// console.log(imageData);</span>
+    // Cordova がデバイスと接続するまで待機
+    //
+    document.addEventListener("deviceready",onDeviceReady,false);
 
-      <span class="c1">// 画像ハンドルを取得</span>
-      <span class="c1">//</span>
-      <span class="kd">var</span> <span class="nx">smallImage</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'smallImage'</span><span class="p">);</span>
+    // Cordova 準備完了
+    //
+    function onDeviceReady() {
+        pictureSource=navigator.camera.PictureSourceType;
+        destinationType=navigator.camera.DestinationType;
+    }
 
-      <span class="c1">// 画像要素を表示</span>
-      <span class="c1">//</span>
-      <span class="nx">smallImage</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">'block'</span><span class="p">;</span>
+    // 写真の撮影に成功した場合 (URI 形式)
+    //
+    function onPhotoDataSuccess(imageData) {
+      // 下記のコメントを外すことで Base64 形式のデータをログに出力
+      // console.log(imageData);
 
-      <span class="c1">// 取得した写真を表示</span>
-      <span class="c1">// 画像のリサイズにインライン CSS を使用</span>
-      <span class="c1">//</span>
-      <span class="nx">smallImage</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s2">"data:image/jpeg;base64,"</span> <span class="o">+</span> <span class="nx">imageData</span><span class="p">;</span>
-    <span class="p">}</span>
+      // 画像ハンドルを取得
+      //
+      var smallImage = document.getElementById('smallImage');
 
-    <span class="c1">// 写真の撮影に成功した場合 (URI  形式)</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onPhotoURISuccess</span><span class="p">(</span><span class="nx">imageURI</span><span class="p">)</span> <span class="p">{</span>
-      <span class="c1">// 下記のコメントを外すことでファイル URI をログに出力</span>
-      <span class="c1">// console.log(imageURI);</span>
+      // 画像要素を表示
+      //
+      smallImage.style.display = 'block';
 
-      <span class="c1">// 画像ハンドルを取得</span>
-      <span class="c1">//</span>
-      <span class="kd">var</span> <span class="nx">largeImage</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'largeImage'</span><span class="p">);</span>
+      // 取得した写真を表示
+      // 画像のリサイズにインライン CSS を使用
+      //
+      smallImage.src = "data:image/jpeg;base64," + imageData;
+    }
 
-      <span class="c1">// 画像要素を表示</span>
-      <span class="c1">//</span>
-      <span class="nx">largeImage</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">'block'</span><span class="p">;</span>
+    // 写真の撮影に成功した場合 (URI  形式)
+    //
+    function onPhotoURISuccess(imageURI) {
+      // 下記のコメントを外すことでファイル URI をログに出力
+      // console.log(imageURI);
 
-      <span class="c1">// 取得した写真を表示</span>
-      <span class="c1">// 画像のリサイズにインライン CSS を使</span>
-      <span class="c1">//</span>
-      <span class="nx">largeImage</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">imageURI</span><span class="p">;</span>
-    <span class="p">}</span>
+      // 画像ハンドルを取得
+      //
+      var largeImage = document.getElementById('largeImage');
 
-    <span class="c1">// ボタンがクリックされた場合の処理</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">capturePhoto</span><span class="p">()</span> <span class="p">{</span>
-      <span class="c1">// 編集が許可された写真を撮影し、 Base64 形式のイメージとして取得する場合</span>
-      <span class="nb">navigator</span><span class="p">.</span><span class="nx">camera</span><span class="p">.</span><span class="nx">getPicture</span><span class="p">(</span><span class="nx">onPhotoDataSuccess</span><span class="p">,</span> <span class="nx">onFail</span><span class="p">,</span> <span class="p">{</span> <span class="na">quality</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
-        <span class="na">destinationType</span><span class="p">:</span> <span class="nx">destinationType</span><span class="p">.</span><span class="nx">DATA_URL</span> <span class="p">});</span>
-    <span class="p">}</span>
+      // 画像要素を表示
+      //
+      largeImage.style.display = 'block';
 
-    <span class="c1">// ボタンがクリックされた場合の処理</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">capturePhotoEdit</span><span class="p">()</span> <span class="p">{</span>
-      <span class="c1">// 編集が許可された写真を撮影し、 Base64 形式のイメージとして取得する場合</span>
-      <span class="nb">navigator</span><span class="p">.</span><span class="nx">camera</span><span class="p">.</span><span class="nx">getPicture</span><span class="p">(</span><span class="nx">onPhotoDataSuccess</span><span class="p">,</span> <span class="nx">onFail</span><span class="p">,</span> <span class="p">{</span> <span class="na">quality</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="na">allowEdit</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-        <span class="na">destinationType</span><span class="p">:</span> <span class="nx">destinationType</span><span class="p">.</span><span class="nx">DATA_URL</span> <span class="p">});</span>
-    <span class="p">}</span>
+      // 取得した写真を表示
+      // 画像のリサイズにインライン CSS を使
+      //
+      largeImage.src = imageURI;
+    }
 
-    <span class="c1">// ボタンがクリックされた場合の処理</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">getPhoto</span><span class="p">(</span><span class="nx">source</span><span class="p">)</span> <span class="p">{</span>
-      <span class="c1">// 写真をファイル URI として取得する場合</span>
-      <span class="nb">navigator</span><span class="p">.</span><span class="nx">camera</span><span class="p">.</span><span class="nx">getPicture</span><span class="p">(</span><span class="nx">onPhotoURISuccess</span><span class="p">,</span> <span class="nx">onFail</span><span class="p">,</span> <span class="p">{</span> <span class="na">quality</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
-        <span class="na">destinationType</span><span class="p">:</span> <span class="nx">destinationType</span><span class="p">.</span><span class="nx">FILE_URI</span><span class="p">,</span>
-        <span class="na">sourceType</span><span class="p">:</span> <span class="nx">source</span> <span class="p">});</span>
-    <span class="p">}</span>
+    // ボタンがクリックされた場合の処理
+    //
+    function capturePhoto() {
+      // 編集が許可された写真を撮影し、 Base64 形式のイメージとして取得する場合
+      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
+        destinationType: destinationType.DATA_URL });
+    }
 
-    <span class="c1">// エラー発生時の処理</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onFail</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">alert</span><span class="p">(</span><span class="s1">'エラーが発生しました: '</span> <span class="o">+</span> <span class="nx">message</span><span class="p">);</span>
-    <span class="p">}</span>
+    // ボタンがクリックされた場合の処理
+    //
+    function capturePhotoEdit() {
+      // 編集が許可された写真を撮影し、 Base64 形式のイメージとして取得する場合
+      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true,
+        destinationType: destinationType.DATA_URL });
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"capturePhoto();"</span><span class="nt">&gt;</span>写真を撮影<span class="nt">&lt;/button&gt;</span> <span class="nt">&lt;br&gt;</span>
-    <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"capturePhotoEdit();"</span><span class="nt">&gt;</span>写真を撮影して編集<span class="nt">&lt;/button&gt;</span> <span class="nt">&lt;br&gt;</span>
-    <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"getPhoto(pictureSource.PHOTOLIBRARY);"</span><span class="nt">&gt;</span>フォトライブラリから取得<span class="nt">&lt;/button&gt;&lt;br&gt;</span>
-    <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"getPhoto(pictureSource.SAVEDPHOTOALBUM);"</span><span class="nt">&gt;</span>フォトアルバムから取得<span class="nt">&lt;/button&gt;&lt;br&gt;</span>
-    <span class="nt">&lt;img</span> <span class="na">style=</span><span class="s">"display:none;width:60px;height:60px;"</span> <span class="na">id=</span><span class="s">"smallImage"</span> <span class="na">src=</span><span class="s">""</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;img</span> <span class="na">style=</span><span class="s">"display:none;"</span> <span class="na">id=</span><span class="s">"largeImage"</span> <span class="na">src=</span><span class="s">""</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+    // ボタンがクリックされた場合の処理
+    //
+    function getPhoto(source) {
+      // 写真をファイル URI として取得する場合
+      navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
+        destinationType: destinationType.FILE_URI,
+        sourceType: source });
+    }
+
+    // エラー発生時の処理
+    //
+    function onFail(message) {
+      alert('エラーが発生しました: ' + message);
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;button onclick="capturePhoto();"&gt;写真を撮影&lt;/button&gt; &lt;br&gt;
+    &lt;button onclick="capturePhotoEdit();"&gt;写真を撮影して編集&lt;/button&gt; &lt;br&gt;
+    &lt;button onclick="getPhoto(pictureSource.PHOTOLIBRARY);"&gt;フォトライブラリから取得&lt;/button&gt;&lt;br&gt;
+    &lt;button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);"&gt;フォトアルバムから取得&lt;/button&gt;&lt;br&gt;
+    &lt;img style="display:none;width:60px;height:60px;" id="smallImage" src="" /&gt;
+    &lt;img style="display:none;" id="largeImage" src="" /&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

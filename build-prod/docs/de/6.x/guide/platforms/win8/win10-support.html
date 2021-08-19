@@ -2104,54 +2104,58 @@
             
 
             <div id="page-toc-source">
-                <h1>Cordova für Windows 10</h1>
+                <h1 id="cordova-für-windows-10">Cordova für Windows 10</h1>
 
-<p>Vielleicht könnten Sie stattdessen &quot;Windows 10 für Cordova&quot; nennen es Windows 10 hatte seine HTML- und JavaScript-Apps-Plattform re-engineered Cordova Unterstützung ins Web bringen und Plattform Sicherheitseinschränkungen aus dem Weg zu bekommen.</p>
+<p>Vielleicht könnten Sie stattdessen “Windows 10 für Cordova” nennen es Windows 10 hatte seine HTML- und JavaScript-Apps-Plattform re-engineered Cordova Unterstützung ins Web bringen und Plattform Sicherheitseinschränkungen aus dem Weg zu bekommen.</p>
 
-<h2>Erste Schritte mit Windows 10</h2>
+<h2 id="erste-schritte-mit-windows-10">Erste Schritte mit Windows 10</h2>
 
 <p>Hinzufügen von Windows 10 ist Unterstützung zu Ihrer app so einfach wie das Festlegen Ihrer Windows-Plattform-Zielversion auf 10.0:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="windows-target-version" value="10.0" /&gt;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="windows-target-version" value="10.0" /&gt;
 &lt;preference name="windows-phone-target-version" value="10.0" /&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Wenn Sie mit diesen Einstellungen festgelegt erstellen, werden nur ein einzelnes .appx (und .appxupload) gebaut werden. Sie benötigen Windows 10 auf ein Minimum.</p>
 
-<h3>Grundlegendes zu entfernten Modus vs. Local Mode</h3>
+<h3 id="grundlegendes-zu-entfernten-modus-vs-local-mode">Grundlegendes zu entfernten Modus vs. Local Mode</h3>
 
-<p>Remote-Modus ist ein neues Feature der HTML-Anwendungen für Windows-Plattform Windows 10. In Windows 8 und 8.1 arbeitete HTML-Anwendungen im so genannten &quot;Local Mode&quot; in Windows 10. Im lokalen Modus haben HTML-Anwendungen vollen Zugriff auf die native Windows API-Oberfläche und Funktionen. Um Skript-Injection-Angriffe zu verhindern, wodurch konnten in den austretenden persönlich identifizierbare Informationen durch bösartigen Code, lokalen Modus verbietet Inlineskript und Entwickler, die DOM-Manipulation innerhalb eines expliziten Kontexts (<code>MSApp.execUnsafeLocalFunction</code> dazu führen erfordert).</p>
+<p>Remote-Modus ist ein neues Feature der HTML-Anwendungen für Windows-Plattform Windows 10. In Windows 8 und 8.1 arbeitete HTML-Anwendungen im so genannten “Local Mode” in Windows 10. Im lokalen Modus haben HTML-Anwendungen vollen Zugriff auf die native Windows API-Oberfläche und Funktionen. Um Skript-Injection-Angriffe zu verhindern, wodurch konnten in den austretenden persönlich identifizierbare Informationen durch bösartigen Code, lokalen Modus verbietet Inlineskript und Entwickler, die DOM-Manipulation innerhalb eines expliziten Kontexts (<code class="language-plaintext highlighter-rouge">MSApp.execUnsafeLocalFunction</code> dazu führen erfordert).</p>
 
 <p>Remote-Modus beseitigt diese Anforderungen, wodurch es möglich, unveränderte-Bibliotheken wie jQuery oder AngularJS direkt im Code, ohne Änderungen zu verwenden. Hierzu wird Ihre Fähigkeit, bestimmte Funktionen zu deklarieren, wenn Sie Ihre Anwendung in der Windows-Store zertifizieren lassen entfernt. Die Beseitigung dieser Funktionen in der Regel nicht verhindern, um bestimmte Funktionen abrufen, aber es möglicherweise erforderlich, um eine andere Kombination von APIs oder Taktiken zu verwenden.</p>
 
-<h3>Wirkung von Remote-Modus auf die Funktionen</h3>
+<h3 id="wirkung-von-remote-modus-auf-die-funktionen">Wirkung von Remote-Modus auf die Funktionen</h3>
 
 <p>Die folgenden Funktionen sind nicht verfügbar, beim Bereitstellen der Anwendung Remote-Modus in der Windows-Speicher:</p>
 
 <ul>
-<li>Unternehmensauthentifizierung (<code>enterpriseAuthentication</code>)</li>
-<li>Freigegebene Benutzerzertifikate (<code>sharedUserCertificates</code>)</li>
-<li>Dokumentbibliothek (<code>documentsLibrary</code>)</li>
-<li>Musikbibliothek (<code>musicLibrary</code>)</li>
-<li>Bildbibliothek (<code>picturesLibrary</code>)</li>
-<li>Videobibliothek (<code>videosLibrary</code>)</li>
-<li>Wechselmedien (<code>removableStorage</code>)</li>
-<li>Internet Client/Server (<code>internetClientServer</code>) - beachten Sie, dass <code>InternetClient</code> ist noch erlaubt</li>
-<li>Privates Netzwerk Client/Server (<code>privateNetworkClientServer</code>)</li>
+  <li>Unternehmensauthentifizierung (<code class="language-plaintext highlighter-rouge">enterpriseAuthentication</code>)</li>
+  <li>Freigegebene Benutzerzertifikate (<code class="language-plaintext highlighter-rouge">sharedUserCertificates</code>)</li>
+  <li>Dokumentbibliothek (<code class="language-plaintext highlighter-rouge">documentsLibrary</code>)</li>
+  <li>Musikbibliothek (<code class="language-plaintext highlighter-rouge">musicLibrary</code>)</li>
+  <li>Bildbibliothek (<code class="language-plaintext highlighter-rouge">picturesLibrary</code>)</li>
+  <li>Videobibliothek (<code class="language-plaintext highlighter-rouge">videosLibrary</code>)</li>
+  <li>Wechselmedien (<code class="language-plaintext highlighter-rouge">removableStorage</code>)</li>
+  <li>Internet Client/Server (<code class="language-plaintext highlighter-rouge">internetClientServer</code>) - beachten Sie, dass <code class="language-plaintext highlighter-rouge">InternetClient</code> ist noch erlaubt</li>
+  <li>Privates Netzwerk Client/Server (<code class="language-plaintext highlighter-rouge">privateNetworkClientServer</code>)</li>
 </ul>
 
 <p>Jede Bibliothek Beschränkungen kann verlangen, dass der Benutzer interagieren mit dem Dateisystem über eine <a href="https://msdn.microsoft.com/en-us/library/windows/apps/windows.storage.pickers.fileopenpicker.aspx">Dateiauswahl</a>herum gearbeitet werden. Dadurch wird verhindert, dass böswilligen eingefügten Code beliebig Zugriff auf das Dateisystem.</p>
 
-<p>Die netzwerkbezogene Einschränkungen müssen um gearbeitet, entweder über eine API, die Fähigkeit Kontrollen nicht verwendet oder durch Vermittlung Kommunikation über standard-Internet-Kommunikation-Kanäle wie <code>XMLHttpRequest</code> oder Web Sockets.</p>
+<p>Die netzwerkbezogene Einschränkungen müssen um gearbeitet, entweder über eine API, die Fähigkeit Kontrollen nicht verwendet oder durch Vermittlung Kommunikation über standard-Internet-Kommunikation-Kanäle wie <code class="language-plaintext highlighter-rouge">XMLHttpRequest</code> oder Web Sockets.</p>
 
 <p>Die Unternehmensauthentifizierung und Benutzerzertifikaten freigegebene Funktionen richten sich speziell an Enterprise-Szenarien. Diese Funktionen werden unterstützt für Private/Unternehmen-fähige App Stores, also wenn Sie apps erstellen die werden, auf einen internen Bereitstellungsmechanismus bereitgestellt werden, Sie noch dies unterstützen können. Sie werden jedoch nicht für Remote Mode apps im öffentlichen Windows-Speicher unterstützt. Wenn Sie Windows 10, Zielen erstellen, wenn man diese Funktionen in Ihrem app-Manifest erkannt wird, wird eine Warnung angezeigt.</p>
 
-<h2>Referenz</h2>
+<h2 id="referenz">Referenz</h2>
 
-<h3>&quot;config.xml&quot; &quot;Einstellungen&quot;</h3>
+<h3 id="configxml-einstellungen">“config.xml” “Einstellungen”</h3>
 
-<h4>windows-target-version, windows-phone-target-version</h4>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="windows-target-version" value="10.0" /&gt;
+<h4 id="windows-target-version-windows-phone-target-version">windows-target-version, windows-phone-target-version</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="windows-target-version" value="10.0" /&gt;
 &lt;preference name="windows-phone-target-version" value="10.0" /&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p><em>Mindestens eine Angabe erforderlich.</em></p>
 
 <p>Diese Einstellungen bestimmen die Version von Windows oder Windows Phone, die Sie möchten, dass Ihre app-Paket zum Ziel.</p>
@@ -2159,52 +2163,56 @@
 <p><strong>Gültige Werte</strong></p>
 
 <ul>
-<li><code>10.0</code>, <code>UAP</code>: baut für Windows 10 Universal App-Plattform</li>
-<li><code>8.1</code>: Builds für Windows 8.1 bzw. Windows Phone 8.1</li>
-<li><code>8.0</code>: bauen für Windows 8.0. Dies gilt nicht für Windows Phone (verwenden Sie stattdessen die <strong>wp8</strong> -Cordova-Plattform)</li>
+  <li><code class="language-plaintext highlighter-rouge">10.0</code>, <code class="language-plaintext highlighter-rouge">UAP</code>: baut für Windows 10 Universal App-Plattform</li>
+  <li><code class="language-plaintext highlighter-rouge">8.1</code>: Builds für Windows 8.1 bzw. Windows Phone 8.1</li>
+  <li><code class="language-plaintext highlighter-rouge">8.0</code>: bauen für Windows 8.0. Dies gilt nicht für Windows Phone (verwenden Sie stattdessen die <strong>wp8</strong> -Cordova-Plattform)</li>
 </ul>
 
 <p><strong>Szenarien</strong></p>
 
-<p>Wenn Sie nur Windows 10 abzielen, müssen Sie nur eine einzelne <code>windows-target-version</code> -Einstellung in der Datei &quot;config.xml&quot; haben.</p>
+<p>Wenn Sie nur Windows 10 abzielen, müssen Sie nur eine einzelne <code class="language-plaintext highlighter-rouge">windows-target-version</code> -Einstellung in der Datei “config.xml” haben.</p>
 
-<h4>WindowsDefaultUriPrefix</h4>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="WindowsDefaultUriPrefix" value="ms-appx://|ms-appx-web://" /&gt;
-</code></pre></div>
-<p>Diese Einstellung gibt an, ob Sie Ihre Anwendung im <strong>lokalen Kontext</strong> oder <strong>entfernten Kontext</strong> als seine Start-URI als Ziel soll. Beim Erstellen von für Windows 10 ist der Standardwert entfernten Zusammenhang (<code>ms-appx-web://</code>).</p>
+<h4 id="windowsdefaulturiprefix">WindowsDefaultUriPrefix</h4>
 
-<p>Um eine Anwendung im lokalen Modus haben, die von Remote-Modus Funktion Einschränkungen nicht betroffen ist, müssen Sie diese Voreinstellung auf setzen <code>ms-appx://</code> und <code>&lt;access&gt;</code> Elemente mit entfernten URIs nicht zu erklären.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="WindowsDefaultUriPrefix" value="ms-appx://|ms-appx-web://" /&gt;
+</code></pre></div></div>
+
+<p>Diese Einstellung gibt an, ob Sie Ihre Anwendung im <strong>lokalen Kontext</strong> oder <strong>entfernten Kontext</strong> als seine Start-URI als Ziel soll. Beim Erstellen von für Windows 10 ist der Standardwert entfernten Zusammenhang (<code class="language-plaintext highlighter-rouge">ms-appx-web://</code>).</p>
+
+<p>Um eine Anwendung im lokalen Modus haben, die von Remote-Modus Funktion Einschränkungen nicht betroffen ist, müssen Sie diese Voreinstellung auf setzen <code class="language-plaintext highlighter-rouge">ms-appx://</code> und <code class="language-plaintext highlighter-rouge">&lt;access&gt;</code> Elemente mit entfernten URIs nicht zu erklären.</p>
 
 <p><strong>Gültige Werte</strong></p>
 
 <ul>
-<li><code>ms-appx://</code> (Standardeinstellung für Windows 8.0, 8.1): die Startseite wird im lokalen Kontext</li>
-<li><code>ms-appx-web://</code> (Standardeinstellung für Windows 10): die Startseite wird im entfernten Kontext</li>
+  <li><code class="language-plaintext highlighter-rouge">ms-appx://</code> (Standardeinstellung für Windows 8.0, 8.1): die Startseite wird im lokalen Kontext</li>
+  <li><code class="language-plaintext highlighter-rouge">ms-appx-web://</code> (Standardeinstellung für Windows 10): die Startseite wird im entfernten Kontext</li>
 </ul>
 
-<h4>{SDK}-MinVersion, {SDK}-MaxVersionTested</h4>
+<h4 id="sdk-minversion-sdk-maxversiontested">{SDK}-MinVersion, {SDK}-MaxVersionTested</h4>
 
 <p><em>Optional</em></p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="Windows.Universal-MinVersion" value="10.0.0.0" /&gt;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="Windows.Universal-MinVersion" value="10.0.0.0" /&gt;
 &lt;preference name="Windows.Mobile-MinVersion" value="10.0.9927.0" /&gt;
 &lt;preference name="Windows.Mobile-MaxVersionTested" value="10.0.10031.0" /&gt;
 &lt;preference name="Microsoft.Band-MinVersion" value="10.0.11.0" /&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Diese Präferenzen ermitteln welche Ökosysteme (einschließlich aber nicht beschränkt auf Universal Windows, Windows Mobile oder Xbox) und ihre min/Max-Versionen sind kompatibel mit. Sie benötigen noch die Plattformen unterstützt die Universal App-Plattform (also Windows 10 als Basis Betriebssystem). Jedoch können dies bedeuten, dass die Anwendung bestimmte Funktionen kennt, die nur auf bestimmten Geräten (z. B. Spiel streaming auf Xbox) vorliegen müssen.</p>
 
 <p><strong>Gültige Werte</strong></p>
 
-<p>Es gibt drei Teile mit jedem Wert: das <strong>SDK</strong>, <strong>Version Beschränkung</strong>und den <strong>Versionswert</strong>. Diese Einstellungen werden von <code>Windows</code> oder <code>Microsoft</code> beginnt und endet <code>- MinVersion</code> oder <code>-MaxVersionTested</code>erkannt:</p>
+<p>Es gibt drei Teile mit jedem Wert: das <strong>SDK</strong>, <strong>Version Beschränkung</strong>und den <strong>Versionswert</strong>. Diese Einstellungen werden von <code class="language-plaintext highlighter-rouge">Windows</code> oder <code class="language-plaintext highlighter-rouge">Microsoft</code> beginnt und endet <code class="language-plaintext highlighter-rouge">- MinVersion</code> oder <code class="language-plaintext highlighter-rouge">-MaxVersionTested</code>erkannt:</p>
 
 <ul>
-<li>Das <strong>SDK</strong> wird definiert, welche spezialisierte Plattform, die Sie ansprechen möchten. Der Standardwert ist <code>Windows.Universal</code>. Gültige Werte für diese werden in das AppxManifest-Schema, in dem <code>Paket/Depednencies/TargetPlatform</code> -Elementen definiert.</li>
-<li>Die <strong>Version-Beschränkung</strong> Regeln für die Kompatibilität von Anwendungen definiert. Zum Beispiel, wenn die <code>-MinVersion</code> wird auf 10.1.0.0, festgelegt, dann OS-Versionen, die nicht mindestens 10.1.0.0 des entsprechenden SDK unterstützen nicht laden können.
-
-<ul>
-<li><code>-MinVersion</code> gibt die minimale Version des SDK erforderlich</li>
-<li><code>-MaxVersionTested</code> gibt die höchste getestete Version des SDK. Wenn eine neue Version des entsprechenden SDK freigegeben wird, wird es im Kompatibilitätsmodus für die angegebene Version ausgeführt.</li>
-</ul></li>
-<li>Der <strong>Versionswert</strong> ist ein 4-Ganzzahl-Tupel in Form von <em>major.minor.build.qfe</em>.</li>
+  <li>Das <strong>SDK</strong> wird definiert, welche spezialisierte Plattform, die Sie ansprechen möchten. Der Standardwert ist <code class="language-plaintext highlighter-rouge">Windows.Universal</code>. Gültige Werte für diese werden in das AppxManifest-Schema, in dem <code class="language-plaintext highlighter-rouge">Paket/Depednencies/TargetPlatform</code> -Elementen definiert.</li>
+  <li>Die <strong>Version-Beschränkung</strong> Regeln für die Kompatibilität von Anwendungen definiert. Zum Beispiel, wenn die <code class="language-plaintext highlighter-rouge">-MinVersion</code> wird auf 10.1.0.0, festgelegt, dann OS-Versionen, die nicht mindestens 10.1.0.0 des entsprechenden SDK unterstützen nicht laden können.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">-MinVersion</code> gibt die minimale Version des SDK erforderlich</li>
+      <li><code class="language-plaintext highlighter-rouge">-MaxVersionTested</code> gibt die höchste getestete Version des SDK. Wenn eine neue Version des entsprechenden SDK freigegeben wird, wird es im Kompatibilitätsmodus für die angegebene Version ausgeführt.</li>
+    </ul>
+  </li>
+  <li>Der <strong>Versionswert</strong> ist ein 4-Ganzzahl-Tupel in Form von <em>major.minor.build.qfe</em>.</li>
 </ul>
 
 <p>Wenn keine Vorgaben dieser Typen in der Datei config.xml angegeben sind, werden Windows.Universal Version 10.0.0.0 standardmäßig ausgewählt.</p>

@@ -944,96 +944,126 @@
             
 
             <div id="page-toc-source">
-                <h1>iOS Platform Guide</h1>
+                <h1 id="ios-platform-guide">iOS Platform Guide</h1>
 
 <p>Esta guía le muestra cómo configurar el entorno de desarrollo SDK para desplegar aplicaciones Cordova para dispositivos iOS como el iPhone y iPad. Vea el siguiente para obtener más información específica de la plataforma:</p>
 
 <ul>
-<li>  <a href="config.html">iOS configuración</a></li>
-<li>  <a href="upgrading.html">Actualizar iOS</a></li>
-<li>  <a href="webview.html">iOS WebViews</a></li>
-<li>  <a href="plugin.html">iOS Plugins</a></li>
-<li>  <a href="tools.html">iOS herramientas de línea de comandos</a></li>
+  <li><a href="config.html">iOS configuración</a></li>
+  <li><a href="upgrading.html">Actualizar iOS</a></li>
+  <li><a href="webview.html">iOS WebViews</a></li>
+  <li><a href="plugin.html">iOS Plugins</a></li>
+  <li><a href="tools.html">iOS herramientas de línea de comandos</a></li>
 </ul>
 
 <p>Las herramientas de línea de comandos anteriores se refieren a las versiones anteriores Cordova 3.0. Ver la interfaz de línea de comandos para obtener información sobre la interfaz actual.</p>
 
-<h2>Requisitos y apoyo</h2>
+<h2 id="requisitos-y-apoyo">Requisitos y apoyo</h2>
 
 <p>Apple ® herramientas necesarias para crear aplicaciones iOS ejecutar sólo en el sistema operativo OS X de Mac basados en Intel. Xcode ® 4.5 (la versión mínima requerida) se ejecuta en OS X versión 10.7 (Lion) o mayor e incluye el iOS 6 SDK (Software Development Kit). Presentar aplicaciones para el Apple App Store℠ requiere las últimas versiones de las herramientas de Apple.</p>
 
 <p>Usted puede probar muchas de las características de Cordova usando el emulador de iOS instalado con el iOS SDK y Xcode, pero necesita un dispositivo real a completamente todas las características de la aplicación dispositivo de prueba antes de presentar a la App Store. El dispositivo debe tener por lo menos iOS 5.x instalado, la versión de iOS mínimo apoyado desde Cordova 2.3. Dispositivos de apoyo incluyen todos iPad ® modelos, iPhone ® 3GS y arriba y iPod ® Touch de 3ª generación o posterior. Para instalar aplicaciones en un dispositivo, también debe ser un miembro de Apple <a href="https://developer.apple.com/programs/ios/">iOS Developer Program</a>, que cuesta $99 por año. Esta guía le muestra cómo implementar aplicaciones para el emulador de iOS, para lo cual no tienes que registrar con el programa para desarrolladores.</p>
 
-<h2>Instalar el SDK</h2>
+<h2 id="instalar-el-sdk">Instalar el SDK</h2>
 
 <p>Hay dos maneras de descargar Xcode:</p>
 
 <ul>
-<li><p>desde la <a href="https://itunes.apple.com/us/app/xcode/id497799835?mt=12">App Store</a>, disponible mediante la búsqueda de &quot;Xcode&quot; en la aplicación de <strong>La App Store</strong> .</p></li>
-<li><p>de <a href="https://developer.apple.com/downloads/index.action">Descargas de desarrollador de Apple</a>, que requiere el registro como desarrollador de Apple.</p></li>
+  <li>
+    <p>desde la <a href="https://itunes.apple.com/us/app/xcode/id497799835?mt=12">App Store</a>, disponible mediante la búsqueda de “Xcode” en la aplicación de <strong>La App Store</strong> .</p>
+  </li>
+  <li>
+    <p>de <a href="https://developer.apple.com/downloads/index.action">Descargas de desarrollador de Apple</a>, que requiere el registro como desarrollador de Apple.</p>
+  </li>
 </ul>
 
 <p>Una vez instalado Xcode, varias herramientas de línea de comandos necesitan estar habilitada para que Córdoba ejecutar. En el menú de <strong>Xcode</strong> , seleccione <strong>preferencias</strong>y luego la pestaña <strong>descargas</strong> . Desde el panel <strong>componentes</strong> , pulse el botón <strong>instalar</strong> junto a la lista de <strong>Herramientas de línea de comandos</strong> .</p>
 
-<h2>Abrir un proyecto en el SDK</h2>
+<h2 id="abrir-un-proyecto-en-el-sdk">Abrir un proyecto en el SDK</h2>
 
-<p>Uso el <code>cordova</code> utilidad para configurar un nuevo proyecto, como se describe en la Córdoba del interfaz de comandos. Por ejemplo, en un directorio del código fuente:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova create hello com.example.hello "HelloWorld"
+<p>Uso el <code class="language-plaintext highlighter-rouge">cordova</code> utilidad para configurar un nuevo proyecto, como se describe en la Córdoba del interfaz de comandos. Por ejemplo, en un directorio del código fuente:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova create hello com.example.hello "HelloWorld"
     $ cd hello
     $ cordova platform add ios
     $ cordova prepare              # or "cordova build"
-</code></pre></div>
-<p>Una vez creado, puede abrir desde dentro de Xcode. Haga doble clic para abrir el <code>hello/platforms/ios/hello.xcodeproj</code> archivo. La pantalla debe verse así:</p>
+</code></pre></div></div>
 
-<p><img src="/static/img/guide/platforms/ios/helloworld_project.png" alt=""></p>
+<p>Una vez creado, puede abrir desde dentro de Xcode. Haga doble clic para abrir el <code class="language-plaintext highlighter-rouge">hello/platforms/ios/hello.xcodeproj</code> archivo. La pantalla debe verse así:</p>
 
-<h2>Desplegar en emulador</h2>
+<p><img src="/static/img/guide/platforms/ios/helloworld_project.png" alt="" /></p>
+
+<h2 id="desplegar-en-emulador">Desplegar en emulador</h2>
 
 <p>Para previsualizar la aplicación en el emulador de iOS:</p>
 
 <ol>
-<li><p>Asegúrese de que el archivo <em>.xcodeproj</em> es seleccionado en el panel izquierdo.</p></li>
-<li><p>Seleccione la aplicación <strong>hello</strong> en el panel inmediatamente a la derecha.</p></li>
-<li><p>Seleccione el dispositivo deseado desde el menú de la barra de herramientas <strong>Scheme</strong>, como el iPhone Simulator 6.0 como destacado aquí:</p>
+  <li>
+    <p>Asegúrese de que el archivo <em>.xcodeproj</em> es seleccionado en el panel izquierdo.</p>
+  </li>
+  <li>
+    <p>Seleccione la aplicación <strong>hello</strong> en el panel inmediatamente a la derecha.</p>
+  </li>
+  <li>
+    <p>Seleccione el dispositivo deseado desde el menú de la barra de herramientas <strong>Scheme</strong>, como el iPhone Simulator 6.0 como destacado aquí:</p>
 
-<p><img src="/static/img/guide/platforms/ios/select_xcode_scheme.png" alt=""></p></li>
-<li><p>Presione el botón <strong>Run</strong> que aparece en la misma barra de herramientas a la izquierda del <strong>Scheme</strong>. Construye, implementa y ejecuta la aplicación en el emulador. Una aplicación separada emulador se abre para mostrar la aplicación:</p>
+    <p><img src="/static/img/guide/platforms/ios/select_xcode_scheme.png" alt="" /></p>
+  </li>
+  <li>
+    <p>Presione el botón <strong>Run</strong> que aparece en la misma barra de herramientas a la izquierda del <strong>Scheme</strong>. Construye, implementa y ejecuta la aplicación en el emulador. Una aplicación separada emulador se abre para mostrar la aplicación:</p>
 
-<p><img src="/static/img/guide/platforms/ios/HelloWorldStandard.png" alt=""></p>
+    <p><img src="/static/img/guide/platforms/ios/HelloWorldStandard.png" alt="" /></p>
 
-<p>Sólo un emulador puede ejecutar al mismo tiempo, así que si quieres probar la aplicación en un emulador diferente, tienes que dejar la aplicación del emulador y llevar un objetivo diferente dentro de Xcode.</p></li>
+    <p>Sólo un emulador puede ejecutar al mismo tiempo, así que si quieres probar la aplicación en un emulador diferente, tienes que dejar la aplicación del emulador y llevar un objetivo diferente dentro de Xcode.</p>
+  </li>
 </ol>
 
 <p>Xcode viene liado con emuladores para las ultimas versiones de iPhone y iPad. Las versiones más antiguas pueden estar disponibles en el <strong>Xcode → preferencias → descargas → componentes</strong> panel.</p>
 
-<h2>Desplegar en el dispositivo</h2>
+<h2 id="desplegar-en-el-dispositivo">Desplegar en el dispositivo</h2>
 
 <p>Para obtener más información acerca de varios requisitos para implementar en un dispositivo, consulte la sección <em>configuración de desarrollo y distribución de activos</em> de <a href="http://developer.apple.com/library/ios/#documentation/Xcode/Conceptual/ios_development_workflow/00-About_the_iOS_Application_Development_Workflow/introduction.html#//apple_ref/doc/uid/TP40007959">Herramientas de flujo de trabajo guía para iOS</a>de Apple. Brevemente, necesitas hacer lo siguiente antes de implementar:</p>
 
 <ol>
-<li><p>Únete a la Apple iOS Developer Program.</p></li>
-<li><p>Crear un <em>Perfil de Provisioning</em> dentro del <a href="https://developer.apple.com/ios/manage/overview/index.action">iOS Provisioning Portal</a>. Puede utilizar su <em>Asistente de Provisioning de desarrollo</em> para crear e instalar el perfil y requiere certificado Xcode.</p></li>
-<li><p>Verificar que de la sección <em>Firma de código</em> <em>Identidad de firma de código</em> dentro de la configuración del proyecto se establece en su aprovisionamiento nombre de perfil.</p></li>
+  <li>
+    <p>Únete a la Apple iOS Developer Program.</p>
+  </li>
+  <li>
+    <p>Crear un <em>Perfil de Provisioning</em> dentro del <a href="https://developer.apple.com/ios/manage/overview/index.action">iOS Provisioning Portal</a>. Puede utilizar su <em>Asistente de Provisioning de desarrollo</em> para crear e instalar el perfil y requiere certificado Xcode.</p>
+  </li>
+  <li>
+    <p>Verificar que de la sección <em>Firma de código</em> <em>Identidad de firma de código</em> dentro de la configuración del proyecto se establece en su aprovisionamiento nombre de perfil.</p>
+  </li>
 </ol>
 
 <p>Para desplegar en el dispositivo:</p>
 
 <ol>
-<li><p>Utilice el cable USB para enchufar el dispositivo en tu Mac.</p></li>
-<li><p>Seleccione el nombre del proyecto en la lista desplegable de la ventana Xcode <strong>Scheme</strong>.</p></li>
-<li><p>Seleccione su dispositivo de la lista desplegable de <strong>dispositivos</strong>. Si está conectado vía USB, pero aún no aparece, pulse el botón <strong>organizador</strong> para resolver los errores.</p></li>
-<li><p>Presione el botón <strong>Run</strong> para construir, implementar y ejecutar la aplicación en tu dispositivo.</p></li>
+  <li>
+    <p>Utilice el cable USB para enchufar el dispositivo en tu Mac.</p>
+  </li>
+  <li>
+    <p>Seleccione el nombre del proyecto en la lista desplegable de la ventana Xcode <strong>Scheme</strong>.</p>
+  </li>
+  <li>
+    <p>Seleccione su dispositivo de la lista desplegable de <strong>dispositivos</strong>. Si está conectado vía USB, pero aún no aparece, pulse el botón <strong>organizador</strong> para resolver los errores.</p>
+  </li>
+  <li>
+    <p>Presione el botón <strong>Run</strong> para construir, implementar y ejecutar la aplicación en tu dispositivo.</p>
+  </li>
 </ol>
 
-<h2>Problemas comunes</h2>
+<h2 id="problemas-comunes">Problemas comunes</h2>
 
 <p><strong>Descarte las advertencias</strong>: cuando una aplicación es modificada o sustituida por otra API interfaz de programación (API), que está marcado como <em>obsoleto</em>. La API todavía funciona en el corto plazo, pero eventualmente se retira. Algunas de estas interfaces obsoletas se reflejan en Apache Cordova y Xcode emite advertencias sobre ellos cuando construir y desplegar una aplicación.</p>
 
-<p>Xcode de la advertencia sobre el <code>invokeString</code> método refiere a una funcionalidad que lanza una app desde una dirección URL personalizada. Mientras que el mecanismo para cargar desde una dirección URL personalizada ha cambiado, este código todavía está presente para proporcionar la funcionalidad al revés para aplicaciones creadas con versiones anteriores de Córdoba. La aplicación muestra no utiliza esta funcionalidad, así que estas advertencias pueden ser ignoradas. Para evitar que aparezcan estas advertencias, quitar el código que hace referencia a la invokeString obsoleta API:</p>
+<p>Xcode de la advertencia sobre el <code class="language-plaintext highlighter-rouge">invokeString</code> método refiere a una funcionalidad que lanza una app desde una dirección URL personalizada. Mientras que el mecanismo para cargar desde una dirección URL personalizada ha cambiado, este código todavía está presente para proporcionar la funcionalidad al revés para aplicaciones creadas con versiones anteriores de Córdoba. La aplicación muestra no utiliza esta funcionalidad, así que estas advertencias pueden ser ignoradas. Para evitar que aparezcan estas advertencias, quitar el código que hace referencia a la invokeString obsoleta API:</p>
 
 <ul>
-<li><p>Edite el archivo <em>Classes/MainViewController.m</em> , rodean el siguiente bloque de código con <code>/*</code> y <code>*/</code> comentarios como se muestra a continuación, escriba el <strong>comando + s</strong> para guardar el archivo:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">(void)webViewDidFinishLoad:(UIWebView*)theWebView
+  <li>
+    <p>Edite el archivo <em>Classes/MainViewController.m</em> , rodean el siguiente bloque de código con <code class="language-plaintext highlighter-rouge">/*</code> y <code class="language-plaintext highlighter-rouge">*/</code> comentarios como se muestra a continuación, escriba el <strong>comando + s</strong> para guardar el archivo:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(void)webViewDidFinishLoad:(UIWebView*)theWebView
 {
 // only valid if ___PROJECTNAME__-Info.plist specifies a protocol to handle
 /*
@@ -1046,14 +1076,20 @@ if (self.invokeString) {
 */
 // Black base color for background matches the native apps
 theWebView.backgroundColor = [UIColor blackColor];
-
+    
 return [super webViewDidFinishLoad:theWebView];
 }
-</code></pre></div></li>
-<li><p>Edite el archivo <em>Classes/AppViewDelegate.m</em> , comentar la siguiente línea insertando una doble barra como se muestra abajo, a continuación, escriba el <strong>comando + s</strong> para guardar el archivo:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">//self.viewController.invokeString = invokeString;
-</code></pre></div></li>
-<li><p>Pulse <strong>comando + b</strong> para reconstruir el proyecto y eliminar las advertencias.</p></li>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Edite el archivo <em>Classes/AppViewDelegate.m</em> , comentar la siguiente línea insertando una doble barra como se muestra abajo, a continuación, escriba el <strong>comando + s</strong> para guardar el archivo:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//self.viewController.invokeString = invokeString;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Pulse <strong>comando + b</strong> para reconstruir el proyecto y eliminar las advertencias.</p>
+  </li>
 </ul>
 
 <!-- Does this fix only last until the next "cordova prepare"? -->
@@ -1061,10 +1097,14 @@ return [super webViewDidFinishLoad:theWebView];
 <p><strong>Faltan encabezados</strong>: errores de compilación relativos a cabeceras de faltantes el resultado de problemas con la ubicación de construir y puede estar fijados mediante Xcode preferencias:</p>
 
 <ol>
-<li><p>Seleccione <strong>Xcode → preferencias → ubicaciones de</strong>.</p></li>
-<li><p>En la sección de <strong>Datos derivados</strong>, pulse el botón <strong>avanzado</strong> y seleccione <strong>único</strong> como la <strong>Ubicación de construir</strong> como se muestra aquí:</p>
+  <li>
+    <p>Seleccione <strong>Xcode → preferencias → ubicaciones de</strong>.</p>
+  </li>
+  <li>
+    <p>En la sección de <strong>Datos derivados</strong>, pulse el botón <strong>avanzado</strong> y seleccione <strong>único</strong> como la <strong>Ubicación de construir</strong> como se muestra aquí:</p>
 
-<p><img src="/static/img/guide/platforms/ios/xcode_build_location.png" alt=""></p></li>
+    <p><img src="/static/img/guide/platforms/ios/xcode_build_location.png" alt="" /></p>
+  </li>
 </ol>
 
 <p>Esta es la configuración predeterminada para una instalación nueva de Xcode, pero se puede ajustar diferentemente después de una actualización de una versión anterior de Xcode.</p>
@@ -1072,12 +1112,24 @@ return [super webViewDidFinishLoad:theWebView];
 <p>Para más información, consulte la documentación de Apple:</p>
 
 <ul>
-<li><p><a href="http://developer.apple.com/library/ios/#referencelibrary/GettingStarted/RoadMapiOS/index.html#//apple_ref/doc/uid/TP40011343">IOS empezar a desarrollar aplicaciones hoy</a> proporciona una rápida visión de los pasos para el desarrollo de aplicaciones iOS.</p></li>
-<li><p><a href="https://developer.apple.com/membercenter/index.action">Miembro del centro página</a> proporciona enlaces a varios iOS recursos técnicos incluyendo recursos técnicos, el portal de aprovisionamiento, guías de distribución y foros de la comunidad.</p></li>
-<li><p><a href="http://developer.apple.com/library/ios/#documentation/Xcode/Conceptual/ios_development_workflow/00-About_the_iOS_Application_Development_Workflow/introduction.html#//apple_ref/doc/uid/TP40007959">Herramientas de flujo de trabajo guía para iOS</a></p></li>
-<li><p><a href="http://developer.apple.com/library/ios/#documentation/ToolsLanguages/Conceptual/Xcode4UserGuide/000-About_Xcode/about.html#//apple_ref/doc/uid/TP40010215">Xcode 4 Guía del usuario</a></p></li>
-<li><p><a href="https://developer.apple.com/videos/wwdc/2012/">Videos de sesiones</a> de la Conferencia de desarrolladores amplia manzana mundial 2012 (WWDC2012)</p></li>
-<li><p>Se instala el <a href="http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/xcode-select.1.html">comando selección de xcode</a>, que ayuda a especificar la versión correcta de Xcode si más de uno.</p></li>
+  <li>
+    <p><a href="http://developer.apple.com/library/ios/#referencelibrary/GettingStarted/RoadMapiOS/index.html#//apple_ref/doc/uid/TP40011343">IOS empezar a desarrollar aplicaciones hoy</a> proporciona una rápida visión de los pasos para el desarrollo de aplicaciones iOS.</p>
+  </li>
+  <li>
+    <p><a href="https://developer.apple.com/membercenter/index.action">Miembro del centro página</a> proporciona enlaces a varios iOS recursos técnicos incluyendo recursos técnicos, el portal de aprovisionamiento, guías de distribución y foros de la comunidad.</p>
+  </li>
+  <li>
+    <p><a href="http://developer.apple.com/library/ios/#documentation/Xcode/Conceptual/ios_development_workflow/00-About_the_iOS_Application_Development_Workflow/introduction.html#//apple_ref/doc/uid/TP40007959">Herramientas de flujo de trabajo guía para iOS</a></p>
+  </li>
+  <li>
+    <p><a href="http://developer.apple.com/library/ios/#documentation/ToolsLanguages/Conceptual/Xcode4UserGuide/000-About_Xcode/about.html#//apple_ref/doc/uid/TP40010215">Xcode 4 Guía del usuario</a></p>
+  </li>
+  <li>
+    <p><a href="https://developer.apple.com/videos/wwdc/2012/">Videos de sesiones</a> de la Conferencia de desarrolladores amplia manzana mundial 2012 (WWDC2012)</p>
+  </li>
+  <li>
+    <p>Se instala el <a href="http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/xcode-select.1.html">comando selección de xcode</a>, que ayuda a especificar la versión correcta de Xcode si más de uno.</p>
+  </li>
 </ul>
 
 <p>(Mac ® OS X ®, Apple ®, Xcode, App Store℠, iPad ®, iPhone ®, iPod ® y Finder ® son marcas registradas de Apple Inc.)</p>

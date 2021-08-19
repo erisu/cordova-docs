@@ -944,98 +944,132 @@
             
 
             <div id="page-toc-source">
-                <h1>Guide de la liste blanche</h1>
+                <h1 id="guide-de-la-liste-blanche">Guide de la liste blanche</h1>
 
-<p>Domaine liste blanche est un modèle de sécurité qui contrôle l&#39;accès à des domaines externes sur lesquels votre application n&#39;a aucun contrôle. Stratégie de sécurité par défaut de Cordova permet d&#39;accéder à n&#39;importe quel site. Avant de déplacer votre application à la production, vous devez formuler une liste blanche et permettre l&#39;accès au réseau des domaines et sous-domaines.</p>
+<p>Domaine liste blanche est un modèle de sécurité qui contrôle l’accès à des domaines externes sur lesquels votre application n’a aucun contrôle. Stratégie de sécurité par défaut de Cordova permet d’accéder à n’importe quel site. Avant de déplacer votre application à la production, vous devez formuler une liste blanche et permettre l’accès au réseau des domaines et sous-domaines.</p>
 
-<p>Cordova respecte la spécification <a href="http://www.w3.org/TR/widgets-access/">W3C Widget accès</a> , qui s&#39;appuie sur le <code>&lt;access&gt;</code> élément au sein du PPA <code>config.xml</code> fichier pour activer l&#39;accès réseau à des domaines spécifiques. Pour les projets qui s&#39;appuient sur le workflow de CLI décrit dans l&#39;Interface de ligne de commande, ce fichier se trouve dans le répertoire racine du projet. Autrement pour les chemins de développement spécifiques à la plateforme, les endroits sont énumérés dans les sections ci-dessous. (Voir les différents Guides de plate-forme pour plus d&#39;informations sur chaque plate-forme).</p>
+<p>Cordova respecte la spécification <a href="http://www.w3.org/TR/widgets-access/">W3C Widget accès</a> , qui s’appuie sur le <code class="language-plaintext highlighter-rouge">&lt;access&gt;</code> élément au sein du PPA <code class="language-plaintext highlighter-rouge">config.xml</code> fichier pour activer l’accès réseau à des domaines spécifiques. Pour les projets qui s’appuient sur le workflow de CLI décrit dans l’Interface de ligne de commande, ce fichier se trouve dans le répertoire racine du projet. Autrement pour les chemins de développement spécifiques à la plateforme, les endroits sont énumérés dans les sections ci-dessous. (Voir les différents Guides de plate-forme pour plus d’informations sur chaque plate-forme).</p>
 
 <p>Les exemples suivants illustrent la syntaxe de la liste blanche :</p>
 
 <ul>
-<li><p>Accès à <a href="http://google.com">google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" /&gt;
-</code></pre></div></li>
-<li><p>Accès sécurisé <a href="https://google.com">google.com</a> ( <code>https://</code> ) :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="https://google.com" /&gt;
-</code></pre></div></li>
-<li><p>Accès pour le sous-domaine <a href="http://maps.google.com">maps.google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://maps.google.com" /&gt;
-</code></pre></div></li>
-<li><p>Accès à tous les sous-domaines sur <a href="http://google.com">google.com</a>, par exemple <a href="http://mail.google.com">mail.google.com</a> et <a href="http://docs.google.com">docs.google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://*.google.com" /&gt;
-</code></pre></div></li>
-<li><p>Accès à <em>tous les</em> domaines, par exemple, <a href="http://google.com">google.com</a> et <a href="http://developer.mozilla.org">developer.mozilla.org</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="*" /&gt;
-</code></pre></div>
-<p>C&#39;est la valeur par défaut pour les projets CLI nouvellement créés.</p></li>
+  <li>
+    <p>Accès à <a href="http://google.com">google.com</a>:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Accès sécurisé <a href="https://google.com">google.com</a> ( <code class="language-plaintext highlighter-rouge">https://</code> ) :</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="https://google.com" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Accès pour le sous-domaine <a href="http://maps.google.com">maps.google.com</a>:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://maps.google.com" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Accès à tous les sous-domaines sur <a href="http://google.com">google.com</a>, par exemple <a href="http://mail.google.com">mail.google.com</a> et <a href="http://docs.google.com">docs.google.com</a>:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://*.google.com" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Accès à <em>tous les</em> domaines, par exemple, <a href="http://google.com">google.com</a> et <a href="http://developer.mozilla.org">developer.mozilla.org</a>:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="*" /&gt;
+</code></pre></div>    </div>
+
+    <p>C’est la valeur par défaut pour les projets CLI nouvellement créés.</p>
+  </li>
 </ul>
 
-<h2>Amazon Fire OS liste blanche</h2>
+<h2 id="amazon-fire-os-liste-blanche">Amazon Fire OS liste blanche</h2>
 
-<p>Règles spécifiques à la plateforme whitelisting se trouvent dans<code>res/xml/config.xml</code>.</p>
+<p>Règles spécifiques à la plateforme whitelisting se trouvent dans<code class="language-plaintext highlighter-rouge">res/xml/config.xml</code>.</p>
 
-<h2>Android liste blanche</h2>
+<h2 id="android-liste-blanche">Android liste blanche</h2>
 
-<p>Règles spécifiques à la plateforme whitelisting se trouvent dans<code>res/xml/config.xml</code>.</p>
+<p>Règles spécifiques à la plateforme whitelisting se trouvent dans<code class="language-plaintext highlighter-rouge">res/xml/config.xml</code>.</p>
 
-<p><strong>NOTE</strong>: sous Android 2.3 et avant, domaine liste blanche ne fonctionne que pour <code>href</code> , les liens hypertexte non référencé ressources telles que les images et les scripts. Prendre des mesures pour éviter les scripts d&#39;être injecté dans l&#39;application.</p>
+<p><strong>NOTE</strong>: sous Android 2.3 et avant, domaine liste blanche ne fonctionne que pour <code class="language-plaintext highlighter-rouge">href</code> , les liens hypertexte non référencé ressources telles que les images et les scripts. Prendre des mesures pour éviter les scripts d’être injecté dans l’application.</p>
 
-<p>Navigation vers les domaines non-liste blanche via <code>href</code> lien hypertexte, la page à ouvrir dans le navigateur par défaut plutôt qu&#39;au sein de l&#39;application. (Comparez ceci au comportement d&#39;iOS noté ci-dessous).</p>
+<p>Navigation vers les domaines non-liste blanche via <code class="language-plaintext highlighter-rouge">href</code> lien hypertexte, la page à ouvrir dans le navigateur par défaut plutôt qu’au sein de l’application. (Comparez ceci au comportement d’iOS noté ci-dessous).</p>
 
-<h2>iOS liste blanche</h2>
+<h2 id="ios-liste-blanche">iOS liste blanche</h2>
 
-<p>Règles de liste blanche de la plate-forme sont trouvent dans le répertoire application nommé <code>config.xml</code> fichier.</p>
+<p>Règles de liste blanche de la plate-forme sont trouvent dans le répertoire application nommé <code class="language-plaintext highlighter-rouge">config.xml</code> fichier.</p>
 
-<p>Origines spécifiés sans un protocole, tel que <code>www.apache.org</code> plutôt que <code>http://www.apache.org</code> , par défaut à tous les <code>http</code> , <code>https</code> , <code>ftp</code> , et <code>ftps</code> régimes.</p>
+<p>Origines spécifiés sans un protocole, tel que <code class="language-plaintext highlighter-rouge">www.apache.org</code> plutôt que <code class="language-plaintext highlighter-rouge">http://www.apache.org</code> , par défaut à tous les <code class="language-plaintext highlighter-rouge">http</code> , <code class="language-plaintext highlighter-rouge">https</code> , <code class="language-plaintext highlighter-rouge">ftp</code> , et <code class="language-plaintext highlighter-rouge">ftps</code> régimes.</p>
 
-<p>Caractères génériques sur la plateforme iOS sont plus souples que dans la spécification <a href="http://www.w3.org/TR/widgets-access/">W3C Widget accès</a> . Par exemple, le texte suivant accède tous les sous-domaines et domaines de premier niveau tels que <code>.com</code> et <code>.net</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;access origin="*.google.*" /&gt;
-</code></pre></div>
-<p>Contrairement à la plateforme Android susmentionnée, en accédant à des domaines non-liste blanche via <code>href</code> lien hypertexte sur iOS empêche la page d&#39;ouverture à tous.</p>
+<p>Caractères génériques sur la plateforme iOS sont plus souples que dans la spécification <a href="http://www.w3.org/TR/widgets-access/">W3C Widget accès</a> . Par exemple, le texte suivant accède tous les sous-domaines et domaines de premier niveau tels que <code class="language-plaintext highlighter-rouge">.com</code> et <code class="language-plaintext highlighter-rouge">.net</code> :</p>
 
-<h2>BlackBerry 10 liste blanche</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;access origin="*.google.*" /&gt;
+</code></pre></div></div>
 
-<p>Les règles de liste blanche se trouvent dans<code>www/config.xml</code>.</p>
+<p>Contrairement à la plateforme Android susmentionnée, en accédant à des domaines non-liste blanche via <code class="language-plaintext highlighter-rouge">href</code> lien hypertexte sur iOS empêche la page d’ouverture à tous.</p>
+
+<h2 id="blackberry-10-liste-blanche">BlackBerry 10 liste blanche</h2>
+
+<p>Les règles de liste blanche se trouvent dans<code class="language-plaintext highlighter-rouge">www/config.xml</code>.</p>
 
 <p>Utilisation de quelques dizaines de blackBerry de caractères génériques se distingue des autres plates-formes de deux façons :</p>
 
 <ul>
-<li><p>Tout contenu accédé par <code>XMLHttpRequest</code> doivent être déclarées explicitement. Mise en <code>origin=&quot;*&quot;</code> ne fonctionne pas dans ce cas. Sinon, toutes les sécurités de web peuvent être désactivée à l&#39;aide de la <code>WebSecurity</code> préférence décrite dans Configuration de BlackBerry :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="websecurity" value="disable" /&gt;
-</code></pre></div></li>
-<li><p>Comme alternative au paramètre <code>*.domain</code> , définissez une nouvelle <code>subdomains</code> attribuent à <code>true</code> . Il doit avoir la valeur <code>false</code> par défaut. Par exemple, ce qui suit permet d&#39;accéder à <code>google.com</code> , <code>maps.google.com</code> , et <code>docs.google.com</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" subdomains="true" /&gt;
-</code></pre></div>
-<p>Le passage suivant l&#39;accès à <code>google.com</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" subdomains="false" /&gt;
-</code></pre></div>
-<p>L&#39;accès à tous les domaines, y compris le local <code>file://</code> protocole :</p>
+  <li>
+    <p>Tout contenu accédé par <code class="language-plaintext highlighter-rouge">XMLHttpRequest</code> doivent être déclarées explicitement. Mise en <code class="language-plaintext highlighter-rouge">origin="*"</code> ne fonctionne pas dans ce cas. Sinon, toutes les sécurités de web peuvent être désactivée à l’aide de la <code class="language-plaintext highlighter-rouge">WebSecurity</code> préférence décrite dans Configuration de BlackBerry :</p>
 
-<p><access origin="*" subdomains="true" /></p></li>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="websecurity" value="disable" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Comme alternative au paramètre <code class="language-plaintext highlighter-rouge">*.domain</code> , définissez une nouvelle <code class="language-plaintext highlighter-rouge">subdomains</code> attribuent à <code class="language-plaintext highlighter-rouge">true</code> . Il doit avoir la valeur <code class="language-plaintext highlighter-rouge">false</code> par défaut. Par exemple, ce qui suit permet d’accéder à <code class="language-plaintext highlighter-rouge">google.com</code> , <code class="language-plaintext highlighter-rouge">maps.google.com</code> , et <code class="language-plaintext highlighter-rouge">docs.google.com</code> :</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" subdomains="true" /&gt;
+</code></pre></div>    </div>
+
+    <p>Le passage suivant l’accès à <code class="language-plaintext highlighter-rouge">google.com</code> :</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" subdomains="false" /&gt;
+</code></pre></div>    </div>
+
+    <p>L’accès à tous les domaines, y compris le local <code class="language-plaintext highlighter-rouge">file://</code> protocole :</p>
+
+    <access origin="*" subdomains="true" />
+  </li>
 </ul>
 
-<p>(Pour plus d&#39;informations sur la prise en charge, consultez documentation de BlackBerry sur l&#39; <a href="https://developer.blackberry.com/html5/documentation/ww_developing/Access_element_834677_11.html">élément access</a>.)</p>
+<p>(Pour plus d’informations sur la prise en charge, consultez documentation de BlackBerry sur l’ <a href="https://developer.blackberry.com/html5/documentation/ww_developing/Access_element_834677_11.html">élément access</a>.)</p>
 
-<h2>Changements d&#39;iOS 3.1.0</h2>
+<h2 id="changements-dios-310">Changements d’iOS 3.1.0</h2>
 
-<p>Avant la version 3.1.0, Cordova-iOS inclus quelques extensions non standards pour le régime de whilelisting de domaine pris en charge par les autres plateformes de Cordova. En 3.1.0, le whitelist iOS est maintenant conforme à la syntaxe de liste blanche de ressource décrite en haut de ce document. Si vous mettez à niveau pre-3.1.0, et que vous utilisiez ces extensions, vous devrez peut-être modifier votre <code>config.xml</code> fichier afin de continuer la liste blanche du même ensemble de ressources comme avant.</p>
+<p>Avant la version 3.1.0, Cordova-iOS inclus quelques extensions non standards pour le régime de whilelisting de domaine pris en charge par les autres plateformes de Cordova. En 3.1.0, le whitelist iOS est maintenant conforme à la syntaxe de liste blanche de ressource décrite en haut de ce document. Si vous mettez à niveau pre-3.1.0, et que vous utilisiez ces extensions, vous devrez peut-être modifier votre <code class="language-plaintext highlighter-rouge">config.xml</code> fichier afin de continuer la liste blanche du même ensemble de ressources comme avant.</p>
 
 <p>Plus précisément, ces motifs doivent être actualisés :</p>
 
 <ul>
-<li><p><code>apache.org</code>(pas de protocole): cela correspondrait précédemment <code>http</code> , <code>https</code> , <code>ftp</code> , et <code>ftps</code> des protocoles. Remplacez &quot; <code>*://apache.org/*</code> &quot; d&#39;inclure tous les protocoles, ou inclure une ligne pour chaque protocole, vous devez appuyer.</p></li>
-<li><p><code>http://apache.*</code>(caractère générique à la fin du domaine): cela correspondrait auparavant tous les top domaines niveau, y compris tous les TLDs possibles de deux lettres (mais pas utiles domaines aiment. co.uk). Inclure une ligne pour chaque TLD qui vous en fait Contrôlez et devez whitelist.</p></li>
-<li><p><code>h*t*://ap*he.o*g</code>(caractères génériques pour les lettres manquantes au hasard): ceux-ci ne sont plus prises en charge ; changement d&#39;inclure une ligne pour chaque domaine et le protocole que vous devez réellement whitelist.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">apache.org</code>(pas de protocole): cela correspondrait précédemment <code class="language-plaintext highlighter-rouge">http</code> , <code class="language-plaintext highlighter-rouge">https</code> , <code class="language-plaintext highlighter-rouge">ftp</code> , et <code class="language-plaintext highlighter-rouge">ftps</code> des protocoles. Remplacez “ <code class="language-plaintext highlighter-rouge">*://apache.org/*</code> “ d’inclure tous les protocoles, ou inclure une ligne pour chaque protocole, vous devez appuyer.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">http://apache.*</code>(caractère générique à la fin du domaine): cela correspondrait auparavant tous les top domaines niveau, y compris tous les TLDs possibles de deux lettres (mais pas utiles domaines aiment. co.uk). Inclure une ligne pour chaque TLD qui vous en fait Contrôlez et devez whitelist.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">h*t*://ap*he.o*g</code>(caractères génériques pour les lettres manquantes au hasard): ceux-ci ne sont plus prises en charge ; changement d’inclure une ligne pour chaque domaine et le protocole que vous devez réellement whitelist.</p>
+  </li>
 </ul>
 
-<h2>Windows Phone liste blanche</h2>
+<h2 id="windows-phone-liste-blanche">Windows Phone liste blanche</h2>
 
-<p>Les règles de liste blanche pour Windows Phone 7 et 8 se trouvent dans l&#39;application <code>config.xml</code> fichier.</p>
+<p>Les règles de liste blanche pour Windows Phone 7 et 8 se trouvent dans l’application <code class="language-plaintext highlighter-rouge">config.xml</code> fichier.</p>
 
-<h2>Liste blanche paciarelli</h2>
+<h2 id="liste-blanche-paciarelli">Liste blanche paciarelli</h2>
 
-<p>Règles de liste blanche se trouvent dans l&#39;application de <code>config.xml</code> fichier. La plate-forme s&#39;appuie sur les mêmes <code>subdomains</code> attribut comme la plateforme BlackBerry. (Pour plus d&#39;informations sur la prise en charge, consultez documentation de paciarelli sur l&#39; <a href="https://developer.tizen.org/help/index.jsp?topic=%2Forg.tizen.web.appprogramming%2Fhtml%2Fide_sdk_tools%2Fconfig_editor_w3celements.htm">élément access</a>.)</p>
+<p>Règles de liste blanche se trouvent dans l’application de <code class="language-plaintext highlighter-rouge">config.xml</code> fichier. La plate-forme s’appuie sur les mêmes <code class="language-plaintext highlighter-rouge">subdomains</code> attribut comme la plateforme BlackBerry. (Pour plus d’informations sur la prise en charge, consultez documentation de paciarelli sur l’ <a href="https://developer.tizen.org/help/index.jsp?topic=%2Forg.tizen.web.appprogramming%2Fhtml%2Fide_sdk_tools%2Fconfig_editor_w3celements.htm">élément access</a>.)</p>
+
 
 
             </div>

@@ -2084,247 +2084,330 @@
             
 
             <div id="page-toc-source">
-                <h1>Plugin specifikacija</h1>
+                <h1 id="plugin-specifikacija">Plugin specifikacija</h1>
 
-<p>Na <code>plugin.xml</code> je datoteka XML dokument v v <code>plugins</code> imenskega prostora: <code>http://apache.org/cordova/ns/plugins/1.0</code> . Vsebuje na najvišji ravni <code>plugin</code> element, ki določa plugin, in otroci, ki določajo strukturo plugin.</p>
+<p>Na <code class="language-plaintext highlighter-rouge">plugin.xml</code> je datoteka XML dokument v v <code class="language-plaintext highlighter-rouge">plugins</code> imenskega prostora: <code class="language-plaintext highlighter-rouge">http://apache.org/cordova/ns/plugins/1.0</code> . Vsebuje na najvišji ravni <code class="language-plaintext highlighter-rouge">plugin</code> element, ki določa plugin, in otroci, ki določajo strukturo plugin.</p>
 
 <p>Vzorec plugin element:</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
-<span class="nt">&lt;plugin</span> <span class="na">xmlns=</span><span class="s">"http://apache.org/cordova/ns/plugins/1.0"</span>
-    <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
-    <span class="na">id=</span><span class="s">"com.alunny.foo"</span>
-    <span class="na">version=</span><span class="s">"1.0.2"</span><span class="nt">&gt;</span>
-</code></pre></div>
-<h2><em>plugin</em> Element</h2>
 
-<p>Je <code>plugin</code> element je element najvišje ravni, manifest za plugin. Ponaša se z naslednjimi atributi:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="com.alunny.foo"
+    version="1.0.2"&gt;
+</code></pre></div></div>
+
+<h2 id="plugin-element"><em>plugin</em> Element</h2>
+
+<p>Je <code class="language-plaintext highlighter-rouge">plugin</code> element je element najvišje ravni, manifest za plugin. Ponaša se z naslednjimi atributi:</p>
 
 <ul>
-<li><p><code>xmlns</code>(obvezno): plugin imenskega prostora, <code>http://apache.org/cordova/ns/plugins/1.0</code> . Če dokument vsebuje XML iz drugih imenskih prostorih, kot so oznake, ki se doda v <code>AndroidManifest.xml</code> datoteko, tiste imenske prostore treba vključiti tudi v najvišje ravni element.</p></li>
-<li><p><code>id</code>(obvezno): reverse domain slog identifikator za plugin, kot so<code>com.alunny.foo</code></p></li>
-<li><p><code>version</code>(obvezno): številka različice za plugin, ki ustreza naslednji major-molu-obliž slog regularni izraz:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">^\d+[.]\d+[.]\d+$
-</code></pre></div></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">xmlns</code>(obvezno): plugin imenskega prostora, <code class="language-plaintext highlighter-rouge">http://apache.org/cordova/ns/plugins/1.0</code> . Če dokument vsebuje XML iz drugih imenskih prostorih, kot so oznake, ki se doda v <code class="language-plaintext highlighter-rouge">AndroidManifest.xml</code> datoteko, tiste imenske prostore treba vključiti tudi v najvišje ravni element.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">id</code>(obvezno): reverse domain slog identifikator za plugin, kot so<code class="language-plaintext highlighter-rouge">com.alunny.foo</code></p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">version</code>(obvezno): številka različice za plugin, ki ustreza naslednji major-molu-obliž slog regularni izraz:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>^\d+[.]\d+[.]\d+$
+</code></pre></div>    </div>
+  </li>
 </ul>
 
-<h2><em>motorji</em> in <em>motorjem</em> elementih</h2>
+<h2 id="motorji-in-motorjem-elementih"><em>motorji</em> in <em>motorjem</em> elementih</h2>
 
-<p>Podrejene elemente v <code>&lt;engines&gt;</code> element navedite različice Apache Cordova na osnovi ogrodij, ki ta plugin podpira. Primer:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;engines&gt;
+<p>Podrejene elemente v <code class="language-plaintext highlighter-rouge">&lt;engines&gt;</code> element navedite različice Apache Cordova na osnovi ogrodij, ki ta plugin podpira. Primer:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;engines&gt;
     &lt;engine name="cordova" version="1.7.0" /&gt;
     &lt;engine name="cordova" version="1.8.1" /&gt;
     &lt;engine name="worklight" version="1.0.0" platform="android" scriptSrc="worklight_version"/&gt;
 &lt;/engines&gt;
-</code></pre></div>
-<p>Podoben je <code>&lt;plugin&gt;</code> elementa <code>version</code> atribut, določeno različico niz mora ustrezati major-molu-obliž niz ustreza regularni izraz:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    ^\d+[.]\d+[.]\d+$
-</code></pre></div>
-<p>Elementi motorja lahko tudi določite meglenih zadetkov, da se prepreči ponovitev, in za zmanjšanje vzdrževanje posodobitvi temeljno platformo. Orodja should podporo najmanj <code>&gt;</code> , <code>&gt;=</code> , <code>&lt;</code> in <code>&lt;=</code> , na primer:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;engines&gt;
+</code></pre></div></div>
+
+<p>Podoben je <code class="language-plaintext highlighter-rouge">&lt;plugin&gt;</code> elementa <code class="language-plaintext highlighter-rouge">version</code> atribut, določeno različico niz mora ustrezati major-molu-obliž niz ustreza regularni izraz:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ^\d+[.]\d+[.]\d+$
+</code></pre></div></div>
+
+<p>Elementi motorja lahko tudi določite meglenih zadetkov, da se prepreči ponovitev, in za zmanjšanje vzdrževanje posodobitvi temeljno platformo. Orodja should podporo najmanj <code class="language-plaintext highlighter-rouge">&gt;</code> , <code class="language-plaintext highlighter-rouge">&gt;=</code> , <code class="language-plaintext highlighter-rouge">&lt;</code> in <code class="language-plaintext highlighter-rouge">&lt;=</code> , na primer:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;engines&gt;
     &lt;engine name="cordova" version="&gt;=1.7.0" /&gt;
     &lt;engine name="cordova" version="&lt;1.8.1" /&gt;
 &lt;/engines&gt;
-</code></pre></div>
-<p>Na <code>&lt;engine&gt;</code> tags ima privzeto podporo za vse glavne platforme Cordova obstaja na. Določanje na <code>cordova</code> motorju oznaka pomeni, da morajo izpolnjevati vse različice Cordova naprej poljuben plosčad atribut različice motorja. Si lahko tudi seznam posebnih platformah in njihove različice ovrže catch-all <code>cordova</code> motorja:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;engines&gt;
+</code></pre></div></div>
+
+<p>Na <code class="language-plaintext highlighter-rouge">&lt;engine&gt;</code> tags ima privzeto podporo za vse glavne platforme Cordova obstaja na. Določanje na <code class="language-plaintext highlighter-rouge">cordova</code> motorju oznaka pomeni, da morajo izpolnjevati vse različice Cordova naprej poljuben plosčad atribut različice motorja. Si lahko tudi seznam posebnih platformah in njihove različice ovrže catch-all <code class="language-plaintext highlighter-rouge">cordova</code> motorja:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;engines&gt;
     &lt;engine name="cordova" version="&gt;=1.7.0" /&gt;
     &lt;engine name="cordova-android" version="&gt;=1.8.0" /&gt;
     &lt;engine name="cordova-ios" version="&gt;=1.7.1" /&gt;
 &lt;/engines&gt;
-</code></pre></div>
-<p>Tukaj je seznam privzeti iskalniki, ki je &quot;<engine>&quot;tag podpira: *&quot;Cordoba&quot;*&quot;cordova-plugman&quot;* &#39;cordova-amazon-fireos&#39; * &#39;cordova-android&#39; *&quot;cordova-ios&quot;*&quot;cordova-blackberry10&quot;* &#39;cordova wp7&#39; <em>&quot;cordova wp8&quot;</em>&quot;cordova-windows8&quot;  </p>
+</code></pre></div></div>
 
+<p>Tukaj je seznam privzeti iskalniki, ki je “<engine>"tag podpira: \*"Cordoba"\*"cordova-plugman"* 'cordova-amazon-fireos' * 'cordova-android' \*"cordova-ios"\*"cordova-blackberry10"* 'cordova wp7' *"cordova wp8"*"cordova-windows8"</engine></p>
 <ul>
-<li>&quot;android sdk&quot; / / vrne najvišji Android api ravni nameščen * &quot;apple-xcode&quot; / / vrne xcode različico * &quot;apple ios&quot; / / vrne najvišji nameščena različica iOS * &quot;apple-osx&quot; / / vrne različico OSX * &quot;blackberry-ndk&quot; / / vrne native blackberry različica SDK</li>
+  <li>“android sdk” / / vrne najvišji Android api ravni nameščen * “apple-xcode” / / vrne xcode različico * “apple ios” / / vrne najvišji nameščena različica iOS * “apple-osx” / / vrne različico OSX * “blackberry-ndk” / / vrne native blackberry različica SDK</li>
 </ul>
 
 <p>Navedbo, po meri temelji na Apache Cordova okvirov treba uvrstiti pod oznako motorja, kot so:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;engines&gt;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;engines&gt;
     &lt;engine name="my_custom_framework" version="1.0.0" platform="android" scriptSrc="path_to_my_custom_framework_version"/&gt;
     &lt;engine name="another_framework" version="&gt;0.2.0" platform="ios|android" scriptSrc="path_to_another_framework_version"/&gt;
     &lt;engine name="even_more_framework" version="&gt;=2.2.0" platform="*" scriptSrc="path_to_even_more_framework_version"/&gt;
 &lt;/engines&gt;
-</code></pre></div>
-<p>Meri okvir temelji na Apache Cordova zahteva, da motor element vključuje naslednje atribute: <code>name</code> , <code>version</code> , <code>scriptSrc</code> , in<code>platform</code>.</p>
+</code></pre></div></div>
+
+<p>Meri okvir temelji na Apache Cordova zahteva, da motor element vključuje naslednje atribute: <code class="language-plaintext highlighter-rouge">name</code> , <code class="language-plaintext highlighter-rouge">version</code> , <code class="language-plaintext highlighter-rouge">scriptSrc</code> , in<code class="language-plaintext highlighter-rouge">platform</code>.</p>
 
 <ul>
-<li><p><code>name</code>(obvezno): berljivo ime za svojo meri okvir.</p></li>
-<li><p><code>version</code>(obvezno): različica, ki vaš okvir mora imeti za namestitev.</p></li>
-<li><p><code>scriptSrc</code>(obvezno): skriptno datoteko, ki pove plugman kakšen prevod po meri okvir. V idealnem primeru, ta datoteka mora biti v najvišji ravni imenika plugin directory.</p></li>
-<li><p><code>platform</code>(obvezno): katere platforme, ki podpira vaš okvir. Lahko uporabite nadomestni znak <code>*</code> reči podprtih za vse platforme, določite več z navpičnico kot <code>android|ios|blackberry10</code> ali samo enotno platformo kot<code>android</code>.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">name</code>(obvezno): berljivo ime za svojo meri okvir.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">version</code>(obvezno): različica, ki vaš okvir mora imeti za namestitev.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">scriptSrc</code>(obvezno): skriptno datoteko, ki pove plugman kakšen prevod po meri okvir. V idealnem primeru, ta datoteka mora biti v najvišji ravni imenika plugin directory.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">platform</code>(obvezno): katere platforme, ki podpira vaš okvir. Lahko uporabite nadomestni znak <code class="language-plaintext highlighter-rouge">*</code> reči podprtih za vse platforme, določite več z navpičnico kot <code class="language-plaintext highlighter-rouge">android|ios|blackberry10</code> ali samo enotno platformo kot<code class="language-plaintext highlighter-rouge">android</code>.</p>
+  </li>
 </ul>
 
 <p>plugman prekine z nič zbornik zakaj poljuben čep, čigar ciljni projekt izpolnjuje omejitve motorja.</p>
 
-<p>Če ni <code>&lt;engine&gt;</code> so določene oznake, plugman poskuša namestiti v imeniku navedeni cordova projekt slepo.</p>
+<p>Če ni <code class="language-plaintext highlighter-rouge">&lt;engine&gt;</code> so določene oznake, plugman poskuša namestiti v imeniku navedeni cordova projekt slepo.</p>
 
-<h2><em>ime</em> Element</h2>
+<h2 id="ime-element"><em>ime</em> Element</h2>
 
 <p>Berljivo ime plugin, katerih vsebino besedila vsebuje ime plugin. Na primer:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;name&gt;Foo&lt;/name&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;name&gt;Foo&lt;/name&gt;
+</code></pre></div></div>
+
 <p>Ta element (še ne) obravnava lokalizacijo.</p>
 
-<h2><em>Opis</em> Element</h2>
+<h2 id="opis-element"><em>Opis</em> Element</h2>
 
 <p>Berljivo opis za plugin. Besedilo Vsebina elementa vsebuje opis plugin. Primer:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;description&gt;Foo plugin description&lt;/description&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;description&gt;Foo plugin description&lt;/description&gt;
+</code></pre></div></div>
+
 <p>Ta element (še ne) obravnava lokalizacijo.</p>
 
-<h2><em>avtor</em> Element</h2>
+<h2 id="avtor-element"><em>avtor</em> Element</h2>
 
 <p>Plugin ime avtorja. Besedilo Vsebina elementa vsebuje ime plugin avtorja. Primer:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;author&gt;Foo plugin description&lt;/author&gt;
-</code></pre></div>
-<h2><em>ključne besede</em> Element</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;author&gt;Foo plugin description&lt;/author&gt;
+</code></pre></div></div>
+
+<h2 id="ključne-besede-element"><em>ključne besede</em> Element</h2>
 
 <p>Ključne besede plugin. Besedilo Vsebina elementa vsebuje z vejico ločene ključne besede za opis plugin. Primer:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;keywords&gt;foo,bar&lt;/keywords&gt;
-</code></pre></div>
-<h2><em>dati dovoljenje</em> Element</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;keywords&gt;foo,bar&lt;/keywords&gt;
+</code></pre></div></div>
+
+<h2 id="dati-dovoljenje-element"><em>dati dovoljenje</em> Element</h2>
 
 <p>Plugin licenco. Besedilo Vsebina elementa vsebuje plugin licenco. Primer:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;license&gt;Apache 2.0 License&lt;/license&gt;
-</code></pre></div>
-<h2><em>sredstva</em> Element</h2>
 
-<p>Enega ali več elementov v seznam datotek ali imenikov v obstati prepisovalec v Cordova app <code>www</code> imenik. Primeri:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;!-- a single file, to be copied in the root directory --&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;license&gt;Apache 2.0 License&lt;/license&gt;
+</code></pre></div></div>
+
+<h2 id="sredstva-element"><em>sredstva</em> Element</h2>
+
+<p>Enega ali več elementov v seznam datotek ali imenikov v obstati prepisovalec v Cordova app <code class="language-plaintext highlighter-rouge">www</code> imenik. Primeri:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- a single file, to be copied in the root directory --&gt;
 &lt;asset src="www/foo.js" target="foo.js" /&gt;
 &lt;!-- a directory, also to be copied in the root directory --&gt;
 &lt;asset src="www/foo" target="foo" /&gt;
-</code></pre></div>
-<p>Vse <code>&lt;asset&gt;</code> tags zahtevajo tako <code>src</code> in <code>target</code> lastnosti. Web-samo plugins vsebuje večinoma <code>&lt;asset&gt;</code> elementov. Vse <code>&lt;asset&gt;</code> elementov, ki so ugnezdeni znotraj <code>&lt;platform&gt;</code> elementov določite posamezne spletne sredstev, kot je opisano spodaj. Atributi vključujejo:</p>
+</code></pre></div></div>
+
+<p>Vse <code class="language-plaintext highlighter-rouge">&lt;asset&gt;</code> tags zahtevajo tako <code class="language-plaintext highlighter-rouge">src</code> in <code class="language-plaintext highlighter-rouge">target</code> lastnosti. Web-samo plugins vsebuje večinoma <code class="language-plaintext highlighter-rouge">&lt;asset&gt;</code> elementov. Vse <code class="language-plaintext highlighter-rouge">&lt;asset&gt;</code> elementov, ki so ugnezdeni znotraj <code class="language-plaintext highlighter-rouge">&lt;platform&gt;</code> elementov določite posamezne spletne sredstev, kot je opisano spodaj. Atributi vključujejo:</p>
 
 <ul>
-<li><p><code>src</code>(obvezno): datoteka ali imenik kje v plugin paket, glede na v <code>plugin.xml</code> dokumentu. Če datoteka ne obstaja v navedeni <code>src</code> mesto, plugman ustavi obrne umestitev proces, izda obvestilo o konfliktu in zapre s kodo nič.</p></li>
-<li><p><code>target</code>(zahtevano):</p>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">src</code>(obvezno): datoteka ali imenik kje v plugin paket, glede na v <code class="language-plaintext highlighter-rouge">plugin.xml</code> dokumentu. Če datoteka ne obstaja v navedeni <code class="language-plaintext highlighter-rouge">src</code> mesto, plugman ustavi obrne umestitev proces, izda obvestilo o konfliktu in zapre s kodo nič.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">target</code>(zahtevano):</p>
 
-<p>Datoteka ali imenik mora biti kje v Cordova app, glede na v <code>www</code> naslovnik. Sredstva lahko ciljno podimenikov, na primer:</p>
+    <p>Datoteka ali imenik mora biti kje v Cordova app, glede na v <code class="language-plaintext highlighter-rouge">www</code> naslovnik. Sredstva lahko ciljno podimenikov, na primer:</p>
 
-<p><asset src="www/new-foo.js" target="js/experimental/foo.js" /></p>
+    <asset src="www/new-foo.js" target="js/experimental/foo.js" />
 
-<p>ustvarja v <code>js/experimental</code> imenik v v <code>www</code> imenik, razen če že prisotna, nato kopije na <code>new-foo.js</code> datoteke in jo preimenuje <code>foo.js</code> . Če datoteka že obstaja na ciljno mesto, plugman ustavi obrne umestitev proces, izda obvestilo o konfliktu in zapre s kodo nič.</p></li>
+    <p>ustvarja v <code class="language-plaintext highlighter-rouge">js/experimental</code> imenik v v <code class="language-plaintext highlighter-rouge">www</code> imenik, razen če že prisotna, nato kopije na <code class="language-plaintext highlighter-rouge">new-foo.js</code> datoteke in jo preimenuje <code class="language-plaintext highlighter-rouge">foo.js</code> . Če datoteka že obstaja na ciljno mesto, plugman ustavi obrne umestitev proces, izda obvestilo o konfliktu in zapre s kodo nič.</p>
+  </li>
 </ul>
 
-<h2><em>JS modul</em> Element</h2>
+<h2 id="js-modul-element"><em>JS modul</em> Element</h2>
 
-<p>Večina plugins vključujejo eno ali več datotek JavaScript. Vsak <code>&lt;js-module&gt;</code> oznaka ustreza JavaScript datoteke, in plugin uporabnikom prepreči imetje prišteti a <code>&lt;script&gt;</code> oznako za vsako datoteko. Medtem ko <code>&lt;asset&gt;</code> tags preprosto kopirati datoteke iz podimenika plugin v <code>www</code> , <code>&lt;js-module&gt;</code> oznake so veliko bolj prefinjene. Izgledajo takole:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;js-module src="socket.js" name="Socket"&gt;
+<p>Večina plugins vključujejo eno ali več datotek JavaScript. Vsak <code class="language-plaintext highlighter-rouge">&lt;js-module&gt;</code> oznaka ustreza JavaScript datoteke, in plugin uporabnikom prepreči imetje prišteti a <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> oznako za vsako datoteko. Medtem ko <code class="language-plaintext highlighter-rouge">&lt;asset&gt;</code> tags preprosto kopirati datoteke iz podimenika plugin v <code class="language-plaintext highlighter-rouge">www</code> , <code class="language-plaintext highlighter-rouge">&lt;js-module&gt;</code> oznake so veliko bolj prefinjene. Izgledajo takole:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;js-module src="socket.js" name="Socket"&gt;
     &lt;clobbers target="chrome.socket" /&gt;
 &lt;/js-module&gt;
-</code></pre></div>
-<p>Ko namestite plugin z zgornjem, <code>socket.js</code> se kopira v <code>www/plugins/my.plugin.id/socket.js</code> , in doda kot vnos v <code>www/cordova_plugins.js</code> . V času obremenitve, zbornik v <code>cordova.js</code> uporablja XHR prebrati vsako datoteko in injicirajte a <code>&lt;script&gt;</code> tag v HTML. To doda preslikavo clobber ali zliti to primerno, kot je opisano spodaj.</p>
+</code></pre></div></div>
 
-<p><em>Ne</em> zaviti datoteko z <code>cordova.define</code> , kot je samodejno dodan. Modul je zavita v zaprtje, s <code>module</code> , <code>exports</code> , in <code>require</code> v obsegu, kot je običajen za AMD modulov.</p>
+<p>Ko namestite plugin z zgornjem, <code class="language-plaintext highlighter-rouge">socket.js</code> se kopira v <code class="language-plaintext highlighter-rouge">www/plugins/my.plugin.id/socket.js</code> , in doda kot vnos v <code class="language-plaintext highlighter-rouge">www/cordova_plugins.js</code> . V času obremenitve, zbornik v <code class="language-plaintext highlighter-rouge">cordova.js</code> uporablja XHR prebrati vsako datoteko in injicirajte a <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> tag v HTML. To doda preslikavo clobber ali zliti to primerno, kot je opisano spodaj.</p>
 
-<p>Podrobnosti za na <code>&lt;js-module&gt;</code> oznako:</p>
+<p><em>Ne</em> zaviti datoteko z <code class="language-plaintext highlighter-rouge">cordova.define</code> , kot je samodejno dodan. Modul je zavita v zaprtje, s <code class="language-plaintext highlighter-rouge">module</code> , <code class="language-plaintext highlighter-rouge">exports</code> , in <code class="language-plaintext highlighter-rouge">require</code> v obsegu, kot je običajen za AMD modulov.</p>
 
-<ul>
-<li><p>V <code>src</code> se sklicuje na datoteko v imeniku plugin glede na v <code>plugin.xml</code> datoteko.</p></li>
-<li><p>Na <code>name</code> zagotavlja zadnji del ime modula. Na splošno je karkoli vam je všeč, in samo to pomembno, če želite uporabiti <code>cordova.require</code> uvoz drugih delov vaš plugins v JavaScript kodo. Ime modula za a <code>&lt;js-module&gt;</code> je vaš plugin <code>id</code> sledi vrednost <code>name</code> . Na primer, zgoraj, s je <code>id</code> od <code>chrome.socket</code> , je ime modula<code>chrome.socket.Socket</code>.</p></li>
-<li><p>Tri oznake so dovoljene v <code>&lt;js-module&gt;</code> :</p>
+<p>Podrobnosti za na <code class="language-plaintext highlighter-rouge">&lt;js-module&gt;</code> oznako:</p>
 
 <ul>
-<li>  <code>&lt;clobbers target=&quot;some.value&quot;/&gt;</code>kaže, da je <code>module.exports</code> vstavite v <code>window</code> predmeta kot <code>window.some.value</code> . Lahko imate toliko <code>&lt;clobbers&gt;</code> kot želite. Vsak predmet, ni na voljo v <code>window</code> je ustvaril.</li>
-<li>  <code>&lt;merges target=&quot;some.value&quot;/&gt;</code>kaže, da bi bilo treba združiti modul s katero koli obstoječo vrednost na <code>window.some.value</code> . Če kateri koli ključ že obstaja, različica modula preglasi original. Lahko imate toliko <code>&lt;merges&gt;</code> kot želite. Vsak predmet, ni na voljo v <code>window</code> je ustvaril.</li>
-<li>  <code>&lt;runs/&gt;</code>pomeni, da kodo mora biti določena z <code>cordova.require</code> , pa ni nameščena v <code>window</code> predmeta. To je uporabno med inicializacijo modula, izhajajo iz rutine ali drugače. Lahko imate samo do enega <code>&lt;runs/&gt;</code> oznako. Upoštevajte, da tudi a <code>&lt;runs/&gt;</code> s <code>&lt;clobbers/&gt;</code> ali <code>&lt;merges/&gt;</code> je odveč, saj tudi <code>cordova.require</code> vaš modul.</li>
-<li>  Empty <code>&lt;js-module&gt;</code> še vedno nalaga in lahko acccessed v drugi moduli preko<code>cordova.require</code>.</li>
-</ul></li>
+  <li>
+    <p>V <code class="language-plaintext highlighter-rouge">src</code> se sklicuje na datoteko v imeniku plugin glede na v <code class="language-plaintext highlighter-rouge">plugin.xml</code> datoteko.</p>
+  </li>
+  <li>
+    <p>Na <code class="language-plaintext highlighter-rouge">name</code> zagotavlja zadnji del ime modula. Na splošno je karkoli vam je všeč, in samo to pomembno, če želite uporabiti <code class="language-plaintext highlighter-rouge">cordova.require</code> uvoz drugih delov vaš plugins v JavaScript kodo. Ime modula za a <code class="language-plaintext highlighter-rouge">&lt;js-module&gt;</code> je vaš plugin <code class="language-plaintext highlighter-rouge">id</code> sledi vrednost <code class="language-plaintext highlighter-rouge">name</code> . Na primer, zgoraj, s je <code class="language-plaintext highlighter-rouge">id</code> od <code class="language-plaintext highlighter-rouge">chrome.socket</code> , je ime modula<code class="language-plaintext highlighter-rouge">chrome.socket.Socket</code>.</p>
+  </li>
+  <li>
+    <p>Tri oznake so dovoljene v <code class="language-plaintext highlighter-rouge">&lt;js-module&gt;</code> :</p>
+
+    <ul>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">&lt;clobbers target="some.value"/&gt;</code>kaže, da je <code class="language-plaintext highlighter-rouge">module.exports</code> vstavite v <code class="language-plaintext highlighter-rouge">window</code> predmeta kot <code class="language-plaintext highlighter-rouge">window.some.value</code> . Lahko imate toliko <code class="language-plaintext highlighter-rouge">&lt;clobbers&gt;</code> kot želite. Vsak predmet, ni na voljo v <code class="language-plaintext highlighter-rouge">window</code> je ustvaril.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">&lt;merges target="some.value"/&gt;</code>kaže, da bi bilo treba združiti modul s katero koli obstoječo vrednost na <code class="language-plaintext highlighter-rouge">window.some.value</code> . Če kateri koli ključ že obstaja, različica modula preglasi original. Lahko imate toliko <code class="language-plaintext highlighter-rouge">&lt;merges&gt;</code> kot želite. Vsak predmet, ni na voljo v <code class="language-plaintext highlighter-rouge">window</code> je ustvaril.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">&lt;runs/&gt;</code>pomeni, da kodo mora biti določena z <code class="language-plaintext highlighter-rouge">cordova.require</code> , pa ni nameščena v <code class="language-plaintext highlighter-rouge">window</code> predmeta. To je uporabno med inicializacijo modula, izhajajo iz rutine ali drugače. Lahko imate samo do enega <code class="language-plaintext highlighter-rouge">&lt;runs/&gt;</code> oznako. Upoštevajte, da tudi a <code class="language-plaintext highlighter-rouge">&lt;runs/&gt;</code> s <code class="language-plaintext highlighter-rouge">&lt;clobbers/&gt;</code> ali <code class="language-plaintext highlighter-rouge">&lt;merges/&gt;</code> je odveč, saj tudi <code class="language-plaintext highlighter-rouge">cordova.require</code> vaš modul.</p>
+      </li>
+      <li>
+        <p>Empty <code class="language-plaintext highlighter-rouge">&lt;js-module&gt;</code> še vedno nalaga in lahko acccessed v drugi moduli preko<code class="language-plaintext highlighter-rouge">cordova.require</code>.</p>
+      </li>
+    </ul>
+  </li>
 </ul>
 
-<p>Če <code>src</code> ne razreši obstoječo datoteko, plugman ustavi in razveljavi namestitev, izda obvestilo o problem in zapre s kodo nič.</p>
+<p>Če <code class="language-plaintext highlighter-rouge">src</code> ne razreši obstoječo datoteko, plugman ustavi in razveljavi namestitev, izda obvestilo o problem in zapre s kodo nič.</p>
 
-<p>Gnezdenje <code>&lt;js-module&gt;</code> elementov v <code>&lt;platform&gt;</code> izjavlja plosčad-poseben JavaScript modul vezi.</p>
+<p>Gnezdenje <code class="language-plaintext highlighter-rouge">&lt;js-module&gt;</code> elementov v <code class="language-plaintext highlighter-rouge">&lt;platform&gt;</code> izjavlja plosčad-poseben JavaScript modul vezi.</p>
 
-<h2><em>odvisnost</em> Element</h2>
+<h2 id="odvisnost-element"><em>odvisnost</em> Element</h2>
 
-<p>Na <code>&lt;dependency&gt;</code> tag omogoča, da določite drugih plugins, od katerih je odvisna trenutno plugin. Medtem ko prihodnje različice bodo do njih dostopate od plugin počivališče, je kratkoročno plugins so neposredno sklicuje kot URL-jih <code>&lt;dependency&gt;</code> tags. So oblikovani kot sledi:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;dependency id="com.plugin.id" url="https://github.com/myuser/someplugin" commit="428931ada3891801" subdir="some/path/here" /&gt;
-</code></pre></div>
+<p>Na <code class="language-plaintext highlighter-rouge">&lt;dependency&gt;</code> tag omogoča, da določite drugih plugins, od katerih je odvisna trenutno plugin. Medtem ko prihodnje različice bodo do njih dostopate od plugin počivališče, je kratkoročno plugins so neposredno sklicuje kot URL-jih <code class="language-plaintext highlighter-rouge">&lt;dependency&gt;</code> tags. So oblikovani kot sledi:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;dependency id="com.plugin.id" url="https://github.com/myuser/someplugin" commit="428931ada3891801" subdir="some/path/here" /&gt;
+</code></pre></div></div>
+
 <ul>
-<li><p><code>id</code>: Določa ID plugin. Mora biti globalno Enolični, in izražena v obratnem-domene slog. Medtem ko nobena od teh omejitev je trenutno uveljavljena, bodo v prihodnosti.</p></li>
-<li><p><code>url</code>: URL za plugin. To je referenčna git skladišče, ki plugman poskuša klon.</p></li>
-<li><p><code>commit</code>: To je vsako sklicevanje kreten, ki ga razume <code>git checkout</code> : vejo ali oznako ime (npr., <code>master</code> , <code>0.3.1</code> ), ali objavo haše (npr.<code>975ddb228af811dd8bb37ed1dfd092a3d05295f9</code>).</p></li>
-<li><p><code>subdir</code>: Določa, da ciljno plugin odvisnosti obstaja kot podimenik skladišču git. To je koristno, saj omogoča skladišče vsebuje več povezanih plugins, vsak individualno določeni.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">id</code>: Določa ID plugin. Mora biti globalno Enolični, in izražena v obratnem-domene slog. Medtem ko nobena od teh omejitev je trenutno uveljavljena, bodo v prihodnosti.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">url</code>: URL za plugin. To je referenčna git skladišče, ki plugman poskuša klon.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">commit</code>: To je vsako sklicevanje kreten, ki ga razume <code class="language-plaintext highlighter-rouge">git checkout</code> : vejo ali oznako ime (npr., <code class="language-plaintext highlighter-rouge">master</code> , <code class="language-plaintext highlighter-rouge">0.3.1</code> ), ali objavo haše (npr.<code class="language-plaintext highlighter-rouge">975ddb228af811dd8bb37ed1dfd092a3d05295f9</code>).</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">subdir</code>: Določa, da ciljno plugin odvisnosti obstaja kot podimenik skladišču git. To je koristno, saj omogoča skladišče vsebuje več povezanih plugins, vsak individualno določeni.</p>
+  </li>
 </ul>
 
 <p>V prihodnosti, bo uvedla različico omejitve in plugin skladišču bo obstaja opreti pridobivam z imenom namesto izrecno URLs.</p>
 
-<h3>Odvisnost relativne poti</h3>
+<h3 id="odvisnost-relativne-poti">Odvisnost relativne poti</h3>
 
-<p>Če nastavite na <code>url</code> od a <code>&lt;dependency&gt;</code> tag <code>&quot;.&quot;</code> in zagotoviti a <code>subdir</code> , odvisnih plugin nameščen iz istega lokalnih ali oddaljenih git skladišče kot matično plugin, ki določa na <code>&lt;dependency&gt;</code> oznako.</p>
+<p>Če nastavite na <code class="language-plaintext highlighter-rouge">url</code> od a <code class="language-plaintext highlighter-rouge">&lt;dependency&gt;</code> tag <code class="language-plaintext highlighter-rouge">"."</code> in zagotoviti a <code class="language-plaintext highlighter-rouge">subdir</code> , odvisnih plugin nameščen iz istega lokalnih ali oddaljenih git skladišče kot matično plugin, ki določa na <code class="language-plaintext highlighter-rouge">&lt;dependency&gt;</code> oznako.</p>
 
-<p>Upoštevajte, da je <code>subdir</code> vedno določa pot glede na <em>koren</em> git skladišče, ne starševski vtičnik. To velja tudi, če ste namestili plugin z lokalno potjo neposredno nanj. Plugman najde koren git skladišče in nato poišče drugi plugin od tam.</p>
+<p>Upoštevajte, da je <code class="language-plaintext highlighter-rouge">subdir</code> vedno določa pot glede na <em>koren</em> git skladišče, ne starševski vtičnik. To velja tudi, če ste namestili plugin z lokalno potjo neposredno nanj. Plugman najde koren git skladišče in nato poišče drugi plugin od tam.</p>
 
-<h2><em>platforma</em> Element</h2>
+<h2 id="platforma-element"><em>platforma</em> Element</h2>
 
-<p>Na <code>&lt;platform&gt;</code> tag identificira platforme, ki so povezane domorodno kodo ali zahtevajo spremembe njihovega konfiguracijske datoteke. Orodja, ki uporabljajo to specifikacijo lahko identificirajo podprte platforme in namestiti kodo v Cordova projektov.</p>
+<p>Na <code class="language-plaintext highlighter-rouge">&lt;platform&gt;</code> tag identificira platforme, ki so povezane domorodno kodo ali zahtevajo spremembe njihovega konfiguracijske datoteke. Orodja, ki uporabljajo to specifikacijo lahko identificirajo podprte platforme in namestiti kodo v Cordova projektov.</p>
 
-<p>Plugins brez <code>&lt;platform&gt;</code> tags so predpostavlja samo JavaScript, in zato installable na vse platforme.</p>
+<p>Plugins brez <code class="language-plaintext highlighter-rouge">&lt;platform&gt;</code> tags so predpostavlja samo JavaScript, in zato installable na vse platforme.</p>
 
 <p>Vzorec platformo tag:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;platform name="android"&gt;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;platform name="android"&gt;
     &lt;!-- android-specific elements --&gt;
 &lt;/platform&gt;
 &lt;platform name="ios"&gt;
     &lt;!-- ios-specific elements --&gt;
 &lt;/platform&gt;
-</code></pre></div>
-<p>Zahtevane <code>name</code> atribut identificira platformo kot podpira, povezovanje elementa otrok s to platformo.</p>
+</code></pre></div></div>
+
+<p>Zahtevane <code class="language-plaintext highlighter-rouge">name</code> atribut identificira platformo kot podpira, povezovanje elementa otrok s to platformo.</p>
 
 <p>Platforma imena mora biti črka. Platforma imena, kot samovoljno odločili, so navedene:</p>
 
 <ul>
-<li>  Amazon-fireos</li>
-<li>  Android</li>
-<li>  blackberry10</li>
-<li>  IOS</li>
-<li>  WP7</li>
-<li>  WP8</li>
+  <li>Amazon-fireos</li>
+  <li>Android</li>
+  <li>blackberry10</li>
+  <li>IOS</li>
+  <li>WP7</li>
+  <li>WP8</li>
 </ul>
 
-<h2><em>izvorne datoteke</em> Element</h2>
+<h2 id="izvorne-datoteke-element"><em>izvorne datoteke</em> Element</h2>
 
-<p>Na <code>&lt;source-file&gt;</code> elementa, identificira izvršljiv izvorno kodo, ki se vgradi v projekt. Primeri:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;!-- android --&gt;
+<p>Na <code class="language-plaintext highlighter-rouge">&lt;source-file&gt;</code> elementa, identificira izvršljiv izvorno kodo, ki se vgradi v projekt. Primeri:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- android --&gt;
 &lt;source-file src="src/android/Foo.java"
                 target-dir="src/com/alunny/foo" /&gt;
 &lt;!-- ios --&gt;
 &lt;source-file src="src/ios/CDVFoo.m" /&gt;
 &lt;source-file src="src/ios/someLib.a" framework="true" /&gt;
 &lt;source-file src="src/ios/someLib.a" compiler-flags="-fno-objc-arc" /&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Podpira naslednje atribute:</p>
 
 <ul>
-<li><p><code>src</code>(obvezno): mesto datoteke glede na <code>plugin.xml</code> . Če v <code>src</code> ni mogoče najti datoteke, plugman ustavi in razveljavi namestitev, izda obvestilo o težavi in zapre s kodo nič.</p></li>
-<li><p><code>target-dir</code>: Imenik, v katerega je treba kopirati datoteke glede korena Cordova projekta. V praksi, to je najbolj pomembno za Java Platform, kjer je datoteka v v <code>com.alunny.foo</code> paket mora biti nameščena v v <code>com/alunny/foo</code> naslovnik. Za platforme, kjer Izvorni imenik ni pomembno, naj izpusti ta atribut.</p>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">src</code>(obvezno): mesto datoteke glede na <code class="language-plaintext highlighter-rouge">plugin.xml</code> . Če v <code class="language-plaintext highlighter-rouge">src</code> ni mogoče najti datoteke, plugman ustavi in razveljavi namestitev, izda obvestilo o težavi in zapre s kodo nič.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">target-dir</code>: Imenik, v katerega je treba kopirati datoteke glede korena Cordova projekta. V praksi, to je najbolj pomembno za Java Platform, kjer je datoteka v v <code class="language-plaintext highlighter-rouge">com.alunny.foo</code> paket mora biti nameščena v v <code class="language-plaintext highlighter-rouge">com/alunny/foo</code> naslovnik. Za platforme, kjer Izvorni imenik ni pomembno, naj izpusti ta atribut.</p>
 
-<p>S sredstvi, če je <code>target</code> od a <code>source-file</code> bi prepisati obstoječe datoteke, plugman ustavi in razveljavi namestitev, izda obvestilo o težavi in zapre s kodo nič.</p></li>
-<li><p><code>framework</code>(samo za iOS): Če nastavite na <code>true</code> , doda tudi določene datoteke kot okvir projekta.</p></li>
-<li><p><code>compiler-flags</code>(samo za iOS): Če nastavite, dodeli določeno prevajalnik zastavice za določen izvorne datoteke.</p></li>
+    <p>S sredstvi, če je <code class="language-plaintext highlighter-rouge">target</code> od a <code class="language-plaintext highlighter-rouge">source-file</code> bi prepisati obstoječe datoteke, plugman ustavi in razveljavi namestitev, izda obvestilo o težavi in zapre s kodo nič.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">framework</code>(samo za iOS): Če nastavite na <code class="language-plaintext highlighter-rouge">true</code> , doda tudi določene datoteke kot okvir projekta.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">compiler-flags</code>(samo za iOS): Če nastavite, dodeli določeno prevajalnik zastavice za določen izvorne datoteke.</p>
+  </li>
 </ul>
 
-<h2><em>config-file</em> Element</h2>
+<h2 id="config-file-element"><em>config-file</em> Element</h2>
 
 <p>Identificira na podlagi XML konfiguracijsko datoteko spremeniti, kjer v ta dokument spremembi naj potekajo in kaj je treba spremeniti.</p>
 
-<p>So dveh vrst datotek, ki so bile preskušene za spremembo s tem elementom <code>xml</code> in <code>plist</code> datotek.</p>
+<p>So dveh vrst datotek, ki so bile preskušene za spremembo s tem elementom <code class="language-plaintext highlighter-rouge">xml</code> in <code class="language-plaintext highlighter-rouge">plist</code> datotek.</p>
 
-<p>Je <code>config-file</code> element omogoča samo dodati novo drevo je XML dokumenta. Otroci so XML literals vstavljeno v ciljnem dokumentu.</p>
+<p>Je <code class="language-plaintext highlighter-rouge">config-file</code> element omogoča samo dodati novo drevo je XML dokumenta. Otroci so XML literals vstavljeno v ciljnem dokumentu.</p>
 
 <p>Primer za XML:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;config-file target="AndroidManifest.xml" parent="/manifest/application"&gt;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;config-file target="AndroidManifest.xml" parent="/manifest/application"&gt;
     &lt;activity android:name="com.foo.Foo" android:label="@string/app_name"&gt;
         &lt;intent-filter&gt;
         &lt;/intent-filter&gt;
     &lt;/activity&gt;
 &lt;/config-file&gt;
-</code></pre></div>
-<p>Primer za <code>plist</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;config-file target="*-Info.plist" parent="CFBundleURLTypes"&gt;
+</code></pre></div></div>
+
+<p>Primer za <code class="language-plaintext highlighter-rouge">plist</code> :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;config-file target="*-Info.plist" parent="CFBundleURLTypes"&gt;
     &lt;array&gt;
         &lt;dict&gt;
             &lt;key&gt;PackageName&lt;/key&gt;
@@ -2332,111 +2415,142 @@
         &lt;/dict&gt;
     &lt;/array&gt;
 &lt;/config-file&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Podpira naslednje atribute:</p>
 
 <ul>
-<li><p><code>target</code>:</p>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">target</code>:</p>
 
-<p>Pila v obstati povedno določilo ter pot koren Cordova projekta.</p>
+    <p>Pila v obstati povedno določilo ter pot koren Cordova projekta.</p>
 
-<p>Cilj lahko vključujejo nadomestne ( <code>*</code> ) elementov. V tem primeru plugman rekurzivno preišče imeniško strukturo projekta in uporablja prvo tekmo.</p>
+    <p>Cilj lahko vključujejo nadomestne ( <code class="language-plaintext highlighter-rouge">*</code> ) elementov. V tem primeru plugman rekurzivno preišče imeniško strukturo projekta in uporablja prvo tekmo.</p>
 
-<p>Na iOS, lokacije konfiguracijske datoteke glede na korenski imenik projekta ni znano, tako določa cilj <code>config.xml</code> razreši<code>cordova-ios-project/MyAppName/config.xml</code>.</p>
+    <p>Na iOS, lokacije konfiguracijske datoteke glede na korenski imenik projekta ni znano, tako določa cilj <code class="language-plaintext highlighter-rouge">config.xml</code> razreši<code class="language-plaintext highlighter-rouge">cordova-ios-project/MyAppName/config.xml</code>.</p>
 
-<p>Če navedena datoteka ne obstaja, orodje prezre sprememba konfiguracije in nadaljuje namestitev.</p></li>
-<li><p><code>parent</code>: Na XPath selektor navajanje staršev elementov dodati v datoteki config. Če uporabljate absolutne selektorje, uporabite nadomestni znak ( <code>*</code> ) določiti korenski element, npr.<code>/*/plugins</code>.</p>
+    <p>Če navedena datoteka ne obstaja, orodje prezre sprememba konfiguracije in nadaljuje namestitev.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">parent</code>: Na XPath selektor navajanje staršev elementov dodati v datoteki config. Če uporabljate absolutne selektorje, uporabite nadomestni znak ( <code class="language-plaintext highlighter-rouge">*</code> ) določiti korenski element, npr.<code class="language-plaintext highlighter-rouge">/*/plugins</code>.</p>
 
-<p>Za <code>plist</code> datoteke, je <code>parent</code> ugotovi, pod kateri nadrejeni ključ naj vstavi določeno XML.</p>
+    <p>Za <code class="language-plaintext highlighter-rouge">plist</code> datoteke, je <code class="language-plaintext highlighter-rouge">parent</code> ugotovi, pod kateri nadrejeni ključ naj vstavi določeno XML.</p>
 
-<p>Če selektor ne razreši otrok od navedenega dokumenta, orodje ustavi in obrnjeno umestitev proces, izda opozorilo, in zapre s kodo nič.</p></li>
+    <p>Če selektor ne razreši otrok od navedenega dokumenta, orodje ustavi in obrnjeno umestitev proces, izda opozorilo, in zapre s kodo nič.</p>
+  </li>
 </ul>
 
-<h2><em>plugins-plist</em> Element</h2>
+<h2 id="plugins-plist-element"><em>plugins-plist</em> Element</h2>
 
-<p>To je <em>zastarel</em> , saj velja le cordova-ios 2.2.0 in spodaj. Uporaba je <code>&lt;config-file&gt;</code> oznaka za novejše različice Cordova.</p>
+<p>To je <em>zastarel</em> , saj velja le cordova-ios 2.2.0 in spodaj. Uporaba je <code class="language-plaintext highlighter-rouge">&lt;config-file&gt;</code> oznaka za novejše različice Cordova.</p>
 
 <p>Primer:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;config-file target="config.xml" parent="/widget/plugins"&gt;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;config-file target="config.xml" parent="/widget/plugins"&gt;
     &lt;feature name="ChildBrowser"&gt;
         &lt;param name="ios-package" value="ChildBrowserCommand"/&gt;
     &lt;/feature&gt;
 &lt;/config-file&gt;
-</code></pre></div>
-<p>Določa ključ in vrednost v privesiti v ustrezne <code>AppInfo.plist</code> datoteke v projektu Cordova iOS. Na primer:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;plugins-plist key="Foo" string="CDVFoo" /&gt;
-</code></pre></div>
-<h2><em>vir datoteke</em> in <em>datoteke za glave</em> elementov</h2>
+</code></pre></div></div>
+
+<p>Določa ključ in vrednost v privesiti v ustrezne <code class="language-plaintext highlighter-rouge">AppInfo.plist</code> datoteke v projektu Cordova iOS. Na primer:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;plugins-plist key="Foo" string="CDVFoo" /&gt;
+</code></pre></div></div>
+
+<h2 id="vir-datoteke-in-datoteke-za-glave-elementov"><em>vir datoteke</em> in <em>datoteke za glave</em> elementov</h2>
 
 <p>Kot izvorne datoteke, vendar posebej za platforme, kot so iOS da razlikujete od izvorne datoteke, glave in virov. iOS primeri:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;resource-file src="CDVFoo.bundle" /&gt;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;resource-file src="CDVFoo.bundle" /&gt;
 &lt;resource-file src="CDVFooViewController.xib" /&gt;
 &lt;header-file src="CDVFoo.h" /&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Android primer:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt; datoteko sredstev src="FooPluginStrings.xml" target="res/values/FooPluginStrings.xml" / &gt;
-</code></pre></div>
-<h2><em>lib-datoteke</em> Element</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt; datoteko sredstev src="FooPluginStrings.xml" target="res/values/FooPluginStrings.xml" / &gt;
+</code></pre></div></div>
+
+<h2 id="lib-datoteke-element"><em>lib-datoteke</em> Element</h2>
 
 <p>Kot vir, vir in glava datoteke, vendar posebej za platforme, kot so BlackBerry 10, ki uporabljajo ustvarjajo knjižnice. Primeri:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;lib-file src="src/BlackBerry10/native/device/libfoo.so" arch="device" /&gt;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;lib-file src="src/BlackBerry10/native/device/libfoo.so" arch="device" /&gt;
 &lt;lib-file src="src/BlackBerry10/native/simulator/libfoo.so" arch="simulator" /&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Podprtih atribute:</p>
 
 <ul>
-<li><p><code>src</code>(obvezno): mesto datoteke glede na <code>plugin.xml</code> . Če <code>src</code> ni mogoče najti, plugman ustavi in razveljavi namestitev, izdaja a svarilen približno problem, in zapre s kodo nič.</p></li>
-<li><p><code>arch</code>: Arhitektura, ki je <code>.so</code> je bila zgrajena datoteka, bodisi <code>device</code> ali<code>simulator</code>.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">src</code>(obvezno): mesto datoteke glede na <code class="language-plaintext highlighter-rouge">plugin.xml</code> . Če <code class="language-plaintext highlighter-rouge">src</code> ni mogoče najti, plugman ustavi in razveljavi namestitev, izdaja a svarilen približno problem, in zapre s kodo nič.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">arch</code>: Arhitektura, ki je <code class="language-plaintext highlighter-rouge">.so</code> je bila zgrajena datoteka, bodisi <code class="language-plaintext highlighter-rouge">device</code> ali<code class="language-plaintext highlighter-rouge">simulator</code>.</p>
+  </li>
 </ul>
 
-<h2><em>okvir</em> Element</h2>
+<h2 id="okvir-element"><em>okvir</em> Element</h2>
 
 <p>Opredeljuje okvir (običajno del OS/platform) na katerem plugin je odvisna.</p>
 
 <p>Primeri:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;framework src="libsqlite3.dylib" /&gt;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;framework src="libsqlite3.dylib" /&gt;
 &lt;framework src="social.framework" weak="true" /&gt;
-</code></pre></div>
-<p>Na <code>src</code> atribut določa okvir, ki plugman poskuša dodati Cordova projekt, na pravi način za določeno platformo.</p>
+</code></pre></div></div>
 
-<p>Izbirnem <code>weak</code> atribut je logična vrednost, ki označuje, ali bi morali biti okviru šibko povezani. Privzeta vrednost je<code>false</code>.</p>
+<p>Na <code class="language-plaintext highlighter-rouge">src</code> atribut določa okvir, ki plugman poskuša dodati Cordova projekt, na pravi način za določeno platformo.</p>
 
-<h2><em>info</em> Element</h2>
+<p>Izbirnem <code class="language-plaintext highlighter-rouge">weak</code> atribut je logična vrednost, ki označuje, ali bi morali biti okviru šibko povezani. Privzeta vrednost je<code class="language-plaintext highlighter-rouge">false</code>.</p>
 
-<p>Dodatne informacije za uporabnike. To je uporabno, ko potrebujete poseben lestev, ki je ni mogoče zlahka avtomatizirano ali so izven obsega plugman&#39;s. Primeri:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;info&gt;
+<h2 id="info-element"><em>info</em> Element</h2>
+
+<p>Dodatne informacije za uporabnike. To je uporabno, ko potrebujete poseben lestev, ki je ni mogoče zlahka avtomatizirano ali so izven obsega plugman’s. Primeri:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;info&gt;
 You need to install __Google Play Services__ from the `Android Extras` section using the Android SDK manager (run `android`).
 
 You need to add the following line to your `local.properties`
 
 android.library.reference.1=PATH_TO_ANDROID_SDK/sdk/extras/google/google_play_services/libproject/google-play-services_lib
 &lt;/info&gt;
-</code></pre></div>
-<h2>Spremenljivke</h2>
+</code></pre></div></div>
 
-<p>V nekaterih primerih plugin morda morali spremembe konfiguracije odvisna od ciljnega programa. Na primer, v register za C2DM na Android app katerega paket id je <code>com.alunny.message</code> zahtevala dovoljenje, kot so:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;uses-permission
+<h2 id="spremenljivke">Spremenljivke</h2>
+
+<p>V nekaterih primerih plugin morda morali spremembe konfiguracije odvisna od ciljnega programa. Na primer, v register za C2DM na Android app katerega paket id je <code class="language-plaintext highlighter-rouge">com.alunny.message</code> zahtevala dovoljenje, kot so:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;uses-permission
 android:name="com.alunny.message.permission.C2D_MESSAGE"/&gt;
-</code></pre></div>
-<p>V takšnih primerih, kjer bo vsebina postavljena od na <code>plugin.xml</code> datoteke ni znana pred časom, spremenljivke lahko navede znak za dolar sledi niz tiskanimi črkami, številke ali podčrtaji. V zgornjem primeru, je <code>plugin.xml</code> datoteke vključujejo to oznako:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;uses-permission
+</code></pre></div></div>
+
+<p>V takšnih primerih, kjer bo vsebina postavljena od na <code class="language-plaintext highlighter-rouge">plugin.xml</code> datoteke ni znana pred časom, spremenljivke lahko navede znak za dolar sledi niz tiskanimi črkami, številke ali podčrtaji. V zgornjem primeru, je <code class="language-plaintext highlighter-rouge">plugin.xml</code> datoteke vključujejo to oznako:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;uses-permission
 android:name="$PACKAGE_NAME.permission.C2D_MESSAGE"/&gt;
-</code></pre></div>
-<p>plugman zamenja sklice spremenljivk z določeno vrednost ali prazen niz, če ne najde. Lahko zazna vrednost spremenljivke referenc (v tem primeru iz na <code>AndroidManifest.xml</code> datoteko) ali določen uporabnik orodja; natančen postopek je odvisen od določeno orodje.</p>
+</code></pre></div></div>
+
+<p>plugman zamenja sklice spremenljivk z določeno vrednost ali prazen niz, če ne najde. Lahko zazna vrednost spremenljivke referenc (v tem primeru iz na <code class="language-plaintext highlighter-rouge">AndroidManifest.xml</code> datoteko) ali določen uporabnik orodja; natančen postopek je odvisen od določeno orodje.</p>
 
 <p>plugman lahko zahteva uporabnik v poseben značaj a plugin zahtevane spremenljivke. Primer API tipke za C2M in Google Maps lahko določena kot argument ukazne vrstice:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">plugman --platform android --project /path/to/project --plugin name|git-url|path --variable API_KEY=!@CFATGWE%^WGSFDGSDFW$%^#$%YTHGsdfhsfhyer56734
-</code></pre></div>
-<p>Narediti spremenljivko obvezna, je <code>&lt;platform&gt;</code> oznaka mora vsebovati a <code>&lt;preference&gt;</code> oznako. Na primer:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="API_KEY" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plugman --platform android --project /path/to/project --plugin name|git-url|path --variable API_KEY=!@CFATGWE%^WGSFDGSDFW$%^#$%YTHGsdfhsfhyer56734
+</code></pre></div></div>
+
+<p>Narediti spremenljivko obvezna, je <code class="language-plaintext highlighter-rouge">&lt;platform&gt;</code> oznaka mora vsebovati a <code class="language-plaintext highlighter-rouge">&lt;preference&gt;</code> oznako. Na primer:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="API_KEY" /&gt;
+</code></pre></div></div>
+
 <p>plugman preveri, da so te zahtevane nastavitve opravil v. V nasprotnem primeru, to opozoriti uporabnika kako poteči spremenljiv v in izhod s šifro ni nič.</p>
 
 <p>Nekatera imena spremenljivk je treba rezervirati, kot prisluškovati spodaj.</p>
 
-<h2>$PACKAGE_NAME</h2>
+<h2 id="package_name">$PACKAGE_NAME</h2>
 
-<p>Obratno-domene slog Enolični identifikator za paket, ki ustreza na <code>CFBundleIdentifier</code> na iOS ali <code>package</code> atribut najvišje ravni <code>manifest</code> element v je <code>AndroidManifest.xml</code> datoteke.</p>
+<p>Obratno-domene slog Enolični identifikator za paket, ki ustreza na <code class="language-plaintext highlighter-rouge">CFBundleIdentifier</code> na iOS ali <code class="language-plaintext highlighter-rouge">package</code> atribut najvišje ravni <code class="language-plaintext highlighter-rouge">manifest</code> element v je <code class="language-plaintext highlighter-rouge">AndroidManifest.xml</code> datoteke.</p>
 
 
             </div>

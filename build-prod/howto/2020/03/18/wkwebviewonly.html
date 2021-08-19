@@ -131,31 +131,32 @@
     </header>
     <section>
         <div>
-            <p>Apple started to reject apps with <code>UIWebView</code> references. You will need to update your app to fix this and this post sums up the required steps.</p>
+            <p>Apple started to reject apps with <code class="language-plaintext highlighter-rouge">UIWebView</code> references. You will need to update your app to fix this and this post sums up the required steps.</p>
 
 <p>This should solve the warning after uploading the app to App Store connect:</p>
 
 <blockquote>
-<p>ITMS-90809: Deprecated API Usage - Apple will stop accepting submissions of apps that use UIWebView APIs.</p>
+  <p>ITMS-90809: Deprecated API Usage - Apple will stop accepting submissions of apps that use UIWebView APIs.</p>
 </blockquote>
 
-<p>A new <code>preference</code> flag <code>WKWebViewOnly</code> was introduced to remove all <code>UIWebView</code> references from Cordova&#39;s code during compile-time. It is recommended to upgrade the <code>cordova-ios</code> platform to version <code>5.1.1</code>.</p>
+<p>A new <code class="language-plaintext highlighter-rouge">preference</code> flag <code class="language-plaintext highlighter-rouge">WKWebViewOnly</code> was introduced to remove all <code class="language-plaintext highlighter-rouge">UIWebView</code> references from Cordova’s code during compile-time. It is recommended to upgrade the <code class="language-plaintext highlighter-rouge">cordova-ios</code> platform to version <code class="language-plaintext highlighter-rouge">5.1.1</code>.</p>
 
 <!--more-->
 
-<h2>Use a WKWebView plugin.</h2>
+<h2 id="use-a-wkwebview-plugin">Use a WKWebView plugin.</h2>
 
-<p>The following example uses the <code>[cordova-plugin-wkwebview-engine](https://github.com/apache/cordova-plugin-wkwebview-engine)</code> plugin:</p>
+<p>The following example uses the <code class="language-plaintext highlighter-rouge">[cordova-plugin-wkwebview-engine](https://github.com/apache/cordova-plugin-wkwebview-engine)</code> plugin:</p>
 
 <ul>
-<li>Add plugin <code>cordova-plugin-wkwebview-engine</code>, preferably the latest version <strong>1.2.1</strong></li>
-<li>Add <code>preference</code> attribute <code>CordovaWebViewEngine</code> to the <code>config.xml</code>.</li>
-<li>Add <code>feature</code> attribute <code>CDVWKWebViewEngine</code> to the <code>config.xml</code>.</li>
-<li>Add <code>preference</code> <code>WKWebViewOnly</code> to the <code>config.xml</code>.</li>
+  <li>Add plugin <code class="language-plaintext highlighter-rouge">cordova-plugin-wkwebview-engine</code>, preferably the latest version <strong>1.2.1</strong></li>
+  <li>Add <code class="language-plaintext highlighter-rouge">preference</code> attribute <code class="language-plaintext highlighter-rouge">CordovaWebViewEngine</code> to the <code class="language-plaintext highlighter-rouge">config.xml</code>.</li>
+  <li>Add <code class="language-plaintext highlighter-rouge">feature</code> attribute <code class="language-plaintext highlighter-rouge">CDVWKWebViewEngine</code> to the <code class="language-plaintext highlighter-rouge">config.xml</code>.</li>
+  <li>Add <code class="language-plaintext highlighter-rouge">preference</code> <code class="language-plaintext highlighter-rouge">WKWebViewOnly</code> to the <code class="language-plaintext highlighter-rouge">config.xml</code>.</li>
 </ul>
 
-<p><strong>Example <code>config.xml</code> with <code>cordova-plugin-wkwebview-engine</code> plugin</strong></p>
-<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;platform</span> <span class="na">name=</span><span class="s">"ios"</span><span class="nt">&gt;</span>
+<p><strong>Example <code class="language-plaintext highlighter-rouge">config.xml</code> with <code class="language-plaintext highlighter-rouge">cordova-plugin-wkwebview-engine</code> plugin</strong></p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;platform</span> <span class="na">name=</span><span class="s">"ios"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;preference</span> <span class="na">name=</span><span class="s">"WKWebViewOnly"</span> <span class="na">value=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
 
     <span class="nt">&lt;feature</span> <span class="na">name=</span><span class="s">"CDVWKWebViewEngine"</span><span class="nt">&gt;</span>
@@ -164,18 +165,20 @@
 
     <span class="nt">&lt;preference</span> <span class="na">name=</span><span class="s">"CordovaWebViewEngine"</span> <span class="na">value=</span><span class="s">"CDVWKWebViewEngine"</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/platform&gt;</span>
-</code></pre></div>
-<h2>Still getting the warning?</h2>
+</code></pre></div></div>
 
-<p>If you are still getting the warning, it is most likely one or more plugins in your project are still references <code>UIWebView</code>. You will need to identify which plugins and contact those plugin&#39;s developers through their support channel (plugin&#39;s repo). They will need to fix their plugins by either remove the references or wrap them with the new flag.</p>
+<h2 id="still-getting-the-warning">Still getting the warning?</h2>
 
-<h2>Using other WKWebView plugin</h2>
+<p>If you are still getting the warning, it is most likely one or more plugins in your project are still references <code class="language-plaintext highlighter-rouge">UIWebView</code>. You will need to identify which plugins and contact those plugin’s developers through their support channel (plugin’s repo). They will need to fix their plugins by either remove the references or wrap them with the new flag.</p>
+
+<h2 id="using-other-wkwebview-plugin">Using other WKWebView plugin</h2>
 
 <p>There are alternatives to the official WKWebView plugin from the examples above. Make sure they have been updated and use the latest version. If you have any issues or usage questions with their plugins, please read their docs and request help through their support channels.</p>
 
-<h2>Future Roadmap</h2>
+<h2 id="future-roadmap">Future Roadmap</h2>
 
-<p>The next major release of <code>cordova-ios</code> will remove all references of <code>UIWebView</code> from code. The flag will also be removed in the next major release as <code>WKWebView</code> will be Cordova&#39;s default webview. There is currently <em>no ETA</em> for the next major release.</p>
+<p>The next major release of <code class="language-plaintext highlighter-rouge">cordova-ios</code> will remove all references of <code class="language-plaintext highlighter-rouge">UIWebView</code> from code. The flag will also be removed in the next major release as <code class="language-plaintext highlighter-rouge">WKWebView</code> will be Cordova’s default webview. There is currently <em>no ETA</em> for the next major release.</p>
+
 
         </div>
     </section>

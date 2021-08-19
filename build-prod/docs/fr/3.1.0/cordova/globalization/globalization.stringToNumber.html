@@ -1256,65 +1256,73 @@
             
 
             <div id="page-toc-source">
-                <h1>globalization.stringToNumber</h1>
+                <h1 id="globalizationstringtonumber">globalization.stringToNumber</h1>
 
-<p>Analyse un nombre mis en forme comme une chaîne selon les préférences de l&#39;utilisateur du client et renvoie le numéro du correspondant.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.globalization.stringToNumber(string, successCallback, errorCallback, options);
-</code></pre></div>
-<h2>Description</h2>
+<p>Analyse un nombre mis en forme comme une chaîne selon les préférences de l’utilisateur du client et renvoie le numéro du correspondant.</p>
 
-<p>Retourne le nombre de la <code>successCallback</code> avec un <code>properties</code> objet comme paramètre. Cet objet doit avoir une <code>value</code> propriété avec une <code>Number</code> valeur.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.globalization.stringToNumber(string, successCallback, errorCallback, options);
+</code></pre></div></div>
 
-<p>S&#39;il y a une erreur, l&#39;analyse de la chaîne de numéro, puis le <code>errorCallback</code> s&#39;exécute avec un <code>[GlobalizationError](GlobalizationError/globalizationerror.html)</code> objet comme paramètre. Code attendu de l&#39;erreur est<code>[GlobalizationError](GlobalizationError/globalizationerror.html).PARSING\_ERROR</code>.</p>
+<h2 id="description">Description</h2>
 
-<p>Le <code>options</code> paramètre est facultatif et par défaut les valeurs suivantes :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">{type: « decimal »}
-</code></pre></div>
-<p>Le <code>options.type</code> peut être <code>decimal</code> , <code>percent</code> , ou<code>currency</code>.</p>
+<p>Retourne le nombre de la <code class="language-plaintext highlighter-rouge">successCallback</code> avec un <code class="language-plaintext highlighter-rouge">properties</code> objet comme paramètre. Cet objet doit avoir une <code class="language-plaintext highlighter-rouge">value</code> propriété avec une <code class="language-plaintext highlighter-rouge">Number</code> valeur.</p>
 
-<h2>Plates-formes prises en charge</h2>
+<p>S’il y a une erreur, l’analyse de la chaîne de numéro, puis le <code class="language-plaintext highlighter-rouge">errorCallback</code> s’exécute avec un <code class="language-plaintext highlighter-rouge">[GlobalizationError](GlobalizationError/globalizationerror.html)</code> objet comme paramètre. Code attendu de l’erreur est<code class="language-plaintext highlighter-rouge">[GlobalizationError](GlobalizationError/globalizationerror.html).PARSING\_ERROR</code>.</p>
+
+<p>Le <code class="language-plaintext highlighter-rouge">options</code> paramètre est facultatif et par défaut les valeurs suivantes :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{type: « decimal »}
+</code></pre></div></div>
+
+<p>Le <code class="language-plaintext highlighter-rouge">options.type</code> peut être <code class="language-plaintext highlighter-rouge">decimal</code> , <code class="language-plaintext highlighter-rouge">percent</code> , ou<code class="language-plaintext highlighter-rouge">currency</code>.</p>
+
+<h2 id="plates-formes-prises-en-charge">Plates-formes prises en charge</h2>
 
 <ul>
-<li>  Android</li>
-<li>  BlackBerry WebWorks (OS 5.0 et plus)</li>
-<li>  iOS</li>
-<li>  Windows Phone 8</li>
+  <li>Android</li>
+  <li>BlackBerry WebWorks (OS 5.0 et plus)</li>
+  <li>iOS</li>
+  <li>Windows Phone 8</li>
 </ul>
 
-<h2>Petit exemple</h2>
+<h2 id="petit-exemple">Petit exemple</h2>
 
-<p>Lorsque le navigateur est configuré pour la <code>en\_US</code> locale, cela doit afficher une boîte de dialogue contextuelle avec un texte semblable à <code>number: 1234.56</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.globalization.stringToNumber(
+<p>Lorsque le navigateur est configuré pour la <code class="language-plaintext highlighter-rouge">en\_US</code> locale, cela doit afficher une boîte de dialogue contextuelle avec un texte semblable à <code class="language-plaintext highlighter-rouge">number: 1234.56</code> :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.globalization.stringToNumber(
     '1234.56',
     function (number) {alert('number: ' + number.value + '\n');},
     function () {alert('Error getting number\n');},
     {type:'decimal'}
 );
-</code></pre></div>
-<h2>Exemple complet</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>stringToNumber Example<span class="nt">&lt;/title&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
 
-    <span class="kd">function</span> <span class="nx">checkNumber</span><span class="p">()</span> <span class="p">{</span>
-      <span class="nb">navigator</span><span class="p">.</span><span class="nx">globalization</span><span class="p">.</span><span class="nx">stringToNumber</span><span class="p">(</span>
-        <span class="s1">'1234.56'</span><span class="p">,</span>
-        <span class="kd">function</span> <span class="p">(</span><span class="nx">number</span><span class="p">)</span> <span class="p">{</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'number: '</span> <span class="o">+</span> <span class="nx">number</span><span class="p">.</span><span class="nx">value</span> <span class="o">+</span> <span class="s1">'\n'</span><span class="p">);},</span>
-        <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'Error getting number\n'</span><span class="p">);},</span>
-        <span class="p">{</span><span class="na">type</span><span class="p">:</span><span class="s1">'decimal'</span><span class="p">}</span>
-      <span class="p">);</span>
-    <span class="p">}</span>
+<h2 id="exemple-complet">Exemple complet</h2>
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"checkNumber()"</span><span class="nt">&gt;</span>Click for parsed number<span class="nt">&lt;/button&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;stringToNumber Example&lt;/title&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
+
+    function checkNumber() {
+      navigator.globalization.stringToNumber(
+        '1234.56',
+        function (number) {alert('number: ' + number.value + '\n');},
+        function () {alert('Error getting number\n');},
+        {type:'decimal'}
+      );
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;button onclick="checkNumber()"&gt;Click for parsed number&lt;/button&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

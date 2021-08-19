@@ -1310,26 +1310,27 @@
     }
 </style>
 
-<h1>Файл config.xml</h1>
+<h1 id="файл-configxml">Файл config.xml</h1>
 
-<p>Многие аспекты поведения приложения можно управлять с помощью глобальной конфигурации файла <code>config.xml</code> , то есть в верхнего уровня веб-каталог активов, а также на домашней странице приложения. Этот XML-файл платформа агностик форматируются основаны на спецификации W3C <a href="http://www.w3.org/TR/widgets/">Упакованы веб-приложений (виджетов)</a> и продлил указать основные Cordova API функции, плагины и платформо зависимые параметры.</p>
+<p>Многие аспекты поведения приложения можно управлять с помощью глобальной конфигурации файла <code class="language-plaintext highlighter-rouge">config.xml</code> , то есть в верхнего уровня веб-каталог активов, а также на домашней странице приложения. Этот XML-файл платформа агностик форматируются основаны на спецификации W3C <a href="http://www.w3.org/TR/widgets/">Упакованы веб-приложений (виджетов)</a> и продлил указать основные Cordova API функции, плагины и платформо зависимые параметры.</p>
 
-<p>Для проектов, созданных с помощью Cordova CLI (описанный в разделе &quot;интерфейс командной строки&quot;) этот файл можно найти в каталоге верхнего уровня <code>www</code>. Использование CLI для построения проекта восстанавливает версии файла в разных подкаталогах в пределах <code>platforms</code> . Если вы используете CLI для создания проекта, но затем переход рабочего процесса на пакет SDK, файл платформа специфического служит источником.</p>
+<p>Для проектов, созданных с помощью Cordova CLI (описанный в разделе “интерфейс командной строки”) этот файл можно найти в каталоге верхнего уровня <code class="language-plaintext highlighter-rouge">www</code>. Использование CLI для построения проекта восстанавливает версии файла в разных подкаталогах в пределах <code class="language-plaintext highlighter-rouge">platforms</code> . Если вы используете CLI для создания проекта, но затем переход рабочего процесса на пакет SDK, файл платформа специфического служит источником.</p>
 
 <p>В этом разделе описываются параметры конфигурации глобальных и кросс платформенной. В следующих разделах для конкретной платформы вариантов:</p>
 
 <ul>
-<li>  <a href="../guide/platforms/ios/config.html">iOS конфигурации</a></li>
-<li>  Андроид конфигурации</li>
-<li>  <a href="../guide/platforms/blackberry10/config.html">BlackBerry конфигурации</a></li>
+  <li><a href="../guide/platforms/ios/config.html">iOS конфигурации</a></li>
+  <li>Андроид конфигурации</li>
+  <li><a href="../guide/platforms/blackberry10/config.html">BlackBerry конфигурации</a></li>
 </ul>
 
 <p>Помимо различных параметров конфигурации, подробно описаны ниже можно также настроить приложения основной набор образов для каждой целевой платформы. Увидеть иконки и заставки для получения дополнительной информации.</p>
 
-<h2>Основные элементы конфигурации</h2>
+<h2 id="основные-элементы-конфигурации">Основные элементы конфигурации</h2>
 
-<p>Этот пример показывает значение по умолчанию <code>config.xml</code> порожденных CLI <code>create</code> команды, описанные в интерфейс командной строки:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;widget id="com.example.hello" version="0.0.1"&gt;
+<p>Этот пример показывает значение по умолчанию <code class="language-plaintext highlighter-rouge">config.xml</code> порожденных CLI <code class="language-plaintext highlighter-rouge">create</code> команды, описанные в интерфейс командной строки:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;widget id="com.example.hello" version="0.0.1"&gt;
         &lt;name&gt;HelloWorld&lt;/name&gt;
         &lt;description&gt;
             A sample Apache Cordova application that responds to the deviceready event.
@@ -1342,70 +1343,108 @@
         &lt;preference name="Fullscreen" value="true" /&gt;
         &lt;preference name="WebViewBounce" value="true" /&gt;
     &lt;/widget&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <!-- QUERY: is WebViewBounce superseded by DisallowOverscroll? -->
 
-<p>Следующие элементы конфигурации отображаются в профиле верхнего уровня <code>config.xml</code> файл и поддерживаются на всех поддерживаемых платформах Кордова:</p>
+<p>Следующие элементы конфигурации отображаются в профиле верхнего уровня <code class="language-plaintext highlighter-rouge">config.xml</code> файл и поддерживаются на всех поддерживаемых платформах Кордова:</p>
 
 <ul>
-<li><p><code>&lt;widget&gt;</code>Элемента <code>id</code> атрибут предоставляет идентификатор реверс домена приложения и <code>version</code> его полный номер версии в нотации майор/несовершеннолетнего/патч.</p></li>
-<li><p><code>&lt;name&gt;</code>Элемент определяет официальное имя приложения, как он отображается на главном экране устройства и в магазине app интерфейсы.</p></li>
-<li><p><code>&lt;description&gt;</code>И <code>&lt;author&gt;</code> элементы определяют метаданные и контактную информацию, которая может появиться в магазине app списки.</p></li>
-<li><p>Необязательный <code>&lt;content&gt;</code> элемент определяет начальную страницу вашего приложения в каталоге верхнего уровня веб-активы. Значением по умолчанию является <code>index.html</code> , которая обычно появляется в проекте верхнего уровня <code>www</code> каталог.</p></li>
-<li><p><code>&lt;access&gt;</code>элементы определяют набор внешних доменов, которое приложение разрешается общаться с. Значение по умолчанию, показано выше позволяет доступ к любому серверу. Руководстве Whitelist домена для деталей.</p></li>
-<li><p><code>&lt;preference&gt;</code>Тег задает различные параметры как пар <code>name</code> / <code>value</code> атрибуты. Каждый предпочтение <code>name</code> регистр не учитывается. Многие параметры являются уникальными для конкретных платформ, перечисленных в верхней части этой страницы. В следующих разделах подробно описаны настройки, которые применяются к более чем одной платформы.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">&lt;widget&gt;</code>Элемента <code class="language-plaintext highlighter-rouge">id</code> атрибут предоставляет идентификатор реверс домена приложения и <code class="language-plaintext highlighter-rouge">version</code> его полный номер версии в нотации майор/несовершеннолетнего/патч.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">&lt;name&gt;</code>Элемент определяет официальное имя приложения, как он отображается на главном экране устройства и в магазине app интерфейсы.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">&lt;description&gt;</code>И <code class="language-plaintext highlighter-rouge">&lt;author&gt;</code> элементы определяют метаданные и контактную информацию, которая может появиться в магазине app списки.</p>
+  </li>
+  <li>
+    <p>Необязательный <code class="language-plaintext highlighter-rouge">&lt;content&gt;</code> элемент определяет начальную страницу вашего приложения в каталоге верхнего уровня веб-активы. Значением по умолчанию является <code class="language-plaintext highlighter-rouge">index.html</code> , которая обычно появляется в проекте верхнего уровня <code class="language-plaintext highlighter-rouge">www</code> каталог.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">&lt;access&gt;</code>элементы определяют набор внешних доменов, которое приложение разрешается общаться с. Значение по умолчанию, показано выше позволяет доступ к любому серверу. Руководстве Whitelist домена для деталей.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">&lt;preference&gt;</code>Тег задает различные параметры как пар <code class="language-plaintext highlighter-rouge">name</code> / <code class="language-plaintext highlighter-rouge">value</code> атрибуты. Каждый предпочтение <code class="language-plaintext highlighter-rouge">name</code> регистр не учитывается. Многие параметры являются уникальными для конкретных платформ, перечисленных в верхней части этой страницы. В следующих разделах подробно описаны настройки, которые применяются к более чем одной платформы.</p>
+  </li>
 </ul>
 
-<h2>Глобальная предпочтений</h2>
+<h2 id="глобальная-предпочтений">Глобальная предпочтений</h2>
 
 <p>Следующие глобальные настройки применяются для всех платформ:</p>
 
 <ul>
-<li><p><code>Fullscreen</code>позволяет скрыть строку состояния в верхней части экрана. Значение по умолчанию — <code>false</code> . Пример:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="Fullscreen" value="true" /&gt;
-</code></pre></div></li>
-<li><p><code>Orientation</code>позволяет заблокировать ориентации и проворачиваться в ответ на изменения в ориентации интерфейс. Возможные значения <code>default</code> , <code>landscape</code> , или <code>portrait</code> . Пример:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="Orientation" value="landscape" /&gt;
-</code></pre></div>
-<p><strong>Примечание:</strong> <code>default</code>Значение означает включены <em>как</em> альбомной и портретной ориентации. Если вы хотите использовать настройки по умолчанию каждой платформы (обычно только для портрет), оставьте этот тег из <code>config.xml</code> файла. Кроме того, ежевика использует <code>auto</code> вместо <code>default</code> в его <code>config.xml</code> файл. Если указать <code>default</code> в глобальной <code>config.xml</code> , оно переводится <code>auto</code> в построении BlackBerry.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Fullscreen</code>позволяет скрыть строку состояния в верхней части экрана. Значение по умолчанию — <code class="language-plaintext highlighter-rouge">false</code> . Пример:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="Fullscreen" value="true" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Orientation</code>позволяет заблокировать ориентации и проворачиваться в ответ на изменения в ориентации интерфейс. Возможные значения <code class="language-plaintext highlighter-rouge">default</code> , <code class="language-plaintext highlighter-rouge">landscape</code> , или <code class="language-plaintext highlighter-rouge">portrait</code> . Пример:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="Orientation" value="landscape" /&gt;
+</code></pre></div>    </div>
+
+    <p><strong>Примечание:</strong> <code class="language-plaintext highlighter-rouge">default</code>Значение означает включены <em>как</em> альбомной и портретной ориентации. Если вы хотите использовать настройки по умолчанию каждой платформы (обычно только для портрет), оставьте этот тег из <code class="language-plaintext highlighter-rouge">config.xml</code> файла. Кроме того, ежевика использует <code class="language-plaintext highlighter-rouge">auto</code> вместо <code class="language-plaintext highlighter-rouge">default</code> в его <code class="language-plaintext highlighter-rouge">config.xml</code> файл. Если указать <code class="language-plaintext highlighter-rouge">default</code> в глобальной <code class="language-plaintext highlighter-rouge">config.xml</code> , оно переводится <code class="language-plaintext highlighter-rouge">auto</code> в построении BlackBerry.</p>
+  </li>
 </ul>
 
-<h2>Multi-платформы предпочтения</h2>
+<h2 id="multi-платформы-предпочтения">Multi-платформы предпочтения</h2>
 
 <p>Следующие настройки применяются к более чем одной платформы, но не все из них:</p>
 
 <ul>
-<li><p><code>DisallowOverscroll</code>(логическое значение, по умолчанию <code>false</code> ): набор <code>true</code> Если вы не хотите интерфейс для отображения каких-либо обратной связи, когда пользователи прокрутки за начало или конец содержимого.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="DisallowOverscroll" value="true"/&gt;
-</code></pre></div>
-<p>Применяется к Android и iOS. На iOS, overscroll жесты причиной контента чтобы отскочить назад в исходное положение. На Android они производят более тонкий светящийся эффект вдоль верхнего или нижнего края содержание.</p></li>
-<li><p><code>BackgroundColor</code>: Задайте цвет фона приложения. Поддерживает шестнадцатеричное значение размером 4 байта, с первый байт, представляющий альфа-канал и стандартные значения RGB для следующих трех байтов. В этом примере указывается голубой:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="BackgroundColor" value="0xff0000ff"/&gt;
-</code></pre></div>
-<p>Применяется к Android и BlackBerry. Переопределяет CSS в противном случае доступны на <em>всех</em> платформах, например:<code>body{background-color:blue}</code>.</p></li>
-<li><p><code>HideKeyboardFormAccessoryBar</code>(логическое значение, по умолчанию <code>false</code> ): набор <code>true</code> Скрыть дополнительную панель инструментов, которая появляется над клавиатурой, помогая пользователям перемещаться из одной формы ввода на другой.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="HideKeyboardFormAccessoryBar" value="true"/&gt;
-</code></pre></div>
-<p>Применяется к iOS и BlackBerry.</p>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">DisallowOverscroll</code>(логическое значение, по умолчанию <code class="language-plaintext highlighter-rouge">false</code> ): набор <code class="language-plaintext highlighter-rouge">true</code> Если вы не хотите интерфейс для отображения каких-либо обратной связи, когда пользователи прокрутки за начало или конец содержимого.</p>
 
-<p><strong>Примечание:</strong> Для BlackBerry, допустимые значения находятся в <code>enable</code> или<code>disable</code>.</p></li>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="DisallowOverscroll" value="true"/&gt;
+</code></pre></div>    </div>
+
+    <p>Применяется к Android и iOS. На iOS, overscroll жесты причиной контента чтобы отскочить назад в исходное положение. На Android они производят более тонкий светящийся эффект вдоль верхнего или нижнего края содержание.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">BackgroundColor</code>: Задайте цвет фона приложения. Поддерживает шестнадцатеричное значение размером 4 байта, с первый байт, представляющий альфа-канал и стандартные значения RGB для следующих трех байтов. В этом примере указывается голубой:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="BackgroundColor" value="0xff0000ff"/&gt;
+</code></pre></div>    </div>
+
+    <p>Применяется к Android и BlackBerry. Переопределяет CSS в противном случае доступны на <em>всех</em> платформах, например:<code class="language-plaintext highlighter-rouge">body{background-color:blue}</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">HideKeyboardFormAccessoryBar</code>(логическое значение, по умолчанию <code class="language-plaintext highlighter-rouge">false</code> ): набор <code class="language-plaintext highlighter-rouge">true</code> Скрыть дополнительную панель инструментов, которая появляется над клавиатурой, помогая пользователям перемещаться из одной формы ввода на другой.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="HideKeyboardFormAccessoryBar" value="true"/&gt;
+</code></pre></div>    </div>
+
+    <p>Применяется к iOS и BlackBerry.</p>
+
+    <p><strong>Примечание:</strong> Для BlackBerry, допустимые значения находятся в <code class="language-plaintext highlighter-rouge">enable</code> или<code class="language-plaintext highlighter-rouge">disable</code>.</p>
+  </li>
 </ul>
 
-<h2><code>&lt;feature&gt;</code>Элемент</h2>
+<h2 id="featureэлемент"><code class="language-plaintext highlighter-rouge">&lt;feature&gt;</code>Элемент</h2>
 
-<p>Если вы используете CLI для построения приложений, используется <code>plugin</code> команду, чтобы включить устройство API-интерфейсы. Это не изменяет верхнего уровня <code>config.xml</code> файл, так что <code>&lt;feature&gt;</code> элемент не применяется к ваш рабочий процесс. Если вы работаете непосредственно в SDK и с помощью платформа специфического <code>config.xml</code> файл в качестве источника, вы используете <code>&lt;feature&gt;</code> тег, чтобы включить уровень устройства API и внешних плагинов. Они обычно появляются в этой форме:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;feature name="Plugin" value="PluginID" /&gt;
-</code></pre></div>
-<p>Они часто появляются с пользовательские значения в конкретной платформы <code>config.xml</code> файлов. Например вот как для указания устройства API для Android проектов:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;feature name="Device"&gt;
+<p>Если вы используете CLI для построения приложений, используется <code class="language-plaintext highlighter-rouge">plugin</code> команду, чтобы включить устройство API-интерфейсы. Это не изменяет верхнего уровня <code class="language-plaintext highlighter-rouge">config.xml</code> файл, так что <code class="language-plaintext highlighter-rouge">&lt;feature&gt;</code> элемент не применяется к ваш рабочий процесс. Если вы работаете непосредственно в SDK и с помощью платформа специфического <code class="language-plaintext highlighter-rouge">config.xml</code> файл в качестве источника, вы используете <code class="language-plaintext highlighter-rouge">&lt;feature&gt;</code> тег, чтобы включить уровень устройства API и внешних плагинов. Они обычно появляются в этой форме:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;feature name="Plugin" value="PluginID" /&gt;
+</code></pre></div></div>
+
+<p>Они часто появляются с пользовательские значения в конкретной платформы <code class="language-plaintext highlighter-rouge">config.xml</code> файлов. Например вот как для указания устройства API для Android проектов:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;feature name="Device"&gt;
         &lt;param name="android-package" value="org.apache.cordova.device.Device" /&gt;
     &lt;/feature&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Вот как элемент отображается для iOS проектов:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;feature name="Device"&gt;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;feature name="Device"&gt;
         &lt;param name="ios-package" value="CDVDevice" /&gt;
     &lt;/feature&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Подробную информацию о том, как указать каждую функцию в справочнике API. Руководстве плагин развития для получения дополнительной информации на плагины.</p>
 
 

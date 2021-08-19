@@ -2104,72 +2104,79 @@
             
 
             <div id="page-toc-source">
-                <h1>pause</h1>
+                <h1 id="pause">pause</h1>
 
-<p>L&#39;évènement se déclenche quand une application est mise en arrière-plan.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">document.addEventListener("pause", yourCallbackFunction, false);
-</code></pre></div>
-<h2>Détails</h2>
+<p>L’évènement se déclenche quand une application est mise en arrière-plan.</p>
 
-<p>L&#39;évènement <code>pause</code> se déclenche lorsque la plate-forme native met l&#39;application en arrière-plan, généralement lorsque l&#39;utilisateur bascule vers une autre application.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>document.addEventListener("pause", yourCallbackFunction, false);
+</code></pre></div></div>
 
-<p>Les applications devraient en général utiliser <code>document.addEventListener</code> pour attacher un écouteur d&#39;évènements, une fois l&#39;évènement <code>[deviceready](events.deviceready.html)</code> déclenché.</p>
+<h2 id="détails">Détails</h2>
 
-<h2>Plates-formes supportées</h2>
+<p>L’évènement <code class="language-plaintext highlighter-rouge">pause</code> se déclenche lorsque la plate-forme native met l’application en arrière-plan, généralement lorsque l’utilisateur bascule vers une autre application.</p>
+
+<p>Les applications devraient en général utiliser <code class="language-plaintext highlighter-rouge">document.addEventListener</code> pour attacher un écouteur d’évènements, une fois l’évènement <code class="language-plaintext highlighter-rouge">[deviceready](events.deviceready.html)</code> déclenché.</p>
+
+<h2 id="plates-formes-supportées">Plates-formes supportées</h2>
 
 <ul>
-<li>  Amazon Fire OS</li>
-<li>  Android</li>
-<li>  BlackBerry 10</li>
-<li>  iOS</li>
-<li>  Windows Phone 8</li>
-<li>  Windows 8</li>
+  <li>Amazon Fire OS</li>
+  <li>Android</li>
+  <li>BlackBerry 10</li>
+  <li>iOS</li>
+  <li>Windows Phone 8</li>
+  <li>Windows 8</li>
 </ul>
 
-<h2>Exemple court</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">document.addEventListener("pause", onPause, false);
+<h2 id="exemple-court">Exemple court</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>document.addEventListener("pause", onPause, false);
 
 function onPause() {
     // Handle the pause event
 }
-</code></pre></div>
-<h2>Exemple complet</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Pause Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="exemple-complet">Exemple complet</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onLoad</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="p">}</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Pause Example&lt;/title&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"pause"</span><span class="p">,</span> <span class="nx">onPause</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// Handle the pause event</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onPause</span><span class="p">()</span> <span class="p">{</span>
-    <span class="p">}</span>
+    // Wait for device API libraries to load
+    //
+    function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body</span> <span class="na">onload=</span><span class="s">"onLoad()"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2>Notes au sujet d&#39;iOS</h2>
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        document.addEventListener("pause", onPause, false);
+    }
 
-<p>Dans un gestionnaire de l&#39;évènement <code>pause</code>, tous les appels à l&#39;API Cordova ou vers des plugins natifs passant par l&#39;Objective-C ne fonctionnent pas, de même pour tous les appels interactifs tels que des alertes ou <code>console.log()</code>. Ceux-ci sont traités uniquement lorsque l&#39;application revient au premier plan, lors du prochain passage de la boucle d&#39;exécution.</p>
+    // Handle the pause event
+    //
+    function onPause() {
+    }
 
-<p>Sous iOS, l&#39;évènement spécifique <code>resign</code> est disponible comme alternative à <code>pause</code> et détecte quand les utilisateurs pressent le bouton de <strong>verrouillage</strong> pour verrouiller l&#39;appareil avec l&#39;application en cours d&#39;exécution au premier plan. Si l&#39;application (et l&#39;appareil) est prévue pour le multitâche, un évènement <code>pause</code> lui est ultérieurement associé, mais seulement sous iOS 5. En réalité, sous iOS 5, toutes les applications verrouillées prévues pour le multitâche sont envoyées à l&#39;arrière-plan. Afin qu&#39;une application puisse continuer à s&#39;exécuter lorsque l&#39;appareil est verrouillé sous iOS 5, il faudra désactiver le multitâche pour celle-ci en réglant <a href="http://developer.apple.com/library/ios/#documentation/general/Reference/InfoPlistKeyReference/Articles/iPhoneOSKeys.html">UIApplicationExitsOnSuspend</a> sur <code>YES</code>. Sous iOS 4, l&#39;application continuera de s&#39;exécuter même si l&#39;appareil est verrouillé, modifier la valeur de ce paramètre n&#39;a aucun effet.</p>
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body onload="onLoad()"&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h2 id="notes-au-sujet-dios">Notes au sujet d’iOS</h2>
+
+<p>Dans un gestionnaire de l’évènement <code class="language-plaintext highlighter-rouge">pause</code>, tous les appels à l’API Cordova ou vers des plugins natifs passant par l’Objective-C ne fonctionnent pas, de même pour tous les appels interactifs tels que des alertes ou <code class="language-plaintext highlighter-rouge">console.log()</code>. Ceux-ci sont traités uniquement lorsque l’application revient au premier plan, lors du prochain passage de la boucle d’exécution.</p>
+
+<p>Sous iOS, l’évènement spécifique <code class="language-plaintext highlighter-rouge">resign</code> est disponible comme alternative à <code class="language-plaintext highlighter-rouge">pause</code> et détecte quand les utilisateurs pressent le bouton de <strong>verrouillage</strong> pour verrouiller l’appareil avec l’application en cours d’exécution au premier plan. Si l’application (et l’appareil) est prévue pour le multitâche, un évènement <code class="language-plaintext highlighter-rouge">pause</code> lui est ultérieurement associé, mais seulement sous iOS 5. En réalité, sous iOS 5, toutes les applications verrouillées prévues pour le multitâche sont envoyées à l’arrière-plan. Afin qu’une application puisse continuer à s’exécuter lorsque l’appareil est verrouillé sous iOS 5, il faudra désactiver le multitâche pour celle-ci en réglant <a href="http://developer.apple.com/library/ios/#documentation/general/Reference/InfoPlistKeyReference/Articles/iPhoneOSKeys.html">UIApplicationExitsOnSuspend</a> sur <code class="language-plaintext highlighter-rouge">YES</code>. Sous iOS 4, l’application continuera de s’exécuter même si l’appareil est verrouillé, modifier la valeur de ce paramètre n’a aucun effet.</p>
+
 
 
             </div>

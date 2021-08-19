@@ -1304,78 +1304,84 @@
             
 
             <div id="page-toc-source">
-                <h1>線上</h1>
+                <h1 id="線上">線上</h1>
 
 <p>當應用程式進入線上狀態，和該設備將成為連接到互聯網時觸發此事件。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">document.addEventListener("online", yourCallbackFunction, false);
-</code></pre></div>
-<h2>詳細資訊</h2>
 
-<p><code>online</code>當先前連接的行動裝置接收到一個網路連接以允許應用程式訪問互聯網時激發的事件。 它依賴于連接 API 中，相同的資訊和火災時的值 <code>[connection.type](../connection/connection.type.html)</code> 成為<code>NONE</code>.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>document.addEventListener("online", yourCallbackFunction, false);
+</code></pre></div></div>
 
-<p>應用程式通常應使用 <code>document.addEventListener</code> 將一個事件攔截器附加一次 <code>[deviceready](events.deviceready.html)</code> 事件火災。</p>
+<h2 id="詳細資訊">詳細資訊</h2>
 
-<h2>支援的平臺</h2>
+<p><code class="language-plaintext highlighter-rouge">online</code>當先前連接的行動裝置接收到一個網路連接以允許應用程式訪問互聯網時激發的事件。 它依賴于連接 API 中，相同的資訊和火災時的值 <code class="language-plaintext highlighter-rouge">[connection.type](../connection/connection.type.html)</code> 成為<code class="language-plaintext highlighter-rouge">NONE</code>.</p>
+
+<p>應用程式通常應使用 <code class="language-plaintext highlighter-rouge">document.addEventListener</code> 將一個事件攔截器附加一次 <code class="language-plaintext highlighter-rouge">[deviceready](events.deviceready.html)</code> 事件火災。</p>
+
+<h2 id="支援的平臺">支援的平臺</h2>
 
 <ul>
-<li>  Android 系統</li>
-<li>  黑莓手機 WebWorks （OS 5.0 和更高）</li>
-<li>  iOS</li>
-<li>  Windows Phone 7 和 8</li>
-<li>  Tizen</li>
-<li>  Windows 8</li>
+  <li>Android 系統</li>
+  <li>黑莓手機 WebWorks （OS 5.0 和更高）</li>
+  <li>iOS</li>
+  <li>Windows Phone 7 和 8</li>
+  <li>Tizen</li>
+  <li>Windows 8</li>
 </ul>
 
-<h2>快速的示例</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">document.addEventListener("online", onOnline, false);
+<h2 id="快速的示例">快速的示例</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>document.addEventListener("online", onOnline, false);
 
 function onOnline() {
     // Handle the online event
 }
-</code></pre></div>
-<h2>完整的示例</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Online Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="完整的示例">完整的示例</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onLoad</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"online"</span><span class="p">,</span> <span class="nx">onOnline</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="p">}</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Online Example&lt;/title&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// Handle the online event</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onOnline</span><span class="p">()</span> <span class="p">{</span>
-    <span class="p">}</span>
+    // Wait for device API libraries to load
+    //
+    function onLoad() {
+        document.addEventListener("online", onOnline, false);
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body</span> <span class="na">onload=</span><span class="s">"onLoad()"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2>iOS 的怪癖</h2>
+    // device APIs are available
+    //
+    function onDeviceReady() {
+    }
 
-<p>在初始啟動期間第一次 <code>online</code> <a href="events.html">事件</a> （如果適用），至少需一秒的火災之前的, <code>[connection.type](../connection/connection.type.html)</code> 是<code>UNKNOWN</code>.</p>
+    // Handle the online event
+    //
+    function onOnline() {
+    }
 
-<h2>Windows Phone 7 的怪癖</h2>
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body onload="onLoad()"&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
 
-<p>當運行在模擬器中， <code>connection.status</code> 始終是未知的因此，此事件將<em>不</em>火。</p>
+<h2 id="ios-的怪癖">iOS 的怪癖</h2>
 
-<h2>Windows Phone 8 怪癖</h2>
+<p>在初始啟動期間第一次 <code class="language-plaintext highlighter-rouge">online</code> <a href="events.html">事件</a> （如果適用），至少需一秒的火災之前的, <code class="language-plaintext highlighter-rouge">[connection.type](../connection/connection.type.html)</code> 是<code class="language-plaintext highlighter-rouge">UNKNOWN</code>.</p>
 
-<p>模擬程式報告連線類型為 <code>Cellular</code> ，而不會更改，所以事件將<em>不</em>火。</p>
+<h2 id="windows-phone-7-的怪癖">Windows Phone 7 的怪癖</h2>
+
+<p>當運行在模擬器中， <code class="language-plaintext highlighter-rouge">connection.status</code> 始終是未知的因此，此事件將<em>不</em>火。</p>
+
+<h2 id="windows-phone-8-怪癖">Windows Phone 8 怪癖</h2>
+
+<p>模擬程式報告連線類型為 <code class="language-plaintext highlighter-rouge">Cellular</code> ，而不會更改，所以事件將<em>不</em>火。</p>
 
 
             </div>

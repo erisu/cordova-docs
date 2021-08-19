@@ -1304,41 +1304,52 @@
             
 
             <div id="page-toc-source">
-                <h1>Notification.Confirm</h1>
+                <h1 id="notificationconfirm">Notification.Confirm</h1>
 
 <p><a href="../inappbrowser/inappbrowser.html">Visualizza</a> una finestra di dialogo conferma personalizzabile.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.notification.confirm(message, confirmCallback, [title], [buttonLabels])
-</code></pre></div>
-<ul>
-<li><p><strong>messaggio</strong>: messaggio finestra di dialogo. <em>(String)</em></p></li>
-<li><p><strong>confirmCallback</strong>: Callback da richiamare con l&#39;indice del pulsante premuto (1, 2 o 3) o quando la finestra di dialogo viene chiusa senza una pressione del pulsante (0). <em>(Funzione)</em></p></li>
-<li><p><strong>titolo</strong>: titolo di dialogo. <em>(String)</em> (Opzionale, default è<code>Confirm</code>)</p></li>
-<li><p><strong>buttonLabels</strong>: matrice di stringhe che specificano le etichette dei pulsanti. <em>(Matrice)</em> (Opzionale, default è [ <code>OK,Cancel</code> ])</p></li>
-</ul>
 
-<h2>Descrizione</h2>
-
-<p>Il <code>notification.confirm</code> metodo visualizza una finestra di dialogo nativa che è più personalizzabile del browser <code>confirm</code> funzione.</p>
-
-<h2>confirmCallback</h2>
-
-<p>Il <code>confirmCallback</code> viene eseguito quando l&#39;utente preme uno dei pulsanti nella finestra di dialogo conferma.</p>
-
-<p>Il callback accetta l&#39;argomento <code>buttonIndex</code> <em>(numero)</em>, che è l&#39;indice del pulsante premuto. Nota che l&#39;indice utilizza l&#39;indicizzazione base uno, quindi il valore è <code>1</code> , <code>2</code> , <code>3</code> , ecc.</p>
-
-<h2>Piattaforme supportate</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.notification.confirm(message, confirmCallback, [title], [buttonLabels])
+</code></pre></div></div>
 
 <ul>
-<li>  Android</li>
-<li>  BlackBerry WebWorks (OS 5.0 e superiori)</li>
-<li>  iOS</li>
-<li>  Tizen</li>
-<li>  Windows Phone 7 e 8</li>
-<li>  Windows 8</li>
+  <li>
+    <p><strong>messaggio</strong>: messaggio finestra di dialogo. <em>(String)</em></p>
+  </li>
+  <li>
+    <p><strong>confirmCallback</strong>: Callback da richiamare con l’indice del pulsante premuto (1, 2 o 3) o quando la finestra di dialogo viene chiusa senza una pressione del pulsante (0). <em>(Funzione)</em></p>
+  </li>
+  <li>
+    <p><strong>titolo</strong>: titolo di dialogo. <em>(String)</em> (Opzionale, default è<code class="language-plaintext highlighter-rouge">Confirm</code>)</p>
+  </li>
+  <li>
+    <p><strong>buttonLabels</strong>: matrice di stringhe che specificano le etichette dei pulsanti. <em>(Matrice)</em> (Opzionale, default è [ <code class="language-plaintext highlighter-rouge">OK,Cancel</code> ])</p>
+  </li>
 </ul>
 
-<h2>Esempio rapido</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">// process the confirmation dialog result
+<h2 id="descrizione">Descrizione</h2>
+
+<p>Il <code class="language-plaintext highlighter-rouge">notification.confirm</code> metodo visualizza una finestra di dialogo nativa che è più personalizzabile del browser <code class="language-plaintext highlighter-rouge">confirm</code> funzione.</p>
+
+<h2 id="confirmcallback">confirmCallback</h2>
+
+<p>Il <code class="language-plaintext highlighter-rouge">confirmCallback</code> viene eseguito quando l’utente preme uno dei pulsanti nella finestra di dialogo conferma.</p>
+
+<p>Il callback accetta l’argomento <code class="language-plaintext highlighter-rouge">buttonIndex</code> <em>(numero)</em>, che è l’indice del pulsante premuto. Nota che l’indice utilizza l’indicizzazione base uno, quindi il valore è <code class="language-plaintext highlighter-rouge">1</code> , <code class="language-plaintext highlighter-rouge">2</code> , <code class="language-plaintext highlighter-rouge">3</code> , ecc.</p>
+
+<h2 id="piattaforme-supportate">Piattaforme supportate</h2>
+
+<ul>
+  <li>Android</li>
+  <li>BlackBerry WebWorks (OS 5.0 e superiori)</li>
+  <li>iOS</li>
+  <li>Tizen</li>
+  <li>Windows Phone 7 e 8</li>
+  <li>Windows 8</li>
+</ul>
+
+<h2 id="esempio-rapido">Esempio rapido</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// process the confirmation dialog result
 function onConfirm(buttonIndex) {
     alert('You selected button ' + buttonIndex);
 }
@@ -1353,56 +1364,64 @@ function showConfirm() {
         ['Restart','Exit']         // buttonLabels
     );
 }
-</code></pre></div>
-<h2>Esempio completo</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Notification Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="esempio-completo">Esempio completo</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Notification Example&lt;/title&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="c1">// Empty</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// process the confirmation dialog result</span>
-    <span class="kd">function</span> <span class="nx">onConfirm</span><span class="p">(</span><span class="nx">buttonIndex</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">alert</span><span class="p">(</span><span class="s1">'You selected button '</span> <span class="o">+</span> <span class="nx">buttonIndex</span><span class="p">);</span>
-    <span class="p">}</span>
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
 
-    <span class="c1">// Show a custom confirmation dialog</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">showConfirm</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">navigator</span><span class="p">.</span><span class="nx">notification</span><span class="p">.</span><span class="nx">confirm</span><span class="p">(</span>
-            <span class="s1">'You are the winner!'</span><span class="p">,</span> <span class="c1">// message</span>
-             <span class="nx">onConfirm</span><span class="p">,</span>            <span class="c1">// callback to invoke with index of button pressed</span>
-            <span class="s1">'Game Over'</span><span class="p">,</span>           <span class="c1">// title</span>
-            <span class="p">[</span><span class="s1">'Restart'</span><span class="p">,</span><span class="s1">'Exit'</span><span class="p">]</span>         <span class="c1">// buttonLabels</span>
-        <span class="p">);</span>
-    <span class="p">}</span>
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        // Empty
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">onclick=</span><span class="s">"showConfirm(); return false;"</span><span class="nt">&gt;</span>Show Confirm<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2>Windows Phone 7 e 8 stranezze</h2>
+    // process the confirmation dialog result
+    function onConfirm(buttonIndex) {
+        alert('You selected button ' + buttonIndex);
+    }
+
+    // Show a custom confirmation dialog
+    //
+    function showConfirm() {
+        navigator.notification.confirm(
+            'You are the winner!', // message
+             onConfirm,            // callback to invoke with index of button pressed
+            'Game Over',           // title
+            ['Restart','Exit']         // buttonLabels
+        );
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;&lt;a href="#" onclick="showConfirm(); return false;"&gt;Show Confirm&lt;/a&gt;&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h2 id="windows-phone-7-e-8-stranezze">Windows Phone 7 e 8 stranezze</h2>
 
 <ul>
-<li><p>Non non c&#39;è nessuna funzione browser incorporato per <code>window.confirm</code> , ma è possibile associare assegnando:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">window.confirm = navigator.notification.confirm;
-</code></pre></div></li>
-<li><p>Chiama al <code>alert</code> e <code>confirm</code> sono non bloccante, quindi il risultato è disponibile solo in modo asincrono.</p></li>
+  <li>
+    <p>Non non c’è nessuna funzione browser incorporato per <code class="language-plaintext highlighter-rouge">window.confirm</code> , ma è possibile associare assegnando:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>window.confirm = navigator.notification.confirm;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Chiama al <code class="language-plaintext highlighter-rouge">alert</code> e <code class="language-plaintext highlighter-rouge">confirm</code> sono non bloccante, quindi il risultato è disponibile solo in modo asincrono.</p>
+  </li>
 </ul>
 
 

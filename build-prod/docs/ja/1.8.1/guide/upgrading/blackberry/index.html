@@ -1220,58 +1220,69 @@
             
 
             <div id="page-toc-source">
-                <h1>Upgrading Cordova BlackBerry</h1>
+                <h1 id="upgrading-cordova-blackberry">Upgrading Cordova BlackBerry</h1>
 
 <p>これは、 Cordova を古いバージョンから新しいバージョンにアップグレードする必要がある人のためのドキュメントです。</p>
 
 <ul>
-<li>1.8.0 にアップグレードするには、 1.7.0 からアップグレードしてください</li>
+  <li>1.8.0 にアップグレードするには、 1.7.0 からアップグレードしてください</li>
 </ul>
 
-<h2>1.7.0 から 1.8.0 へのアップグレード</h2>
+<h2 id="170-から-180-へのアップグレード">1.7.0 から 1.8.0 へのアップグレード</h2>
 
 <p>www フォルダーのアップデート:</p>
 
 <ol>
-<li>アプリの <code>www/</code> フォルダーを開きます</li>
-<li><code>ext/</code> フォルダーにある .jar ファイルを削除し更新します</li>
-<li><code>ext-air/</code> フォルダーの内容を更新します</li>
-<li>新しい <code>cordova-1.8.0.js</code> をプロジェクトにコピーします
+  <li>アプリの <code class="language-plaintext highlighter-rouge">www/</code> フォルダーを開きます</li>
+  <li><code class="language-plaintext highlighter-rouge">ext/</code> フォルダーにある .jar ファイルを削除し更新します</li>
+  <li><code class="language-plaintext highlighter-rouge">ext-air/</code> フォルダーの内容を更新します</li>
+  <li>新しい <code class="language-plaintext highlighter-rouge">cordova-1.8.0.js</code> をプロジェクトにコピーします
+    <ul>
+      <li>playbook の場合は <code class="language-plaintext highlighter-rouge">playbook/</code> フォルダーの中の .js ファイルを更新します</li>
+    </ul>
+  </li>
+  <li>HTML を、新しい cordova-1.8.0.js を使って更新します</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">www/plugins.xml</code> ファイルを更新します。2つのプラグインの namespace/service ラベルが変更されています。 <a href="../../../cordova/media/capture/capture.html">Capture</a> と <a href="../../../cordova/contacts/Contact/contact.html">Contact</a> の項目を次から:</p>
 
-<ul>
-<li>playbook の場合は <code>playbook/</code> フォルダーの中の .js ファイルを更新します</li>
-</ul></li>
-<li>HTML を、新しい cordova-1.8.0.js を使って更新します</li>
-<li><p><code>www/plugins.xml</code> ファイルを更新します。2つのプラグインの namespace/service ラベルが変更されています。 <a href="../../../cordova/media/capture/capture.html">Capture</a> と <a href="../../../cordova/contacts/Contact/contact.html">Contact</a> の項目を次から:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;plugin name="Capture" value="org.apache.cordova.media.MediaCapture"/&gt;
-&lt;plugin name="Contact" value="org.apache.cordova.pim.Contact"/&gt;
-</code></pre></div></li>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &lt;plugin name="Capture" value="org.apache.cordova.media.MediaCapture"/&gt;
+ &lt;plugin name="Contact" value="org.apache.cordova.pim.Contact"/&gt;
+</code></pre></div>    </div>
+
+    <p>次に変更します:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &lt;plugin name="Capture" value="org.apache.cordova.capture.MediaCapture"/&gt;
+ &lt;plugin name="Contacts" value="org.apache.cordova.pim.Contact"/&gt;
+</code></pre></div>    </div>
+  </li>
 </ol>
 
-<p>次に変更します:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;plugin name="Capture" value="org.apache.cordova.capture.MediaCapture"/&gt;
-    &lt;plugin name="Contacts" value="org.apache.cordova.pim.Contact"/&gt;
-</code></pre></div>
 <p>サンプルフォルダーのアップデート (例, ant ツールを使ったアップデート):</p>
 
 <ol>
-<li><code>sample/lib/</code> フォルダーを開きます</li>
-<li><code>cordova.1.7.0/ext/</code> フォルダーにある .jar ファイルを更新します</li>
-<li><code>cordova.1.7.0/ext-air/</code> フォルダーの内容を更新します</li>
-<li><code>cordova.1.7.0/javascript/</code> フォルダーにある .js ファイルを更新します</li>
-<li><code>sample/lib/</code> フォルダーを開き、 <code>cordova.1.7.0/</code> フォルダーを <code>cordova.1.8.0/</code> へリネームします</li>
-<li><code>www/</code> フォルダーを新しい Cordova でアップデートするため、 <code>ant blackberry build</code> または <code>ant playbook build</code> とタイプします</li>
-<li><code>www/</code> フォルダーを開き、HTML を、新しい <code>cordova-1.8.0.js</code> を使って更新します</li>
-<li><p><code>www/</code> フォルダーを開き、 <code>plugins.xml</code> ファイルを更新します。2つのプラグインの namespace/service ラベルが変更されています。 <a href="../../../cordova/media/capture/capture.html">Capture</a> と <a href="../../../cordova/contacts/Contact/contact.html">Contact</a> の項目を次から:</p>
-<div class="highlight"><pre><code class="language-" data-lang=""> &lt;plugin name="Capture" value="org.apache.cordova.media.MediaCapture"/&gt;
- &lt;plugin name="Contact" value="org.apache.cordova.pim.Contact"/&gt;
-</code></pre></div></li>
+  <li><code class="language-plaintext highlighter-rouge">sample/lib/</code> フォルダーを開きます</li>
+  <li><code class="language-plaintext highlighter-rouge">cordova.1.7.0/ext/</code> フォルダーにある .jar ファイルを更新します</li>
+  <li><code class="language-plaintext highlighter-rouge">cordova.1.7.0/ext-air/</code> フォルダーの内容を更新します</li>
+  <li><code class="language-plaintext highlighter-rouge">cordova.1.7.0/javascript/</code> フォルダーにある .js ファイルを更新します</li>
+  <li><code class="language-plaintext highlighter-rouge">sample/lib/</code> フォルダーを開き、 <code class="language-plaintext highlighter-rouge">cordova.1.7.0/</code> フォルダーを <code class="language-plaintext highlighter-rouge">cordova.1.8.0/</code> へリネームします</li>
+  <li><code class="language-plaintext highlighter-rouge">www/</code> フォルダーを新しい Cordova でアップデートするため、 <code class="language-plaintext highlighter-rouge">ant blackberry build</code> または <code class="language-plaintext highlighter-rouge">ant playbook build</code> とタイプします</li>
+  <li><code class="language-plaintext highlighter-rouge">www/</code> フォルダーを開き、HTML を、新しい <code class="language-plaintext highlighter-rouge">cordova-1.8.0.js</code> を使って更新します</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">www/</code> フォルダーを開き、 <code class="language-plaintext highlighter-rouge">plugins.xml</code> ファイルを更新します。2つのプラグインの namespace/service ラベルが変更されています。 <a href="../../../cordova/media/capture/capture.html">Capture</a> と <a href="../../../cordova/contacts/Contact/contact.html">Contact</a> の項目を次から:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &lt;plugin name="Capture" value="org.apache.cordova.media.MediaCapture"/&gt;
+  &lt;plugin name="Contact" value="org.apache.cordova.pim.Contact"/&gt;
+</code></pre></div>    </div>
+
+    <p>次に変更します:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &lt;plugin name="Capture" value="org.apache.cordova.capture.MediaCapture"/&gt;
+  &lt;plugin name="Contacts" value="org.apache.cordova.pim.Contact"/&gt;
+</code></pre></div>    </div>
+  </li>
 </ol>
 
-<p>次に変更します:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">     &lt;plugin name="Capture" value="org.apache.cordova.capture.MediaCapture"/&gt;
-     &lt;plugin name="Contacts" value="org.apache.cordova.pim.Contact"/&gt;
-</code></pre></div>
+
 
             </div>
         </div>

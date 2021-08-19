@@ -1020,115 +1020,367 @@
             
 
             <div id="page-toc-source">
-                <h1>Uporaba Plugman za upravljanje Plugins</h1>
+                <h1 id="uporaba-plugman-za-upravljanje-plugins">Uporaba Plugman za upravljanje Plugins</h1>
 
-<p>Od različice 3.0 naprej, Cordova izvaja vse naprave API kot plugins, in nanje privzeto onemogočene. Podpira tudi dva različna načina za dodajanje in odstranjevanje plugins. Prvi je s pomočjo na <code>cordova</code> CLI, opisane v vmesnik ukazne vrstice. Drugi je z uporabo nižje ravni <a href="https://github.com/apache/cordova-plugman/">Plugman</a> vmesnik ukazne vrstice (potek dela &quot;Native platformo dev&quot;.) Glavna razlika med teh dveh razvojnih poti je, da Plugman lahko samo dodati plugins eno platformo naenkrat, ker CLI bo dodati plugins vse platforme, ki jih ciljate. Zaradi tega je bolj smiselno uporabiti Plugman, ko delate tesno z enotno platformo, zato ime &quot;Native platformo Dev&quot; potek dela.</p>
+<p>Od različice 3.0 naprej, Cordova izvaja vse naprave API kot plugins, in nanje privzeto onemogočene. Podpira tudi dva različna načina za dodajanje in odstranjevanje plugins. Prvi je s pomočjo na <code class="language-plaintext highlighter-rouge">cordova</code> CLI, opisane v vmesnik ukazne vrstice. Drugi je z uporabo nižje ravni <a href="https://github.com/apache/cordova-plugman/">Plugman</a> vmesnik ukazne vrstice (potek dela “Native platformo dev”.) Glavna razlika med teh dveh razvojnih poti je, da Plugman lahko samo dodati plugins eno platformo naenkrat, ker CLI bo dodati plugins vse platforme, ki jih ciljate. Zaradi tega je bolj smiselno uporabiti Plugman, ko delate tesno z enotno platformo, zato ime “Native platformo Dev” potek dela.</p>
 
 <p>Več informacij na Plugman, še posebej, če ste zainteresirani za uživanje Plugman kot vozlišče modul ali taksist na šifro Plugman, glejte <a href="https://github.com/apache/cordova-plugman/blob/master/README.md">README datoteko v svojem skladišču</a>.</p>
 
-<h2>Namestitev Plugman</h2>
+<h2 id="namestitev-plugman">Namestitev Plugman</h2>
 
 <p>Namestite plugman, morate imeti <a href="http://nodejs.org/">sečišče</a> nameščen v vašem računalniku. Potem vi moči prost dostop sledeč zapoved od kjerkoli v vašem okolju namestiti plugman globalno, tako da je na voljo od poljuben imenik v računalniku:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ npm install -g plugman
-</code></pre></div>
-<p>Vi življati imeti tudi <code>git</code> na vaš <code>PATH</code> biti sposobni namestiti plugins neposredno iz oddaljenih kreten URLs.</p>
 
-<p><strong>Nasvet:</strong> Če ugotovite, da po namestitvi plugman z npm ste še vedno nezmožen teči poljuben <code>plugman</code> ukaze, se prepričajte, da ste dodali v <code>/npm/</code> imenik v vaš<code>PATH</code>.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ npm install -g plugman
+</code></pre></div></div>
 
-<p><strong>Opomba:</strong> Ta korak lahko preskočite, če ne želite, da onesnažujejo globalni npm namespace z namestitvijo Plugman na svetovni ravni. Če je temu tako, potem ko ustvarite Cordova projekt z lupino orodja, bo na <code>node_modules</code> imenik znotraj vašega projekta, ki vsebuje Plugman. Ker si ne instally globalno, boste morali sklicevati vozlišča za vsak Plugman ukaz, na primer <code>node ./node_modules/plugman/main.js -version</code> . Preostanek ta vodnik prevzame ste namestili Plugman globalno, kar pomeni, da lahko zaženete s samo<code>plugman</code>.</p>
+<p>Vi življati imeti tudi <code class="language-plaintext highlighter-rouge">git</code> na vaš <code class="language-plaintext highlighter-rouge">PATH</code> biti sposobni namestiti plugins neposredno iz oddaljenih kreten URLs.</p>
 
-<h2>Ustvarjanje Cordova projekta</h2>
+<p><strong>Nasvet:</strong> Če ugotovite, da po namestitvi plugman z npm ste še vedno nezmožen teči poljuben <code class="language-plaintext highlighter-rouge">plugman</code> ukaze, se prepričajte, da ste dodali v <code class="language-plaintext highlighter-rouge">/npm/</code> imenik v vaš<code class="language-plaintext highlighter-rouge">PATH</code>.</p>
 
-<p>Preden lahko uporabite Plugman, morate ustvariti projekt Cordova. To storite z bodisi z ukazno vrstico ali nižji ravni lupine skripte. Navodila za uporabo lupine skripte, da ustvarite svoj projekt se nahajajo v različnih &quot;Ukazne vrstice orodja&quot; vodniki, navedena na platformo vodniki.</p>
+<p><strong>Opomba:</strong> Ta korak lahko preskočite, če ne želite, da onesnažujejo globalni npm namespace z namestitvijo Plugman na svetovni ravni. Če je temu tako, potem ko ustvarite Cordova projekt z lupino orodja, bo na <code class="language-plaintext highlighter-rouge">node_modules</code> imenik znotraj vašega projekta, ki vsebuje Plugman. Ker si ne instally globalno, boste morali sklicevati vozlišča za vsak Plugman ukaz, na primer <code class="language-plaintext highlighter-rouge">node ./node_modules/plugman/main.js -version</code> . Preostanek ta vodnik prevzame ste namestili Plugman globalno, kar pomeni, da lahko zaženete s samo<code class="language-plaintext highlighter-rouge">plugman</code>.</p>
 
-<h2>Dodal Plugin</h2>
+<h2 id="ustvarjanje-cordova-projekta">Ustvarjanje Cordova projekta</h2>
+
+<p>Preden lahko uporabite Plugman, morate ustvariti projekt Cordova. To storite z bodisi z ukazno vrstico ali nižji ravni lupine skripte. Navodila za uporabo lupine skripte, da ustvarite svoj projekt se nahajajo v različnih “Ukazne vrstice orodja” vodniki, navedena na platformo vodniki.</p>
+
+<h2 id="dodal-plugin">Dodal Plugin</h2>
 
 <p>Nekoč vi življati umestiti Plugman ter ustvarili projekt Cordova, lahko začnete dodajanje plugins platformo z:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp7|wp8&gt; --project &lt;directory&gt; --plugin &lt;name|url|path&gt; [--plugins_dir &lt;directory&gt;] [--www &lt;directory&gt;] [--variable &lt;name&gt;=&lt;value&gt; [--variable &lt;name&gt;=&lt;value&gt; ...]]
-</code></pre></div>
-<p>Z uporabo minimalne parametrov, ta ukaz namesti plugin v projektu cordova. Navesti morate mesto platformo in cordova projekta za to platformo. Prav tako morate navesti plugin, z različnimi <code>--plugin</code> parameter oblike bitje:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ plugman --platform &lt;ios|amazon-fireos|android|blackberry10|wp7|wp8&gt; --project &lt;directory&gt; --plugin &lt;name|url|path&gt; [--plugins_dir &lt;directory&gt;] [--www &lt;directory&gt;] [--variable &lt;name&gt;=&lt;value&gt; [--variable &lt;name&gt;=&lt;value&gt; ...]]
+</code></pre></div></div>
+
+<p>Z uporabo minimalne parametrov, ta ukaz namesti plugin v projektu cordova. Navesti morate mesto platformo in cordova projekta za to platformo. Prav tako morate navesti plugin, z različnimi <code class="language-plaintext highlighter-rouge">--plugin</code> parameter oblike bitje:</p>
 
 <ul>
-<li>  <code>name</code>: Ime imenika, kjer obstaja plugin vsebino. To mora biti obstoječ imenik pod na <code>--plugins_dir</code> poti (glej spodaj za več info) ali plugin v registru Cordova.</li>
-<li>  <code>url</code>: URL začne z https:// ali kreten: / /, če pokažete veljavno git skladišče, ki je clonable in vsebuje a <code>plugin.xml</code> pila. Bi program kopira vsebino tega skladišča v na<code>--plugins_dir</code>.</li>
-<li>  <code>path</code>: Pot do imenika, ki vsebuje veljavne plugin, ki vključuje a <code>plugin.xml</code> pila. Ta pot vsebine bodo kopirani v na<code>--plugins_dir</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">name</code>: Ime imenika, kjer obstaja plugin vsebino. To mora biti obstoječ imenik pod na <code class="language-plaintext highlighter-rouge">--plugins_dir</code> poti (glej spodaj za več info) ali plugin v registru Cordova.</li>
+  <li><code class="language-plaintext highlighter-rouge">url</code>: URL začne z https:// ali kreten: / /, če pokažete veljavno git skladišče, ki je clonable in vsebuje a <code class="language-plaintext highlighter-rouge">plugin.xml</code> pila. Bi program kopira vsebino tega skladišča v na<code class="language-plaintext highlighter-rouge">--plugins_dir</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">path</code>: Pot do imenika, ki vsebuje veljavne plugin, ki vključuje a <code class="language-plaintext highlighter-rouge">plugin.xml</code> pila. Ta pot vsebine bodo kopirani v na<code class="language-plaintext highlighter-rouge">--plugins_dir</code>.</li>
 </ul>
 
 <p>Drugi parametri:</p>
 
 <ul>
-<li>  <code>--plugins_dir</code>privzeto <code>&lt;project&gt;/cordova/plugins</code> , vendar je lahko poljuben imenik, ki vsebuje podimenik za vsako nerealne plugin.</li>
-<li>  <code>--www</code>privzete nastavitve v projekt <code>www</code> mesto mape, vendar lahko naslovnik, ki se uporablja kot cordova projekt uporabe spletnih sredstev.</li>
-<li>  <code>--variable</code>omogoča, da določite nekatere spremenljivke v napeljati čas, potreben za nekatere plugins, ki zahteva API tipke ali drugih parametrov, po meri, uporabniško definirane. Oglejte si <a href="plugin_spec.md">specifikacije plugin</a> za več informacij.</li>
+  <li><code class="language-plaintext highlighter-rouge">--plugins_dir</code>privzeto <code class="language-plaintext highlighter-rouge">&lt;project&gt;/cordova/plugins</code> , vendar je lahko poljuben imenik, ki vsebuje podimenik za vsako nerealne plugin.</li>
+  <li><code class="language-plaintext highlighter-rouge">--www</code>privzete nastavitve v projekt <code class="language-plaintext highlighter-rouge">www</code> mesto mape, vendar lahko naslovnik, ki se uporablja kot cordova projekt uporabe spletnih sredstev.</li>
+  <li><code class="language-plaintext highlighter-rouge">--variable</code>omogoča, da določite nekatere spremenljivke v napeljati čas, potreben za nekatere plugins, ki zahteva API tipke ali drugih parametrov, po meri, uporabniško definirane. Oglejte si <a href="plugin_spec.md">specifikacije plugin</a> za več informacij.</li>
 </ul>
 
-<h2>Odstranite Plugin</h2>
+<h2 id="odstranite-plugin">Odstranite Plugin</h2>
 
-<p>V uninstall plugin, da preprosto prenesti na <code>--uninstall</code> zastava ter zagotoviti plugin ID.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ plugman --uninstall --platform &lt;ios|amazon-fireos|android|blackberry10|wp7|wp8&gt; --project &lt;directory&gt; --plugin &lt;id&gt; [--www &lt;directory&gt;] [--plugins_dir &lt;directory&gt;]
-</code></pre></div>
-<h2>Pomoč ukazov</h2>
+<p>V uninstall plugin, da preprosto prenesti na <code class="language-plaintext highlighter-rouge">--uninstall</code> zastava ter zagotoviti plugin ID.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ plugman --uninstall --platform &lt;ios|amazon-fireos|android|blackberry10|wp7|wp8&gt; --project &lt;directory&gt; --plugin &lt;id&gt; [--www &lt;directory&gt;] [--plugins_dir &lt;directory&gt;]
+</code></pre></div></div>
+
+<h2 id="pomoč-ukazov">Pomoč ukazov</h2>
 
 <p>Plugman značilnosti globalnih pomoč ukaz, ki vam lahko pomagajo, če vi zaslužiti zaljubljen ali so težave. Prikaže seznam vseh ukazov Plugman in svoje sintakse:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">plugman -help
-plugman  # same as above
-</code></pre></div>
-<p><strong>Opomba</strong>: <code>plugman -help</code> lahko kažejo nekatere dodatne ukaze povezan z registrom. Ti ukazi so plugin za razvijalce in ne smejo izvajati na tretji plugin registrov.</p>
 
-<p>Lahko tudi dodate v <code>--debug|-d</code> zastave Plugman ukaz, da zaženete ta ukaz v podrobnem načinu, ki bo prikazal vse notranje informacije o iskanju napak, saj so oddane in vam lahko pomagajo izslediti težave, kot so manjkajoče datoteke.</p>
-<div class="highlight"><pre><code class="language-" data-lang=""># Adding Android battery-status plugin to "myProject":
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plugman -help
+plugman  # same as above
+</code></pre></div></div>
+
+<p><strong>Opomba</strong>: <code class="language-plaintext highlighter-rouge">plugman -help</code> lahko kažejo nekatere dodatne ukaze povezan z registrom. Ti ukazi so plugin za razvijalce in ne smejo izvajati na tretji plugin registrov.</p>
+
+<p>Lahko tudi dodate v <code class="language-plaintext highlighter-rouge">--debug|-d</code> zastave Plugman ukaz, da zaženete ta ukaz v podrobnem načinu, ki bo prikazal vse notranje informacije o iskanju napak, saj so oddane in vam lahko pomagajo izslediti težave, kot so manjkajoče datoteke.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Adding Android battery-status plugin to "myProject":
 plugman -d --platform android --project myProject --plugin org.apache.cordova.battery-status
-</code></pre></div>
-<p>Končno, lahko uporabite na <code>--version|-v</code> zastavo, da vidite, katera različica Plugman, ki ga uporabljate.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">plugman -v
-</code></pre></div>
-<h2>Registracija dejavnosti</h2>
+</code></pre></div></div>
+
+<p>Končno, lahko uporabite na <code class="language-plaintext highlighter-rouge">--version|-v</code> zastavo, da vidite, katera različica Plugman, ki ga uporabljate.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plugman -v
+</code></pre></div></div>
+
+<h2 id="registracija-dejavnosti">Registracija dejavnosti</h2>
 
 <p>Obstajajo številne plugman ukazov, ki se lahko uporabijo za interakcijo s <a href="http://plugins.cordova.io">registracija Plugin</a>. Prosimo, upoštevajte, da ti ukazi register posebej za register <em>plugins.cordova.io</em> plugin, ne smejo izvajati tretji plugin registri.</p>
 
-<h3>Iščete Plugin</h3>
+<h3 id="iščete-plugin">Iščete Plugin</h3>
 
-<p>Plugman lahko uporabite za iskanje <a href="http://plugins.cordova.io">registracija Plugin</a> za plugin id&#39;s, ki ustreza dani prostor ločen seznam ključnih besed.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">plugman search &lt;plugin keywords&gt;
-</code></pre></div>
-<h3>Sprememba Plugin registracija</h3>
+<p>Plugman lahko uporabite za iskanje <a href="http://plugins.cordova.io">registracija Plugin</a> za plugin id’s, ki ustreza dani prostor ločen seznam ključnih besed.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plugman search &lt;plugin keywords&gt;
+</code></pre></div></div>
+
+<h3 id="sprememba-plugin-registracija">Sprememba Plugin registracija</h3>
 
 <p>Lahko dobite ali pa nastavite URL sedanji registracija plugin, ki uporablja plugman. Na splošno mora zapustiti ta nastavljena na http://registry.cordova.io, razen če vi biti brez rabiti a tretji stranka plugin registra.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">plugman config set registry &lt;url-to-registry&gt;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plugman config set registry &lt;url-to-registry&gt;
 plugman config get registry
-</code></pre></div>
-<h3>Get Plugin informacije</h3>
+</code></pre></div></div>
+
+<h3 id="get-plugin-informacije">Get Plugin informacije</h3>
 
 <p>Lahko dobite informacije o posebnih plugin shranjeni v plugin skladišču:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">plugman info &lt;id&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plugman info &lt;id&gt;
+</code></pre></div></div>
+
 <p>To bo stik plugin registracija ter puščati podatke, kot so številka različice je plugin.</p>
 
-<h2>Namestitvi Plugins jedro</h2>
+<h2 id="namestitvi-plugins-jedro">Namestitvi Plugins jedro</h2>
 
 <p>Spodnji primeri kažejo, kako dodati plugins, kot je potrebno, da vse Cordova API uporabljate v vašem projektu še vedno dela, ko nadgradite na različico 3.0. Za vsak ukaz, morate izbrati ciljni platformi, in referenčno platformo imenik projekta.</p>
 
 <ul>
-<li><p>cordova-plugin-battery-status</p>
+  <li>
+    <p>cordova-plugin-battery-status</p>
 
-<p>plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.battery-status</p></li>
-<li><p>cordova-plugin-camera plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.camera</p></li>
-<li><p>cordova-plugin-console plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.console</p></li>
-<li><p>cordova-plugin-contacts plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.contacts</p></li>
-<li><p>cordova-plugin-device plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.device</p></li>
-<li><p>cordova-plugin-device-motion (accelerometer) plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.device-motion</p></li>
-<li><p>cordova-plugin-device-orientation (compass) plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.device-orientation</p></li>
-<li><p>cordova-plugin-dialogs plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.dialogs</p></li>
-<li><p>cordova-plugin-file plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.file</p></li>
-<li><p>cordova-plugin-file-transfer plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.file-transfer</p></li>
-<li><p>cordova-plugin-geolocation plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.geolocation</p></li>
-<li><p>cordova-plugin-globalization plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.globalization</p></li>
-<li><p>cordova-plugin-inappbrowser plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.inappbrowser</p></li>
-<li><p>cordova-plugin-media plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.media</p></li>
-<li><p>cordova-plugin-media-capture plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.media-capture</p></li>
-<li><p>cordova-plugin-network-information plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.network-information</p></li>
-<li><p>cordova-plugin-splashscreen plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.splashscreen</p></li>
-<li><p>cordova-plugin-vibration plugman --platform <ios|amazon-fireos|android|blackberry10|wp7|wp8> --project <directory> --plugin org.apache.cordova.vibration</p></li>
+    <table>
+      <tbody>
+        <tr>
+          <td>plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.battery-status</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-camera plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.camera</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-console plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.console</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-contacts plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.contacts</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-device plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.device</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-device-motion (accelerometer) plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.device-motion</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-device-orientation (compass) plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.device-orientation</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-dialogs plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.dialogs</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-file plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.file</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-file-transfer plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.file-transfer</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-geolocation plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.geolocation</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-globalization plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.globalization</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-inappbrowser plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.inappbrowser</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-media plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.media</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-media-capture plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.media-capture</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-network-information plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.network-information</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-splashscreen plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.splashscreen</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>cordova-plugin-vibration plugman –platform &lt;ios</td>
+          <td>amazon-fireos</td>
+          <td>android</td>
+          <td>blackberry10</td>
+          <td>wp7</td>
+          <td>wp8&gt; –project <directory> --plugin org.apache.cordova.vibration</directory></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
 </ul>
 
 

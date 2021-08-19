@@ -944,72 +944,79 @@
             
 
             <div id="page-toc-source">
-                <h1>pause</h1>
+                <h1 id="pause">pause</h1>
 
 <p>El evento se desencadena cuando una aplicación se coloca en el fondo.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">document.addEventListener("pause", yourCallbackFunction, false);
-</code></pre></div>
-<h2>Detalles</h2>
 
-<p>El evento de <code>pause</code> se desencadena cuando la plataforma nativa pone la aplicación en el fondo, normalmente cuando el usuario cambia a otra aplicación.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>document.addEventListener("pause", yourCallbackFunction, false);
+</code></pre></div></div>
 
-<p>Las aplicaciones normalmente deben utilizar <code>document.addEventListener</code> para conectar un detector de eventos una vez que se desencadene el evento <code>[deviceready](events.deviceready.html)</code>.</p>
+<h2 id="detalles">Detalles</h2>
 
-<h2>Plataformas soportadas</h2>
+<p>El evento de <code class="language-plaintext highlighter-rouge">pause</code> se desencadena cuando la plataforma nativa pone la aplicación en el fondo, normalmente cuando el usuario cambia a otra aplicación.</p>
+
+<p>Las aplicaciones normalmente deben utilizar <code class="language-plaintext highlighter-rouge">document.addEventListener</code> para conectar un detector de eventos una vez que se desencadene el evento <code class="language-plaintext highlighter-rouge">[deviceready](events.deviceready.html)</code>.</p>
+
+<h2 id="plataformas-soportadas">Plataformas soportadas</h2>
 
 <ul>
-<li>  Amazon fuego OS</li>
-<li>  Android</li>
-<li>  BlackBerry 10</li>
-<li>  iOS</li>
-<li>  Windows Phone 7 y 8</li>
-<li>  Windows 8</li>
+  <li>Amazon fuego OS</li>
+  <li>Android</li>
+  <li>BlackBerry 10</li>
+  <li>iOS</li>
+  <li>Windows Phone 7 y 8</li>
+  <li>Windows 8</li>
 </ul>
 
-<h2>Ejemplo rápido</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">document.addEventListener("pause", onPause, false);
+<h2 id="ejemplo-rápido">Ejemplo rápido</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>document.addEventListener("pause", onPause, false);
 
 function onPause() {
     // Handle the pause event
 }
-</code></pre></div>
-<h2>Ejemplo completo</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Pause Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="ejemplo-completo">Ejemplo completo</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onLoad</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="p">}</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Pause Example&lt;/title&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"pause"</span><span class="p">,</span> <span class="nx">onPause</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// Handle the pause event</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onPause</span><span class="p">()</span> <span class="p">{</span>
-    <span class="p">}</span>
+    // Wait for device API libraries to load
+    //
+    function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body</span> <span class="na">onload=</span><span class="s">"onLoad()"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2>iOS rarezas</h2>
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        document.addEventListener("pause", onPause, false);
+    }
 
-<p>En el <code>pause</code> controlador, todas las llamadas a la API de Córdoba o plugins nativos que atraviesan Objective-C no funciona, junto con cualquier llamadas interactivas, tales como alertas o <code>console.log()</code> . Sólo son procesados cuando se reanuda la aplicación, en el siguiente bucle ejecución.</p>
+    // Handle the pause event
+    //
+    function onPause() {
+    }
 
-<p>El evento específico de iOS <code>resign</code> está disponible como una alternativa para hacer una<code>pause</code> y detecta cuando los usuarios activar el botón de <strong>Lock</strong> bloquear el dispositivo con la aplicación que se ejecuta en primer plano. Si la aplicación (y dispositivo) está habilitados para multitarea, esto está emparejado con un evento posterior <code>pause</code>, pero sólo bajo iOS 5. En efecto, todas las apps bloqueadas en iOS 5 que tienen habilitado multi-tasking son empujadas al fondo. Para que aplicaciones seguirá corriendo cuando encerrado bajo iOS 5, deshabilitar multi-tasking de la aplicación estableciendo <a href="http://developer.apple.com/library/ios/#documentation/general/Reference/InfoPlistKeyReference/Articles/iPhoneOSKeys.html">UIApplicationExitsOnSuspend</a> a <code>YES</code>. Debe ejecutar cuando se trabó en iOS 4, que esta configuración no importa.</p>
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body onload="onLoad()"&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h2 id="ios-rarezas">iOS rarezas</h2>
+
+<p>En el <code class="language-plaintext highlighter-rouge">pause</code> controlador, todas las llamadas a la API de Córdoba o plugins nativos que atraviesan Objective-C no funciona, junto con cualquier llamadas interactivas, tales como alertas o <code class="language-plaintext highlighter-rouge">console.log()</code> . Sólo son procesados cuando se reanuda la aplicación, en el siguiente bucle ejecución.</p>
+
+<p>El evento específico de iOS <code class="language-plaintext highlighter-rouge">resign</code> está disponible como una alternativa para hacer una<code class="language-plaintext highlighter-rouge"> pause</code> y detecta cuando los usuarios activar el botón de <strong>Lock</strong> bloquear el dispositivo con la aplicación que se ejecuta en primer plano. Si la aplicación (y dispositivo) está habilitados para multitarea, esto está emparejado con un evento posterior <code class="language-plaintext highlighter-rouge">pause</code>, pero sólo bajo iOS 5. En efecto, todas las apps bloqueadas en iOS 5 que tienen habilitado multi-tasking son empujadas al fondo. Para que aplicaciones seguirá corriendo cuando encerrado bajo iOS 5, deshabilitar multi-tasking de la aplicación estableciendo <a href="http://developer.apple.com/library/ios/#documentation/general/Reference/InfoPlistKeyReference/Articles/iPhoneOSKeys.html">UIApplicationExitsOnSuspend</a> a <code class="language-plaintext highlighter-rouge">YES</code>. Debe ejecutar cuando se trabó en iOS 4, que esta configuración no importa.</p>
+
 
 
             </div>

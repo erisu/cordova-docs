@@ -1112,38 +1112,39 @@
             
 
             <div id="page-toc-source">
-                <h1>Empaquetado de Windows</h1>
+                <h1 id="empaquetado-de-windows">Empaquetado de Windows</h1>
 
 <p>Usted puede aprender más sobre firma y empaquetado de aplicaciones de la tienda de Windows en <a href="https://msdn.microsoft.com/en-us/library/hh446593(v=vs.85).aspx">MSDN</a>.</p>
 
 <p>Para poder correctamente y firmar Windows aplicaciones allí son pocas cosas necesarias:</p>
 
 <ul>
-<li>Un certificado de firma</li>
-<li>Datos de identidad que empareja el certificado de firma suministrado</li>
+  <li>Un certificado de firma</li>
+  <li>Datos de identidad que empareja el certificado de firma suministrado</li>
 </ul>
 
 <p>En proyecto de Windows, datos de identidad se mantienen en un archivo llamado package.appxmanifest. Este archivo se rellena automáticamente cada vez que se construye una aplicación de Córdoba. Identidad tiene 3 campos importantes.</p>
 
 <ul>
-<li>Name</li>
-<li>Publisher</li>
-<li>Version</li>
+  <li>Name</li>
+  <li>Publisher</li>
+  <li>Version</li>
 </ul>
 
 <p><em>Nombre</em> y la <em>versión</em> se pueden establecer desde <strong>config.xml</strong>. <em>Editor</em> puede ser proporcionado como un parámetro de compilación o pueden configurarse en el archivo <strong>build.json</strong> .</p>
 
-<p><img src="/static/img/guide/platforms/win8/packaging.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/win8/packaging.png" alt="" /></p>
 
 <p>Un certificado de firma puede proporcionar cualquier CLI o a través del archivo build.json. El certificado relacionado con CLI banderas son:</p>
 
 <ul>
-<li><code>--packageCertificateKeyFile</code> : una vez creado un paquete certificado de firma, este parámetro puede utilizarse para asociar el certificado de la aplicación. Este indicador toma una ruta de archivo como argumento. Por ejemplo. <code>&gt; cordova build -- --packageCertificateKeyFile=&quot;platforms\windows\CordovaApp_TemporaryKey.pfx&quot;</code></li>
-<li><code>-packageThumbprint</code> : huella digital del paquete se utiliza para validar la autenticidad del archivo clave del paquete certificado. Al crear un archivo de clave de certificado, este valor será proporcionado al usuario final. Por ejemplo. <code>&gt; cordova build -- --packageCertificateKeyFile=&quot;platforms\windows\CordovaApp_TemporaryKey.pfx&quot; --packageThumbprint=&quot;ABCABCABCABC123123123123&quot;</code></li>
+  <li><code class="language-plaintext highlighter-rouge">--packageCertificateKeyFile</code> : una vez creado un paquete certificado de firma, este parámetro puede utilizarse para asociar el certificado de la aplicación. Este indicador toma una ruta de archivo como argumento. Por ejemplo. <code class="language-plaintext highlighter-rouge">&gt; cordova build -- --packageCertificateKeyFile="platforms\windows\CordovaApp_TemporaryKey.pfx"</code></li>
+  <li><code class="language-plaintext highlighter-rouge">-packageThumbprint</code> : huella digital del paquete se utiliza para validar la autenticidad del archivo clave del paquete certificado. Al crear un archivo de clave de certificado, este valor será proporcionado al usuario final. Por ejemplo. <code class="language-plaintext highlighter-rouge">&gt; cordova build -- --packageCertificateKeyFile="platforms\windows\CordovaApp_TemporaryKey.pfx" --packageThumbprint="ABCABCABCABC123123123123"</code></li>
 </ul>
 
-<p>Alternativamente, estos valores podrían especificarse utilizando un archivo de configuración de build (build.json) mediante CLI (--buildConfig). Un archivo de configuración de compilación de muestra:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">{
+<p>Alternativamente, estos valores podrían especificarse utilizando un archivo de configuración de build (build.json) mediante CLI (–buildConfig). Un archivo de configuración de compilación de muestra:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
     "windows": {
         "debug": {
             "packageCertificateKeyFile": "platforms\\windows\\CordovaApp_TemporaryKey.pfx"
@@ -1155,69 +1156,70 @@
         }
     }
 }
-</code></pre></div>
+</code></pre></div></div>
+
 <p>También hay soporte para mezclar y combinar los argumentos de línea de comandos y parámetros en el archivo build.json. Valores de los argumentos de línea de comandos tendrá prioridad.</p>
 
-<h1>Cómo crear un certificado de clave y signo Cordova windows aplicaciones</h1>
+<h1 id="cómo-crear-un-certificado-de-clave-y-signo-cordova-windows-aplicaciones">Cómo crear un certificado de clave y signo Cordova windows aplicaciones</h1>
 
 <p>Firma se requiere para distribuir e instalar aplicaciones de Windows Store. Este proceso es manejado normalmente por Visual Studio al implementar un paquete de liberación. Para hacer tmhis sin Visual Studio necesitamos crear nuestros propios certificados.</p>
 
-<p>Para la creación de certificados debemos utilizar <a href="https://msdn.microsoft.com/en-us/library/ff548309(v=vs.85).aspx">makecert.exe</a> util. Esta herramienta viene con el SDK de Windows y puede encontrarse en <code>%ProgramFiles(x86) %\Windows Kits\8.1\bin\x64</code> o <code>%ProgramFiles(x86) %\Windows Kits\8.1\bin\x86</code>.</p>
+<p>Para la creación de certificados debemos utilizar <a href="https://msdn.microsoft.com/en-us/library/ff548309(v=vs.85).aspx">makecert.exe</a> util. Esta herramienta viene con el SDK de Windows y puede encontrarse en <code class="language-plaintext highlighter-rouge">%ProgramFiles(x86) %\Windows Kits\8.1\bin\x64</code> o <code class="language-plaintext highlighter-rouge">%ProgramFiles(x86) %\Windows Kits\8.1\bin\x86</code>.</p>
 
 <p>Lo primero que debemos hacer es crear una clave de root para firmar nuestra aplicación.</p>
 
-<p><code>makecert.exe -n &quot;CN=FakeCorp.com&quot; -r -eku &quot;1.3.6.1.5.5.7.3.3,1.3.6.1.4.1.311.10.3.13&quot; -e &quot;01/01/2020&quot; -h 0 -sv FakeCorp.com.pvk FakeCorp.com.cer</code></p>
+<p><code class="language-plaintext highlighter-rouge">makecert.exe -n "CN=FakeCorp.com" -r -eku "1.3.6.1.5.5.7.3.3,1.3.6.1.4.1.311.10.3.13" -e "01/01/2020" -h 0 -sv FakeCorp.com.pvk FakeCorp.com.cer</code></p>
 
 <p>Para entender qué makecert hace, aquí está una breve explicación de lo que hacen los parámetros:</p>
 
 <ul>
-<li>-n &quot;CN=FakeCorp.com&quot;: este es el nombre <a href="http://en.wikipedia.org/wiki/X.509">X.509</a> certificado sujeto. En este ejemplo es <strong>C</strong>Common<strong>N</strong>ame=FakeCorp.com.</li>
-<li>-r: crea un <a href="http://en.wikipedia.org/wiki/Self-signed_certificate">certificado auto firmado</a>.</li>
-<li>-eku #EKU_VAL #: separado por comas mejorado uso clave OID.
-
-<ul>
-<li>1.3.6.1.5.5.7.3.3 indica que el certificado es válido para firma de código. Siempre especificar este valor para limitar el uso del certificado.</li>
-<li>1.3.6.1.4.1.311.10.3.13 indica que el certificado de la respeta firma de toda la vida. Normalmente, si una firma es tiempo estampado, como el certificado era válido en el punto de la hora estampada, la firma sigue siendo válida incluso si el certificado caduca. Este EKU obliga la firma vencimiento independientemente de si la firma es tiempo de estampado.</li>
-</ul></li>
-<li>-e &quot;01/01/2020&quot;: establece la fecha de expiración del certificado.</li>
-<li>-h 0: altura máxima del árbol debajo de este certificado se establece en 0 para impedir que el certificado se utiliza como una autoridad de certificación (CA) que pueden emitir otros certificados.</li>
-<li>sv - FakeCorp.com.pvk: salida PVK archivo. Windows utiliza PVK archivos para almacenar las claves privadas de firma de código.</li>
-<li>FakeCorp.com.cer: Archivo de certificado de salida. Archivo CER se utiliza para almacenar el certificado X.509.</li>
+  <li>-n “CN=FakeCorp.com”: este es el nombre <a href="http://en.wikipedia.org/wiki/X.509">X.509</a> certificado sujeto. En este ejemplo es <strong>C</strong>Common<strong>N</strong>ame=FakeCorp.com.</li>
+  <li>-r: crea un <a href="http://en.wikipedia.org/wiki/Self-signed_certificate">certificado auto firmado</a>.</li>
+  <li>-eku #EKU_VAL #: separado por comas mejorado uso clave OID.
+    <ul>
+      <li>1.3.6.1.5.5.7.3.3 indica que el certificado es válido para firma de código. Siempre especificar este valor para limitar el uso del certificado.</li>
+      <li>1.3.6.1.4.1.311.10.3.13 indica que el certificado de la respeta firma de toda la vida. Normalmente, si una firma es tiempo estampado, como el certificado era válido en el punto de la hora estampada, la firma sigue siendo válida incluso si el certificado caduca. Este EKU obliga la firma vencimiento independientemente de si la firma es tiempo de estampado.</li>
+    </ul>
+  </li>
+  <li>-e “01/01/2020”: establece la fecha de expiración del certificado.</li>
+  <li>-h 0: altura máxima del árbol debajo de este certificado se establece en 0 para impedir que el certificado se utiliza como una autoridad de certificación (CA) que pueden emitir otros certificados.</li>
+  <li>sv - FakeCorp.com.pvk: salida PVK archivo. Windows utiliza PVK archivos para almacenar las claves privadas de firma de código.</li>
+  <li>FakeCorp.com.cer: Archivo de certificado de salida. Archivo CER se utiliza para almacenar el certificado X.509.</li>
 </ul>
 
 <p>Después de ejecutar makecert por primera vez, introduzca la clave privada en la pantalla que aparece:</p>
 
-<p><img src="/static/img/guide/platforms/win8/createprivatekeywindow.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/win8/createprivatekeywindow.png" alt="" /></p>
 
-<p>Una vez creado el archivo cer y pvk, necesitamos crear un archivo pfx de estos certificados. Un archivo pfx (formato de intercambio de Personal) contiene una variedad de información criptográfica, como certificados, certificados de autoridad raíz, cadenas de certificados y claves privadas. Para paquete de los certs, utilizaremos la herramienta llamada <a href="https://msdn.microsoft.com/en-us/library/ff550672(v=vs.85).aspx">pvk2pfx</a>. Esta herramienta viene con el SDK de Windows y puede encontrarse en <code>%ProgramFiles(x86)%\Windows Kits\8.1\bin\x64</code> o<code>%ProgramFiles(x86)%\Windows Kits\8.1\bin\x86</code>.</p>
+<p>Una vez creado el archivo cer y pvk, necesitamos crear un archivo pfx de estos certificados. Un archivo pfx (formato de intercambio de Personal) contiene una variedad de información criptográfica, como certificados, certificados de autoridad raíz, cadenas de certificados y claves privadas. Para paquete de los certs, utilizaremos la herramienta llamada <a href="https://msdn.microsoft.com/en-us/library/ff550672(v=vs.85).aspx">pvk2pfx</a>. Esta herramienta viene con el SDK de Windows y puede encontrarse en <code class="language-plaintext highlighter-rouge">%ProgramFiles(x86)%\Windows Kits\8.1\bin\x64</code> o<code class="language-plaintext highlighter-rouge">%ProgramFiles(x86)%\Windows Kits\8.1\bin\x86</code>.</p>
 
-<p><code>pvk2pfx -pvk FakeCorp.com.pvk -pi pvkPassword -spc FakeCorp.com.cer -pfx FakeCorp.com.pfx -po pfxPassword</code></p>
+<p><code class="language-plaintext highlighter-rouge">pvk2pfx -pvk FakeCorp.com.pvk -pi pvkPassword -spc FakeCorp.com.cer -pfx FakeCorp.com.pfx -po pfxPassword</code></p>
 
 <p>Donde:</p>
 
 <ul>
-<li>PVK: nombre del archivo de entrada pvk</li>
-<li>PI: pvk contraseña</li>
-<li>SPC: nombre del archivo de entrada cert</li>
-<li>pfx: nombre del archivo pfx de salida</li>
-<li>po: contraseña pfx; igual pvk contraseña si no dispone de</li>
+  <li>PVK: nombre del archivo de entrada pvk</li>
+  <li>PI: pvk contraseña</li>
+  <li>SPC: nombre del archivo de entrada cert</li>
+  <li>pfx: nombre del archivo pfx de salida</li>
+  <li>po: contraseña pfx; igual pvk contraseña si no dispone de</li>
 </ul>
 
-<p>Si ofrecemos este archivo pfx archivo de build.json, tenemos el siguiente error: &quot;el archivo de llave puede ser protegido con contraseña. Para corregir esto, intente importar manualmente el certificado en el almacén de certificados personales del usuario actual. &quot;. Para importar tenemos que utilizar <a href="https://technet.microsoft.com/en-us/library/ee624045(v=ws.10).aspx">certutil</a> desde un símbolo del sistema de administración:</p>
+<p>Si ofrecemos este archivo pfx archivo de build.json, tenemos el siguiente error: “el archivo de llave puede ser protegido con contraseña. Para corregir esto, intente importar manualmente el certificado en el almacén de certificados personales del usuario actual. “. Para importar tenemos que utilizar <a href="https://technet.microsoft.com/en-us/library/ee624045(v=ws.10).aspx">certutil</a> desde un símbolo del sistema de administración:</p>
 
-<p><code>certutil -user -p PASSWORD -importPFX FakeCorp.com.pfx</code></p>
+<p><code class="language-plaintext highlighter-rouge">certutil -user -p PASSWORD -importPFX FakeCorp.com.pfx</code></p>
 
 <p>Donde:</p>
 
 <ul>
-<li>user: especifica &quot;usuario actual&quot; almacén personal</li>
-<li>p: contraseña para el archivo pfx</li>
-<li>importPfx: nombre de archivo pfx</li>
+  <li>user: especifica “usuario actual” almacén personal</li>
+  <li>p: contraseña para el archivo pfx</li>
+  <li>importPfx: nombre de archivo pfx</li>
 </ul>
 
 <p>Una vez instalado, el siguiente paso es agregar packageThumbprint y packageCertificateKeyFile a build.json. Para encontrar la packageThumbprint, buscar el CommonName nos hemos asociado con el certificado:</p>
 
-<p><code>powershell -Command &quot; &amp; {dir -path cert:\LocalMachine\My | where { $_.Subject -like \&quot;*FakeCorp.com*\&quot; }}&quot;</code></p>
+<p><code class="language-plaintext highlighter-rouge">powershell -Command " &amp; {dir -path cert:\LocalMachine\My | where { $_.Subject -like \"*FakeCorp.com*\" }}"</code></p>
 
 <p>Una vez que estos últimos valores son proporcionados. Córdoba con éxito debe paquete y firmar la aplicación.</p>
 

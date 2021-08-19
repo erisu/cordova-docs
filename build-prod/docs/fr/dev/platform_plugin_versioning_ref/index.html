@@ -2112,124 +2112,142 @@
             
 
             <div id="page-toc-source">
-                <h1>Plates-formes et gestion de Plugins Version</h1>
+                <h1 id="plates-formes-et-gestion-de-plugins-version">Plates-formes et gestion de Plugins Version</h1>
 
 <p>Depuis la version 4.3.0, Cordova permet de sauvegarder et restaurer des plates-formes et des plugins.</p>
 
-<p>Cette fonctionnalité permet aux développeurs d&#39;enregistrer et de restaurer leur application à un état connu sans avoir à vérifier dans l&#39;ensemble du code source plate-forme et plugin.</p>
+<p>Cette fonctionnalité permet aux développeurs d’enregistrer et de restaurer leur application à un état connu sans avoir à vérifier dans l’ensemble du code source plate-forme et plugin.</p>
 
-<p>La commande « save » stocke les détails de plate-forme de l&#39;application et les versions plugin dans le fichier config.xml. L&#39;étape de « restaurer » se fait automatiquement lorsqu&#39;un <strong>&#39;prépare la cordova&#39;</strong> est délivré, en faisant usage de l&#39;information précédemment enregistrée dans le fichier config.xml.</p>
+<p>La commande « save » stocke les détails de plate-forme de l’application et les versions plugin dans le fichier config.xml. L’étape de « restaurer » se fait automatiquement lorsqu’un <strong>‘prépare la cordova’</strong> est délivré, en faisant usage de l’information précédemment enregistrée dans le fichier config.xml.</p>
 
-<p>Un scénario où les capacités de sauvegarde/restauration venir dans maniable est en grandes équipes qui travaillent sur une application, avec chaque membre de l&#39;équipe en se concentrant sur une plateforme ou un plugin. Cette caractéristique le rend plus facile de partager le projet et de réduire la quantité de code redondant qui est vérifié dans le référentiel.</p>
+<p>Un scénario où les capacités de sauvegarde/restauration venir dans maniable est en grandes équipes qui travaillent sur une application, avec chaque membre de l’équipe en se concentrant sur une plateforme ou un plugin. Cette caractéristique le rend plus facile de partager le projet et de réduire la quantité de code redondant qui est vérifié dans le référentiel.</p>
 
-<h2>Versioning de plate-forme</h2>
+<h2 id="versioning-de-plate-forme">Versioning de plate-forme</h2>
 
-<h3>Enregistrement des plates-formes</h3>
+<h3 id="enregistrement-des-plates-formes">Enregistrement des plates-formes</h3>
 
 <p>Pour enregistrer une plate-forme, vous émettez la commande suivante :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova platform add &lt;platform[@&lt;version&gt;] | directory | git_url&gt; --save
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova platform add &lt;platform[@&lt;version&gt;] | directory | git_url&gt; --save
+</code></pre></div></div>
+
 <p>Après avoir exécuté la commande ci-dessus, le fichier config.xml qui en résulte ressemble à :</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;?xml version='1.0' encoding='utf-8'?&gt;</span>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version='1.0' encoding='utf-8'?&gt;
     ...
-    <span class="nt">&lt;engine</span> <span class="na">name=</span><span class="s">"android"</span> <span class="na">spec=</span><span class="s">"~4.0.0"</span> <span class="nt">/&gt;</span>
+    &lt;engine name="android" spec="~4.0.0" /&gt;
     ...
-<span class="nt">&lt;/xml&gt;</span>
-</code></pre></div>
+&lt;/xml&gt;
+</code></pre></div></div>
+
 <p>Quelques exemples :</p>
 
 <ul>
-<li><strong>&#39;cordova platform add android --save&#39;</strong> =&gt; récupère la version en attente de la plateforme android, il ajoute au projet et puis met à jour fichier config.xml.</li>
-<li><strong>&quot;cordova platform add android@3.7.0 --save&quot;</strong> =&gt; récupère la plateforme android, version 3.7.0 du NPM, il ajoute au projet et puis met à jour fichier config.xml.</li>
-<li><strong>&quot;cordova platform add android@https://github.com/apache/cordova-android.git​ --save&quot;</strong> =&gt; clones le dépôt git de cordova-android spécifié, ajoute la plate-forme android pour le projet, puis met à jour le fichier config.xml et pointer sa version git-l&#39;URL spécifiée.</li>
-<li><strong>&quot;cordova platform add C:/path/to/android/platform --save&quot;</strong> =&gt; récupère la plateforme android du répertoire spécifié, il ajoute au projet, puis met à jour le fichier config.xml, puis pointez sur le répertoire.</li>
+  <li><strong>‘cordova platform add android –save’</strong> =&gt; récupère la version en attente de la plateforme android, il ajoute au projet et puis met à jour fichier config.xml.</li>
+  <li><strong>“cordova platform add android@3.7.0 –save”</strong> =&gt; récupère la plateforme android, version 3.7.0 du NPM, il ajoute au projet et puis met à jour fichier config.xml.</li>
+  <li><strong>“cordova platform add android@https://github.com/apache/cordova-android.git​ –save”</strong> =&gt; clones le dépôt git de cordova-android spécifié, ajoute la plate-forme android pour le projet, puis met à jour le fichier config.xml et pointer sa version git-l’URL spécifiée.</li>
+  <li><strong>“cordova platform add C:/path/to/android/platform –save”</strong> =&gt; récupère la plateforme android du répertoire spécifié, il ajoute au projet, puis met à jour le fichier config.xml, puis pointez sur le répertoire.</li>
 </ul>
 
-<h3>Masse, économie des plates-formes sur un projet existant</h3>
+<h3 id="masse-économie-des-plates-formes-sur-un-projet-existant">Masse, économie des plates-formes sur un projet existant</h3>
 
-<p>Le &#39;--save &#39; drapeau décrit ci-dessus n&#39;est utile que lorsque vous pensez à l&#39;utiliser lors de l&#39;ajout de la plate-forme. Si vous avez un projet existant et que vous souhaitez enregistrer toutes les plateformes actuellement ajoutés à votre projet, vous pouvez utiliser :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova platform save
-</code></pre></div>
-<h3>Mise à jour / suppression des plates-formes</h3>
+<p>Le ‘–save ‘ drapeau décrit ci-dessus n’est utile que lorsque vous pensez à l’utiliser lors de l’ajout de la plate-forme. Si vous avez un projet existant et que vous souhaitez enregistrer toutes les plateformes actuellement ajoutés à votre projet, vous pouvez utiliser :</p>
 
-<p>Il est également possible de mise à jour/suppression du fichier config.xml pendant les commandes &#39;cordova platform update&quot;et « plate-forme cordova supprimer » :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova platform update &lt;platform[@&lt;version&gt;] | directory | git_url&gt; --save
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova platform save
+</code></pre></div></div>
+
+<h3 id="mise-à-jour--suppression-des-plates-formes">Mise à jour / suppression des plates-formes</h3>
+
+<p>Il est également possible de mise à jour/suppression du fichier config.xml pendant les commandes ‘cordova platform update”et « plate-forme cordova supprimer » :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova platform update &lt;platform[@&lt;version&gt;] | directory | git_url&gt; --save
 $ cordova platform remove &lt;platform&gt; --save
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Quelques exemples :</p>
 
 <ul>
-<li><strong>&quot;cordova platform update android --save&quot;</strong> =&gt; en plus de la mise à jour de la plateforme android vers la version en attente, mise à jour fichier config.xml entrée</li>
-<li><strong>&#39;cordova platform update android@3.8.0 --save&#39;</strong> =&gt; en plus de mettre à jour la plateforme android vers la version 3.8.0, mise à jour fichier config.xml entrée</li>
-<li><strong>&#39;cordova platform update /path/to/android/platform --save&#39;</strong> =&gt; en plus de mettre à jour la plateforme android vers la version dans le dossier, mise à jour fichier config.xml entrée</li>
-<li><strong>&#39;cordova platform remove android --save&#39;</strong> =&gt; supprime le projet de la plateforme android et supprime son entrée de config.xml.</li>
+  <li><strong>“cordova platform update android –save”</strong> =&gt; en plus de la mise à jour de la plateforme android vers la version en attente, mise à jour fichier config.xml entrée</li>
+  <li><strong>‘cordova platform update android@3.8.0 –save’</strong> =&gt; en plus de mettre à jour la plateforme android vers la version 3.8.0, mise à jour fichier config.xml entrée</li>
+  <li><strong>‘cordova platform update /path/to/android/platform –save’</strong> =&gt; en plus de mettre à jour la plateforme android vers la version dans le dossier, mise à jour fichier config.xml entrée</li>
+  <li><strong>‘cordova platform remove android –save’</strong> =&gt; supprime le projet de la plateforme android et supprime son entrée de config.xml.</li>
 </ul>
 
-<h3>Restauration des plates-formes</h3>
+<h3 id="restauration-des-plates-formes">Restauration des plates-formes</h3>
 
-<p>Plateformes sont automatiquement restaurées de config.xml en actionnant la commande <strong>&#39;cordova prepare&#39;</strong> .</p>
+<p>Plateformes sont automatiquement restaurées de config.xml en actionnant la commande <strong>‘cordova prepare’</strong> .</p>
 
 <p>Si vous ajoutez une plateforme sans spécifier une version/dossier/git_url, la version à installer est extraite de config.xml, <strong>si trouvé</strong>.</p>
 
 <p>Exemple :</p>
 
-<p>Supposons que votre fichier config.xml contient l&#39;entrée suivante :</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;?xml version='1.0' encoding='utf-8'?&gt;</span>
-    ...
-    <span class="nt">&lt;engine</span> <span class="na">name=</span><span class="s">"android"</span> <span class="na">spec=</span><span class="s">"3.7.0"</span> <span class="nt">/&gt;</span>
-    ...
-<span class="nt">&lt;/xml&gt;</span>
-</code></pre></div>
-<p>Si vous exécutez la commande <strong>« cordova plate-forme Ajouter android »</strong> (aucune version/dossier/git_url spécifiée), la plate-forme &quot;android@3.7.0&quot; (comme provient de config.xml) sera installée.</p>
+<p>Supposons que votre fichier config.xml contient l’entrée suivante :</p>
 
-<hr>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version='1.0' encoding='utf-8'?&gt;
+    ...
+    &lt;engine name="android" spec="3.7.0" /&gt;
+    ...
+&lt;/xml&gt;
+</code></pre></div></div>
 
-<h2>Versioning de plugin</h2>
+<p>Si vous exécutez la commande <strong>« cordova plate-forme Ajouter android »</strong> (aucune version/dossier/git_url spécifiée), la plate-forme “android@3.7.0” (comme provient de config.xml) sera installée.</p>
+
+<hr />
+
+<h2 id="versioning-de-plugin">Versioning de plugin</h2>
 
 <p><em>(Les commandes du plugin sont un miroir des commandes plugin)</em></p>
 
-<h3>Sauver les plugins</h3>
+<h3 id="sauver-les-plugins">Sauver les plugins</h3>
 
 <p>Pour enregistrer un plugin, vous émettez la commande suivante :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin add &lt;plugin[@&lt;version&gt;] | directory | git_url&gt; --save
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin add &lt;plugin[@&lt;version&gt;] | directory | git_url&gt; --save
+</code></pre></div></div>
+
 <p>Après avoir exécuté la commande ci-dessus, le fichier config.xml qui en résulte ressemble à :</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;?xml version='1.0' encoding='utf-8'?&gt;</span>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version='1.0' encoding='utf-8'?&gt;
     ...
-    <span class="nt">&lt;plugin</span> <span class="na">name=</span><span class="s">"cordova-plugin-console"</span> <span class="na">spec=</span><span class="s">"~1.0.0"</span> <span class="nt">/&gt;</span>
+    &lt;plugin name="cordova-plugin-console" spec="~1.0.0" /&gt;
     ...
-<span class="nt">&lt;/xml&gt;</span>
-</code></pre></div>
+&lt;/xml&gt;
+</code></pre></div></div>
+
 <p>Quelques exemples :</p>
 
 <ul>
-<li><strong>&#39;cordova plugin add cordova-plugin-console --save&#39;</strong> =&gt; récupère la version du plugin console en attente, il ajoute au projet et puis met à jour fichier config.xml.</li>
-<li><strong>&quot;cordova plugin add cordova-plugin-console@0.2.13 --save&quot;</strong> =&gt; récupère le plugin android, la version 0.2.13 de la NGP, il ajoute au projet et puis met à jour fichier config.xml.</li>
-<li><strong>&quot;cordova plugin add https://github.com/apache/cordova-plugin-console.git --save&quot;</strong> =&gt; clones le dépôt git de console spécifié plugin, ajoute le plugin console au projet, puis met à jour le fichier config.xml et pointer sa version git-l&#39;URL spécifiée.</li>
-<li><strong>&quot;cordova plugin add C:/chemin/de/console/plugin --save&quot;</strong> =&gt; récupère le plugin console du répertoire spécifié, il ajoute au projet, puis met à jour le fichier config.xml, puis pointez sur le répertoire.</li>
+  <li><strong>‘cordova plugin add cordova-plugin-console –save’</strong> =&gt; récupère la version du plugin console en attente, il ajoute au projet et puis met à jour fichier config.xml.</li>
+  <li><strong>“cordova plugin add cordova-plugin-console@0.2.13 –save”</strong> =&gt; récupère le plugin android, la version 0.2.13 de la NGP, il ajoute au projet et puis met à jour fichier config.xml.</li>
+  <li><strong>“cordova plugin add https://github.com/apache/cordova-plugin-console.git –save”</strong> =&gt; clones le dépôt git de console spécifié plugin, ajoute le plugin console au projet, puis met à jour le fichier config.xml et pointer sa version git-l’URL spécifiée.</li>
+  <li><strong>“cordova plugin add C:/chemin/de/console/plugin –save”</strong> =&gt; récupère le plugin console du répertoire spécifié, il ajoute au projet, puis met à jour le fichier config.xml, puis pointez sur le répertoire.</li>
 </ul>
 
-<h3>Masse, économie des plugins sur un projet existant</h3>
+<h3 id="masse-économie-des-plugins-sur-un-projet-existant">Masse, économie des plugins sur un projet existant</h3>
 
-<p>Le &#39;--save &#39; drapeau décrit ci-dessus n&#39;est utile que lorsque vous pensez à l&#39;utiliser lors de l&#39;ajout de plugin. Si vous avez un projet existant et que vous souhaitez enregistrer tous actuellement ajoutés des plugins dans le projet, vous pouvez utiliser :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin save
-</code></pre></div>
-<h3>Mise à jour / suppression des plugins</h3>
+<p>Le ‘–save ‘ drapeau décrit ci-dessus n’est utile que lorsque vous pensez à l’utiliser lors de l’ajout de plugin. Si vous avez un projet existant et que vous souhaitez enregistrer tous actuellement ajoutés des plugins dans le projet, vous pouvez utiliser :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin save
+</code></pre></div></div>
+
+<h3 id="mise-à-jour--suppression-des-plugins">Mise à jour / suppression des plugins</h3>
 
 <p>Il est également possible de mise à jour/suppression du fichier config.xml pendant les commandes « cordova plugin update » et « supprimer plugin cordova » :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin update &lt;plugin[@&lt;version&gt;] | directory | git_url&gt; --save
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin update &lt;plugin[@&lt;version&gt;] | directory | git_url&gt; --save
 $ cordova plugin remove &lt;plugin&gt; --save
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Quelques exemples :</p>
 
 <ul>
-<li><strong>&#39;cordova plugin update cordova-plugin-console --save&#39;</strong> =&gt; en plus de la mise à jour le plugin console vers la version en attente, mise à jour fichier config.xml entrée</li>
-<li><strong>&#39;cordova plugin update cordova-plugin-console@0.2.13 --save&#39;</strong> =&gt; en plus de la mise à jour le plugin android vers la version 3.8.0, mise à jour fichier config.xml entrée</li>
-<li><strong>&#39;cordova plugin update /path/to/console/plugin --save&#39;</strong> =&gt; en plus de la mise à jour le plugin console vers la version dans le dossier, mise à jour fichier config.xml entrée</li>
-<li><strong>« cordova plugin remove cordova-plugin-console --save »</strong> =&gt; supprime la console plugin dans le projet et supprime son entrée de config.xml.</li>
+  <li><strong>‘cordova plugin update cordova-plugin-console –save’</strong> =&gt; en plus de la mise à jour le plugin console vers la version en attente, mise à jour fichier config.xml entrée</li>
+  <li><strong>‘cordova plugin update cordova-plugin-console@0.2.13 –save’</strong> =&gt; en plus de la mise à jour le plugin android vers la version 3.8.0, mise à jour fichier config.xml entrée</li>
+  <li><strong>‘cordova plugin update /path/to/console/plugin –save’</strong> =&gt; en plus de la mise à jour le plugin console vers la version dans le dossier, mise à jour fichier config.xml entrée</li>
+  <li><strong>« cordova plugin remove cordova-plugin-console –save »</strong> =&gt; supprime la console plugin dans le projet et supprime son entrée de config.xml.</li>
 </ul>
 
-<h3>Restauration des plugins</h3>
+<h3 id="restauration-des-plugins">Restauration des plugins</h3>
 
 <p>Plugins sont automatiquement restaurées de config.xml en actionnant la commande <strong>« cordova prepare »</strong> .</p>
 
@@ -2237,14 +2255,16 @@ $ cordova plugin remove &lt;plugin&gt; --save
 
 <p>Exemple :</p>
 
-<p>Supposons que votre fichier config.xml contient l&#39;entrée suivante :</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;?xml version='1.0' encoding='utf-8'?&gt;</span>
+<p>Supposons que votre fichier config.xml contient l’entrée suivante :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version='1.0' encoding='utf-8'?&gt;
     ...
-    <span class="nt">&lt;plugin</span> <span class="na">name=</span><span class="s">"cordova-plugin-console"</span> <span class="na">spec=</span><span class="s">"0.2.11"</span> <span class="nt">/&gt;</span>
+    &lt;plugin name="cordova-plugin-console" spec="0.2.11" /&gt;
     ...
-<span class="nt">&lt;/ xml&gt;</span>
-</code></pre></div>
-<p>Si vous exécutez la commande <strong>« cordova plugin add cordova-plugin-console »</strong> (aucune version/dossier/git_url spécifiée), sera installé le plugin &quot;cordova-plugin-console@0.2.11&quot; (comme provient de config.xml).</p>
+&lt;/ xml&gt;
+</code></pre></div></div>
+
+<p>Si vous exécutez la commande <strong>« cordova plugin add cordova-plugin-console »</strong> (aucune version/dossier/git_url spécifiée), sera installé le plugin “cordova-plugin-console@0.2.11” (comme provient de config.xml).</p>
 
 
             </div>

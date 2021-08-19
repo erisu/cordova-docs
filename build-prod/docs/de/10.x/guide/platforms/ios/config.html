@@ -2104,62 +2104,112 @@
             
 
             <div id="page-toc-source">
-                <h1>iOS Konfiguration</h1>
+                <h1 id="ios-konfiguration">iOS Konfiguration</h1>
 
-<p>Die <code>config.xml</code> Datei steuert eine app-Grundeinstellungen, die für jede Anwendung und CordovaWebView Instanz gelten. Dieser Abschnitt beschreibt die Einstellungen, die nur auf iOS-Builds zu gelten. Informationen über globale Konfigurationsoptionen finden Sie unter <a href="config_ref_index.md.html#The%20config.xml%20File">die Datei config.xml Datei</a>.</p>
+<p>Die <code class="language-plaintext highlighter-rouge">config.xml</code> Datei steuert eine app-Grundeinstellungen, die für jede Anwendung und CordovaWebView Instanz gelten. Dieser Abschnitt beschreibt die Einstellungen, die nur auf iOS-Builds zu gelten. Informationen über globale Konfigurationsoptionen finden Sie unter <a href="config_ref_index.md.html#The%20config.xml%20File">die Datei config.xml Datei</a>.</p>
 
 <ul>
-<li><p><code>EnableViewportScale</code>(Boolean, wird standardmäßig auf <code>false</code> ): Legen Sie auf <code>true</code> um ein Viewport Metatag entweder deaktivieren oder beschränken die Bandbreite der Benutzer zu skalieren, zu ermöglichen, die standardmäßig aktiviert ist.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="EnableViewportScale" value="true"/&gt;
-</code></pre></div>
-<p>Platzieren Sie einen Viewport wie die folgende in den HTML-Code zu deaktivieren, Skalierung und passen Inhalte flexibel innerhalb der Darstellung WebView:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt; Meta Name = "Viewport" Content = "Breite = Gerät-breit, Initial-Scale = 1, Benutzer-skalierbare = No" / &gt;
-</code></pre></div></li>
-<li><p><code>MediaPlaybackAllowsAirPlay</code> (Boolean, standardmäßig auf <code>true festgelegt</code>): Air Play verhindern, in dieser Ansicht verwendet wird auf <code>false</code> festgelegt. Erhältlich in Standard UIWebView und WKWebView.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="MediaPlaybackAllowsAirPlay" value="false"/&gt;
-</code></pre></div></li>
-<li><p><code>MediaPlaybackRequiresUserAction</code> (Boolean, standardmäßig auf <code>false</code>): um zu verhindern, dass HTML5-Videos oder Audios automatisch wiedergegeben werden, mit dem Attribut <code>Autoplay</code> oder per JavaScript auf <code>true</code> festgelegt.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="MediaPlaybackRequiresUserAction" value="true"/&gt;
-</code></pre></div></li>
-<li><p><code>AllowInlineMediaPlayback</code> (Boolean, standardmäßig auf <code>false</code>): HTML5-Medienwiedergabe <em>Inline</em> innerhalb des Bildschirm-Layouts, mit Browser bereitgestellten Steuerelemente anstelle von native Steuerelemente angezeigt werden können auf <code>true</code> festgelegt. Damit dies funktioniert fügen Sie das <code>Webkit-Playsinline</code> -Attribut für alle <code>&lt; video &gt;</code> Elemente.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="AllowInlineMediaPlayback" value="true"/&gt;
-</code></pre></div></li>
-<li><p><code>BackupWebStorage</code> (string, entweder <code>keine</code>, <code>lokalen</code>oder der Standard- <code>Wolke</code>): Legen Sie auf <code>Wolke</code> Web Speicherdaten-Backup über iCloud können. Legen Sie auf <code>lokalen</code> nur lokale Backups über iTunes Sync zu ermöglichen. Satz auf <code>none</code> zu verhindern, dass Web-Speicher-Sicherungen.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="BackupWebStorage" value="local"/&gt;
-</code></pre></div></li>
-<li><p><code>TopActivityIndicator</code> (string, standardmäßig <code>gray</code>): steuert die Anzeige von das kleine rotierende-Symbol in der Statusleiste, die erhebliche Prozessoraktivitäten angibt. Gültige Werte sind <code>whiteLarge</code>, <code>white</code>und <code>gray</code>.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="TopActivityIndicator" value="white"/&gt;
-</code></pre></div></li>
-<li><p><code>KeyboardDisplayRequiresUserAction</code> (Boolean, standardmäßig auf <code>true festgelegt</code>): auf <code>false</code> festgelegt, um die Tastatur angezeigt werden beim Aufrufen von <code>focus()</code> für Formularfelder zu ermöglichen.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="KeyboardDisplayRequiresUserAction" value="false"/&gt;
-</code></pre></div></li>
-<li><p><code>SuppressesIncrementalRendering</code> (Boolean, standardmäßig auf <code>false</code>): warten, bis alle Inhalte eingegangen ist, bevor es auf dem Bildschirm gerendert wird auf <code>true</code> festgelegt.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="SuppressesIncrementalRendering" value="true"/&gt;
-</code></pre></div></li>
-<li><p><code>GapBetweenPages</code> (float, hat den Standardwert ``): die Größe der Lücke, zwischen Seiten in Punkt.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="GapBetweenPages" value="0"/&gt;
-</code></pre></div></li>
-<li><p><code>PageLength</code> (float, hat den Standardwert ``): die Größe jeder Seite in Punkt in die Richtung, die die Seiten fließen. Wenn PaginationMode rechts nach links oder von links nach rechts, diese Eigenschaft stellt die Breite auf jeder Seite. Diese Eigenschaft stellt beim PaginationMode TopToBottom oder BottomToTop ist, die Höhe der einzelnen Seiten dar. Der Standardwert ist 0, was, dass das Layout die Größe des Viewports wird verwendet bedeutet, um die Dimensionen der Seite bestimmen.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="PageLength" value="0"/&gt;
-</code></pre></div></li>
-<li><p><code>PaginationBreakingMode</code> (string, wird standardmäßig auf der <code>page</code>): gültige Werte sind <code>page</code> und <code>column</code>. Die Art und Weise, in der Spalte oder Seitenumbruch auftritt. Diese Eigenschaft bestimmt, ob bestimmte CSS-Eigenschaften zur Spalte und Seitenumbruch berücksichtigt oder ignoriert werden. Wenn diese Eigenschaft auf <code>column</code>festgelegt ist, respektiert die Inhalte mit Bezug zu Spalte aktuelle an Stelle der Seitenumbruch CSS-Eigenschaften.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="PaginationBreakingMode" value="page"/&gt;
-</code></pre></div></li>
-<li><p><code>PaginationMode</code> (string, Standard ist <code>unpaginated</code>): gültige Werte sind <code>unpaginated</code>, <code>LeftToRight</code>, <code>TopToBottom</code>, <code>BottomToTop</code>und <code>RightToLeft</code>. Diese Eigenschaft bestimmt, ob Inhalte in der Webansicht aufgebrochen in Seiten, die den Ansicht einen Bildschirm in einer Zeit zu füllen, oder als eine lange durchlaufende Ansicht angezeigt. Wenn der Satz zu einem paginierten Formular, diese Eigenschaft ein paginiertes Layouts zum Inhalt verursacht die Webansicht zu verwenden, die Werte der SeitenLaenge und GapBetweenPages zu Relayout inhaltlich schaltet.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="PaginationMode" value="unpaginated"/&gt;
-</code></pre></div></li>
-<li><p><code>UIWebViewDecelerationSpeed</code> (string, wird standardmäßig auf <code>normal</code>): gültige Werte sind <code>normal</code>, <code>fast</code>. Diese Eigenschaft steuert die Geschwindigkeit Abbremsen Schwung scrollen. <code>Normal</code> ist die Standardgeschwindigkeit für die meisten systemeigenen apps, und <code>fast</code> ist der Standard für Mobile Safari.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="UIWebViewDecelerationSpeed" value="fast" /&gt;
-</code></pre></div></li>
-<li><p><code>ErrorUrl</code> (String, nicht standardmäßig festgelegt): Wenn gesetzt, wird die referenzierte lokale Seite ein Fehler in der Anwendung angezeigt.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="ErrorUrl" value="myErrorPage.html"/&gt;
-</code></pre></div></li>
-<li><p><code>OverrideUserAgent</code>(String, nicht standardmäßig festgelegt): Wenn gesetzt, der Wert der alten UserAgent Webview ersetzen wird. Es ist hilfreich, um die Anforderung von app/Browser identifizieren, wenn entfernte Seiten anfordern. Verwendung mit Vorsicht, dies kann verursacht Compitiable Problem mit Webservern. Verwenden Sie für die meisten Fälle stattdessen AppendUserAgent.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="OverrideUserAgent" value="Mozilla/5.0 My Browser" /&gt;
-</code></pre></div></li>
-<li><p><code>AppendUserAgent</code>(String, nicht standardmäßig festgelegt): Wenn gesetzt, der Wert bis zum Ende des alten UserAgent der Webview angefügt wird. Wenn Sie mit OverrideUserAgent zu verwenden, wird dieser Wert ignoriert.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="AppendUserAgent" value="My Browser" /&gt;
-</code></pre></div></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">EnableViewportScale</code>(Boolean, wird standardmäßig auf <code class="language-plaintext highlighter-rouge">false</code> ): Legen Sie auf <code class="language-plaintext highlighter-rouge">true</code> um ein Viewport Metatag entweder deaktivieren oder beschränken die Bandbreite der Benutzer zu skalieren, zu ermöglichen, die standardmäßig aktiviert ist.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="EnableViewportScale" value="true"/&gt;
+</code></pre></div>    </div>
+
+    <p>Platzieren Sie einen Viewport wie die folgende in den HTML-Code zu deaktivieren, Skalierung und passen Inhalte flexibel innerhalb der Darstellung WebView:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt; Meta Name = "Viewport" Content = "Breite = Gerät-breit, Initial-Scale = 1, Benutzer-skalierbare = No" / &gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">MediaPlaybackAllowsAirPlay</code> (Boolean, standardmäßig auf <code class="language-plaintext highlighter-rouge">true festgelegt</code>): Air Play verhindern, in dieser Ansicht verwendet wird auf <code class="language-plaintext highlighter-rouge">false</code> festgelegt. Erhältlich in Standard UIWebView und WKWebView.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="MediaPlaybackAllowsAirPlay" value="false"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">MediaPlaybackRequiresUserAction</code> (Boolean, standardmäßig auf <code class="language-plaintext highlighter-rouge">false</code>): um zu verhindern, dass HTML5-Videos oder Audios automatisch wiedergegeben werden, mit dem Attribut <code class="language-plaintext highlighter-rouge">Autoplay</code> oder per JavaScript auf <code class="language-plaintext highlighter-rouge">true</code> festgelegt.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="MediaPlaybackRequiresUserAction" value="true"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">AllowInlineMediaPlayback</code> (Boolean, standardmäßig auf <code class="language-plaintext highlighter-rouge">false</code>): HTML5-Medienwiedergabe <em>Inline</em> innerhalb des Bildschirm-Layouts, mit Browser bereitgestellten Steuerelemente anstelle von native Steuerelemente angezeigt werden können auf <code class="language-plaintext highlighter-rouge">true</code> festgelegt. Damit dies funktioniert fügen Sie das <code class="language-plaintext highlighter-rouge">Webkit-Playsinline</code> -Attribut für alle <code class="language-plaintext highlighter-rouge">&lt; video &gt;</code> Elemente.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="AllowInlineMediaPlayback" value="true"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">BackupWebStorage</code> (string, entweder <code class="language-plaintext highlighter-rouge">keine</code>, <code class="language-plaintext highlighter-rouge">lokalen</code>oder der Standard- <code class="language-plaintext highlighter-rouge">Wolke</code>): Legen Sie auf <code class="language-plaintext highlighter-rouge">Wolke</code> Web Speicherdaten-Backup über iCloud können. Legen Sie auf <code class="language-plaintext highlighter-rouge">lokalen</code> nur lokale Backups über iTunes Sync zu ermöglichen. Satz auf <code class="language-plaintext highlighter-rouge">none</code> zu verhindern, dass Web-Speicher-Sicherungen.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="BackupWebStorage" value="local"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">TopActivityIndicator</code> (string, standardmäßig <code class="language-plaintext highlighter-rouge">gray</code>): steuert die Anzeige von das kleine rotierende-Symbol in der Statusleiste, die erhebliche Prozessoraktivitäten angibt. Gültige Werte sind <code class="language-plaintext highlighter-rouge">whiteLarge</code>, <code class="language-plaintext highlighter-rouge">white</code>und <code class="language-plaintext highlighter-rouge">gray</code>.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="TopActivityIndicator" value="white"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">KeyboardDisplayRequiresUserAction</code> (Boolean, standardmäßig auf <code class="language-plaintext highlighter-rouge">true festgelegt</code>): auf <code class="language-plaintext highlighter-rouge">false</code> festgelegt, um die Tastatur angezeigt werden beim Aufrufen von <code class="language-plaintext highlighter-rouge">focus()</code> für Formularfelder zu ermöglichen.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="KeyboardDisplayRequiresUserAction" value="false"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">SuppressesIncrementalRendering</code> (Boolean, standardmäßig auf <code class="language-plaintext highlighter-rouge">false</code>): warten, bis alle Inhalte eingegangen ist, bevor es auf dem Bildschirm gerendert wird auf <code class="language-plaintext highlighter-rouge">true</code> festgelegt.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="SuppressesIncrementalRendering" value="true"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">GapBetweenPages</code> (float, hat den Standardwert ``): die Größe der Lücke, zwischen Seiten in Punkt.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="GapBetweenPages" value="0"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">PageLength</code> (float, hat den Standardwert ``): die Größe jeder Seite in Punkt in die Richtung, die die Seiten fließen. Wenn PaginationMode rechts nach links oder von links nach rechts, diese Eigenschaft stellt die Breite auf jeder Seite. Diese Eigenschaft stellt beim PaginationMode TopToBottom oder BottomToTop ist, die Höhe der einzelnen Seiten dar. Der Standardwert ist 0, was, dass das Layout die Größe des Viewports wird verwendet bedeutet, um die Dimensionen der Seite bestimmen.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="PageLength" value="0"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">PaginationBreakingMode</code> (string, wird standardmäßig auf der <code class="language-plaintext highlighter-rouge">page</code>): gültige Werte sind <code class="language-plaintext highlighter-rouge">page</code> und <code class="language-plaintext highlighter-rouge">column</code>. Die Art und Weise, in der Spalte oder Seitenumbruch auftritt. Diese Eigenschaft bestimmt, ob bestimmte CSS-Eigenschaften zur Spalte und Seitenumbruch berücksichtigt oder ignoriert werden. Wenn diese Eigenschaft auf <code class="language-plaintext highlighter-rouge">column</code>festgelegt ist, respektiert die Inhalte mit Bezug zu Spalte aktuelle an Stelle der Seitenumbruch CSS-Eigenschaften.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="PaginationBreakingMode" value="page"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">PaginationMode</code> (string, Standard ist <code class="language-plaintext highlighter-rouge">unpaginated</code>): gültige Werte sind <code class="language-plaintext highlighter-rouge">unpaginated</code>, <code class="language-plaintext highlighter-rouge">LeftToRight</code>, <code class="language-plaintext highlighter-rouge">TopToBottom</code>, <code class="language-plaintext highlighter-rouge">BottomToTop</code>und <code class="language-plaintext highlighter-rouge">RightToLeft</code>. Diese Eigenschaft bestimmt, ob Inhalte in der Webansicht aufgebrochen in Seiten, die den Ansicht einen Bildschirm in einer Zeit zu füllen, oder als eine lange durchlaufende Ansicht angezeigt. Wenn der Satz zu einem paginierten Formular, diese Eigenschaft ein paginiertes Layouts zum Inhalt verursacht die Webansicht zu verwenden, die Werte der SeitenLaenge und GapBetweenPages zu Relayout inhaltlich schaltet.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="PaginationMode" value="unpaginated"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">UIWebViewDecelerationSpeed</code> (string, wird standardmäßig auf <code class="language-plaintext highlighter-rouge">normal</code>): gültige Werte sind <code class="language-plaintext highlighter-rouge">normal</code>, <code class="language-plaintext highlighter-rouge">fast</code>. Diese Eigenschaft steuert die Geschwindigkeit Abbremsen Schwung scrollen. <code class="language-plaintext highlighter-rouge">Normal</code> ist die Standardgeschwindigkeit für die meisten systemeigenen apps, und <code class="language-plaintext highlighter-rouge">fast</code> ist der Standard für Mobile Safari.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="UIWebViewDecelerationSpeed" value="fast" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">ErrorUrl</code> (String, nicht standardmäßig festgelegt): Wenn gesetzt, wird die referenzierte lokale Seite ein Fehler in der Anwendung angezeigt.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="ErrorUrl" value="myErrorPage.html"/&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">OverrideUserAgent</code>(String, nicht standardmäßig festgelegt): Wenn gesetzt, der Wert der alten UserAgent Webview ersetzen wird. Es ist hilfreich, um die Anforderung von app/Browser identifizieren, wenn entfernte Seiten anfordern. Verwendung mit Vorsicht, dies kann verursacht Compitiable Problem mit Webservern. Verwenden Sie für die meisten Fälle stattdessen AppendUserAgent.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="OverrideUserAgent" value="Mozilla/5.0 My Browser" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">AppendUserAgent</code>(String, nicht standardmäßig festgelegt): Wenn gesetzt, der Wert bis zum Ende des alten UserAgent der Webview angefügt wird. Wenn Sie mit OverrideUserAgent zu verwenden, wird dieser Wert ignoriert.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="AppendUserAgent" value="My Browser" /&gt;
+</code></pre></div>    </div>
+  </li>
 </ul>
 
 

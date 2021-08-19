@@ -1112,32 +1112,39 @@
             
 
             <div id="page-toc-source">
-                <h1>BlackBerry 10 Plugins</h1>
+                <h1 id="blackberry-10-plugins">BlackBerry 10 Plugins</h1>
 
 <p>Dieser Abschnitt enthält Informationen für das native Plugin-Code auf der BlackBerry 10-Plattform zu implementieren. Finden Sie bevor Sie dies lesen einen Überblick über die Plugin-Struktur und ihre gemeinsame JavaScript-Schnittstelle Anwendung Plugins. In diesem Abschnitt weiterhin das Beispiel- <em>Echo</em> -Plugin, das zum einheitlichen Plattform und zurück von Cordova-Webview kommuniziert.</p>
 
-<p>Das Echo-Plugin was String. grundsätzlich die <code>window.echo</code> Funktion sendet von JavaScript:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    window.echo = function(str, callback) {
+<p>Das Echo-Plugin was String. grundsätzlich die <code class="language-plaintext highlighter-rouge">window.echo</code> Funktion sendet von JavaScript:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    window.echo = function(str, callback) {
         cordova.exec(callback, function(err) {
             callback('Nothing to echo.');
         }, "Echo", "echo", [str]);
     };
-</code></pre></div>
-<p>Eine Cordova-Plugin für BlackBerry 10 enthält sowohl JavaScript als auch native Code, die durch einen Rahmen bereitgestellt durch JNEXT miteinander kommunizieren. Jedes Plugin muss auch eine <code>plugin.xml</code> Datei.</p>
+</code></pre></div></div>
 
-<h2>Erstellen der systemeigenen Klasse</h2>
+<p>Eine Cordova-Plugin für BlackBerry 10 enthält sowohl JavaScript als auch native Code, die durch einen Rahmen bereitgestellt durch JNEXT miteinander kommunizieren. Jedes Plugin muss auch eine <code class="language-plaintext highlighter-rouge">plugin.xml</code> Datei.</p>
+
+<h2 id="erstellen-der-systemeigenen-klasse">Erstellen der systemeigenen Klasse</h2>
 
 <p>Um den einheitlichen Teil Ihr Plugin zu erstellen, öffnen Sie die BlackBerry 10 NDK IDE, und wählen Sie <strong>Datei → neu → BlackBerry Project → Native Erweiterung → BlackBerry 10</strong>. Geben Sie den gewünschten Projektnamen und den Speicherort, und drücken Sie <strong>Fertig stellen</strong>.</p>
 
 <p>Das Projekt, erstellt von der IDE enthält Beispielcode für ein Speicher-Plugin. Sie können zu ersetzen oder diese Dateien ändern, um Ihre eigene Funktionalität zu implementieren:</p>
 
 <ul>
-<li><p><code>*name*_js.hpp</code>: C++-Header für den JNEXT-Code.</p></li>
-<li><p><code>*name*_js.cpp</code>: C++-Code für JNEXT.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">*name*_js.hpp</code>: C++-Header für den JNEXT-Code.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">*name*_js.cpp</code>: C++-Code für JNEXT.</p>
+  </li>
 </ul>
 
-<p>Die systemeigene Schnittstelle für die JNEXT-Erweiterung kann in der Plugin-Header-Datei des Projekts im öffentlichen Verzeichnis angezeigt werden. Es kennzeichnet auch Konstanten und Hilfsfunktionen in systemeigenen Code verfügbar. Das Plugin muss abgeleitet werden <code>JSExt</code> , die definiert ist <code>plugin.h</code> . Das heißt, müssen Sie die folgende Klasse implementieren:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    class JSExt
+<p>Die systemeigene Schnittstelle für die JNEXT-Erweiterung kann in der Plugin-Header-Datei des Projekts im öffentlichen Verzeichnis angezeigt werden. Es kennzeichnet auch Konstanten und Hilfsfunktionen in systemeigenen Code verfügbar. Das Plugin muss abgeleitet werden <code class="language-plaintext highlighter-rouge">JSExt</code> , die definiert ist <code class="language-plaintext highlighter-rouge">plugin.h</code> . Das heißt, müssen Sie die folgende Klasse implementieren:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    class JSExt
     {
     public:
         virtual ~JSExt() {};
@@ -1146,9 +1153,11 @@
     private:
         std::string m_id;
     };
-</code></pre></div>
-<p>Die Erweiterung sollte enthalten die <code>plugin.h</code> -Headerdatei. In der <code>Echo</code> Beispiel, verwenden Sie <code>JSExt</code> wie folgt in der <code>echo_js.hpp</code> Datei:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    #include "../public/plugin.h"
+</code></pre></div></div>
+
+<p>Die Erweiterung sollte enthalten die <code class="language-plaintext highlighter-rouge">plugin.h</code> -Headerdatei. In der <code class="language-plaintext highlighter-rouge">Echo</code> Beispiel, verwenden Sie <code class="language-plaintext highlighter-rouge">JSExt</code> wie folgt in der <code class="language-plaintext highlighter-rouge">echo_js.hpp</code> Datei:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    #include "../public/plugin.h"
     #include &lt;string&gt;
 
     #ifndef ECHO_JS_H_
@@ -1166,9 +1175,11 @@
     };
 
     #endif // ECHO_JS_H_
-</code></pre></div>
-<p>Das <code>m_id</code> -Attribut enthält die <code>JNEXT</code> -Id für das Objekt, das als Argument für den Konstruktor der Klasse übergeben wird. Es ist für die systemeigene Seite auf Triggerereignisse auf der Seite JavaScript benötigt. Die <code>CanDelete</code> -Methode bestimmt, ob das systemeigene Objekt gelöscht werden kann. Die <code>InvokeMethod</code> Funktion wird als Ergebnis aus einer Anfrage von JavaScript zum Aufrufen einer Methode von diesem Objekt aufgerufen. Das einzige Argument an diese Funktion ist eine Zeichenfolge, die von JavaScript, das diese Methode analysiert, um festzustellen, welche das systemeigene Objekt Methoden ausgeführt werden soll, übergeben. Diese Methoden sind implementiert, in <code>echo_js.cpp</code> . Hier ist die <code>InvokeMethod</code> -Funktion für die <code>Echo</code> Beispiel:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    string Echo::InvokeMethod(const string&amp; command) {
+</code></pre></div></div>
+
+<p>Das <code class="language-plaintext highlighter-rouge">m_id</code> -Attribut enthält die <code class="language-plaintext highlighter-rouge">JNEXT</code> -Id für das Objekt, das als Argument für den Konstruktor der Klasse übergeben wird. Es ist für die systemeigene Seite auf Triggerereignisse auf der Seite JavaScript benötigt. Die <code class="language-plaintext highlighter-rouge">CanDelete</code> -Methode bestimmt, ob das systemeigene Objekt gelöscht werden kann. Die <code class="language-plaintext highlighter-rouge">InvokeMethod</code> Funktion wird als Ergebnis aus einer Anfrage von JavaScript zum Aufrufen einer Methode von diesem Objekt aufgerufen. Das einzige Argument an diese Funktion ist eine Zeichenfolge, die von JavaScript, das diese Methode analysiert, um festzustellen, welche das systemeigene Objekt Methoden ausgeführt werden soll, übergeben. Diese Methoden sind implementiert, in <code class="language-plaintext highlighter-rouge">echo_js.cpp</code> . Hier ist die <code class="language-plaintext highlighter-rouge">InvokeMethod</code> -Funktion für die <code class="language-plaintext highlighter-rouge">Echo</code> Beispiel:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    string Echo::InvokeMethod(const string&amp; command) {
 
         //parse command and args from string
         int index = command.find_first_of(" ");
@@ -1182,39 +1193,53 @@
             return "Unsupported Method";
         }
     }
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Das native Plugin muss auch die folgende Callback-Funktionen implementieren:</p>
 
 <ul>
-<li><p><code>extern char* onGetObjList( void );</code></p></li>
-<li><p><code>extern JSExt* onCreateObject( const string&amp; strClassName, const string&amp; strObjId );</code></p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">extern char* onGetObjList( void );</code></p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">extern JSExt* onCreateObject( const string&amp; strClassName, const string&amp; strObjId );</code></p>
+  </li>
 </ul>
 
-<p>Die <code>onGetObjList</code> -Funktion gibt eine durch Kommas getrennte Liste der Klassen, die von JNEXT unterstützt. JNEXT verwendet diese Funktion bestimmt den Satz von Klassen, die JNEXT instanziieren können. Das <code>Echo</code> Plugin implementiert in folgende <code>echo_js.cpp</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    char* onGetObjList() {
+<p>Die <code class="language-plaintext highlighter-rouge">onGetObjList</code> -Funktion gibt eine durch Kommas getrennte Liste der Klassen, die von JNEXT unterstützt. JNEXT verwendet diese Funktion bestimmt den Satz von Klassen, die JNEXT instanziieren können. Das <code class="language-plaintext highlighter-rouge">Echo</code> Plugin implementiert in folgende <code class="language-plaintext highlighter-rouge">echo_js.cpp</code> :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    char* onGetObjList() {
         static char name[] = "Echo";
         return name;
     }
-</code></pre></div>
-<p>Die <code>onCreateObject</code> Funktion nimmt zwei Parameter. Die erste ist der Name der angeforderten Klasse von der Seite JavaScript mit gültigen Namen wie kehrte erstellt werden <code>onGetObjList</code> . Der zweite Parameter ist die Klasse einzigartige Objekt-Id. Diese Methode gibt einen Zeiger auf das Objekt erstellten Plugin. Das <code>Echo</code> Plugin implementiert in folgende <code>echo_js.cpp</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    JSExt* onCreateObject(const string&amp; className, const string&amp; id) {
+</code></pre></div></div>
+
+<p>Die <code class="language-plaintext highlighter-rouge">onCreateObject</code> Funktion nimmt zwei Parameter. Die erste ist der Name der angeforderten Klasse von der Seite JavaScript mit gültigen Namen wie kehrte erstellt werden <code class="language-plaintext highlighter-rouge">onGetObjList</code> . Der zweite Parameter ist die Klasse einzigartige Objekt-Id. Diese Methode gibt einen Zeiger auf das Objekt erstellten Plugin. Das <code class="language-plaintext highlighter-rouge">Echo</code> Plugin implementiert in folgende <code class="language-plaintext highlighter-rouge">echo_js.cpp</code> :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    JSExt* onCreateObject(const string&amp; className, const string&amp; id) {
         if (className == "Echo") {
             return new Echo(id);
         }
         return NULL;
     }
-</code></pre></div>
-<h2>Das Plugin-JavaScript erstellen</h2>
+</code></pre></div></div>
+
+<h2 id="das-plugin-javascript-erstellen">Das Plugin-JavaScript erstellen</h2>
 
 <p>Das Plugin muss die folgenden JavaScript-Dateien enthalten:</p>
 
 <ul>
-<li><p><code>client.js</code>: Dies wird als die Client-Seite und enthält die API eine Cordova-Anwendung zur Verfügung gestellt. Die API in <code>client.js</code> Aufrufe Aufrufe an <code>index.js</code> . Die API im <code>client.js</code> auch Callback-Funktionen zu den <a href="../../../cordova/events/events.html">Veranstaltungen</a>, die die Rückrufe auslösen herstellt.</p></li>
-<li><p><code>index.js</code>: Cordova lädt <code>index.js</code> und macht es über die cordova.exec-Brücke. Die <code>client.js</code> Datei Aufrufe an die API in der <code>index.js</code> Datei, die wiederum aufrufen, um JNEXT macht zu kommunizieren, die systemeigene Seite.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">client.js</code>: Dies wird als die Client-Seite und enthält die API eine Cordova-Anwendung zur Verfügung gestellt. Die API in <code class="language-plaintext highlighter-rouge">client.js</code> Aufrufe Aufrufe an <code class="language-plaintext highlighter-rouge">index.js</code> . Die API im <code class="language-plaintext highlighter-rouge">client.js</code> auch Callback-Funktionen zu den <a href="../../../cordova/events/events.html">Veranstaltungen</a>, die die Rückrufe auslösen herstellt.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">index.js</code>: Cordova lädt <code class="language-plaintext highlighter-rouge">index.js</code> und macht es über die cordova.exec-Brücke. Die <code class="language-plaintext highlighter-rouge">client.js</code> Datei Aufrufe an die API in der <code class="language-plaintext highlighter-rouge">index.js</code> Datei, die wiederum aufrufen, um JNEXT macht zu kommunizieren, die systemeigene Seite.</p>
+  </li>
 </ul>
 
-<p>Die Client- und Serverseite ( <code>client.js</code> und <code>index.js</code> ) interagiert durch die <code>Cordova.exec</code> Funktion. Die <code>client.js</code> muss Aufrufen der <code>exec</code> -Funktion und geben Sie die erforderlichen Argumente. Das <code>Echo</code> Plugin implementiert die folgenden in der <code>client.js</code> Datei:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    var service = "org.apache.cordova.blackberry.echo",
+<p>Die Client- und Serverseite ( <code class="language-plaintext highlighter-rouge">client.js</code> und <code class="language-plaintext highlighter-rouge">index.js</code> ) interagiert durch die <code class="language-plaintext highlighter-rouge">Cordova.exec</code> Funktion. Die <code class="language-plaintext highlighter-rouge">client.js</code> muss Aufrufen der <code class="language-plaintext highlighter-rouge">exec</code> -Funktion und geben Sie die erforderlichen Argumente. Das <code class="language-plaintext highlighter-rouge">Echo</code> Plugin implementiert die folgenden in der <code class="language-plaintext highlighter-rouge">client.js</code> Datei:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    var service = "org.apache.cordova.blackberry.echo",
         exec = cordova.require("cordova/exec");
 
     module.exports = {
@@ -1222,23 +1247,33 @@
             exec(success, fail, service, "echo", { data: data });
         }
     };
-</code></pre></div>
-<p>Die <code>index.js</code> JNEXT-Komponente verwendet, die systemeigene Seite interagieren. Anfügen einer Konstruktorfunktion mit dem Namen <code>Echo</code> , JNEXT ermöglicht es Ihnen, führen Sie die folgenden wichtigen Vorgänge, die mit der <code>init</code> Funktion:</p>
+</code></pre></div></div>
+
+<p>Die <code class="language-plaintext highlighter-rouge">index.js</code> JNEXT-Komponente verwendet, die systemeigene Seite interagieren. Anfügen einer Konstruktorfunktion mit dem Namen <code class="language-plaintext highlighter-rouge">Echo</code> , JNEXT ermöglicht es Ihnen, führen Sie die folgenden wichtigen Vorgänge, die mit der <code class="language-plaintext highlighter-rouge">init</code> Funktion:</p>
 
 <ul>
-<li><p>Geben Sie das erforderliche Modul durch die systemeigene Seite exportiert. Der Name des Moduls erforderlich muss der Name einer Laufzeit-Bibliothek-Datei übereinstimmen ( <code>.so</code> Datei):</p>
-<div class="highlight"><pre><code class="language-" data-lang="">JNEXT.require("libecho")
-</code></pre></div></li>
-<li><p>Erstellen Sie ein Objekt über ein erworbenes Modul und speichern Sie die ID, die durch den Aufruf zurückgegeben wird:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">self.m_id = JNEXT.createObject("libecho.Echo");
-</code></pre></div>
-<p>Wenn die Anwendung ruft die <code>echo</code> Funktion in <code>client.js</code> , so nennen wiederum Aufrufe der <code>echo</code> Funktion in <code>index.js</code> , wo die <code>PluginResult</code> Objekt sendet Daten als Antwort zurück zu <code>client.js</code> . Da die <code>args</code> in die Funktionen übergebene Argument wurde umgebaut <code>JSON.stringfy()</code> und codierte als ein <code>URIcomponent</code> , müssen Sie Folgendes aufrufen:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">data = JSON.parse(decodeURIComponent(args.data));
-</code></pre></div></li>
+  <li>
+    <p>Geben Sie das erforderliche Modul durch die systemeigene Seite exportiert. Der Name des Moduls erforderlich muss der Name einer Laufzeit-Bibliothek-Datei übereinstimmen ( <code class="language-plaintext highlighter-rouge">.so</code> Datei):</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>JNEXT.require("libecho")
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Erstellen Sie ein Objekt über ein erworbenes Modul und speichern Sie die ID, die durch den Aufruf zurückgegeben wird:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>self.m_id = JNEXT.createObject("libecho.Echo");
+</code></pre></div>    </div>
+
+    <p>Wenn die Anwendung ruft die <code class="language-plaintext highlighter-rouge">echo</code> Funktion in <code class="language-plaintext highlighter-rouge">client.js</code> , so nennen wiederum Aufrufe der <code class="language-plaintext highlighter-rouge">echo</code> Funktion in <code class="language-plaintext highlighter-rouge">index.js</code> , wo die <code class="language-plaintext highlighter-rouge">PluginResult</code> Objekt sendet Daten als Antwort zurück zu <code class="language-plaintext highlighter-rouge">client.js</code> . Da die <code class="language-plaintext highlighter-rouge">args</code> in die Funktionen übergebene Argument wurde umgebaut <code class="language-plaintext highlighter-rouge">JSON.stringfy()</code> und codierte als ein <code class="language-plaintext highlighter-rouge">URIcomponent</code> , müssen Sie Folgendes aufrufen:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data = JSON.parse(decodeURIComponent(args.data));
+</code></pre></div>    </div>
+  </li>
 </ul>
 
 <p>Sie können jetzt die Daten zurück, wie folgt senden:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    module.exports = {
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    module.exports = {
         echo: function (success, fail, args, env) {
             var result = new PluginResult(args, env),
             data = JSON.parse(decodeURIComponent(args.data)),
@@ -1246,30 +1281,32 @@
             result.ok(response, false);
         }
     };
-</code></pre></div>
-<h2>Plugin-Architektur</h2>
+</code></pre></div></div>
 
-<p>Kann man das Plugin Artefakte, darunter die <code>plugin.xml</code> Datei, die JavaScript und C++-Quelldateien, und die <code>.so</code> Binär-Dateien in einer Verzeichnisstruktur solange Sie korrekt, die Dateipfade in angeben der <code>plugin.xml</code> Datei. Hier ist eine typische Struktur:</p>
+<h2 id="plugin-architektur">Plugin-Architektur</h2>
+
+<p>Kann man das Plugin Artefakte, darunter die <code class="language-plaintext highlighter-rouge">plugin.xml</code> Datei, die JavaScript und C++-Quelldateien, und die <code class="language-plaintext highlighter-rouge">.so</code> Binär-Dateien in einer Verzeichnisstruktur solange Sie korrekt, die Dateipfade in angeben der <code class="language-plaintext highlighter-rouge">plugin.xml</code> Datei. Hier ist eine typische Struktur:</p>
 
 <p><strong><em>project_directory</em></strong> (&gt; plugin.xml)</p>
 
 <ul>
-<li>  <strong>www</strong> (&gt;client.js)</li>
-<li>  <strong>src</strong> 
-
-<ul>
-<li>  <strong>blackberry10</strong> (&gt; index.js, <strong>native</strong> &gt; *.cpp, *.hpp)</li>
-<li>  <strong>Gerät</strong> (&gt;<em>Binärdatei</em> * .so)</li>
-<li>  <strong>Simulator</strong> (&gt;<em>Binärdatei</em> * .so)</li>
-</ul></li>
+  <li><strong>www</strong> (&gt;client.js)</li>
+  <li><strong>src</strong>
+    <ul>
+      <li><strong>blackberry10</strong> (&gt; index.js, <strong>native</strong> &gt; *.cpp, *.hpp)</li>
+      <li><strong>Gerät</strong> (&gt;<em>Binärdatei</em> * .so)</li>
+      <li><strong>Simulator</strong> (&gt;<em>Binärdatei</em> * .so)</li>
+    </ul>
+  </li>
 </ul>
 
-<p>Die Liste zeigt die hierarchische Beziehung zwischen den Ordner der obersten Ebene. Die Klammer zeigt den Inhalt eines angegebenen Verzeichnisses. Alle Verzeichnisnamen werden in Fettschrift angezeigt. Dateinamen vorangestellt sind die <code>&gt;</code> Zeichen.</p>
+<p>Die Liste zeigt die hierarchische Beziehung zwischen den Ordner der obersten Ebene. Die Klammer zeigt den Inhalt eines angegebenen Verzeichnisses. Alle Verzeichnisnamen werden in Fettschrift angezeigt. Dateinamen vorangestellt sind die <code class="language-plaintext highlighter-rouge">&gt;</code> Zeichen.</p>
 
-<h2>Die Datei <em>plugin.xml</em></h2>
+<h2 id="die-datei-pluginxml">Die Datei <em>plugin.xml</em></h2>
 
-<p>Die <code>plugin.xml</code> -Datei enthält die Erweiterung-Namespace und andere Metadaten. Einrichten der <code>Echo</code> Plugin wie folgt:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+<p>Die <code class="language-plaintext highlighter-rouge">plugin.xml</code> -Datei enthält die Erweiterung-Namespace und andere Metadaten. Einrichten der <code class="language-plaintext highlighter-rouge">Echo</code> Plugin wie folgt:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
         id="org.apache.cordova.blackberry.echo"
         version="1.0.0"&gt;
         &lt;js-module src="www/client.js"&gt;
@@ -1284,7 +1321,8 @@
             &lt;/config-file&gt;
         &lt;/platform&gt;
     &lt;/plugin&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 
             </div>
         </div>

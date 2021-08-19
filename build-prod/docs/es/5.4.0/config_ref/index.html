@@ -1112,34 +1112,39 @@
             
 
             <div id="page-toc-source">
-                <h1>El archivo config.xml</h1>
+                <h1 id="el-archivo-configxml">El archivo config.xml</h1>
 
-<p>Muchos aspectos del comportamiento de una aplicación pueden controlarse con un archivo de configuración global, <code>config.xml</code> . Este archivo XML independiente de la plataforma se arregla basado en la especificación del W3C <a href="http://www.w3.org/TR/widgets/">Empaquetado aplicaciones Web (Widgets)</a> y extendido a especificar funciones API Cordova centrales, plugins y configuración específica de la plataforma.</p>
+<p>Muchos aspectos del comportamiento de una aplicación pueden controlarse con un archivo de configuración global, <code class="language-plaintext highlighter-rouge">config.xml</code> . Este archivo XML independiente de la plataforma se arregla basado en la especificación del W3C <a href="http://www.w3.org/TR/widgets/">Empaquetado aplicaciones Web (Widgets)</a> y extendido a especificar funciones API Cordova centrales, plugins y configuración específica de la plataforma.</p>
 
 <p>Para los proyectos creados con la CLI Cordova (descrito en la interfaz de línea de comandos), este archivo puede encontrarse en el directorio de nivel superior:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    app/config.xml
-</code></pre></div>
-<p>Tenga en cuenta que antes de versión 3.3.1-0.2.0, el archivo existía en <code>app/www/config.xml</code> , y que tenerlo aquí es apoyado todavía.</p>
 
-<p>Cuando se usa la CLI para construir un proyecto, las versiones de este archivo pasivo se copian en varios <code>platforms/</code> subdirectorios, por ejemplo:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    app/platforms/ios/AppName/config.xml
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    app/config.xml
+</code></pre></div></div>
+
+<p>Tenga en cuenta que antes de versión 3.3.1-0.2.0, el archivo existía en <code class="language-plaintext highlighter-rouge">app/www/config.xml</code> , y que tenerlo aquí es apoyado todavía.</p>
+
+<p>Cuando se usa la CLI para construir un proyecto, las versiones de este archivo pasivo se copian en varios <code class="language-plaintext highlighter-rouge">platforms/</code> subdirectorios, por ejemplo:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    app/platforms/ios/AppName/config.xml
     app/platforms/blackberry10/www/config.xml
     app/platforms/android/res/xml/config.xml
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Esta sección detalla las opciones de configuración global y multiplataforma. Consulte las siguientes secciones para las opciones específicas de la plataforma:</p>
 
 <ul>
-<li>  Configuración de iOS</li>
-<li>  <a href="../guide/platforms/android/config.html">Configuración de Android</a></li>
-<li>  <a href="../guide/platforms/blackberry10/config.html">Configuración de BlackBerry 10</a></li>
+  <li>Configuración de iOS</li>
+  <li><a href="../guide/platforms/android/config.html">Configuración de Android</a></li>
+  <li><a href="../guide/platforms/blackberry10/config.html">Configuración de BlackBerry 10</a></li>
 </ul>
 
 <p>Además de las diversas opciones de configuración detalladas a continuación, también puede configurar el conjunto básico de una aplicación de imágenes para cada plataforma de destino. Ver los iconos y salpicadura pantallas para obtener más información.</p>
 
-<h2>Elementos de configuración del núcleo</h2>
+<h2 id="elementos-de-configuración-del-núcleo">Elementos de configuración del núcleo</h2>
 
-<p>Este ejemplo muestra el valor predeterminado <code>config.xml</code> generados por la CLI <code>create</code> comando, que se describe en la interfaz de línea de comandos:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;widget id="com.example.hello" version="0.0.1"&gt;
+<p>Este ejemplo muestra el valor predeterminado <code class="language-plaintext highlighter-rouge">config.xml</code> generados por la CLI <code class="language-plaintext highlighter-rouge">create</code> comando, que se describe en la interfaz de línea de comandos:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;widget id="com.example.hello" version="0.0.1"&gt;
         &lt;name&gt;HelloWorld&lt;/name&gt;
         &lt;description&gt;
             A sample Apache Cordova application that responds to the deviceready event.
@@ -1150,105 +1155,152 @@
         &lt;content src="index.html" /&gt;
         &lt;access origin="*" /&gt;
     &lt;/widget&gt;
-</code></pre></div>
-<p>Los siguientes elementos de configuración aparecen en el archivo <code>config.xml</code> de primer nivel y se admiten todas las plataformas soportadas Cordova:</p>
+</code></pre></div></div>
+
+<p>Los siguientes elementos de configuración aparecen en el archivo <code class="language-plaintext highlighter-rouge">config.xml</code> de primer nivel y se admiten todas las plataformas soportadas Cordova:</p>
 
 <ul>
-<li><p>Atributo <code>id</code> del elemento <code>&lt;widget&gt;</code> proporciona identificador de reversa-dominio de la aplicación y la <code>versión de</code> su número de versión completa expresada en notación de mayor/menor/parche.</p>
+  <li>
+    <p>Atributo <code class="language-plaintext highlighter-rouge">id</code> del elemento <code class="language-plaintext highlighter-rouge">&lt;widget&gt;</code> proporciona identificador de reversa-dominio de la aplicación y la <code class="language-plaintext highlighter-rouge">versión de</code> su número de versión completa expresada en notación de mayor/menor/parche.</p>
 
-<p>La etiqueta widget también puede tener atributos que especifican las versiones alternativas, a saber versionCode para Android y CFBundleVersion para iOS. Vea la sección de versiones adicionales debajo para más detalles.</p></li>
-<li><p>El elemento <code>&lt;name&gt;</code> especifica nombre formal de la aplicación, como aparece en la pantalla principal del dispositivo y dentro de la tienda app interfaces.</p></li>
-<li><p>Los elementos <code>&lt;description&gt;</code> y <code>&lt;author&gt;</code> especifican metadatos e información de contacto que puede aparecer en anuncios de la tienda app.</p></li>
-<li><p>Opcional <code>&lt;content&gt;</code> elemento define la página de inicio de la aplicación en el directorio web de alto nivel de activos. El valor predeterminado es <code>index.html</code>, que habitualmente aparece en el directorio de nivel superior <code>www</code> de un proyecto.</p></li>
-<li><p>elementos <code>&lt;access&gt;</code> definen el conjunto de dominios externos que puede comunicarse con la aplicación. El valor predeterminado que se muestra arriba le permite acceder a cualquier servidor. Consulte a la guía de lista blanca de dominio para obtener más detalles.</p></li>
-<li><p>La etiqueta <code>&lt;preference&gt;</code> establece varias opciones como pares de <code>nombre</code> / <code>valor de</code> atributos. De cada preferencia <code>name</code> es sensible a las mayúsculas. Muchas preferencias son exclusivos para plataformas específicas, como se indica en la parte superior de esta página. Las siguientes secciones detallan las preferencias que se aplican a más de una plataforma.</p></li>
+    <p>La etiqueta widget también puede tener atributos que especifican las versiones alternativas, a saber versionCode para Android y CFBundleVersion para iOS. Vea la sección de versiones adicionales debajo para más detalles.</p>
+  </li>
+  <li>
+    <p>El elemento <code class="language-plaintext highlighter-rouge">&lt;name&gt;</code> especifica nombre formal de la aplicación, como aparece en la pantalla principal del dispositivo y dentro de la tienda app interfaces.</p>
+  </li>
+  <li>
+    <p>Los elementos <code class="language-plaintext highlighter-rouge">&lt;description&gt;</code> y <code class="language-plaintext highlighter-rouge">&lt;author&gt;</code> especifican metadatos e información de contacto que puede aparecer en anuncios de la tienda app.</p>
+  </li>
+  <li>
+    <p>Opcional <code class="language-plaintext highlighter-rouge">&lt;content&gt;</code> elemento define la página de inicio de la aplicación en el directorio web de alto nivel de activos. El valor predeterminado es <code class="language-plaintext highlighter-rouge">index.html</code>, que habitualmente aparece en el directorio de nivel superior <code class="language-plaintext highlighter-rouge">www</code> de un proyecto.</p>
+  </li>
+  <li>
+    <p>elementos <code class="language-plaintext highlighter-rouge">&lt;access&gt;</code> definen el conjunto de dominios externos que puede comunicarse con la aplicación. El valor predeterminado que se muestra arriba le permite acceder a cualquier servidor. Consulte a la guía de lista blanca de dominio para obtener más detalles.</p>
+  </li>
+  <li>
+    <p>La etiqueta <code class="language-plaintext highlighter-rouge">&lt;preference&gt;</code> establece varias opciones como pares de <code class="language-plaintext highlighter-rouge">nombre</code> / <code class="language-plaintext highlighter-rouge">valor de</code> atributos. De cada preferencia <code class="language-plaintext highlighter-rouge">name</code> es sensible a las mayúsculas. Muchas preferencias son exclusivos para plataformas específicas, como se indica en la parte superior de esta página. Las siguientes secciones detallan las preferencias que se aplican a más de una plataforma.</p>
+  </li>
 </ul>
 
-<h3>Versiones adicionales</h3>
+<h3 id="versiones-adicionales">Versiones adicionales</h3>
 
 <p>Ambos, Android y iOS apoyar una segunda cadena de versión (o número) además de la visible en tiendas de aplicaciones, <a href="http://developer.android.com/tools/publishing/versioning.html">versionCode</a> para Android y <a href="http://stackoverflow.com/questions/4933093/cfbundleversion-in-the-info-plist-upload-error">CFBundleVersion</a> para iOS. A continuación es un ejemplo que establece explícitamente versionCode y CFBundleVersion</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;widget id="io.cordova.hellocordova"
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;widget id="io.cordova.hellocordova"
       version="0.0.1"
       android-versionCode="7"
       ios-CFBundleVersion="3.3.3"&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Si no se especifica la versión alternativa, se utilizarán los siguientes valores predeterminados:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    // assuming version = MAJOR.MINOR.PATCH-whatever
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    // assuming version = MAJOR.MINOR.PATCH-whatever
     versionCode = PATCH + MINOR * 100 + MAJOR * 10000
     CFBundleVersion = "MAJOR.MINOR.PATCH"
-</code></pre></div>
-<h2>Preferencias globales</h2>
+</code></pre></div></div>
+
+<h2 id="preferencias-globales">Preferencias globales</h2>
 
 <p>Las siguientes preferencias globales se aplican a todas las plataformas:</p>
 
 <ul>
-<li><p><code>Fullscreen</code> permite ocultar la barra de estado en la parte superior de la pantalla. El valor predeterminado es <code>false</code>. Ejemplo:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="Fullscreen" value="true" /&gt;
-</code></pre></div></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Fullscreen</code> permite ocultar la barra de estado en la parte superior de la pantalla. El valor predeterminado es <code class="language-plaintext highlighter-rouge">false</code>. Ejemplo:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="Fullscreen" value="true" /&gt;
+</code></pre></div>    </div>
+  </li>
 </ul>
 
-<h2>Preferencias de múltiples plataformas</h2>
+<h2 id="preferencias-de-múltiples-plataformas">Preferencias de múltiples plataformas</h2>
 
 <p>A más de una plataforma, pero no a todos ellos se aplican las siguientes preferencias:</p>
 
 <ul>
-<li><p><code>DisallowOverscroll</code> (boolean, valor predeterminado <code>false</code>): Si no quieres la interfaz para mostrar cualquier regeneración cuando los usuarios se pasa al principio o al final del contenido se establece en <code>true</code>.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="DisallowOverscroll" value="true"/&gt;
-</code></pre></div>
-<p>Se aplica a iOS y Android. En iOS, overscroll gestos causa contenido a repuntar a su posición original. En Android, que producen un efecto brillante más sutil a lo largo del borde superior o inferior del contenido.</p></li>
-<li><p><code>BackgroundColor</code>: definir color de fondo de la aplicación. Admite un valor hexadecimal de cuatro bytes, con el primer byte que representan el canal alfa y valores RGB estándar para los siguientes tres bytes. Este ejemplo especifica azul:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="BackgroundColor" value="0xff0000ff"/&gt;
-</code></pre></div>
-<p>Se aplica a Android y BlackBerry. Anula CSS disponibles en <em>todas</em> las plataformas, por ejemplo: <code>body{background-color: blue;}</code>.</p></li>
-<li><p><code>HideKeyboardFormAccessoryBar</code> (boolean, valor predeterminado <code>false</code>): establece en <code>true</code> para ocultar la barra de herramientas adicional que aparece encima del teclado, ayudando a los usuarios navegar desde la entrada de una forma a otra.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="HideKeyboardFormAccessoryBar" value="true"/&gt;
-</code></pre></div>
-<p>Se aplica para BlackBerry.</p></li>
-<li><p><code>Orientation</code>(string, el valor predeterminado de <code>default</code> ): le permite bloquear orientación y evitar que roten en respuesta a cambios en la orientación de la interfaz. Los valores posibles son <code>default</code> , <code>landscape</code> o <code>portrait</code> . Ejemplo:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="Orientation" value="landscape" /&gt;
-</code></pre></div>
-<p>Además, puede especificar cualquier valor de orientación específica de la plataforma si colocas el <code>&lt;preference&gt;</code> elemento dentro de un <code>&lt;platform&gt;</code> elemento:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;platform name="android"&gt;
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">DisallowOverscroll</code> (boolean, valor predeterminado <code class="language-plaintext highlighter-rouge">false</code>): Si no quieres la interfaz para mostrar cualquier regeneración cuando los usuarios se pasa al principio o al final del contenido se establece en <code class="language-plaintext highlighter-rouge">true</code>.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="DisallowOverscroll" value="true"/&gt;
+</code></pre></div>    </div>
+
+    <p>Se aplica a iOS y Android. En iOS, overscroll gestos causa contenido a repuntar a su posición original. En Android, que producen un efecto brillante más sutil a lo largo del borde superior o inferior del contenido.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">BackgroundColor</code>: definir color de fondo de la aplicación. Admite un valor hexadecimal de cuatro bytes, con el primer byte que representan el canal alfa y valores RGB estándar para los siguientes tres bytes. Este ejemplo especifica azul:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="BackgroundColor" value="0xff0000ff"/&gt;
+</code></pre></div>    </div>
+
+    <p>Se aplica a Android y BlackBerry. Anula CSS disponibles en <em>todas</em> las plataformas, por ejemplo: <code class="language-plaintext highlighter-rouge">body{background-color: blue;}</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">HideKeyboardFormAccessoryBar</code> (boolean, valor predeterminado <code class="language-plaintext highlighter-rouge">false</code>): establece en <code class="language-plaintext highlighter-rouge">true</code> para ocultar la barra de herramientas adicional que aparece encima del teclado, ayudando a los usuarios navegar desde la entrada de una forma a otra.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="HideKeyboardFormAccessoryBar" value="true"/&gt;
+</code></pre></div>    </div>
+
+    <p>Se aplica para BlackBerry.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Orientation</code>(string, el valor predeterminado de <code class="language-plaintext highlighter-rouge">default</code> ): le permite bloquear orientación y evitar que roten en respuesta a cambios en la orientación de la interfaz. Los valores posibles son <code class="language-plaintext highlighter-rouge">default</code> , <code class="language-plaintext highlighter-rouge">landscape</code> o <code class="language-plaintext highlighter-rouge">portrait</code> . Ejemplo:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="Orientation" value="landscape" /&gt;
+</code></pre></div>    </div>
+
+    <p>Además, puede especificar cualquier valor de orientación específica de la plataforma si colocas el <code class="language-plaintext highlighter-rouge">&lt;preference&gt;</code> elemento dentro de un <code class="language-plaintext highlighter-rouge">&lt;platform&gt;</code> elemento:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;platform name="android"&gt;
     &lt;preference name="Orientation" value="sensorLandscape" /&gt;
 &lt;/platform&gt;
-</code></pre></div>
-<p>Se aplica a Android, iOS, WP8, Amazon OS fuego y Firefox OS.</p>
+</code></pre></div>    </div>
 
-<p><strong>Nota</strong>: el <code>default</code> valor significa Cordova tira a la entrada de preferencia de orientación del archivo de manifiesto/configuración de la plataforma que permite la plataforma a la suplencia a su comportamiento por defecto.</p>
+    <p>Se aplica a Android, iOS, WP8, Amazon OS fuego y Firefox OS.</p>
 
-<p>Para iOS, para especificar tanto retrato y modo apaisado usted utilizaría la plataforma valor específico <code>all</code>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;platform name="ios"&gt;
+    <p><strong>Nota</strong>: el <code class="language-plaintext highlighter-rouge">default</code> valor significa Cordova tira a la entrada de preferencia de orientación del archivo de manifiesto/configuración de la plataforma que permite la plataforma a la suplencia a su comportamiento por defecto.</p>
+
+    <p>Para iOS, para especificar tanto retrato y modo apaisado usted utilizaría la plataforma valor específico <code class="language-plaintext highlighter-rouge">all</code>:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;platform name="ios"&gt;
     &lt;preference name="Orientation" value="all" /&gt;
 &lt;/platform&gt;
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ul>
 
-<h2>La <em>función de</em> elemento</h2>
+<h2 id="la-función-de-elemento">La <em>función de</em> elemento</h2>
 
-<p>Si utilizas el CLI para construir aplicaciones, usted utilice el comando <code>plugin</code> para habilitar dispositivo APIs. No se modifique el archivo <code>config.xml</code> de nivel superior, por lo que el elemento <code>&lt; feature &gt;</code> no se aplica a su flujo de trabajo. Si trabajas directamente en un SDK y usando el archivo <code>config.xml</code> de específicas de la plataforma como fuente, se utiliza la etiqueta <code>&lt; feature &gt;</code> para habilitar APIs de nivel de dispositivo y plugins externos. A menudo aparecen con valores personalizados en archivos específicos para cada plataforma <code>config.xml</code> . Por ejemplo, aquí es cómo especificar el dispositivo API para los proyectos de Android:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;feature name="Device"&gt;
+<p>Si utilizas el CLI para construir aplicaciones, usted utilice el comando <code class="language-plaintext highlighter-rouge">plugin</code> para habilitar dispositivo APIs. No se modifique el archivo <code class="language-plaintext highlighter-rouge">config.xml</code> de nivel superior, por lo que el elemento <code class="language-plaintext highlighter-rouge">&lt; feature &gt;</code> no se aplica a su flujo de trabajo. Si trabajas directamente en un SDK y usando el archivo <code class="language-plaintext highlighter-rouge">config.xml</code> de específicas de la plataforma como fuente, se utiliza la etiqueta <code class="language-plaintext highlighter-rouge">&lt; feature &gt;</code> para habilitar APIs de nivel de dispositivo y plugins externos. A menudo aparecen con valores personalizados en archivos específicos para cada plataforma <code class="language-plaintext highlighter-rouge">config.xml</code> . Por ejemplo, aquí es cómo especificar el dispositivo API para los proyectos de Android:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;feature name="Device"&gt;
         &lt;param name="android-package" value="org.apache.cordova.device.Device" /&gt;
     &lt;/feature&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Aquí es cómo aparece el elemento de iOS proyectos:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;feature name="Device"&gt;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;feature name="Device"&gt;
         &lt;param name="ios-package" value="CDVDevice" /&gt;
     &lt;/feature&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Ver la referencia de la API para obtener más información sobre cómo especificar cada función. Consulte a la guía de desarrollo del Plugin para obtener más información sobre plugins.</p>
 
-<h2>El elemento <em>platform</em></h2>
+<h2 id="el-elemento-platform">El elemento <em>platform</em></h2>
 
-<p>Cuando utilice la CLI para construir aplicaciones, a veces es necesario especificar preferencias u otros elementos específicos para una determinada plataforma. Utilice el elemento <code>&lt; platform &gt;</code> para especificar la configuración que sólo debe aparecer en un archivo específico de plataforma única <code>config.xml</code> . Por ejemplo, aquí es cómo especificar que android sólo debe emplear la opción de pantalla completa:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;platform name="android"&gt;
+<p>Cuando utilice la CLI para construir aplicaciones, a veces es necesario especificar preferencias u otros elementos específicos para una determinada plataforma. Utilice el elemento <code class="language-plaintext highlighter-rouge">&lt; platform &gt;</code> para especificar la configuración que sólo debe aparecer en un archivo específico de plataforma única <code class="language-plaintext highlighter-rouge">config.xml</code> . Por ejemplo, aquí es cómo especificar que android sólo debe emplear la opción de pantalla completa:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;platform name="android"&gt;
         &lt;preference name="Fullscreen" value="true" /&gt;
     &lt;/platform&gt;
-</code></pre></div>
-<h2>El elemento <em>hook</em></h2>
+</code></pre></div></div>
+
+<h2 id="el-elemento-hook">El elemento <em>hook</em></h2>
 
 <p>Representa la secuencia de comandos personalizada que será llamado por Córdoba cuando se produce cierta acción (por ejemplo, después se agrega el plugin o plataforma preparar lógica se invoca). Esto es útil cuando se necesita extender la funcionalidad de Cordova por defecto. Para más información vea la guía de los ganchos.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;hook type="after_plugin_install" src="scripts/afterPluginInstall.js" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;hook type="after_plugin_install" src="scripts/afterPluginInstall.js" /&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

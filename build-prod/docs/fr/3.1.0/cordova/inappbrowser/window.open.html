@@ -1256,87 +1256,103 @@
             
 
             <div id="page-toc-source">
-                <h1>window.open</h1>
+                <h1 id="windowopen">window.open</h1>
 
-<p>Ouvre une URL dans une nouvelle instance de la classe <code>[InAppBrowser](inappbrowser.html)</code>, une instance déjà existante ou dans le navigateur système.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">var ref = window.open(url, target, options);
-</code></pre></div>
-<ul>
-<li><p><strong>ref</strong> : référence à la fenêtre <code>[InAppBrowser](inappbrowser.html)</code>. <em>(InAppBrowser)</em></p></li>
-<li><p><strong>url</strong> : l&#39;URL à charger <em>(String)</em>. À encoder au préalable via <code>encodeURI()</code> si celle-ci contient des caractères Unicode.</p></li>
-<li><p><strong>target</strong> : la cible du chargement de l&#39;URL, ce paramètre est optionnel, sa valeur par défaut est <code>_self</code>. <em>(String)</em></p>
+<p>Ouvre une URL dans une nouvelle instance de la classe <code class="language-plaintext highlighter-rouge">[InAppBrowser](inappbrowser.html)</code>, une instance déjà existante ou dans le navigateur système.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var ref = window.open(url, target, options);
+</code></pre></div></div>
 
 <ul>
-<li>  <code>_self</code> : dirige le chargement vers la WebView Cordova si l&#39;URL figure dans la liste blanche, sinon dans une fenêtre <code>InAppBrowser</code>.</li>
-<li>  <code>_blank</code> : dirige le chargement vers une fenêtre <code>InAppBrowser</code>.</li>
-<li>  <code>_system</code> : dirige le chargement vers le navigateur Web du système.</li>
-</ul></li>
-<li><p><strong>options</strong> : permet de personnaliser la fenêtre <code>[InAppBrowser](inappbrowser.html)</code>. Paramètre facultatif dont la valeur par défaut est <code>location=yes</code>. <em>(String)</em></p>
+  <li>
+    <p><strong>ref</strong> : référence à la fenêtre <code class="language-plaintext highlighter-rouge">[InAppBrowser](inappbrowser.html)</code>. <em>(InAppBrowser)</em></p>
+  </li>
+  <li>
+    <p><strong>url</strong> : l’URL à charger <em>(String)</em>. À encoder au préalable via <code class="language-plaintext highlighter-rouge">encodeURI()</code> si celle-ci contient des caractères Unicode.</p>
+  </li>
+  <li>
+    <p><strong>target</strong> : la cible du chargement de l’URL, ce paramètre est optionnel, sa valeur par défaut est <code class="language-plaintext highlighter-rouge">_self</code>. <em>(String)</em></p>
 
-<p>La chaîne <code>options</code> ne doit contenir aucun caractère vide, chaque paire nom/valeur représentant une fonctionnalité doit être séparée de la précédente par une virgule. Les noms de fonctionnalités sont sensibles à la casse. Toutes les plates-formes prennent en charge la valeur ci-dessous :</p>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">_self</code> : dirige le chargement vers la WebView Cordova si l’URL figure dans la liste blanche, sinon dans une fenêtre <code class="language-plaintext highlighter-rouge">InAppBrowser</code>.</li>
+      <li><code class="language-plaintext highlighter-rouge">_blank</code> : dirige le chargement vers une fenêtre <code class="language-plaintext highlighter-rouge">InAppBrowser</code>.</li>
+      <li><code class="language-plaintext highlighter-rouge">_system</code> : dirige le chargement vers le navigateur Web du système.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>options</strong> : permet de personnaliser la fenêtre <code class="language-plaintext highlighter-rouge">[InAppBrowser](inappbrowser.html)</code>. Paramètre facultatif dont la valeur par défaut est <code class="language-plaintext highlighter-rouge">location=yes</code>. <em>(String)</em></p>
 
-<ul>
-<li>  <strong>location</strong> : régler à <code>yes</code> ou <code>no</code> afin d&#39;afficher ou masquer la barre d&#39;adresse de la fenêtre <code>InAppBrowser</code>.
-## Android uniquement</li>
-<li>  <strong>closebuttoncaption</strong> : permet de modifier la valeur du texte du bouton &quot;Terminé&quot;. </li>
-<li>  <strong>hidden</strong> : régler à &#39;yes&#39; pour créer la fenêtre et charger la page, mais ne pas la montrer. L&#39;événement load se déclenche lorsque le chargement est terminé. Ne pas préciser de valeur ou régler sur &#39;no&#39; (par défaut) afin que la fenêtre soit affichée normalement. </li>
-<li>  <strong>clearcache</strong> : régler sur &#39;yes&#39; pour que les cookies du navigateur soient effacés avant l&#39;ouverture de la nouvelle fenêtre</li>
-<li>  <strong>clearsessioncache</strong> : régler sur &#39;yes&#39; afin que les cookies de session soient supprimés avant l&#39;ouverture de la nouvelle fenêtre
-## iOS uniquement</li>
-<li>  <strong>closebuttoncaption</strong> : permet de modifier la valeur du texte du bouton &quot;Terminé&quot;. Dans le cas d&#39;une application multilingue, vous devrez localiser cette valeur par vos propres moyens.</li>
-<li>  <strong>hidden</strong> : régler à &#39;yes&#39; pour créer la fenêtre et charger la page, mais ne pas la montrer. L&#39;événement load se déclenche lorsque le chargement est terminé. Ne pas préciser de valeur ou régler sur &#39;no&#39; (par défaut) afin que la fenêtre soit affichée normalement. </li>
-<li>  <strong>toolbar</strong> : régler sur &#39;yes&#39; ou &#39;no&#39; afin d&#39;afficher ou masquer la barre d&#39;outils de la fenêtre InAppBrowser (&#39;yes&#39; par défaut).</li>
-<li>  <strong>enableViewportScale</strong> : selon si la valeur est <code>yes</code> ou <code>no</code>, une balise meta est injectée avec pour but de permettre ou empêcher l&#39;utilisateur de zoomer dans le viewport (<code>no</code> par défaut).</li>
-<li>  <strong>mediaPlaybackRequiresUserAction</strong> : selon si la valeur est <code>yes</code> ou <code>no</code>, la lecture automatique de contenus HTML5 audio ou vidéo (c&#39;est à dire sans action préalable de l&#39;utilisateur) est désactivée ou activée (<code>no</code> par défaut).</li>
-<li>  <strong>allowInlineMediaPlayback</strong> : régler sur <code>yes</code> ou <code>no</code> pour permettre ou interdire la lecture de contenu HTML5 audio ou vidéo directement au sein du navigateur plutôt que dans une fenêtre de lecture spécifique à l&#39;appareil. L&#39;élément HTML <code>video</code> doit également comporter l&#39;attribut <code>webkit-playsinline</code> (<code>no</code> par défaut)</li>
-<li>  <strong>keyboardDisplayRequiresUserAction</strong> : régler sur <code>yes</code> ou <code>no</code> pour interdire ou autoriser l&#39;ouverture du clavier lorsque des éléments de formulaire reçoivent le focus par l&#39;intermédiaire d&#39;un appel à la méthode JavaScript <code>focus()</code> (<code>yes</code> par défaut).</li>
-<li>  <strong>suppressesIncrementalRendering</strong> : selon si la valeur est <code>yes</code> ou <code>no</code>, le rendu de la vue attendra ou non que tout nouveau contenu soit reçu (<code>no</code> par défaut).</li>
-<li>  <strong>presentationstyle</strong> : régler sur <code>pagesheet</code>, <code>formsheet</code> ou <code>fullscreen</code> afin d&#39;obtenir le <a href="http://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/Reference/Reference.html#//apple_ref/occ/instp/UIViewController/modalPresentationStyle">style de présentation</a> de fenêtre souhaité (<code>fullscreen</code> par défaut).</li>
-<li>  <strong>transitionstyle</strong>: régler la valeur à <code>fliphorizontal</code>, <code>crossdissolve</code> ou <code>coververtical</code> afin de définir le <a href="http://developer.apple.com/library/ios/#documentation/UIKit/Reference/UIViewController_Class/Reference/Reference.html#//apple_ref/occ/instp/UIViewController/modalTransitionStyle">style de transition</a> de fenêtre souhaité (<code>coververtical</code> par défaut).</li>
-</ul></li>
+    <p>La chaîne <code class="language-plaintext highlighter-rouge">options</code> ne doit contenir aucun caractère vide, chaque paire nom/valeur représentant une fonctionnalité doit être séparée de la précédente par une virgule. Les noms de fonctionnalités sont sensibles à la casse. Toutes les plates-formes prennent en charge la valeur ci-dessous :</p>
+
+    <ul>
+      <li><strong>location</strong> : régler à <code class="language-plaintext highlighter-rouge">yes</code> ou <code class="language-plaintext highlighter-rouge">no</code> afin d’afficher ou masquer la barre d’adresse de la fenêtre <code class="language-plaintext highlighter-rouge">InAppBrowser</code>.
+        <h2 id="android-uniquement">Android uniquement</h2>
+      </li>
+      <li><strong>closebuttoncaption</strong> : permet de modifier la valeur du texte du bouton “Terminé”.</li>
+      <li><strong>hidden</strong> : régler à ‘yes’ pour créer la fenêtre et charger la page, mais ne pas la montrer. L’événement load se déclenche lorsque le chargement est terminé. Ne pas préciser de valeur ou régler sur ‘no’ (par défaut) afin que la fenêtre soit affichée normalement.</li>
+      <li><strong>clearcache</strong> : régler sur ‘yes’ pour que les cookies du navigateur soient effacés avant l’ouverture de la nouvelle fenêtre</li>
+      <li><strong>clearsessioncache</strong> : régler sur ‘yes’ afin que les cookies de session soient supprimés avant l’ouverture de la nouvelle fenêtre
+        <h2 id="ios-uniquement">iOS uniquement</h2>
+      </li>
+      <li><strong>closebuttoncaption</strong> : permet de modifier la valeur du texte du bouton “Terminé”. Dans le cas d’une application multilingue, vous devrez localiser cette valeur par vos propres moyens.</li>
+      <li><strong>hidden</strong> : régler à ‘yes’ pour créer la fenêtre et charger la page, mais ne pas la montrer. L’événement load se déclenche lorsque le chargement est terminé. Ne pas préciser de valeur ou régler sur ‘no’ (par défaut) afin que la fenêtre soit affichée normalement.</li>
+      <li><strong>toolbar</strong> : régler sur ‘yes’ ou ‘no’ afin d’afficher ou masquer la barre d’outils de la fenêtre InAppBrowser (‘yes’ par défaut).</li>
+      <li><strong>enableViewportScale</strong> : selon si la valeur est <code class="language-plaintext highlighter-rouge">yes</code> ou <code class="language-plaintext highlighter-rouge">no</code>, une balise meta est injectée avec pour but de permettre ou empêcher l’utilisateur de zoomer dans le viewport (<code class="language-plaintext highlighter-rouge">no</code> par défaut).</li>
+      <li><strong>mediaPlaybackRequiresUserAction</strong> : selon si la valeur est <code class="language-plaintext highlighter-rouge">yes</code> ou <code class="language-plaintext highlighter-rouge">no</code>, la lecture automatique de contenus HTML5 audio ou vidéo (c’est à dire sans action préalable de l’utilisateur) est désactivée ou activée (<code class="language-plaintext highlighter-rouge">no</code> par défaut).</li>
+      <li><strong>allowInlineMediaPlayback</strong> : régler sur <code class="language-plaintext highlighter-rouge">yes</code> ou <code class="language-plaintext highlighter-rouge">no</code> pour permettre ou interdire la lecture de contenu HTML5 audio ou vidéo directement au sein du navigateur plutôt que dans une fenêtre de lecture spécifique à l’appareil. L’élément HTML <code class="language-plaintext highlighter-rouge">video</code> doit également comporter l’attribut <code class="language-plaintext highlighter-rouge">webkit-playsinline</code> (<code class="language-plaintext highlighter-rouge">no</code> par défaut)</li>
+      <li><strong>keyboardDisplayRequiresUserAction</strong> : régler sur <code class="language-plaintext highlighter-rouge">yes</code> ou <code class="language-plaintext highlighter-rouge">no</code> pour interdire ou autoriser l’ouverture du clavier lorsque des éléments de formulaire reçoivent le focus par l’intermédiaire d’un appel à la méthode JavaScript <code class="language-plaintext highlighter-rouge">focus()</code> (<code class="language-plaintext highlighter-rouge">yes</code> par défaut).</li>
+      <li><strong>suppressesIncrementalRendering</strong> : selon si la valeur est <code class="language-plaintext highlighter-rouge">yes</code> ou <code class="language-plaintext highlighter-rouge">no</code>, le rendu de la vue attendra ou non que tout nouveau contenu soit reçu (<code class="language-plaintext highlighter-rouge">no</code> par défaut).</li>
+      <li><strong>presentationstyle</strong> : régler sur <code class="language-plaintext highlighter-rouge">pagesheet</code>, <code class="language-plaintext highlighter-rouge">formsheet</code> ou <code class="language-plaintext highlighter-rouge">fullscreen</code> afin d’obtenir le <a href="http://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/Reference/Reference.html#//apple_ref/occ/instp/UIViewController/modalPresentationStyle">style de présentation</a> de fenêtre souhaité (<code class="language-plaintext highlighter-rouge">fullscreen</code> par défaut).</li>
+      <li><strong>transitionstyle</strong>: régler la valeur à <code class="language-plaintext highlighter-rouge">fliphorizontal</code>, <code class="language-plaintext highlighter-rouge">crossdissolve</code> ou <code class="language-plaintext highlighter-rouge">coververtical</code> afin de définir le <a href="http://developer.apple.com/library/ios/#documentation/UIKit/Reference/UIViewController_Class/Reference/Reference.html#//apple_ref/occ/instp/UIViewController/modalTransitionStyle">style de transition</a> de fenêtre souhaité (<code class="language-plaintext highlighter-rouge">coververtical</code> par défaut).</li>
+    </ul>
+  </li>
 </ul>
 
-<h2>Plates-formes supportées</h2>
+<h2 id="plates-formes-supportées">Plates-formes supportées</h2>
 
 <ul>
-<li>  Android</li>
-<li>  BlackBerry</li>
-<li>  iOS</li>
-<li>  Windows Phone 7 et 8</li>
+  <li>Android</li>
+  <li>BlackBerry</li>
+  <li>iOS</li>
+  <li>Windows Phone 7 et 8</li>
 </ul>
 
-<h2>Exemple court</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">var ref = window.open('http://apache.org', '_blank', 'location=yes');
+<h2 id="exemple-court">Exemple court</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var ref = window.open('http://apache.org', '_blank', 'location=yes');
 var ref2 = window.open(encodeURI('http://ja.m.wikipedia.org/wiki/ハングル'), '_blank', 'location=yes');
-</code></pre></div>
-<h2>Exemple complet</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>window.open Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="exemple-complet">Exemple complet</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;window.open Example&lt;/title&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="c1">// external url</span>
-        <span class="kd">var</span> <span class="nx">ref</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nb">encodeURI</span><span class="p">(</span><span class="s1">'http://apache.org'</span><span class="p">),</span> <span class="s1">'_blank'</span><span class="p">,</span> <span class="s1">'location=yes'</span><span class="p">);</span>
-        <span class="c1">// relative document</span>
-        <span class="nx">ref</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">'next.html'</span><span class="p">,</span> <span class="s1">'_self'</span><span class="p">);</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        // external url
+        var ref = window.open(encodeURI('http://apache.org'), '_blank', 'location=yes');
+        // relative document
+        ref = window.open('next.html', '_self');
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

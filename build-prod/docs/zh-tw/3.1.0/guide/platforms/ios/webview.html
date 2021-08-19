@@ -1304,101 +1304,188 @@
             
 
             <div id="page-toc-source">
-                <h1>WebViews iOS</h1>
+                <h1 id="webviews-ios">WebViews iOS</h1>
 
-<p>從科爾多瓦 1.4 開始，可以使用一個元件作為科爾多瓦在 iOS 應用程式中。此元件是代號為 &#39;刀&#39;。</p>
+<p>從科爾多瓦 1.4 開始，可以使用一個元件作為科爾多瓦在 iOS 應用程式中。此元件是代號為 ‘刀’。</p>
 
 <p>新科爾多瓦基於應用程式使用提供在科爾多瓦 1.4 或更多地使用刀的 Xcode 範本創建的。（範本是刀的參考實現。</p>
 
 <p>科爾多瓦 2.0.0 和後續版本僅支援基於次級專案刀執行。</p>
 
-<h2>系統必備元件</h2>
+<h2 id="系統必備元件">系統必備元件</h2>
 
 <ul>
-<li><p>科爾多瓦 2.3.0 或更大</p></li>
-<li><p>Xcode 4.5 或更大</p></li>
-<li><p><code>config.xml</code><a href="../../../cordova/file/fileobj/fileobj.html">檔</a> (從新創建的 iOS 專案)</p></li>
+  <li>
+    <p>科爾多瓦 2.3.0 或更大</p>
+  </li>
+  <li>
+    <p>Xcode 4.5 或更大</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">config.xml</code><a href="../../../cordova/file/fileobj/fileobj.html">檔</a> (從新創建的 iOS 專案)</p>
+  </li>
 </ul>
 
-<h2>克利弗添加到 Xcode 專案 （CordovaLib 子專案）</h2>
+<h2 id="克利弗添加到-xcode-專案-cordovalib-子專案">克利弗添加到 Xcode 專案 （CordovaLib 子專案）</h2>
 
 <ol>
-<li><p>下載並解壓縮到您的硬碟磁碟機上的永久目錄位置的科爾多瓦源，例如到<code>~/Documents/Cordova</code>.</p></li>
-<li><p>如果它正在運行，請退出 Xcode。</p></li>
-<li><p>使用終端程式，定位到你放在上面的下載的源的目錄。</p></li>
-<li><p>複製 <code>config.xml</code> 檔到你的專案目錄在磁片上 （請參見上面的前提條件）。</p></li>
-<li><p>拖放式 <code>config.xml</code> 到 Xcode 專案導航的檔。</p></li>
-<li><p>選擇<strong>創建組的任何添加的資料夾</strong>選項按鈕，然後按<strong>完成</strong>.</p></li>
-<li><p>拖放式 <code>CordovaLib.xcodeproj</code> 到 Xcode 專案導航的檔 （從永久目錄以上，位置和它應該在 <code>CordovaLib</code> 子目錄）。</p></li>
-<li><p>Select <code>CordovaLib.xcodeproj</code> in the Project Navigator.</p></li>
-<li><p>鍵入<strong>選項-命令-1</strong>鍵的組合，以顯示<strong>檔檢查器</strong>.</p></li>
-<li><p>選擇<strong>相對於組</strong><strong>檔檢查器</strong>器下拉式功能表中的<strong>位置</strong>.</p></li>
-<li><p>在專案導航器中選擇<strong>專案圖示</strong>，選擇你的<strong>目標</strong>，然後選擇<strong>生成設置</strong>選項卡。</p></li>
-<li><p>添加 <code>-all_load</code> 和 <code>-Obj-C</code> 的<strong>其他連結器標誌</strong>值。</p></li>
-<li><p>按一下專案導航器中的<strong>專案圖示</strong>，選擇你的<strong>目標</strong>，然後選擇<strong>生成階段</strong>選項卡。</p></li>
-<li><p>展開<strong>連結二進位檔案與庫</strong>.</p></li>
-<li><p>選擇<strong>+</strong>按鈕，然後添加下列<strong>框架</strong>。（可選） 該專案導航器中移動他們的<strong>框架</strong>組下）：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">AddressBook.framework AddressBookUI.framework AudioToolbox.framework AVFoundation.framework CoreLocation.framework MediaPlayer.framework QuartzCore.framework SystemConfiguration.framework MobileCoreServices.framework CoreMedia.framework
-</code></pre></div></li>
-<li><p>擴展<strong>目標的依賴關係</strong>，標有像這樣如果您有多個框的頂部框 ！</p></li>
-<li><p>選擇<strong>+</strong>按鈕，然後添加 <code>CordovaLib</code> 生成產品。</p></li>
-<li><p>展開<strong>連結二進位檔案與庫</strong>，標有像這樣如果您有多個框的頂部框 ！</p></li>
-<li><p>選擇<strong>+</strong>按鈕，然後添加<code>libCordova.a</code>.</p></li>
-<li><p>設置為<strong>獨特</strong>Xcode 偏好<strong>Xcode 首選項 → <a href="../../../cordova/geolocation/Position/position.html">位置</a> → 派生資料 → 先進......</strong>.</p></li>
-<li><p>在專案導航器中選擇<strong>專案圖示</strong>，選擇你的<strong>目標</strong>，然後選擇<strong>生成設置</strong>選項卡。</p></li>
-<li><p>搜索<strong>標題搜索路徑</strong>。該設置，添加以下 （帶引號） 這三個值：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">"$(TARGET_BUILD_DIR)/usr/local/lib/include"        
+  <li>
+    <p>下載並解壓縮到您的硬碟磁碟機上的永久目錄位置的科爾多瓦源，例如到<code class="language-plaintext highlighter-rouge">~/Documents/Cordova</code>.</p>
+  </li>
+  <li>
+    <p>如果它正在運行，請退出 Xcode。</p>
+  </li>
+  <li>
+    <p>使用終端程式，定位到你放在上面的下載的源的目錄。</p>
+  </li>
+  <li>
+    <p>複製 <code class="language-plaintext highlighter-rouge">config.xml</code> 檔到你的專案目錄在磁片上 （請參見上面的前提條件）。</p>
+  </li>
+  <li>
+    <p>拖放式 <code class="language-plaintext highlighter-rouge">config.xml</code> 到 Xcode 專案導航的檔。</p>
+  </li>
+  <li>
+    <p>選擇<strong>創建組的任何添加的資料夾</strong>選項按鈕，然後按<strong>完成</strong>.</p>
+  </li>
+  <li>
+    <p>拖放式 <code class="language-plaintext highlighter-rouge">CordovaLib.xcodeproj</code> 到 Xcode 專案導航的檔 （從永久目錄以上，位置和它應該在 <code class="language-plaintext highlighter-rouge">CordovaLib</code> 子目錄）。</p>
+  </li>
+  <li>
+    <p>Select <code class="language-plaintext highlighter-rouge">CordovaLib.xcodeproj</code> in the Project Navigator.</p>
+  </li>
+  <li>
+    <p>鍵入<strong>選項-命令-1</strong>鍵的組合，以顯示<strong>檔檢查器</strong>.</p>
+  </li>
+  <li>
+    <p>選擇<strong>相對於組</strong><strong>檔檢查器</strong>器下拉式功能表中的<strong>位置</strong>.</p>
+  </li>
+  <li>
+    <p>在專案導航器中選擇<strong>專案圖示</strong>，選擇你的<strong>目標</strong>，然後選擇<strong>生成設置</strong>選項卡。</p>
+  </li>
+  <li>
+    <p>添加 <code class="language-plaintext highlighter-rouge">-all_load</code> 和 <code class="language-plaintext highlighter-rouge">-Obj-C</code> 的<strong>其他連結器標誌</strong>值。</p>
+  </li>
+  <li>
+    <p>按一下專案導航器中的<strong>專案圖示</strong>，選擇你的<strong>目標</strong>，然後選擇<strong>生成階段</strong>選項卡。</p>
+  </li>
+  <li>
+    <p>展開<strong>連結二進位檔案與庫</strong>.</p>
+  </li>
+  <li>
+    <p>選擇<strong>+</strong>按鈕，然後添加下列<strong>框架</strong>。（可選） 該專案導航器中移動他們的<strong>框架</strong>組下）：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AddressBook.framework AddressBookUI.framework AudioToolbox.framework AVFoundation.framework CoreLocation.framework MediaPlayer.framework QuartzCore.framework SystemConfiguration.framework MobileCoreServices.framework CoreMedia.framework
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>擴展<strong>目標的依賴關係</strong>，標有像這樣如果您有多個框的頂部框 ！</p>
+  </li>
+  <li>
+    <p>選擇<strong>+</strong>按鈕，然後添加 <code class="language-plaintext highlighter-rouge">CordovaLib</code> 生成產品。</p>
+  </li>
+  <li>
+    <p>展開<strong>連結二進位檔案與庫</strong>，標有像這樣如果您有多個框的頂部框 ！</p>
+  </li>
+  <li>
+    <p>選擇<strong>+</strong>按鈕，然後添加<code class="language-plaintext highlighter-rouge">libCordova.a</code>.</p>
+  </li>
+  <li>
+    <p>設置為<strong>獨特</strong>Xcode 偏好<strong>Xcode 首選項 → <a href="../../../cordova/geolocation/Position/position.html">位置</a> → 派生資料 → 先進……</strong>.</p>
+  </li>
+  <li>
+    <p>在專案導航器中選擇<strong>專案圖示</strong>，選擇你的<strong>目標</strong>，然後選擇<strong>生成設置</strong>選項卡。</p>
+  </li>
+  <li>
+    <p>搜索<strong>標題搜索路徑</strong>。該設置，添加以下 （帶引號） 這三個值：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"$(TARGET_BUILD_DIR)/usr/local/lib/include"        
 "$(OBJROOT)/UninstalledProducts/include"
 "$(BUILT_PRODUCTS_DIR)"
-</code></pre></div>
-<p>與科爾多瓦 2.1.0， <code>CordovaLib</code> 已升級為使用<strong>自動引用計數 (弧)</strong>。 你不需要升級到<strong>弧</strong>要使用 CordovaLib，但是如果你想要升級您的專案使用<strong>弧</strong>，請使用 Xcode 遷移嚮導從功能表中：<strong>編輯 → 重構 → 轉換為目標 C 弧...</strong>，<strong>取消選擇 libCordova.a</strong>，然後運行嚮導完成。</p></li>
+</code></pre></div>    </div>
+
+    <p>與科爾多瓦 2.1.0， <code class="language-plaintext highlighter-rouge">CordovaLib</code> 已升級為使用<strong>自動引用計數 (弧)</strong>。 你不需要升級到<strong>弧</strong>要使用 CordovaLib，但是如果你想要升級您的專案使用<strong>弧</strong>，請使用 Xcode 遷移嚮導從功能表中：<strong>編輯 → 重構 → 轉換為目標 C 弧…</strong>，<strong>取消選擇 libCordova.a</strong>，然後運行嚮導完成。</p>
+  </li>
 </ol>
 
-<h2>在您的代碼中使用 CDVViewController</h2>
+<h2 id="在您的代碼中使用-cdvviewcontroller">在您的代碼中使用 CDVViewController</h2>
 
 <ol>
-<li><p>添加此標頭：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">#import &lt;Cordova/CDVViewController.h&gt;
-</code></pre></div></li>
-<li><p>具現化一個新的 <code>CDVViewController</code> ，並保留它在某個地方 （例如，向您的類中的屬性）：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">CDVViewController* viewController = [CDVViewController new];
-</code></pre></div></li>
-<li><p>(<em>可選</em>）設置 <code>wwwFolderName</code> 屬性 （預設為 <code>www</code> ）：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">viewController.wwwFolderName = @"myfolder";
-</code></pre></div></li>
-<li><p>(<em>可選</em>）在您的 config.xml 中設置的起始頁 <code>&lt;content&gt;</code> 標記。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;content src="index.html" /&gt;
-</code></pre></div>
-<p>或</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;content src="http://apache.org" /&gt;
-</code></pre></div></li>
-<li><p>(<em>可選</em>）設置 <code>useSplashScreen</code> 屬性 （預設為 <code>NO</code> ）：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">viewController.useSplashScreen = YES;
-</code></pre></div></li>
-<li><p>設置<strong>視圖框架</strong>（總是此設置作為最後一個屬性）：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">viewController.view.frame = CGRectMake(0, 0, 320, 480);
-</code></pre></div></li>
-<li><p>將刀添加到您的視圖：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">[myView addSubview:viewController.view];
-</code></pre></div></li>
+  <li>
+    <p>添加此標頭：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#import &lt;Cordova/CDVViewController.h&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>具現化一個新的 <code class="language-plaintext highlighter-rouge">CDVViewController</code> ，並保留它在某個地方 （例如，向您的類中的屬性）：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CDVViewController* viewController = [CDVViewController new];
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>(<em>可選</em>）設置 <code class="language-plaintext highlighter-rouge">wwwFolderName</code> 屬性 （預設為 <code class="language-plaintext highlighter-rouge">www</code> ）：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>viewController.wwwFolderName = @"myfolder";
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>(<em>可選</em>）在您的 config.xml 中設置的起始頁 <code class="language-plaintext highlighter-rouge">&lt;content&gt;</code> 標記。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;content src="index.html" /&gt;
+</code></pre></div>    </div>
+
+    <p>或</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;content src="http://apache.org" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>(<em>可選</em>）設置 <code class="language-plaintext highlighter-rouge">useSplashScreen</code> 屬性 （預設為 <code class="language-plaintext highlighter-rouge">NO</code> ）：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>viewController.useSplashScreen = YES;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>設置<strong>視圖框架</strong>（總是此設置作為最後一個屬性）：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>viewController.view.frame = CGRectMake(0, 0, 320, 480);
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>將刀添加到您的視圖：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[myView addSubview:viewController.view];
+</code></pre></div>    </div>
+  </li>
 </ol>
 
-<h2>添加您的 HTML、 CSS 和 JavaScript 資產</h2>
+<h2 id="添加您的-html-css-和-javascript-資產">添加您的 HTML、 CSS 和 JavaScript 資產</h2>
 
 <ol>
-<li><p>在您在磁片上的專案中創建一個新的目錄 <code>www</code> 為例。</p></li>
-<li><p>將您的 HTML、 CSS 和 JavaScript 資產放入此目錄。</p></li>
-<li><p>拖動並放到 Xcode 專案導航器的目錄。</p></li>
-<li><p>選擇<strong>創建資料夾引用的任何添加的資料夾</strong>選項按鈕。</p></li>
-<li><p>設置相應的 <code>wwwFolderName</code> 和 <code>startPage</code> 你最初創建的資料夾的屬性，或使用預設設置 （請參閱上一節） 當你具現化<code>CDVViewController</code>.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">/*
+  <li>
+    <p>在您在磁片上的專案中創建一個新的目錄 <code class="language-plaintext highlighter-rouge">www</code> 為例。</p>
+  </li>
+  <li>
+    <p>將您的 HTML、 CSS 和 JavaScript 資產放入此目錄。</p>
+  </li>
+  <li>
+    <p>拖動並放到 Xcode 專案導航器的目錄。</p>
+  </li>
+  <li>
+    <p>選擇<strong>創建資料夾引用的任何添加的資料夾</strong>選項按鈕。</p>
+  </li>
+  <li>
+    <p>設置相應的 <code class="language-plaintext highlighter-rouge">wwwFolderName</code> 和 <code class="language-plaintext highlighter-rouge">startPage</code> 你最初創建的資料夾的屬性，或使用預設設置 （請參閱上一節） 當你具現化<code class="language-plaintext highlighter-rouge">CDVViewController</code>.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*
  if you created a folder called 'myfolder' and
  you want the file 'mypage.html' in it to be
  the startPage
 */
 viewController.wwwFolderName = @"myfolder";
 viewController.startPage = @"mypage.html"
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ol>
 
 

@@ -1436,32 +1436,45 @@
             
 
             <div id="page-toc-source">
-                <h1>Android の web 表示</h1>
+                <h1 id="android-の-web-表示">Android の web 表示</h1>
 
-<p>コルドバ 1.9 での援助にはじまって、 <code>CordovaActivity</code> 、コルドバ大きいネイティブ Android アプリケーションでコンポーネントとして使用できます。 Android としてこのコンポーネントを指す、 <code>CordovaWebView</code> 。 1.9 から新しいコルドバ ベースのアプリケーションを使用し、 <code>CordovaWebView</code> かどうかに関係なくそのメイン ビューとして、従来の <code>CordovaActivity</code> のアプローチが使用されます。</p>
+<p>コルドバ 1.9 での援助にはじまって、 <code class="language-plaintext highlighter-rouge">CordovaActivity</code> 、コルドバ大きいネイティブ Android アプリケーションでコンポーネントとして使用できます。 Android としてこのコンポーネントを指す、 <code class="language-plaintext highlighter-rouge">CordovaWebView</code> 。 1.9 から新しいコルドバ ベースのアプリケーションを使用し、 <code class="language-plaintext highlighter-rouge">CordovaWebView</code> かどうかに関係なくそのメイン ビューとして、従来の <code class="language-plaintext highlighter-rouge">CordovaActivity</code> のアプローチが使用されます。</p>
 
 <p>Android アプリケーションの開発に慣れていないしている場合は、WebView を含めようとして前にコルドバのアプリケーションを開発する Android プラットフォームのガイドをお読みください。 アンドロイド Cordova アプリを作成する主な方法ではありません。 これらの手順は、現在マニュアルですが可能性があります最終的に自動化されます。</p>
 
-<h2>前提条件</h2>
+<h2 id="前提条件">前提条件</h2>
 
 <ul>
-<li><p>コルドバ 1.9 以上</p></li>
-<li><p>最新の SDK を更新 android SDK</p></li>
+  <li>
+    <p>コルドバ 1.9 以上</p>
+  </li>
+  <li>
+    <p>最新の SDK を更新 android SDK</p>
+  </li>
 </ul>
 
-<h2>Android プロジェクトでの CordovaWebView の使用へのガイドします。</h2>
+<h2 id="android-プロジェクトでの-cordovawebview-の使用へのガイドします">Android プロジェクトでの CordovaWebView の使用へのガイドします。</h2>
 
 <ol>
-<li><p><code>cd</code><code>/framework</code>を実行 <code>ant jar</code> コルドバの jar を構築します。 として形成された .jar ファイルを作成します <code>cordova-x.x.x.jar</code> で、 <code>/framework</code> ディレクトリ。</p></li>
-<li><p>コルドバ jar を Android プロジェクト内にコピー <code>/libs</code> ディレクトリ。</p></li>
-<li><p>編集アプリケーションの <code>main.xml</code> <a href="../../../cordova/file/fileobj/fileobj.html">ファイル</a> （下 <code>/res/xml</code> ) と、次のように、 <code>layout_height</code> 、 <code>layout_width</code> 、 <code>id</code> 、アプリケーションに合わせて変更します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;org.apache.cordova.CordovaWebView
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cd</code><code class="language-plaintext highlighter-rouge">/framework</code>を実行 <code class="language-plaintext highlighter-rouge">ant jar</code> コルドバの jar を構築します。 として形成された .jar ファイルを作成します <code class="language-plaintext highlighter-rouge">cordova-x.x.x.jar</code> で、 <code class="language-plaintext highlighter-rouge">/framework</code> ディレクトリ。</p>
+  </li>
+  <li>
+    <p>コルドバ jar を Android プロジェクト内にコピー <code class="language-plaintext highlighter-rouge">/libs</code> ディレクトリ。</p>
+  </li>
+  <li>
+    <p>編集アプリケーションの <code class="language-plaintext highlighter-rouge">main.xml</code> <a href="../../../cordova/file/fileobj/fileobj.html">ファイル</a> （下 <code class="language-plaintext highlighter-rouge">/res/xml</code> ) と、次のように、 <code class="language-plaintext highlighter-rouge">layout_height</code> 、 <code class="language-plaintext highlighter-rouge">layout_width</code> 、 <code class="language-plaintext highlighter-rouge">id</code> 、アプリケーションに合わせて変更します。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;org.apache.cordova.CordovaWebView
     android:id="@+id/tutorialView"
     android:layout_width="match_parent"
     android:layout_height="match_parent" /&gt;
-</code></pre></div></li>
-<li><p>あなたの活動を変更して、それを実装する、 <code>CordovaInterface</code> 。 含まれているメソッドを実装する必要があります。 それらをコピーすることができます <code>/framework/src/org/apache/cordova/CordovaActivity.java</code> 、または独自に実装します。 インターフェイスを使用して、基本的なアプリケーションを次のコード片に示します。 参照先のビュー id と一致する方法に注意してください、 <code>id</code> 上記のように XML フラグメントで指定された属性。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">public class CordovaViewTestActivity extends Activity implements CordovaInterface {
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>あなたの活動を変更して、それを実装する、 <code class="language-plaintext highlighter-rouge">CordovaInterface</code> 。 含まれているメソッドを実装する必要があります。 それらをコピーすることができます <code class="language-plaintext highlighter-rouge">/framework/src/org/apache/cordova/CordovaActivity.java</code> 、または独自に実装します。 インターフェイスを使用して、基本的なアプリケーションを次のコード片に示します。 参照先のビュー id と一致する方法に注意してください、 <code class="language-plaintext highlighter-rouge">id</code> 上記のように XML フラグメントで指定された属性。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class CordovaViewTestActivity extends Activity implements CordovaInterface {
     CordovaWebView cwv;
     /* Called when the activity is first created. */
     @Override
@@ -1472,11 +1485,13 @@
         Config.init(this);
         cwv.loadUrl(Config.getStartUrl());
     }
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ol>
 
 <p>カメラを使用する場合もこれを実装する必要があります。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    @Override
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @Override
     public void setActivityResultCallback(CordovaPlugin plugin) {
         this.activityResultCallback = plugin;
     }
@@ -1518,16 +1533,23 @@
             callback.onActivityResult(requestCode, resultCode, intent);
         }
     }
-</code></pre></div>
+</code></pre></div></div>
+
 <p>最後に、スレッド プールを追加してください、それ以外の場合、プラグインには上で実行するスレッドはありません。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    @Override
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @Override
     public ExecutorService getThreadPool() {
         return threadPool;
     }
-</code></pre></div>
+</code></pre></div></div>
+
 <ol>
-<li><p>アプリケーションの HTML や JavaScript ファイル、プロジェクトにコピー Android の <code>/assets/www</code> ディレクトリ。</p></li>
-<li><p>コピー <code>config.xml</code> から <code>/framework/res/xml</code> プロジェクトの <code>/res/xml</code> ディレクトリ。</p></li>
+  <li>
+    <p>アプリケーションの HTML や JavaScript ファイル、プロジェクトにコピー Android の <code class="language-plaintext highlighter-rouge">/assets/www</code> ディレクトリ。</p>
+  </li>
+  <li>
+    <p>コピー <code class="language-plaintext highlighter-rouge">config.xml</code> から <code class="language-plaintext highlighter-rouge">/framework/res/xml</code> プロジェクトの <code class="language-plaintext highlighter-rouge">/res/xml</code> ディレクトリ。</p>
+  </li>
 </ol>
 
 

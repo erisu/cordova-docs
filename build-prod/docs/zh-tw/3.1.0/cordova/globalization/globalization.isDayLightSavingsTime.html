@@ -1304,60 +1304,66 @@
             
 
             <div id="page-toc-source">
-                <h1>globalization.isDayLightSavingsTime</h1>
+                <h1 id="globalizationisdaylightsavingstime">globalization.isDayLightSavingsTime</h1>
 
 <p>指示是否夏令時生效是給定日期使用用戶端的時區和日曆。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.globalization.isDayLightSavingsTime(date, successCallback, errorCallback);
-</code></pre></div>
-<h2>說明</h2>
 
-<p>指示是否夏令時生效的是 <code>successCallback</code> 與 <code>properties</code> 物件作為參數。 物件應具有 <code>dst</code> 屬性與 <code>Boolean</code> 的值。 A <code>true</code> 值指示夏令時實際上是對給定的日期，和 <code>false</code> 指示它不是。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.globalization.isDayLightSavingsTime(date, successCallback, errorCallback);
+</code></pre></div></div>
 
-<p>入站的參數 <code>date</code> 的類型應為<code>Date</code>.</p>
+<h2 id="說明">說明</h2>
 
-<p>如果有錯誤讀取日期，然後 <code>errorCallback</code> 執行。錯誤的期望的代碼<code>[GlobalizationError](GlobalizationError/globalizationerror.html).UNKNOWN\_ERROR</code>.</p>
+<p>指示是否夏令時生效的是 <code class="language-plaintext highlighter-rouge">successCallback</code> 與 <code class="language-plaintext highlighter-rouge">properties</code> 物件作為參數。 物件應具有 <code class="language-plaintext highlighter-rouge">dst</code> 屬性與 <code class="language-plaintext highlighter-rouge">Boolean</code> 的值。 A <code class="language-plaintext highlighter-rouge">true</code> 值指示夏令時實際上是對給定的日期，和 <code class="language-plaintext highlighter-rouge">false</code> 指示它不是。</p>
 
-<h2>支援的平臺</h2>
+<p>入站的參數 <code class="language-plaintext highlighter-rouge">date</code> 的類型應為<code class="language-plaintext highlighter-rouge">Date</code>.</p>
+
+<p>如果有錯誤讀取日期，然後 <code class="language-plaintext highlighter-rouge">errorCallback</code> 執行。錯誤的期望的代碼<code class="language-plaintext highlighter-rouge">[GlobalizationError](GlobalizationError/globalizationerror.html).UNKNOWN\_ERROR</code>.</p>
+
+<h2 id="支援的平臺">支援的平臺</h2>
 
 <ul>
-<li>  Android 系統</li>
-<li>  黑莓手機 WebWorks （OS 5.0 和更高）</li>
-<li>  iOS</li>
-<li>  Windows Phone 8</li>
+  <li>Android 系統</li>
+  <li>黑莓手機 WebWorks （OS 5.0 和更高）</li>
+  <li>iOS</li>
+  <li>Windows Phone 8</li>
 </ul>
 
-<h2>快速的示例</h2>
+<h2 id="快速的示例">快速的示例</h2>
 
-<p>在夏天的時候，如果瀏覽器被設置為啟用 DST 時區，這應顯示一個彈出式對話方塊與類似的文本和 <code>dst: true</code> ：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.globalization.isDayLightSavingsTime(
+<p>在夏天的時候，如果瀏覽器被設置為啟用 DST 時區，這應顯示一個彈出式對話方塊與類似的文本和 <code class="language-plaintext highlighter-rouge">dst: true</code> ：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.globalization.isDayLightSavingsTime(
     new Date(),
     function (date) {alert('dst: ' + date.dst + '\n');},
     function () {alert('Error getting names\n');}
 );
-</code></pre></div>
-<h2>完整的示例</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>isDayLightSavingsTime Example<span class="nt">&lt;/title&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
 
-    <span class="kd">function</span> <span class="nx">checkDayLightSavings</span><span class="p">()</span> <span class="p">{</span>
-      <span class="nb">navigator</span><span class="p">.</span><span class="nx">globalization</span><span class="p">.</span><span class="nx">isDayLightSavingsTime</span><span class="p">(</span>
-        <span class="k">new</span> <span class="nb">Date</span><span class="p">(),</span>
-        <span class="kd">function</span> <span class="p">(</span><span class="nx">date</span><span class="p">)</span> <span class="p">{</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'dst: '</span> <span class="o">+</span> <span class="nx">date</span><span class="p">.</span><span class="nx">dst</span> <span class="o">+</span> <span class="s1">'\n'</span><span class="p">);},</span>
-        <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'Error getting names\n'</span><span class="p">);}</span>
-      <span class="p">);</span>
-    <span class="p">}</span>
+<h2 id="完整的示例">完整的示例</h2>
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"checkDayLightSavings()"</span><span class="nt">&gt;</span>Click for daylight savings<span class="nt">&lt;/button&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;isDayLightSavingsTime Example&lt;/title&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
+
+    function checkDayLightSavings() {
+      navigator.globalization.isDayLightSavingsTime(
+        new Date(),
+        function (date) {alert('dst: ' + date.dst + '\n');},
+        function () {alert('Error getting names\n');}
+      );
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;button onclick="checkDayLightSavings()"&gt;Click for daylight savings&lt;/button&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

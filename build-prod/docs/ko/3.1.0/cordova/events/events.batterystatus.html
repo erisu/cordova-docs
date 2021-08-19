@@ -1182,79 +1182,89 @@
             
 
             <div id="page-toc-source">
-                <h1>batterystatus</h1>
+                <h1 id="batterystatus">batterystatus</h1>
 
 <p>이벤트는 배터리 상태에 변화가 있을 때 발생 합니다.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">window.addEventListener("batterystatus", yourCallbackFunction, false);
-</code></pre></div>
-<h2>세부 정보</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>window.addEventListener("batterystatus", yourCallbackFunction, false);
+</code></pre></div></div>
+
+<h2 id="세부-정보">세부 정보</h2>
 
 <p>이 이벤트는 배터리 충전 비율 1% 이상에 의해 변경 될 때 또는 장치를 <a href="../connection/connection.html">연결</a> 하거나 분리 하는 경우 발생 합니다.</p>
 
 <p>배터리 상태 처리기는 두 개의 속성이 포함 된 개체에 전달 됩니다.</p>
 
 <ul>
-<li><p><strong>수준</strong>: 배터리 충전 (0-100)의 비율. <em>(수)</em></p></li>
-<li><p><strong>isPlugged</strong>: <a href="../device/device.html">장치</a> 연결된 인치 <em>(부울)</em> 인지 여부를 나타내는 부울 값</p></li>
+  <li>
+    <p><strong>수준</strong>: 배터리 충전 (0-100)의 비율. <em>(수)</em></p>
+  </li>
+  <li>
+    <p><strong>isPlugged</strong>: <a href="../device/device.html">장치</a> 연결된 인치 <em>(부울)</em> 인지 여부를 나타내는 부울 값</p>
+  </li>
 </ul>
 
-<p>일반적으로 응용 프로그램을 사용 해야 합니다 <code>window.addEventListener</code> 한번 <a href="events.html">이벤트</a> 리스너를 <a href="../connection/connection.html">연결</a> 하는 <code>[deviceready](events.deviceready.html)</code> 이벤트가 발생 합니다.</p>
+<p>일반적으로 응용 프로그램을 사용 해야 합니다 <code class="language-plaintext highlighter-rouge">window.addEventListener</code> 한번 <a href="events.html">이벤트</a> 리스너를 <a href="../connection/connection.html">연결</a> 하는 <code class="language-plaintext highlighter-rouge">[deviceready](events.deviceready.html)</code> 이벤트가 발생 합니다.</p>
 
-<h2>지원 되는 플랫폼</h2>
+<h2 id="지원-되는-플랫폼">지원 되는 플랫폼</h2>
 
 <ul>
-<li>  iOS</li>
-<li>  안 드 로이드</li>
-<li>  블랙베리 WebWorks (운영 체제 5.0와 더 높은)</li>
-<li>  Windows Phone 7과 8</li>
-<li>  Tizen</li>
+  <li>iOS</li>
+  <li>안 드 로이드</li>
+  <li>블랙베리 WebWorks (운영 체제 5.0와 더 높은)</li>
+  <li>Windows Phone 7과 8</li>
+  <li>Tizen</li>
 </ul>
 
-<h2>Windows Phone 7, 8 특수</h2>
+<h2 id="windows-phone-7-8-특수">Windows Phone 7, 8 특수</h2>
 
-<p>Windows Phone 7 배터리 수준을 확인 하려면 네이티브 Api를 제공 하지 않습니다 때문에 <code>level</code> 속성은 사용할 수 없습니다. <code>isPlugged</code>매개 변수는 <em>는</em> 지원.</p>
+<p>Windows Phone 7 배터리 수준을 확인 하려면 네이티브 Api를 제공 하지 않습니다 때문에 <code class="language-plaintext highlighter-rouge">level</code> 속성은 사용할 수 없습니다. <code class="language-plaintext highlighter-rouge">isPlugged</code>매개 변수는 <em>는</em> 지원.</p>
 
-<h2>빠른 예제</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">window.addEventListener("batterystatus", onBatteryStatus, false);
+<h2 id="빠른-예제">빠른 예제</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>window.addEventListener("batterystatus", onBatteryStatus, false);
 
 function onBatteryStatus(info) {
     // Handle the online event
     console.log("Level: " + info.level + " isPlugged: " + info.isPlugged);
 }
-</code></pre></div>
-<h2>전체 예제</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Device Ready Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="전체-예제">전체 예제</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onLoad</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="p">}</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Device Ready Example&lt;/title&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"batterystatus"</span><span class="p">,</span> <span class="nx">onBatteryStatus</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// Handle the batterystatus event</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onBatteryStatus</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Level: "</span> <span class="o">+</span> <span class="nx">info</span><span class="p">.</span><span class="nx">level</span> <span class="o">+</span> <span class="s2">" isPlugged: "</span> <span class="o">+</span> <span class="nx">info</span><span class="p">.</span><span class="nx">isPlugged</span><span class="p">);</span>
-    <span class="p">}</span>
+    // Wait for device API libraries to load
+    //
+    function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body</span> <span class="na">onload=</span><span class="s">"onLoad()"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        window.addEventListener("batterystatus", onBatteryStatus, false);
+    }
+
+    // Handle the batterystatus event
+    //
+    function onBatteryStatus(info) {
+        console.log("Level: " + info.level + " isPlugged: " + info.isPlugged);
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body onload="onLoad()"&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

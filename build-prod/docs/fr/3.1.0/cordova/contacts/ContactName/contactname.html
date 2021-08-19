@@ -1256,37 +1256,50 @@
             
 
             <div id="page-toc-source">
-                <h1>ContactName</h1>
+                <h1 id="contactname">ContactName</h1>
 
-<p>Contient différents types d&#39;informations sur le nom d&#39;un objet <code>[Contact](../Contact/contact.html)</code>.</p>
+<p>Contient différents types d’informations sur le nom d’un objet <code class="language-plaintext highlighter-rouge">[Contact](../Contact/contact.html)</code>.</p>
 
-<h2>Propriétés</h2>
-
-<ul>
-<li><p><strong>mise en forme</strong> : le nom complet du contact. <em>(DOMString)</em></p></li>
-<li><p><strong>familyName</strong> : nom de famille du contact. <em>(DOMString)</em></p></li>
-<li><p><strong>givenName</strong> : prénom du contact. <em>(DOMString)</em></p></li>
-<li><p><strong>middleName</strong> : deuxième prénom du contact. <em>(DOMString)</em></p></li>
-<li><p><strong>honorificPrefix</strong> : préfixe du contact (exemple <em>M.</em> ou <em>Mme</em>) <em>(DOMString)</em></p></li>
-<li><p><strong>honorificSuffix</strong> : suffixe du contact (exemple <em>Esq.</em>). <em>(DOMString)</em></p></li>
-</ul>
-
-<h2>Détails</h2>
-
-<p>L&#39;objet <code>ContactName</code> stocke les propriétés de nom d&#39;un contact.</p>
-
-<h2>Plates-formes prises en charge</h2>
+<h2 id="propriétés">Propriétés</h2>
 
 <ul>
-<li>  Android 2.X</li>
-<li>  BlackBerry WebWorks (OS 5.0 et plus)</li>
-<li>  iOS</li>
-<li>  Windows Phone 7 et 8</li>
-<li>  Windows 8</li>
+  <li>
+    <p><strong>mise en forme</strong> : le nom complet du contact. <em>(DOMString)</em></p>
+  </li>
+  <li>
+    <p><strong>familyName</strong> : nom de famille du contact. <em>(DOMString)</em></p>
+  </li>
+  <li>
+    <p><strong>givenName</strong> : prénom du contact. <em>(DOMString)</em></p>
+  </li>
+  <li>
+    <p><strong>middleName</strong> : deuxième prénom du contact. <em>(DOMString)</em></p>
+  </li>
+  <li>
+    <p><strong>honorificPrefix</strong> : préfixe du contact (exemple <em>M.</em> ou <em>Mme</em>) <em>(DOMString)</em></p>
+  </li>
+  <li>
+    <p><strong>honorificSuffix</strong> : suffixe du contact (exemple <em>Esq.</em>). <em>(DOMString)</em></p>
+  </li>
 </ul>
 
-<h2>Petit exemple</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">function onSuccess(contacts) {
+<h2 id="détails">Détails</h2>
+
+<p>L’objet <code class="language-plaintext highlighter-rouge">ContactName</code> stocke les propriétés de nom d’un contact.</p>
+
+<h2 id="plates-formes-prises-en-charge">Plates-formes prises en charge</h2>
+
+<ul>
+  <li>Android 2.X</li>
+  <li>BlackBerry WebWorks (OS 5.0 et plus)</li>
+  <li>iOS</li>
+  <li>Windows Phone 7 et 8</li>
+  <li>Windows 8</li>
+</ul>
+
+<h2 id="petit-exemple">Petit exemple</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function onSuccess(contacts) {
     for (var i = 0; i &lt; contacts.length; i++) {
         alert("Formatted: "  + contacts[i].name.formatted       + "\n" +
             "Family Name: "  + contacts[i].name.familyName      + "\n" +
@@ -1305,77 +1318,92 @@ var options = new ContactFindOptions();
 options.filter = "";
 filter = ["displayName", "name"];
 navigator.contacts.find(filter, onSuccess, onError, options);
-</code></pre></div>
-<h2>Exemple complet</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Contact Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="exemple-complet">Exemple complet</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Contact Example&lt;/title&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ContactFindOptions</span><span class="p">();</span>
-        <span class="nx">options</span><span class="p">.</span><span class="nx">filter</span><span class="o">=</span><span class="s2">""</span><span class="p">;</span>
-        <span class="nx">filter</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"displayName"</span><span class="p">,</span><span class="s2">"name"</span><span class="p">];</span>
-        <span class="nb">navigator</span><span class="p">.</span><span class="nx">contacts</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">filter</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onError</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// onSuccess: Get a snapshot of the current contacts</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onSuccess</span><span class="p">(</span><span class="nx">contacts</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">contacts</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">alert</span><span class="p">(</span><span class="s2">"Formatted: "</span> <span class="o">+</span> <span class="nx">contacts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">name</span><span class="p">.</span><span class="nx">formatted</span>       <span class="o">+</span> <span class="s2">"\n"</span> <span class="o">+</span>
-                <span class="s2">"Family Name: "</span> <span class="o">+</span> <span class="nx">contacts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">name</span><span class="p">.</span><span class="nx">familyName</span>      <span class="o">+</span> <span class="s2">"\n"</span> <span class="o">+</span>
-                <span class="s2">"Given Name: "</span>  <span class="o">+</span> <span class="nx">contacts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">name</span><span class="p">.</span><span class="nx">givenName</span>       <span class="o">+</span> <span class="s2">"\n"</span> <span class="o">+</span>
-                <span class="s2">"Middle Name: "</span> <span class="o">+</span> <span class="nx">contacts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">name</span><span class="p">.</span><span class="nx">middleName</span>      <span class="o">+</span> <span class="s2">"\n"</span> <span class="o">+</span>
-                <span class="s2">"Suffix: "</span>      <span class="o">+</span> <span class="nx">contacts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">name</span><span class="p">.</span><span class="nx">honorificSuffix</span> <span class="o">+</span> <span class="s2">"\n"</span> <span class="o">+</span>
-                <span class="s2">"Prefix: "</span>      <span class="o">+</span> <span class="nx">contacts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">name</span><span class="p">.</span><span class="nx">honorificPrefix</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">};</span>
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
 
-    <span class="c1">// onError: Failed to get the contacts</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onError</span><span class="p">(</span><span class="nx">contactError</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">alert</span><span class="p">(</span><span class="s1">'onError!'</span><span class="p">);</span>
-    <span class="p">}</span>
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        var options = new ContactFindOptions();
+        options.filter="";
+        filter = ["displayName","name"];
+        navigator.contacts.find(filter, onSuccess, onError, options);
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;h1&gt;</span>Example<span class="nt">&lt;/h1&gt;</span>
-    <span class="nt">&lt;p&gt;</span>Find Contacts<span class="nt">&lt;/p&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2>Spécificités Android</h2>
+    // onSuccess: Get a snapshot of the current contacts
+    //
+    function onSuccess(contacts) {
+        for (var i = 0; i &lt; contacts.length; i ++) {
+            alert("Formatted: " + contacts[i].name.formatted       + "\n" +
+                "Family Name: " + contacts[i].name.familyName      + "\n" +
+                "Given Name: "  + contacts[i].name.givenName       + "\n" +
+                "Middle Name: " + contacts[i].name.middleName      + "\n" +
+                "Suffix: "      + contacts[i].name.honorificSuffix + "\n" +
+                "Prefix: "      + contacts[i].name.honorificPrefix);
+        }
+    };
+
+    // onError: Failed to get the contacts
+    //
+    function onError(contactError) {
+        alert('onError!');
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Example&lt;/h1&gt;
+    &lt;p&gt;Find Contacts&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h2 id="spécificités-android">Spécificités Android</h2>
 
 <ul>
-<li>  <strong>formatted</strong> : partiellement pris en charge et en lecture seule. Retourne la concaténation de <code>honorificPrefix</code> , <code>givenName</code> , <code>middleName</code> , <code>familyName</code> , et <code>honorificSuffix</code>.</li>
+  <li><strong>formatted</strong> : partiellement pris en charge et en lecture seule. Retourne la concaténation de <code class="language-plaintext highlighter-rouge">honorificPrefix</code> , <code class="language-plaintext highlighter-rouge">givenName</code> , <code class="language-plaintext highlighter-rouge">middleName</code> , <code class="language-plaintext highlighter-rouge">familyName</code> , et <code class="language-plaintext highlighter-rouge">honorificSuffix</code>.</li>
 </ul>
 
-<h2>Spécificités BlackBerry WebWorks (OS 5.0 et plus)</h2>
+<h2 id="spécificités-blackberry-webworks-os-50-et-plus">Spécificités BlackBerry WebWorks (OS 5.0 et plus)</h2>
 
 <ul>
-<li><p><strong>formatted</strong> : partiellement pris en charge. Retourne la concaténation de champs <strong>firstName</strong> et <strong>lastName</strong> de BlackBerry.</p></li>
-<li><p><strong>familyName</strong> : prise en charge. Stockée dans le champ <strong>lastName</strong> BlackBerry.</p></li>
-<li><p><strong>givenName</strong> : prise en charge. Stockée dans le champ <strong>firstName</strong> BlackBerry.</p></li>
-<li><p><strong>middleName</strong> : non pris en charge, retourne <code>null</code>.</p></li>
-<li><p><strong>honorificPrefix</strong> : non pris en charge, retourne <code>null</code>.</p></li>
-<li><p><strong>honorificSuffix</strong> : non pris en charge, retourne <code>null</code>.</p></li>
+  <li>
+    <p><strong>formatted</strong> : partiellement pris en charge. Retourne la concaténation de champs <strong>firstName</strong> et <strong>lastName</strong> de BlackBerry.</p>
+  </li>
+  <li>
+    <p><strong>familyName</strong> : prise en charge. Stockée dans le champ <strong>lastName</strong> BlackBerry.</p>
+  </li>
+  <li>
+    <p><strong>givenName</strong> : prise en charge. Stockée dans le champ <strong>firstName</strong> BlackBerry.</p>
+  </li>
+  <li>
+    <p><strong>middleName</strong> : non pris en charge, retourne <code class="language-plaintext highlighter-rouge">null</code>.</p>
+  </li>
+  <li>
+    <p><strong>honorificPrefix</strong> : non pris en charge, retourne <code class="language-plaintext highlighter-rouge">null</code>.</p>
+  </li>
+  <li>
+    <p><strong>honorificSuffix</strong> : non pris en charge, retourne <code class="language-plaintext highlighter-rouge">null</code>.</p>
+  </li>
 </ul>
 
-<h2>Spécificités iOS</h2>
+<h2 id="spécificités-ios">Spécificités iOS</h2>
 
 <ul>
-<li>  <strong>formatted</strong> : partiellement pris en charge. Retourne le nom composé iOS, mais est en lecture seule.</li>
+  <li><strong>formatted</strong> : partiellement pris en charge. Retourne le nom composé iOS, mais est en lecture seule.</li>
 </ul>
 
 

@@ -1094,80 +1094,88 @@
     }
 </style>
 
-<h1>BlackBerry плагины</h1>
+<h1 id="blackberry-плагины">BlackBerry плагины</h1>
 
 <p>В этом руководстве показано, как разработать эхо плагин на ежевике. Руководство по разработке плагин обеспечивает широкий обзор, с которой вы уже должны быть знакомы, и это руководство забирает где он листья. Кроме того Скачайте <a href="https://git-wip-us.apache.org/repos/asf?p=cordova-blackberry-webworks.git;a=summary">Cordova BlackBerry репозитория</a>.</p>
 
-<p><code>Cordova-BlackBerry</code>Проект позволяет развернуть к приборам ежевики как факел, полужирный и пьес. Playbook использует другой код базы чем других портативных устройств BlackBerry, для которых необходимо дублировать ваши усилия в области развития. В этом руководстве основное внимание на портативные устройства, а не таблетки. (В будущем, это руководство должны охватывать обе платформы).</p>
+<p><code class="language-plaintext highlighter-rouge">Cordova-BlackBerry</code>Проект позволяет развернуть к приборам ежевики как факел, полужирный и пьес. Playbook использует другой код базы чем других портативных устройств BlackBerry, для которых необходимо дублировать ваши усилия в области развития. В этом руководстве основное внимание на портативные устройства, а не таблетки. (В будущем, это руководство должны охватывать обе платформы).</p>
 
-<p>Эхо плагин по существу возвращает все сообщения пользователя предоставляет <code>window.echo</code> функции:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">window.echo = function(str, callback) {
+<p>Эхо плагин по существу возвращает все сообщения пользователя предоставляет <code class="language-plaintext highlighter-rouge">window.echo</code> функции:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>window.echo = function(str, callback) {
     cordova.exec(callback, function(err) {
         callback('Nothing to echo.');
     }, "Echo", "echo", [str]);
 };
-</code></pre></div>
-<h2>Изменение plugins.xml</h2>
+</code></pre></div></div>
 
-<p>Вашего проекта <code>www/plugins.xml</code> Каталог содержит все необходимые ссылки на проекте Cordova плагины. Добавить дополнительные ссылки так что когда <code>cordova.exec</code> это называется, Кордова знает как сопоставить <code>Echo</code> аргумент <code>cordova.exec</code> для <code>Echo</code> класс, который мы хотим написать изначально:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="Echo"&gt;
+<h2 id="изменение-pluginsxml">Изменение plugins.xml</h2>
+
+<p>Вашего проекта <code class="language-plaintext highlighter-rouge">www/plugins.xml</code> Каталог содержит все необходимые ссылки на проекте Cordova плагины. Добавить дополнительные ссылки так что когда <code class="language-plaintext highlighter-rouge">cordova.exec</code> это называется, Кордова знает как сопоставить <code class="language-plaintext highlighter-rouge">Echo</code> аргумент <code class="language-plaintext highlighter-rouge">cordova.exec</code> для <code class="language-plaintext highlighter-rouge">Echo</code> класс, который мы хотим написать изначально:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="Echo"&gt;
     &lt;param name="blackberry-package" value="org.apache.cordova.echo.Echo" /&gt;
 &lt;/feature&gt;
-</code></pre></div>
-<h2>Добавление Echo.java</h2>
+</code></pre></div></div>
 
-<p>Если вы заметили структуры атрибута value, вы увидите определенный путь, что приводит к эхо плагин. В корневом каталоге Cordova BlackBerry WebWorks репо, найдите каталог, называемый <code>framework</code> . Этот каталог содержит весь исходный код, который изначально работает на ежевике. Перейдите к <code>framework/ext/src/org/apache/cordova</code> . На данный момент вы увидите все плагин directorys, внутри которого содержится исходный код. Так что добавьте каталог эхо для <code>framework/ext/src/org/apache/cordova/echo</code> и создайте файл с именем <code>Echo.java</code> в<code>framework/ext/src/org/apache/cordova/echo/Echo.java</code>.</p>
+<h2 id="добавление-echojava">Добавление Echo.java</h2>
 
-<h2>Написание Echo.java</h2>
+<p>Если вы заметили структуры атрибута value, вы увидите определенный путь, что приводит к эхо плагин. В корневом каталоге Cordova BlackBerry WebWorks репо, найдите каталог, называемый <code class="language-plaintext highlighter-rouge">framework</code> . Этот каталог содержит весь исходный код, который изначально работает на ежевике. Перейдите к <code class="language-plaintext highlighter-rouge">framework/ext/src/org/apache/cordova</code> . На данный момент вы увидите все плагин directorys, внутри которого содержится исходный код. Так что добавьте каталог эхо для <code class="language-plaintext highlighter-rouge">framework/ext/src/org/apache/cordova/echo</code> и создайте файл с именем <code class="language-plaintext highlighter-rouge">Echo.java</code> в<code class="language-plaintext highlighter-rouge">framework/ext/src/org/apache/cordova/echo/Echo.java</code>.</p>
 
-<p>Основная идея написания плагина является создание класса, который расширяет плагин класс и метод, называемый <code>execute</code> вернуться <code>PluginResult</code> класс. Любой звонок, сделанный в <code>cordova.exec</code> проходит в действие для выполнения в пределах класса, а также аргументы. В этом случае «эхо» являются действия, мы хотим выполнять в пределах класса «Эхо» и [силы] аргументы, которые мы проходим в.</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="k">package</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">echo</span><span class="p">;</span>
+<h2 id="написание-echojava">Написание Echo.java</h2>
 
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="n">Plugin</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="n">PluginResult</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">json4j</span><span class="p">.</span><span class="n">JSONArray</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">json4j</span><span class="p">.</span><span class="n">JSONException</span><span class="p">;</span>
-<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">json4j</span><span class="p">.</span><span class="n">JSONObject</span><span class="p">;</span>
-<span class="p">/**</span>
- <span class="p">*</span> <span class="n">A</span> <span class="n">simple</span> <span class="n">plugin</span> <span class="k">to</span> <span class="n">demonstrate</span> <span class="n">how</span> <span class="k">to</span> <span class="n">build</span> <span class="n">a</span> <span class="n">plugin</span> <span class="n">for</span> <span class="n">BlackBerry</span>
- <span class="p">*</span> <span class="n">Basically</span> <span class="n">echos</span> <span class="n">back</span> <span class="n">the</span> <span class="n">msg</span> <span class="n">that</span> <span class="n">a</span> <span class="n">user</span> <span class="n">calls</span> <span class="k">to</span> <span class="n">this</span> <span class="n">plugin</span>
- <span class="p">*/</span>
-<span class="k">public</span> <span class="n">final</span> <span class="n">class</span> <span class="n">Echo</span> <span class="n">extends</span> <span class="n">Plugin</span> <span class="p">{</span>
+<p>Основная идея написания плагина является создание класса, который расширяет плагин класс и метод, называемый <code class="language-plaintext highlighter-rouge">execute</code> вернуться <code class="language-plaintext highlighter-rouge">PluginResult</code> класс. Любой звонок, сделанный в <code class="language-plaintext highlighter-rouge">cordova.exec</code> проходит в действие для выполнения в пределах класса, а также аргументы. В этом случае «эхо» являются действия, мы хотим выполнять в пределах класса «Эхо» и [силы] аргументы, которые мы проходим в.</p>
 
-    <span class="k">public</span> <span class="n">static</span> <span class="n">final</span> <span class="k">String</span> <span class="n">echo</span> <span class="p">=</span> <span class="s2">"echo"</span><span class="p">;</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package org.apache.cordova.echo;
 
-    <span class="k">public</span> <span class="n">PluginResult</span> <span class="n">execute</span><span class="p">(</span><span class="k">String</span> <span class="n">action</span><span class="p">,</span> <span class="n">JSONArray</span> <span class="n">args</span><span class="p">,</span> <span class="k">String</span> <span class="n">callbackId</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">PluginResult</span> <span class="n">result</span> <span class="p">=</span> <span class="n">new</span> <span class="n">PluginResult</span><span class="p">(</span><span class="n">PluginResult</span><span class="p">.</span><span class="n">Status</span><span class="p">.</span><span class="n">INVALID_ACTION</span><span class="p">,</span> <span class="s2">"Echo: Invalid action:"</span> <span class="p">+</span> <span class="n">action</span><span class="p">);</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">action</span><span class="p">.</span><span class="n">equals</span><span class="p">(</span><span class="n">echo</span><span class="p">)){</span>
-            <span class="n">try</span> <span class="p">{</span>
-                <span class="k">String</span> <span class="n">theMsg</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
-                <span class="k">if</span><span class="p">(</span><span class="n">theMsg</span><span class="c1">!= null || theMsg.length()&gt;0){
-</span>                    <span class="n">result</span> <span class="p">=</span> <span class="n">new</span> <span class="n">PluginResult</span><span class="p">(</span><span class="n">PluginResult</span><span class="p">.</span><span class="n">Status</span><span class="p">.</span><span class="n">OK</span><span class="p">,</span> <span class="n">theMsg</span><span class="p">);</span>
-                <span class="p">}</span><span class="k">else</span><span class="p">{</span>
-                    <span class="n">result</span> <span class="p">=</span> <span class="n">new</span> <span class="n">PluginResult</span><span class="p">(</span><span class="n">PluginResult</span><span class="p">.</span><span class="n">Status</span><span class="p">.</span><span class="n">ERROR</span><span class="p">,</span> <span class="s2">"Nothing to echo."</span><span class="p">);</span>
-                <span class="p">}</span>
-            <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">JSONException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">result</span> <span class="p">=</span> <span class="n">new</span> <span class="n">PluginResult</span><span class="p">(</span><span class="n">PluginResult</span><span class="p">.</span><span class="n">Status</span><span class="p">.</span><span class="n">JSON_EXCEPTION</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="n">getMessage</span><span class="p">());</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
+import org.apache.cordova.api.Plugin;
+import org.apache.cordova.api.PluginResult;
+import org.apache.cordova.json4j.JSONArray;
+import org.apache.cordova.json4j.JSONException;
+import org.apache.cordova.json4j.JSONObject;
+/**
+ * A simple plugin to demonstrate how to build a plugin for BlackBerry
+ * Basically echos back the msg that a user calls to this plugin
+ */
+public final class Echo extends Plugin {
 
-        <span class="n">return</span> <span class="n">result</span><span class="p">;</span>
-    <span class="p">}</span>
+    public static final String echo = "echo";
 
-<span class="p">}</span>
-</code></pre></div>
-<p>Так что если мы посмотрим на приведенный выше код, мы видим, что в методе execute, мы сначала ищет то, что действия идут в. Эхо плагин имеет только одно действие, <code>echo</code> , поэтому мы будем только проверять для этого. Если наш плагин больше действий, это просто вопрос добавления более условной тесты для этих действий.</p>
+    public PluginResult execute(String action, JSONArray args, String callbackId) {
+        PluginResult result = new PluginResult(PluginResult.Status.INVALID_ACTION, "Echo: Invalid action:" + action);
+        if(action.equals(echo)){
+            try {
+                String theMsg = args.getString(0);
+                if(theMsg!= null || theMsg.length()&gt;0){
+                    result = new PluginResult(PluginResult.Status.OK, theMsg);
+                }else{
+                    result = new PluginResult(PluginResult.Status.ERROR, "Nothing to echo.");
+                }
+            } catch (JSONException e) {
+                result = new PluginResult(PluginResult.Status.JSON_EXCEPTION, e.getMessage());
+            }
+        }
 
-<p>Затем мы будем захватить сообщения, поступающие из аргументов, которая поставляется параметр args. Мы можем взять первый аргумент, просто делать<code>String theMsg = args.getString(0);</code>.</p>
+        return result;
+    }
 
-<p>Мы сделаем некоторые проверки ошибок и если сообщение выглядит нормально, мы будет создан экземпляр нового PluginResult со статусом ОК: <code>PluginResult.Status.OK</code> и вернуть сообщение: <code>theMsg</code> . После этого мы вернуть результат который быть передан обратно в JavaScript, чтобы быть уволены в успех обратного вызова. Если что-то не удается, мы можем вернуть различные состояния исключения, как <code>PluginResult.Status.ERROR</code> , <code>PluginResult.Status.JSON_EXCEPTION</code> , или <code>PluginResult.Status.INVALID_ACTION</code> . При передаче обратно, эти типы результатов огонь сбой обратного вызова в JavaScript.</p>
+}
+</code></pre></div></div>
 
-<h2>Обновление .jar в www каталоге вашего проекта</h2>
+<p>Так что если мы посмотрим на приведенный выше код, мы видим, что в методе execute, мы сначала ищет то, что действия идут в. Эхо плагин имеет только одно действие, <code class="language-plaintext highlighter-rouge">echo</code> , поэтому мы будем только проверять для этого. Если наш плагин больше действий, это просто вопрос добавления более условной тесты для этих действий.</p>
 
-<p>Добавил <code>Echo.java</code> необходимо обновить в проекте. Для создания <code>.jar</code> файла, перейдите к BlackBerry WebWorks репо корневой каталог и запустить <code>ant</code> команду:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">муравей обновление - Dproject.path="~/path_to_my_project»
-</code></pre></div>
-<p>Это создает новый <code>.jar</code> файл в <code>build/ext</code> каталог. Копия <code>build/ext/cordova.jar</code> файл в ваш <code>project/www/ext</code> каталог.</p>
+<p>Затем мы будем захватить сообщения, поступающие из аргументов, которая поставляется параметр args. Мы можем взять первый аргумент, просто делать<code class="language-plaintext highlighter-rouge">String theMsg = args.getString(0);</code>.</p>
+
+<p>Мы сделаем некоторые проверки ошибок и если сообщение выглядит нормально, мы будет создан экземпляр нового PluginResult со статусом ОК: <code class="language-plaintext highlighter-rouge">PluginResult.Status.OK</code> и вернуть сообщение: <code class="language-plaintext highlighter-rouge">theMsg</code> . После этого мы вернуть результат который быть передан обратно в JavaScript, чтобы быть уволены в успех обратного вызова. Если что-то не удается, мы можем вернуть различные состояния исключения, как <code class="language-plaintext highlighter-rouge">PluginResult.Status.ERROR</code> , <code class="language-plaintext highlighter-rouge">PluginResult.Status.JSON_EXCEPTION</code> , или <code class="language-plaintext highlighter-rouge">PluginResult.Status.INVALID_ACTION</code> . При передаче обратно, эти типы результатов огонь сбой обратного вызова в JavaScript.</p>
+
+<h2 id="обновление-jar-в-www-каталоге-вашего-проекта">Обновление .jar в www каталоге вашего проекта</h2>
+
+<p>Добавил <code class="language-plaintext highlighter-rouge">Echo.java</code> необходимо обновить в проекте. Для создания <code class="language-plaintext highlighter-rouge">.jar</code> файла, перейдите к BlackBerry WebWorks репо корневой каталог и запустить <code class="language-plaintext highlighter-rouge">ant</code> команду:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>муравей обновление - Dproject.path="~/path_to_my_project»
+</code></pre></div></div>
+
+<p>Это создает новый <code class="language-plaintext highlighter-rouge">.jar</code> файл в <code class="language-plaintext highlighter-rouge">build/ext</code> каталог. Копия <code class="language-plaintext highlighter-rouge">build/ext/cordova.jar</code> файл в ваш <code class="language-plaintext highlighter-rouge">project/www/ext</code> каталог.</p>
 
 <p>Если все пойдет хорошо, что позволяет использовать плагин эхо в BlackBerry.</p>
 

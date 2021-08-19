@@ -1292,28 +1292,29 @@
             
 
             <div id="page-toc-source">
-                <h1>connection.type</h1>
+                <h1 id="connectiontype">connection.type</h1>
 
 <p>使われているネットワーク接続のタイプを確認します。</p>
 
-<h2>概要</h2>
+<h2 id="概要">概要</h2>
 
 <p>このプロパティーは、デバイスのネットワーク接続状態や接続のタイプを手早く取得出来ます。</p>
 
-<h2>サポートされているプラットフォーム</h2>
+<h2 id="サポートされているプラットフォーム">サポートされているプラットフォーム</h2>
 
 <ul>
-<li>iOS</li>
-<li>Android</li>
-<li>BlackBerry WebWorks (OS 5.0 以上)</li>
-<li>Windows Phone 7 (Mango)</li>
-<li>Bada 2.x</li>
-<li>webOS</li>
-<li>Tizen</li>
+  <li>iOS</li>
+  <li>Android</li>
+  <li>BlackBerry WebWorks (OS 5.0 以上)</li>
+  <li>Windows Phone 7 (Mango)</li>
+  <li>Bada 2.x</li>
+  <li>webOS</li>
+  <li>Tizen</li>
 </ul>
 
-<h2><a href="../storage/storage.opendatabase.html">使用例</a></h2>
-<div class="highlight"><pre><code class="language-" data-lang="">function checkConnection() {
+<h2 id="使用例"><a href="../storage/storage.opendatabase.html">使用例</a></h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function checkConnection() {
     var networkState = navigator.network.connection.type;
 
     var states = {};
@@ -1329,88 +1330,91 @@
 }
 
 checkConnection();
-</code></pre></div>
-<h2>詳細な使用例</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>navigator.network.connection.type 使用例<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova-2.1.0.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="詳細な使用例">詳細な使用例</h2>
 
-    <span class="c1">// Cordova の読み込み完了まで待機</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;navigator.network.connection.type 使用例&lt;/title&gt;
 
-    <span class="c1">// Cordova 準備完了</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">checkConnection</span><span class="p">();</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.1.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="kd">function</span> <span class="nx">checkConnection</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">networkState</span> <span class="o">=</span> <span class="nb">navigator</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="nx">connection</span><span class="p">.</span><span class="nx">type</span><span class="p">;</span>
+    // Cordova の読み込み完了まで待機
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
 
-        <span class="kd">var</span> <span class="nx">states</span> <span class="o">=</span> <span class="p">{};</span>
-        <span class="nx">states</span><span class="p">[</span><span class="nx">Connection</span><span class="p">.</span><span class="nx">UNKNOWN</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'不明な接続'</span><span class="p">;</span>
-        <span class="nx">states</span><span class="p">[</span><span class="nx">Connection</span><span class="p">.</span><span class="nx">ETHERNET</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'イーサネット接続'</span><span class="p">;</span>
-        <span class="nx">states</span><span class="p">[</span><span class="nx">Connection</span><span class="p">.</span><span class="nx">WIFI</span><span class="p">]</span>     <span class="o">=</span> <span class="s1">'WiFi接続'</span><span class="p">;</span>
-        <span class="nx">states</span><span class="p">[</span><span class="nx">Connection</span><span class="p">.</span><span class="nx">CELL_2G</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'2G接続'</span><span class="p">;</span>
-        <span class="nx">states</span><span class="p">[</span><span class="nx">Connection</span><span class="p">.</span><span class="nx">CELL_3G</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'3G接続'</span><span class="p">;</span>
-        <span class="nx">states</span><span class="p">[</span><span class="nx">Connection</span><span class="p">.</span><span class="nx">CELL_4G</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'4G接続'</span><span class="p">;</span>
-        <span class="nx">states</span><span class="p">[</span><span class="nx">Connection</span><span class="p">.</span><span class="nx">NONE</span><span class="p">]</span>     <span class="o">=</span> <span class="s1">'ネットワーク接続なし'</span><span class="p">;</span>
+    // Cordova 準備完了
+    //
+    function onDeviceReady() {
+        checkConnection();
+    }
 
-        <span class="nx">alert</span><span class="p">(</span><span class="s1">'コネクションタイプ: '</span> <span class="o">+</span> <span class="nx">states</span><span class="p">[</span><span class="nx">networkState</span><span class="p">]);</span>
-    <span class="p">}</span>
+    function checkConnection() {
+        var networkState = navigator.network.connection.type;
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;p&gt;</span>ダイアログボックスがネットワーク状態を表示します。<span class="nt">&lt;/p&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2>iOS に関する注意点</h2>
+        var states = {};
+        states[Connection.UNKNOWN]  = '不明な接続';
+        states[Connection.ETHERNET] = 'イーサネット接続';
+        states[Connection.WIFI]     = 'WiFi接続';
+        states[Connection.CELL_2G]  = '2G接続';
+        states[Connection.CELL_3G]  = '3G接続';
+        states[Connection.CELL_4G]  = '4G接続';
+        states[Connection.NONE]     = 'ネットワーク接続なし';
+
+        alert('コネクションタイプ: ' + states[networkState]);
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;ダイアログボックスがネットワーク状態を表示します。&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h2 id="ios-に関する注意点">iOS に関する注意点</h2>
 
 <ul>
-<li>iOS はネットワーク接続のタイプを特定することが出来ません。
-
-<ul>
-<li>携帯電話ネットワークでの接続時、 <code>navigator.network.connection.type</code> には <code>Connection.CELL_2G</code> がセットされます。</li>
-</ul></li>
+  <li>iOS はネットワーク接続のタイプを特定することが出来ません。
+    <ul>
+      <li>携帯電話ネットワークでの接続時、 <code class="language-plaintext highlighter-rouge">navigator.network.connection.type</code> には <code class="language-plaintext highlighter-rouge">Connection.CELL_2G</code> がセットされます。</li>
+    </ul>
+  </li>
 </ul>
 
-<h2>Bada に関する注意点</h2>
+<h2 id="bada-に関する注意点">Bada に関する注意点</h2>
 
 <ul>
-<li>Bada は WiFi または 携帯電話ネットワークに接続されているかどうかのみを特定できます。
-
-<ul>
-<li>携帯電話ネットワークでの接続時、 <code>navigator.network.connection.type</code> には <code>Connection.CELL_2G</code> がセットされます。</li>
-</ul></li>
+  <li>Bada は WiFi または 携帯電話ネットワークに接続されているかどうかのみを特定できます。
+    <ul>
+      <li>携帯電話ネットワークでの接続時、 <code class="language-plaintext highlighter-rouge">navigator.network.connection.type</code> には <code class="language-plaintext highlighter-rouge">Connection.CELL_2G</code> がセットされます。</li>
+    </ul>
+  </li>
 </ul>
 
-<h2>webOS に関する注意点</h2>
+<h2 id="webos-に関する注意点">webOS に関する注意点</h2>
 
 <ul>
-<li>接続が確立されているかのみを表し、タイプについては特定できません。</li>
+  <li>接続が確立されているかのみを表し、タイプについては特定できません。</li>
 </ul>
 
-<h2>Windows Phone に関する注意点</h2>
+<h2 id="windows-phone-に関する注意点">Windows Phone に関する注意点</h2>
 
 <ul>
-<li>Windows Phone Emulator は常に <code>navigator.network.connection.type</code> を <code>[Connection](connection.html).UNKNOWN</code> と返します。</li>
+  <li>Windows Phone Emulator は常に <code class="language-plaintext highlighter-rouge">navigator.network.connection.type</code> を <code class="language-plaintext highlighter-rouge">[Connection](connection.html).UNKNOWN</code> と返します。</li>
 </ul>
 
-<h2>Tizen に関する注意点</h2>
+<h2 id="tizen-に関する注意点">Tizen に関する注意点</h2>
 
 <ul>
-<li>Tizen は WiFi または 携帯電話ネットワークに接続されているかどうかのみを特定できます。
-
-<ul>
-<li>携帯電話ネットワークでの接続時、 <code>navigator.network.connection.type</code> には <code>Connection.CELL_2G</code> がセットされます。</li>
-</ul></li>
+  <li>Tizen は WiFi または 携帯電話ネットワークに接続されているかどうかのみを特定できます。
+    <ul>
+      <li>携帯電話ネットワークでの接続時、 <code class="language-plaintext highlighter-rouge">navigator.network.connection.type</code> には <code class="language-plaintext highlighter-rouge">Connection.CELL_2G</code> がセットされます。</li>
+    </ul>
+  </li>
 </ul>
 
 

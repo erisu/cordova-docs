@@ -2112,97 +2112,176 @@
             
 
             <div id="page-toc-source">
-                <h1>iOS WebViews</h1>
+                <h1 id="ios-webviews">iOS WebViews</h1>
 
 <p>Esta guía le muestra cómo incrustar un componente WebView Cordova habilitado dentro de una aplicación iOS más grande. Para más detalles sobre cómo estos componentes pueden comunicarse entre sí, vea aplicación Plugins.</p>
 
-<p>Apoyo WebViews iOS comenzó con Córdoba versión 1.4, usando un <code>Cleaver</code> para que sirve la plantilla de Xcode como una implementación de referencia del componente. Cordova 2.0 y versiones posteriores sólo admiten la implementación basada en el subproyecto Cleaver.</p>
+<p>Apoyo WebViews iOS comenzó con Córdoba versión 1.4, usando un <code class="language-plaintext highlighter-rouge">Cleaver</code> para que sirve la plantilla de Xcode como una implementación de referencia del componente. Cordova 2.0 y versiones posteriores sólo admiten la implementación basada en el subproyecto Cleaver.</p>
 
-<p>Estas instrucciones requieren menos Cordova 3.x y Xcode 6.0, junto con un <code>config.xml</code> el archivo de un proyecto de iOS recién creado. Puede utilizar el procedimiento en la interfaz de línea de comandos para crear un nuevo proyecto, y luego obtener el <code>config.xml</code> archivo de dentro del subdirectorio dentro de la aplicación llamado<code>platforms/ios</code>.</p>
+<p>Estas instrucciones requieren menos Cordova 3.x y Xcode 6.0, junto con un <code class="language-plaintext highlighter-rouge">config.xml</code> el archivo de un proyecto de iOS recién creado. Puede utilizar el procedimiento en la interfaz de línea de comandos para crear un nuevo proyecto, y luego obtener el <code class="language-plaintext highlighter-rouge">config.xml</code> archivo de dentro del subdirectorio dentro de la aplicación llamado<code class="language-plaintext highlighter-rouge">platforms/ios</code>.</p>
 
 <p>Para seguir estas instrucciones, asegúrate de que tienes la última distribución de Córdoba. Descargar desde <a href="http://cordova.apache.org">cordova.apache.org</a> y descomprimir el paquete de iOS.</p>
 
-<h2>Cleaver agregando al proyecto Xcode (subproyecto CordovaLib)</h2>
+<h2 id="cleaver-agregando-al-proyecto-xcode-subproyecto-cordovalib">Cleaver agregando al proyecto Xcode (subproyecto CordovaLib)</h2>
 
 <ol>
-<li><p>Deja de Xcode si se está ejecutando.</p></li>
-<li><p>Abra una terminal y desplácese hasta el directorio fuente para iOS Cordova.</p></li>
-<li><p>Copia el <code>config.xml</code> archivo descrito anteriormente en el directorio del proyecto.</p></li>
-<li><p>Abra Xcode y utilizar el buscador para copiar el <code>config.xml</code> archivo en la ventana de su <strong>Navegador de proyectos</strong> .</p></li>
-<li><p>Elija <strong>crear grupos para cualquier añadidos carpetas</strong> y pulse <strong>Finalizar</strong>.</p></li>
-<li><p>Utilice el buscador para copiar el <code>CordovaLib/CordovaLib.xcodeproj</code> archivo de Xcode <strong>Navegador de proyectos</strong></p></li>
-<li><p>Seleccione <code>CordovaLib.xcodeproj</code> en el <strong>navegador de proyectos</strong>.</p></li>
-<li><p>Tipo de la combinación de teclas <strong>Command-Option-1</strong> para mostrar el <strong>Inspector File</strong>.</p></li>
-<li><p>Elegir <strong>relativo al grupo</strong> en el <strong>Inspector de archivo</strong> del menú desplegable para <strong>Ubicación</strong>.</p></li>
-<li><p>Seleccione el <strong>icono de proyecto</strong> en el <strong>Navegador de proyectos</strong>, seleccione el <strong>destino</strong>y seleccione la ficha <strong>Configuración de construir</strong> .</p></li>
-<li><p>Agregar <code>-force_load</code> y <code>-Obj-C</code> para el valor de <strong>Otras banderas del vinculador</strong> .</p></li>
-<li><p>Haga clic en el <strong>icono de proyecto</strong> en el navegador de proyectos, seleccione el <strong>destino</strong>y seleccione la ficha <strong>Fases construir</strong> .</p></li>
-<li><p>Ampliar <strong>los binarios de enlace con las bibliotecas</strong>.</p></li>
-<li><p>Seleccione el <strong>+</strong> botón y agregue los siguientes <strong>Marcos</strong>. Opcionalmente en el <strong>Navegador de proyectos</strong>, moverlos en el grupo de <strong>Marcos</strong> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">AssetsLibrary.framework
+  <li>
+    <p>Deja de Xcode si se está ejecutando.</p>
+  </li>
+  <li>
+    <p>Abra una terminal y desplácese hasta el directorio fuente para iOS Cordova.</p>
+  </li>
+  <li>
+    <p>Copia el <code class="language-plaintext highlighter-rouge">config.xml</code> archivo descrito anteriormente en el directorio del proyecto.</p>
+  </li>
+  <li>
+    <p>Abra Xcode y utilizar el buscador para copiar el <code class="language-plaintext highlighter-rouge">config.xml</code> archivo en la ventana de su <strong>Navegador de proyectos</strong> .</p>
+  </li>
+  <li>
+    <p>Elija <strong>crear grupos para cualquier añadidos carpetas</strong> y pulse <strong>Finalizar</strong>.</p>
+  </li>
+  <li>
+    <p>Utilice el buscador para copiar el <code class="language-plaintext highlighter-rouge">CordovaLib/CordovaLib.xcodeproj</code> archivo de Xcode <strong>Navegador de proyectos</strong></p>
+  </li>
+  <li>
+    <p>Seleccione <code class="language-plaintext highlighter-rouge">CordovaLib.xcodeproj</code> en el <strong>navegador de proyectos</strong>.</p>
+  </li>
+  <li>
+    <p>Tipo de la combinación de teclas <strong>Command-Option-1</strong> para mostrar el <strong>Inspector File</strong>.</p>
+  </li>
+  <li>
+    <p>Elegir <strong>relativo al grupo</strong> en el <strong>Inspector de archivo</strong> del menú desplegable para <strong>Ubicación</strong>.</p>
+  </li>
+  <li>
+    <p>Seleccione el <strong>icono de proyecto</strong> en el <strong>Navegador de proyectos</strong>, seleccione el <strong>destino</strong>y seleccione la ficha <strong>Configuración de construir</strong> .</p>
+  </li>
+  <li>
+    <p>Agregar <code class="language-plaintext highlighter-rouge">-force_load</code> y <code class="language-plaintext highlighter-rouge">-Obj-C</code> para el valor de <strong>Otras banderas del vinculador</strong> .</p>
+  </li>
+  <li>
+    <p>Haga clic en el <strong>icono de proyecto</strong> en el navegador de proyectos, seleccione el <strong>destino</strong>y seleccione la ficha <strong>Fases construir</strong> .</p>
+  </li>
+  <li>
+    <p>Ampliar <strong>los binarios de enlace con las bibliotecas</strong>.</p>
+  </li>
+  <li>
+    <p>Seleccione el <strong>+</strong> botón y agregue los siguientes <strong>Marcos</strong>. Opcionalmente en el <strong>Navegador de proyectos</strong>, moverlos en el grupo de <strong>Marcos</strong> :</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AssetsLibrary.framework
 CoreLocation.framework
 CoreGraphics.framework
 MobileCoreServices.framework
-</code></pre></div></li>
-<li><p>Ampliar <strong>Las dependencias de destino</strong>, el cuadro superior con esa etiqueta si hay más de una caja.</p></li>
-<li><p>Seleccione el <strong>+</strong> botón y agregar el <code>CordovaLib</code> construir el producto.</p></li>
-<li><p>Ampliar <strong>Los binarios de enlace con las bibliotecas</strong>, el cuadro superior con esa etiqueta si hay más de una caja.</p></li>
-<li><p>Seleccione el <strong>+</strong> botón y añadir <code>libCordova.a</code>.</p></li>
-<li><p>Fijar la <strong>Xcode preferencias → ubicaciones → derivada datos → avanzado...</strong> a <strong>único</strong>.</p></li>
-<li><p>Seleccione el <strong>icono de proyecto</strong> en el navegador de proyectos, selecciona tu <strong>destino</strong>y seleccione la ficha <strong>Configuración de construir</strong> .</p></li>
-<li><p>Búsqueda de <strong>rutas de búsqueda encabezado</strong>. Para esa configuración, agregar estos tres valores abajo, incluyendo las comillas:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">"$(TARGET_BUILD_DIR)/usr/local/lib/include"        
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Ampliar <strong>Las dependencias de destino</strong>, el cuadro superior con esa etiqueta si hay más de una caja.</p>
+  </li>
+  <li>
+    <p>Seleccione el <strong>+</strong> botón y agregar el <code class="language-plaintext highlighter-rouge">CordovaLib</code> construir el producto.</p>
+  </li>
+  <li>
+    <p>Ampliar <strong>Los binarios de enlace con las bibliotecas</strong>, el cuadro superior con esa etiqueta si hay más de una caja.</p>
+  </li>
+  <li>
+    <p>Seleccione el <strong>+</strong> botón y añadir <code class="language-plaintext highlighter-rouge">libCordova.a</code>.</p>
+  </li>
+  <li>
+    <p>Fijar la <strong>Xcode preferencias → ubicaciones → derivada datos → avanzado…</strong> a <strong>único</strong>.</p>
+  </li>
+  <li>
+    <p>Seleccione el <strong>icono de proyecto</strong> en el navegador de proyectos, selecciona tu <strong>destino</strong>y seleccione la ficha <strong>Configuración de construir</strong> .</p>
+  </li>
+  <li>
+    <p>Búsqueda de <strong>rutas de búsqueda encabezado</strong>. Para esa configuración, agregar estos tres valores abajo, incluyendo las comillas:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"$(TARGET_BUILD_DIR)/usr/local/lib/include"        
 "$(OBJROOT)/UninstalledProducts/include"
 "$(BUILT_PRODUCTS_DIR)"
-</code></pre></div>
-<p>A partir de Cordova 2.1.0, <code>CordovaLib</code> ha sido actualizado para utilizar el <strong>Conteo automático de referencia (ARC)</strong>. No necesitas actualizar a <strong>ARC</strong> para utilizar <code>CordovaLib</code> , pero si desea actualizar su proyecto para utilizar <strong>ARC</strong>, debe usar el Asistente para migración de Xcode de la <strong>Editar → Refactor → convertir en Objective-C arco...</strong> menú, <strong>anular la selección de libCordova.a</strong>, luego ejecute el Asistente para completar.</p></li>
+</code></pre></div>    </div>
+
+    <p>A partir de Cordova 2.1.0, <code class="language-plaintext highlighter-rouge">CordovaLib</code> ha sido actualizado para utilizar el <strong>Conteo automático de referencia (ARC)</strong>. No necesitas actualizar a <strong>ARC</strong> para utilizar <code class="language-plaintext highlighter-rouge">CordovaLib</code> , pero si desea actualizar su proyecto para utilizar <strong>ARC</strong>, debe usar el Asistente para migración de Xcode de la <strong>Editar → Refactor → convertir en Objective-C arco…</strong> menú, <strong>anular la selección de libCordova.a</strong>, luego ejecute el Asistente para completar.</p>
+  </li>
 </ol>
 
-<h2>Usando CDVViewController</h2>
+<h2 id="usando-cdvviewcontroller">Usando CDVViewController</h2>
 
 <ol>
-<li><p>Agregue el siguiente encabezado:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">#import &lt;Cordova/CDVViewController.h&gt;
-</code></pre></div></li>
-<li><p>Instanciar un nuevo <code>CDVViewController</code> y consérvelo en algún sitio, por ejemplo, a una propiedad de clase:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">CDVViewController* viewController = [CDVViewController new];
-</code></pre></div></li>
-<li><p>Opcionalmente, establezca el <code>wwwFolderName</code> propiedad, cuyo valor predeterminado es <code>www</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">viewController.wwwFolderName = @"myfolder";
-</code></pre></div></li>
-<li><p>Opcionalmente, configurar la página de inicio el <code>config.xml</code> del archivo <code>&lt;content&gt;</code> de la etiqueta, ya sea un archivo local:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;content src="index.html" /&gt;
-</code></pre></div>
-<p>.. .o un sitio remoto:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;content src="http://apache.org" /&gt;
-</code></pre></div></li>
-<li><p>Opcionalmente, establezca el <code>useSplashScreen</code> propiedad, cuyo valor predeterminado es <code>NO</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">viewController.useSplashScreen = YES;
-</code></pre></div></li>
-<li><p>Establecer el <strong>marco de la vista</strong>. Siempre definir esto como la última propiedad:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">viewController.view.frame = CGRectMake(0, 0, 320, 480);
-</code></pre></div></li>
-<li><p>Agregar la cuchilla a la vista:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">[myView addSubview:viewController.view];
-</code></pre></div></li>
+  <li>
+    <p>Agregue el siguiente encabezado:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#import &lt;Cordova/CDVViewController.h&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Instanciar un nuevo <code class="language-plaintext highlighter-rouge">CDVViewController</code> y consérvelo en algún sitio, por ejemplo, a una propiedad de clase:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CDVViewController* viewController = [CDVViewController new];
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Opcionalmente, establezca el <code class="language-plaintext highlighter-rouge">wwwFolderName</code> propiedad, cuyo valor predeterminado es <code class="language-plaintext highlighter-rouge">www</code> :</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>viewController.wwwFolderName = @"myfolder";
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Opcionalmente, configurar la página de inicio el <code class="language-plaintext highlighter-rouge">config.xml</code> del archivo <code class="language-plaintext highlighter-rouge">&lt;content&gt;</code> de la etiqueta, ya sea un archivo local:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;content src="index.html" /&gt;
+</code></pre></div>    </div>
+
+    <p>.. .o un sitio remoto:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;content src="http://apache.org" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Opcionalmente, establezca el <code class="language-plaintext highlighter-rouge">useSplashScreen</code> propiedad, cuyo valor predeterminado es <code class="language-plaintext highlighter-rouge">NO</code> :</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>viewController.useSplashScreen = YES;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Establecer el <strong>marco de la vista</strong>. Siempre definir esto como la última propiedad:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>viewController.view.frame = CGRectMake(0, 0, 320, 480);
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Agregar la cuchilla a la vista:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[myView addSubview:viewController.view];
+</code></pre></div>    </div>
+  </li>
 </ol>
 
-<h2>Adición de HTML, CSS y JavaScript activos</h2>
+<h2 id="adición-de-html-css-y-javascript-activos">Adición de HTML, CSS y JavaScript activos</h2>
 
 <ol>
-<li><p>Crear un nuevo directorio dentro del proyecto, <code>www</code> por ejemplo.</p></li>
-<li><p>Coloque el HTML, CSS y JavaScript activos en este directorio.</p></li>
-<li><p>Utilice el buscador para copiar el directorio en la ventana del <strong>Navegador de proyecto</strong> de Xcode.</p></li>
-<li><p>Seleccione <strong>crear carpeta referencias para cualquier añadidas carpetas</strong>.</p></li>
-<li><p>Establecer la adecuada <code>wwwFolderName</code> y <code>startPage</code> las propiedades para el directorio creado inicialmente, o utilizar los valores predeterminados (especificados en la sección anterior) al crear instancias de la<code>CDVViewController</code>.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">/*
+  <li>
+    <p>Crear un nuevo directorio dentro del proyecto, <code class="language-plaintext highlighter-rouge">www</code> por ejemplo.</p>
+  </li>
+  <li>
+    <p>Coloque el HTML, CSS y JavaScript activos en este directorio.</p>
+  </li>
+  <li>
+    <p>Utilice el buscador para copiar el directorio en la ventana del <strong>Navegador de proyecto</strong> de Xcode.</p>
+  </li>
+  <li>
+    <p>Seleccione <strong>crear carpeta referencias para cualquier añadidas carpetas</strong>.</p>
+  </li>
+  <li>
+    <p>Establecer la adecuada <code class="language-plaintext highlighter-rouge">wwwFolderName</code> y <code class="language-plaintext highlighter-rouge">startPage</code> las propiedades para el directorio creado inicialmente, o utilizar los valores predeterminados (especificados en la sección anterior) al crear instancias de la<code class="language-plaintext highlighter-rouge">CDVViewController</code>.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*
  if you created a folder called 'myfolder' and
  you want the file 'mypage.html' in it to be
  the startPage
 */
 viewController.wwwFolderName = @"myfolder";
 viewController.startPage = @"mypage.html"
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ol>
 
 

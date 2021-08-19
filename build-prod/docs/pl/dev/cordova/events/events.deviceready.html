@@ -2046,67 +2046,73 @@
             
 
             <div id="page-toc-source">
-                <h1>deviceready</h1>
+                <h1 id="deviceready">deviceready</h1>
 
 <p>Zdarzenie fires po całkowitym załadowaniu Cordova.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">document.addEventListener("deviceready", yourCallbackFunction, false);
-</code></pre></div>
-<h2>Szczegóły</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>document.addEventListener("deviceready", yourCallbackFunction, false);
+</code></pre></div></div>
+
+<h2 id="szczegóły">Szczegóły</h2>
 
 <p>To wydarzenie jest niezbędna do dowolnej aplikacji. Sygnalizuje on, że urządzenie Cordova w API załadowany i są gotowe do dostępu.</p>
 
 <p>Cordova składa się z dwóch baz kod: macierzystego i JavaScript. Podczas gdy ładuje kodu macierzystego, wyświetla ładowanie niestandardowych obrazów. Jednak JavaScript tylko ładuje po DOM ładunki. Oznacza to, że aplikacja sieci web potencjalnie może wywołać funkcję Cordova JavaScript przed odpowiedniego kodu macierzystego staje się dostępna.</p>
 
-<p><code>deviceready</code>Zdarzenie fires po pełni załadowaniu Cordova. Raz pożary zdarzenia, można bezpiecznie wykonywać połączenia API, Cordova. Aplikacje zazwyczaj dołączyć słuchacza z <code>document.addEventListener</code> po załadowaniu dokumentu HTML DOM.</p>
+<p><code class="language-plaintext highlighter-rouge">deviceready</code>Zdarzenie fires po pełni załadowaniu Cordova. Raz pożary zdarzenia, można bezpiecznie wykonywać połączenia API, Cordova. Aplikacje zazwyczaj dołączyć słuchacza z <code class="language-plaintext highlighter-rouge">document.addEventListener</code> po załadowaniu dokumentu HTML DOM.</p>
 
-<p><code>deviceready</code>Zdarzenie zachowuje się nieco inaczej od innych. Żadnych zdarzeń zarejestrowanych po <code>deviceready</code> pożary zdarzenia ma jego funkcja wywołania zwrotnego o nazwie natychmiast.</p>
+<p><code class="language-plaintext highlighter-rouge">deviceready</code>Zdarzenie zachowuje się nieco inaczej od innych. Żadnych zdarzeń zarejestrowanych po <code class="language-plaintext highlighter-rouge">deviceready</code> pożary zdarzenia ma jego funkcja wywołania zwrotnego o nazwie natychmiast.</p>
 
-<h2>Obsługiwane platformy</h2>
+<h2 id="obsługiwane-platformy">Obsługiwane platformy</h2>
 
 <ul>
-<li>  Amazon Fire OS</li>
-<li>  Android</li>
-<li>  BlackBerry 10</li>
-<li>  iOS</li>
-<li>  Tizen</li>
-<li>  Windows Phone 8</li>
-<li>  Windows 8</li>
+  <li>Amazon Fire OS</li>
+  <li>Android</li>
+  <li>BlackBerry 10</li>
+  <li>iOS</li>
+  <li>Tizen</li>
+  <li>Windows Phone 8</li>
+  <li>Windows 8</li>
 </ul>
 
-<h2>Szybki przykład</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">document.addEventListener("deviceready", onDeviceReady, false);
+<h2 id="szybki-przykład">Szybki przykład</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
     // Now safe to use device APIs
 }
-</code></pre></div>
-<h2>Pełny przykład</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Device Ready Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="pełny-przykład">Pełny przykład</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onLoad</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="p">}</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Device Ready Example&lt;/title&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="c1">// Now safe to use device APIs</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body</span> <span class="na">onload=</span><span class="s">"onLoad()"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+    // Wait for device API libraries to load
+    //
+    function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        // Now safe to use device APIs
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body onload="onLoad()"&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

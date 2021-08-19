@@ -1310,32 +1310,45 @@
     }
 </style>
 
-<h1>Android WebViews</h1>
+<h1 id="android-webviews">Android WebViews</h1>
 
-<p>Начиная Cordova 1.9, с помощью <code>CordovaActivity</code> , Cordova можно использовать в качестве компонента в более крупных родной Android приложений. Android относится к этот компонент как <code>CordovaWebView</code> . Новые приложения на базе Cordova от 1,9 года использовать <code>CordovaWebView</code> как основной вид, независимо от того наследие <code>CordovaActivity</code> используется подход.</p>
+<p>Начиная Cordova 1.9, с помощью <code class="language-plaintext highlighter-rouge">CordovaActivity</code> , Cordova можно использовать в качестве компонента в более крупных родной Android приложений. Android относится к этот компонент как <code class="language-plaintext highlighter-rouge">CordovaWebView</code> . Новые приложения на базе Cordova от 1,9 года использовать <code class="language-plaintext highlighter-rouge">CordovaWebView</code> как основной вид, независимо от того наследие <code class="language-plaintext highlighter-rouge">CordovaActivity</code> используется подход.</p>
 
 <p>Если вы не знакомы с разработки Android приложений, пожалуйста, прочитайте руководство Android платформы разработки Cordova-приложение перед попыткой включить WebView. Это не основной способ создания приложений Android Кордова. Эти инструкции в настоящее время вручную, но может быть в конечном итоге быть автоматизированы.</p>
 
-<h2>Необходимые условия</h2>
+<h2 id="необходимые-условия">Необходимые условия</h2>
 
 <ul>
-<li><p>Кордова 1.9 или выше</p></li>
-<li><p>SDK Android, обновлены до последних SDK</p></li>
+  <li>
+    <p>Кордова 1.9 или выше</p>
+  </li>
+  <li>
+    <p>SDK Android, обновлены до последних SDK</p>
+  </li>
 </ul>
 
-<h2>Руководство по использованию CordovaWebView в Android-проект</h2>
+<h2 id="руководство-по-использованию-cordovawebview-в-android-проект">Руководство по использованию CordovaWebView в Android-проект</h2>
 
 <ol>
-<li><p><code>cd</code>в <code>/framework</code> и запустить <code>ant jar</code> построить cordova банку. Он создает файл .jar, формируется как <code>cordova-x.x.x.jar</code> в <code>/framework</code> каталог.</p></li>
-<li><p>Скопируйте cordova банку в ваш Android-проект <code>/libs</code> каталог.</p></li>
-<li><p>Редактирование вашего приложения <code>main.xml</code> файл (под <code>/res/xml</code> ) чтобы выглядеть следующим образом, с <code>layout_height</code> , <code>layout_width</code> и <code>id</code> изменены в соответствии с вашего приложения:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;org.apache.cordova.CordovaWebView
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cd</code>в <code class="language-plaintext highlighter-rouge">/framework</code> и запустить <code class="language-plaintext highlighter-rouge">ant jar</code> построить cordova банку. Он создает файл .jar, формируется как <code class="language-plaintext highlighter-rouge">cordova-x.x.x.jar</code> в <code class="language-plaintext highlighter-rouge">/framework</code> каталог.</p>
+  </li>
+  <li>
+    <p>Скопируйте cordova банку в ваш Android-проект <code class="language-plaintext highlighter-rouge">/libs</code> каталог.</p>
+  </li>
+  <li>
+    <p>Редактирование вашего приложения <code class="language-plaintext highlighter-rouge">main.xml</code> файл (под <code class="language-plaintext highlighter-rouge">/res/xml</code> ) чтобы выглядеть следующим образом, с <code class="language-plaintext highlighter-rouge">layout_height</code> , <code class="language-plaintext highlighter-rouge">layout_width</code> и <code class="language-plaintext highlighter-rouge">id</code> изменены в соответствии с вашего приложения:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;org.apache.cordova.CordovaWebView
     android:id="@+id/tutorialView"
     android:layout_width="match_parent"
     android:layout_height="match_parent" /&gt;
-</code></pre></div></li>
-<li><p>Измените вашу деятельность, чтобы он реализует <code>CordovaInterface</code> . Следует реализовать включены методы. Вы можете скопировать их из <code>/framework/src/org/apache/cordova/CordovaActivity.java</code> , или реализовать их на свой собственный. Фрагмент кода ниже показывает простое приложение, использующее интерфейс. Обратите внимание, как ссылающееся представление id соответствует <code>id</code> атрибут, указанный в XML-фрагменте показано выше:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">public class CordovaViewTestActivity extends Activity implements CordovaInterface {
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Измените вашу деятельность, чтобы он реализует <code class="language-plaintext highlighter-rouge">CordovaInterface</code> . Следует реализовать включены методы. Вы можете скопировать их из <code class="language-plaintext highlighter-rouge">/framework/src/org/apache/cordova/CordovaActivity.java</code> , или реализовать их на свой собственный. Фрагмент кода ниже показывает простое приложение, использующее интерфейс. Обратите внимание, как ссылающееся представление id соответствует <code class="language-plaintext highlighter-rouge">id</code> атрибут, указанный в XML-фрагменте показано выше:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class CordovaViewTestActivity extends Activity implements CordovaInterface {
     CordovaWebView cwv;
     /* Called when the activity is first created. */
     @Override
@@ -1346,11 +1359,13 @@
         Config.init(this);
         cwv.loadUrl(Config.getStartUrl());
     }
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ol>
 
 <p>Если вы используете камеру, следует также реализовать это:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    @Override
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @Override
     public void setActivityResultCallback(CordovaPlugin plugin) {
         this.activityResultCallback = plugin;
     }
@@ -1392,16 +1407,23 @@
             callback.onActivityResult(requestCode, resultCode, intent);
         }
     }
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Наконец, не забудьте добавить пул потоков, иначе плагины нет потоков для запуска на:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    @Override
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @Override
     public ExecutorService getThreadPool() {
         return threadPool;
     }
-</code></pre></div>
+</code></pre></div></div>
+
 <ol>
-<li><p>Скопировать файлы HTML и JavaScript вашего приложения на ваш Android-проекта <code>/assets/www</code> каталог.</p></li>
-<li><p>Копия <code>config.xml</code> от <code>/framework/res/xml</code> к вашему проекту <code>/res/xml</code> каталог.</p></li>
+  <li>
+    <p>Скопировать файлы HTML и JavaScript вашего приложения на ваш Android-проекта <code class="language-plaintext highlighter-rouge">/assets/www</code> каталог.</p>
+  </li>
+  <li>
+    <p>Копия <code class="language-plaintext highlighter-rouge">config.xml</code> от <code class="language-plaintext highlighter-rouge">/framework/res/xml</code> к вашему проекту <code class="language-plaintext highlighter-rouge">/res/xml</code> каталог.</p>
+  </li>
 </ol>
 
 

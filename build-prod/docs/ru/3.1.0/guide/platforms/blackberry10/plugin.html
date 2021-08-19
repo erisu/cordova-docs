@@ -1310,30 +1310,37 @@
     }
 </style>
 
-<h1>BlackBerry 10 плагинов</h1>
+<h1 id="blackberry-10-плагинов">BlackBerry 10 плагинов</h1>
 
-<p>Это продолжение плагин развития руководство для Кордова. После просмотра этого содержимого, теперь давайте смотрите на вещи, мы должны иметь эхо плагин для платформы BlackBerry 10. Напомним, что эхо плагин в основном возвращает все строки пользователя предоставляет <code>window.echo</code> функции:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">window.echo = function(str, callback) {
+<p>Это продолжение плагин развития руководство для Кордова. После просмотра этого содержимого, теперь давайте смотрите на вещи, мы должны иметь эхо плагин для платформы BlackBerry 10. Напомним, что эхо плагин в основном возвращает все строки пользователя предоставляет <code class="language-plaintext highlighter-rouge">window.echo</code> функции:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>window.echo = function(str, callback) {
         cordova.exec(callback, function(err) {
             callback('Nothing to echo.');
         }, "Echo", "echo", [str]);
     };
-</code></pre></div>
-<p>Родной BlackBerry 10 плагин для Кордова содержит код JavaScript и может также содержать машинный код. Эхо плагин примере показано, как ссылаться на родной функциональность из JavaScript. Родной и код JavaScript общаться друг с другом в рамках, предоставленных JNEXT. Каждый плагин должен также включать <code>plugin.xml</code> файл.</p>
+</code></pre></div></div>
 
-<h2>Создание собственного частью вашего плагина</h2>
+<p>Родной BlackBerry 10 плагин для Кордова содержит код JavaScript и может также содержать машинный код. Эхо плагин примере показано, как ссылаться на родной функциональность из JavaScript. Родной и код JavaScript общаться друг с другом в рамках, предоставленных JNEXT. Каждый плагин должен также включать <code class="language-plaintext highlighter-rouge">plugin.xml</code> файл.</p>
+
+<h2 id="создание-собственного-частью-вашего-плагина">Создание собственного частью вашего плагина</h2>
 
 <p>Для создания собственного часть вашего плагина, открыть BlackBerry 10 NDK IDE и выберите файл настроек новый раздел настроек BlackBerry проекта настроек стандартного расширения настроек BlackBerry WebWorks. Введите имя требуемого проекта / местоположение и нажмите кнопку Готово.</p>
 
 <p>Проект, созданный в среде IDE содержит примеры кода для памяти плагин. Вы можете заменить или изменить эти файлы, чтобы включить свои собственные функции.</p>
 
 <ul>
-<li><p><code>*name*_js.hpp</code>: Заголовок C++ для кода JNEXT.</p></li>
-<li><p><code>*name*_js.cpp</code>: Код C++ для JNEXT.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">*name*_js.hpp</code>: Заголовок C++ для кода JNEXT.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">*name*_js.cpp</code>: Код C++ для JNEXT.</p>
+  </li>
 </ul>
 
 <p>Родной интерфейс для модуля JNEXT может рассматриваться в файле заголовка плагина, расположенный в общественной директории вашего проекта. Он также содержит константы и сервисных функций, которые могут использоваться в машинном коде. Ваш плагин должен быть производным от JSExt, который определен в plugin.h. То есть необходимо реализовать следующий класс:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">class JSExt
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class JSExt
 {
 public:
     virtual ~JSExt() {};
@@ -1342,9 +1349,11 @@ public:
 private:
     std::string m_id;
 };
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Таким образом расширение должно включать файл заголовка plugin.h. В этом примере Эхо используется JSExt следующим в файле echo_js.hpp:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">#include "../public/plugin.h"
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include "../public/plugin.h"
 #include &lt;string&gt;
 
 #ifndef ECHO_JS_H_
@@ -1362,9 +1371,11 @@ private:
 };
 
 #endif // ECHO_JS_H_
-</code></pre></div>
-<p><code>m_id</code>— Это атрибут, содержащий идентификатор JNEXT для этого объекта. Идентификатор передается классу как аргумент в конструктор. Необходимо активировать события на стороне JavaScript из родной. Метод CanDelete используется JNEXT для определения, является ли ваш родной объект может быть удален. InvokeMethod функция вызывается в результате запроса от JavaScript для вызова метода из данного конкретного объекта. Единственный аргумент этой функции является строка, передаваемая от JavaScript, что этот метод должен анализировать для того, чтобы определить, какой метод собственного объекта должен быть выполнен. Теперь мы реализовать эти функции в echo_js.cpp. Для примера, эхо мы реализовать функции InvokeMethod следующим образом:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">string Echo::InvokeMethod(const string&amp; command) {
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">m_id</code>— Это атрибут, содержащий идентификатор JNEXT для этого объекта. Идентификатор передается классу как аргумент в конструктор. Необходимо активировать события на стороне JavaScript из родной. Метод CanDelete используется JNEXT для определения, является ли ваш родной объект может быть удален. InvokeMethod функция вызывается в результате запроса от JavaScript для вызова метода из данного конкретного объекта. Единственный аргумент этой функции является строка, передаваемая от JavaScript, что этот метод должен анализировать для того, чтобы определить, какой метод собственного объекта должен быть выполнен. Теперь мы реализовать эти функции в echo_js.cpp. Для примера, эхо мы реализовать функции InvokeMethod следующим образом:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>string Echo::InvokeMethod(const string&amp; command) {
 
     //parse command and args from string
     int index = command.find_first_of(" ");
@@ -1378,39 +1389,53 @@ private:
         return "Unsupported Method";
     }
 }
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Ваш родной плагин также необходимо реализовать следующие функции обратного вызова:</p>
 
 <ul>
-<li><p><code>extern char* onGetObjList( void );</code></p></li>
-<li><p><code>extern JSExt* onCreateObject( const string&amp; strClassName, const string&amp; strObjId );</code></p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">extern char* onGetObjList( void );</code></p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">extern JSExt* onCreateObject( const string&amp; strClassName, const string&amp; strObjId );</code></p>
+  </li>
 </ul>
 
-<p><code>onGetObjList</code>Функция возвращает разделенный запятыми список классов, поддерживаемых JNEXT. JNEXT эта функция используется для определения набора классов, которые можно создать экземпляр JNEXT. В нашем эхо плагин, у нас есть следующие в <code>echo_js.cpp</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">char* onGetObjList() {
+<p><code class="language-plaintext highlighter-rouge">onGetObjList</code>Функция возвращает разделенный запятыми список классов, поддерживаемых JNEXT. JNEXT эта функция используется для определения набора классов, которые можно создать экземпляр JNEXT. В нашем эхо плагин, у нас есть следующие в <code class="language-plaintext highlighter-rouge">echo_js.cpp</code> :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>char* onGetObjList() {
     static char name[] = "Echo";
     return name;
 }
-</code></pre></div>
-<p><code>onCreateObject</code>Функция принимает два параметра. Первый параметр — имя данного класса должен быть создан из JavaScript стороне. Допустимые имена являются те, которые возвращаются в <code>onGetObjList</code> . Вторым параметром является идентификатор уникального объекта для класса. Этот метод возвращает указатель на объект создан плагин. В нашем эхо плагин, у нас есть следующие в <code>echo_js.cpp</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">JSExt* onCreateObject(const string&amp; className, const string&amp; id) {
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">onCreateObject</code>Функция принимает два параметра. Первый параметр — имя данного класса должен быть создан из JavaScript стороне. Допустимые имена являются те, которые возвращаются в <code class="language-plaintext highlighter-rouge">onGetObjList</code> . Вторым параметром является идентификатор уникального объекта для класса. Этот метод возвращает указатель на объект создан плагин. В нашем эхо плагин, у нас есть следующие в <code class="language-plaintext highlighter-rouge">echo_js.cpp</code> :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>JSExt* onCreateObject(const string&amp; className, const string&amp; id) {
     if (className == "Echo") {
         return new Echo(id);
     }
     return NULL;
 }
-</code></pre></div>
-<h2>Создание JavaScript часть вашего плагина</h2>
+</code></pre></div></div>
+
+<h2 id="создание-javascript-часть-вашего-плагина">Создание JavaScript часть вашего плагина</h2>
 
 <p>JavaScript часть ваш плагин должен содержать следующие файлы:</p>
 
 <ul>
-<li><p><code>client.js</code>: Это считается стороне клиента и содержит интерфейс API, который можно вызывать Cordova-приложение. API в <code>client.js</code> звонки делает вызовы <code>index.js</code> . API в <code>client.js</code> также соединяет функции обратного вызова для событий, вызываемых обратные вызовы.</p></li>
-<li><p><code>index.js</code>: Загружает Кордова <code>index.js</code> и делает его доступным через cordova.exec мост. <code>client.js</code>Файла делает вызовы API в <code>index.js</code> файл, который в свою очередь делает вызов для JNEXT для взаимодействия с родной стороне.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">client.js</code>: Это считается стороне клиента и содержит интерфейс API, который можно вызывать Cordova-приложение. API в <code class="language-plaintext highlighter-rouge">client.js</code> звонки делает вызовы <code class="language-plaintext highlighter-rouge">index.js</code> . API в <code class="language-plaintext highlighter-rouge">client.js</code> также соединяет функции обратного вызова для событий, вызываемых обратные вызовы.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">index.js</code>: Загружает Кордова <code class="language-plaintext highlighter-rouge">index.js</code> и делает его доступным через cordova.exec мост. <code class="language-plaintext highlighter-rouge">client.js</code>Файла делает вызовы API в <code class="language-plaintext highlighter-rouge">index.js</code> файл, который в свою очередь делает вызов для JNEXT для взаимодействия с родной стороне.</p>
+  </li>
 </ul>
 
-<p>Стороне клиента и сервера ( <code>client.js</code> и <code>index.js</code> ) взаимодействует через <code>Cordova.exec</code> функции. Так, в <code>client.js</code> вы вызываете <code>exec</code> функционировать и предоставлять необходимые аргументы. В эхо плагин, мы имеем следующую в <code>client.js</code> файл:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">var service = "org.apache.cordova.blackberry.echo",
+<p>Стороне клиента и сервера ( <code class="language-plaintext highlighter-rouge">client.js</code> и <code class="language-plaintext highlighter-rouge">index.js</code> ) взаимодействует через <code class="language-plaintext highlighter-rouge">Cordova.exec</code> функции. Так, в <code class="language-plaintext highlighter-rouge">client.js</code> вы вызываете <code class="language-plaintext highlighter-rouge">exec</code> функционировать и предоставлять необходимые аргументы. В эхо плагин, мы имеем следующую в <code class="language-plaintext highlighter-rouge">client.js</code> файл:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var service = "org.apache.cordova.blackberry.echo",
     exec = cordova.require("cordova/exec");
 
 module.exports = {
@@ -1418,23 +1443,25 @@ module.exports = {
         exec(success, fail, service, "echo", { data: data });
     }
 };
-</code></pre></div>
-<p>Теперь <code>index.js</code> взаимодействует с родной стороны, с помощью JNEXT. Так вы прикрепить функции конструктора с именем Echo в JNEXT. Внутри конструктора выполните следующие основные операции, используя функцию init:</p>
+</code></pre></div></div>
+
+<p>Теперь <code class="language-plaintext highlighter-rouge">index.js</code> взаимодействует с родной стороны, с помощью JNEXT. Так вы прикрепить функции конструктора с именем Echo в JNEXT. Внутри конструктора выполните следующие основные операции, используя функцию init:</p>
 
 <ul>
-<li>  Укажите необходимый модуль, экспортируемые на родной стороне. Имя необходимого модуля должно соответствовать имени файла общей библиотеки (.so файла).</li>
+  <li>Укажите необходимый модуль, экспортируемые на родной стороне. Имя необходимого модуля должно соответствовать имени файла общей библиотеки (.so файла).</li>
 </ul>
 
-<p><code>JNEXT.require(&quot;libecho&quot;)</code></p>
+<p><code class="language-plaintext highlighter-rouge">JNEXT.require("libecho")</code></p>
 
 <ul>
-<li>  Создайте объект с помощью приобретенного модуль и сохраните идентификатор, возвращенный вызовом. Self.m_id = JNEXT.createObject (&quot;libecho.Эхо»); Когда приложение вызывает функцию эхо в <code>client.js</code> , что вызов в свою очередь вызывает функцию эхо в <code>index.js</code> , где PluginResult объект отправляет ответ (данных) обратно в <code>client.js</code> . Поскольку args аргумент, переданный функции был преобразован в JSON.stringfy() и кодируются как URIcomponent, необходимо вызвать следующие:</li>
+  <li>Создайте объект с помощью приобретенного модуль и сохраните идентификатор, возвращенный вызовом. Self.m_id = JNEXT.createObject (“libecho.Эхо»); Когда приложение вызывает функцию эхо в <code class="language-plaintext highlighter-rouge">client.js</code> , что вызов в свою очередь вызывает функцию эхо в <code class="language-plaintext highlighter-rouge">index.js</code> , где PluginResult объект отправляет ответ (данных) обратно в <code class="language-plaintext highlighter-rouge">client.js</code> . Поскольку args аргумент, переданный функции был преобразован в JSON.stringfy() и кодируются как URIcomponent, необходимо вызвать следующие:</li>
 </ul>
 
-<p><code>данных = JSON.parse(decodeURIComponent(args.data));</code></p>
+<p><code class="language-plaintext highlighter-rouge">данных = JSON.parse(decodeURIComponent(args.data));</code></p>
 
 <p>Теперь вы можете отправлять данные обратно. Давайте положить все это вместе:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">module.exports = {
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module.exports = {
 
     echo: function (success, fail, args, env) {
 
@@ -1444,30 +1471,32 @@ module.exports = {
         result.ok(response, false);
     }
 };
-</code></pre></div>
-<h2>Архитектура плагин</h2>
+</code></pre></div></div>
 
-<p>Вы можете разместить артефакты плагин, который включает в себя <code>plugin.xml</code> файл, исходные файлы (JavaScript, C++) и двоичные файлы ( <code>.so</code> ) в любой структуре каталогов, как долго, как вы правильно укажите расположение файлов в <code>plugin.xml</code> файл. Типичная структура выглядит следующим образом:</p>
+<h2 id="архитектура-плагин">Архитектура плагин</h2>
+
+<p>Вы можете разместить артефакты плагин, который включает в себя <code class="language-plaintext highlighter-rouge">plugin.xml</code> файл, исходные файлы (JavaScript, C++) и двоичные файлы ( <code class="language-plaintext highlighter-rouge">.so</code> ) в любой структуре каталогов, как долго, как вы правильно укажите расположение файлов в <code class="language-plaintext highlighter-rouge">plugin.xml</code> файл. Типичная структура выглядит следующим образом:</p>
 
 <p><strong><em>your_project_directory</em></strong> (раздел настроек plugin.xml)</p>
 
 <ul>
-<li>  <strong>www</strong> (раздел настроек client.js)</li>
-<li>  <strong>src</strong> 
-
-<ul>
-<li>  <strong>blackberry10</strong> (раздел настроек index.js, <strong>родной</strong> настроек *.cpp, *.hpp)</li>
-<li>  <strong>устройство</strong> (раздел настроек<em>двоичный файл</em> * .so)</li>
-<li>  <strong>симулятор</strong> (раздел настроек<em>двоичный файл</em> * .so)</li>
-</ul></li>
+  <li><strong>www</strong> (раздел настроек client.js)</li>
+  <li><strong>src</strong>
+    <ul>
+      <li><strong>blackberry10</strong> (раздел настроек index.js, <strong>родной</strong> настроек *.cpp, *.hpp)</li>
+      <li><strong>устройство</strong> (раздел настроек<em>двоичный файл</em> * .so)</li>
+      <li><strong>симулятор</strong> (раздел настроек<em>двоичный файл</em> * .so)</li>
+    </ul>
+  </li>
 </ul>
 
-<p>(В списке отображаются иерархические связи между каталогов верхнего уровня. Скобки показывает содержимое данного каталога. Все имена каталогов отображаются полужирным шрифтом. Имена файлов предшествует <code>&gt;</code> знак.)</p>
+<p>(В списке отображаются иерархические связи между каталогов верхнего уровня. Скобки показывает содержимое данного каталога. Все имена каталогов отображаются полужирным шрифтом. Имена файлов предшествует <code class="language-plaintext highlighter-rouge">&gt;</code> знак.)</p>
 
-<h2>Содержимое <code>plugin.xml</code> файла</h2>
+<h2 id="содержимое-pluginxml-файла">Содержимое <code class="language-plaintext highlighter-rouge">plugin.xml</code> файла</h2>
 
-<p><code>plugin.xml</code><a href="../../../cordova/file/fileobj/fileobj.html">Файл</a> содержит пространства имен расширения и другие метаданные. Определить пространство имен и укажите другие метаданные для Эхо плагина следующим:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+<p><code class="language-plaintext highlighter-rouge">plugin.xml</code><a href="../../../cordova/file/fileobj/fileobj.html">Файл</a> содержит пространства имен расширения и другие метаданные. Определить пространство имен и укажите другие метаданные для Эхо плагина следующим:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
     id="org.apache.cordova.blackberry.echo"
     version="1.0.0"&gt;
     &lt;js-module src="www/client.js"&gt;
@@ -1482,7 +1511,8 @@ module.exports = {
         &lt;/config-file&gt;
     &lt;/platform&gt;
 &lt;/plugin&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 
             </div>
         </div>

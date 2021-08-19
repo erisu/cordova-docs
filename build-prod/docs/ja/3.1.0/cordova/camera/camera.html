@@ -1438,71 +1438,90 @@
             
 
             <div id="page-toc-source">
-                <h1>カメラ</h1>
+                <h1 id="カメラ">カメラ</h1>
 
 <blockquote>
-<p><code>camera</code>オブジェクトは、デバイスのデフォルト カメラ アプリケーションへのアクセスを提供します。</p>
+  <p><code class="language-plaintext highlighter-rouge">camera</code>オブジェクトは、デバイスのデフォルト カメラ アプリケーションへのアクセスを提供します。</p>
 </blockquote>
 
 <p><strong>重要なプライバシーの注意：</strong>デバイスのカメラからの画像の収集と利用を重要なプライバシーの問題を発生させます。 アプリのプライバシー ポリシーは、カメラを使う方法と他の当事者との記録された画像の共有かどうかを議論すべき。 さらに、カメラのアプリの使用がない場合明らかに、ユーザー インターフェイスで、(<a href="../device/device.html">デバイス</a> オペレーティング システム既にそうしない） 場合、カメラへのアクセス、アプリの前に、ジャスト イン タイム通知を提供する必要があります。 その通知は、上記の (例えば、 <strong>[ok]</strong>を<strong>おかげで</strong>選択肢を提示する) によってユーザーのアクセス許可を取得するだけでなく、同じ情報を提供する必要があります。 詳細については、プライバシーに関するガイドを参照してください。</p>
 
-<h2>メソッド</h2>
+<h2 id="メソッド">メソッド</h2>
 
 <ul>
-<li>  <a href="camera.getPicture.html">camera.getPicture</a></li>
-<li>  <a href="camera.cleanup.html">camera.cleanup</a></li>
+  <li><a href="camera.getPicture.html">camera.getPicture</a></li>
+  <li><a href="camera.cleanup.html">camera.cleanup</a></li>
 </ul>
 
-<h2>機能へのアクセス</h2>
+<h2 id="機能へのアクセス">機能へのアクセス</h2>
 
-<p>バージョン 3.0 は、コルドバ<em>のプラグイン</em>としてデバイス レベルの Api を実装します。 CLI の使用 <code>plugin</code> のコマンドライン ・ インタ フェースを追加または削除、プロジェクトに対してこの機能を記載されているコマンド。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add org.apache.cordova.camera
+<p>バージョン 3.0 は、コルドバ<em>のプラグイン</em>としてデバイス レベルの Api を実装します。 CLI の使用 <code class="language-plaintext highlighter-rouge">plugin</code> のコマンドライン ・ インタ フェースを追加または削除、プロジェクトに対してこの機能を記載されているコマンド。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add org.apache.cordova.camera
     $ cordova plugin ls
     [ 'org.apache.cordova.camera' ]
     $ cordova plugin rm org.apache.cordova.camera
-</code></pre></div>
+</code></pre></div></div>
+
 <p>これらのコマンドすべてのターゲット プラットフォームに適用されますが、以下のプラットフォームに固有の構成設定を変更します。</p>
 
 <ul>
-<li><p>アンドロイド</p>
-<div class="highlight"><pre><code class="language-" data-lang="">(in app/res/xml/config.xml)
+  <li>
+    <p>アンドロイド</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(in app/res/xml/config.xml)
 &lt;feature name="Camera"&gt;
     &lt;param name="android-package" value="org.apache.cordova.CameraLauncher" /&gt;
 &lt;/feature&gt;
-
+    
 (in app/AndroidManifest)
 &lt;uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /&gt;
-</code></pre></div></li>
-<li><p>ブラックベリー WebWorks</p>
-<div class="highlight"><pre><code class="language-" data-lang="">(in www/plugins.xml)
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>ブラックベリー WebWorks</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(in www/plugins.xml)
 &lt;feature name="Camera"&gt;
     &lt;param name="blackberry-package" value="org.apache.cordova.camera.Camera" /&gt;
 &lt;/feature&gt;
-
+    
 (in www/config.xml)
 &lt;feature id="blackberry.media.camera" /&gt;
-
+    
 &lt;rim:permissions&gt;
     &lt;rim:permit&gt;use_camera&lt;/rim:permit&gt;
 &lt;/rim:permissions&gt;
-</code></pre></div></li>
-<li><p>iOS （<code>config.xml</code>)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="Camera"&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>iOS （<code class="language-plaintext highlighter-rouge">config.xml</code>)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="Camera"&gt;
     &lt;param name="ios-package" value="CDVCamera" /&gt;
 &lt;/feature&gt;
-</code></pre></div></li>
-<li><p>(Windows Phone<code>Properties/WPAppManifest.xml</code>)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;Capabilities&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>(Windows Phone<code class="language-plaintext highlighter-rouge">Properties/WPAppManifest.xml</code>)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;Capabilities&gt;
     &lt;Capability Name="ID_CAP_ISV_CAMERA" /&gt;
     &lt;Capability Name="ID_HW_FRONTCAMERA" /&gt;
 &lt;/Capabilities&gt;
-</code></pre></div>
-<p>参照: <a href="http://msdn.microsoft.com/en-us/library/ff769509%28v=vs.92%29.aspx">Windows Phone のアプリケーション マニフェスト</a></p></li>
-<li><p>(Tizen<code>config.xml</code>)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="http://tizen.org/api/application" required="true"/&gt;
+</code></pre></div>    </div>
+
+    <p>参照: <a href="http://msdn.microsoft.com/en-us/library/ff769509%28v=vs.92%29.aspx">Windows Phone のアプリケーション マニフェスト</a></p>
+  </li>
+  <li>
+    <p>(Tizen<code class="language-plaintext highlighter-rouge">config.xml</code>)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="http://tizen.org/api/application" required="true"/&gt;
 &lt;feature name="http://tizen.org/api/application.launch" required="true"/&gt;
-</code></pre></div>
-<p>参照: <a href="https://developer.tizen.org/help/topic/org.tizen.help.gs/Creating%20a%20Project.html?path=0_1_1_3#8814682_CreatingaProject-EditingconfigxmlFeatures">Tizen Web アプリケーションのアプリケーション マニフェスト</a></p></li>
+</code></pre></div>    </div>
+
+    <p>参照: <a href="https://developer.tizen.org/help/topic/org.tizen.help.gs/Creating%20a%20Project.html?path=0_1_1_3#8814682_CreatingaProject-EditingconfigxmlFeatures">Tizen Web アプリケーションのアプリケーション マニフェスト</a></p>
+  </li>
 </ul>
 
 <p>いくつかのプラットフォームは特別な構成を必要とせずにこの機能をサポート可能性があります。<em>プラットフォームのサポート</em>の概要のセクションを参照してください。</p>

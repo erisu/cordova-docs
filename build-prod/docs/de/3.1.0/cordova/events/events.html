@@ -1330,72 +1330,87 @@
             
 
             <div id="page-toc-source">
-                <h1>Veranstaltungen</h1>
+                <h1 id="veranstaltungen">Veranstaltungen</h1>
 
 <blockquote>
-<p>Cordova Lebenszyklusereignisse.</p>
+  <p>Cordova Lebenszyklusereignisse.</p>
 </blockquote>
 
-<h2>Ereignistypen</h2>
+<h2 id="ereignistypen">Ereignistypen</h2>
 
 <ul>
-<li>  <a href="events.deviceready.html">deviceready</a></li>
-<li>  <a href="events.pause.html">Anhalten</a></li>
-<li>  <a href="events.resume.html">Lebenslauf</a></li>
-<li>  <a href="events.online.html">Online</a></li>
-<li>  <a href="events.offline.html">Offline</a></li>
-<li>  <a href="events.backbutton.html">BackButton</a></li>
-<li>  <a href="events.batterycritical.html">batterycritical</a></li>
-<li>  <a href="events.batterylow.html">batterylow</a></li>
-<li>  <a href="events.batterystatus.html">batterystatus</a></li>
-<li>  <a href="events.menubutton.html">menubutton</a></li>
-<li>  <a href="events.searchbutton.html">SearchButton</a></li>
-<li>  <a href="events.startcallbutton.html">startcallbutton</a></li>
-<li>  <a href="events.endcallbutton.html">endcallbutton</a></li>
-<li>  <a href="events.volumedownbutton.html">volumedownbutton</a></li>
-<li>  <a href="events.volumeupbutton.html">volumeupbutton</a></li>
+  <li><a href="events.deviceready.html">deviceready</a></li>
+  <li><a href="events.pause.html">Anhalten</a></li>
+  <li><a href="events.resume.html">Lebenslauf</a></li>
+  <li><a href="events.online.html">Online</a></li>
+  <li><a href="events.offline.html">Offline</a></li>
+  <li><a href="events.backbutton.html">BackButton</a></li>
+  <li><a href="events.batterycritical.html">batterycritical</a></li>
+  <li><a href="events.batterylow.html">batterylow</a></li>
+  <li><a href="events.batterystatus.html">batterystatus</a></li>
+  <li><a href="events.menubutton.html">menubutton</a></li>
+  <li><a href="events.searchbutton.html">SearchButton</a></li>
+  <li><a href="events.startcallbutton.html">startcallbutton</a></li>
+  <li><a href="events.endcallbutton.html">endcallbutton</a></li>
+  <li><a href="events.volumedownbutton.html">volumedownbutton</a></li>
+  <li><a href="events.volumeupbutton.html">volumeupbutton</a></li>
 </ul>
 
-<h2>Zugriff auf die Funktion</h2>
+<h2 id="zugriff-auf-die-funktion">Zugriff auf die Funktion</h2>
 
-<p>Ab Version 3.0, Cordova implementiert Batteriestatus und andere Geräteebene APIs als <em>Plugins</em>. Zugriff auf alle anderen Ereignisse, die nicht im Zusammenhang mit Batterie-Status sind standardmäßig aktiviert. Verwenden Sie der CLI <code>plugin</code> Befehl, beschrieben in der Command-Line Interface, aktivieren oder Deaktivieren von Batterie-Veranstaltungen:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add org.apache.cordova.battery-status
+<p>Ab Version 3.0, Cordova implementiert Batteriestatus und andere Geräteebene APIs als <em>Plugins</em>. Zugriff auf alle anderen Ereignisse, die nicht im Zusammenhang mit Batterie-Status sind standardmäßig aktiviert. Verwenden Sie der CLI <code class="language-plaintext highlighter-rouge">plugin</code> Befehl, beschrieben in der Command-Line Interface, aktivieren oder Deaktivieren von Batterie-Veranstaltungen:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add org.apache.cordova.battery-status
     $ cordova plugin ls
     [ 'org.apache.cordova.battery-status' ]
     $ cordova plugin rm org.apache.cordova.battery-status
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Diese Befehle gelten für alle Zielplattformen, aber die unten beschriebenen Plattform-spezifische Konfigurationseinstellungen ändern:</p>
 
 <ul>
-<li><p>Android</p>
-<div class="highlight"><pre><code class="language-" data-lang="">(in app/res/xml/config.xml)
+  <li>
+    <p>Android</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(in app/res/xml/config.xml)
 &lt;feature name="Battery"&gt;
     &lt;param name="android-package" value="org.apache.cordova.BatteryListener" /&gt;
 &lt;/feature&gt;
-
+    
 (in app/AndroidManifest.xml)
 &lt;uses-permission android:name="android.permission.BROADCAST_STICKY" /&gt;
-</code></pre></div></li>
-<li><p>BlackBerry WebWorks</p>
-<div class="highlight"><pre><code class="language-" data-lang="">(in www/plugins.xml)
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>BlackBerry WebWorks</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(in www/plugins.xml)
 &lt;feature name="Battery"&gt;
     &lt;param name="blackberry-package" value="org.apache.cordova.battery.Battery" /&gt;
 &lt;/feature&gt;
-
+    
 (in www/config.xml)
 &lt;feature id="blackberry.app"          required="true" version="1.0.0.0" /&gt;
 &lt;feature id="blackberry.app.event"    required="true" version="1.0.0.0" /&gt;
 &lt;feature id="blackberry.system.event" required="true" version="1.0.0.0" /&gt;
-</code></pre></div></li>
-<li><p>iOS (in<code>config.xml</code>)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="Battery"&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>iOS (in<code class="language-plaintext highlighter-rouge">config.xml</code>)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="Battery"&gt;
     &lt;param name="ios-package" value="CDVBattery" /&gt;
 &lt;/feature&gt;
-</code></pre></div></li>
-<li><p>Tizen (in<code>config.xml</code>)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="http://tizen.org/api/systeminfo" required="true"/&gt;
-</code></pre></div>
-<p>Bezug: <a href="https://developer.tizen.org/help/topic/org.tizen.help.gs/Creating%20a%20Project.html?path=0_1_1_3#8814682_CreatingaProject-EditingconfigxmlFeatures">Anwendungsmanifest für Tizen Webanwendung</a></p></li>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Tizen (in<code class="language-plaintext highlighter-rouge">config.xml</code>)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="http://tizen.org/api/systeminfo" required="true"/&gt;
+</code></pre></div>    </div>
+
+    <p>Bezug: <a href="https://developer.tizen.org/help/topic/org.tizen.help.gs/Creating%20a%20Project.html?path=0_1_1_3#8814682_CreatingaProject-EditingconfigxmlFeatures">Anwendungsmanifest für Tizen Webanwendung</a></p>
+  </li>
 </ul>
 
 <p>Einige Plattformen können dieses Feature unterstützen, ohne dass eine besondere Konfiguration. Finden Sie unter <em>Plattform-Unterstützung</em> in der <a href="../../guide/overview/index.html">Übersicht</a>.</p>

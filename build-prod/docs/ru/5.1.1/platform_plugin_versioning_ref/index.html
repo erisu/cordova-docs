@@ -1190,139 +1190,159 @@
     }
 </style>
 
-<h1>Управление версиями платформ и плагинов</h1>
+<h1 id="управление-версиями-платформ-и-плагинов">Управление версиями платформ и плагинов</h1>
 
 <p>Начиная с версии Cordova 4.3.0 и далее предоставляет возможность сохранять и восстанавливать платформ и плагины.</p>
 
 <p>Эта функция позволяет разработчикам сохранять и восстанавливать их приложения в предсказуемое состояние без необходимости размещения всех исходных кодов платформы и плагинов в систему контроля версий.</p>
 
-<p>Команда &#39;save&#39; сохраняет информацию о платформе приложения и версии плагина в файле config.xml. Шаг &#39;restore&#39; шаг происходит автоматически, когда запускается <strong>&#39;cordova prepare&#39;</strong> , используя информацию, ранее сохраненную в файле config.xml.</p>
+<p>Команда ‘save’ сохраняет информацию о платформе приложения и версии плагина в файле config.xml. Шаг ‘restore’ шаг происходит автоматически, когда запускается <strong>‘cordova prepare’</strong> , используя информацию, ранее сохраненную в файле config.xml.</p>
 
 <p>Один сценарий, где возможность сохранить/восстановить очень сподручна это в больших группах, которые работают над приложение, где каждый член команды, концентирует внимание на платформе или плагине. Эта функция позволяет легче поделиться проектом и уменьшить количество избыточного кода, который добавляется в репозиторий.</p>
 
-<h2>Управление версиями платформы</h2>
+<h2 id="управление-версиями-платформы">Управление версиями платформы</h2>
 
-<h3>Сохранение платформы</h3>
+<h3 id="сохранение-платформы">Сохранение платформы</h3>
 
 <p>Чтобы сохранить платформу, выполните следующую команду:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova platform add &lt;platform[@&lt;version&gt;] | directory | git_url&gt; --save
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova platform add &lt;platform[@&lt;version&gt;] | directory | git_url&gt; --save
+</code></pre></div></div>
+
 <p>После выполнения команды выше, результирующий файл config.xml выглядит так :</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;?xml version='1.0' encoding='utf-8'?&gt;</span>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version='1.0' encoding='utf-8'?&gt;
     ...
-    <span class="nt">&lt;engine</span> <span class="na">name=</span><span class="s">"android"</span> <span class="na">spec=</span><span class="s">"^4.0.0"</span> <span class="nt">/&gt;</span>
+    &lt;engine name="android" spec="^4.0.0" /&gt;
     ...
-<span class="nt">&lt;/xml&gt;</span>
-</code></pre></div>
-<p>Некоторые примеры: </p>
+&lt;/xml&gt;
+</code></pre></div></div>
+
+<p>Некоторые примеры:</p>
 
 <ul>
-<li><strong>&#39;cordova platform add android --save&#39;</strong> =&gt; извлекает закрепленную версию платформы android, добавляет ее в проект и затем обновляет файл config.xml. </li>
-<li><strong>&#39;cordova platform add android@3.7.0 --save&#39;</strong> =&gt; извлекает платформу android, версии 3.7.0 из NPM, добавляет ее в проект и затем обновляет файл config.xml. </li>
-<li><strong>&#39;cordova platform add android@https://github.com/apache/cordova-android.git​ --save&#39;</strong> =&gt; клонирует заданный git-репозиторий cordova-android, добавляет платформу android в проект, затем обновляет файл config.xml и указывает версию как переданный выше git-адрес. </li>
-<li><strong>&#39;cordova platform add C:/path/to/android/platform --save&#39;</strong> =&gt; получает платформу android из указанного каталога, добавляет ее в проект, а затем обновляет файл config.xml и указывает на каталог.</li>
+  <li><strong>‘cordova platform add android –save’</strong> =&gt; извлекает закрепленную версию платформы android, добавляет ее в проект и затем обновляет файл config.xml.</li>
+  <li><strong>‘cordova platform add android@3.7.0 –save’</strong> =&gt; извлекает платформу android, версии 3.7.0 из NPM, добавляет ее в проект и затем обновляет файл config.xml.</li>
+  <li><strong>‘cordova platform add android@https://github.com/apache/cordova-android.git​ –save’</strong> =&gt; клонирует заданный git-репозиторий cordova-android, добавляет платформу android в проект, затем обновляет файл config.xml и указывает версию как переданный выше git-адрес.</li>
+  <li><strong>‘cordova platform add C:/path/to/android/platform –save’</strong> =&gt; получает платформу android из указанного каталога, добавляет ее в проект, а затем обновляет файл config.xml и указывает на каталог.</li>
 </ul>
 
-<h3>Массовое сохранение платформ в существующем проекте</h3>
+<h3 id="массовое-сохранение-платформ-в-существующем-проекте">Массовое сохранение платформ в существующем проекте</h3>
 
-<p>Флаг &#39;--save &#39;, описанные выше полезен только когда вы помните о том что нужно его использовать при добавлении платформы. Если у вас есть существующий проект и вы хотите сохранить все, в настоящее время добавленые, платформы в вашем проекте, можно использовать:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova platform save
-</code></pre></div>
-<h3>Обновление / удаление платформ</h3>
+<p>Флаг ‘–save ‘, описанные выше полезен только когда вы помните о том что нужно его использовать при добавлении платформы. Если у вас есть существующий проект и вы хотите сохранить все, в настоящее время добавленые, платформы в вашем проекте, можно использовать:</p>
 
-<p>Также возможно указывать этот параметр для обновления или удаления из config.xml во время команды &#39;cordova platform update&#39; и &#39;cordova platform remove&#39;:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova platform update &lt;platform[@&lt;version&gt;] | directory | git_url&gt; --save
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova platform save
+</code></pre></div></div>
+
+<h3 id="обновление--удаление-платформ">Обновление / удаление платформ</h3>
+
+<p>Также возможно указывать этот параметр для обновления или удаления из config.xml во время команды ‘cordova platform update’ и ‘cordova platform remove’:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova platform update &lt;platform[@&lt;version&gt;] | directory | git_url&gt; --save
 $ cordova platform remove &lt;platform&gt; --save
-</code></pre></div>
-<p>Некоторые примеры: </p>
+</code></pre></div></div>
+
+<p>Некоторые примеры:</p>
 
 <ul>
-<li><strong>&#39;cordova platform update android --save&#39;</strong> =&gt; помимо обновления платформы android до закрепленной версии, обновление записи в файле config.xml </li>
-<li><strong>&#39;cordova platform update android@3.8.0 --save&#39;</strong> =&gt; помимо обновления платформы android до версии 3.8.0, обновление записи в файле config.xml </li>
-<li><strong>&#39;cordova platform update /path/to/android/platform --save&#39;</strong> =&gt; помимо обновления платформы android версии из папке, обновление записи в файле config.xml </li>
-<li><strong>&#39;cordova platform remove android --save&#39;</strong> =&gt; удаляет платформу android из проекта и ее запись из файла config.xml.</li>
+  <li><strong>‘cordova platform update android –save’</strong> =&gt; помимо обновления платформы android до закрепленной версии, обновление записи в файле config.xml</li>
+  <li><strong>‘cordova platform update android@3.8.0 –save’</strong> =&gt; помимо обновления платформы android до версии 3.8.0, обновление записи в файле config.xml</li>
+  <li><strong>‘cordova platform update /path/to/android/platform –save’</strong> =&gt; помимо обновления платформы android версии из папке, обновление записи в файле config.xml</li>
+  <li><strong>‘cordova platform remove android –save’</strong> =&gt; удаляет платформу android из проекта и ее запись из файла config.xml.</li>
 </ul>
 
-<h3>Восстановление платформы</h3>
+<h3 id="восстановление-платформы">Восстановление платформы</h3>
 
 <ul>
-<li>Платформы автоматически восстанавливаются из config.xml при запуске команды <strong>&#39;cordova prepare&#39;</strong> .</li>
-<li><p>Если вы добавите платформу без указания версии/папка/git_url, версия для установки берется из файла config.xml, <strong>если значение присутсвует</strong>. </p>
+  <li>Платформы автоматически восстанавливаются из config.xml при запуске команды <strong>‘cordova prepare’</strong> .</li>
+  <li>Если вы добавите платформу без указания версии/папка/git_url, версия для установки берется из файла config.xml, <strong>если значение присутсвует</strong>.
+    <ul>
+      <li>
+        <p>Пример: Предположим, ваш файл config.xml содержит следующую запись:</p>
 
-<ul>
-<li><p>Пример: Предположим, ваш файл config.xml содержит следующую запись: </p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;?xml version='1.0' encoding='utf-8'?&gt;</span>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version='1.0' encoding='utf-8'?&gt;
   ...
-  <span class="nt">&lt;engine</span> <span class="na">name=</span><span class="s">"android"</span> <span class="na">spec=</span><span class="s">"3.7.0"</span> <span class="nt">/&gt;</span>
+  &lt;engine name="android" spec="3.7.0" /&gt;
   ...
-<span class="nt">&lt;/xml&gt;</span>
-</code></pre></div>
-<p>Если вы запустите команду <strong>&#39;cordova platform add android&#39;</strong> (без указания версии/папки/git_url), будут установлена платформы &#39;android@3.7.0&#39; (как получено из файла config.xml).</p></li>
-</ul></li>
+&lt;/xml&gt;
+</code></pre></div>        </div>
+
+        <p>Если вы запустите команду <strong>‘cordova platform add android’</strong> (без указания версии/папки/git_url), будут установлена платформы ‘android@3.7.0’ (как получено из файла config.xml).</p>
+      </li>
+    </ul>
+  </li>
 </ul>
 
-<hr>
+<hr />
 
-<h2>Управление версиями плагинов</h2>
+<h2 id="управление-версиями-плагинов">Управление версиями плагинов</h2>
 
 <p><em>(Команды plugin являются зеркалом команды plugin)</em></p>
 
-<h3>Сохранение плагинов</h3>
+<h3 id="сохранение-плагинов">Сохранение плагинов</h3>
 
 <p>Чтобы сохранить плагин, выполните следующую команду:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin add &lt;plugin[@&lt;version&gt;] | directory | git_url&gt; --save
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin add &lt;plugin[@&lt;version&gt;] | directory | git_url&gt; --save
+</code></pre></div></div>
+
 <p>После выполнения команды выше, результирующий файл config.xml выглядит так :</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;?xml version='1.0' encoding='utf-8'?&gt;</span>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version='1.0' encoding='utf-8'?&gt;
     ...
-    <span class="nt">&lt;plugin</span> <span class="na">name=</span><span class="s">"cordova-plugin-console"</span> <span class="na">spec=</span><span class="s">"^1.0.0"</span> <span class="nt">/&gt;</span>
+    &lt;plugin name="cordova-plugin-console" spec="^1.0.0" /&gt;
     ...
-<span class="nt">&lt;/xml&gt;</span>
-</code></pre></div>
-<p>Некоторые примеры: </p>
+&lt;/xml&gt;
+</code></pre></div></div>
+
+<p>Некоторые примеры:</p>
 
 <ul>
-<li><strong>«cordova plugin add cordova-plugin-console --save&#39;»</strong> =&gt; извлекает закрепленную версию плагина консоли, добавляет его в проект и затем обновляет файл config.xml. </li>
-<li><strong>&#39;cordova plugin add cordova-plugin-console@0.2.13 --save&#39;</strong> =&gt; извлекает android плагин, версия 0.2.13 из NPM, добавляет его в проект и затем обновляет файл config.xml. </li>
-<li><strong>&#39;cordova plugin add https://github.com/apache/cordova-plugin-console.git --save&#39;</strong> =&gt; клонирует указанный git-репозиторий плагина консоли, добавляет плагин консоли в проект, а затем обновляет файл config.xml и указывают указаный git-адрес как версию. </li>
-<li><strong>&#39;cordova plugin add C:/path/to/console/plugin --save&#39;</strong> =&gt; извлекает плагин консоли из указанного каталога, добавляет его в проект, а затем обновляет файл config.xml и указывает на каталог.</li>
+  <li><strong>«cordova plugin add cordova-plugin-console –save’»</strong> =&gt; извлекает закрепленную версию плагина консоли, добавляет его в проект и затем обновляет файл config.xml.</li>
+  <li><strong>‘cordova plugin add cordova-plugin-console@0.2.13 –save’</strong> =&gt; извлекает android плагин, версия 0.2.13 из NPM, добавляет его в проект и затем обновляет файл config.xml.</li>
+  <li><strong>‘cordova plugin add https://github.com/apache/cordova-plugin-console.git –save’</strong> =&gt; клонирует указанный git-репозиторий плагина консоли, добавляет плагин консоли в проект, а затем обновляет файл config.xml и указывают указаный git-адрес как версию.</li>
+  <li><strong>‘cordova plugin add C:/path/to/console/plugin –save’</strong> =&gt; извлекает плагин консоли из указанного каталога, добавляет его в проект, а затем обновляет файл config.xml и указывает на каталог.</li>
 </ul>
 
-<h3>Массовое сохранение плагинов в существующем проекте</h3>
+<h3 id="массовое-сохранение-плагинов-в-существующем-проекте">Массовое сохранение плагинов в существующем проекте</h3>
 
-<p>Флаг &#39;--save &#39;, описанные выше полезен только когда вы помните о том что нужно его использовать при добавлении плагина. Если у вас есть существующий проект и вы хотите сохранить все, в настоящее время добавленые, плагины в проекте, вы можете использовать:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin save
-</code></pre></div>
-<h3>Обновление / удаление плагинов</h3>
+<p>Флаг ‘–save ‘, описанные выше полезен только когда вы помните о том что нужно его использовать при добавлении плагина. Если у вас есть существующий проект и вы хотите сохранить все, в настоящее время добавленые, плагины в проекте, вы можете использовать:</p>
 
-<p>Также возможно указывать этот параметр для обновления или удаления из config.xml во время команды &#39;cordova plugin update&#39; и &#39;cordova plugin remove&#39; :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin update &lt;plugin[@&lt;version&gt;] | directory | git_url&gt; --save
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin save
+</code></pre></div></div>
+
+<h3 id="обновление--удаление-плагинов">Обновление / удаление плагинов</h3>
+
+<p>Также возможно указывать этот параметр для обновления или удаления из config.xml во время команды ‘cordova plugin update’ и ‘cordova plugin remove’ :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin update &lt;plugin[@&lt;version&gt;] | directory | git_url&gt; --save
 $ cordova plugin remove &lt;plugin&gt; --save
-</code></pre></div>
-<p>Некоторые примеры: </p>
+</code></pre></div></div>
+
+<p>Некоторые примеры:</p>
 
 <ul>
-<li><strong>&#39;cordova plugin update cordova-plugin-console --save&#39;</strong> =&gt; помимо обновления плагина консоли до закрепленного версии, обновление записи в файле config.xml </li>
-<li><strong>&#39;cordova plugin update cordova-plugin-console@0.2.13 --save&#39;</strong> =&gt; помимо обновления android плагина до версии 3.8.0, обновление записи в файле config.xml </li>
-<li><strong>&#39;cordova plugin update /path/to/console/plugin --save&#39;</strong> =&gt; помимо обновления плагина консоли до версии в папке, обновление записи в файле config.xml </li>
-<li><strong>&#39;cordova plugin remove cordova-plugin-console --save&#39;</strong> =&gt; удаляет плагин консоли из проекта и его запись в файле config.xml.</li>
+  <li><strong>‘cordova plugin update cordova-plugin-console –save’</strong> =&gt; помимо обновления плагина консоли до закрепленного версии, обновление записи в файле config.xml</li>
+  <li><strong>‘cordova plugin update cordova-plugin-console@0.2.13 –save’</strong> =&gt; помимо обновления android плагина до версии 3.8.0, обновление записи в файле config.xml</li>
+  <li><strong>‘cordova plugin update /path/to/console/plugin –save’</strong> =&gt; помимо обновления плагина консоли до версии в папке, обновление записи в файле config.xml</li>
+  <li><strong>‘cordova plugin remove cordova-plugin-console –save’</strong> =&gt; удаляет плагин консоли из проекта и его запись в файле config.xml.</li>
 </ul>
 
-<h3>Восстановление плагинов</h3>
+<h3 id="восстановление-плагинов">Восстановление плагинов</h3>
 
 <ul>
-<li>Плагины автоматически восстанавливаются из config.xml при запуске команды <strong>&#39;cordova prepare&#39;</strong>.</li>
-<li>Если вы добавите плагин без указания версии/папка/git_url, версия для установки берется из файла config.xml, <strong>если значение присутсвует</strong>. 
-
-<ul>
-<li>Пример: Предположим, ваш файл config.xml содержит следующую запись: 
-    &lt;?xml version=&#39;1.0&#39; encoding=&#39;utf-8&#39;?&gt;
-    ...
-      <plugin name="cordova-plugin-console" spec="0.2.11" />
-    ...
-    </xml>
-если запустить команду <strong>&#39;cordova plugin add cordova-plugin-console&#39;</strong> (без указания версия/папка/git_url), будет устанавливаться плагин &#39;cordova-plugin-console@0.2.11&#39; (значение полученное из файла config.xml).</li>
-</ul></li>
+  <li>Плагины автоматически восстанавливаются из config.xml при запуске команды <strong>‘cordova prepare’</strong>.</li>
+  <li>Если вы добавите плагин без указания версии/папка/git_url, версия для установки берется из файла config.xml, <strong>если значение присутсвует</strong>.
+    <ul>
+      <li>Пример: Предположим, ваш файл config.xml содержит следующую запись: 
+    &lt;?xml version=’1.0’ encoding=’utf-8’?&gt;
+    …
+      <plugin name="cordova-plugin-console" spec="0.2.11"></plugin>
+    …
+    &lt;/xml&gt;
+если запустить команду <strong>‘cordova plugin add cordova-plugin-console’</strong> (без указания версия/папка/git_url), будет устанавливаться плагин ‘cordova-plugin-console@0.2.11’ (значение полученное из файла config.xml).</li>
+    </ul>
+  </li>
 </ul>
 
 

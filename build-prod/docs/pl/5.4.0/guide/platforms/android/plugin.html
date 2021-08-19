@@ -1022,58 +1022,69 @@
             
 
             <div id="page-toc-source">
-                <h1>Wtyczek Android</h1>
+                <h1 id="wtyczek-android">Wtyczek Android</h1>
 
 <p>Ta sekcja zawiera szczegóły dotyczące sposobu realizacji kodu macierzystego plugin na platformie Android. Przed przeczytaniem, zobacz zastosowanie pluginów omówienie struktury wtyczki i jego wspólny interfejs JavaScript. W tej sekcji w dalszym ciągu wykazują wtyczce <em>echo</em> próbki, który komunikuje się z widoku sieci Web Cordova do macierzystego platformy i z powrotem. Dla innej próbki Zobacz też komentarze w <a href="https://github.com/apache/cordova-android/blob/master/framework/src/org/apache/cordova/CordovaPlugin.java">CordovaPlugin.java</a>.</p>
 
-<p>Android wtyczki są oparte na Cordova-Android, który składa się z Android WebView z hakami do niej przywiązani. Wtyczki są reprezentowane jako Klasa mapowania w <code>config.xml</code> pliku. Plugin składa się z co najmniej jednej klasy Java, która rozszerza <code>CordovaPlugin</code> klasy, zastępując jeden z jego <code>execute</code> metody. Jako najlepsze praktyki, plugin powinien również obsługiwać <code>[pause](../../../cordova/events/events.pause.html)</code> i <code>[resume](../../../cordova/events/events.resume.html)</code> wydarzenia, wraz z wiadomości przechodzi między wtyczek. Wtyczki z długim żądania, aktywność tło głoska bezdźwięczna playback, słuchaczy lub stan wewnętrzny należy implementować <code>onReset()</code> Metoda, jak również. Gdy wykonuje <code>WebView</code> przechodzi do nowej strony lub odświeża, który ładuje JavaScript.</p>
+<p>Android wtyczki są oparte na Cordova-Android, który składa się z Android WebView z hakami do niej przywiązani. Wtyczki są reprezentowane jako Klasa mapowania w <code class="language-plaintext highlighter-rouge">config.xml</code> pliku. Plugin składa się z co najmniej jednej klasy Java, która rozszerza <code class="language-plaintext highlighter-rouge">CordovaPlugin</code> klasy, zastępując jeden z jego <code class="language-plaintext highlighter-rouge">execute</code> metody. Jako najlepsze praktyki, plugin powinien również obsługiwać <code class="language-plaintext highlighter-rouge">[pause](../../../cordova/events/events.pause.html)</code> i <code class="language-plaintext highlighter-rouge">[resume](../../../cordova/events/events.resume.html)</code> wydarzenia, wraz z wiadomości przechodzi między wtyczek. Wtyczki z długim żądania, aktywność tło głoska bezdźwięczna playback, słuchaczy lub stan wewnętrzny należy implementować <code class="language-plaintext highlighter-rouge">onReset()</code> Metoda, jak również. Gdy wykonuje <code class="language-plaintext highlighter-rouge">WebView</code> przechodzi do nowej strony lub odświeża, który ładuje JavaScript.</p>
 
-<h2>Mapowanie plugin Klasa</h2>
+<h2 id="mapowanie-plugin-klasa">Mapowanie plugin Klasa</h2>
 
-<p>Plugin JavaScript interfejs używa <code>cordova.exec</code> Metoda w następujący sposób:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    exec (&lt; successFunction &gt;, &lt; failFunction &gt;, &lt; usługi &gt;, &lt; działania &gt;, &lt; argumenty &gt;);
-</code></pre></div>
-<p>To marszałków wniosek z widoku sieci Web w stronę rodzimych Android, skutecznie wywołanie <code>action</code> Metoda <code>service</code> klasy, z dodatkowe argumenty przekazywane w <code>args</code> tablicy.</p>
+<p>Plugin JavaScript interfejs używa <code class="language-plaintext highlighter-rouge">cordova.exec</code> Metoda w następujący sposób:</p>
 
-<p>Czy można rozpowszechniać plugin jako Java plik lub pliki <em>jar</em> własnych, plugin musi być określona w aplikacji Cordova Android <code>res/xml/config.xml</code> pliku. Zobacz wtyczki aplikacji aby uzyskać więcej informacji na temat korzystania <code>plugin.xml</code> plik, aby wprowadzić to <code>feature</code> elementu:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;feature name="&lt;service_name&gt;"&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    exec (&lt; successFunction &gt;, &lt; failFunction &gt;, &lt; usługi &gt;, &lt; działania &gt;, &lt; argumenty &gt;);
+</code></pre></div></div>
+
+<p>To marszałków wniosek z widoku sieci Web w stronę rodzimych Android, skutecznie wywołanie <code class="language-plaintext highlighter-rouge">action</code> Metoda <code class="language-plaintext highlighter-rouge">service</code> klasy, z dodatkowe argumenty przekazywane w <code class="language-plaintext highlighter-rouge">args</code> tablicy.</p>
+
+<p>Czy można rozpowszechniać plugin jako Java plik lub pliki <em>jar</em> własnych, plugin musi być określona w aplikacji Cordova Android <code class="language-plaintext highlighter-rouge">res/xml/config.xml</code> pliku. Zobacz wtyczki aplikacji aby uzyskać więcej informacji na temat korzystania <code class="language-plaintext highlighter-rouge">plugin.xml</code> plik, aby wprowadzić to <code class="language-plaintext highlighter-rouge">feature</code> elementu:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;feature name="&lt;service_name&gt;"&gt;
         &lt;param name="android-package" value="&lt;full_name_including_namespace&gt;" /&gt;
     &lt;/feature&gt;
-</code></pre></div>
-<p>Nazwa usługa odpowiada zastosowany w JavaScript <code>exec</code> zadzwonić. Wartość jest identyfikatorem pełni kwalifikowana obszaru nazw klasy Java. W przeciwnym razie plugin może skompilować ale nadal być niedostępny do Cordova.</p>
+</code></pre></div></div>
 
-<h2>Plugin inicjowania i życia</h2>
+<p>Nazwa usługa odpowiada zastosowany w JavaScript <code class="language-plaintext highlighter-rouge">exec</code> zadzwonić. Wartość jest identyfikatorem pełni kwalifikowana obszaru nazw klasy Java. W przeciwnym razie plugin może skompilować ale nadal być niedostępny do Cordova.</p>
 
-<p>Jedno wystąpienie obiekt plugin jest tworzony dla życia każdego <code>WebView</code> . Wtyczki nie są inicjalizowane aż po raz pierwszy są wywoływane przez wywołanie z JavaScript, chyba <code>&lt;param&gt;</code> z <code>onload</code> <code>name</code> atrybut jest zestaw <code>&quot;true&quot;</code> w <code>config.xml</code> . Np.:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="Echo"&gt;
+<h2 id="plugin-inicjowania-i-życia">Plugin inicjowania i życia</h2>
+
+<p>Jedno wystąpienie obiekt plugin jest tworzony dla życia każdego <code class="language-plaintext highlighter-rouge">WebView</code> . Wtyczki nie są inicjalizowane aż po raz pierwszy są wywoływane przez wywołanie z JavaScript, chyba <code class="language-plaintext highlighter-rouge">&lt;param&gt;</code> z <code class="language-plaintext highlighter-rouge">onload</code> <code class="language-plaintext highlighter-rouge">name</code> atrybut jest zestaw <code class="language-plaintext highlighter-rouge">"true"</code> w <code class="language-plaintext highlighter-rouge">config.xml</code> . Np.:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="Echo"&gt;
     &lt;param name="android-package" value="&lt;full_name_including_namespace&gt;" /&gt;
     &lt;param name="onload" value="true" /&gt;
 &lt;/feature&gt;
-</code></pre></div>
-<p>Należy używać wtyczki <code>initialize</code> Metoda ich uruchamiania logiki.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">@Override
+</code></pre></div></div>
+
+<p>Należy używać wtyczki <code class="language-plaintext highlighter-rouge">initialize</code> Metoda ich uruchamiania logiki.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Override
 public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     super.initialize(cordova, webView);
     // your init code here
 }
-</code></pre></div>
-<h2>Pismo wtyczka Android Java</h2>
+</code></pre></div></div>
 
-<p>Połączenie JavaScript odpala plugin wniosek na stronie macierzysty, i odpowiednie wtyczki Java jest mapowane odpowiednio w <code>config.xml</code> pliku, ale jak końcowy wygląda klasy Android wtyczki Java? Co jest wysyłane do wtyczki z JavaScript <code>exec</code> funkcja jest przekazywana do wtyczki klasy <code>execute</code> Metoda. Większość <code>execute</code> implementacje wyglądać tak:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    @Override logiczna publicznych wykonać (ciąg działań, JSONArray argumenty, CallbackContext callbackContext) rzuca JSONException {jeśli ("beep".equals(action)) {this.beep(args.getLong(0));
+<h2 id="pismo-wtyczka-android-java">Pismo wtyczka Android Java</h2>
+
+<p>Połączenie JavaScript odpala plugin wniosek na stronie macierzysty, i odpowiednie wtyczki Java jest mapowane odpowiednio w <code class="language-plaintext highlighter-rouge">config.xml</code> pliku, ale jak końcowy wygląda klasy Android wtyczki Java? Co jest wysyłane do wtyczki z JavaScript <code class="language-plaintext highlighter-rouge">exec</code> funkcja jest przekazywana do wtyczki klasy <code class="language-plaintext highlighter-rouge">execute</code> Metoda. Większość <code class="language-plaintext highlighter-rouge">execute</code> implementacje wyglądać tak:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @Override logiczna publicznych wykonać (ciąg działań, JSONArray argumenty, CallbackContext callbackContext) rzuca JSONException {jeśli ("beep".equals(action)) {this.beep(args.getLong(0));
             callbackContext.success();
             zwraca wartość PRAWDA;
         } Powrót fałszywy;  Powrót false wyniki w błąd "MethodNotFound".
     }
-</code></pre></div>
-<p>JavaScript <code>exec</code> funkcji <code>action</code> parametr odpowiada Metoda prywatnych klasy do wysyłki z parametrów opcjonalnych.</p>
+</code></pre></div></div>
+
+<p>JavaScript <code class="language-plaintext highlighter-rouge">exec</code> funkcji <code class="language-plaintext highlighter-rouge">action</code> parametr odpowiada Metoda prywatnych klasy do wysyłki z parametrów opcjonalnych.</p>
 
 <p>Kiedy łowienie wyjątki i powrocie błędy, to ważne ze względu na jasność, że błędy powrócił do nazwy wyjątek JavaScript meczu Java jak najwięcej.</p>
 
-<h2>Wątki</h2>
+<h2 id="wątki">Wątki</h2>
 
-<p>Plugin JavaScript czy <em>nie</em> uruchomić w głównym wątku z <code>WebView</code> interfejs, zamiast, działa <code>WebCore</code> wątek, jak <code>execute</code> Metoda. Jeśli ty potrzebować wobec wchodzić w interakcje z interfejsu użytkownika, należy użyć następujących zmian:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    @Override
+<p>Plugin JavaScript czy <em>nie</em> uruchomić w głównym wątku z <code class="language-plaintext highlighter-rouge">WebView</code> interfejs, zamiast, działa <code class="language-plaintext highlighter-rouge">WebCore</code> wątek, jak <code class="language-plaintext highlighter-rouge">execute</code> Metoda. Jeśli ty potrzebować wobec wchodzić w interakcje z interfejsu użytkownika, należy użyć następujących zmian:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @Override
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
         if ("beep".equals(action)) {
             final long duration = args.getLong(0);
@@ -1087,9 +1098,11 @@ public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         }
         return false;
     }
-</code></pre></div>
-<p>Użycie następujących, jeśli nie musisz uruchomić na interfejsie głównym w wątku, ale nie chcesz blokować <code>WebCore</code> wątku, albo:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    @Override
+</code></pre></div></div>
+
+<p>Użycie następujących, jeśli nie musisz uruchomić na interfejsie głównym w wątku, ale nie chcesz blokować <code class="language-plaintext highlighter-rouge">WebCore</code> wątku, albo:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @Override
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
         if ("beep".equals(action)) {
             final long duration = args.getLong(0);
@@ -1103,63 +1116,68 @@ public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         }
         return false;
     }
-</code></pre></div>
-<h2>Przykład wtyczki Echo</h2>
+</code></pre></div></div>
 
-<p>Do interfejsu JavaScript <em>echa</em> funkcji opisanych w aplikacji wtyczek, użyj <code>plugin.xml</code> Aby wprowadzić <code>feature</code> specyfikacji do lokalnej platformie <code>config.xml</code> pliku:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;platform name="android"&gt;
+<h2 id="przykład-wtyczki-echo">Przykład wtyczki Echo</h2>
+
+<p>Do interfejsu JavaScript <em>echa</em> funkcji opisanych w aplikacji wtyczek, użyj <code class="language-plaintext highlighter-rouge">plugin.xml</code> Aby wprowadzić <code class="language-plaintext highlighter-rouge">feature</code> specyfikacji do lokalnej platformie <code class="language-plaintext highlighter-rouge">config.xml</code> pliku:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;platform name="android"&gt;
         &lt;config-file target="config.xml" parent="/*"&gt;
             &lt;feature name="Echo"&gt;
                 &lt;param name="android-package" value="org.apache.cordova.plugin.Echo"/&gt;
             &lt;/feature&gt;
         &lt;/config-file&gt;
     &lt;/platform&gt;
-</code></pre></div>
-<p>Następnie dodać następujące czynności, aby <code>src/org/apache/cordova/plugin/Echo.java</code> plik:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    <span class="k">package</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">plugin</span><span class="p">;</span>
+</code></pre></div></div>
 
-    <span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">CordovaPlugin</span><span class="p">;</span>
-    <span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">cordova</span><span class="p">.</span><span class="n">CallbackContext</span><span class="p">;</span>
+<p>Następnie dodać następujące czynności, aby <code class="language-plaintext highlighter-rouge">src/org/apache/cordova/plugin/Echo.java</code> plik:</p>
 
-    <span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">JSONArray</span><span class="p">;</span>
-    <span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">JSONException</span><span class="p">;</span>
-    <span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">JSONObject</span><span class="p">;</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    package org.apache.cordova.plugin;
 
-    <span class="p">/**</span>
-     <span class="p">*</span> <span class="n">This</span> <span class="n">class</span> <span class="n">echoes</span> <span class="n">a</span> <span class="k">string</span> <span class="n">called</span> <span class="k">from</span> <span class="n">JavaScript</span><span class="p">.</span>
-     <span class="p">*/</span>
-    <span class="k">public</span> <span class="n">class</span> <span class="n">Echo</span> <span class="n">extends</span> <span class="n">CordovaPlugin</span> <span class="p">{</span>
+    import org.apache.cordova.CordovaPlugin;
+    import org.apache.cordova.CallbackContext;
 
-        <span class="p">@</span><span class="n">Override</span>
-        <span class="k">public</span> <span class="k">boolean</span> <span class="n">execute</span><span class="p">(</span><span class="k">String</span> <span class="n">action</span><span class="p">,</span> <span class="n">JSONArray</span> <span class="n">args</span><span class="p">,</span> <span class="n">CallbackContext</span> <span class="n">callbackContext</span><span class="p">)</span> <span class="n">throws</span> <span class="n">JSONException</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">action</span><span class="p">.</span><span class="n">equals</span><span class="p">(</span><span class="s2">"echo"</span><span class="p">))</span> <span class="p">{</span>
-                <span class="k">String</span> <span class="n">message</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
-                <span class="n">this</span><span class="p">.</span><span class="n">echo</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">callbackContext</span><span class="p">);</span>
-                <span class="n">return</span> <span class="nb">true</span><span class="p">;</span>
-            <span class="p">}</span>
-            <span class="n">return</span> <span class="nb">false</span><span class="p">;</span>
-        <span class="p">}</span>
+    import org.json.JSONArray;
+    import org.json.JSONException;
+    import org.json.JSONObject;
 
-        <span class="n">private</span> <span class="n">void</span> <span class="n">echo</span><span class="p">(</span><span class="k">String</span> <span class="n">message</span><span class="p">,</span> <span class="n">CallbackContext</span> <span class="n">callbackContext</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">message</span> <span class="c1">!= null &amp;&amp; message.length() &gt; 0) {
-</span>                <span class="n">callbackContext</span><span class="p">.</span><span class="n">success</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="n">callbackContext</span><span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="s2">"Expected one non-empty string argument."</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-</code></pre></div>
-<p>Potrzeby przywozu w górnej części pliku rozszerza klasę z <code>CordovaPlugin</code> , którego <code>execute()</code> Metoda zastępuje on otrzymywać wiadomości od <code>exec()</code> . <code>execute()</code>Metoda najpierw sprawdza wartość <code>action</code> , dla których w tym przypadku obowiązuje tylko jeden <code>echo</code> wartość. Inne zwroty akcji <code>false</code> i wyniki w <code>INVALID_ACTION</code> błąd, co przekłada się na błąd wywołania zwrotnego wywoływana po stronie JavaScript.</p>
+    /**
+     * This class echoes a string called from JavaScript.
+     */
+    public class Echo extends CordovaPlugin {
 
-<p>Następnie metoda pobiera ciąg echa za pomocą <code>args</code> obiektu <code>getString</code> Metoda, określając pierwszy parametr przekazany do Metoda. Po wartość jest przekazywana do prywatnego <code>echo</code> Metoda, to parametr sprawdzane, aby upewnić się, że to nie jest <code>null</code> lub pusty ciąg, w którym to przypadku <code>callbackContext.error()</code> wywołuje JavaScript błąd wywołania zwrotnego. Jeśli różnych kontroli przejść, <code>callbackContext.success()</code> przechodzi oryginał <code>message</code> ciąg do zwrotnego JavaScript na sukces jako parametr.</p>
+        @Override
+        public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+            if (action.equals("echo")) {
+                String message = args.getString(0);
+                this.echo(message, callbackContext);
+                return true;
+            }
+            return false;
+        }
 
-<h2>Android integracji</h2>
+        private void echo(String message, CallbackContext callbackContext) {
+            if (message != null &amp;&amp; message.length() &gt; 0) {
+                callbackContext.success(message);
+            } else {
+                callbackContext.error("Expected one non-empty string argument.");
+            }
+        }
+    }
+</code></pre></div></div>
 
-<p>Android funkcje <code>Intent</code> system, który pozwala komunikować się ze sobą. Wtyczki mają dostęp do <code>CordovaInterface</code> obiekt, który można uzyskać dostęp do Android <code>Activity</code> który uruchamia aplikację. To jest <code>Context</code> wymagane do uruchomienia nowych Android <code>Intent</code> . <code>CordovaInterface</code>Pozwala wtyczki rozpocząć <code>Activity</code> na wynik i ustawić zwrotnego plugin gdy <code>Intent</code> zwraca do aplikacji.</p>
+<p>Potrzeby przywozu w górnej części pliku rozszerza klasę z <code class="language-plaintext highlighter-rouge">CordovaPlugin</code> , którego <code class="language-plaintext highlighter-rouge">execute()</code> Metoda zastępuje on otrzymywać wiadomości od <code class="language-plaintext highlighter-rouge">exec()</code> . <code class="language-plaintext highlighter-rouge">execute()</code>Metoda najpierw sprawdza wartość <code class="language-plaintext highlighter-rouge">action</code> , dla których w tym przypadku obowiązuje tylko jeden <code class="language-plaintext highlighter-rouge">echo</code> wartość. Inne zwroty akcji <code class="language-plaintext highlighter-rouge">false</code> i wyniki w <code class="language-plaintext highlighter-rouge">INVALID_ACTION</code> błąd, co przekłada się na błąd wywołania zwrotnego wywoływana po stronie JavaScript.</p>
 
-<p>Od Cordova 2.0, już bezpośrednio dostęp wtyczek <code>Context</code> i dziedzictwo <code>ctx</code> Państwa jest niezalecane. Wszystkie <code>ctx</code> istnieją metody na <code>Context</code> , więc zarówno <code>getContext()</code> i <code>getActivity()</code> można zwrócić żądany obiekt.</p>
+<p>Następnie metoda pobiera ciąg echa za pomocą <code class="language-plaintext highlighter-rouge">args</code> obiektu <code class="language-plaintext highlighter-rouge">getString</code> Metoda, określając pierwszy parametr przekazany do Metoda. Po wartość jest przekazywana do prywatnego <code class="language-plaintext highlighter-rouge">echo</code> Metoda, to parametr sprawdzane, aby upewnić się, że to nie jest <code class="language-plaintext highlighter-rouge">null</code> lub pusty ciąg, w którym to przypadku <code class="language-plaintext highlighter-rouge">callbackContext.error()</code> wywołuje JavaScript błąd wywołania zwrotnego. Jeśli różnych kontroli przejść, <code class="language-plaintext highlighter-rouge">callbackContext.success()</code> przechodzi oryginał <code class="language-plaintext highlighter-rouge">message</code> ciąg do zwrotnego JavaScript na sukces jako parametr.</p>
 
-<h2>Debugowania Android wtyczek</h2>
+<h2 id="android-integracji">Android integracji</h2>
+
+<p>Android funkcje <code class="language-plaintext highlighter-rouge">Intent</code> system, który pozwala komunikować się ze sobą. Wtyczki mają dostęp do <code class="language-plaintext highlighter-rouge">CordovaInterface</code> obiekt, który można uzyskać dostęp do Android <code class="language-plaintext highlighter-rouge">Activity</code> który uruchamia aplikację. To jest <code class="language-plaintext highlighter-rouge">Context</code> wymagane do uruchomienia nowych Android <code class="language-plaintext highlighter-rouge">Intent</code> . <code class="language-plaintext highlighter-rouge">CordovaInterface</code>Pozwala wtyczki rozpocząć <code class="language-plaintext highlighter-rouge">Activity</code> na wynik i ustawić zwrotnego plugin gdy <code class="language-plaintext highlighter-rouge">Intent</code> zwraca do aplikacji.</p>
+
+<p>Od Cordova 2.0, już bezpośrednio dostęp wtyczek <code class="language-plaintext highlighter-rouge">Context</code> i dziedzictwo <code class="language-plaintext highlighter-rouge">ctx</code> Państwa jest niezalecane. Wszystkie <code class="language-plaintext highlighter-rouge">ctx</code> istnieją metody na <code class="language-plaintext highlighter-rouge">Context</code> , więc zarówno <code class="language-plaintext highlighter-rouge">getContext()</code> i <code class="language-plaintext highlighter-rouge">getActivity()</code> można zwrócić żądany obiekt.</p>
+
+<h2 id="debugowania-android-wtyczek">Debugowania Android wtyczek</h2>
 
 <p>Zaćmienie pozwala na debugowanie wtyczki Java Źródło zawarte w projekcie. Tylko najnowsza wersja Android Developer Tools pozwala dołączyć kod źródłowy do <em>JAR</em> zależnościami, więc ta funkcja nie jest jeszcze w pełni obsługiwane.</p>
 

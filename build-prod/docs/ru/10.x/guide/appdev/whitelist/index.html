@@ -2158,95 +2158,126 @@
     }
 </style>
 
-<h1>Инструкция по доступу к внешним ресурсам</h1>
+<h1 id="инструкция-по-доступу-к-внешним-ресурсам">Инструкция по доступу к внешним ресурсам</h1>
 
 <p>Список разрешенных доменов это модель безопасности, которая контролирует доступ во внешние домены, к которому ваше приложение не имеет доступа. Cordova предоставляет настраиваемую политику безопасности для определения, к каким внешним сайтам может быть получен доступ. По умолчанию новые приложения настроены для доступа к любому сайту. Прежде чем переносить приложение для рабочую среду, следует сформулировать список разрешений и разрешить доступ к определенным сетевым доменам и поддоменам.</p>
 
 <p>Для Android и iOS (по состоянию на их версии 4.0) политики безопасности Cordova могут быть расширяемым через инерфейс плагина. Ваше приложение должно использовать <a href="https://github.com/apache/cordova-plugin-whitelist">cordova-plugin-whitelist</a>, так как он обеспечивает лучшую безопасность и настраиваемость, чем более ранние версии Cordova. Хотя это возможно осуществить свой собственный плагин управления доступом к внешним ресурсам, это не рекомендуется, за исключением случая если ваше приложение имеет весьма специфические требования политики безопасности. Смотрите <a href="https://github.com/apache/cordova-plugin-whitelist">cordova-plugin-whitelist</a> за подробностями об использовании и настройке.</p>
 
-<p>Cordova следует спецификации <a href="http://www.w3.org/TR/widgets-access/">W3C Доступ виджета</a>, которая опирается на элемент <code>&lt;access&gt;</code> в файле <code>config.xml</code> приложения, чтобы включить сетевой доступ к отдельным доменам. Для проектов которые погалаются на процесс с использованием командной строки, описанный в разделе &quot;<a href="../../cli/index.html">Интерфейс командной строки</a>&quot;, этот файл расположен в корневой папке проекта. В противном случае при использовании пути разработки с использованием платформо-ориентированного кода, места расположения указаны в разделах ниже. (См. различные разделы &quot;<a href="../../platforms/index.html">Руководство по поддерживаемым платформам</a>&quot; для получения дополнительной информации на каждой платформе.)</p>
+<p>Cordova следует спецификации <a href="http://www.w3.org/TR/widgets-access/">W3C Доступ виджета</a>, которая опирается на элемент <code class="language-plaintext highlighter-rouge">&lt;access&gt;</code> в файле <code class="language-plaintext highlighter-rouge">config.xml</code> приложения, чтобы включить сетевой доступ к отдельным доменам. Для проектов которые погалаются на процесс с использованием командной строки, описанный в разделе “<a href="../../cli/index.html">Интерфейс командной строки</a>”, этот файл расположен в корневой папке проекта. В противном случае при использовании пути разработки с использованием платформо-ориентированного кода, места расположения указаны в разделах ниже. (См. различные разделы “<a href="../../platforms/index.html">Руководство по поддерживаемым платформам</a>” для получения дополнительной информации на каждой платформе.)</p>
 
-<p>В следующих примерах демонстрируется синтаксис <code>&lt;access&gt;</code> списка разрешенных ресурсов:</p>
+<p>В следующих примерах демонстрируется синтаксис <code class="language-plaintext highlighter-rouge">&lt;access&gt;</code> списка разрешенных ресурсов:</p>
 
 <ul>
-<li><p>Доступ к <a href="http://google.com">google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" /&gt;
-</code></pre></div></li>
-<li><p>Доступ по защищенному протоколу к <a href="https://google.com">google.com</a> (<code>https://</code>):</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="https://google.com" /&gt;
-</code></pre></div></li>
-<li><p>Доступ к поддомену <a href="http://maps.google.com">maps.google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://maps.google.com" /&gt;
-</code></pre></div></li>
-<li><p>Доступ для всех поддоменов для домена <a href="http://google.com">google.com</a>, например, <a href="http://mail.google.com">mail.google.com</a> и <a href="http://docs.google.com">docs.google.com</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://*.google.com" /&gt;
-</code></pre></div></li>
-<li><p>Доступ ко <em>всем</em> доменам, например, <a href="http://google.com">google.com</a> и <a href="http://developer.mozilla.org">developer.mozilla.org</a>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="*" /&gt;
-</code></pre></div>
-<p>Это значение по умолчанию для вновь созданных проектов CLI.</p></li>
+  <li>
+    <p>Доступ к <a href="http://google.com">google.com</a>:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Доступ по защищенному протоколу к <a href="https://google.com">google.com</a> (<code class="language-plaintext highlighter-rouge">https://</code>):</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="https://google.com" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Доступ к поддомену <a href="http://maps.google.com">maps.google.com</a>:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://maps.google.com" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Доступ для всех поддоменов для домена <a href="http://google.com">google.com</a>, например, <a href="http://mail.google.com">mail.google.com</a> и <a href="http://docs.google.com">docs.google.com</a>:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://*.google.com" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Доступ ко <em>всем</em> доменам, например, <a href="http://google.com">google.com</a> и <a href="http://developer.mozilla.org">developer.mozilla.org</a>:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="*" /&gt;
+</code></pre></div>    </div>
+
+    <p>Это значение по умолчанию для вновь созданных проектов CLI.</p>
+  </li>
 </ul>
 
 <p>Имейте ввиду что некоторые сайты могут автоматически перенаправить вас со своей домашней страницы на другой URL, например используя протокол HTTPS или на домен специфичный для страны пользователя. Например http://www.google.com будет перенаправлять на использование протокола SSL/TLS по адресу https://www.google.com и затем может перенаправить на оснввании вашего географического расположения, например https://www.google.co.uk. Такие сценарии могут потребовать измененных или дополнительных записей в списке разрешенных доменов по отношению к вашим первоначальным требованиям. Пожалуйста, учитывайте это, когда вы строите ваш список разрешенных доменов.</p>
 
 <p>Обратите внимание, что список разрешенных доменов применяется только к основным WebView Cordova и не применяется к InAppBrowser WebView или при открытии ссылки в веб-браузере системы.</p>
 
-<h2>Список разрешений Amazon Fire OS</h2>
+<h2 id="список-разрешений-amazon-fire-os">Список разрешений Amazon Fire OS</h2>
 
-<p>Список разрешений расположен в<code>res/xml/config.xml</code>.</p>
+<p>Список разрешений расположен в<code class="language-plaintext highlighter-rouge">res/xml/config.xml</code>.</p>
 
-<h2>Список разрешений Android</h2>
+<h2 id="список-разрешений-android">Список разрешений Android</h2>
 
 <p>Как указано выше см. <a href="https://github.com/apache/cordova-plugin-whitelist">cordova-plugin-whitelist</a> для подробностей. Для cordova-android до 4.0.0 версии смотрите старые версии этой документации.</p>
 
-<h2>Список разрешений iOS</h2>
+<h2 id="список-разрешений-ios">Список разрешений iOS</h2>
 
 <p>Как указано выше см. <a href="https://github.com/apache/cordova-plugin-whitelist">cordova-plugin-whitelist</a> для подробностей. Для cordova-ios до 4.0.0 версии смотрите старые версии этой документации.</p>
 
-<h2>Список разрешений BlackBerry 10</h2>
+<h2 id="список-разрешений-blackberry-10">Список разрешений BlackBerry 10</h2>
 
-<p>Разрешающие правила могут быть найдены в <code>www/config.xml</code>.</p>
+<p>Разрешающие правила могут быть найдены в <code class="language-plaintext highlighter-rouge">www/config.xml</code>.</p>
 
 <p>Использование шаблонов в BlackBerry 10 отличается от остальных платформы двумя способами:</p>
 
 <ul>
-<li><p>Любой контент, к которому получается доступ с использованием <code>XMLHttpRequest</code> должн быть объявлен явным образом. Установка <code>origin=&quot;*&quot;</code> в этом случае не работает. Как вариант, веб-безопасность можно отключить с помощью параметра <code>WebSecurity</code>, описанном в разделе Настройка BlackBerry:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="websecurity" value="disable" /&gt;
-</code></pre></div></li>
-<li><p>Как альтернатива параметру <code>*.domain</code> , установите дополнительный атрибут <code>subdomains</code> со значением <code>true</code>. Он установлен в <code>false</code> по умолчанию. Например, следующее описание позволяет получить доступ к <code>google.com</code> , <code>maps.google.com</code> , и <code>docs.google.com</code>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" subdomains="true" /&gt;
-</code></pre></div>
-<p>А следующее описание ограничивает доступ до <code>google.com</code>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" subdomains="false" /&gt;
-</code></pre></div>
-<p>Укажите доступ ко всем доменам, в том числе для протокола локальной файловой системы <code>file://</code>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="*" subdomains="true" /&gt;
-</code></pre></div></li>
+  <li>
+    <p>Любой контент, к которому получается доступ с использованием <code class="language-plaintext highlighter-rouge">XMLHttpRequest</code> должн быть объявлен явным образом. Установка <code class="language-plaintext highlighter-rouge">origin="*"</code> в этом случае не работает. Как вариант, веб-безопасность можно отключить с помощью параметра <code class="language-plaintext highlighter-rouge">WebSecurity</code>, описанном в разделе Настройка BlackBerry:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="websecurity" value="disable" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Как альтернатива параметру <code class="language-plaintext highlighter-rouge">*.domain</code> , установите дополнительный атрибут <code class="language-plaintext highlighter-rouge">subdomains</code> со значением <code class="language-plaintext highlighter-rouge">true</code>. Он установлен в <code class="language-plaintext highlighter-rouge">false</code> по умолчанию. Например, следующее описание позволяет получить доступ к <code class="language-plaintext highlighter-rouge">google.com</code> , <code class="language-plaintext highlighter-rouge">maps.google.com</code> , и <code class="language-plaintext highlighter-rouge">docs.google.com</code>:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" subdomains="true" /&gt;
+</code></pre></div>    </div>
+
+    <p>А следующее описание ограничивает доступ до <code class="language-plaintext highlighter-rouge">google.com</code>:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" subdomains="false" /&gt;
+</code></pre></div>    </div>
+
+    <p>Укажите доступ ко всем доменам, в том числе для протокола локальной файловой системы <code class="language-plaintext highlighter-rouge">file://</code>:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="*" subdomains="true" /&gt;
+</code></pre></div>    </div>
+  </li>
 </ul>
 
 <p>(За более подробной информацией о поддерживаемых функциях, смотрите документации BlackBerry по <a href="https://developer.blackberry.com/html5/documentation/ww_developing/Access_element_834677_11.html">тегу access</a>.)</p>
 
-<h2>Firefox OS</h2>
+<h2 id="firefox-os">Firefox OS</h2>
 
-<p>В Firefox OS нет концепции разрешения определенного домена. Вместо этого есть специальное разрешение называемое <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest#Permissions">SystemXHR</a>. Существует необходимость добавить это разрешение в <code>config.xml</code>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;platform name="firefoxos"&gt;
+<p>В Firefox OS нет концепции разрешения определенного домена. Вместо этого есть специальное разрешение называемое <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest#Permissions">SystemXHR</a>. Существует необходимость добавить это разрешение в <code class="language-plaintext highlighter-rouge">config.xml</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;platform name="firefoxos"&gt;
     &lt;permission name="systemXHR" privileged="true" description="load data from server" /&gt;
 &lt;/platform&gt;
-</code></pre></div>
-<p>Объект <code>XMLHttpRequest</code> должен быть инстанцирован с двумя параметрами <code>mozAnon</code> и <code>mozSystem</code>:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">var request = new XMLHttpRequest({
+</code></pre></div></div>
+
+<p>Объект <code class="language-plaintext highlighter-rouge">XMLHttpRequest</code> должен быть инстанцирован с двумя параметрами <code class="language-plaintext highlighter-rouge">mozAnon</code> и <code class="language-plaintext highlighter-rouge">mozSystem</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var request = new XMLHttpRequest({
     mozAnon: true,
     mozSystem: true});
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Это решение является прозрачным, так что нет никакой разницы при использовании его совместно с другими платформами.</p>
 
-<h2>Список разрешений Windows Phone</h2>
+<h2 id="список-разрешений-windows-phone">Список разрешений Windows Phone</h2>
 
-<p>Списки разрешающий правил для Windows Phone 7 и 8 находятся в файле <code>config.xml</code> приложения.</p>
+<p>Списки разрешающий правил для Windows Phone 7 и 8 находятся в файле <code class="language-plaintext highlighter-rouge">config.xml</code> приложения.</p>
 
-<h2>Список разрешений Tizen</h2>
+<h2 id="список-разрешений-tizen">Список разрешений Tizen</h2>
 
-<p>Списки разрешающий правил находятся в файле приложения <code>config.xml</code>. Платформа рассчитывает на тот же атрибут <code>subdomains</code> что и платформа BlackBerry. (За более детальной информацией о поддерживаемых функциях, смотрите документацию Tizen по <a href="https://developer.tizen.org/help/index.jsp?topic=%2Forg.tizen.web.appprogramming%2Fhtml%2Fide_sdk_tools%2Fconfig_editor_w3celements.htm">тегу access</a>.)</p>
+<p>Списки разрешающий правил находятся в файле приложения <code class="language-plaintext highlighter-rouge">config.xml</code>. Платформа рассчитывает на тот же атрибут <code class="language-plaintext highlighter-rouge">subdomains</code> что и платформа BlackBerry. (За более детальной информацией о поддерживаемых функциях, смотрите документацию Tizen по <a href="https://developer.tizen.org/help/index.jsp?topic=%2Forg.tizen.web.appprogramming%2Fhtml%2Fide_sdk_tools%2Fconfig_editor_w3celements.htm">тегу access</a>.)</p>
+
 
 
             </div>

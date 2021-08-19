@@ -1436,44 +1436,51 @@
             
 
             <div id="page-toc-source">
-                <h1>iOS のプラグイン</h1>
+                <h1 id="ios-のプラグイン">iOS のプラグイン</h1>
 
-<p>プラグインは拡張する客観的 C クラスは <code>CDVPlugin</code> クラスです。</p>
+<p>プラグインは拡張する客観的 C クラスは <code class="language-plaintext highlighter-rouge">CDVPlugin</code> クラスです。</p>
 
-<p>各プラグインのクラスとして登録する必要があります、 <code>&lt;feature&gt;</code> タグを <code>config.xml</code> ファイル。 その JavaScript はこの機構を介して <code>exec</code> メソッドの <code>service</code> パラメーター、Objective-C のクラスにマップします。</p>
+<p>各プラグインのクラスとして登録する必要があります、 <code class="language-plaintext highlighter-rouge">&lt;feature&gt;</code> タグを <code class="language-plaintext highlighter-rouge">config.xml</code> ファイル。 その JavaScript はこの機構を介して <code class="language-plaintext highlighter-rouge">exec</code> メソッドの <code class="language-plaintext highlighter-rouge">service</code> パラメーター、Objective-C のクラスにマップします。</p>
 
-<h2>プラグイン クラスのマッピング</h2>
+<h2 id="プラグイン-クラスのマッピング">プラグイン クラスのマッピング</h2>
 
-<p>プラグインの JavaScript の部分を常に使用して、 <code>cordova.exec</code> メソッドは次のように。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">exec(&lt;successFunction&gt;, &lt;failFunction&gt;, &lt;service&gt;, &lt;action&gt;, [&lt;args&gt;]);
-</code></pre></div>
-<p>これから要求をマーシャ リングします、 <code>UIWebView</code> 、iOS ネイティブ側にもっとまたはより少なく通話にダウン沸騰、 <code>action</code> メソッド、 <code>service</code> に渡された引数を持つクラス、 <code>args</code> 配列。</p>
+<p>プラグインの JavaScript の部分を常に使用して、 <code class="language-plaintext highlighter-rouge">cordova.exec</code> メソッドは次のように。</p>
 
-<p>指定のプラグインとして、 <code>&lt;feature&gt;</code> 、コルドバ iOS アプリケーションのプロジェクトのタグ <code>config.xml</code> ファイル。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="LocalStorage"&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exec(&lt;successFunction&gt;, &lt;failFunction&gt;, &lt;service&gt;, &lt;action&gt;, [&lt;args&gt;]);
+</code></pre></div></div>
+
+<p>これから要求をマーシャ リングします、 <code class="language-plaintext highlighter-rouge">UIWebView</code> 、iOS ネイティブ側にもっとまたはより少なく通話にダウン沸騰、 <code class="language-plaintext highlighter-rouge">action</code> メソッド、 <code class="language-plaintext highlighter-rouge">service</code> に渡された引数を持つクラス、 <code class="language-plaintext highlighter-rouge">args</code> 配列。</p>
+
+<p>指定のプラグインとして、 <code class="language-plaintext highlighter-rouge">&lt;feature&gt;</code> 、コルドバ iOS アプリケーションのプロジェクトのタグ <code class="language-plaintext highlighter-rouge">config.xml</code> ファイル。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="LocalStorage"&gt;
     &lt;param name="ios-package" value="CDVLocalStorage" /&gt;
 &lt;/feature&gt;
-</code></pre></div>
-<p>機能は、 <code>name</code> 属性は、JavaScript で使用すると一致する必要があります <code>exec</code> コールの <code>service</code> パラメーターと、 <code>value</code> 属性は、プラグインの Objective-C のクラスの名前と一致する必要があります。 <code>&lt;param name&gt;</code>私はする必要があります常に <code>&quot;ios-package&quot;</code> 。 このセットアップに従っていない場合、プラグイン コンパイル可能性がありますが、コルドバ到達されませんされます。</p>
+</code></pre></div></div>
 
-<h2>プラグインの初期化と有効期間</h2>
+<p>機能は、 <code class="language-plaintext highlighter-rouge">name</code> 属性は、JavaScript で使用すると一致する必要があります <code class="language-plaintext highlighter-rouge">exec</code> コールの <code class="language-plaintext highlighter-rouge">service</code> パラメーターと、 <code class="language-plaintext highlighter-rouge">value</code> 属性は、プラグインの Objective-C のクラスの名前と一致する必要があります。 <code class="language-plaintext highlighter-rouge">&lt;param name&gt;</code>私はする必要があります常に <code class="language-plaintext highlighter-rouge">"ios-package"</code> 。 このセットアップに従っていない場合、プラグイン コンパイル可能性がありますが、コルドバ到達されませんされます。</p>
 
-<p>それぞれの人生のためのプラグイン オブジェクトの 1 つのインスタンスが作成されます <code>UIWebView</code> 。 プラグインはまでインスタンス化されない最初、JavaScript から呼び出しによって参照されている場合を除き <code>&lt;param&gt;</code> と、 <code>onload</code> <code>name</code> 属性を設定する <code>&quot;true&quot;</code> で <code>config.xml</code> 。 例えば。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="Echo"&gt;
+<h2 id="プラグインの初期化と有効期間">プラグインの初期化と有効期間</h2>
+
+<p>それぞれの人生のためのプラグイン オブジェクトの 1 つのインスタンスが作成されます <code class="language-plaintext highlighter-rouge">UIWebView</code> 。 プラグインはまでインスタンス化されない最初、JavaScript から呼び出しによって参照されている場合を除き <code class="language-plaintext highlighter-rouge">&lt;param&gt;</code> と、 <code class="language-plaintext highlighter-rouge">onload</code> <code class="language-plaintext highlighter-rouge">name</code> 属性を設定する <code class="language-plaintext highlighter-rouge">"true"</code> で <code class="language-plaintext highlighter-rouge">config.xml</code> 。 例えば。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="Echo"&gt;
     &lt;param name="ios-package" value="Echo" /&gt;
     &lt;param name="onload" value="true" /&gt;
 &lt;/feature&gt;
-</code></pre></div>
-<p><em>ない</em>プラグインの初期化子を指定します。代わりに、プラグインを使用する必要があります、 <code>pluginInitialize</code> 、スタート アップ ロジックのメソッド。</p>
+</code></pre></div></div>
 
-<p>実行時間の長い要求プラグイン背景活動 （例えば、再生中のメディア）、内部状態またはリスナーを実装する必要があります、 <code>onReset</code> メソッドと停止またはそれらの活動をクリーンアップします。 このメソッドが実行されます、 <code>UIWebView</code> 、java スクリプトの設定を再読み込みを新しいページまたは更新に移動します。</p>
+<p><em>ない</em>プラグインの初期化子を指定します。代わりに、プラグインを使用する必要があります、 <code class="language-plaintext highlighter-rouge">pluginInitialize</code> 、スタート アップ ロジックのメソッド。</p>
 
-<h2>IOS コルドバ プラグインを書く</h2>
+<p>実行時間の長い要求プラグイン背景活動 （例えば、再生中のメディア）、内部状態またはリスナーを実装する必要があります、 <code class="language-plaintext highlighter-rouge">onReset</code> メソッドと停止またはそれらの活動をクリーンアップします。 このメソッドが実行されます、 <code class="language-plaintext highlighter-rouge">UIWebView</code> 、java スクリプトの設定を再読み込みを新しいページまたは更新に移動します。</p>
 
-<p>Java スクリプトの設定をネイティブ側に要求するプラグイン火があります。 我々 は持っている iOS Objective-C プラグイン経由で適切に割り当てられて、 <code>config.xml</code> ファイル。 だから最終的な iOS Objective-C のプラグイン クラスどのようか。</p>
+<h2 id="ios-コルドバ-プラグインを書く">IOS コルドバ プラグインを書く</h2>
 
-<p>どのような JavaScript の経由でプラグインにディスパッチを取得 <code>exec</code> 関数で渡される対応するプラグイン クラスの <code>action</code> メソッド。プラグインのメソッドは、この署名。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">- (void)myMethod:(CDVInvokedUrlCommand*)command
+<p>Java スクリプトの設定をネイティブ側に要求するプラグイン火があります。 我々 は持っている iOS Objective-C プラグイン経由で適切に割り当てられて、 <code class="language-plaintext highlighter-rouge">config.xml</code> ファイル。 だから最終的な iOS Objective-C のプラグイン クラスどのようか。</p>
+
+<p>どのような JavaScript の経由でプラグインにディスパッチを取得 <code class="language-plaintext highlighter-rouge">exec</code> 関数で渡される対応するプラグイン クラスの <code class="language-plaintext highlighter-rouge">action</code> メソッド。プラグインのメソッドは、この署名。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- (void)myMethod:(CDVInvokedUrlCommand*)command
 {
     CDVPluginResult* pluginResult = nil;
     NSString* myarg = [command.arguments objectAtIndex:0];
@@ -1485,84 +1492,98 @@
     }
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
-</code></pre></div>
+</code></pre></div></div>
+
 <ol>
-<li><p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVInvokedUrlCommand.h">CDVInvokedUrlCommand.h</a></p></li>
-<li><p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPluginResult.h">CDVPluginResult.h</a></p></li>
-<li><p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVCommandDelegate.h">CDVCommandDelegate.h</a></p></li>
+  <li>
+    <p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVInvokedUrlCommand.h">CDVInvokedUrlCommand.h</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPluginResult.h">CDVPluginResult.h</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVCommandDelegate.h">CDVCommandDelegate.h</a></p>
+  </li>
 </ol>
 
-<h2>iOS CDVPluginResult のメッセージの種類</h2>
+<h2 id="ios-cdvpluginresult-のメッセージの種類">iOS CDVPluginResult のメッセージの種類</h2>
 
 <p>CDVPluginResult を使用してを返すことができますさまざまな結果型を JavaScript コールバックに戻るのようなクラスのメソッドを使用しています。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">+ (CDVPluginResult*)resultWithStatus:(CDVCommandStatus)statusOrdinal messageAs...
-</code></pre></div>
-<p>作成することができます <code>String</code> 、 <code>Int</code> 、 <code>Double</code> 、 <code>Bool</code> 、 <code>Array</code> 、 <code>Dictionary</code> 、 <code>ArrayBuffer</code> 、および <code>Multipart</code> の種類。 または、任意の引数 (ちょうど送信ステータス) を添付しないでください。 または、エラーを返します。 その場合、コールバックは発生しませんないすべてで任意のプラグインの結果を送信することもできます。</p>
 
-<h3>メモ</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+ (CDVPluginResult*)resultWithStatus:(CDVCommandStatus)statusOrdinal messageAs...
+</code></pre></div></div>
 
-<ul>
-<li>  <code>messageAsArrayBuffer</code>期待 <code>NSData*</code> に変換し、 <code>ArrayBuffer</code> JavaScript コールバック (と <code>ArrayBuffers</code> JavaScript からプラグインに送信に変換<code>NSData*</code>).</li>
-<li>  <code>messageAsMultipart</code> 期待して、 <code>NSArray *</code> サポートされている他のいずれかを含む型ととして配列全体を送信します <code>引数</code> JavaScript のコールバック。 
+<p>作成することができます <code class="language-plaintext highlighter-rouge">String</code> 、 <code class="language-plaintext highlighter-rouge">Int</code> 、 <code class="language-plaintext highlighter-rouge">Double</code> 、 <code class="language-plaintext highlighter-rouge">Bool</code> 、 <code class="language-plaintext highlighter-rouge">Array</code> 、 <code class="language-plaintext highlighter-rouge">Dictionary</code> 、 <code class="language-plaintext highlighter-rouge">ArrayBuffer</code> 、および <code class="language-plaintext highlighter-rouge">Multipart</code> の種類。 または、任意の引数 (ちょうど送信ステータス) を添付しないでください。 または、エラーを返します。 その場合、コールバックは発生しませんないすべてで任意のプラグインの結果を送信することもできます。</p>
+
+<h3 id="メモ">メモ</h3>
 
 <ul>
-<li>  気まぐれ: これはちょうど構文糖 （ただし、それは甘い） です。 こうすると、すべての引数はシリアル化または必要に応じて逆シリアル化します。 例えば、それに返しても安全 <code>NSData*</code> が、マルチパートとしてではなく <code>Array</code> /<code>Dictionary</code>.</li>
-</ul></li>
+  <li><code class="language-plaintext highlighter-rouge">messageAsArrayBuffer</code>期待 <code class="language-plaintext highlighter-rouge">NSData*</code> に変換し、 <code class="language-plaintext highlighter-rouge">ArrayBuffer</code> JavaScript コールバック (と <code class="language-plaintext highlighter-rouge">ArrayBuffers</code> JavaScript からプラグインに送信に変換<code class="language-plaintext highlighter-rouge">NSData*</code>).</li>
+  <li><code class="language-plaintext highlighter-rouge">messageAsMultipart</code> 期待して、 <code class="language-plaintext highlighter-rouge">NSArray *</code> サポートされている他のいずれかを含む型ととして配列全体を送信します <code class="language-plaintext highlighter-rouge">引数</code> JavaScript のコールバック。
+    <ul>
+      <li>気まぐれ: これはちょうど構文糖 （ただし、それは甘い） です。 こうすると、すべての引数はシリアル化または必要に応じて逆シリアル化します。 例えば、それに返しても安全 <code class="language-plaintext highlighter-rouge">NSData*</code> が、マルチパートとしてではなく <code class="language-plaintext highlighter-rouge">Array</code> /<code class="language-plaintext highlighter-rouge">Dictionary</code>.</li>
+    </ul>
+  </li>
 </ul>
 
-<h2>エコー プラグイン iOS プラグイン</h2>
+<h2 id="エコー-プラグイン-ios-プラグイン">エコー プラグイン iOS プラグイン</h2>
 
-<p>我々 は、次のプロジェクトに追加の <code>config.xml</code> ファイル。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="Echo"&gt;
+<p>我々 は、次のプロジェクトに追加の <code class="language-plaintext highlighter-rouge">config.xml</code> ファイル。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="Echo"&gt;
     &lt;param name="ios-package" value="Echo" /&gt;
 &lt;/feature&gt;
-</code></pre></div>
-<p>我々 は、次のファイルを追加し、( <code>Echo.h</code> および <code>Echo.m</code> ) 私たちコルドバ iOS アプリケーション ディレクトリ内のプラグイン ディレクトリに。</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cm">/********* Echo.h Cordova Plugin Header *******/</span>
+</code></pre></div></div>
 
-<span class="cp">#import &lt;Cordova/CDV.h&gt;
-</span>
-<span class="k">@interface</span> <span class="nc">Echo</span> <span class="p">:</span> <span class="nc">CDVPlugin</span>
+<p>我々 は、次のファイルを追加し、( <code class="language-plaintext highlighter-rouge">Echo.h</code> および <code class="language-plaintext highlighter-rouge">Echo.m</code> ) 私たちコルドバ iOS アプリケーション ディレクトリ内のプラグイン ディレクトリに。</p>
 
-<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">echo</span><span class="p">:(</span><span class="n">CDVInvokedUrlCommand</span><span class="o">*</span><span class="p">)</span><span class="nv">command</span><span class="p">;</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/********* Echo.h Cordova Plugin Header *******/
 
-<span class="k">@end</span>
-
-<span class="cm">/********* Echo.m Cordova Plugin Implementation *******/</span>
-
-<span class="cp">#import "Echo.h"
 #import &lt;Cordova/CDV.h&gt;
-</span>
-<span class="k">@implementation</span> <span class="nc">Echo</span>
 
-<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">echo</span><span class="p">:(</span><span class="n">CDVInvokedUrlCommand</span><span class="o">*</span><span class="p">)</span><span class="nv">command</span>
-<span class="p">{</span>
-    <span class="n">CDVPluginResult</span><span class="o">*</span> <span class="n">pluginResult</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
-    <span class="n">NSString</span><span class="o">*</span> <span class="n">echo</span> <span class="o">=</span> <span class="p">[</span><span class="n">command</span><span class="p">.</span><span class="n">arguments</span> <span class="nf">objectAtIndex</span><span class="p">:</span><span class="mi">0</span><span class="p">];</span>
+@interface Echo : CDVPlugin
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">echo</span> <span class="o">!=</span> <span class="nb">nil</span> <span class="o">&amp;&amp;</span> <span class="p">[</span><span class="n">echo</span> <span class="nf">length</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">pluginResult</span> <span class="o">=</span> <span class="p">[</span><span class="n">CDVPluginResult</span> <span class="nf">resultWithStatus</span><span class="p">:</span><span class="n">CDVCommandStatus_OK</span> <span class="nf">messageAsString</span><span class="p">:</span><span class="n">echo</span><span class="p">];</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="n">pluginResult</span> <span class="o">=</span> <span class="p">[</span><span class="n">CDVPluginResult</span> <span class="nf">resultWithStatus</span><span class="p">:</span><span class="n">CDVCommandStatus_ERROR</span><span class="p">];</span>
-    <span class="p">}</span>
+- (void)echo:(CDVInvokedUrlCommand*)command;
 
-    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">commandDelegate</span> <span class="nf">sendPluginResult</span><span class="p">:</span><span class="n">pluginResult</span> <span class="nf">callbackId</span><span class="p">:</span><span class="n">command</span><span class="p">.</span><span class="n">callbackId</span><span class="p">];</span>
-<span class="p">}</span>
+@end
 
-<span class="k">@end</span>
-</code></pre></div>
-<p>コードを見てをみましょう。上部に我々 はすべての必要なコルドバ輸入があります。私たちのクラスから拡張 <code>CDVPlugin</code> (非常に重要）。</p>
+/********* Echo.m Cordova Plugin Implementation *******/
 
-<p>このプラグインは 1 つのアクションのみをサポートします、 <code>echo</code> アクション。 最初に、私たちを使用してエコー文字列をつかむ、 <code>objectAtIndex</code> メソッドに私たち <code>args</code> 、引数配列の 0 番目のパラメーターを取得したいそれを伝えます。 パラメーターのチェックのビットを行う我々： それはないことを確認 <code>nil</code> 、長さ 0 の文字列ではないことを確認しています。</p>
+#import "Echo.h"
+#import &lt;Cordova/CDV.h&gt;
 
-<p>私たちを返すかどうかは、 <code>PluginResult</code> と、 <code>ERROR</code> 状態。 すべてのそれらのチェックに合格し、私たちを返すかどうか、 <code>PluginResult</code> と、 <code>OK</code> の状態、およびパス、 <code>echo</code> 我々 は最初の場所で、パラメーターとして受け取った文字列。</p>
+@implementation Echo
 
-<p>最後に、我々 に結果を送信 <code>self.commandDelegate</code> 、これを実行する、 <code>exec</code> 側の JavaScript メソッドの成功または失敗のコールバック。 成功時のコールバックが呼び出されると、それを渡します、 <code>echo</code> パラメーター。</p>
+- (void)echo:(CDVInvokedUrlCommand*)command
+{
+    CDVPluginResult* pluginResult = nil;
+    NSString* echo = [command.arguments objectAtIndex:0];
 
-<h2>スレッド処理</h2>
+    if (echo != nil &amp;&amp; [echo length] &gt; 0) {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:echo];
+    } else {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+    }
+
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
+@end
+</code></pre></div></div>
+
+<p>コードを見てをみましょう。上部に我々 はすべての必要なコルドバ輸入があります。私たちのクラスから拡張 <code class="language-plaintext highlighter-rouge">CDVPlugin</code> (非常に重要）。</p>
+
+<p>このプラグインは 1 つのアクションのみをサポートします、 <code class="language-plaintext highlighter-rouge">echo</code> アクション。 最初に、私たちを使用してエコー文字列をつかむ、 <code class="language-plaintext highlighter-rouge">objectAtIndex</code> メソッドに私たち <code class="language-plaintext highlighter-rouge">args</code> 、引数配列の 0 番目のパラメーターを取得したいそれを伝えます。 パラメーターのチェックのビットを行う我々： それはないことを確認 <code class="language-plaintext highlighter-rouge">nil</code> 、長さ 0 の文字列ではないことを確認しています。</p>
+
+<p>私たちを返すかどうかは、 <code class="language-plaintext highlighter-rouge">PluginResult</code> と、 <code class="language-plaintext highlighter-rouge">ERROR</code> 状態。 すべてのそれらのチェックに合格し、私たちを返すかどうか、 <code class="language-plaintext highlighter-rouge">PluginResult</code> と、 <code class="language-plaintext highlighter-rouge">OK</code> の状態、およびパス、 <code class="language-plaintext highlighter-rouge">echo</code> 我々 は最初の場所で、パラメーターとして受け取った文字列。</p>
+
+<p>最後に、我々 に結果を送信 <code class="language-plaintext highlighter-rouge">self.commandDelegate</code> 、これを実行する、 <code class="language-plaintext highlighter-rouge">exec</code> 側の JavaScript メソッドの成功または失敗のコールバック。 成功時のコールバックが呼び出されると、それを渡します、 <code class="language-plaintext highlighter-rouge">echo</code> パラメーター。</p>
+
+<h2 id="スレッド処理">スレッド処理</h2>
 
 <p>プラグインのメソッドは、UI と同じスレッドで実行されます。あなたのプラグイン大量の処理が必要です、ブロッキング呼び出しを必要とする場合は、バック グラウンド スレッドを使用してください。たとえば。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">- (void)myPluginMethod:(CDVInvokedUrlCommand*)command
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- (void)myPluginMethod:(CDVInvokedUrlCommand*)command
 {
     // Check command.arguments here.
     [self.commandDelegate runInBackground:^{
@@ -1573,29 +1594,38 @@
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }];
 }
-</code></pre></div>
-<h2>高度なプラグイン機能</h2>
+</code></pre></div></div>
+
+<h2 id="高度なプラグイン機能">高度なプラグイン機能</h2>
 
 <p>他のメソッドでオーバーライドすることができますを参照してください。</p>
 
 <ul>
-<li><p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.h">CDVPlugin.h</a></p></li>
-<li><p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.m">CDVPlugin.m</a></p></li>
+  <li>
+    <p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.h">CDVPlugin.h</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.m">CDVPlugin.m</a></p>
+  </li>
 </ul>
 
-<p>たとえばにフックすることができます、 <code>pause</code> 、 <code>resume</code> 、アプリを終了して <code>handleOpenURL</code> イベント。</p>
+<p>たとえばにフックすることができます、 <code class="language-plaintext highlighter-rouge">pause</code> 、 <code class="language-plaintext highlighter-rouge">resume</code> 、アプリを終了して <code class="language-plaintext highlighter-rouge">handleOpenURL</code> イベント。</p>
 
-<h2>プラグインのデバッグ</h2>
+<h2 id="プラグインのデバッグ">プラグインのデバッグ</h2>
 
 <p>Objective-C 側をデバッグするときは Xcode の組み込みのデバッガー。 JavaScript では、iOS の 5.0 使用できます<a href="https://github.com/apache/cordova-weinre">Weinre、Apache コルドバ プロジェクト</a>や<a href="http://www.iwebinspector.com/">iWebInspector、サード パーティ製ユーティリティ</a></p>
 
 <p>IOS の 6, サファリ 6.0 を使用して単に ios 6 シミュレータを実行しているアプリにアタッチすると思います。</p>
 
-<h2>一般的な落とし穴</h2>
+<h2 id="一般的な落とし穴">一般的な落とし穴</h2>
 
 <ul>
-<li><p>Config.xml にプラグインのマッピングを追加することを忘れないでください。忘れた場合は、Xcode のコンソールにエラーが記録されます。</p></li>
-<li><p>ドメイン ホワイト リスト ガイドで説明されているように、ホワイト リストに接続するすべてのホストを追加することを忘れないでください。忘れた場合は、Xcode のコンソールにエラーが記録されます。</p></li>
+  <li>
+    <p>Config.xml にプラグインのマッピングを追加することを忘れないでください。忘れた場合は、Xcode のコンソールにエラーが記録されます。</p>
+  </li>
+  <li>
+    <p>ドメイン ホワイト リスト ガイドで説明されているように、ホワイト リストに接続するすべてのホストを追加することを忘れないでください。忘れた場合は、Xcode のコンソールにエラーが記録されます。</p>
+  </li>
 </ul>
 
 

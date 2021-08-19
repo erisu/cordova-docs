@@ -1438,74 +1438,93 @@
             
 
             <div id="page-toc-source">
-                <h1>接続</h1>
+                <h1 id="接続">接続</h1>
 
 <blockquote>
-<p><code>connection</code>オブジェクトによって公開されて <code>navigator.connection</code> 、デバイスの携帯電話や wifi 接続に関する情報を提供します。</p>
+  <p><code class="language-plaintext highlighter-rouge">connection</code>オブジェクトによって公開されて <code class="language-plaintext highlighter-rouge">navigator.connection</code> 、デバイスの携帯電話や wifi 接続に関する情報を提供します。</p>
 </blockquote>
 
-<h2>プロパティ</h2>
+<h2 id="プロパティ">プロパティ</h2>
 
 <ul>
-<li>  <a href="connection.type.html">connection.type</a></li>
+  <li><a href="connection.type.html">connection.type</a></li>
 </ul>
 
-<h2>定数</h2>
+<h2 id="定数">定数</h2>
 
 <ul>
-<li>  Connection.UNKNOWN</li>
-<li>  Connection.ETHERNET</li>
-<li>  Connection.WIFI</li>
-<li>  Connection.CELL_2G</li>
-<li>  Connection.CELL_3G</li>
-<li>  Connection.CELL_4G</li>
-<li>  Connection.CELL</li>
-<li>  Connection.NONE</li>
+  <li>Connection.UNKNOWN</li>
+  <li>Connection.ETHERNET</li>
+  <li>Connection.WIFI</li>
+  <li>Connection.CELL_2G</li>
+  <li>Connection.CELL_3G</li>
+  <li>Connection.CELL_4G</li>
+  <li>Connection.CELL</li>
+  <li>Connection.NONE</li>
 </ul>
 
-<h2>機能へのアクセス</h2>
+<h2 id="機能へのアクセス">機能へのアクセス</h2>
 
-<p>バージョン 3.0 は、コルドバ<em>のプラグイン</em>としてデバイス レベルの Api を実装します。 CLI の使用 <code>plugin</code> のコマンドライン ・ インタ フェースを追加または削除、プロジェクトに対してこの機能を記載されているコマンド。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add org.apache.cordova.network-information
+<p>バージョン 3.0 は、コルドバ<em>のプラグイン</em>としてデバイス レベルの Api を実装します。 CLI の使用 <code class="language-plaintext highlighter-rouge">plugin</code> のコマンドライン ・ インタ フェースを追加または削除、プロジェクトに対してこの機能を記載されているコマンド。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add org.apache.cordova.network-information
     $ cordova plugin ls
     [ 'org.apache.cordova.network-information' ]
     $ cordova plugin rm org.apache.cordova.network-information
-</code></pre></div>
+</code></pre></div></div>
+
 <p>これらのコマンドすべてのターゲット プラットフォームに適用されますが、以下のプラットフォームに固有の構成設定を変更します。</p>
 
 <ul>
-<li><p>アンドロイド</p>
-<div class="highlight"><pre><code class="language-" data-lang="">(in app/res/xml/config.xml)
+  <li>
+    <p>アンドロイド</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(in app/res/xml/config.xml)
 &lt;feature name="NetworkStatus"&gt;
     &lt;param name="android-package" value="org.apache.cordova.NetworkManager" /&gt;
 &lt;/feature&gt;
-
+    
 (in app/AndroidManifest.xml)
 &lt;uses-permission android:name="android.permission.INTERNET" /&gt;
 &lt;uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /&gt;
 &lt;uses-permission android:name="android.permission.READ_PHONE_STATE" /&gt;
-</code></pre></div></li>
-<li><p>ブラックベリー WebWorks</p>
-<div class="highlight"><pre><code class="language-" data-lang="">(in www/plugins.xml)
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>ブラックベリー WebWorks</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(in www/plugins.xml)
 &lt;feature name="Network Status"&gt;
     &lt;param name="blackberry-package" value="org.apache.cordova.network.Network" /&gt;
 &lt;/feature&gt;
-</code></pre></div></li>
-<li><p>iOS （<code>config.xml</code>)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="NetworkStatus"&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>iOS （<code class="language-plaintext highlighter-rouge">config.xml</code>)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="NetworkStatus"&gt;
     &lt;param name="ios-package" value="CDVConnection" /&gt;
 &lt;/feature&gt;
-</code></pre></div></li>
-<li><p>(Windows Phone<code>Properties/WPAppManifest.xml</code>)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;Capabilities&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>(Windows Phone<code class="language-plaintext highlighter-rouge">Properties/WPAppManifest.xml</code>)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;Capabilities&gt;
     &lt;Capability Name="ID_CAP_NETWORKING" /&gt;
 &lt;/Capabilities&gt;
-</code></pre></div>
-<p>参照: <a href="http://msdn.microsoft.com/en-us/library/ff769509%28v=vs.92%29.aspx">Windows Phone のアプリケーション マニフェスト</a></p></li>
-<li><p>(Tizen<code>config.xml</code>)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="http://tizen.org/api/systeminfo" required="true"/&gt;
-</code></pre></div>
-<p>参照: <a href="https://developer.tizen.org/help/topic/org.tizen.help.gs/Creating%20a%20Project.html?path=0_1_1_3#8814682_CreatingaProject-EditingconfigxmlFeatures">Tizen Web アプリケーションのアプリケーション マニフェスト</a></p></li>
+</code></pre></div>    </div>
+
+    <p>参照: <a href="http://msdn.microsoft.com/en-us/library/ff769509%28v=vs.92%29.aspx">Windows Phone のアプリケーション マニフェスト</a></p>
+  </li>
+  <li>
+    <p>(Tizen<code class="language-plaintext highlighter-rouge">config.xml</code>)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="http://tizen.org/api/systeminfo" required="true"/&gt;
+</code></pre></div>    </div>
+
+    <p>参照: <a href="https://developer.tizen.org/help/topic/org.tizen.help.gs/Creating%20a%20Project.html?path=0_1_1_3#8814682_CreatingaProject-EditingconfigxmlFeatures">Tizen Web アプリケーションのアプリケーション マニフェスト</a></p>
+  </li>
 </ul>
 
 <p>いくつかのプラットフォームは特別な構成を必要とせずにこの機能をサポート可能性があります。<em>プラットフォームのサポート</em>の概要のセクションを参照してください。</p>

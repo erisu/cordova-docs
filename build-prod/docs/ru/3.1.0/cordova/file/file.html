@@ -1312,70 +1312,79 @@
     }
 </style>
 
-<h1>Файл</h1>
+<h1 id="файл">Файл</h1>
 
 <blockquote>
-<p>Интерфейс API, чтобы читать, писать и навигации по иерархиям файловой системы, основанные на <a href="http://www.w3.org/TR/FileAPI">w3c файла api</a>.</p>
+  <p>Интерфейс API, чтобы читать, писать и навигации по иерархиям файловой системы, основанные на <a href="http://www.w3.org/TR/FileAPI">w3c файла api</a>.</p>
 </blockquote>
 
-<h2>Объекты</h2>
+<h2 id="объекты">Объекты</h2>
 
 <ul>
-<li>  <a href="directoryentry/directoryentry.html">DirectoryEntry</a></li>
-<li>  <a href="directoryreader/directoryreader.html">DirectoryReader</a></li>
-<li>  <a href="fileobj/fileobj.html">Файл</a></li>
-<li>  <a href="fileentry/fileentry.html">FileEntry</a></li>
-<li>  <a href="fileerror/fileerror.html">FileError</a></li>
-<li>  <a href="filereader/filereader.html">FileReader</a></li>
-<li>  <a href="filesystem/filesystem.html">Файловая система</a></li>
-<li>  <a href="filetransfer/filetransfer.html">FileTransfer</a></li>
-<li>  <a href="filetransfererror/filetransfererror.html">FileTransferError</a></li>
-<li>  <a href="fileuploadoptions/fileuploadoptions.html">FileUploadOptions</a></li>
-<li>  <a href="fileuploadresult/fileuploadresult.html">FileUploadResult</a></li>
-<li>  <a href="filewriter/filewriter.html">Уничтожал</a></li>
-<li>  <a href="flags/flags.html">Флаги</a></li>
-<li>  <a href="localfilesystem/localfilesystem.html">LocalFileSystem</a></li>
-<li>  <a href="metadata/metadata.html">Метаданные</a></li>
+  <li><a href="directoryentry/directoryentry.html">DirectoryEntry</a></li>
+  <li><a href="directoryreader/directoryreader.html">DirectoryReader</a></li>
+  <li><a href="fileobj/fileobj.html">Файл</a></li>
+  <li><a href="fileentry/fileentry.html">FileEntry</a></li>
+  <li><a href="fileerror/fileerror.html">FileError</a></li>
+  <li><a href="filereader/filereader.html">FileReader</a></li>
+  <li><a href="filesystem/filesystem.html">Файловая система</a></li>
+  <li><a href="filetransfer/filetransfer.html">FileTransfer</a></li>
+  <li><a href="filetransfererror/filetransfererror.html">FileTransferError</a></li>
+  <li><a href="fileuploadoptions/fileuploadoptions.html">FileUploadOptions</a></li>
+  <li><a href="fileuploadresult/fileuploadresult.html">FileUploadResult</a></li>
+  <li><a href="filewriter/filewriter.html">Уничтожал</a></li>
+  <li><a href="flags/flags.html">Флаги</a></li>
+  <li><a href="localfilesystem/localfilesystem.html">LocalFileSystem</a></li>
+  <li><a href="metadata/metadata.html">Метаданные</a></li>
 </ul>
 
-<h2>Доступ к функции</h2>
+<h2 id="доступ-к-функции">Доступ к функции</h2>
 
-<p>Начиная с версии 3.0 Кордова реализует интерфейсы API уровень устройства как <em>плагины</em>. Использование CLI <code>plugin</code> команды, описанные в интерфейс командной строки, чтобы добавить или удалить эту функцию для проекта:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add org.apache.cordova.file
+<p>Начиная с версии 3.0 Кордова реализует интерфейсы API уровень устройства как <em>плагины</em>. Использование CLI <code class="language-plaintext highlighter-rouge">plugin</code> команды, описанные в интерфейс командной строки, чтобы добавить или удалить эту функцию для проекта:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add org.apache.cordova.file
     $ cordova plugin ls
     [ 'org.apache.cordova.file' ]
     $ cordova plugin rm org.apache.cordova.file
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Чтобы использовать плагин передачи файлов необходимо добавить что отдельно.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add org.apache.cordova.file-transfer
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add org.apache.cordova.file-transfer
     $ cordova plugin ls
     [ 'org.apache.cordova.file-transfer' ]
     $ cordova plugin rm org.apache.cordova.file-transfer
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Эти команды применяются для всех целевых платформ, но изменить параметры конфигурации платформы, описанные ниже:</p>
 
 <ul>
-<li><p>Андроид</p>
-<div class="highlight"><pre><code class="language-" data-lang="">(in app/res/xml/config.xml)
+  <li>
+    <p>Андроид</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(in app/res/xml/config.xml)
 &lt;feature name="File"&gt;
     &lt;param name="android-package" value="org.apache.cordova.FileUtils" /&gt;
 &lt;/feature&gt;
 &lt;feature name="FileTransfer"&gt;
     &lt;param name="android-package" value="org.apache.cordova.FileTransfer" /&gt;
 &lt;/feature&gt;
-
+    
 (in app/AndroidManifest.xml)
 &lt;uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /&gt;
-</code></pre></div></li>
-<li><p>Ежевика WebWorks</p>
-<div class="highlight"><pre><code class="language-" data-lang="">(in www/plugins.xml)
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Ежевика WebWorks</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(in www/plugins.xml)
 &lt;feature name="File"&gt;
     &lt;param name="blackberry-package" value="org.apache.cordova.file.FileManager" /&gt;
 &lt;/feature&gt;
 &lt;feature name="FileTransfer"&gt;
     &lt;param name="blackberry-package" value="org.apache.cordova.http.FileTransfer" /&gt;
 &lt;/feature&gt;
-
+    
 (in www/config.xml)
 &lt;feature id="blackberry.io.file" required="true" version="1.0.0.0" /&gt;
 &lt;feature id="blackberry.utils"   required="true" version="1.0.0.0" /&gt;
@@ -1383,15 +1392,19 @@
 &lt;rim:permissions&gt;
     &lt;rim:permit&gt;access_shared&lt;/rim:permit&gt;
 &lt;/rim:permissions&gt;
-</code></pre></div></li>
-<li><p>iOS (в<code>config.xml</code>)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="File"&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>iOS (в<code class="language-plaintext highlighter-rouge">config.xml</code>)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="File"&gt;
     &lt;param name="ios-package" value="CDVFile" /&gt;
 &lt;/feature&gt;
 &lt;feature name="FileTransfer"&gt;
     &lt;param name="ios-package" value="CDVFileTransfer" /&gt;
 &lt;/feature&gt;
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ul>
 
 <p>Некоторые платформы могут поддерживать эту функцию без необходимости специальной настройки. В разделе <em>Поддержка платформы</em> в разделе Обзор.</p>

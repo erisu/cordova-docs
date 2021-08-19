@@ -1304,32 +1304,45 @@
             
 
             <div id="page-toc-source">
-                <h1>Visualizzazioni Web Android</h1>
+                <h1 id="visualizzazioni-web-android">Visualizzazioni Web Android</h1>
 
-<p>Partire da 1,9 a Cordova, con l&#39;assistenza della <code>CordovaActivity</code> , è possibile utilizzare Cordova come componente di un&#39;applicazione Android nativa più grande. Android si riferisce a questo componente come il <code>CordovaWebView</code> . Nuove applicazioni basate su Cordova da 1,9 in poi utilizzano il <code>CordovaWebView</code> come visualizzazione principale, indipendentemente dal fatto che l&#39;eredità <code>CordovaActivity</code> approccio viene utilizzato.</p>
+<p>Partire da 1,9 a Cordova, con l’assistenza della <code class="language-plaintext highlighter-rouge">CordovaActivity</code> , è possibile utilizzare Cordova come componente di un’applicazione Android nativa più grande. Android si riferisce a questo componente come il <code class="language-plaintext highlighter-rouge">CordovaWebView</code> . Nuove applicazioni basate su Cordova da 1,9 in poi utilizzano il <code class="language-plaintext highlighter-rouge">CordovaWebView</code> come visualizzazione principale, indipendentemente dal fatto che l’eredità <code class="language-plaintext highlighter-rouge">CordovaActivity</code> approccio viene utilizzato.</p>
 
-<p>Se si ha familiarità con lo sviluppo di applicazioni Android, Android piattaforma guida allo sviluppo di un&#39;applicazione di Cordova prima di tentare di comprendere un WebView. Non è il modo principale per creare applicazioni Android Cordova. Queste istruzioni sono attualmente manuale, ma può essere eventualmente essere automatizzato.</p>
+<p>Se si ha familiarità con lo sviluppo di applicazioni Android, Android piattaforma guida allo sviluppo di un’applicazione di Cordova prima di tentare di comprendere un WebView. Non è il modo principale per creare applicazioni Android Cordova. Queste istruzioni sono attualmente manuale, ma può essere eventualmente essere automatizzato.</p>
 
-<h2>Prerequisiti</h2>
+<h2 id="prerequisiti">Prerequisiti</h2>
 
 <ul>
-<li><p>Cordova 1,9 o maggiore</p></li>
-<li><p>Android SDK aggiornato all&#39;ultimo SDK</p></li>
+  <li>
+    <p>Cordova 1,9 o maggiore</p>
+  </li>
+  <li>
+    <p>Android SDK aggiornato all’ultimo SDK</p>
+  </li>
 </ul>
 
-<h2>Guida all&#39;utilizzo di CordovaWebView in un progetto Android</h2>
+<h2 id="guida-allutilizzo-di-cordovawebview-in-un-progetto-android">Guida all’utilizzo di CordovaWebView in un progetto Android</h2>
 
 <ol>
-<li><p><code>cd</code>in <code>/framework</code> ed eseguire <code>ant jar</code> per costruire il barattolo di cordova. Crea il file. jar formato come <code>cordova-x.x.x.jar</code> nel <code>/framework</code> directory.</p></li>
-<li><p>Copiare il barattolo di cordova nel vostro progetto Android <code>/libs</code> directory.</p></li>
-<li><p>Modifica dell&#39;applicazione <code>main.xml</code> file (sotto <code>/res/xml</code> ) per essere simile alla seguente, con la <code>layout_height</code> , <code>layout_width</code> e <code>id</code> modificato per soddisfare la vostra applicazione:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;org.apache.cordova.CordovaWebView
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cd</code>in <code class="language-plaintext highlighter-rouge">/framework</code> ed eseguire <code class="language-plaintext highlighter-rouge">ant jar</code> per costruire il barattolo di cordova. Crea il file. jar formato come <code class="language-plaintext highlighter-rouge">cordova-x.x.x.jar</code> nel <code class="language-plaintext highlighter-rouge">/framework</code> directory.</p>
+  </li>
+  <li>
+    <p>Copiare il barattolo di cordova nel vostro progetto Android <code class="language-plaintext highlighter-rouge">/libs</code> directory.</p>
+  </li>
+  <li>
+    <p>Modifica dell’applicazione <code class="language-plaintext highlighter-rouge">main.xml</code> file (sotto <code class="language-plaintext highlighter-rouge">/res/xml</code> ) per essere simile alla seguente, con la <code class="language-plaintext highlighter-rouge">layout_height</code> , <code class="language-plaintext highlighter-rouge">layout_width</code> e <code class="language-plaintext highlighter-rouge">id</code> modificato per soddisfare la vostra applicazione:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;org.apache.cordova.CordovaWebView
     android:id="@+id/tutorialView"
     android:layout_width="match_parent"
     android:layout_height="match_parent" /&gt;
-</code></pre></div></li>
-<li><p>Modificare la vostra attività che implementa il <code>CordovaInterface</code> . È necessario implementare i metodi inclusi. Si potrebbe desiderare di copiarli da <code>/framework/src/org/apache/cordova/CordovaActivity.java</code> , o implementarle sul proprio. Il frammento di codice riportato di seguito viene illustrata un&#39;applicazione di base che utilizza l&#39;interfaccia. Si noti come l&#39;id di riferimento vista corrisponde la <code>id</code> attributo specificato nel frammento XML sopra indicato:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">public class CordovaViewTestActivity extends Activity implements CordovaInterface {
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Modificare la vostra attività che implementa il <code class="language-plaintext highlighter-rouge">CordovaInterface</code> . È necessario implementare i metodi inclusi. Si potrebbe desiderare di copiarli da <code class="language-plaintext highlighter-rouge">/framework/src/org/apache/cordova/CordovaActivity.java</code> , o implementarle sul proprio. Il frammento di codice riportato di seguito viene illustrata un’applicazione di base che utilizza l’interfaccia. Si noti come l’id di riferimento vista corrisponde la <code class="language-plaintext highlighter-rouge">id</code> attributo specificato nel frammento XML sopra indicato:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class CordovaViewTestActivity extends Activity implements CordovaInterface {
     CordovaWebView cwv;
     /* Called when the activity is first created. */
     @Override
@@ -1340,11 +1353,13 @@
         Config.init(this);
         cwv.loadUrl(Config.getStartUrl());
     }
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ol>
 
 <p>Se si utilizza la fotocamera, è necessario implementare anche questo:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    @Override
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @Override
     public void setActivityResultCallback(CordovaPlugin plugin) {
         this.activityResultCallback = plugin;
     }
@@ -1386,16 +1401,23 @@
             callback.onActivityResult(requestCode, resultCode, intent);
         }
     }
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Infine, ricordarsi di aggiungere il pool di thread, altrimenti il plugin non hanno nessun thread per eseguire:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    @Override
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @Override
     public ExecutorService getThreadPool() {
         return threadPool;
     }
-</code></pre></div>
+</code></pre></div></div>
+
 <ol>
-<li><p>Copiare i file dell&#39;applicazione HTML e JavaScript del progetto Android <code>/assets/www</code> directory.</p></li>
-<li><p>Copia <code>config.xml</code> dal <code>/framework/res/xml</code> al tuo progetto <code>/res/xml</code> directory.</p></li>
+  <li>
+    <p>Copiare i file dell’applicazione HTML e JavaScript del progetto Android <code class="language-plaintext highlighter-rouge">/assets/www</code> directory.</p>
+  </li>
+  <li>
+    <p>Copia <code class="language-plaintext highlighter-rouge">config.xml</code> dal <code class="language-plaintext highlighter-rouge">/framework/res/xml</code> al tuo progetto <code class="language-plaintext highlighter-rouge">/res/xml</code> directory.</p>
+  </li>
 </ol>
 
 

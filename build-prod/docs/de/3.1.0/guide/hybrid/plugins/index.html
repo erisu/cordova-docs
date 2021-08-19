@@ -1328,7 +1328,7 @@
             
 
             <div id="page-toc-source">
-                <h1>Plugin-Entwicklung-Guide</h1>
+                <h1 id="plugin-entwicklung-guide">Plugin-Entwicklung-Guide</h1>
 
 <p>Ein Cordova Plugin Brücken ein wenig Funktionalität zwischen den WebView eine Cordova-Anwendung und der einheitlichen Plattform die Cordova-Anwendung läuft. Plugins bestehen aus einer einzigen JavaScript-Schnittstelle verwendet, die für alle Plattformen und native Implementierungen nach Plattform-spezifischen Plugin-Schnittstellen, denen das JavaScript aufruft. Alle Kern-Cordova-APIs werden mithilfe dieser Architektur implementiert.</p>
 
@@ -1336,74 +1336,92 @@
 
 <p>Dieses Handbuch bietet ausreichend <a href="../../overview/index.html">Übersicht</a>, auf der Sie aufbauen können, um komplexere Plugins zu schreiben.</p>
 
-<h2>JavaScript</h2>
+<h2 id="javascript">JavaScript</h2>
 
 <p>Der Einstiegspunkt für alle Plugin ist JavaScript. Die Grund-Entwickler-verwenden Sie Cordova ist, damit sie nutzen können und schreiben JavaScript, keine Objective-C, nicht Java, nicht c#. Die JavaScript-Schnittstelle für Ihr Plugin ist der nach vorn gerichtete und wohl wichtigsten Teil Ihrer Cordova-Plugin.</p>
 
-<p>Sie können Ihr Plugin-JavaScript strukturieren, wie Sie wollen. Die eine Sache, die Sie <em>müssen</em> verwenden, um die Kommunikation zwischen der Cordova JavaScript und native-Umgebungen ist die <code>cordova.exec</code> Funktion. Hier ist ein Beispiel:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    cordova.exec(function(winParam) {}, function(error) {}, "service",
+<p>Sie können Ihr Plugin-JavaScript strukturieren, wie Sie wollen. Die eine Sache, die Sie <em>müssen</em> verwenden, um die Kommunikation zwischen der Cordova JavaScript und native-Umgebungen ist die <code class="language-plaintext highlighter-rouge">cordova.exec</code> Funktion. Hier ist ein Beispiel:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    cordova.exec(function(winParam) {}, function(error) {}, "service",
                  "action", ["firstArgument", "secondArgument", 42,
                  false]);
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Die Parameter sind nachstehend aufgeführt:</p>
 
 <ul>
-<li><p><code>function(winParam) {}</code>: Erfolg Funktion Rückruf. Vorausgesetzt, Ihre <code>exec</code> Aufruf erfolgreich abgeschlossen ist, diese Funktion wird aufgerufen (optional mit allen Parametern, die Sie wieder an es übergeben).</p></li>
-<li><p><code>function(error) {}</code>: Fehler Funktion Rückruf. Wenn der Vorgang nicht erfolgreich abgeschlossen wird, wird diese Funktion (optional mit einem Fehlerparameter) aufgerufen.</p></li>
-<li><p><code>&quot;service&quot;</code>: Der Dienstname auf die systemeigene Seite aufrufen. Dies ist eine systemeigene Klasse zugeordnet darüber, welche Informationen in den einheimischen Führern, die unten aufgeführten verfügbar ist.</p></li>
-<li><p><code>&quot;action&quot;</code>: Den Namen der Aktion zum aufrufen. Dies ist von der systemeigenen Klasse Empfang abgeholt die <code>exec</code> Aufruf und, abhängig von der Plattform, im Wesentlichen eine Klassenmethode ordnet. Die einheimischen Guides, die unten aufgeführten Angaben.</p></li>
-<li><p><code>[/* arguments */]</code>: In der nativen Umgebung zu übergebenden Argumente.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">function(winParam) {}</code>: Erfolg Funktion Rückruf. Vorausgesetzt, Ihre <code class="language-plaintext highlighter-rouge">exec</code> Aufruf erfolgreich abgeschlossen ist, diese Funktion wird aufgerufen (optional mit allen Parametern, die Sie wieder an es übergeben).</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">function(error) {}</code>: Fehler Funktion Rückruf. Wenn der Vorgang nicht erfolgreich abgeschlossen wird, wird diese Funktion (optional mit einem Fehlerparameter) aufgerufen.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">"service"</code>: Der Dienstname auf die systemeigene Seite aufrufen. Dies ist eine systemeigene Klasse zugeordnet darüber, welche Informationen in den einheimischen Führern, die unten aufgeführten verfügbar ist.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">"action"</code>: Den Namen der Aktion zum aufrufen. Dies ist von der systemeigenen Klasse Empfang abgeholt die <code class="language-plaintext highlighter-rouge">exec</code> Aufruf und, abhängig von der Plattform, im Wesentlichen eine Klassenmethode ordnet. Die einheimischen Guides, die unten aufgeführten Angaben.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">[/* arguments */]</code>: In der nativen Umgebung zu übergebenden Argumente.</p>
+  </li>
 </ul>
 
-<h3>Echo-Plugin-JavaScript-Beispiel</h3>
-<div class="highlight"><pre><code class="language-" data-lang="">    window.echo = function(str, callback) {
+<h3 id="echo-plugin-javascript-beispiel">Echo-Plugin-JavaScript-Beispiel</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    window.echo = function(str, callback) {
         cordova.exec(callback, function(err) {
             callback('Nothing to echo.');
         }, "Echo", "echo", [str]);
     };
-</code></pre></div>
-<p>Lass uns tauchen Sie ein in das. Das Plugin fügt sich <code>window</code> , speziell auf die <code>echo</code> Funktion. Plugin-Nutzer würde es dann wie folgt verwenden:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    window.echo("echome", function(echoValue) {
+</code></pre></div></div>
+
+<p>Lass uns tauchen Sie ein in das. Das Plugin fügt sich <code class="language-plaintext highlighter-rouge">window</code> , speziell auf die <code class="language-plaintext highlighter-rouge">echo</code> Funktion. Plugin-Nutzer würde es dann wie folgt verwenden:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    window.echo("echome", function(echoValue) {
         alert(echoValue == "echome"); // should alert true.
     });
-</code></pre></div>
-<p>Zunächst werfen wir einen Blick auf die letzten drei Argumente für die <code>exec</code> Funktion. Rufen wir die <code>Echo</code> &quot;service&quot;, um die <code>echo</code> &quot;Aktion&quot; und übergeben ein Array von Argumenten, die Echo-Zeichenfolge enthält, das ist der erste Parameter in der <code>window.echo</code> Funktion.</p>
+</code></pre></div></div>
 
-<p>Der Erfolg-Rückruf übergebenen <code>exec</code> ist lediglich ein Verweis auf den Rückruf, die Funktion <code>window.echo</code> führt. Wir machen ein bisschen mehr für den Fehler-Rückruf: Wenn die systemeigene Seite aus der Fehler-Rückruf ausgelöst wird, wir einfach den Erfolg-Rückruf aufzurufen und übergeben sie eine Zeichenfolge &quot;Standard&quot;.</p>
+<p>Zunächst werfen wir einen Blick auf die letzten drei Argumente für die <code class="language-plaintext highlighter-rouge">exec</code> Funktion. Rufen wir die <code class="language-plaintext highlighter-rouge">Echo</code> “service”, um die <code class="language-plaintext highlighter-rouge">echo</code> “Aktion” und übergeben ein Array von Argumenten, die Echo-Zeichenfolge enthält, das ist der erste Parameter in der <code class="language-plaintext highlighter-rouge">window.echo</code> Funktion.</p>
 
-<h2>Plugin-Spezifikation</h2>
+<p>Der Erfolg-Rückruf übergebenen <code class="language-plaintext highlighter-rouge">exec</code> ist lediglich ein Verweis auf den Rückruf, die Funktion <code class="language-plaintext highlighter-rouge">window.echo</code> führt. Wir machen ein bisschen mehr für den Fehler-Rückruf: Wenn die systemeigene Seite aus der Fehler-Rückruf ausgelöst wird, wir einfach den Erfolg-Rückruf aufzurufen und übergeben sie eine Zeichenfolge “Standard”.</p>
 
-<p>Cordova hat eine <a href="../../../plugin_ref/spec.html">Plugin-Spezifikation</a> verfügbar, aktivieren Sie die automatische Installation des Plugins für Android, iOS, BlackBerry 10 und Windows Phone-Plattformen. Indem Ihr Plugin in einer bestimmten Weise zu strukturieren und ein <code>plugin.xml</code> manifest-Datei, Sie können Benutzern ermöglichen, Ihr Plugin über die Befehlszeile Werkzeuge zu installieren.</p>
+<h2 id="plugin-spezifikation">Plugin-Spezifikation</h2>
+
+<p>Cordova hat eine <a href="../../../plugin_ref/spec.html">Plugin-Spezifikation</a> verfügbar, aktivieren Sie die automatische Installation des Plugins für Android, iOS, BlackBerry 10 und Windows Phone-Plattformen. Indem Ihr Plugin in einer bestimmten Weise zu strukturieren und ein <code class="language-plaintext highlighter-rouge">plugin.xml</code> manifest-Datei, Sie können Benutzern ermöglichen, Ihr Plugin über die Befehlszeile Werkzeuge zu installieren.</p>
 
 <ul>
-<li>  <a href="../../../plugin_ref/spec.html">Plugin-Spezifikation</a></li>
+  <li><a href="../../../plugin_ref/spec.html">Plugin-Spezifikation</a></li>
 </ul>
 
-<h2>Native</h2>
+<h2 id="native">Native</h2>
 
 <p>Wenn Sie JavaScript für Ihr Plugin definieren, müssen Sie es mit mindestens einem nativen Implementierung zu ergänzen. Details für jede Plattform dazu sind unten aufgeführt. Diese Leitfäden weiterhin auf dem einfachen Echo-Plugin-Beispiel wie oben beschrieben zu bauen.</p>
 
 <ul>
-<li>  <a href="../../platforms/android/plugin.html">Android Plugins</a></li>
-<li>  <a href="../../platforms/blackberry/plugin.html">BlackBerry-Plugins</a></li>
-<li>  <a href="../../platforms/blackberry10/plugin.html">BlackBerry 10 Plugins</a></li>
-<li>  <a href="../../platforms/ios/plugin.html">iOS Plugins</a></li>
-<li>  <a href="../../platforms/wp8/plugin.html">Windows Phone Plugins</a></li>
+  <li><a href="../../platforms/android/plugin.html">Android Plugins</a></li>
+  <li><a href="../../platforms/blackberry/plugin.html">BlackBerry-Plugins</a></li>
+  <li><a href="../../platforms/blackberry10/plugin.html">BlackBerry 10 Plugins</a></li>
+  <li><a href="../../platforms/ios/plugin.html">iOS Plugins</a></li>
+  <li><a href="../../platforms/wp8/plugin.html">Windows Phone Plugins</a></li>
 </ul>
 
 <p>Tizen-Plattform unterstützt derzeit keine Plugins.</p>
 
-<h2>Publishing plugins</h2>
+<h2 id="publishing-plugins">Publishing plugins</h2>
 
 <p>Sobald Sie Ihr Plugin entwickelt, empfiehlt es sich, zu veröffentlichen und mit der Community teilen. Sie können Ihr Plugin auf der Cordova-Registrierung (basierend auf <a href="https://github.com/isaacs/npmjs.org">Npmjs</a>) veröffentlichen oder zu jeder anderen Npmjs basierte Registrierung. Benutzer werden automatisch mit Plugman oder Cordova-Cli installieren können.</p>
 
 <p>Um ein Plugin zu veröffentlichen müssen Sie mit dem Plugman-Tool und gehen Sie durch die folgenden Schritte aus:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ plugman adduser # that is if you don't have an account yet
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ plugman adduser # that is if you don't have an account yet
 $ plugman publish /path/to/your/plugin
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Das ist es!</p>
 
-<p>Andere registrierungsbasierte Befehle stehen zur Verfügung und <code>plugman --help</code> wird Ihnen eine Liste welche Befehle verfügbar sind und wie man sie benutzt.</p>
+<p>Andere registrierungsbasierte Befehle stehen zur Verfügung und <code class="language-plaintext highlighter-rouge">plugman --help</code> wird Ihnen eine Liste welche Befehle verfügbar sind und wie man sie benutzt.</p>
 
 
             </div>

@@ -2238,18 +2238,19 @@
             
 
             <div id="page-toc-source">
-                <h1>Windows のプラグイン</h1>
+                <h1 id="windows-のプラグイン">Windows のプラグイン</h1>
 
 <p>Windows ストア アプリで使用するためのプラグインを実装する方法の詳細について説明します。これを読む前に、プラグインの構造とその一般的な JavaScript のインターフェイスの概要についてアプリケーション ・ プラグインが参照してください。 このセクションは、ネイティブ プラットフォームに戻るコルドバ webview から通信するサンプル<em>エコー</em>プラグインを示すために続けています。</p>
 
-<p>Windows が直接 Javascript では、開発に必要な特別なケースだけで &#39;native&#39; の部分を意味する開発をサポートすることに注意してくださいすることが重要です。</p>
+<p>Windows が直接 Javascript では、開発に必要な特別なケースだけで ‘native’ の部分を意味する開発をサポートすることに注意してくださいすることが重要です。</p>
 
-<h2>Java スクリプトの設定で、Windows のプラグインの作成</h2>
+<h2 id="java-スクリプトの設定でwindows-のプラグインの作成">Java スクリプトの設定で、Windows のプラグインの作成</h2>
 
 <p>これらの手順は、純粋な JavaScript のプラグインを作成します。これを理解するネイティブ/マネージ ビットを追加する方法を理解する重要です。</p>
 
 <p>Windows コルドバ プラグインは本質的に薄いラッパー関数は、提供されている既存の WinJS が複数のデバイスは、JS 共通インターフェイスを定義したいと仮定すると、通常は 1 の JS ファイルを API を提供します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">// inside file echoplugin.js
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// inside file echoplugin.js
 var EchoPlugin = {
     // the echo function calls successCallback with the provided text in strInput
     // if strInput is empty, it will call the errorCallback
@@ -2257,11 +2258,13 @@ var EchoPlugin = {
         cordova.exec(successCallback,errorCallback,"EchoPlugin","echo",[strInput]);
     }
 }
-</code></pre></div>
-<h2>Windows の内部のコルドバ exec</h2>
+</code></pre></div></div>
+
+<h2 id="windows-の内部のコルドバ-exec">Windows の内部のコルドバ exec</h2>
 
 <p>Cordova.exec 関数は、すべてのプラットフォームで定義が異なるので、これは各プラットフォームには、アプリケーションの js コードとネイティブ ラッパー コード間の通信のそれ自身の方法。 しかし、Windows の場合 exec 呼び出しが一貫性を保つのためにあるので、ネイティブ ラッパーはありません。 あなたがあなたの仕事 js のみプラグイン EchoPlugin.echo で直接のようなもの：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">// inside file echoplugin.js ( this is what NOT to do if you want to reuse the JS API cross platform )
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// inside file echoplugin.js ( this is what NOT to do if you want to reuse the JS API cross platform )
 var EchoPlugin = {
     echo:function(successCallback,errorCallback,strInput) {
         if(!strInput || !strInput.length) {
@@ -2272,19 +2275,21 @@ var EchoPlugin = {
         }
     }
 }
-</code></pre></div>
+</code></pre></div></div>
+
 <p>これは可能性がうまく、しかしそれことを意味します、異なるプラットフォーム用の echoPlugin.js の異なるバージョンを必要がありますおそらく実装に不整合の問題を持って可能性があります。 ベスト プラクティスとして、我々 でした同じ JS コードを実行し、プラットフォームの書き換えをしていないも任意のパラメーターをチェック、または他の一般的なコード他のプラットフォームで働いていた開発者によって提供される利点を取るので、windows では、cordova.exec 内のネイティブ API を模倣することを決めた。</p>
 
-<h2>コルドバ exec プロキシ</h2>
+<h2 id="コルドバ-exec-プロキシ">コルドバ exec プロキシ</h2>
 
 <p>Windows では、コルドバ API へのすべての cordova.exec 呼び出しを処理するオブジェクトの登録に使用することができますプロキシを提供します。</p>
 
 <p>たとえば、加速度計 API の実装を提供したい場合これを行うだろう：</p>
 
-<p>cordova.commandProxy.add (「加速」{開始: 関数 {//あなたのコードをここに...}、//ここでの API の残りの部分});</p>
+<p>cordova.commandProxy.add (「加速」{開始: 関数 {//あなたのコードをここに…}、//ここでの API の残りの部分});</p>
 
 <p>従って我々 は仮定する例では、Windows のプロキシを単に書くことができます JavaScript と私たちにクロスプラット フォームの関連する echoplugin.js 内のコードが処理すること</p>
-<div class="highlight"><pre><code class="language-" data-lang="">// in file echopluginProxy.js
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// in file echopluginProxy.js
 cordova.commandProxy.add("EchoPlugin",{
     echo:function(successCallback,errorCallback,strInput) {
         if(!strInput || !strInput.length) {
@@ -2295,38 +2300,42 @@ cordova.commandProxy.add("EchoPlugin",{
         }
     }
 });
-</code></pre></div>
+</code></pre></div></div>
+
 <p>プラグインの定義</p>
 
 <p>私たちのプラグインのユーザーを簡単に私たちのプラグインをインストールすることができる場合は、我々 PlugMan のプラグインを定義する方法によるとを定義する必要があります。 <a href="plugin_ref_spec.md.html#Plugin%20Specification">プラグイン仕様</a>でこれについての詳細</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
-<span class="nt">&lt;plugin</span> <span class="na">xmlns=</span><span class="s">"http://apache.org/cordova/ns/plugins/1.0"</span>
-    <span class="na">id=</span><span class="s">"com.risingj.echoplugin"</span>
-    <span class="na">version=</span><span class="s">"0.1.0"</span><span class="nt">&gt;</span>
 
-    <span class="nt">&lt;js-module</span> <span class="na">src=</span><span class="s">"www/echoplugin.js"</span> <span class="na">name=</span><span class="s">"echoplugin"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;clobbers</span> <span class="na">target=</span><span class="s">"window.echoplugin"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/js-module&gt;</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    id="com.risingj.echoplugin"
+    version="0.1.0"&gt;
 
-    <span class="c">&lt;!-- windows --&gt;</span>
-    <span class="nt">&lt;platform</span> <span class="na">name=</span><span class="s">"windows"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;js-module</span> <span class="na">src=</span><span class="s">"src/windows/echopluginProxy.js"</span> <span class="na">name=</span><span class="s">"EchoProxy"</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;merges</span> <span class="na">target=</span><span class="s">""</span> <span class="nt">/&gt;</span>
-        <span class="nt">&lt;/js-module&gt;</span>
-    <span class="nt">&lt;/platform&gt;</span>
+    &lt;js-module src="www/echoplugin.js" name="echoplugin"&gt;
+        &lt;clobbers target="window.echoplugin" /&gt;
+    &lt;/js-module&gt;
 
-    <span class="c">&lt;!-- other platforms --&gt;</span>
+    &lt;!-- windows --&gt;
+    &lt;platform name="windows"&gt;
+        &lt;js-module src="src/windows/echopluginProxy.js" name="EchoProxy"&gt;
+            &lt;merges target="" /&gt;
+        &lt;/js-module&gt;
+    &lt;/platform&gt;
 
-<span class="nt">&lt;/plugin&gt;</span>
-</code></pre></div>
+    &lt;!-- other platforms --&gt;
+
+&lt;/plugin&gt;
+</code></pre></div></div>
+
 <p>これにより作業 Windows JavaScript のプラグインの実装 (echopluginProxy.js) の Windows のみの部分を提供するためにプロキシを使用して共通ファイル (echoplugin.js) を使用します。 どのように私たちにネイティブ/マネージ コードを追加しますか？ 我々 は同じを始めるつもり、唯一の違いは、echopluginProxy メソッドの中で行うことになります。</p>
 
-<h1>WinJS は、ネイティブ/マネージ コードにアクセスする方法</h1>
+<h1 id="winjs-はネイティブマネージ-コードにアクセスする方法">WinJS は、ネイティブ/マネージ コードにアクセスする方法</h1>
 
 <p>Windows では、作成したアプリは、ネイティブ コードと対話することができる WinJS この間 op は Windows ランタイム コンポーネントの利用可能です。 詳細は数多くあり、このガイドは基本をカバーしてのみ。 マイクロソフトは多くの情報を提供します<a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh441569.aspx">ここ</a>.</p>
 
-<p>Windows ランタイム コンポーネント、任意のクラスを作成するときは、&#39;アクティブ化可能なクラス&#39; と見なされます &#39;パブリック ref クラスを sealed&#39; として定義されますと JavaScript から呼び出せる。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">// in your header file .h
+<p>Windows ランタイム コンポーネント、任意のクラスを作成するときは、’アクティブ化可能なクラス’ と見なされます ‘パブリック ref クラスを sealed’ として定義されますと JavaScript から呼び出せる。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// in your header file .h
 namespace EchoRuntimeComponent
 {
     public ref class EchoPluginRT sealed 
@@ -2351,11 +2360,13 @@ Platform::String^ EchoPluginRT::Echo(Platform::String^ input)
         return input-&gt;ToString() + "echo";
     }
 }
-</code></pre></div>
+</code></pre></div></div>
+
 <p>今ネイティブ コードを呼び出すために私たちを使用して、名前空間、クラス名、および lowerCamelCase 私たちを呼び出しているメソッド。</p>
 
-<p>var 解像度 = EchoRuntimeComponent.EchoPluginRT.echo(&quot;boom&quot;);これをファイルに移動私たち echopluginProxy.js 我々 はこれを取得：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">// in file echopluginProxy.js
+<p>var 解像度 = EchoRuntimeComponent.EchoPluginRT.echo(“boom”);これをファイルに移動私たち echopluginProxy.js 我々 はこれを取得：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// in file echopluginProxy.js
 cordova.commandProxy.add("EchoPlugin",{
     echo:function(successCallback,errorCallback,strInput) {
         var res = EchoRuntimeComponent.EchoPluginRT.echo(strInput);
@@ -2367,51 +2378,54 @@ cordova.commandProxy.add("EchoPlugin",{
         }
     }
 });
-</code></pre></div>
+</code></pre></div></div>
+
 <p>そしてそれは、我々 の使用のため、エンド ツー エンド バックアップ C++ js 呼び出し可能プラグイン Apache コルドバ、Windows にある ！</p>
 
-<h1>いくつかのテクニカル ノート:</h1>
+<h1 id="いくつかのテクニカル-ノート">いくつかのテクニカル ノート:</h1>
 
 <ul>
-<li>  コールバックは通常 async 呼び出し元によるコールバックをすぐに呼び出すことは期待していないだろうです。 実習では、呼び出しが非同期場合、少なくともしてください javascript タイムアウトを強制的に非同期に呼び出されるコールバック。</li>
-<li>  アクティブ化可能なクラスは派遣、非同期コールバック、独自のオブジェクトの型、配列、コレクション、オーバー ロードされたメソッドおよび大いに多くを渡すイベントのような素晴れらしいのすべての種類を行うことができます。 私はあなたの宿題をお勧めします。</li>
-<li>  一般的な Windows Phone 8.0 と Windows SDK API 呼び出しに固執する場合は、コンポーネントを使用して、同じランタイム (ネイティブまたはマネージ ビット) Windows Phone 8.0 Apache コルドバ プラグインできます。 〜 ポスト用にチューニング滞在します。</li>
+  <li>コールバックは通常 async 呼び出し元によるコールバックをすぐに呼び出すことは期待していないだろうです。 実習では、呼び出しが非同期場合、少なくともしてください javascript タイムアウトを強制的に非同期に呼び出されるコールバック。</li>
+  <li>アクティブ化可能なクラスは派遣、非同期コールバック、独自のオブジェクトの型、配列、コレクション、オーバー ロードされたメソッドおよび大いに多くを渡すイベントのような素晴れらしいのすべての種類を行うことができます。 私はあなたの宿題をお勧めします。</li>
+  <li>一般的な Windows Phone 8.0 と Windows SDK API 呼び出しに固執する場合は、コンポーネントを使用して、同じランタイム (ネイティブまたはマネージ ビット) Windows Phone 8.0 Apache コルドバ プラグインできます。 〜 ポスト用にチューニング滞在します。</li>
 </ul>
 
-<h1>あなたのプラグインを定義します。</h1>
+<h1 id="あなたのプラグインを定義します">あなたのプラグインを定義します。</h1>
 
 <p>我々 は作業のプラグインを持って、今我々 はそれを公開することができますので、以前からプラグインの定義を再検討する必要があります。 我々 は今フレームワークとしてランタイム コンポーネントを追加できます。 .Winmd または .dll、WindowsRuntimeComponent の出力型できることに注意してください。</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
-<span class="nt">&lt;plugin</span> <span class="na">xmlns=</span><span class="s">"http://apache.org/cordova/ns/plugins/1.0"</span>
-    <span class="na">id=</span><span class="s">"com.risingj.echoplugin"</span>
-    <span class="na">version=</span><span class="s">"0.2.0"</span><span class="nt">&gt;</span>
 
-    <span class="nt">&lt;js-module</span> <span class="na">src=</span><span class="s">"www/echoplugin.js"</span> <span class="na">name=</span><span class="s">"echoplugin"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;clobbers</span> <span class="na">target=</span><span class="s">"window.echoplugin"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/js-module&gt;</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    id="com.risingj.echoplugin"
+    version="0.2.0"&gt;
 
-    <span class="c">&lt;!-- windows --&gt;</span>
-    <span class="nt">&lt;platform</span> <span class="na">name=</span><span class="s">"windows"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;js-module</span> <span class="na">src=</span><span class="s">"src/windows/echopluginProxy.js"</span> <span class="na">name=</span><span class="s">"EchoProxy"</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;merges</span> <span class="na">target=</span><span class="s">""</span> <span class="nt">/&gt;</span>
-        <span class="nt">&lt;/js-module&gt;</span>
-        <span class="nt">&lt;framework</span> <span class="na">src=</span><span class="s">"src/windows/EchoRuntimeComponent.winmd"</span> <span class="na">custom=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/platform&gt;</span>
+    &lt;js-module src="www/echoplugin.js" name="echoplugin"&gt;
+        &lt;clobbers target="window.echoplugin" /&gt;
+    &lt;/js-module&gt;
 
-    <span class="c">&lt;!-- other platforms --&gt;</span>
+    &lt;!-- windows --&gt;
+    &lt;platform name="windows"&gt;
+        &lt;js-module src="src/windows/echopluginProxy.js" name="EchoProxy"&gt;
+            &lt;merges target="" /&gt;
+        &lt;/js-module&gt;
+        &lt;framework src="src/windows/EchoRuntimeComponent.winmd" custom="true"/&gt;
+    &lt;/platform&gt;
 
-<span class="nt">&lt;/plugin&gt;</span>
-</code></pre></div>
+    &lt;!-- other platforms --&gt;
+
+&lt;/plugin&gt;
+</code></pre></div></div>
+
 <p>それは、今、世界と共有することができます、配布可能なプラグインがある! 1 つの事に注意してください Windows コルドバ プロジェクトにフレームワークを追加するためのサポートは、コルドバの現在のツーリングになっていることを確認する必要がありますのでのみ最近追加されました。 コルドバ cli とコルドバ plugman サポート ネイティブ バックアップのプラグインを削除するを追加します。</p>
 
 <blockquote>
-<p>cordova plugin add com.risingj.echoplugin</p>
+  <p>cordova plugin add com.risingj.echoplugin</p>
 </blockquote>
 
 <p>または</p>
 
 <blockquote>
-<p>plugman install --platform windows --plugin com.risingj.echoplugin --project .</p>
+  <p>plugman install –platform windows –plugin com.risingj.echoplugin –project .</p>
 </blockquote>
 
 <p>https://github.com/purplecabbage/cordova-runtimecomp-echoplug</p>

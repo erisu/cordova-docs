@@ -1436,39 +1436,42 @@
             
 
             <div id="page-toc-source">
-                <h1>capture.captureImage</h1>
+                <h1 id="capturecaptureimage">capture.captureImage</h1>
 
 <blockquote>
-<p><a href="../../camera/camera.html">カメラ</a> アプリケーションを起動し、キャプチャしたイメージ ファイルに関する情報を返します。</p>
+  <p><a href="../../camera/camera.html">カメラ</a> アプリケーションを起動し、キャプチャしたイメージ ファイルに関する情報を返します。</p>
 </blockquote>
-<div class="highlight"><pre><code class="language-" data-lang="">navigator.device.capture.captureImage(
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigator.device.capture.captureImage(
     CaptureCB captureSuccess, CaptureErrorCB captureError, [CaptureImageOptions options]
 );
-</code></pre></div>
-<h2>説明</h2>
+</code></pre></div></div>
+
+<h2 id="説明">説明</h2>
 
 <p>デバイスのカメラ アプリケーションを使用して画像をキャプチャする非同期操作を開始します。操作では、単一のセッションで 1 つ以上のイメージをキャプチャすることができます。</p>
 
-<p>キャプチャ操作終了いずれかのユーザーが閉じると、カメラ アプリケーションまたは録音で指定された最大数 <code>[CaptureAudioOptions](captureAudioOptions.html).limit</code> に達した。 場合ない <code>limit</code> 値が指定されて、既定の 1 つ (1)、キャプチャ操作終了後、ユーザーは単一のイメージをキャプチャします。</p>
+<p>キャプチャ操作終了いずれかのユーザーが閉じると、カメラ アプリケーションまたは録音で指定された最大数 <code class="language-plaintext highlighter-rouge">[CaptureAudioOptions](captureAudioOptions.html).limit</code> に達した。 場合ない <code class="language-plaintext highlighter-rouge">limit</code> 値が指定されて、既定の 1 つ (1)、キャプチャ操作終了後、ユーザーは単一のイメージをキャプチャします。</p>
 
-<p>キャプチャ操作が完了したら、それを呼び出す、 <code>[CaptureCB](CaptureCB.html)</code> の配列がコールバック <code>MediaFile</code> 各キャプチャされたイメージ ファイルを記述するオブジェクト。 ユーザーは、イメージをキャプチャする前に操作が終了した場合、 <code>[CaptureErrorCB](CaptureErrorCB.html)</code> コールバックで実行する、 <code>[CaptureError](CaptureError.html)</code> オブジェクトの特色、 <code>[CaptureError](CaptureError.html).CAPTURE_NO_MEDIA_FILES</code> エラー コード。</p>
+<p>キャプチャ操作が完了したら、それを呼び出す、 <code class="language-plaintext highlighter-rouge">[CaptureCB](CaptureCB.html)</code> の配列がコールバック <code class="language-plaintext highlighter-rouge">MediaFile</code> 各キャプチャされたイメージ ファイルを記述するオブジェクト。 ユーザーは、イメージをキャプチャする前に操作が終了した場合、 <code class="language-plaintext highlighter-rouge">[CaptureErrorCB](CaptureErrorCB.html)</code> コールバックで実行する、 <code class="language-plaintext highlighter-rouge">[CaptureError](CaptureError.html)</code> オブジェクトの特色、 <code class="language-plaintext highlighter-rouge">[CaptureError](CaptureError.html).CAPTURE_NO_MEDIA_FILES</code> エラー コード。</p>
 
-<h2>サポートされているプラットフォーム</h2>
+<h2 id="サポートされているプラットフォーム">サポートされているプラットフォーム</h2>
 
 <ul>
-<li>  アンドロイド</li>
-<li>  ブラックベリー WebWorks (OS 5.0 およびより高い)</li>
-<li>  iOS</li>
-<li>  Windows Phone 7 と 8</li>
-<li>  Windows 8</li>
+  <li>アンドロイド</li>
+  <li>ブラックベリー WebWorks (OS 5.0 およびより高い)</li>
+  <li>iOS</li>
+  <li>Windows Phone 7 と 8</li>
+  <li>Windows 8</li>
 </ul>
 
-<h2>Windows Phone 7 の癖</h2>
+<h2 id="windows-phone-7-の癖">Windows Phone 7 の癖</h2>
 
 <p>Zune を介してお使いのデバイスが接続されているネイティブ <a href="../../camera/camera.html">カメラ</a> アプリケーションを呼び出すと、動作しませんし、エラー コールバックを実行します。</p>
 
-<h2>簡単な例</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">// capture callback
+<h2 id="簡単な例">簡単な例</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// capture callback
 var captureSuccess = function(mediaFiles) {
     var i, path, len;
     for (i = 0, len = mediaFiles.length; i &lt; len; i += 1) {
@@ -1484,66 +1487,69 @@ var captureError = function(error) {
 
 // start image capture
 navigator.device.capture.captureImage(captureSuccess, captureError, {limit:2});
-</code></pre></div>
-<h2>完全な例</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Capture Image<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"json2.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="完全な例">完全な例</h2>
 
-    <span class="c1">// Called when capture operation is finished</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">captureSuccess</span><span class="p">(</span><span class="nx">mediaFiles</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">len</span><span class="p">;</span>
-        <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">mediaFiles</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">uploadFile</span><span class="p">(</span><span class="nx">mediaFiles</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Capture Image&lt;/title&gt;
 
-    <span class="c1">// Called if something bad happens.</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">captureError</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">msg</span> <span class="o">=</span> <span class="s1">'An error occurred during capture: '</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span><span class="p">;</span>
-        <span class="nb">navigator</span><span class="p">.</span><span class="nx">notification</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="nx">msg</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="s1">'Uh oh!'</span><span class="p">);</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="json2.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// A button will call this function</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">captureImage</span><span class="p">()</span> <span class="p">{</span>
-        <span class="c1">// Launch device camera application,</span>
-        <span class="c1">// allowing user to capture up to 2 images</span>
-        <span class="nb">navigator</span><span class="p">.</span><span class="nx">device</span><span class="p">.</span><span class="nx">capture</span><span class="p">.</span><span class="nx">captureImage</span><span class="p">(</span><span class="nx">captureSuccess</span><span class="p">,</span> <span class="nx">captureError</span><span class="p">,</span> <span class="p">{</span><span class="na">limit</span><span class="p">:</span> <span class="mi">2</span><span class="p">});</span>
-    <span class="p">}</span>
+    // Called when capture operation is finished
+    //
+    function captureSuccess(mediaFiles) {
+        var i, len;
+        for (i = 0, len = mediaFiles.length; i &lt; len; i += 1) {
+            uploadFile(mediaFiles[i]);
+        }
+    }
 
-    <span class="c1">// Upload files to server</span>
-    <span class="kd">function</span> <span class="nx">uploadFile</span><span class="p">(</span><span class="nx">mediaFile</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">ft</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileTransfer</span><span class="p">(),</span>
-            <span class="nx">path</span> <span class="o">=</span> <span class="nx">mediaFile</span><span class="p">.</span><span class="nx">fullPath</span><span class="p">,</span>
-            <span class="nx">name</span> <span class="o">=</span> <span class="nx">mediaFile</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+    // Called if something bad happens.
+    //
+    function captureError(error) {
+        var msg = 'An error occurred during capture: ' + error.code;
+        navigator.notification.alert(msg, null, 'Uh oh!');
+    }
 
-        <span class="nx">ft</span><span class="p">.</span><span class="nx">upload</span><span class="p">(</span><span class="nx">path</span><span class="p">,</span>
-            <span class="s2">"http://my.domain.com/upload.php"</span><span class="p">,</span>
-            <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Upload success: '</span> <span class="o">+</span> <span class="nx">result</span><span class="p">.</span><span class="nx">responseCode</span><span class="p">);</span>
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">bytesSent</span> <span class="o">+</span> <span class="s1">' bytes sent'</span><span class="p">);</span>
-            <span class="p">},</span>
-            <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Error uploading file '</span> <span class="o">+</span> <span class="nx">path</span> <span class="o">+</span> <span class="s1">': '</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span><span class="p">);</span>
-            <span class="p">},</span>
-            <span class="p">{</span> <span class="na">fileName</span><span class="p">:</span> <span class="nx">name</span> <span class="p">});</span>
-    <span class="p">}</span>
+    // A button will call this function
+    //
+    function captureImage() {
+        // Launch device camera application,
+        // allowing user to capture up to 2 images
+        navigator.device.capture.captureImage(captureSuccess, captureError, {limit: 2});
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-    <span class="nt">&lt;/head&gt;</span>
-    <span class="nt">&lt;body&gt;</span>
-        <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"captureImage();"</span><span class="nt">&gt;</span>Capture Image<span class="nt">&lt;/button&gt;</span> <span class="nt">&lt;br&gt;</span>
-    <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+    // Upload files to server
+    function uploadFile(mediaFile) {
+        var ft = new FileTransfer(),
+            path = mediaFile.fullPath,
+            name = mediaFile.name;
+
+        ft.upload(path,
+            "http://my.domain.com/upload.php",
+            function(result) {
+                console.log('Upload success: ' + result.responseCode);
+                console.log(result.bytesSent + ' bytes sent');
+            },
+            function(error) {
+                console.log('Error uploading file ' + path + ': ' + error.code);
+            },
+            { fileName: name });
+    }
+
+    &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;button onclick="captureImage();"&gt;Capture Image&lt;/button&gt; &lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

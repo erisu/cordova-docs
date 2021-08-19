@@ -1022,21 +1022,21 @@
             
 
             <div id="page-toc-source">
-                <h1>Przewodnik platformy iOS</h1>
+                <h1 id="przewodnik-platformy-ios">Przewodnik platformy iOS</h1>
 
 <p>Ten poradnik pokazuje jak skonfigurować SDK środowiska wdrażania Cordova aplikacji dla systemu iOS iPhone i iPad. Zobacz następujące szczegółowe informacje specyficzne dla platformy:</p>
 
 <ul>
-<li>  <a href="config.html">Konfiguracja iOS</a></li>
-<li>  <a href="upgrade.html">Aktualizacja iOS</a></li>
-<li>  <a href="webview.html">iOS WebViews</a></li>
-<li>  <a href="plugin.html">iOS wtyczek</a></li>
-<li>  <a href="tools.html">iOS Shell narzędzia Przewodnik</a></li>
+  <li><a href="config.html">Konfiguracja iOS</a></li>
+  <li><a href="upgrade.html">Aktualizacja iOS</a></li>
+  <li><a href="webview.html">iOS WebViews</a></li>
+  <li><a href="plugin.html">iOS wtyczek</a></li>
+  <li><a href="tools.html">iOS Shell narzędzia Przewodnik</a></li>
 </ul>
 
 <p>Narzędzia wiersza polecenia powyżej odnosi się do wcześniejszych Cordova 3.0. Zobacz interfejs wiersza poleceń do informacji o bieżącym interfejs.</p>
 
-<h2>Wymagania i wsparcie</h2>
+<h2 id="wymagania-i-wsparcie">Wymagania i wsparcie</h2>
 
 <p>Apple ® narzędzia potrzebne do tworzenia aplikacji iOS tylko na systemie operacyjnym na Intel oparty Mac OS X. Xcode ® 6.0 (minimalna wymagana wersja) działa tylko na OS X w wersji 10.9 (Mavericks) lub większym i zawiera iOS 8 SDK (Software Development Kit). Do składania aplikacji na Apple App Store℠ wymaga najnowszej wersji narzędzia Apple.</p>
 
@@ -1044,96 +1044,132 @@
 
 <p><a href="https://www.npmjs.org/package/ios-sim">Ios-sim</a> i <a href="https://www.npmjs.org/package/ios-deploy">ios-deploy</a> narzędzia - pozwala na uruchomienie iOS aplikacji na iOS symulator i urządzenia iOS z wiersza polecenia.</p>
 
-<h2>Instalowanie SDK</h2>
+<h2 id="instalowanie-sdk">Instalowanie SDK</h2>
 
 <p>Istnieją dwa sposoby pobrania Xcode:</p>
 
 <ul>
-<li><p>z <a href="https://itunes.apple.com/us/app/xcode/id497799835?mt=12">App Store</a>, dostępne przez poszukiwanie &quot;Xcode&quot; w <strong>App Store</strong> aplikację.</p></li>
-<li><p>od <a href="https://developer.apple.com/downloads/index.action">Apple Developer pliki do pobrania</a>, który wymaga rejestracji jako Apple Developer.</p></li>
+  <li>
+    <p>z <a href="https://itunes.apple.com/us/app/xcode/id497799835?mt=12">App Store</a>, dostępne przez poszukiwanie “Xcode” w <strong>App Store</strong> aplikację.</p>
+  </li>
+  <li>
+    <p>od <a href="https://developer.apple.com/downloads/index.action">Apple Developer pliki do pobrania</a>, który wymaga rejestracji jako Apple Developer.</p>
+  </li>
 </ul>
 
 <p>Po zainstalowaniu Xcode kilka narzędzi wiersza polecenia należy włączyć dla Cordova do uruchomienia. <strong>Xcode</strong> menu wybierz <strong>Ustawienia</strong>, a następnie w zakładce <strong>pliki do pobrania</strong> . Z panelu <strong>składniki</strong> naciśnij przycisk <strong>zainstalować</strong> <strong>Narzędzia wiersza polecenia</strong> lista.</p>
 
-<h2>Zainstaluj wdrożyć narzędzia</h2>
+<h2 id="zainstaluj-wdrożyć-narzędzia">Zainstaluj wdrożyć narzędzia</h2>
 
 <p>Należy uruchomić terminal comman-line:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ npm install -g ios-sim
-    $ npm install -g ios-deploy
-</code></pre></div>
-<h2>Tworzenie nowego projektu</h2>
 
-<p>Użyj narzędzia <code>cordova</code> założyć nowy projekt, opisanym w The Cordova interfejs wiersza poleceń. Na przykład w katalogu kodu źródłowego:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova create hello com.example.hello "HelloWorld"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ npm install -g ios-sim
+    $ npm install -g ios-deploy
+</code></pre></div></div>
+
+<h2 id="tworzenie-nowego-projektu">Tworzenie nowego projektu</h2>
+
+<p>Użyj narzędzia <code class="language-plaintext highlighter-rouge">cordova</code> założyć nowy projekt, opisanym w The Cordova interfejs wiersza poleceń. Na przykład w katalogu kodu źródłowego:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova create hello com.example.hello "HelloWorld"
     $ cd hello
     $ cordova platform add ios
     $ cordova prepare              # or "cordova build"
-</code></pre></div>
-<h2>Wdrażanie aplikacji</h2>
+</code></pre></div></div>
+
+<h2 id="wdrażanie-aplikacji">Wdrażanie aplikacji</h2>
 
 <p>Do wdrażania aplikacji na urządzenia podłączone iOS:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova run ios --device
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova run ios --device
+</code></pre></div></div>
+
 <p>Aby wdrożyć aplikację na domyślny emulator iOS:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova emulate ios
-</code></pre></div>
-<p>Można użyć <strong>cordova run ios --list</strong> aby zobaczyć wszystkie dostępne cele i <strong>cordova run ios --target=target_name</strong> do uruchomienia aplikacji na urządzenia lub emulatora (na przykład <code>cordova run ios --target=&quot;iPhone-6&quot;</code>).</p>
 
-<p>Umożliwia także <strong>cordova uruchomić--Pomoc</strong> Zobacz dodatkowe budować i uruchamiać opcji.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova emulate ios
+</code></pre></div></div>
 
-<h2>Otwórz projekt w SDK</h2>
+<p>Można użyć <strong>cordova run ios –list</strong> aby zobaczyć wszystkie dostępne cele i <strong>cordova run ios –target=target_name</strong> do uruchomienia aplikacji na urządzenia lub emulatora (na przykład <code class="language-plaintext highlighter-rouge">cordova run ios --target="iPhone-6"</code>).</p>
 
-<p>Po platformie ios jest dodawany do projektu, można otworzyć go w Xcode. Kliknij dwukrotnie, aby otworzyć plik <code>hello/platforms/ios/hello.xcodeproj</code> . Ekran powinien wyglądać tak:</p>
+<p>Umożliwia także <strong>cordova uruchomić–Pomoc</strong> Zobacz dodatkowe budować i uruchamiać opcji.</p>
 
-<p><img src="/static/img/guide/platforms/ios/helloworld_project.png" alt=""></p>
+<h2 id="otwórz-projekt-w-sdk">Otwórz projekt w SDK</h2>
 
-<h2>Wdrażanie do emulatora</h2>
+<p>Po platformie ios jest dodawany do projektu, można otworzyć go w Xcode. Kliknij dwukrotnie, aby otworzyć plik <code class="language-plaintext highlighter-rouge">hello/platforms/ios/hello.xcodeproj</code> . Ekran powinien wyglądać tak:</p>
+
+<p><img src="/static/img/guide/platforms/ios/helloworld_project.png" alt="" /></p>
+
+<h2 id="wdrażanie-do-emulatora">Wdrażanie do emulatora</h2>
 
 <p>Aby wyświetlić podgląd aplikacji w emulatorze iOS:</p>
 
 <ol>
-<li><p>Upewnij się, że plik <em>.xcodeproj</em> jest zaznaczone w panelu po lewej stronie.</p></li>
-<li><p>Wybierz aplikację <strong>Witaj</strong> w panelu po prawej stronie.</p></li>
-<li><p>Wybierz urządzenie przeznaczone z paska menu <strong>programu</strong> , takich jak iPhone symulator 6.0 jako wyróżnione tu:</p>
+  <li>
+    <p>Upewnij się, że plik <em>.xcodeproj</em> jest zaznaczone w panelu po lewej stronie.</p>
+  </li>
+  <li>
+    <p>Wybierz aplikację <strong>Witaj</strong> w panelu po prawej stronie.</p>
+  </li>
+  <li>
+    <p>Wybierz urządzenie przeznaczone z paska menu <strong>programu</strong> , takich jak iPhone symulator 6.0 jako wyróżnione tu:</p>
 
-<p><img src="/static/img/guide/platforms/ios/select_xcode_scheme.png" alt=""></p></li>
-<li><p>Naciśnij przycisk <strong>Uruchom</strong> , który pojawia się w tych samych narzędzi po lewej stronie <strong>systemu</strong>. Który tworzy, wdraża i uruchamia aplikację w emulatorze. Stosowanie oddzielnych emulatora otwiera do wyświetlania aplikacji:</p>
+    <p><img src="/static/img/guide/platforms/ios/select_xcode_scheme.png" alt="" /></p>
+  </li>
+  <li>
+    <p>Naciśnij przycisk <strong>Uruchom</strong> , który pojawia się w tych samych narzędzi po lewej stronie <strong>systemu</strong>. Który tworzy, wdraża i uruchamia aplikację w emulatorze. Stosowanie oddzielnych emulatora otwiera do wyświetlania aplikacji:</p>
 
-<p><img src="/static/img/guide/platforms/ios/HelloWorldStandard.png" alt=""></p>
+    <p><img src="/static/img/guide/platforms/ios/HelloWorldStandard.png" alt="" /></p>
 
-<p>Tylko jeden emulatora może działać w czasie, więc jeśli chcesz przetestować aplikację w inny emulator, musisz zamknąć aplikację emulatora i uruchomić inny cel w Xcode.</p></li>
+    <p>Tylko jeden emulatora może działać w czasie, więc jeśli chcesz przetestować aplikację w inny emulator, musisz zamknąć aplikację emulatora i uruchomić inny cel w Xcode.</p>
+  </li>
 </ol>
 
 <p>Xcode jest dostarczany z emulatorów dla najnowszej wersji iPhone i iPad. Starsze wersje mogą być dostępne z <strong>Xcode → preferencje → pobieranie składników →</strong> panelu.</p>
 
-<h2>Wdrażanie do urządzenia</h2>
+<h2 id="wdrażanie-do-urządzenia">Wdrażanie do urządzenia</h2>
 
 <p>Szczegółowe informacje na temat różnych wymagań aby wdrożyć urządzenie odnoszą się do sekcji <em>Uruchomić twój aplikacja na urządzenia</em> firmy Apple <a href="https://developer.apple.com/library/prerelease/ios/documentation/IDEs/Conceptual/AppDistributionGuide/Introduction/Introduction.html">O przepływy dystrybucji aplikacji</a>. Krótko mówiąc trzeba wykonać następujące czynności przed wdrożeniem:</p>
 
 <ol>
-<li><p>Dołącz do Apple iOS Developer Program.</p></li>
-<li><p>Utwórz <em>Profil Provisioning</em> w <a href="https://developer.apple.com/ios/manage/overview/index.action">iOS Provisioning Portal</a>. Można użyć jego <em>Rozwoju rezerw asystent</em> tworzenia i instalować profil i wymaga certyfikatu Xcode.</p></li>
-<li><p>Sprawdź, czy sekcji <em>Podpisywania kodu</em> <em>Kod podpisywanie tożsamości</em> w ustawieniach projektu jest zestaw do nazwy profilu zastrzegania.</p></li>
+  <li>
+    <p>Dołącz do Apple iOS Developer Program.</p>
+  </li>
+  <li>
+    <p>Utwórz <em>Profil Provisioning</em> w <a href="https://developer.apple.com/ios/manage/overview/index.action">iOS Provisioning Portal</a>. Można użyć jego <em>Rozwoju rezerw asystent</em> tworzenia i instalować profil i wymaga certyfikatu Xcode.</p>
+  </li>
+  <li>
+    <p>Sprawdź, czy sekcji <em>Podpisywania kodu</em> <em>Kod podpisywanie tożsamości</em> w ustawieniach projektu jest zestaw do nazwy profilu zastrzegania.</p>
+  </li>
 </ol>
 
 <p>Aby wdrożyć urządzenie:</p>
 
 <ol>
-<li><p>Za pomocą kabla USB do podłączenia urządzenia do komputera Mac.</p></li>
-<li><p>Wybierz nazwę projektu w oknie Xcode <strong>systemu</strong> drop niedziałający listy.</p></li>
-<li><p>Wybierz urządzenie z listy rozwijanej <strong>urządzenia</strong> . Jeśli jest podłączony przez USB, ale nadal nie ma, naciśnij przycisk <strong>organizator</strong> , aby rozwiązać wszelkie błędy.</p></li>
-<li><p>Naciśnij przycisk <strong>Uruchom</strong> , aby zbudować, wdrożyć i uruchom aplikację na urządzeniu.</p></li>
+  <li>
+    <p>Za pomocą kabla USB do podłączenia urządzenia do komputera Mac.</p>
+  </li>
+  <li>
+    <p>Wybierz nazwę projektu w oknie Xcode <strong>systemu</strong> drop niedziałający listy.</p>
+  </li>
+  <li>
+    <p>Wybierz urządzenie z listy rozwijanej <strong>urządzenia</strong> . Jeśli jest podłączony przez USB, ale nadal nie ma, naciśnij przycisk <strong>organizator</strong> , aby rozwiązać wszelkie błędy.</p>
+  </li>
+  <li>
+    <p>Naciśnij przycisk <strong>Uruchom</strong> , aby zbudować, wdrożyć i uruchom aplikację na urządzeniu.</p>
+  </li>
 </ol>
 
-<h2>Typowe problemy</h2>
+<h2 id="typowe-problemy">Typowe problemy</h2>
 
 <p><strong>Oczekiwany ostrzeżenia</strong>: podczas aplikacji interfejs programistyczny (API) jest zmieniony lub zastąpiony przez innego interfejsu API, to jest oznaczony jako <em>przestarzały</em>. API nadal działa w najbliższym czasie, ale ostatecznie usunięty. Niektóre z tych interfejsów zaniechane znajdują odzwierciedlenie w Apache Cordova, i Xcode kwestii ostrzeżenia o nich podczas tworzenia i wdrażania aplikacji.</p>
 
-<p>Xcode jest ostrzeżenie o metodzie <code>invokeString</code> dotyczy funkcji, które uruchamia aplikację z niestandardowego adresu URL. Chociaż mechanizm ładowania z niestandardowy adres URL został zmieniony, ten kod jest nadal obecny do tyłu funkcjonalność dla aplikacji utworzonych w starszych wersjach Cordova. Aplikacja przykładowej nie używać tej funkcji, więc te ostrzeżenia, mogą być ignorowane. Aby zapobiec te ostrzeżenia wyświetlane, należy usunąć kod, który odwołuje się do invokeString przestarzałe API:</p>
+<p>Xcode jest ostrzeżenie o metodzie <code class="language-plaintext highlighter-rouge">invokeString</code> dotyczy funkcji, które uruchamia aplikację z niestandardowego adresu URL. Chociaż mechanizm ładowania z niestandardowy adres URL został zmieniony, ten kod jest nadal obecny do tyłu funkcjonalność dla aplikacji utworzonych w starszych wersjach Cordova. Aplikacja przykładowej nie używać tej funkcji, więc te ostrzeżenia, mogą być ignorowane. Aby zapobiec te ostrzeżenia wyświetlane, należy usunąć kod, który odwołuje się do invokeString przestarzałe API:</p>
 
 <ul>
-<li><p>Edytuj plik <em>Classes/MainViewController.m</em> , otoczyć w następującym fragmencie kodu z <code>/*</code> i <code>*/</code> komentarzy jak pokazano poniżej, a następnie wpisz <strong>polecenia s</strong> , aby zapisać plik:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">(void)webViewDidFinishLoad:(UIWebView*)theWebView
+  <li>
+    <p>Edytuj plik <em>Classes/MainViewController.m</em> , otoczyć w następującym fragmencie kodu z <code class="language-plaintext highlighter-rouge">/*</code> i <code class="language-plaintext highlighter-rouge">*/</code> komentarzy jak pokazano poniżej, a następnie wpisz <strong>polecenia s</strong> , aby zapisać plik:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(void)webViewDidFinishLoad:(UIWebView*)theWebView
 {
 // only valid if ___PROJECTNAME__-Info.plist specifies a protocol to handle
 /*
@@ -1146,14 +1182,20 @@ if (self.invokeString) {
 */
 // Black base color for background matches the native apps
 theWebView.backgroundColor = [UIColor blackColor];
-
+    
 return [super webViewDidFinishLoad:theWebView];
 }
-</code></pre></div></li>
-<li><p>Edytuj plik <em>Classes/AppViewDelegate.m</em> , komentarz na zewnątrz ten kolejne specjalność wstawiając podwójny ukośnik, jak pokazano poniżej, a następnie wpisz <strong>polecenie s</strong> , aby zapisać plik:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">//self.viewController.invokeString = invokeString;
-</code></pre></div></li>
-<li><p>Naciśnij <strong>b polecenie</strong> Odbuduj projekt i wyeliminowania ostrzeżenia.</p></li>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Edytuj plik <em>Classes/AppViewDelegate.m</em> , komentarz na zewnątrz ten kolejne specjalność wstawiając podwójny ukośnik, jak pokazano poniżej, a następnie wpisz <strong>polecenie s</strong> , aby zapisać plik:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//self.viewController.invokeString = invokeString;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Naciśnij <strong>b polecenie</strong> Odbuduj projekt i wyeliminowania ostrzeżenia.</p>
+  </li>
 </ul>
 
 <!-- Does this fix only last until the next "cordova prepare"? -->
@@ -1161,10 +1203,14 @@ return [super webViewDidFinishLoad:theWebView];
 <p><strong>Brak nagłówków</strong>: błędy odnoszące się do brakujących nagłówków wynikają z problemów z lokalizacji budowy i może być ustalona za pomocą Xcode preferencji:</p>
 
 <ol>
-<li><p>Wybierz <strong>Xcode → preferencje → lokalizacje</strong>.</p></li>
-<li><p>W sekcji <strong>Uzyskanych danych</strong> naciśnij przycisk <strong>Zaawansowane</strong> i wybierz <strong>unikatowy</strong> jako <strong>Miejsce budowy</strong> , jak pokazano poniżej:</p>
+  <li>
+    <p>Wybierz <strong>Xcode → preferencje → lokalizacje</strong>.</p>
+  </li>
+  <li>
+    <p>W sekcji <strong>Uzyskanych danych</strong> naciśnij przycisk <strong>Zaawansowane</strong> i wybierz <strong>unikatowy</strong> jako <strong>Miejsce budowy</strong> , jak pokazano poniżej:</p>
 
-<p><img src="/static/img/guide/platforms/ios/xcode_build_location.png" alt=""></p></li>
+    <p><img src="/static/img/guide/platforms/ios/xcode_build_location.png" alt="" /></p>
+  </li>
 </ol>
 
 <p>Jest to ustawienie domyślne dla nowych Xcode zainstalować, ale może być zestaw, inaczej po uaktualnienie ze starszej wersji Xcode.</p>
@@ -1172,12 +1218,24 @@ return [super webViewDidFinishLoad:theWebView];
 <p>Aby uzyskać więcej informacji zajrzyj do dokumentacji firmy Apple:</p>
 
 <ul>
-<li><p><a href="http://developer.apple.com/library/ios/#referencelibrary/GettingStarted/RoadMapiOS/index.html#//apple_ref/doc/uid/TP40011343">Start rozwoju iOS aplikacji dziś</a> zapewnia szybki przegląd kroków dla rozwoju iOS aplikacji.</p></li>
-<li><p><a href="https://developer.apple.com/membercenter/index.action">Centrum Państwa Strona</a> zawiera linki do kilku iOS zasobów technicznych, w tym zasobów technicznych, obsługi portalu, dystrybucja przewodników i fora.</p></li>
-<li><p><a href="http://developer.apple.com/library/ios/#documentation/Xcode/Conceptual/ios_development_workflow/00-About_the_iOS_Application_Development_Workflow/introduction.html#//apple_ref/doc/uid/TP40007959">Narzędzia pracy poradnik dla iOS</a></p></li>
-<li><p><a href="http://developer.apple.com/library/ios/#documentation/ToolsLanguages/Conceptual/Xcode4UserGuide/000-About_Xcode/about.html#//apple_ref/doc/uid/TP40010215">Podręcznik użytkownika Xcode</a></p></li>
-<li><p><a href="https://developer.apple.com/videos/wwdc/2012/">Sesja wideo</a> z konferencji dewelopera szerokim świecie Apple 2012 (WWDC2012)</p></li>
-<li><p><a href="http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/xcode-select.1.html">Xcode wybierz polecenie</a>, które pomaga określić poprawną wersję Xcode, jeśli więcej niż jeden jest zainstalowany.</p></li>
+  <li>
+    <p><a href="http://developer.apple.com/library/ios/#referencelibrary/GettingStarted/RoadMapiOS/index.html#//apple_ref/doc/uid/TP40011343">Start rozwoju iOS aplikacji dziś</a> zapewnia szybki przegląd kroków dla rozwoju iOS aplikacji.</p>
+  </li>
+  <li>
+    <p><a href="https://developer.apple.com/membercenter/index.action">Centrum Państwa Strona</a> zawiera linki do kilku iOS zasobów technicznych, w tym zasobów technicznych, obsługi portalu, dystrybucja przewodników i fora.</p>
+  </li>
+  <li>
+    <p><a href="http://developer.apple.com/library/ios/#documentation/Xcode/Conceptual/ios_development_workflow/00-About_the_iOS_Application_Development_Workflow/introduction.html#//apple_ref/doc/uid/TP40007959">Narzędzia pracy poradnik dla iOS</a></p>
+  </li>
+  <li>
+    <p><a href="http://developer.apple.com/library/ios/#documentation/ToolsLanguages/Conceptual/Xcode4UserGuide/000-About_Xcode/about.html#//apple_ref/doc/uid/TP40010215">Podręcznik użytkownika Xcode</a></p>
+  </li>
+  <li>
+    <p><a href="https://developer.apple.com/videos/wwdc/2012/">Sesja wideo</a> z konferencji dewelopera szerokim świecie Apple 2012 (WWDC2012)</p>
+  </li>
+  <li>
+    <p><a href="http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/xcode-select.1.html">Xcode wybierz polecenie</a>, które pomaga określić poprawną wersję Xcode, jeśli więcej niż jeden jest zainstalowany.</p>
+  </li>
 </ul>
 
 <p>(Mac ® OS X ®, Xcode ®, Apple ® App Store℠, iPad ®, iPhone ®, iPoda ® i Finder ® są znakami towarowymi firmy Apple Inc)</p>

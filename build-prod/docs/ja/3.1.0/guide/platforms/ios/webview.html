@@ -1436,101 +1436,188 @@
             
 
             <div id="page-toc-source">
-                <h1>iOS の web 表示</h1>
+                <h1 id="ios-の-web-表示">iOS の web 表示</h1>
 
-<p>コルドバ 1.4 以降では、iOS アプリケーションでコルドバ、コンポーネントとして使用できます。このコンポーネントは、コードネーム &#39;包丁&#39;。</p>
+<p>コルドバ 1.4 以降では、iOS アプリケーションでコルドバ、コンポーネントとして使用できます。このコンポーネントは、コードネーム ‘包丁’。</p>
 
 <p>新しいコルドバ ベースのアプリケーション コルドバ 1.4 またはより大きい使用の包丁で提供される Xcode テンプレートを使用して作成されます。(テンプレートは包丁のリファレンス実装) です。</p>
 
 <p>コルドバ 2.0.0 とそれ以降のバージョンに基づいてサブ プロジェクト包丁実装をサポートのみ。</p>
 
-<h2>前提条件</h2>
+<h2 id="前提条件">前提条件</h2>
 
 <ul>
-<li><p>コルドバ 2.3.0 以上</p></li>
-<li><p>Xcode 4.5 以上</p></li>
-<li><p><code>config.xml</code>ファイルから新しく作成された iOS プロジェクト)</p></li>
+  <li>
+    <p>コルドバ 2.3.0 以上</p>
+  </li>
+  <li>
+    <p>Xcode 4.5 以上</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">config.xml</code>ファイルから新しく作成された iOS プロジェクト)</p>
+  </li>
 </ul>
 
-<h2>包丁、Xcode プロジェクト (CordovaLib サブ プロジェクト) に追加します。</h2>
+<h2 id="包丁xcode-プロジェクト-cordovalib-サブ-プロジェクト-に追加します">包丁、Xcode プロジェクト (CordovaLib サブ プロジェクト) に追加します。</h2>
 
 <ol>
-<li><p>ダウンロード ソース展開と、コルドバ、ハード ドライブ上の永続的なディレクトリの場所を例に<code>~/Documents/Cordova</code>.</p></li>
-<li><p>それが実行されている場合は、Xcode を終了します。</p></li>
-<li><p>ターミナルを使用して、上記ダウンロードしたソースを配置したディレクトリに移動します。</p></li>
-<li><p>コピー、 <code>config.xml</code> ディスク上のプロジェクトのディレクトリにファイル (上記の前提条件を参照してください)。</p></li>
-<li><p>ドラッグ アンド ドロップ、 <code>config.xml</code> Xcode プロジェクト ナビゲーターにファイル。</p></li>
-<li><p><strong>追加フォルダーを作成するグループ</strong>のオプション ボタンを選択し、<strong>終了</strong>キーを押します.</p></li>
-<li><p>ドラッグ アンド ドロップ、 <code>CordovaLib.xcodeproj</code> Xcode プロジェクト ナビゲーターにファイル (永続的なディレクトリから、上記の場所およびそれべきで、 <code>CordovaLib</code> サブディレクトリ)。</p></li>
-<li><p>Select <code>CordovaLib.xcodeproj</code> in the Project Navigator.</p></li>
-<li><p><strong>ファイル インスペクター</strong>を表示する<strong>オプション コマンド 1</strong>のキーの組み合わせを入力します。.</p></li>
-<li><p>選択してください<strong>グループに相対的な</strong><strong>ファイル検査</strong>のドロップ ダウン メニューでの<strong>場所</strong>.</p></li>
-<li><p>プロジェクト ナビゲーターで<strong>プロジェクトのアイコン</strong>を選択、<strong>ターゲット</strong>を選択し、[<strong>ビルド設定</strong>] タブを選択します。</p></li>
-<li><p>追加 <code>-all_load</code> と <code>-Obj-C</code> の<strong>他のリンカーのフラグ</strong>値。</p></li>
-<li><p>プロジェクト ナビゲーターで<strong>プロジェクト アイコン</strong>をクリックして<strong>ターゲット</strong>を選択し、[<strong>ビルド フェーズ</strong>] タブを選択します。</p></li>
-<li><p><strong>ライブラリとリンク バイナリ</strong>を展開します。.</p></li>
-<li><p><strong>+</strong>を選択してこのボタンをクリックすると、し次の<strong>フレームワーク</strong>を追加。必要に応じて、プロジェクト ナビゲーターで移動それら<strong>フレームワークス</strong>グループの下で)。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">AddressBook.framework AddressBookUI.framework AudioToolbox.framework AVFoundation.framework CoreLocation.framework MediaPlayer.framework QuartzCore.framework SystemConfiguration.framework MobileCoreServices.framework CoreMedia.framework
-</code></pre></div></li>
-<li><p><strong>ターゲットの依存関係</strong>、複数のボックスがある場合、このようなラベル トップ ボックスを展開 ！</p></li>
-<li><p><strong>+</strong>を選択してこのボタンをクリックすると、し追加、 <code>CordovaLib</code> 製品を構築します。</p></li>
-<li><p><strong>ライブラリとリンク バイナリ プログラム</strong>、複数のボックスがある場合、このようなラベル トップ ボックスを展開 ！</p></li>
-<li><p><strong>+</strong>を選択してこのボタンをクリックすると、し追加<code>libCordova.a</code>.</p></li>
-<li><p><strong>一意</strong>に<strong>Xcode 設定 → 場所 → 派生データ高度な...</strong> Xcode の優先順位を設定します。.</p></li>
-<li><p>プロジェクト ナビゲーターで<strong>プロジェクトのアイコン</strong>を選択、<strong>ターゲット</strong>を選択し、[<strong>ビルド設定</strong>] タブを選択します。</p></li>
-<li><p><strong>ヘッダー検索パス</strong>で検索します。その設定は引用符 （） で以下これら 3 つの値を追加します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">"$(TARGET_BUILD_DIR)/usr/local/lib/include"        
+  <li>
+    <p>ダウンロード ソース展開と、コルドバ、ハード ドライブ上の永続的なディレクトリの場所を例に<code class="language-plaintext highlighter-rouge">~/Documents/Cordova</code>.</p>
+  </li>
+  <li>
+    <p>それが実行されている場合は、Xcode を終了します。</p>
+  </li>
+  <li>
+    <p>ターミナルを使用して、上記ダウンロードしたソースを配置したディレクトリに移動します。</p>
+  </li>
+  <li>
+    <p>コピー、 <code class="language-plaintext highlighter-rouge">config.xml</code> ディスク上のプロジェクトのディレクトリにファイル (上記の前提条件を参照してください)。</p>
+  </li>
+  <li>
+    <p>ドラッグ アンド ドロップ、 <code class="language-plaintext highlighter-rouge">config.xml</code> Xcode プロジェクト ナビゲーターにファイル。</p>
+  </li>
+  <li>
+    <p><strong>追加フォルダーを作成するグループ</strong>のオプション ボタンを選択し、<strong>終了</strong>キーを押します.</p>
+  </li>
+  <li>
+    <p>ドラッグ アンド ドロップ、 <code class="language-plaintext highlighter-rouge">CordovaLib.xcodeproj</code> Xcode プロジェクト ナビゲーターにファイル (永続的なディレクトリから、上記の場所およびそれべきで、 <code class="language-plaintext highlighter-rouge">CordovaLib</code> サブディレクトリ)。</p>
+  </li>
+  <li>
+    <p>Select <code class="language-plaintext highlighter-rouge">CordovaLib.xcodeproj</code> in the Project Navigator.</p>
+  </li>
+  <li>
+    <p><strong>ファイル インスペクター</strong>を表示する<strong>オプション コマンド 1</strong>のキーの組み合わせを入力します。.</p>
+  </li>
+  <li>
+    <p>選択してください<strong>グループに相対的な</strong><strong>ファイル検査</strong>のドロップ ダウン メニューでの<strong>場所</strong>.</p>
+  </li>
+  <li>
+    <p>プロジェクト ナビゲーターで<strong>プロジェクトのアイコン</strong>を選択、<strong>ターゲット</strong>を選択し、[<strong>ビルド設定</strong>] タブを選択します。</p>
+  </li>
+  <li>
+    <p>追加 <code class="language-plaintext highlighter-rouge">-all_load</code> と <code class="language-plaintext highlighter-rouge">-Obj-C</code> の<strong>他のリンカーのフラグ</strong>値。</p>
+  </li>
+  <li>
+    <p>プロジェクト ナビゲーターで<strong>プロジェクト アイコン</strong>をクリックして<strong>ターゲット</strong>を選択し、[<strong>ビルド フェーズ</strong>] タブを選択します。</p>
+  </li>
+  <li>
+    <p><strong>ライブラリとリンク バイナリ</strong>を展開します。.</p>
+  </li>
+  <li>
+    <p><strong>+</strong>を選択してこのボタンをクリックすると、し次の<strong>フレームワーク</strong>を追加。必要に応じて、プロジェクト ナビゲーターで移動それら<strong>フレームワークス</strong>グループの下で)。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AddressBook.framework AddressBookUI.framework AudioToolbox.framework AVFoundation.framework CoreLocation.framework MediaPlayer.framework QuartzCore.framework SystemConfiguration.framework MobileCoreServices.framework CoreMedia.framework
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>ターゲットの依存関係</strong>、複数のボックスがある場合、このようなラベル トップ ボックスを展開 ！</p>
+  </li>
+  <li>
+    <p><strong>+</strong>を選択してこのボタンをクリックすると、し追加、 <code class="language-plaintext highlighter-rouge">CordovaLib</code> 製品を構築します。</p>
+  </li>
+  <li>
+    <p><strong>ライブラリとリンク バイナリ プログラム</strong>、複数のボックスがある場合、このようなラベル トップ ボックスを展開 ！</p>
+  </li>
+  <li>
+    <p><strong>+</strong>を選択してこのボタンをクリックすると、し追加<code class="language-plaintext highlighter-rouge">libCordova.a</code>.</p>
+  </li>
+  <li>
+    <p><strong>一意</strong>に<strong>Xcode 設定 → 場所 → 派生データ高度な…</strong> Xcode の優先順位を設定します。.</p>
+  </li>
+  <li>
+    <p>プロジェクト ナビゲーターで<strong>プロジェクトのアイコン</strong>を選択、<strong>ターゲット</strong>を選択し、[<strong>ビルド設定</strong>] タブを選択します。</p>
+  </li>
+  <li>
+    <p><strong>ヘッダー検索パス</strong>で検索します。その設定は引用符 （） で以下これら 3 つの値を追加します。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"$(TARGET_BUILD_DIR)/usr/local/lib/include"        
 "$(OBJROOT)/UninstalledProducts/include"
 "$(BUILT_PRODUCTS_DIR)"
-</code></pre></div>
-<p>コルドバ 2.1.0 と <code>CordovaLib</code> を<strong>自動参照カウント (ARC)</strong>を使用してアップグレードされました。 必要な<strong>アーク</strong>を使用する CordovaLib が<strong>アーク</strong>を使用してプロジェクトをアップグレードする場合にアップグレードするください使用しないメニューから Xcode 移行ウィザード:<strong>編集 → → リファクタリング... Objective-C の弧に変換</strong>、 <strong>libCordova.a の選択を解除</strong>、完了するまでウィザードを実行します。</p></li>
+</code></pre></div>    </div>
+
+    <p>コルドバ 2.1.0 と <code class="language-plaintext highlighter-rouge">CordovaLib</code> を<strong>自動参照カウント (ARC)</strong>を使用してアップグレードされました。 必要な<strong>アーク</strong>を使用する CordovaLib が<strong>アーク</strong>を使用してプロジェクトをアップグレードする場合にアップグレードするください使用しないメニューから Xcode 移行ウィザード:<strong>編集 → → リファクタリング… Objective-C の弧に変換</strong>、 <strong>libCordova.a の選択を解除</strong>、完了するまでウィザードを実行します。</p>
+  </li>
 </ol>
 
-<h2>コード内で CDVViewController を使用してください。</h2>
+<h2 id="コード内で-cdvviewcontroller-を使用してください">コード内で CDVViewController を使用してください。</h2>
 
 <ol>
-<li><p>このヘッダーを追加します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">#import &lt;Cordova/CDVViewController.h&gt;
-</code></pre></div></li>
-<li><p>新しいインスタンス化 <code>CDVViewController</code> 、それをどこか （例えば、あなたのクラスでのプロパティ) を保持して。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">CDVViewController* viewController = [CDVViewController new];
-</code></pre></div></li>
-<li><p>(<em>省略可能です</em>)設定、 <code>wwwFolderName</code> プロパティ (既定値は <code>www</code> )。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">viewController.wwwFolderName = @"myfolder";
-</code></pre></div></li>
-<li><p>(<em>省略可能です</em>)あなたの config.xml でスタート ページを設定、 <code>&lt;content&gt;</code> タグ。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;content src="index.html" /&gt;
-</code></pre></div>
-<p>OR</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;content src="http://apache.org" /&gt;
-</code></pre></div></li>
-<li><p>(<em>省略可能です</em>)設定、 <code>useSplashScreen</code> プロパティ (既定値は <code>NO</code> )。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">viewController.useSplashScreen = YES;
-</code></pre></div></li>
-<li><p><strong>ビュー フレーム</strong>を設定 (常に、最後のプロパティとしてこれをセット)。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">viewController.view.frame = CGRectMake(0, 0, 320, 480);
-</code></pre></div></li>
-<li><p>包丁のビューに追加します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">[myView addSubview:viewController.view];
-</code></pre></div></li>
+  <li>
+    <p>このヘッダーを追加します。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#import &lt;Cordova/CDVViewController.h&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>新しいインスタンス化 <code class="language-plaintext highlighter-rouge">CDVViewController</code> 、それをどこか （例えば、あなたのクラスでのプロパティ) を保持して。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CDVViewController* viewController = [CDVViewController new];
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>(<em>省略可能です</em>)設定、 <code class="language-plaintext highlighter-rouge">wwwFolderName</code> プロパティ (既定値は <code class="language-plaintext highlighter-rouge">www</code> )。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>viewController.wwwFolderName = @"myfolder";
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>(<em>省略可能です</em>)あなたの config.xml でスタート ページを設定、 <code class="language-plaintext highlighter-rouge">&lt;content&gt;</code> タグ。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;content src="index.html" /&gt;
+</code></pre></div>    </div>
+
+    <p>OR</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;content src="http://apache.org" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>(<em>省略可能です</em>)設定、 <code class="language-plaintext highlighter-rouge">useSplashScreen</code> プロパティ (既定値は <code class="language-plaintext highlighter-rouge">NO</code> )。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>viewController.useSplashScreen = YES;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>ビュー フレーム</strong>を設定 (常に、最後のプロパティとしてこれをセット)。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>viewController.view.frame = CGRectMake(0, 0, 320, 480);
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>包丁のビューに追加します。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[myView addSubview:viewController.view];
+</code></pre></div>    </div>
+  </li>
 </ol>
 
-<h2>HTML、CSS、JavaScript の資産を追加します。</h2>
+<h2 id="htmlcssjavascript-の資産を追加します">HTML、CSS、JavaScript の資産を追加します。</h2>
 
 <ol>
-<li><p>ディスクのプロジェクトで新しいディレクトリを作成 <code>www</code> 例えば。</p></li>
-<li><p>このディレクトリに、HTML、CSS、JavaScript の資産を置きます。</p></li>
-<li><p>ドラッグ アンド ドロップ ディレクトリ Xcode プロジェクト ナビゲーター。</p></li>
-<li><p><strong>追加フォルダーを作成するフォルダーの参照</strong>オプション ボタンを選択します。</p></li>
-<li><p>適切な設定 <code>wwwFolderName</code> と <code>startPage</code> の最初に作成したフォルダーのプロパティ (前のセクションを参照) の既定値を使用またはインスタンスを作成する、<code>CDVViewController</code>.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">/*
+  <li>
+    <p>ディスクのプロジェクトで新しいディレクトリを作成 <code class="language-plaintext highlighter-rouge">www</code> 例えば。</p>
+  </li>
+  <li>
+    <p>このディレクトリに、HTML、CSS、JavaScript の資産を置きます。</p>
+  </li>
+  <li>
+    <p>ドラッグ アンド ドロップ ディレクトリ Xcode プロジェクト ナビゲーター。</p>
+  </li>
+  <li>
+    <p><strong>追加フォルダーを作成するフォルダーの参照</strong>オプション ボタンを選択します。</p>
+  </li>
+  <li>
+    <p>適切な設定 <code class="language-plaintext highlighter-rouge">wwwFolderName</code> と <code class="language-plaintext highlighter-rouge">startPage</code> の最初に作成したフォルダーのプロパティ (前のセクションを参照) の既定値を使用またはインスタンスを作成する、<code class="language-plaintext highlighter-rouge">CDVViewController</code>.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*
  if you created a folder called 'myfolder' and
  you want the file 'mypage.html' in it to be
  the startPage
 */
 viewController.wwwFolderName = @"myfolder";
 viewController.startPage = @"mypage.html"
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ol>
 
 

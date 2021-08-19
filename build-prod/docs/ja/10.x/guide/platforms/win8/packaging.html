@@ -2236,38 +2236,39 @@
             
 
             <div id="page-toc-source">
-                <h1>Windows パッケージ</h1>
+                <h1 id="windows-パッケージ">Windows パッケージ</h1>
 
 <p>署名および<a href="https://msdn.microsoft.com/en-us/library/hh446593(v=vs.85).aspx">MSDN</a>の Windows ストア アプリのパッケージについての詳細を学ぶことができます。.</p>
 
 <p>正しくパッケージ化して Windows に署名できるようにするには、アプリはいくつ必要です。</p>
 
 <ul>
-<li>署名証明書</li>
-<li>指定された署名証明書に一致する識別情報の詳細</li>
+  <li>署名証明書</li>
+  <li>指定された署名証明書に一致する識別情報の詳細</li>
 </ul>
 
 <p>Windows プロジェクトの id の詳細は package.appxmanifest ファイルで保持されます。Cordova アプリをビルドするたびに、このファイルが自動的に設定されます。Identity は、3 つの重要なフィールドを保持しています。</p>
 
 <ul>
-<li>Name</li>
-<li>Publisher</li>
-<li>Version</li>
+  <li>Name</li>
+  <li>Publisher</li>
+  <li>Version</li>
 </ul>
 
 <p><em>NAme</em>と<em>Version</em>は、 <strong>config.xml</strong>から設定できます。<em>Publisher</em>は、構築パラメーターとして指定することができます。 または<strong>build.json</strong>ファイルに設定することができます。</p>
 
-<p><img src="/static/img/guide/platforms/win8/packaging.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/win8/packaging.png" alt="" /></p>
 
 <p>いずれかの CLI から、または build.json ファイル、署名証明書を指定できます。証明書は、CLI のフラグ関連。</p>
 
 <ul>
-<li><code>--packageCertificateKeyFile</code> : パッケージの署名証明書を作成すると、このパラメーターを使用してアプリケーションに証明書を関連付けることができます。このフラグは、ファイルのパスを引数として受け取ります。 例えば。 <code>&gt; cordova build -- --packageCertificateKeyFile=&quot;platforms\windows\CordovaApp_TemporaryKey.pfx&quot;</code></li>
-<li><code>--packageThumbprint</code> : パッケージ拇印を使用してパッケージ証明書キー ファイルの信頼性を検証します。 証明書キー ファイルを作成すると、この値は、エンド ・ ユーザーに提供されます。 例えば。 <code>&gt; cordova build -- --packageCertificateKeyFile=&quot;platforms\windows\CordovaApp_TemporaryKey.pfx&quot; --packageThumbprint=&quot;ABCABCABCABC123123123123&quot;</code></li>
+  <li><code class="language-plaintext highlighter-rouge">--packageCertificateKeyFile</code> : パッケージの署名証明書を作成すると、このパラメーターを使用してアプリケーションに証明書を関連付けることができます。このフラグは、ファイルのパスを引数として受け取ります。 例えば。 <code class="language-plaintext highlighter-rouge">&gt; cordova build -- --packageCertificateKeyFile="platforms\windows\CordovaApp_TemporaryKey.pfx"</code></li>
+  <li><code class="language-plaintext highlighter-rouge">--packageThumbprint</code> : パッケージ拇印を使用してパッケージ証明書キー ファイルの信頼性を検証します。 証明書キー ファイルを作成すると、この値は、エンド ・ ユーザーに提供されます。 例えば。 <code class="language-plaintext highlighter-rouge">&gt; cordova build -- --packageCertificateKeyFile="platforms\windows\CordovaApp_TemporaryKey.pfx" --packageThumbprint="ABCABCABCABC123123123123"</code></li>
 </ul>
 
 <p>CLI を使用してビルド構成ファイル (build.json) を使用してこれらの値を指定ことができますまた、(-buildConfig)。サンプルのビルド構成ファイル:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">{
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
     "windows": {
         "debug": {
             "packageCertificateKeyFile": "platforms\\windows\\CordovaApp_TemporaryKey.pfx"
@@ -2279,69 +2280,70 @@
         }
     }
 }
-</code></pre></div>
+</code></pre></div></div>
+
 <p>サポートをミックスし、コマンド ・ ライン引数および build.json ファイルのパラメーターと一致しています。コマンドライン引数から値は優先順位を取得します。</p>
 
-<h1>証明書にキーと署名コルドバ windows アプリを作成する方法</h1>
+<h1 id="証明書にキーと署名コルドバ-windows-アプリを作成する方法">証明書にキーと署名コルドバ windows アプリを作成する方法</h1>
 
 <p>署名が配布して Windows ストア アプリをインストールする必要です。 このプロセスは、リリースのパッケージを展開するとき通常 Visual Studio によって処理されます。 私たちは私たち自身の証明書を作成する必要があります Visual Studio せず tmhis を行う。</p>
 
-<p>証明書を作成するため我々 は util。 <a href="https://msdn.microsoft.com/en-us/library/ff548309(v=vs.85).aspx">makecert.exe</a>を使用する必要があります。 このツールは、Windows SDK に付属し、 <code>%ProgramFiles(x86) %\Windows Kits\8.1\bin\x64</code>または<code>%ProgramFiles(x86) %\Windows Kits\8.1\bin\x86</code>の下で見つけることができます。.</p>
+<p>証明書を作成するため我々 は util。 <a href="https://msdn.microsoft.com/en-us/library/ff548309(v=vs.85).aspx">makecert.exe</a>を使用する必要があります。 このツールは、Windows SDK に付属し、 <code class="language-plaintext highlighter-rouge">%ProgramFiles(x86) %\Windows Kits\8.1\bin\x64</code>または<code class="language-plaintext highlighter-rouge">%ProgramFiles(x86) %\Windows Kits\8.1\bin\x86</code>の下で見つけることができます。.</p>
 
 <p>我々 が行う必要がある最初の事は、我々 のアプリに署名するためのルート キーを作成します。</p>
 
-<p><code>makecert.exe -n &quot;CN=FakeCorp.com&quot; -r -eku &quot;1.3.6.1.5.5.7.3.3,1.3.6.1.4.1.311.10.3.13&quot; -e &quot;01/01/2020&quot; -h 0 -sv FakeCorp.com.pvk FakeCorp.com.cer</code></p>
+<p><code class="language-plaintext highlighter-rouge">makecert.exe -n "CN=FakeCorp.com" -r -eku "1.3.6.1.5.5.7.3.3,1.3.6.1.4.1.311.10.3.13" -e "01/01/2020" -h 0 -sv FakeCorp.com.pvk FakeCorp.com.cer</code></p>
 
 <p>何の makecert は理解して、何をパラメーターの簡単な説明をここでは。</p>
 
 <ul>
-<li>-n&quot;CN=FakeCorp.com&quot;: これは、 <a href="http://en.wikipedia.org/wiki/X.509">X.509</a>証明書の件名。この例では<strong>C</strong>ommon<strong>N</strong>ame=FakeCorp.com です。</li>
-<li>-r:<a href="http://en.wikipedia.org/wiki/Self-signed_certificate">自己署名証明書</a>を作成します.</li>
-<li>-eku #EKU_VAL #: カンマで区切られた拡張キー使用法の Oid。
-
-<ul>
-<li>1.3.6.1.5.5.7.3.3 は、証明書がコードの署名用に有効であることを示します。常に証明書の使用目的を制限するこの値を指定します。</li>
-<li>1.3.6.1.4.1.311.10.3.13 は、証明書が有効期間の署名を尊重することを示します。 通常、証明書いた時点で有効なスタンプの時間だったとき、タイムスタンプを署名が場合、署名証明書の有効期限が切れた場合でも有効なままです。 この EKU は、署名がスタンプの時間かどうかにかかわらず期限切れに署名を強制します。</li>
-</ul></li>
-<li>-e「2020/01/01」: 証明書の有効期限を設定します。</li>
-<li>-h 0: この証明書の下のツリーの最大の高さを証明書が他の証明書を発行できる証明機関 (CA) として使用されているを防ぐために 0 に設定します。</li>
-<li>-sv FakeCorp.com.pvk: 出力 PVK ファイル。Windows では、コード署名の秘密キーを格納する PVK ファイルを使用します。</li>
-<li>FakeCorp.com.cer: 出力証明書ファイル。CER ファイルを使用して、X.509 証明書を格納します。</li>
+  <li>-n”CN=FakeCorp.com”: これは、 <a href="http://en.wikipedia.org/wiki/X.509">X.509</a>証明書の件名。この例では<strong>C</strong>ommon<strong>N</strong>ame=FakeCorp.com です。</li>
+  <li>-r:<a href="http://en.wikipedia.org/wiki/Self-signed_certificate">自己署名証明書</a>を作成します.</li>
+  <li>-eku #EKU_VAL #: カンマで区切られた拡張キー使用法の Oid。
+    <ul>
+      <li>1.3.6.1.5.5.7.3.3 は、証明書がコードの署名用に有効であることを示します。常に証明書の使用目的を制限するこの値を指定します。</li>
+      <li>1.3.6.1.4.1.311.10.3.13 は、証明書が有効期間の署名を尊重することを示します。 通常、証明書いた時点で有効なスタンプの時間だったとき、タイムスタンプを署名が場合、署名証明書の有効期限が切れた場合でも有効なままです。 この EKU は、署名がスタンプの時間かどうかにかかわらず期限切れに署名を強制します。</li>
+    </ul>
+  </li>
+  <li>-e「2020/01/01」: 証明書の有効期限を設定します。</li>
+  <li>-h 0: この証明書の下のツリーの最大の高さを証明書が他の証明書を発行できる証明機関 (CA) として使用されているを防ぐために 0 に設定します。</li>
+  <li>-sv FakeCorp.com.pvk: 出力 PVK ファイル。Windows では、コード署名の秘密キーを格納する PVK ファイルを使用します。</li>
+  <li>FakeCorp.com.cer: 出力証明書ファイル。CER ファイルを使用して、X.509 証明書を格納します。</li>
 </ul>
 
 <p>初めての makecert を実行した後ポップアップ画面で専用パスワードを入力します。</p>
 
-<p><img src="/static/img/guide/platforms/win8/createprivatekeywindow.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/win8/createprivatekeywindow.png" alt="" /></p>
 
-<p>Pvk と cer ファイルが作成されると、これらの証明書から pfx ファイルを作成私たち必要があります。 Pfx (個人的な交換形式) ファイルには、各種証明書、ルート証明機関証明書、証明書チェーンおよび秘密キーなどの暗号化に関する情報が含まれています。 証明書をパッケージするには使用、ツールは、 <a href="https://msdn.microsoft.com/en-us/library/ff550672(v=vs.85).aspx">pvk2pfx</a>を呼ばれます。 このツールは、Windows SDK に付属しの下で見つけることができます <code>%ProgramFiles(x86)%\Windows Kits\8.1\bin\x64</code> または<code>%ProgramFiles(x86)%\Windows Kits\8.1\bin\x86</code>.</p>
+<p>Pvk と cer ファイルが作成されると、これらの証明書から pfx ファイルを作成私たち必要があります。 Pfx (個人的な交換形式) ファイルには、各種証明書、ルート証明機関証明書、証明書チェーンおよび秘密キーなどの暗号化に関する情報が含まれています。 証明書をパッケージするには使用、ツールは、 <a href="https://msdn.microsoft.com/en-us/library/ff550672(v=vs.85).aspx">pvk2pfx</a>を呼ばれます。 このツールは、Windows SDK に付属しの下で見つけることができます <code class="language-plaintext highlighter-rouge">%ProgramFiles(x86)%\Windows Kits\8.1\bin\x64</code> または<code class="language-plaintext highlighter-rouge">%ProgramFiles(x86)%\Windows Kits\8.1\bin\x86</code>.</p>
 
-<p><code>pvk2pfx -pvk FakeCorp.com.pvk -pi pvkPassword -spc FakeCorp.com.cer -pfx FakeCorp.com.pfx -po pfxPassword</code></p>
+<p><code class="language-plaintext highlighter-rouge">pvk2pfx -pvk FakeCorp.com.pvk -pi pvkPassword -spc FakeCorp.com.cer -pfx FakeCorp.com.pfx -po pfxPassword</code></p>
 
 <p>場所:</p>
 
 <ul>
-<li>pvk: 入力 pvk ファイル名</li>
-<li>pi: pvk パスワード</li>
-<li>spc: 入力証明書ファイル名</li>
-<li>pfx: 出力 pfx ファイル名</li>
-<li>po: pfx パスワード;pvk パスワードを指定しない場合と同じ</li>
+  <li>pvk: 入力 pvk ファイル名</li>
+  <li>pi: pvk パスワード</li>
+  <li>spc: 入力証明書ファイル名</li>
+  <li>pfx: 出力 pfx ファイル名</li>
+  <li>po: pfx パスワード;pvk パスワードを指定しない場合と同じ</li>
 </ul>
 
-<p>この pfx ファイルを build.json ファイルを提供する、もし私たちは次のエラーを持つでしょう:&quot;キー ファイルはパスワードで保護することがあります。 この問題を解決する現在のユーザーの個人用証明書ストアに証明書を手動でインポートしよう。」。 それをインポートするために、私達は管理者プロンプトで<a href="https://technet.microsoft.com/en-us/library/ee624045(v=ws.10).aspx">certutil</a>を使用しなければなりません。</p>
+<p>この pfx ファイルを build.json ファイルを提供する、もし私たちは次のエラーを持つでしょう:”キー ファイルはパスワードで保護することがあります。 この問題を解決する現在のユーザーの個人用証明書ストアに証明書を手動でインポートしよう。」。 それをインポートするために、私達は管理者プロンプトで<a href="https://technet.microsoft.com/en-us/library/ee624045(v=ws.10).aspx">certutil</a>を使用しなければなりません。</p>
 
-<p><code>certutil -user -p PASSWORD -importPFX FakeCorp.com.pfx</code></p>
+<p><code class="language-plaintext highlighter-rouge">certutil -user -p PASSWORD -importPFX FakeCorp.com.pfx</code></p>
 
 <p>場所:</p>
 
 <ul>
-<li>user:「現在のユーザー」を指定します個人ストア</li>
-<li>p: pfx ファイルのパスワード</li>
-<li>importPfx: pfx ファイルの名前</li>
+  <li>user:「現在のユーザー」を指定します個人ストア</li>
+  <li>p: pfx ファイルのパスワード</li>
+  <li>importPfx: pfx ファイルの名前</li>
 </ul>
 
 <p>一度インストールすれば、次のステップは、packageThumbprint と packageCertificateKeyFile を build.json に追加するのには。 PackageThumbprint を見つけるために、我々 は証明書に関連付けられている共通の検索します。</p>
 
-<p><code>powershell -Command &quot; &amp; {dir -path cert:\LocalMachine\My | where { $_.Subject -like \&quot;*FakeCorp.com*\&quot; }}&quot;</code></p>
+<p><code class="language-plaintext highlighter-rouge">powershell -Command " &amp; {dir -path cert:\LocalMachine\My | where { $_.Subject -like \"*FakeCorp.com*\" }}"</code></p>
 
 <p>一度これらの最終的な値が提供されます。コルドバ正常にパッケージ化し、アプリケーションに署名します。</p>
 

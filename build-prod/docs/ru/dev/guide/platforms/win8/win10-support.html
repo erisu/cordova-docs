@@ -2166,54 +2166,58 @@
     }
 </style>
 
-<h1>Cordova для Windows 10</h1>
+<h1 id="cordova-для-windows-10">Cordova для Windows 10</h1>
 
 <p>Возможно вы вместо этого названия могли бы назвать продукт «Windows 10 для Cordova». У Windows 10 платформа разработки приложений HTML и JavaScript была переработана чтобы принести поддержку Cordova в Интернет и убрать ограничения безопасности платформы с вашего пути.</p>
 
-<h2>Начало работы с Windows 10</h2>
+<h2 id="начало-работы-с-windows-10">Начало работы с Windows 10</h2>
 
 <p>Добавление поддержки Windows 10 в ваше приложение настолько же просто, насколько установка вашего целевой платформы Windows значению 10.0:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="windows-target-version" value="10.0" /&gt;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="windows-target-version" value="10.0" /&gt;
 &lt;preference name="windows-phone-target-version" value="10.0" /&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Когда вы собираете с обоими этими параметрами, будет построен только один .appx (и .appxupload). Они потребуют как минимум Windows 10.</p>
 
-<h3>Различия между удаленным режимом и локальным режимом</h3>
+<h3 id="различия-между-удаленным-режимом-и-локальным-режимом">Различия между удаленным режимом и локальным режимом</h3>
 
-<p>Удаленный режим — Новая возможность платформы HTML приложений для Windows в Windows 10. В Windows 8 и 8.1 HTML-приложения работали способом, что сейчас называется «Локальный режим» в Windows 10. В локальном режиме HTML приложения имеют полный доступ к Windows API и возможностям платформы. Для того, чтобы предотвратить атаки путем внедрения скриптов, которые могут привести к утечки персональной информации благодаря вредоносному коду, локальный режим запрещает встроенные скрипты и требует от разработчиков, которые выполняют манипуляции над DOM, делать это в контексте (<code>MSApp.execUnsafeLocalFunction</code>).</p>
+<p>Удаленный режим — Новая возможность платформы HTML приложений для Windows в Windows 10. В Windows 8 и 8.1 HTML-приложения работали способом, что сейчас называется «Локальный режим» в Windows 10. В локальном режиме HTML приложения имеют полный доступ к Windows API и возможностям платформы. Для того, чтобы предотвратить атаки путем внедрения скриптов, которые могут привести к утечки персональной информации благодаря вредоносному коду, локальный режим запрещает встроенные скрипты и требует от разработчиков, которые выполняют манипуляции над DOM, делать это в контексте (<code class="language-plaintext highlighter-rouge">MSApp.execUnsafeLocalFunction</code>).</p>
 
 <p>Удаленный режим устраняет эти требования, что делает возможным использовать неизмененные библиотеки такие как jQuery или AngularJS непосредственно в вашем коде, без каких-либо изменений. Для этого, он удаляет вашу способность объявлять определенные возможности при сертификации вашего приложения в магазине Windows. Удаление этих возможностей обычно не мешает получать определенные функции, но может потребоваться использовать сочетание различных API или тактик.</p>
 
-<h3>Влияние удаленного режима на возможности</h3>
+<h3 id="влияние-удаленного-режима-на-возможности">Влияние удаленного режима на возможности</h3>
 
 <p>При развертывании удаленного режима приложения в магазин Windows недоступны следующие возможности:</p>
 
 <ul>
-<li>Корпоративная аутентификация (<code>enterpriseAuthentication</code>)</li>
-<li>Общие сертификаты пользователей (<code>sharedUserCertificates</code>)</li>
-<li>Библиотека документов (<code>documentsLibrary</code>)</li>
-<li>Музыкальная библиотека (<code>musicLibrary</code>)</li>
-<li>Библиотека изображений (<code>picturesLibrary</code>)</li>
-<li>Видео библиотека (<code>videosLibrary</code>)</li>
-<li>Съемные ЗУ (<code>removableStorage</code>)</li>
-<li>Интернет клиент/сервер (<code>internetClientServer</code>) - Обратите внимание, что <code>internetClient</code> все еще разрешено</li>
-<li>Частная сеть клиент/сервер (<code>privateNetworkClientServer</code>)</li>
+  <li>Корпоративная аутентификация (<code class="language-plaintext highlighter-rouge">enterpriseAuthentication</code>)</li>
+  <li>Общие сертификаты пользователей (<code class="language-plaintext highlighter-rouge">sharedUserCertificates</code>)</li>
+  <li>Библиотека документов (<code class="language-plaintext highlighter-rouge">documentsLibrary</code>)</li>
+  <li>Музыкальная библиотека (<code class="language-plaintext highlighter-rouge">musicLibrary</code>)</li>
+  <li>Библиотека изображений (<code class="language-plaintext highlighter-rouge">picturesLibrary</code>)</li>
+  <li>Видео библиотека (<code class="language-plaintext highlighter-rouge">videosLibrary</code>)</li>
+  <li>Съемные ЗУ (<code class="language-plaintext highlighter-rouge">removableStorage</code>)</li>
+  <li>Интернет клиент/сервер (<code class="language-plaintext highlighter-rouge">internetClientServer</code>) - Обратите внимание, что <code class="language-plaintext highlighter-rouge">internetClient</code> все еще разрешено</li>
+  <li>Частная сеть клиент/сервер (<code class="language-plaintext highlighter-rouge">privateNetworkClientServer</code>)</li>
 </ul>
 
 <p>Ограничения на доступ к библиотеке может быть обойдено если пользователь будет взаимодействовать с файловой системой через средство <a href="https://msdn.microsoft.com/en-us/library/windows/apps/windows.storage.pickers.fileopenpicker.aspx">Выбора файлов</a>. Это предотвращает внедренный вредоносный кода от произвольного доступа к файловой системе.</p>
 
-<p>Ограничения, связанные с работой сети могут быть обойдены, используя интерфейс API, который не использует возможность проверки или промежуточного соединения через стандартные каналы связи Интернет, таких как <code>XMLHttpRequest</code> или веб-сокеты.</p>
+<p>Ограничения, связанные с работой сети могут быть обойдены, используя интерфейс API, который не использует возможность проверки или промежуточного соединения через стандартные каналы связи Интернет, таких как <code class="language-plaintext highlighter-rouge">XMLHttpRequest</code> или веб-сокеты.</p>
 
 <p>Возможности корпоративной аутентификации и Общие сертификаты пользователей специально ориентированы на корпоративных сценариях. Эти возможности поддерживаются для частных предприятий с поддержкой магазинов приложений, так что если вы создаете приложения, которые будут развертываться с помощью механизм внутреннего развертывания, вы все еще можете поддержать этот функционал. Однако они не поддерживаются для приложений удаленного режима в общедоступном магазине Windows. Когда вы собираете проект ориентируюясь на Windows 10, если одна из этих возможностей будет обнаружена в манифесте вашего приложения, будет отображаться предупреждение.</p>
 
-<h2>Справка</h2>
+<h2 id="справка">Справка</h2>
 
-<h3>Параметры config.xml</h3>
+<h3 id="параметры-configxml">Параметры config.xml</h3>
 
-<h4>windows-target-version, windows-phone-target-version</h4>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="windows-target-version" value="10.0" /&gt;
+<h4 id="windows-target-version-windows-phone-target-version">windows-target-version, windows-phone-target-version</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="windows-target-version" value="10.0" /&gt;
 &lt;preference name="windows-phone-target-version" value="10.0" /&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p><em>По крайней мере один параметр требуется.</em></p>
 
 <p>Эти параметры определяют версию Windows или Windows Phone которые вы хотели бы использовать как цель для пакета приложения.</p>
@@ -2221,52 +2225,56 @@
 <p><strong>Допустимые значения</strong></p>
 
 <ul>
-<li><code>10.0</code>, <code>UAP</code>: собирает для универсальной платформы приложений Windows 10</li>
-<li><code>8.1</code>: собирает для Windows 8.1 или Windows Phone 8.1</li>
-<li><code>8.0</code>: собирает для Windows 8.0. Не действительно для Windows Phone (используйте платформу Cordova <strong>wp8</strong>)</li>
+  <li><code class="language-plaintext highlighter-rouge">10.0</code>, <code class="language-plaintext highlighter-rouge">UAP</code>: собирает для универсальной платформы приложений Windows 10</li>
+  <li><code class="language-plaintext highlighter-rouge">8.1</code>: собирает для Windows 8.1 или Windows Phone 8.1</li>
+  <li><code class="language-plaintext highlighter-rouge">8.0</code>: собирает для Windows 8.0. Не действительно для Windows Phone (используйте платформу Cordova <strong>wp8</strong>)</li>
 </ul>
 
 <p><strong>Сценарии</strong></p>
 
-<p>Если вы используете только Windows 10, вам только нужно иметь единственный параметр <code>windows-target-version</code> в вашем файле config.xml.</p>
+<p>Если вы используете только Windows 10, вам только нужно иметь единственный параметр <code class="language-plaintext highlighter-rouge">windows-target-version</code> в вашем файле config.xml.</p>
 
-<h4>WindowsDefaultUriPrefix</h4>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="WindowsDefaultUriPrefix" value="ms-appx://|ms-appx-web://" /&gt;
-</code></pre></div>
-<p>Этот параметр определяет, будет ли ваше приложение работать в <strong>локаьльном контексте</strong> или <strong>удаленном</strong> при запуска его стартового URI. При построении для Windows 10, по умолчанию используется удаленный контекст (<code>ms-appx-web://</code>).</p>
+<h4 id="windowsdefaulturiprefix">WindowsDefaultUriPrefix</h4>
 
-<p>Для того, чтобы у создать приложение локального режима, которое не затронуто ограничениями удаленного режима, необходимо установить этому параметру значение <code>ms-appx://</code> и не объявлять любые элементы <code>&lt;access&gt;</code> с удаленным URI.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="WindowsDefaultUriPrefix" value="ms-appx://|ms-appx-web://" /&gt;
+</code></pre></div></div>
+
+<p>Этот параметр определяет, будет ли ваше приложение работать в <strong>локаьльном контексте</strong> или <strong>удаленном</strong> при запуска его стартового URI. При построении для Windows 10, по умолчанию используется удаленный контекст (<code class="language-plaintext highlighter-rouge">ms-appx-web://</code>).</p>
+
+<p>Для того, чтобы у создать приложение локального режима, которое не затронуто ограничениями удаленного режима, необходимо установить этому параметру значение <code class="language-plaintext highlighter-rouge">ms-appx://</code> и не объявлять любые элементы <code class="language-plaintext highlighter-rouge">&lt;access&gt;</code> с удаленным URI.</p>
 
 <p><strong>Допустимые значения</strong></p>
 
 <ul>
-<li><code>ms-appx://</code> (По умолчанию для Windows 8.0, 8.1): Начальная страница выполняется в локальном контексте</li>
-<li><code>ms-appx-web://</code> (По умолчанию для Windows 10): Начальная страница выполняется в удаленном контексте</li>
+  <li><code class="language-plaintext highlighter-rouge">ms-appx://</code> (По умолчанию для Windows 8.0, 8.1): Начальная страница выполняется в локальном контексте</li>
+  <li><code class="language-plaintext highlighter-rouge">ms-appx-web://</code> (По умолчанию для Windows 10): Начальная страница выполняется в удаленном контексте</li>
 </ul>
 
-<h4>{SDK}-MinVersion, {SDK}-MaxVersionTested</h4>
+<h4 id="sdk-minversion-sdk-maxversiontested">{SDK}-MinVersion, {SDK}-MaxVersionTested</h4>
 
 <p><em>Необязательный</em></p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="Windows.Universal-MinVersion" value="10.0.0.0" /&gt;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="Windows.Universal-MinVersion" value="10.0.0.0" /&gt;
 &lt;preference name="Windows.Mobile-MinVersion" value="10.0.9927.0" /&gt;
 &lt;preference name="Windows.Mobile-MaxVersionTested" value="10.0.10031.0" /&gt;
 &lt;preference name="Microsoft.Band-MinVersion" value="10.0.11.0" /&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Эти предпочтения определить с какими экосистемами (включая но не ограничиваясь универсальным Windows, Windows Mobile или Xbox) и с какими их минимальные и максимальные версии обеспечивается совместимость. Все еще требуются, чтобы платформы обладали поддержкой платформы универсальных приложений (таким образом Windows 10 в качестве базовой ОС). Однако это может указывать, что приложение осознает особую функциональность, которая может быть доступна только на некоторых устройствах (например, потоковые игры на Xbox).</p>
 
 <p><strong>Допустимые значения</strong></p>
 
-<p>Есть три части для каждого значения: <strong>SDK</strong>, <strong>ограничение версии</strong>и <strong>значение версии</strong>. Эти параметры определяются по значениям начинающимся с <code>Windows</code> или <code>Microsoft</code> и заканчивающимся ан <code>-MinVersion</code> или <code>-MaxVersionTested</code>:</p>
+<p>Есть три части для каждого значения: <strong>SDK</strong>, <strong>ограничение версии</strong>и <strong>значение версии</strong>. Эти параметры определяются по значениям начинающимся с <code class="language-plaintext highlighter-rouge">Windows</code> или <code class="language-plaintext highlighter-rouge">Microsoft</code> и заканчивающимся ан <code class="language-plaintext highlighter-rouge">-MinVersion</code> или <code class="language-plaintext highlighter-rouge">-MaxVersionTested</code>:</p>
 
 <ul>
-<li><strong>SDK</strong> определяет на какие специализированные платформы, вы хотите ориентироваться. Значение по умолчанию — <code>Windows.Universal</code>. Допустимые значения для них определены в схеме AppxManifest в элементах <code>Package/Depednencies/TargetPlatform</code> .</li>
-<li>В <strong>ограничении версии</strong> определяются правила совместимости приложений. Например если <code>-MinVersion</code> установлено в 10.1.0.0, то те версий ОС, которые не поддерживают по крайней мере версию 10.1.0.0 соответствующего SDK не сможет загрузить его.
-
-<ul>
-<li><code>-MinVersion</code> Указывает минимальную требуемую версию SDK</li>
-<li><code>-MaxVersionTested</code> указывает наибольшую версию SDK в которой проводилось тестирование. Если выпущена новая версия соответствующего пакета SDK, он будет работать в режиме совместимости для заданной версии.</li>
-</ul></li>
-<li><strong>Значение версии</strong> — кортеж из 4-целых чисел в виде <em>major.minor.build.qfe</em>.</li>
+  <li><strong>SDK</strong> определяет на какие специализированные платформы, вы хотите ориентироваться. Значение по умолчанию — <code class="language-plaintext highlighter-rouge">Windows.Universal</code>. Допустимые значения для них определены в схеме AppxManifest в элементах <code class="language-plaintext highlighter-rouge">Package/Depednencies/TargetPlatform</code> .</li>
+  <li>В <strong>ограничении версии</strong> определяются правила совместимости приложений. Например если <code class="language-plaintext highlighter-rouge">-MinVersion</code> установлено в 10.1.0.0, то те версий ОС, которые не поддерживают по крайней мере версию 10.1.0.0 соответствующего SDK не сможет загрузить его.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">-MinVersion</code> Указывает минимальную требуемую версию SDK</li>
+      <li><code class="language-plaintext highlighter-rouge">-MaxVersionTested</code> указывает наибольшую версию SDK в которой проводилось тестирование. Если выпущена новая версия соответствующего пакета SDK, он будет работать в режиме совместимости для заданной версии.</li>
+    </ul>
+  </li>
+  <li><strong>Значение версии</strong> — кортеж из 4-целых чисел в виде <em>major.minor.build.qfe</em>.</li>
 </ul>
 
 <p>Если никаких параметров данного типа не указано в файле config.xml, то Windows.Universal версии 10.0.0.0 будет выбрано по умолчанию.</p>

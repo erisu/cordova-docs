@@ -2104,35 +2104,54 @@
             
 
             <div id="page-toc-source">
-                <h1>Amazon Fire OS Webansichten für</h1>
+                <h1 id="amazon-fire-os-webansichten-für">Amazon Fire OS Webansichten für</h1>
 
-<p>Beginnend mit 3.3.0, können Sie Cordova als Komponente in Amazon-Feuer-OS-Anwendungen. Amazon Fire OS bezieht sich auf diese Komponente als <code>CordovaWebView</code> . <code>CordovaWebView</code>erweitert Amazon WebView, die auf der open-Source-Projekt Chromium basiert. Durch die Nutzung dieser Funktion, können Ihre Webanwendungen der neuesten HTML5-Web-Standards, die in einem modernen Web-Runtime-Engine ausgeführt nutzen.</p>
+<p>Beginnend mit 3.3.0, können Sie Cordova als Komponente in Amazon-Feuer-OS-Anwendungen. Amazon Fire OS bezieht sich auf diese Komponente als <code class="language-plaintext highlighter-rouge">CordovaWebView</code> . <code class="language-plaintext highlighter-rouge">CordovaWebView</code>erweitert Amazon WebView, die auf der open-Source-Projekt Chromium basiert. Durch die Nutzung dieser Funktion, können Ihre Webanwendungen der neuesten HTML5-Web-Standards, die in einem modernen Web-Runtime-Engine ausgeführt nutzen.</p>
 
 <p>Wenn Sie mit Amazon Fire OS nicht vertraut sind, sollten Sie zunächst machen Sie sich mit der Amazon-Handbuch für OS-Plattform im Feuer und haben die neuesten SDKs installiert, bevor Sie versuchen die ungewöhnlicheren Entwicklungsoption einen WebView-Einbettung.</p>
 
-<h2>Voraussetzungen</h2>
+<h2 id="voraussetzungen">Voraussetzungen</h2>
 
 <ul>
-<li><p>Cordova 3.3.0 oder größer</p></li>
-<li><p>Android SDK aktualisiert, um neuesten SDK</p></li>
-<li><p>Amazon WebView SDK</p></li>
+  <li>
+    <p>Cordova 3.3.0 oder größer</p>
+  </li>
+  <li>
+    <p>Android SDK aktualisiert, um neuesten SDK</p>
+  </li>
+  <li>
+    <p>Amazon WebView SDK</p>
+  </li>
 </ul>
 
-<h2>Anleitung zur Verwendung von CordovaWebView in einem Amazon-Feuer-OS-Projekt</h2>
+<h2 id="anleitung-zur-verwendung-von-cordovawebview-in-einem-amazon-feuer-os-projekt">Anleitung zur Verwendung von CordovaWebView in einem Amazon-Feuer-OS-Projekt</h2>
 
 <ol>
-<li><p>Um diese Anweisungen befolgen, stellen Sie sicher, dass Sie die neueste Cordova-Verteilung. Von <a href="http://cordova.apache.org">cordova.apache.org</a> herunterladen Sie und entpacken Sie die Amazon Fire OS-Paket.</p></li>
-<li><p>Download <a href="https://developer.amazon.com/sdk/fire/IntegratingAWV.html#installawv">Amazon WebView SDK</a> zu erweitern, und kopieren Sie die awv_interface.jar in <code>/framework/libs</code> Verzeichnis. Erstellen einer Libs / Ordner, wenn es nicht vorhanden ist.</p></li>
-<li><p>Navigieren Sie zu des Pakets <code>/framework</code> Verzeichnis und führen <code>ant jar</code> . Es schafft die Cordova <code>.jar</code> Datei, bildete sich als<code>/framework/cordova-x.x.x.jar</code>.</p></li>
-<li><p>Kopie der <code>.jar</code> Datei in des Android-Projekts <code>/libs</code> Verzeichnis.</p></li>
-<li><p>Fügen Sie Folgendes in der Anwendung <code>/res/xml/main.xml</code> -Datei, mit der <code>layout_height</code> , <code>layout_width</code> und <code>id</code> die Anwendung angepasst:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;org.apache.cordova.CordovaWebView
+  <li>
+    <p>Um diese Anweisungen befolgen, stellen Sie sicher, dass Sie die neueste Cordova-Verteilung. Von <a href="http://cordova.apache.org">cordova.apache.org</a> herunterladen Sie und entpacken Sie die Amazon Fire OS-Paket.</p>
+  </li>
+  <li>
+    <p>Download <a href="https://developer.amazon.com/sdk/fire/IntegratingAWV.html#installawv">Amazon WebView SDK</a> zu erweitern, und kopieren Sie die awv_interface.jar in <code class="language-plaintext highlighter-rouge">/framework/libs</code> Verzeichnis. Erstellen einer Libs / Ordner, wenn es nicht vorhanden ist.</p>
+  </li>
+  <li>
+    <p>Navigieren Sie zu des Pakets <code class="language-plaintext highlighter-rouge">/framework</code> Verzeichnis und führen <code class="language-plaintext highlighter-rouge">ant jar</code> . Es schafft die Cordova <code class="language-plaintext highlighter-rouge">.jar</code> Datei, bildete sich als<code class="language-plaintext highlighter-rouge">/framework/cordova-x.x.x.jar</code>.</p>
+  </li>
+  <li>
+    <p>Kopie der <code class="language-plaintext highlighter-rouge">.jar</code> Datei in des Android-Projekts <code class="language-plaintext highlighter-rouge">/libs</code> Verzeichnis.</p>
+  </li>
+  <li>
+    <p>Fügen Sie Folgendes in der Anwendung <code class="language-plaintext highlighter-rouge">/res/xml/main.xml</code> -Datei, mit der <code class="language-plaintext highlighter-rouge">layout_height</code> , <code class="language-plaintext highlighter-rouge">layout_width</code> und <code class="language-plaintext highlighter-rouge">id</code> die Anwendung angepasst:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;org.apache.cordova.CordovaWebView
     android:id="@+id/tutorialView"
     android:layout_width="match_parent"
     android:layout_height="match_parent" /&gt;
-</code></pre></div></li>
-<li><p>Ihre Aktivität ändern, sodass es implementiert die <code>CordovaInterface</code> . Sie sollten die enthaltenen Methoden implementieren. Vielleicht möchten Sie Kopieren von <code>/framework/src/org/apache/cordova/CordovaActivity.java</code> , oder setzen sie auf eigene Faust. Das folgende Codefragment zeigt eine einfache Anwendung, die die Schnittstelle verwendet. Beachten Sie, wie die referenzierten anzeigen-Id entspricht der <code>id</code> in das XML-Fragment oben angegebene Attribut:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">public class CordovaViewTestActivity extends Activity implements CordovaInterface {
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Ihre Aktivität ändern, sodass es implementiert die <code class="language-plaintext highlighter-rouge">CordovaInterface</code> . Sie sollten die enthaltenen Methoden implementieren. Vielleicht möchten Sie Kopieren von <code class="language-plaintext highlighter-rouge">/framework/src/org/apache/cordova/CordovaActivity.java</code> , oder setzen sie auf eigene Faust. Das folgende Codefragment zeigt eine einfache Anwendung, die die Schnittstelle verwendet. Beachten Sie, wie die referenzierten anzeigen-Id entspricht der <code class="language-plaintext highlighter-rouge">id</code> in das XML-Fragment oben angegebene Attribut:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class CordovaViewTestActivity extends Activity implements CordovaInterface {
     CordovaWebView cwv;
     /* Called when the activity is first created. */
     @Override
@@ -2143,11 +2162,13 @@
         Config.init(this);
         cwv.loadUrl(Config.getStartUrl());
     }
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ol>
 
 <p>Wenn Sie die Kamera verwenden, sollten Sie dies auch implementieren:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    @Override
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @Override
     public void setActivityResultCallback(CordovaPlugin plugin) {
         this.activityResultCallback = plugin;
     }
@@ -2189,16 +2210,23 @@
             callback.onActivityResult(requestCode, resultCode, intent);
         }
     }
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Denken Sie daran, den Threadpool hinzufügen, sonst die Plugins keine Threads ausgeführt:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    @Override
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @Override
     public ExecutorService getThreadPool() {
         return threadPool;
     }
-</code></pre></div>
+</code></pre></div></div>
+
 <ol>
-<li><p>Kopieren Sie Ihre Anwendung HTML und JavaScript-Dateien zu Ihrem Amazon-Feuer-OS-Projekts <code>/assets/www</code> Verzeichnis.</p></li>
-<li><p>Kopie <code>config.xml</code> von <code>/framework/res/xml</code> zu Ihrem Projekts <code>/res/xml</code> Verzeichnis.</p></li>
+  <li>
+    <p>Kopieren Sie Ihre Anwendung HTML und JavaScript-Dateien zu Ihrem Amazon-Feuer-OS-Projekts <code class="language-plaintext highlighter-rouge">/assets/www</code> Verzeichnis.</p>
+  </li>
+  <li>
+    <p>Kopie <code class="language-plaintext highlighter-rouge">config.xml</code> von <code class="language-plaintext highlighter-rouge">/framework/res/xml</code> zu Ihrem Projekts <code class="language-plaintext highlighter-rouge">/res/xml</code> Verzeichnis.</p>
+  </li>
 </ol>
 
 

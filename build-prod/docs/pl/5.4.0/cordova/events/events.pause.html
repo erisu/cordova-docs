@@ -1022,72 +1022,79 @@
             
 
             <div id="page-toc-source">
-                <h1>pause</h1>
+                <h1 id="pause">pause</h1>
 
 <p>Zdarzenie fires, gdy aplikacja jest w tle.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">document.addEventListener("pause", yourCallbackFunction, false);
-</code></pre></div>
-<h2>Szczegóły</h2>
 
-<p><code>pause</code>Zdarzenie fires po platformie rodzimych stawia aplikacji w tle, zazwyczaj, gdy użytkownik przechodzi do innej aplikacji.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>document.addEventListener("pause", yourCallbackFunction, false);
+</code></pre></div></div>
 
-<p>Aplikacje zwykle należy użyć <code>document.addEventListener</code> Aby dołączyć słuchacza raz <code>[deviceready](events.deviceready.html)</code> pożary zdarzenia.</p>
+<h2 id="szczegóły">Szczegóły</h2>
 
-<h2>Obsługiwane platformy</h2>
+<p><code class="language-plaintext highlighter-rouge">pause</code>Zdarzenie fires po platformie rodzimych stawia aplikacji w tle, zazwyczaj, gdy użytkownik przechodzi do innej aplikacji.</p>
+
+<p>Aplikacje zwykle należy użyć <code class="language-plaintext highlighter-rouge">document.addEventListener</code> Aby dołączyć słuchacza raz <code class="language-plaintext highlighter-rouge">[deviceready](events.deviceready.html)</code> pożary zdarzenia.</p>
+
+<h2 id="obsługiwane-platformy">Obsługiwane platformy</h2>
 
 <ul>
-<li>  Amazon Fire OS</li>
-<li>  Android</li>
-<li>  BlackBerry 10</li>
-<li>  iOS</li>
-<li>  Windows Phone 8</li>
-<li>  Windows 8</li>
+  <li>Amazon Fire OS</li>
+  <li>Android</li>
+  <li>BlackBerry 10</li>
+  <li>iOS</li>
+  <li>Windows Phone 8</li>
+  <li>Windows 8</li>
 </ul>
 
-<h2>Szybki przykład</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">document.addEventListener("pause", onPause, false);
+<h2 id="szybki-przykład">Szybki przykład</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>document.addEventListener("pause", onPause, false);
 
 function onPause() {
     // Handle the pause event
 }
-</code></pre></div>
-<h2>Pełny przykład</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Pause Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="pełny-przykład">Pełny przykład</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onLoad</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="p">}</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Pause Example&lt;/title&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"pause"</span><span class="p">,</span> <span class="nx">onPause</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// Handle the pause event</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onPause</span><span class="p">()</span> <span class="p">{</span>
-    <span class="p">}</span>
+    // Wait for device API libraries to load
+    //
+    function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body</span> <span class="na">onload=</span><span class="s">"onLoad()"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2>Dziwactwa iOS</h2>
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        document.addEventListener("pause", onPause, false);
+    }
 
-<p>W <code>pause</code> obsługi, wszelkie wywołania interfejsu API Cordova lub macierzystego wtyczek, które przechodzą przez Objective-C nie działają, a także jakichkolwiek połączeń interaktywnych, takich jak alarmy lub <code>console.log()</code> . One są przetwarzane tylko podczas wznawiania działania aplikacji, na następnym uruchomieniu pętli.</p>
+    // Handle the pause event
+    //
+    function onPause() {
+    }
 
-<p>IOS specyficzne <code>resign</code> zdarzeń jest dostępna jako alternatywa dla <code>pause</code> i wykrywa, kiedy użytkownik włączyć przycisk <strong>blokada</strong> zablokować urządzenie z app uruchomiony na pierwszym planie. Jeśli aplikacji (i urządzenia) jest włączona na wielozadaniowość, to jest powiązany z kolejnym <code>pause</code> wydarzenie, ale tylko pod iOS 5. W efekcie wszystkie zablokowane aplikacje w iOS 5, że wielozadaniowych włączone są wypychane do tła. Dla aplikacji będą nadal działać, gdy zablokowane pod iOS 5, wyłączenie aplikacji wielozadaniowych przez ustawienie <a href="http://developer.apple.com/library/ios/#documentation/general/Reference/InfoPlistKeyReference/Articles/iPhoneOSKeys.html">UIApplicationExitsOnSuspend</a> <code>YES</code> . Aby uruchomić zablokowane na iOS 4, to ustawienie nie ma znaczenia.</p>
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body onload="onLoad()"&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h2 id="dziwactwa-ios">Dziwactwa iOS</h2>
+
+<p>W <code class="language-plaintext highlighter-rouge">pause</code> obsługi, wszelkie wywołania interfejsu API Cordova lub macierzystego wtyczek, które przechodzą przez Objective-C nie działają, a także jakichkolwiek połączeń interaktywnych, takich jak alarmy lub <code class="language-plaintext highlighter-rouge">console.log()</code> . One są przetwarzane tylko podczas wznawiania działania aplikacji, na następnym uruchomieniu pętli.</p>
+
+<p>IOS specyficzne <code class="language-plaintext highlighter-rouge">resign</code> zdarzeń jest dostępna jako alternatywa dla <code class="language-plaintext highlighter-rouge">pause</code> i wykrywa, kiedy użytkownik włączyć przycisk <strong>blokada</strong> zablokować urządzenie z app uruchomiony na pierwszym planie. Jeśli aplikacji (i urządzenia) jest włączona na wielozadaniowość, to jest powiązany z kolejnym <code class="language-plaintext highlighter-rouge">pause</code> wydarzenie, ale tylko pod iOS 5. W efekcie wszystkie zablokowane aplikacje w iOS 5, że wielozadaniowych włączone są wypychane do tła. Dla aplikacji będą nadal działać, gdy zablokowane pod iOS 5, wyłączenie aplikacji wielozadaniowych przez ustawienie <a href="http://developer.apple.com/library/ios/#documentation/general/Reference/InfoPlistKeyReference/Articles/iPhoneOSKeys.html">UIApplicationExitsOnSuspend</a> <code class="language-plaintext highlighter-rouge">YES</code> . Aby uruchomić zablokowane na iOS 4, to ustawienie nie ma znaczenia.</p>
+
 
 
             </div>

@@ -1256,44 +1256,51 @@
             
 
             <div id="page-toc-source">
-                <h1>iOS Plugins</h1>
+                <h1 id="ios-plugins">iOS Plugins</h1>
 
-<p>Un plugin est une classe d&#39;Objective-C qui étend la <code>CDVPlugin</code> classe.</p>
+<p>Un plugin est une classe d’Objective-C qui étend la <code class="language-plaintext highlighter-rouge">CDVPlugin</code> classe.</p>
 
-<p>Chaque classe de plugin doit être enregistré comme une <code>&lt;feature&gt;</code> tag dans le <code>config.xml</code> fichier. C&#39;est grâce à ce mécanisme que JavaScript <code>exec</code> de la méthode <code>service</code> paramètre mappe vers une classe d&#39;Objective-C.</p>
+<p>Chaque classe de plugin doit être enregistré comme une <code class="language-plaintext highlighter-rouge">&lt;feature&gt;</code> tag dans le <code class="language-plaintext highlighter-rouge">config.xml</code> fichier. C’est grâce à ce mécanisme que JavaScript <code class="language-plaintext highlighter-rouge">exec</code> de la méthode <code class="language-plaintext highlighter-rouge">service</code> paramètre mappe vers une classe d’Objective-C.</p>
 
-<h2>Classe plugin cartographie</h2>
+<h2 id="classe-plugin-cartographie">Classe plugin cartographie</h2>
 
-<p>La partie JavaScript d&#39;un plugin utilise toujours la <code>cordova.exec</code> méthode comme suit :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">exec(&lt;successFunction&gt;, &lt;failFunction&gt;, &lt;service&gt;, &lt;action&gt;, [&lt;args&gt;]);
-</code></pre></div>
-<p>Cela marshale une demande de la <code>UIWebView</code> vers le côté natif iOS, plus ou moins bouillant vers le bas pour appeler le <code>action</code> méthode sur la <code>service</code> classe, avec les arguments passés à la <code>args</code> tableau.</p>
+<p>La partie JavaScript d’un plugin utilise toujours la <code class="language-plaintext highlighter-rouge">cordova.exec</code> méthode comme suit :</p>
 
-<p>Précisez le plugin comme un <code>&lt;feature&gt;</code> tag dans le projet de votre application Cordova-iOS <code>config.xml</code> fichier.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="LocalStorage"&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exec(&lt;successFunction&gt;, &lt;failFunction&gt;, &lt;service&gt;, &lt;action&gt;, [&lt;args&gt;]);
+</code></pre></div></div>
+
+<p>Cela marshale une demande de la <code class="language-plaintext highlighter-rouge">UIWebView</code> vers le côté natif iOS, plus ou moins bouillant vers le bas pour appeler le <code class="language-plaintext highlighter-rouge">action</code> méthode sur la <code class="language-plaintext highlighter-rouge">service</code> classe, avec les arguments passés à la <code class="language-plaintext highlighter-rouge">args</code> tableau.</p>
+
+<p>Précisez le plugin comme un <code class="language-plaintext highlighter-rouge">&lt;feature&gt;</code> tag dans le projet de votre application Cordova-iOS <code class="language-plaintext highlighter-rouge">config.xml</code> fichier.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="LocalStorage"&gt;
     &lt;param name="ios-package" value="CDVLocalStorage" /&gt;
 &lt;/feature&gt;
-</code></pre></div>
-<p>La fonction <code>name</code> attribut doit correspondre à ce que vous utilisez dans le JavaScript <code>exec</code> call <code>service</code> paramètre et le <code>value</code> attribut doit correspondre au nom de classe d&#39;Objective-C du plugin. <code>&lt;param name&gt;</code>Je serais toujours <code>&quot;ios-package&quot;</code> . Si vous ne suivez pas cette configuration, le plugin peut compiler mais ne sera pas atteignable par Cordova.</p>
+</code></pre></div></div>
 
-<h2>Durée de vie et initialisation du Plugin</h2>
+<p>La fonction <code class="language-plaintext highlighter-rouge">name</code> attribut doit correspondre à ce que vous utilisez dans le JavaScript <code class="language-plaintext highlighter-rouge">exec</code> call <code class="language-plaintext highlighter-rouge">service</code> paramètre et le <code class="language-plaintext highlighter-rouge">value</code> attribut doit correspondre au nom de classe d’Objective-C du plugin. <code class="language-plaintext highlighter-rouge">&lt;param name&gt;</code>Je serais toujours <code class="language-plaintext highlighter-rouge">"ios-package"</code> . Si vous ne suivez pas cette configuration, le plugin peut compiler mais ne sera pas atteignable par Cordova.</p>
 
-<p>Une seule instance d&#39;un objet plugin est créée pour la vie de chaque <code>UIWebView</code> . Plugins ne sont pas instanciés jusqu&#39;à ce qu&#39;ils sont tout d&#39;abord référencées par un appel de JavaScript, à moins que <code>&lt;param&gt;</code> avec un <code>onload</code> <code>name</code> attribut a la valeur <code>&quot;true&quot;</code> dans <code>config.xml</code> . Par exemple :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="Echo"&gt;
+<h2 id="durée-de-vie-et-initialisation-du-plugin">Durée de vie et initialisation du Plugin</h2>
+
+<p>Une seule instance d’un objet plugin est créée pour la vie de chaque <code class="language-plaintext highlighter-rouge">UIWebView</code> . Plugins ne sont pas instanciés jusqu’à ce qu’ils sont tout d’abord référencées par un appel de JavaScript, à moins que <code class="language-plaintext highlighter-rouge">&lt;param&gt;</code> avec un <code class="language-plaintext highlighter-rouge">onload</code> <code class="language-plaintext highlighter-rouge">name</code> attribut a la valeur <code class="language-plaintext highlighter-rouge">"true"</code> dans <code class="language-plaintext highlighter-rouge">config.xml</code> . Par exemple :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="Echo"&gt;
     &lt;param name="ios-package" value="Echo" /&gt;
     &lt;param name="onload" value="true" /&gt;
 &lt;/feature&gt;
-</code></pre></div>
-<p>Il y a <em>pas</em> désigné l&#39;initialiseur de plugins. Plugins doivent plutôt utiliser la <code>pluginInitialize</code> méthode pour leur logique de démarrage.</p>
+</code></pre></div></div>
 
-<p>Plugins avec longues requêtes, fond activité (p. ex., les médias jouant), auditeurs ou état interne doit mettre en œuvre la <code>onReset</code> méthode et arrêter ou nettoyer ces activités. Cette méthode est exécutée lorsque la <code>UIWebView</code> navigue vers une nouvelle page ou des actualisations, qui recharge le JavaScript.</p>
+<p>Il y a <em>pas</em> désigné l’initialiseur de plugins. Plugins doivent plutôt utiliser la <code class="language-plaintext highlighter-rouge">pluginInitialize</code> méthode pour leur logique de démarrage.</p>
 
-<h2>Écrire un iOS Cordova Plugin</h2>
+<p>Plugins avec longues requêtes, fond activité (p. ex., les médias jouant), auditeurs ou état interne doit mettre en œuvre la <code class="language-plaintext highlighter-rouge">onReset</code> méthode et arrêter ou nettoyer ces activités. Cette méthode est exécutée lorsque la <code class="language-plaintext highlighter-rouge">UIWebView</code> navigue vers une nouvelle page ou des actualisations, qui recharge le JavaScript.</p>
 
-<p>Nous avons une demande de plugin pour le côté natif JavaScript feu. Nous avons le plugin iOS Objective-C mappé correctement le <code>config.xml</code> fichier. Donc ce que l&#39;iOS finales Plugin Objective-C classe ressemble ?</p>
+<h2 id="écrire-un-ios-cordova-plugin">Écrire un iOS Cordova Plugin</h2>
 
-<p>Ce qui obtient expédié vers le plugin via du JavaScript <code>exec</code> fonction passée dans la classe correspondante Plugin <code>action</code> méthode. Une méthode de plugin a cette signature :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">- (void)myMethod:(CDVInvokedUrlCommand*)command
+<p>Nous avons une demande de plugin pour le côté natif JavaScript feu. Nous avons le plugin iOS Objective-C mappé correctement le <code class="language-plaintext highlighter-rouge">config.xml</code> fichier. Donc ce que l’iOS finales Plugin Objective-C classe ressemble ?</p>
+
+<p>Ce qui obtient expédié vers le plugin via du JavaScript <code class="language-plaintext highlighter-rouge">exec</code> fonction passée dans la classe correspondante Plugin <code class="language-plaintext highlighter-rouge">action</code> méthode. Une méthode de plugin a cette signature :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- (void)myMethod:(CDVInvokedUrlCommand*)command
 {
     CDVPluginResult* pluginResult = nil;
     NSString* myarg = [command.arguments objectAtIndex:0];
@@ -1305,84 +1312,98 @@
     }
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
-</code></pre></div>
+</code></pre></div></div>
+
 <ol>
-<li><p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVInvokedUrlCommand.h">CDVInvokedUrlCommand.h</a></p></li>
-<li><p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPluginResult.h">CDVPluginResult.h</a></p></li>
-<li><p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVCommandDelegate.h">CDVCommandDelegate.h</a></p></li>
+  <li>
+    <p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVInvokedUrlCommand.h">CDVInvokedUrlCommand.h</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPluginResult.h">CDVPluginResult.h</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVCommandDelegate.h">CDVCommandDelegate.h</a></p>
+  </li>
 </ol>
 
-<h2>iOS CDVPluginResult types de messages</h2>
+<h2 id="ios-cdvpluginresult-types-de-messages">iOS CDVPluginResult types de messages</h2>
 
-<p>À l&#39;aide de CDVPluginResult vous pouvez retourner une variété de types de résultats à vos rappels JavaScript, utilisant des méthodes de la classe qui ressemblent à :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">+ (CDVPluginResult*)resultWithStatus:(CDVCommandStatus)statusOrdinal messageAs...
-</code></pre></div>
-<p>Vous pouvez créer des <code>String</code> , <code>Int</code> , <code>Double</code> , <code>Bool</code> , <code>Array</code> , <code>Dictionary</code> , <code>ArrayBuffer</code> , et <code>Multipart</code> types. Ou bien, ne joindre aucun argument (il suffit d&#39;envoyer un État). Ou, renvoie une erreur. Vous pouvez même choisir ne pas envoyer n&#39;importe quel résultat de plugin du tout, auquel cas le rappel ne se déclenche pas.</p>
+<p>À l’aide de CDVPluginResult vous pouvez retourner une variété de types de résultats à vos rappels JavaScript, utilisant des méthodes de la classe qui ressemblent à :</p>
 
-<h3>Notes</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+ (CDVPluginResult*)resultWithStatus:(CDVCommandStatus)statusOrdinal messageAs...
+</code></pre></div></div>
 
-<ul>
-<li>  <code>messageAsArrayBuffer</code>attend <code>NSData*</code> et le convertit en un <code>ArrayBuffer</code> pour votre rappel JavaScript (et <code>ArrayBuffers</code> venues à un plugin JavaScript sont convertis en<code>NSData*</code>).</li>
-<li>  <code>messageAsMultipart</code> s&#39;attend à une <code>NSArray *</code> contenant l&#39;un de l&#39;autre pris en charge les types et envoie l&#39;intégralité du tableau comme le <code>arguments</code> pour votre rappel JavaScript. 
+<p>Vous pouvez créer des <code class="language-plaintext highlighter-rouge">String</code> , <code class="language-plaintext highlighter-rouge">Int</code> , <code class="language-plaintext highlighter-rouge">Double</code> , <code class="language-plaintext highlighter-rouge">Bool</code> , <code class="language-plaintext highlighter-rouge">Array</code> , <code class="language-plaintext highlighter-rouge">Dictionary</code> , <code class="language-plaintext highlighter-rouge">ArrayBuffer</code> , et <code class="language-plaintext highlighter-rouge">Multipart</code> types. Ou bien, ne joindre aucun argument (il suffit d’envoyer un État). Ou, renvoie une erreur. Vous pouvez même choisir ne pas envoyer n’importe quel résultat de plugin du tout, auquel cas le rappel ne se déclenche pas.</p>
+
+<h3 id="notes">Notes</h3>
 
 <ul>
-<li>  Bizarrerie : ce n&#39;est pas seulement syntaxique (bien qu&#39;il soit sucré). De cette façon, tous les arguments sont sérialisées ou désérialisées si nécessaires. Par exemple, il est sûr de revenir <code>NSData*</code> comme plusieurs parties, mais pas comme <code>Array</code> /<code>Dictionary</code>.</li>
-</ul></li>
+  <li><code class="language-plaintext highlighter-rouge">messageAsArrayBuffer</code>attend <code class="language-plaintext highlighter-rouge">NSData*</code> et le convertit en un <code class="language-plaintext highlighter-rouge">ArrayBuffer</code> pour votre rappel JavaScript (et <code class="language-plaintext highlighter-rouge">ArrayBuffers</code> venues à un plugin JavaScript sont convertis en<code class="language-plaintext highlighter-rouge">NSData*</code>).</li>
+  <li><code class="language-plaintext highlighter-rouge">messageAsMultipart</code> s’attend à une <code class="language-plaintext highlighter-rouge">NSArray *</code> contenant l’un de l’autre pris en charge les types et envoie l’intégralité du tableau comme le <code class="language-plaintext highlighter-rouge">arguments</code> pour votre rappel JavaScript.
+    <ul>
+      <li>Bizarrerie : ce n’est pas seulement syntaxique (bien qu’il soit sucré). De cette façon, tous les arguments sont sérialisées ou désérialisées si nécessaires. Par exemple, il est sûr de revenir <code class="language-plaintext highlighter-rouge">NSData*</code> comme plusieurs parties, mais pas comme <code class="language-plaintext highlighter-rouge">Array</code> /<code class="language-plaintext highlighter-rouge">Dictionary</code>.</li>
+    </ul>
+  </li>
 </ul>
 
-<h2>IOS écho Plugin Plugin</h2>
+<h2 id="ios-écho-plugin-plugin">IOS écho Plugin Plugin</h2>
 
-<p>Nous aimerions ajouter ce qui suit pour le projet <code>config.xml</code> fichier :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="Echo"&gt;
+<p>Nous aimerions ajouter ce qui suit pour le projet <code class="language-plaintext highlighter-rouge">config.xml</code> fichier :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="Echo"&gt;
     &lt;param name="ios-package" value="Echo" /&gt;
 &lt;/feature&gt;
-</code></pre></div>
-<p>Puis nous aimerions ajouter les fichiers suivants ( <code>Echo.h</code> et <code>Echo.m</code> ) vers le répertoire Plugins à l&#39;intérieur de notre répertoire de l&#39;application de Cordova-iOS :</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cm">/********* Echo.h Cordova Plugin Header *******/</span>
+</code></pre></div></div>
 
-<span class="cp">#import &lt;Cordova/CDV.h&gt;
-</span>
-<span class="k">@interface</span> <span class="nc">Echo</span> <span class="p">:</span> <span class="nc">CDVPlugin</span>
+<p>Puis nous aimerions ajouter les fichiers suivants ( <code class="language-plaintext highlighter-rouge">Echo.h</code> et <code class="language-plaintext highlighter-rouge">Echo.m</code> ) vers le répertoire Plugins à l’intérieur de notre répertoire de l’application de Cordova-iOS :</p>
 
-<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">echo</span><span class="p">:(</span><span class="n">CDVInvokedUrlCommand</span><span class="o">*</span><span class="p">)</span><span class="nv">command</span><span class="p">;</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/********* Echo.h Cordova Plugin Header *******/
 
-<span class="k">@end</span>
-
-<span class="cm">/********* Echo.m Cordova Plugin Implementation *******/</span>
-
-<span class="cp">#import "Echo.h"
 #import &lt;Cordova/CDV.h&gt;
-</span>
-<span class="k">@implementation</span> <span class="nc">Echo</span>
 
-<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">echo</span><span class="p">:(</span><span class="n">CDVInvokedUrlCommand</span><span class="o">*</span><span class="p">)</span><span class="nv">command</span>
-<span class="p">{</span>
-    <span class="n">CDVPluginResult</span><span class="o">*</span> <span class="n">pluginResult</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
-    <span class="n">NSString</span><span class="o">*</span> <span class="n">echo</span> <span class="o">=</span> <span class="p">[</span><span class="n">command</span><span class="p">.</span><span class="n">arguments</span> <span class="nf">objectAtIndex</span><span class="p">:</span><span class="mi">0</span><span class="p">];</span>
+@interface Echo : CDVPlugin
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">echo</span> <span class="o">!=</span> <span class="nb">nil</span> <span class="o">&amp;&amp;</span> <span class="p">[</span><span class="n">echo</span> <span class="nf">length</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">pluginResult</span> <span class="o">=</span> <span class="p">[</span><span class="n">CDVPluginResult</span> <span class="nf">resultWithStatus</span><span class="p">:</span><span class="n">CDVCommandStatus_OK</span> <span class="nf">messageAsString</span><span class="p">:</span><span class="n">echo</span><span class="p">];</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="n">pluginResult</span> <span class="o">=</span> <span class="p">[</span><span class="n">CDVPluginResult</span> <span class="nf">resultWithStatus</span><span class="p">:</span><span class="n">CDVCommandStatus_ERROR</span><span class="p">];</span>
-    <span class="p">}</span>
+- (void)echo:(CDVInvokedUrlCommand*)command;
 
-    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">commandDelegate</span> <span class="nf">sendPluginResult</span><span class="p">:</span><span class="n">pluginResult</span> <span class="nf">callbackId</span><span class="p">:</span><span class="n">command</span><span class="p">.</span><span class="n">callbackId</span><span class="p">];</span>
-<span class="p">}</span>
+@end
 
-<span class="k">@end</span>
-</code></pre></div>
-<p>Nous allons jeter un coup d&#39;oeil sur le code. En haut, nous avons toutes les importations de Cordova nécessaires. Notre classe s&#39;étend de <code>CDVPlugin</code> (très important).</p>
+/********* Echo.m Cordova Plugin Implementation *******/
 
-<p>Ce plugin supporte seulement une seule action, le <code>echo</code> action. Tout d&#39;abord, nous attraper la chaîne echo à l&#39;aide du <code>objectAtIndex</code> méthode sur notre <code>args</code> , il dit nous voulons obtenir le paramètre 0E dans le tableau d&#39;arguments. Nous faisons un peu de paramètre de contrôle : Veillez à ce que ce n&#39;est pas <code>nil</code> et assurez-vous qu&#39;il n&#39;est pas une chaîne de longueur nulle.</p>
+#import "Echo.h"
+#import &lt;Cordova/CDV.h&gt;
 
-<p>Si elle est, nous retourner un <code>PluginResult</code> avec une <code>ERROR</code> État. Si toutes ces vérifications passent, puis nous retournons une <code>PluginResult</code> avec un <code>OK</code> statut et passez le <code>echo</code> nous avons reçu en premier lieu comme un paramètre de chaîne.</p>
+@implementation Echo
 
-<p>Enfin, nous envoyer le résultat à <code>self.commandDelegate</code> , qui exécute le <code>exec</code> rappels de succès ou l&#39;échec de la méthode du côté de JavaScript. Si le rappel de succès est appelé, elle passe dans le <code>echo</code> paramètre.</p>
+- (void)echo:(CDVInvokedUrlCommand*)command
+{
+    CDVPluginResult* pluginResult = nil;
+    NSString* echo = [command.arguments objectAtIndex:0];
 
-<h2>Filetage</h2>
+    if (echo != nil &amp;&amp; [echo length] &gt; 0) {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:echo];
+    } else {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+    }
 
-<p>Méthodes plugin sont exécutées dans le même thread que l&#39;interface utilisateur. Si votre plugin nécessite beaucoup de traitement ou nécessite un appel bloquant, vous devez utiliser un thread d&#39;arrière-plan. Par exemple :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">- (void)myPluginMethod:(CDVInvokedUrlCommand*)command
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
+@end
+</code></pre></div></div>
+
+<p>Nous allons jeter un coup d’oeil sur le code. En haut, nous avons toutes les importations de Cordova nécessaires. Notre classe s’étend de <code class="language-plaintext highlighter-rouge">CDVPlugin</code> (très important).</p>
+
+<p>Ce plugin supporte seulement une seule action, le <code class="language-plaintext highlighter-rouge">echo</code> action. Tout d’abord, nous attraper la chaîne echo à l’aide du <code class="language-plaintext highlighter-rouge">objectAtIndex</code> méthode sur notre <code class="language-plaintext highlighter-rouge">args</code> , il dit nous voulons obtenir le paramètre 0E dans le tableau d’arguments. Nous faisons un peu de paramètre de contrôle : Veillez à ce que ce n’est pas <code class="language-plaintext highlighter-rouge">nil</code> et assurez-vous qu’il n’est pas une chaîne de longueur nulle.</p>
+
+<p>Si elle est, nous retourner un <code class="language-plaintext highlighter-rouge">PluginResult</code> avec une <code class="language-plaintext highlighter-rouge">ERROR</code> État. Si toutes ces vérifications passent, puis nous retournons une <code class="language-plaintext highlighter-rouge">PluginResult</code> avec un <code class="language-plaintext highlighter-rouge">OK</code> statut et passez le <code class="language-plaintext highlighter-rouge">echo</code> nous avons reçu en premier lieu comme un paramètre de chaîne.</p>
+
+<p>Enfin, nous envoyer le résultat à <code class="language-plaintext highlighter-rouge">self.commandDelegate</code> , qui exécute le <code class="language-plaintext highlighter-rouge">exec</code> rappels de succès ou l’échec de la méthode du côté de JavaScript. Si le rappel de succès est appelé, elle passe dans le <code class="language-plaintext highlighter-rouge">echo</code> paramètre.</p>
+
+<h2 id="filetage">Filetage</h2>
+
+<p>Méthodes plugin sont exécutées dans le même thread que l’interface utilisateur. Si votre plugin nécessite beaucoup de traitement ou nécessite un appel bloquant, vous devez utiliser un thread d’arrière-plan. Par exemple :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- (void)myPluginMethod:(CDVInvokedUrlCommand*)command
 {
     // Check command.arguments here.
     [self.commandDelegate runInBackground:^{
@@ -1393,29 +1414,38 @@
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }];
 }
-</code></pre></div>
-<h2>Fonctionnalités avancées de Plugin</h2>
+</code></pre></div></div>
 
-<p>Voir d&#39;autres méthodes que vous pouvez substituer dans :</p>
+<h2 id="fonctionnalités-avancées-de-plugin">Fonctionnalités avancées de Plugin</h2>
+
+<p>Voir d’autres méthodes que vous pouvez substituer dans :</p>
 
 <ul>
-<li><p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.h">CDVPlugin.h</a></p></li>
-<li><p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.m">CDVPlugin.m</a></p></li>
+  <li>
+    <p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.h">CDVPlugin.h</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.m">CDVPlugin.m</a></p>
+  </li>
 </ul>
 
-<p>Par exemple, vous pouvez accrocher dans le <code>[pause](../../../cordova/events/events.pause.html)</code> , <code>[resume](../../../cordova/events/events.resume.html)</code> , app résilier et <code>handleOpenURL</code> événements.</p>
+<p>Par exemple, vous pouvez accrocher dans le <code class="language-plaintext highlighter-rouge">[pause](../../../cordova/events/events.pause.html)</code> , <code class="language-plaintext highlighter-rouge">[resume](../../../cordova/events/events.resume.html)</code> , app résilier et <code class="language-plaintext highlighter-rouge">handleOpenURL</code> événements.</p>
 
-<h2>Débogage des Plugins</h2>
+<h2 id="débogage-des-plugins">Débogage des Plugins</h2>
 
-<p>Pour déboguer le côté de l&#39;Objective-C, vous devez utiliser le débogueur intégré de Xcode. Pour JavaScript, sur iOS 5,0 vous pouvez utiliser <a href="https://github.com/apache/cordova-weinre">Weinre, un projet de Cordova Apache</a> ou <a href="http://www.iwebinspector.com/">iWebInspector, un utilitaire tiers</a></p>
+<p>Pour déboguer le côté de l’Objective-C, vous devez utiliser le débogueur intégré de Xcode. Pour JavaScript, sur iOS 5,0 vous pouvez utiliser <a href="https://github.com/apache/cordova-weinre">Weinre, un projet de Cordova Apache</a> ou <a href="http://www.iwebinspector.com/">iWebInspector, un utilitaire tiers</a></p>
 
-<p>Par iOS 6, vous devrez utiliser Safari 6.0 pour fixer simplement à votre application en cours d&#39;exécution dans l&#39;iOS simulateur 6.</p>
+<p>Par iOS 6, vous devrez utiliser Safari 6.0 pour fixer simplement à votre application en cours d’exécution dans l’iOS simulateur 6.</p>
 
-<h2>Pièges communs</h2>
+<h2 id="pièges-communs">Pièges communs</h2>
 
 <ul>
-<li><p>N&#39;oubliez pas d&#39;ajouter le mappage de votre plugin à config.xml. Si vous avez oublié, une erreur est consignée dans la console de Xcode.</p></li>
-<li><p>N&#39;oubliez pas d&#39;ajouter des hôtes que vous connecter à dans la liste blanche, comme décrit dans Domain Whitelist Guide. Si vous avez oublié, une erreur est consignée dans la console de Xcode.</p></li>
+  <li>
+    <p>N’oubliez pas d’ajouter le mappage de votre plugin à config.xml. Si vous avez oublié, une erreur est consignée dans la console de Xcode.</p>
+  </li>
+  <li>
+    <p>N’oubliez pas d’ajouter des hôtes que vous connecter à dans la liste blanche, comme décrit dans Domain Whitelist Guide. Si vous avez oublié, une erreur est consignée dans la console de Xcode.</p>
+  </li>
 </ul>
 
 

@@ -1436,26 +1436,27 @@
             
 
             <div id="page-toc-source">
-                <h1>Config.xml ファイル</h1>
+                <h1 id="configxml-ファイル">Config.xml ファイル</h1>
 
-<p>グローバル構成ファイルを使って、アプリの動作の多くの側面を制御できる <code>config.xml</code> は、アプリのホーム ページと共にトップレベル web アセット ディレクトリに配置されます。 このプラットフォームに依存しない XML ファイルは、W3C の<a href="http://www.w3.org/TR/widgets/">Web アプリのパッケージ化 (ウィジェット)</a>仕様に基づいてフォーマットされ、拡張コア コルドバ API 機能、プラグイン、およびプラットフォームに固有の設定を指定します。</p>
+<p>グローバル構成ファイルを使って、アプリの動作の多くの側面を制御できる <code class="language-plaintext highlighter-rouge">config.xml</code> は、アプリのホーム ページと共にトップレベル web アセット ディレクトリに配置されます。 このプラットフォームに依存しない XML ファイルは、W3C の<a href="http://www.w3.org/TR/widgets/">Web アプリのパッケージ化 (ウィジェット)</a>仕様に基づいてフォーマットされ、拡張コア コルドバ API 機能、プラグイン、およびプラットフォームに固有の設定を指定します。</p>
 
-<p>コルドバ CLI (コマンド ライン インターフェイスで説明します) で作成されたプロジェクト、このファイルは、トップレベルで発見ことができます <code>www</code> ディレクトリ。 内のさまざまなサブディレクトリにこのファイルのバージョンを再生、CLI を使用してプロジェクトをビルドする <code>platforms</code> 。 作成するプロジェクトが SDK にあなたのワークフローをシフトし、CLI を使用する場合、プラットフォーム固有のファイルは、ソースとして機能します。</p>
+<p>コルドバ CLI (コマンド ライン インターフェイスで説明します) で作成されたプロジェクト、このファイルは、トップレベルで発見ことができます <code class="language-plaintext highlighter-rouge">www</code> ディレクトリ。 内のさまざまなサブディレクトリにこのファイルのバージョンを再生、CLI を使用してプロジェクトをビルドする <code class="language-plaintext highlighter-rouge">platforms</code> 。 作成するプロジェクトが SDK にあなたのワークフローをシフトし、CLI を使用する場合、プラットフォーム固有のファイルは、ソースとして機能します。</p>
 
 <p>このセクションとクロス プラットフォームのグローバル構成オプションを詳細します。プラットフォーム固有のオプションの次のセクションを参照してください。</p>
 
 <ul>
-<li>  <a href="../guide/platforms/ios/config.html">iOS 構成</a></li>
-<li>  <a href="../guide/platforms/android/config.html">Android の構成</a></li>
-<li>  <a href="../guide/platforms/blackberry10/config.html">ブラックベリーの構成</a></li>
+  <li><a href="../guide/platforms/ios/config.html">iOS 構成</a></li>
+  <li><a href="../guide/platforms/android/config.html">Android の構成</a></li>
+  <li><a href="../guide/platforms/blackberry10/config.html">ブラックベリーの構成</a></li>
 </ul>
 
 <p>以下に詳述様々 な構成のオプションに加え、アプリケーションのコア セット各ターゲット ・ プラットフォーム用の画像も構成できます。詳細については、アイコンとスプラッシュ画面を参照してください。</p>
 
-<h2>コア構成要素</h2>
+<h2 id="コア構成要素">コア構成要素</h2>
 
-<p>この例では、既定の <code>config.xml</code> は CLI によって生成される <code>create</code> コマンドは、コマンド ライン インターフェイスで記述されています。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;widget id="com.example.hello" version="0.0.1"&gt;
+<p>この例では、既定の <code class="language-plaintext highlighter-rouge">config.xml</code> は CLI によって生成される <code class="language-plaintext highlighter-rouge">create</code> コマンドは、コマンド ライン インターフェイスで記述されています。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;widget id="com.example.hello" version="0.0.1"&gt;
         &lt;name&gt;HelloWorld&lt;/name&gt;
         &lt;description&gt;
             A sample Apache Cordova application that responds to the deviceready event.
@@ -1468,70 +1469,108 @@
         &lt;preference name="Fullscreen" value="true" /&gt;
         &lt;preference name="WebViewBounce" value="true" /&gt;
     &lt;/widget&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <!-- QUERY: is WebViewBounce superseded by DisallowOverscroll? -->
 
-<p>次の構成要素は最上位レベルに表示されます <code>config.xml</code> ファイル、およびすべてのサポートされているコルドバ プラットフォームがサポートされています。</p>
+<p>次の構成要素は最上位レベルに表示されます <code class="language-plaintext highlighter-rouge">config.xml</code> ファイル、およびすべてのサポートされているコルドバ プラットフォームがサポートされています。</p>
 
 <ul>
-<li><p><code>&lt;widget&gt;</code>要素の <code>id</code> 属性をアプリの逆ドメイン識別子を提供します、 <code>version</code> その完全なバージョン番号のメジャー/マイナー/パッチ表記で表されます。</p></li>
-<li><p><code>&lt;name&gt;</code>要素をデバイスのホーム画面とアプリ ストア インターフェイス内が表示されますアプリケーションの正式な名前を指定します。</p></li>
-<li><p><code>&lt;description&gt;</code>と <code>&lt;author&gt;</code> 要素メタデータおよび app の店のリスト内に表示される連絡先の情報を指定します。</p></li>
-<li><p>省略可能な <code>&lt;content&gt;</code> 要素の最上位の web 資産ディレクトリに、アプリケーションの開始ページを定義します。 既定値は <code>index.html</code> 、トップレベルのプロジェクトで表示される習慣 <code>www</code> ディレクトリ。</p></li>
-<li><p><code>&lt;access&gt;</code>要素は外部ドメインのアプリケーション通信を許可するとのセットを定義します。 上記の既定値の任意のサーバーにアクセスすることができます。 詳細についてはドメイン ホワイト リスト ガイドを参照してください。</p></li>
-<li><p><code>&lt;preference&gt;</code>タグのペアとして様々 なオプションを設定します <code>name</code> / <code>value</code> の属性。 各設定項目 <code>name</code> 小文字は区別されません。 多くの設定は、このページの上部に記載されている特定のプラットフォームに固有です。 次のセクションでは、1 つ以上のプラットフォームに適用される設定を詳細します。</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">&lt;widget&gt;</code>要素の <code class="language-plaintext highlighter-rouge">id</code> 属性をアプリの逆ドメイン識別子を提供します、 <code class="language-plaintext highlighter-rouge">version</code> その完全なバージョン番号のメジャー/マイナー/パッチ表記で表されます。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">&lt;name&gt;</code>要素をデバイスのホーム画面とアプリ ストア インターフェイス内が表示されますアプリケーションの正式な名前を指定します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">&lt;description&gt;</code>と <code class="language-plaintext highlighter-rouge">&lt;author&gt;</code> 要素メタデータおよび app の店のリスト内に表示される連絡先の情報を指定します。</p>
+  </li>
+  <li>
+    <p>省略可能な <code class="language-plaintext highlighter-rouge">&lt;content&gt;</code> 要素の最上位の web 資産ディレクトリに、アプリケーションの開始ページを定義します。 既定値は <code class="language-plaintext highlighter-rouge">index.html</code> 、トップレベルのプロジェクトで表示される習慣 <code class="language-plaintext highlighter-rouge">www</code> ディレクトリ。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">&lt;access&gt;</code>要素は外部ドメインのアプリケーション通信を許可するとのセットを定義します。 上記の既定値の任意のサーバーにアクセスすることができます。 詳細についてはドメイン ホワイト リスト ガイドを参照してください。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">&lt;preference&gt;</code>タグのペアとして様々 なオプションを設定します <code class="language-plaintext highlighter-rouge">name</code> / <code class="language-plaintext highlighter-rouge">value</code> の属性。 各設定項目 <code class="language-plaintext highlighter-rouge">name</code> 小文字は区別されません。 多くの設定は、このページの上部に記載されている特定のプラットフォームに固有です。 次のセクションでは、1 つ以上のプラットフォームに適用される設定を詳細します。</p>
+  </li>
 </ul>
 
-<h2>グローバル設定</h2>
+<h2 id="グローバル設定">グローバル設定</h2>
 
 <p>次のグローバル設定がすべてのプラットフォームに適用されます。</p>
 
 <ul>
-<li><p><code>Fullscreen</code>画面の上部のステータス バーを非表示にすることができます。既定値は <code>false</code> です。例:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="Fullscreen" value="true" /&gt;
-</code></pre></div></li>
-<li><p><code>Orientation</code>向きをロックし、インターフェイスから回転の向きの変更に応答しないようにすることができます。 可能な値は <code>default</code> 、 <code>landscape</code> 、または <code>portrait</code> 。 例:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="Orientation" value="landscape" /&gt;
-</code></pre></div>
-<p><strong>注：</strong><code>default</code>値は横向きと縦向きの<em>両方</em>が有効になっていることを意味します。 各プラットフォームの既定の設定 (通常肖像画のみ) を使用する場合のままにこのタグのうち、 <code>config.xml</code> ファイル。 また、ブラックベリーを使用して <code>auto</code> の代わりに <code>default</code> でその <code>config.xml</code> ファイル。 指定した場合 <code>default</code> 、グローバルで <code>config.xml</code> 、それに変換 <code>auto</code> ブラックベリー ビルドで。</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Fullscreen</code>画面の上部のステータス バーを非表示にすることができます。既定値は <code class="language-plaintext highlighter-rouge">false</code> です。例:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="Fullscreen" value="true" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Orientation</code>向きをロックし、インターフェイスから回転の向きの変更に応答しないようにすることができます。 可能な値は <code class="language-plaintext highlighter-rouge">default</code> 、 <code class="language-plaintext highlighter-rouge">landscape</code> 、または <code class="language-plaintext highlighter-rouge">portrait</code> 。 例:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="Orientation" value="landscape" /&gt;
+</code></pre></div>    </div>
+
+    <p><strong>注：</strong><code class="language-plaintext highlighter-rouge">default</code>値は横向きと縦向きの<em>両方</em>が有効になっていることを意味します。 各プラットフォームの既定の設定 (通常肖像画のみ) を使用する場合のままにこのタグのうち、 <code class="language-plaintext highlighter-rouge">config.xml</code> ファイル。 また、ブラックベリーを使用して <code class="language-plaintext highlighter-rouge">auto</code> の代わりに <code class="language-plaintext highlighter-rouge">default</code> でその <code class="language-plaintext highlighter-rouge">config.xml</code> ファイル。 指定した場合 <code class="language-plaintext highlighter-rouge">default</code> 、グローバルで <code class="language-plaintext highlighter-rouge">config.xml</code> 、それに変換 <code class="language-plaintext highlighter-rouge">auto</code> ブラックベリー ビルドで。</p>
+  </li>
 </ul>
 
-<h2>マルチプラット フォーム環境の設定</h2>
+<h2 id="マルチプラット-フォーム環境の設定">マルチプラット フォーム環境の設定</h2>
 
 <p>次の設定を 1 つ以上のプラットフォームができないそれらのすべてが適用されます。</p>
 
 <ul>
-<li><p><code>DisallowOverscroll</code>(ブール値、既定値は <code>false</code> ): に設定されている <code>true</code> ユーザーは過去の先頭または末尾のコンテンツのスクロール時に任意のフィードバックを表示するインターフェイスをしたくないかどうか。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="DisallowOverscroll" value="true"/&gt;
-</code></pre></div>
-<p>人造人間と iOS に適用されます。 IOS の overscroll ジェスチャー原因コンテンツは元の位置に戻って跳ねます。 Android 上で彼らはコンテンツの上部または下部のエッジに沿ってより微妙な光る効果を生成します。</p></li>
-<li><p><code>BackgroundColor</code>: アプリケーションの背景色を設定します。 次の 3 バイトは、アルファ チャネルを表す最初のバイトと 4 バイトの 16 進値と標準の RGB 値をサポートしています。 この例では、青を指定します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="BackgroundColor" value="0xff0000ff"/&gt;
-</code></pre></div>
-<p>アンドロイドおよびブラックベリーに適用されます。たとえば、<em>すべて</em>のプラットフォームそれ以外の場合利用可能な CSS をオーバーライドします。<code>body{background-color:blue}</code>.</p></li>
-<li><p><code>HideKeyboardFormAccessoryBar</code>(ブール値、既定値は <code>false</code> ): に設定されている <code>true</code> 貢献、キーボード上に表示される追加のツールバーを非表示にするユーザーを別の 1 つのフォーム入力から移動します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="HideKeyboardFormAccessoryBar" value="true"/&gt;
-</code></pre></div>
-<p>IOS とブラックベリーに適用されます。</p>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">DisallowOverscroll</code>(ブール値、既定値は <code class="language-plaintext highlighter-rouge">false</code> ): に設定されている <code class="language-plaintext highlighter-rouge">true</code> ユーザーは過去の先頭または末尾のコンテンツのスクロール時に任意のフィードバックを表示するインターフェイスをしたくないかどうか。</p>
 
-<p><strong>注：</strong>有効値は、BlackBerry のため <code>enable</code> または<code>disable</code>.</p></li>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="DisallowOverscroll" value="true"/&gt;
+</code></pre></div>    </div>
+
+    <p>人造人間と iOS に適用されます。 IOS の overscroll ジェスチャー原因コンテンツは元の位置に戻って跳ねます。 Android 上で彼らはコンテンツの上部または下部のエッジに沿ってより微妙な光る効果を生成します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">BackgroundColor</code>: アプリケーションの背景色を設定します。 次の 3 バイトは、アルファ チャネルを表す最初のバイトと 4 バイトの 16 進値と標準の RGB 値をサポートしています。 この例では、青を指定します。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="BackgroundColor" value="0xff0000ff"/&gt;
+</code></pre></div>    </div>
+
+    <p>アンドロイドおよびブラックベリーに適用されます。たとえば、<em>すべて</em>のプラットフォームそれ以外の場合利用可能な CSS をオーバーライドします。<code class="language-plaintext highlighter-rouge">body{background-color:blue}</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">HideKeyboardFormAccessoryBar</code>(ブール値、既定値は <code class="language-plaintext highlighter-rouge">false</code> ): に設定されている <code class="language-plaintext highlighter-rouge">true</code> 貢献、キーボード上に表示される追加のツールバーを非表示にするユーザーを別の 1 つのフォーム入力から移動します。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="HideKeyboardFormAccessoryBar" value="true"/&gt;
+</code></pre></div>    </div>
+
+    <p>IOS とブラックベリーに適用されます。</p>
+
+    <p><strong>注：</strong>有効値は、BlackBerry のため <code class="language-plaintext highlighter-rouge">enable</code> または<code class="language-plaintext highlighter-rouge">disable</code>.</p>
+  </li>
 </ul>
 
-<h2><code>&lt;feature&gt;</code>要素</h2>
+<h2 id="feature要素"><code class="language-plaintext highlighter-rouge">&lt;feature&gt;</code>要素</h2>
 
-<p>使用して、CLI を使用してアプリケーションを構築する場合、 <code>plugin</code> <a href="../cordova/device/device.html">デバイス</a> Api を有効にするコマンド。 これは、最上位レベルは変更されません <code>config.xml</code> ファイル、そう、 <code>&lt;feature&gt;</code> 要素をワークフローに適用されません。 かどうか SDK で直接作業している特定のプラットフォームを使用して <code>config.xml</code> ファイルのソースとして使用する、 <code>&lt;feature&gt;</code> <a href="../cordova/device/device.html">デバイス</a> レベルの Api と外部プラグインを有効にするタグ。 彼らは通常、このフォームに表示されます。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;feature name="Plugin" value="PluginID" /&gt;
-</code></pre></div>
-<p>プラットフォーム固有のカスタム値とともに表示されます多くの場合 <code>config.xml</code> ファイル。たとえば、ここで Android プロジェクト用デバイス API を指定する方法は。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;feature name="Device"&gt;
+<p>使用して、CLI を使用してアプリケーションを構築する場合、 <code class="language-plaintext highlighter-rouge">plugin</code> <a href="../cordova/device/device.html">デバイス</a> Api を有効にするコマンド。 これは、最上位レベルは変更されません <code class="language-plaintext highlighter-rouge">config.xml</code> ファイル、そう、 <code class="language-plaintext highlighter-rouge">&lt;feature&gt;</code> 要素をワークフローに適用されません。 かどうか SDK で直接作業している特定のプラットフォームを使用して <code class="language-plaintext highlighter-rouge">config.xml</code> ファイルのソースとして使用する、 <code class="language-plaintext highlighter-rouge">&lt;feature&gt;</code> <a href="../cordova/device/device.html">デバイス</a> レベルの Api と外部プラグインを有効にするタグ。 彼らは通常、このフォームに表示されます。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;feature name="Plugin" value="PluginID" /&gt;
+</code></pre></div></div>
+
+<p>プラットフォーム固有のカスタム値とともに表示されます多くの場合 <code class="language-plaintext highlighter-rouge">config.xml</code> ファイル。たとえば、ここで Android プロジェクト用デバイス API を指定する方法は。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;feature name="Device"&gt;
         &lt;param name="android-package" value="org.apache.cordova.device.Device" /&gt;
     &lt;/feature&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p>ここでは、iOS のプロジェクトのための要素の表示方法です。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;feature name="Device"&gt;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;feature name="Device"&gt;
         &lt;param name="ios-package" value="CDVDevice" /&gt;
     &lt;/feature&gt;
-</code></pre></div>
+</code></pre></div></div>
+
 <p>各機能を指定する方法の詳細については API リファレンスを参照してください。プラグインの詳細については、プラグイン開発ガイドを参照してください。</p>
 
 

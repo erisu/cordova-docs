@@ -1094,62 +1094,80 @@
     }
 </style>
 
-<h1>Руководство по Windows 8 платформы</h1>
+<h1 id="руководство-по-windows-8-платформы">Руководство по Windows 8 платформы</h1>
 
 <p>В этом руководстве показано, как настроить среду разработки SDK для развертывания приложений Cordova для Windows 8. Смотрите ниже для более подробной информации конкретной платформы:</p>
 
 <ul>
-<li>  <a href="upgrading.html">Обновление для Windows 8</a></li>
-<li>  <a href="tools.html">Средства командной строки Windows 8</a></li>
+  <li><a href="upgrading.html">Обновление для Windows 8</a></li>
+  <li><a href="tools.html">Средства командной строки Windows 8</a></li>
 </ul>
 
 <p>Средства командной строки относятся к версии до 3.0 Кордова. Смотрите информацию о текущем интерфейсе интерфейс командной строки.</p>
 
 <p>Майкрософт рекомендуется использовать имя <em>приложения в стиле Metro</em> в Windows 8 и Windows RT. MSDN теперь ссылается на этот тип приложения как приложения <em>Магазина Windows</em> , и это руководство следует этой Конвенции. Кроме того в этом руководстве <em>Windows 8</em> означает Windows 8 и Windows RT.</p>
 
-<h2>Требования к</h2>
+<h2 id="требования-к">Требования к</h2>
 
 <ul>
-<li><p>ОС Windows 8</p></li>
-<li><p>Visual Studio 2012 Professional или лучше или Visual Studio 2012 Express для Windows 8</p></li>
+  <li>
+    <p>ОС Windows 8</p>
+  </li>
+  <li>
+    <p>Visual Studio 2012 Professional или лучше или Visual Studio 2012 Express для Windows 8</p>
+  </li>
 </ul>
 
 <p>Следуйте инструкциям в <a href="http://www.windowsstore.com/">windowsstore.com</a> представить ваше приложение для Магазина Windows.</p>
 
-<h2>Установить SDK и Кордова</h2>
+<h2 id="установить-sdk-и-кордова">Установить SDK и Кордова</h2>
 
 <p>Настройте ваш предпочтительный вариант Visual Studio 2012. Все платные версии продукта (профессиональный, и т.д.) позволяют создавать приложения Магазина Windows. Вам нужно <strong>Express для Windows 8</strong> для построения приложений Магазина Windows с использованием <a href="http://www.microsoft.com/visualstudio/eng/products/visual-studio-express-products">Экспресс издания</a>.</p>
 
-<p>Загрузите и распакуйте последнюю копию <a href="http://phonegap.com/download">Кордова</a>. Эти instuctions применяются к <code>lib\windows-8</code> подкаталога.</p>
+<p>Загрузите и распакуйте последнюю копию <a href="http://phonegap.com/download">Кордова</a>. Эти instuctions применяются к <code class="language-plaintext highlighter-rouge">lib\windows-8</code> подкаталога.</p>
 
-<h2>Создание нового проекта</h2>
+<h2 id="создание-нового-проекта">Создание нового проекта</h2>
 
 <p>Вы уже можете построить приложений Windows 8 с помощью <em>отслеживания HTML/JavaScript,</em> доступные в приложениях Магазина Windows. Используйте Кордова в приложениях Магазина Windows для предоставления те же API как на других платформах, поддерживаемых Кордова.</p>
 
 <ul>
-<li><p>Откройте Visual Studio 2012 и выберите <strong>Новый проект</strong>.</p></li>
-<li><p>Выберите <strong>Установленные → шаблон → другие языки → JavaScript → Windows Store</strong> из дерева, а затем <strong>Пустое приложение</strong> из списка проекты. Введите имя проекта, какой вам нравится, такие как <code>CordovaWin8Foo</code> как в этом примере:</p>
+  <li>
+    <p>Откройте Visual Studio 2012 и выберите <strong>Новый проект</strong>.</p>
+  </li>
+  <li>
+    <p>Выберите <strong>Установленные → шаблон → другие языки → JavaScript → Windows Store</strong> из дерева, а затем <strong>Пустое приложение</strong> из списка проекты. Введите имя проекта, какой вам нравится, такие как <code class="language-plaintext highlighter-rouge">CordovaWin8Foo</code> как в этом примере:</p>
 
-<p><img src="/static/img/guide/platforms/win8/wsnewproject.png" alt=""></p></li>
-<li><p>Microsoft продолжает использовать <code>default.html</code> как Главная страница по умолчанию, но большинство веб-разработчиков сайта <code>index.html</code> . Это хорошая идея, чтобы сделать это, по крайней мере соответствовать другие платформы, скорее всего, вы работаете на. Чтобы исправить это, в <strong>Обозреватель</strong> переименовать <code>default.html</code> файл <code>index.html</code> . Затем дважды щелкните <code>package.appxmanifest</code> файл и измените значение, <strong>Стартовая страница</strong> <code>index.html</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">![](/static/img/guide/platforms/win8/wschangemanifest.png)
-</code></pre></div></li>
-<li><p>Включить <code>cordova.js</code> в проекте, щелкните правой кнопкой мыши <code>js</code> в <strong>Обозревателе</strong> решений и выберите <strong>пункт Добавить → новый</strong>. Найдите <code>cordova.js</code> файл в <code>lib\windows-8</code> каталог.</p></li>
-<li><p>Изменить код для <code>index.html</code> . Добавьте ссылку на <code>cordova.js</code> . Вы можете сделать это вручную, или перетащить файл из <strong>Обозревателя решений</strong>. Добавьте следующие другие зависимости к домашней странице приложения:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;!-- WinJS references --&gt;
+    <p><img src="/static/img/guide/platforms/win8/wsnewproject.png" alt="" /></p>
+  </li>
+  <li>
+    <p>Microsoft продолжает использовать <code class="language-plaintext highlighter-rouge">default.html</code> как Главная страница по умолчанию, но большинство веб-разработчиков сайта <code class="language-plaintext highlighter-rouge">index.html</code> . Это хорошая идея, чтобы сделать это, по крайней мере соответствовать другие платформы, скорее всего, вы работаете на. Чтобы исправить это, в <strong>Обозреватель</strong> переименовать <code class="language-plaintext highlighter-rouge">default.html</code> файл <code class="language-plaintext highlighter-rouge">index.html</code> . Затем дважды щелкните <code class="language-plaintext highlighter-rouge">package.appxmanifest</code> файл и измените значение, <strong>Стартовая страница</strong> <code class="language-plaintext highlighter-rouge">index.html</code> :</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>![](/static/img/guide/platforms/win8/wschangemanifest.png)
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Включить <code class="language-plaintext highlighter-rouge">cordova.js</code> в проекте, щелкните правой кнопкой мыши <code class="language-plaintext highlighter-rouge">js</code> в <strong>Обозревателе</strong> решений и выберите <strong>пункт Добавить → новый</strong>. Найдите <code class="language-plaintext highlighter-rouge">cordova.js</code> файл в <code class="language-plaintext highlighter-rouge">lib\windows-8</code> каталог.</p>
+  </li>
+  <li>
+    <p>Изменить код для <code class="language-plaintext highlighter-rouge">index.html</code> . Добавьте ссылку на <code class="language-plaintext highlighter-rouge">cordova.js</code> . Вы можете сделать это вручную, или перетащить файл из <strong>Обозревателя решений</strong>. Добавьте следующие другие зависимости к домашней странице приложения:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;!-- WinJS references --&gt;
     &lt;link href="//Microsoft.WinJS.1.0/css/ui-dark.css" rel="stylesheet" /&gt;
     &lt;script src="//Microsoft.WinJS.1.0/js/base.js"&gt;&lt;/script&gt;
     &lt;script src="//Microsoft.WinJS.1.0/js/ui.js"&gt;&lt;/script&gt;
-
+    
     &lt;!-- Cordova --&gt;
     &lt;script src="/js/cordova.js"&gt;&lt;/script&gt;
-
+    
     &lt;!-- CordovaWin8Foo references --&gt;
     &lt;link href="/css/default.css" rel="stylesheet" /&gt;
     &lt;script src="/js/default.js"&gt;&lt;/script&gt;
-</code></pre></div></li>
-<li><p>Добавить <code>[deviceready](../../../cordova/events/events.deviceready.html)</code> работает обработчик для демонстрации Кордова:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;body&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Добавить <code class="language-plaintext highlighter-rouge">[deviceready](../../../cordova/events/events.deviceready.html)</code> работает обработчик для демонстрации Кордова:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;body&gt;
     &lt;p&gt;Content goes here&lt;/p&gt;
     &lt;script type="text/javascript"&gt;
         console.log("Subscribing...");
@@ -1158,14 +1176,17 @@
         });
     &lt;/script&gt;
 &lt;/body&gt;
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ul>
 
-<h2>Тестирование проекта</h2>
+<h2 id="тестирование-проекта">Тестирование проекта</h2>
 
 <p>Запуск проекта из Visual Studio. Вы увидите окно сообщения появляются:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    ![](/static/img/guide/platforms/win8/wsalert.png)
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ![](/static/img/guide/platforms/win8/wsalert.png)
+</code></pre></div></div>
+
 <p>Вот это. Теперь вы готовы строить приложения Магазина Windows с Кордова.</p>
 
 

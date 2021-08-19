@@ -944,124 +944,150 @@
             
 
             <div id="page-toc-source">
-                <h1>Guide de la plate-forme blackBerry 10</h1>
+                <h1 id="guide-de-la-plate-forme-blackberry-10">Guide de la plate-forme blackBerry 10</h1>
 
-<p>Ce guide montre comment configurer votre environnement de développement pour créer et déployer des applications de Cordova pour BlackBerry 10 appareils. Pour les versions précédentes de BlackBerry, vous devez utiliser un ensemble d&#39;outils de ligne de commande, décrits dans le Guide de la plate-forme BlackBerry différent.</p>
+<p>Ce guide montre comment configurer votre environnement de développement pour créer et déployer des applications de Cordova pour BlackBerry 10 appareils. Pour les versions précédentes de BlackBerry, vous devez utiliser un ensemble d’outils de ligne de commande, décrits dans le Guide de la plate-forme BlackBerry différent.</p>
 
-<h2>Exigences</h2>
+<h2 id="exigences">Exigences</h2>
 
-<p>L&#39;environnement de développement est disponible sur Windows, Mac et Linux.</p>
+<p>L’environnement de développement est disponible sur Windows, Mac et Linux.</p>
 
-<p>Les développeurs doivent utiliser les <code>cordova</code> utilitaire en conjonction avec le kit de développement natif de Blackberry. Voir l&#39;Interface de ligne de commande pour plus d&#39;informations comment faire pour installer <code>cordova</code> , ajouter des projets, puis générer et déployer pour chaque plate-forme.</p>
+<p>Les développeurs doivent utiliser les <code class="language-plaintext highlighter-rouge">cordova</code> utilitaire en conjonction avec le kit de développement natif de Blackberry. Voir l’Interface de ligne de commande pour plus d’informations comment faire pour installer <code class="language-plaintext highlighter-rouge">cordova</code> , ajouter des projets, puis générer et déployer pour chaque plate-forme.</p>
 
-<h2>Installer le SDK natif de BlackBerry</h2>
+<h2 id="installer-le-sdk-natif-de-blackberry">Installer le SDK natif de BlackBerry</h2>
 
 <p>Le kit de développement natif de BlackBerry est disponible chez <a href="http://developer.blackberry.com/native/download/">developer.blackberry.com</a>. Après installation, vous devez ajouter ses outils de ligne de commande à votre path système.</p>
 
 <p>Sur Windows :</p>
 
 <ul>
-<li><p>Aller à <strong>mon ordinateur → propriétés → avancé → Variables d&#39;environnement</strong>.</p></li>
-<li><p>Ajoute le répertoire d&#39;installation du SDK natif au chemin, par exemple :</p>
+  <li>
+    <p>Aller à <strong>mon ordinateur → propriétés → avancé → Variables d’environnement</strong>.</p>
+  </li>
+  <li>
+    <p>Ajoute le répertoire d’installation du SDK natif au chemin, par exemple :</p>
 
-<p>;C:\bbndk\host_10_2_0_132\darwin\x86\usr\bin\</p></li>
+    <p>;C:\bbndk\host_10_2_0_132\darwin\x86\usr\bin\</p>
+  </li>
 </ul>
 
 <p>Sur Mac et Linux :</p>
 
 <ul>
-<li><p>Modifier la <code>~/.bash_profile</code> fichier, en ajoutant une ligne semblable à la suivante, selon lequel le kit de développement natif a été installé :</p>
+  <li>
+    <p>Modifier la <code class="language-plaintext highlighter-rouge">~/.bash_profile</code> fichier, en ajoutant une ligne semblable à la suivante, selon lequel le kit de développement natif a été installé :</p>
 
-<p>$ export PATH=${PATH}:/Applications/Momentics.app/host_10_2_0_15/darwin/x86/usr/bin/</p></li>
-<li><p>Exécutez la commande suivante pour appliquer la modification à la présente session :</p>
+    <p>$ export PATH=${PATH}:/Applications/Momentics.app/host_10_2_0_15/darwin/x86/usr/bin/</p>
+  </li>
+  <li>
+    <p>Exécutez la commande suivante pour appliquer la modification à la présente session :</p>
 
-<p>$ source ~/.bash_profile</p></li>
+    <p>$ source ~/.bash_profile</p>
+  </li>
 </ul>
 
-<h2>Mis en place pour la signature</h2>
+<h2 id="mis-en-place-pour-la-signature">Mis en place pour la signature</h2>
 
 <p>Si vous souhaitez tester sur un périphérique ou de distribuer des applications via BlackBerry World, votre système doit être configuré pour la signature de code.</p>
 
 <p>Pour obtenir une clé de signature, aller à [BlackBerry clés votre commande] (https://www.blackberry.com/SignedKeys/codesigning.html).</p>
 
-<p>Cochez la première case: &quot;pour BlackBerry10 apps développées à l&#39;aide de BlackBerry NDK&quot; et puis connectez-vous ou créez un BBID.</p>
+<p>Cochez la première case: “pour BlackBerry10 apps développées à l’aide de BlackBerry NDK” et puis connectez-vous ou créez un BBID.</p>
 
-<p>Entrez un mot de passe et cliquez sur « Get jeton » pour télécharger bbidtoken.csk. Enregistrez ce fichier dans l&#39;emplacement par défaut pour votre système d&#39;exploitation qui s&#39;affichera sur la page de téléchargement.</p>
+<p>Entrez un mot de passe et cliquez sur « Get jeton » pour télécharger bbidtoken.csk. Enregistrez ce fichier dans l’emplacement par défaut pour votre système d’exploitation qui s’affichera sur la page de téléchargement.</p>
 
 <p>La dernière étape consiste à générer un certificat de signature :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ blackberry-keytool -genkeypair -storepass &lt;password&gt; -author 'Your Name’
-</code></pre></div>
-<h2>Créer un projet</h2>
 
-<p>Utilisation du <code>cordova</code> utilitaire de mettre en place un nouveau projet, tel que décrit dans l&#39;Interface de ligne de commande. Par exemple, dans un répertoire de code source :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova create hello com.example.hello
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ blackberry-keytool -genkeypair -storepass &lt;password&gt; -author 'Your Name’
+</code></pre></div></div>
+
+<h2 id="créer-un-projet">Créer un projet</h2>
+
+<p>Utilisation du <code class="language-plaintext highlighter-rouge">cordova</code> utilitaire de mettre en place un nouveau projet, tel que décrit dans l’Interface de ligne de commande. Par exemple, dans un répertoire de code source :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova create hello com.example.hello
 $ cd hello
 $ cordova platform add blackberry10
 $ cordova build
-</code></pre></div>
-<h2>Déployer sur émulateur</h2>
+</code></pre></div></div>
+
+<h2 id="déployer-sur-émulateur">Déployer sur émulateur</h2>
 
 <p>Si vous souhaitez lancer un émulateur de périphérique, téléchargez et installez le simulateur de 10 BlackBerry.</p>
 
 <ul>
-<li>  <a href="http://developer.blackberry.com/native/download/">Télécharger</a></li>
-<li>  <a href="http://developer.blackberry.com/devzone/develop/simulator/blackberry_10_simulator_start.html">Mise en route</a></li>
+  <li><a href="http://developer.blackberry.com/native/download/">Télécharger</a></li>
+  <li><a href="http://developer.blackberry.com/devzone/develop/simulator/blackberry_10_simulator_start.html">Mise en route</a></li>
 </ul>
 
 <p>Avant de tester une application sur un émulateur ou un périphérique, vous devez activer le mode de développement.</p>
 
-<p>Lancer l&#39;image de l&#39;émulateur, puis cliquez sur <strong>paramètres</strong> depuis l&#39;écran d&#39;accueil :</p>
+<p>Lancer l’image de l’émulateur, puis cliquez sur <strong>paramètres</strong> depuis l’écran d’accueil :</p>
 
-<p><img src="/static/img/guide/platforms/blackberry10/bb_home.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/blackberry10/bb_home.png" alt="" /></p>
 
-<p>Accédez à la <strong>→ sécurité et vie privée Mode de développement</strong> section et activer l&#39;option :</p>
+<p>Accédez à la <strong>→ sécurité et vie privée Mode de développement</strong> section et activer l’option :</p>
 
-<p><img src="/static/img/guide/platforms/blackberry10/bb_devel.png" alt=""></p>
+<p><img src="/static/img/guide/platforms/blackberry10/bb_devel.png" alt="" /></p>
 
-<p>Ensuite, exécutez le <code>emulate</code> commande pour visualiser l&#39;application :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova emulate blackberry10 --devicepass &lt;password&gt;
-</code></pre></div>
-<h2>Déployer sur le périphérique</h2>
+<p>Ensuite, exécutez le <code class="language-plaintext highlighter-rouge">emulate</code> commande pour visualiser l’application :</p>
 
-<p>À déployer sur un périphérique, assurez-vous qu&#39;elle est branchée à votre ordinateur et le mode de développement est activé.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova emulate blackberry10 --devicepass &lt;password&gt;
+</code></pre></div></div>
 
-<p>Ensuite, exécutez le <code>run</code> commande pour visualiser l&#39;application :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova run blackberry10 --devicepass &lt;password&gt;
-</code></pre></div>
-<p>Si un jeton de débogage n&#39;est pas encore mis en place pour le périphérique, un message d&#39;erreur vous demande de fournir le mot de passe, vous avez défini lors de la configuration de votre ordinateur pour vous connecter à des applications.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova run blackberry10 --devicepass &lt;password&gt; --keystorepass &lt;signing password&gt;
-</code></pre></div>
-<h2>Débogage avec WebInspector</h2>
+<h2 id="déployer-sur-le-périphérique">Déployer sur le périphérique</h2>
 
-<p>Lorsque vous déboguez sur l&#39;appareil ou un émulateur, vous pouvez exécuter WebInspector à distance pour afficher état interne de l&#39;application. Une invite de commandes affiche l&#39;URL qui vous permet de vous connecter à votre application avec un navigateur web standard. Pour plus d&#39;informations, consultez <a href="http://developer.blackberry.com/html5/documentation/web_inspector_overview_1553586_11.html">débogage à l&#39;aide de WebInspector</a>.</p>
+<p>À déployer sur un périphérique, assurez-vous qu’elle est branchée à votre ordinateur et le mode de développement est activé.</p>
 
-<h2>Générer une Version finale</h2>
+<p>Ensuite, exécutez le <code class="language-plaintext highlighter-rouge">run</code> commande pour visualiser l’application :</p>
 
-<p>Par défaut, exécutez la <code>cordova build</code> commande crée un fichier de package non signé <em>.bar</em> appropriée aux essais sur un appareil ou un simulateur.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova run blackberry10 --devicepass &lt;password&gt;
+</code></pre></div></div>
 
-<p>Utiliser <code>--release</code> pour créer une version adaptée à la distribution par l&#39;intermédiaire de BlackBerry World.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova build --release --keystorepass &lt;signing password&gt;
-</code></pre></div>
-<p>Le <code>--keystorepass</code> option spécifie le mot de passe vous avez défini lors de la configuration de votre ordinateur pour signer les applications.</p>
+<p>Si un jeton de débogage n’est pas encore mis en place pour le périphérique, un message d’erreur vous demande de fournir le mot de passe, vous avez défini lors de la configuration de votre ordinateur pour vous connecter à des applications.</p>
 
-<h2>Déployer dans d&#39;autres endroits</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova run blackberry10 --devicepass &lt;password&gt; --keystorepass &lt;signing password&gt;
+</code></pre></div></div>
 
-<p>Les instructions ci-dessus supposent un appareil est branché via USB ou d&#39;un simulateur est en cours d&#39;exécution sur l&#39;ordinateur local. Il est également possible de déployer dans d&#39;autres endroits.</p>
+<h2 id="débogage-avec-webinspector">Débogage avec WebInspector</h2>
 
-<p>Un jeu supplémentaire d&#39;utilitaires de ligne de commande sont inclus lorsque vous configurez la plate-forme BlackBerry 10 pour votre projet. La commande suivante, appelée dans ce cas depuis le répertoire racine du projet, associe une cible nommée <em>l&#39;UEM</em> avec une adresse IP.</p>
+<p>Lorsque vous déboguez sur l’appareil ou un émulateur, vous pouvez exécuter WebInspector à distance pour afficher état interne de l’application. Une invite de commandes affiche l’URL qui vous permet de vous connecter à votre application avec un navigateur web standard. Pour plus d’informations, consultez <a href="http://developer.blackberry.com/html5/documentation/web_inspector_overview_1553586_11.html">débogage à l’aide de WebInspector</a>.</p>
+
+<h2 id="générer-une-version-finale">Générer une Version finale</h2>
+
+<p>Par défaut, exécutez la <code class="language-plaintext highlighter-rouge">cordova build</code> commande crée un fichier de package non signé <em>.bar</em> appropriée aux essais sur un appareil ou un simulateur.</p>
+
+<p>Utiliser <code class="language-plaintext highlighter-rouge">--release</code> pour créer une version adaptée à la distribution par l’intermédiaire de BlackBerry World.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova build --release --keystorepass &lt;signing password&gt;
+</code></pre></div></div>
+
+<p>Le <code class="language-plaintext highlighter-rouge">--keystorepass</code> option spécifie le mot de passe vous avez défini lors de la configuration de votre ordinateur pour signer les applications.</p>
+
+<h2 id="déployer-dans-dautres-endroits">Déployer dans d’autres endroits</h2>
+
+<p>Les instructions ci-dessus supposent un appareil est branché via USB ou d’un simulateur est en cours d’exécution sur l’ordinateur local. Il est également possible de déployer dans d’autres endroits.</p>
+
+<p>Un jeu supplémentaire d’utilitaires de ligne de commande sont inclus lorsque vous configurez la plate-forme BlackBerry 10 pour votre projet. La commande suivante, appelée dans ce cas depuis le répertoire racine du projet, associe une cible nommée <em>l’UEM</em> avec une adresse IP.</p>
 
 <ul>
-<li><p>Sur Windows :</p>
+  <li>
+    <p>Sur Windows :</p>
 
-<p>$ platforms\blackberry10\cordova\target.bat add emu 192.168.2.24 -t simulator</p></li>
-<li><p>Sur Mac/Linux :</p>
+    <p>$ platforms\blackberry10\cordova\target.bat add emu 192.168.2.24 -t simulator</p>
+  </li>
+  <li>
+    <p>Sur Mac/Linux :</p>
 
-<p>$ platforms/blackberry10/cordova/target add emu 192.168.2.24 -t simulator</p></li>
+    <p>$ platforms/blackberry10/cordova/target add emu 192.168.2.24 -t simulator</p>
+  </li>
 </ul>
 
-<p>Une fois que la cible est définie, vous pouvez le fournir à la commande d&#39;exécution à l&#39;aide <code>--target</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova run blackberry10 --target=emu
-</code></pre></div>
+<p>Une fois que la cible est définie, vous pouvez le fournir à la commande d’exécution à l’aide <code class="language-plaintext highlighter-rouge">--target</code> :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova run blackberry10 --target=emu
+</code></pre></div></div>
+
 
             </div>
         </div>

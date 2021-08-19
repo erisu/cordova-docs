@@ -1328,79 +1328,89 @@
             
 
             <div id="page-toc-source">
-                <h1>batterystatus</h1>
+                <h1 id="batterystatus">batterystatus</h1>
 
 <p>Das Ereignis wird ausgelöst, wenn eine Änderung in den Batteriestatus vorliegt.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">window.addEventListener("batterystatus", yourCallbackFunction, false);
-</code></pre></div>
-<h2>Informationen</h2>
 
-<p>Dieses Ereignis wird ausgelöst, wenn der Prozentsatz der Akkuladung um mindestens 1 Prozent ändert, oder wenn das <a href="../device/device.html">Gerät</a> eingesteckt oder &quot;Unplugged&quot;.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>window.addEventListener("batterystatus", yourCallbackFunction, false);
+</code></pre></div></div>
+
+<h2 id="informationen">Informationen</h2>
+
+<p>Dieses Ereignis wird ausgelöst, wenn der Prozentsatz der Akkuladung um mindestens 1 Prozent ändert, oder wenn das <a href="../device/device.html">Gerät</a> eingesteckt oder “Unplugged”.</p>
 
 <p>Der Batterie-Status-Handler wird ein Objekt übergeben, das zwei Eigenschaften enthält:</p>
 
 <ul>
-<li><p><strong>Ebene</strong>: der Prozentsatz der Batterieladung (0-100). <em>(Anzahl)</em></p></li>
-<li><p><strong>IsPlugged</strong>: ein boolescher Wert, der angibt, ob das <a href="../device/device.html">Gerät</a> eingesteckt Zoll <em>(boolesch)</em></p></li>
+  <li>
+    <p><strong>Ebene</strong>: der Prozentsatz der Batterieladung (0-100). <em>(Anzahl)</em></p>
+  </li>
+  <li>
+    <p><strong>IsPlugged</strong>: ein boolescher Wert, der angibt, ob das <a href="../device/device.html">Gerät</a> eingesteckt Zoll <em>(boolesch)</em></p>
+  </li>
 </ul>
 
-<p>Anwendungen sollten in der Regel verwenden <code>window.addEventListener</code> einmal einen Ereignis-Listener hinzufügen das <code>[deviceready](events.deviceready.html)</code> -Ereignis ausgelöst.</p>
+<p>Anwendungen sollten in der Regel verwenden <code class="language-plaintext highlighter-rouge">window.addEventListener</code> einmal einen Ereignis-Listener hinzufügen das <code class="language-plaintext highlighter-rouge">[deviceready](events.deviceready.html)</code> -Ereignis ausgelöst.</p>
 
-<h2>Unterstützte Plattformen</h2>
+<h2 id="unterstützte-plattformen">Unterstützte Plattformen</h2>
 
 <ul>
-<li>  iOS</li>
-<li>  Android</li>
-<li>  BlackBerry WebWorks (OS 5.0 und höher)</li>
-<li>  Windows Phone 7 und 8</li>
-<li>  Tizen</li>
+  <li>iOS</li>
+  <li>Android</li>
+  <li>BlackBerry WebWorks (OS 5.0 und höher)</li>
+  <li>Windows Phone 7 und 8</li>
+  <li>Tizen</li>
 </ul>
 
-<h2>Windows Phone 7 und 8 Macken</h2>
+<h2 id="windows-phone-7-und-8-macken">Windows Phone 7 und 8 Macken</h2>
 
-<p>Windows Phone 7 bietet keine systemeigenen APIs um zu bestimmen, Batterie-Niveau, so dass die <code>level</code> -Eigenschaft ist nicht verfügbar. Der <code>isPlugged</code> -Parameter <em>wird</em> unterstützt.</p>
+<p>Windows Phone 7 bietet keine systemeigenen APIs um zu bestimmen, Batterie-Niveau, so dass die <code class="language-plaintext highlighter-rouge">level</code> -Eigenschaft ist nicht verfügbar. Der <code class="language-plaintext highlighter-rouge">isPlugged</code> -Parameter <em>wird</em> unterstützt.</p>
 
-<h2>Kleines Beispiel</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">window.addEventListener("batterystatus", onBatteryStatus, false);
+<h2 id="kleines-beispiel">Kleines Beispiel</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>window.addEventListener("batterystatus", onBatteryStatus, false);
 
 function onBatteryStatus(info) {
     // Handle the online event
     console.log("Level: " + info.level + " isPlugged: " + info.isPlugged);
 }
-</code></pre></div>
-<h2>Vollständiges Beispiel</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Device Ready Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="vollständiges-beispiel">Vollständiges Beispiel</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onLoad</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="p">}</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Device Ready Example&lt;/title&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"batterystatus"</span><span class="p">,</span> <span class="nx">onBatteryStatus</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="p">}</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// Handle the batterystatus event</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onBatteryStatus</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Level: "</span> <span class="o">+</span> <span class="nx">info</span><span class="p">.</span><span class="nx">level</span> <span class="o">+</span> <span class="s2">" isPlugged: "</span> <span class="o">+</span> <span class="nx">info</span><span class="p">.</span><span class="nx">isPlugged</span><span class="p">);</span>
-    <span class="p">}</span>
+    // Wait for device API libraries to load
+    //
+    function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body</span> <span class="na">onload=</span><span class="s">"onLoad()"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        window.addEventListener("batterystatus", onBatteryStatus, false);
+    }
+
+    // Handle the batterystatus event
+    //
+    function onBatteryStatus(info) {
+        console.log("Level: " + info.level + " isPlugged: " + info.isPlugged);
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body onload="onLoad()"&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

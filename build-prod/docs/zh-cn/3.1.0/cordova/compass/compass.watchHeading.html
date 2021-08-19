@@ -1304,32 +1304,35 @@
             
 
             <div id="page-toc-source">
-                <h1>compass.watchHeading</h1>
+                <h1 id="compasswatchheading">compass.watchHeading</h1>
 
 <p>固定間隔，在得到中度的羅盤標題。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">var watchID = navigator.compass.watchHeading(compassSuccess, compassError, [compassOptions]);
-</code></pre></div>
-<h2>說明</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var watchID = navigator.compass.watchHeading(compassSuccess, compassError, [compassOptions]);
+</code></pre></div></div>
+
+<h2 id="說明">說明</h2>
 
 <p>羅盤是感應器，可檢測的方向或設備是針對性的標題。它的措施從 0 到 359.99 度中的標題。</p>
 
-<p><code>compass.watchHeading</code>獲取設備的當前標題在固定的時間間隔。 檢索標題時，每次 <code>headingSuccess</code> 執行回呼函數。 指定的時間間隔，以毫秒為單位通過 <code>frequency</code> 參數的 <code>[compassOptions](parameters/compassOptions.html)</code> 物件。</p>
+<p><code class="language-plaintext highlighter-rouge">compass.watchHeading</code>獲取設備的當前標題在固定的時間間隔。 檢索標題時，每次 <code class="language-plaintext highlighter-rouge">headingSuccess</code> 執行回呼函數。 指定的時間間隔，以毫秒為單位通過 <code class="language-plaintext highlighter-rouge">frequency</code> 參數的 <code class="language-plaintext highlighter-rouge">[compassOptions](parameters/compassOptions.html)</code> 物件。</p>
 
-<p>返回的表 ID 引用指南針手錶的時間間隔。可以使用 ID 與手錶 <code>[compass.clearWatch](compass.clearWatch.html)</code> 停止了觀看指南針。</p>
+<p>返回的表 ID 引用指南針手錶的時間間隔。可以使用 ID 與手錶 <code class="language-plaintext highlighter-rouge">[compass.clearWatch](compass.clearWatch.html)</code> 停止了觀看指南針。</p>
 
-<h2>支援的平臺</h2>
+<h2 id="支援的平臺">支援的平臺</h2>
 
 <ul>
-<li>  Android 系統</li>
-<li>  黑莓 10</li>
-<li>  iOS</li>
-<li>  Tizen</li>
-<li>  Windows Phone 7 和 8 （如果在硬體中可用）</li>
-<li>  Windows 8</li>
+  <li>Android 系統</li>
+  <li>黑莓 10</li>
+  <li>iOS</li>
+  <li>Tizen</li>
+  <li>Windows Phone 7 和 8 （如果在硬體中可用）</li>
+  <li>Windows 8</li>
 </ul>
 
-<h2>快速的示例</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">function onSuccess(heading) {
+<h2 id="快速的示例">快速的示例</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function onSuccess(heading) {
     var element = document.getElementById('heading');
     element.innerHTML = 'Heading: ' + heading.magneticHeading;
 };
@@ -1343,75 +1346,78 @@ var options = {
 }; // Update every 3 seconds
 
 var watchID = navigator.compass.watchHeading(onSuccess, onError, options);
-</code></pre></div>
-<h2>完整的示例</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Compass Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="完整的示例">完整的示例</h2>
 
-    <span class="c1">// The watch id references the current `watchHeading`</span>
-    <span class="kd">var</span> <span class="nx">watchID</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Compass Example&lt;/title&gt;
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">startWatch</span><span class="p">();</span>
-    <span class="p">}</span>
+    // The watch id references the current `watchHeading`
+    var watchID = null;
 
-    <span class="c1">// Start watching the compass</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">startWatch</span><span class="p">()</span> <span class="p">{</span>
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
 
-        <span class="c1">// Update compass every 3 seconds</span>
-        <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span> <span class="na">frequency</span><span class="p">:</span> <span class="mi">3000</span> <span class="p">};</span>
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        startWatch();
+    }
 
-        <span class="nx">watchID</span> <span class="o">=</span> <span class="nb">navigator</span><span class="p">.</span><span class="nx">compass</span><span class="p">.</span><span class="nx">watchHeading</span><span class="p">(</span><span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onError</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
-    <span class="p">}</span>
+    // Start watching the compass
+    //
+    function startWatch() {
 
-    <span class="c1">// Stop watching the compass</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">stopWatch</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">watchID</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nb">navigator</span><span class="p">.</span><span class="nx">compass</span><span class="p">.</span><span class="nx">clearWatch</span><span class="p">(</span><span class="nx">watchID</span><span class="p">);</span>
-            <span class="nx">watchID</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+        // Update compass every 3 seconds
+        var options = { frequency: 3000 };
 
-    <span class="c1">// onSuccess: Get the current heading</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onSuccess</span><span class="p">(</span><span class="nx">heading</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">element</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'heading'</span><span class="p">);</span>
-        <span class="nx">element</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">'Heading: '</span> <span class="o">+</span> <span class="nx">heading</span><span class="p">.</span><span class="nx">magneticHeading</span><span class="p">;</span>
-    <span class="p">}</span>
+        watchID = navigator.compass.watchHeading(onSuccess, onError, options);
+    }
 
-    <span class="c1">// onError: Failed to get the heading</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onError</span><span class="p">(</span><span class="nx">compassError</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">alert</span><span class="p">(</span><span class="s1">'Compass error: '</span> <span class="o">+</span> <span class="nx">compassError</span><span class="p">.</span><span class="nx">code</span><span class="p">);</span>
-    <span class="p">}</span>
+    // Stop watching the compass
+    //
+    function stopWatch() {
+        if (watchID) {
+            navigator.compass.clearWatch(watchID);
+            watchID = null;
+        }
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"heading"</span><span class="nt">&gt;</span>Waiting for heading...<span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"startWatch();"</span><span class="nt">&gt;</span>Start Watching<span class="nt">&lt;/button&gt;</span>
-    <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"stopWatch();"</span><span class="nt">&gt;</span>Stop Watching<span class="nt">&lt;/button&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2>iOS 的怪癖</h2>
+    // onSuccess: Get the current heading
+    //
+    function onSuccess(heading) {
+        var element = document.getElementById('heading');
+        element.innerHTML = 'Heading: ' + heading.magneticHeading;
+    }
 
-<p>IOS 中 <code>compass.watchHeading</code> 以指定的度數改變時也可以獲得設備的當前標題。 每次的標題更改時由指定數目的度或更多， <code>headingSuccess</code> 執行回呼函數。 指定度的變化通過 <code>filter</code> 參數的 <code>[compassOptions](parameters/compassOptions.html)</code> 物件。 清除手錶像往常一樣通過傳遞到返回的表 ID <code>[compass.clearWatch](compass.clearWatch.html)</code> 。 此功能將替換以前分開，只有 iOS <code>watchHeadingFilter</code> 和 <code>clearWatchFilter</code> 功能，1.6 版本中被移除。</p>
+    // onError: Failed to get the heading
+    //
+    function onError(compassError) {
+        alert('Compass error: ' + compassError.code);
+    }
 
-<p>只有一個 <code>watchHeading</code> 可以在 iOS 中一次效果。 如果 <code>watchHeading</code> 使用篩選器中，調用 <code>getCurrentHeading</code> 或 <code>watchHeading</code> 使用現有的篩選器值來指定標題的更改。 使用篩選器看標題的變化是與時間間隔比效率更高。</p>
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="heading"&gt;Waiting for heading...&lt;/div&gt;
+    &lt;button onclick="startWatch();"&gt;Start Watching&lt;/button&gt;
+    &lt;button onclick="stopWatch();"&gt;Stop Watching&lt;/button&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h2 id="ios-的怪癖">iOS 的怪癖</h2>
+
+<p>IOS 中 <code class="language-plaintext highlighter-rouge">compass.watchHeading</code> 以指定的度數改變時也可以獲得設備的當前標題。 每次的標題更改時由指定數目的度或更多， <code class="language-plaintext highlighter-rouge">headingSuccess</code> 執行回呼函數。 指定度的變化通過 <code class="language-plaintext highlighter-rouge">filter</code> 參數的 <code class="language-plaintext highlighter-rouge">[compassOptions](parameters/compassOptions.html)</code> 物件。 清除手錶像往常一樣通過傳遞到返回的表 ID <code class="language-plaintext highlighter-rouge">[compass.clearWatch](compass.clearWatch.html)</code> 。 此功能將替換以前分開，只有 iOS <code class="language-plaintext highlighter-rouge">watchHeadingFilter</code> 和 <code class="language-plaintext highlighter-rouge">clearWatchFilter</code> 功能，1.6 版本中被移除。</p>
+
+<p>只有一個 <code class="language-plaintext highlighter-rouge">watchHeading</code> 可以在 iOS 中一次效果。 如果 <code class="language-plaintext highlighter-rouge">watchHeading</code> 使用篩選器中，調用 <code class="language-plaintext highlighter-rouge">getCurrentHeading</code> 或 <code class="language-plaintext highlighter-rouge">watchHeading</code> 使用現有的篩選器值來指定標題的更改。 使用篩選器看標題的變化是與時間間隔比效率更高。</p>
 
 
             </div>

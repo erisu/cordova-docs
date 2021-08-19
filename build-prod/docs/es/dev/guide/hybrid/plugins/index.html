@@ -2112,7 +2112,7 @@
             
 
             <div id="page-toc-source">
-                <h1>Guía de desarrollo de plugin</h1>
+                <h1 id="guía-de-desarrollo-de-plugin">Guía de desarrollo de plugin</h1>
 
 <p>Un <em>plugin</em> es un paquete de código que permite la webview Cordova dentro de la cual hace que la aplicación para comunicarse con la plataforma nativa en la que se ejecuta. Plugins proporcionan acceso a la funcionalidad de plataforma y dispositivo que está normalmente disponible para aplicaciones basadas en web. Las principales características de Cordova API se implementan como plugins, y muchos otros están disponibles que permiten funciones tales como escáneres de código de barras, comunicación NFC, o adaptar el calendario interfaces. Hay un <a href="http://plugins.cordova.io">registro</a> de extensiones disponibles.</p>
 
@@ -2122,13 +2122,16 @@
 
 <p>Además de estas instrucciones, cuando se prepara para escribir un plugin es mejor mirar sobre <a href="http://cordova.apache.org/#contribute">plugins existentes</a> para orientación.</p>
 
-<h2>Construyendo un Plugin</h2>
+<h2 id="construyendo-un-plugin">Construyendo un Plugin</h2>
 
-<p>Los programadores de aplicaciones utilizan la CLI <code>plugin add</code> comando (discutido en la interfaz de línea de comandos) para aplicar un plugin para un proyecto. El argumento de este comando es la dirección URL de un repositorio <em>git</em> que contiene el código del plugin. Este ejemplo implementa dispositivo API de Cordova:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git
-</code></pre></div>
-<p>El repositorio plugin debe cuentan con un alto nivel <code>plugin.xml</code> archivo de manifiesto. Hay muchas maneras de configurar este archivo, los detalles para los que están disponibles en la especificación del Plugin. Esta versión abreviada de la <code>Device</code> plugin proporciona un ejemplo sencillo de usar como un modelo:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+<p>Los programadores de aplicaciones utilizan la CLI <code class="language-plaintext highlighter-rouge">plugin add</code> comando (discutido en la interfaz de línea de comandos) para aplicar un plugin para un proyecto. El argumento de este comando es la dirección URL de un repositorio <em>git</em> que contiene el código del plugin. Este ejemplo implementa dispositivo API de Cordova:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git
+</code></pre></div></div>
+
+<p>El repositorio plugin debe cuentan con un alto nivel <code class="language-plaintext highlighter-rouge">plugin.xml</code> archivo de manifiesto. Hay muchas maneras de configurar este archivo, los detalles para los que están disponibles en la especificación del Plugin. Esta versión abreviada de la <code class="language-plaintext highlighter-rouge">Device</code> plugin proporciona un ejemplo sencillo de usar como un modelo:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
     &lt;plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
             id="cordova-plugin-device" version="0.2.3"&gt;
         &lt;name&gt;Device&lt;/name&gt;
@@ -2148,97 +2151,126 @@
             &lt;source-file src="src/ios/CDVDevice.m" /&gt;
         &lt;/platform&gt;
     &lt;/plugin&gt;
-</code></pre></div>
-<p>El nivel superior <code>plugin</code> de etiqueta <code>id</code> atributo utiliza el mismo formato de dominio reverso para identificar el paquete plugin como las aplicaciones que están agregadas. El <code>js-module</code> etiqueta especifica la ruta de acceso a la interfaz común de JavaScript. El <code>platform</code> etiqueta especifica un conjunto correspondiente de código nativo para la <code>ios</code> plataforma en este caso. El <code>config-file</code> etiqueta encapsula un <code>feature</code> etiqueta que se inyecta en la específica de la plataforma <code>config.xml</code> archivo a la plataforma de la biblioteca de código adicional. El <code>header-file</code> y <code>source-file</code> etiquetas especifican la ruta de acceso a archivos de la biblioteca componentes.</p>
+</code></pre></div></div>
 
-<h2>Validación de un Plugin</h2>
+<p>El nivel superior <code class="language-plaintext highlighter-rouge">plugin</code> de etiqueta <code class="language-plaintext highlighter-rouge">id</code> atributo utiliza el mismo formato de dominio reverso para identificar el paquete plugin como las aplicaciones que están agregadas. El <code class="language-plaintext highlighter-rouge">js-module</code> etiqueta especifica la ruta de acceso a la interfaz común de JavaScript. El <code class="language-plaintext highlighter-rouge">platform</code> etiqueta especifica un conjunto correspondiente de código nativo para la <code class="language-plaintext highlighter-rouge">ios</code> plataforma en este caso. El <code class="language-plaintext highlighter-rouge">config-file</code> etiqueta encapsula un <code class="language-plaintext highlighter-rouge">feature</code> etiqueta que se inyecta en la específica de la plataforma <code class="language-plaintext highlighter-rouge">config.xml</code> archivo a la plataforma de la biblioteca de código adicional. El <code class="language-plaintext highlighter-rouge">header-file</code> y <code class="language-plaintext highlighter-rouge">source-file</code> etiquetas especifican la ruta de acceso a archivos de la biblioteca componentes.</p>
 
-<p>Puede utilizar la <code>plugman</code> utilidad para comprobar si el plugin se instala correctamente para cada plataforma. Instalar <code>plugman</code> con el siguiente comando de <a href="http://nodejs.org/">nodo</a> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ npm install -g plugman
-</code></pre></div>
-<p>Necesita un directorio fuente válida de la aplicación, tales como el nivel superior <code>www</code> directorio incluido en un proyecto generado por CLI predeterminado como se describe en la interfaz de línea de comandos. Asegúrese de que la aplicación de <code>index.html</code> página de inicio de referencia el nombre de JavaScript interfaz del plugin, como si estuviera en el mismo directorio fuente:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    &lt;script src="myplugin.js"&gt;&lt;/script&gt;
-</code></pre></div>
+<h2 id="validación-de-un-plugin">Validación de un Plugin</h2>
+
+<p>Puede utilizar la <code class="language-plaintext highlighter-rouge">plugman</code> utilidad para comprobar si el plugin se instala correctamente para cada plataforma. Instalar <code class="language-plaintext highlighter-rouge">plugman</code> con el siguiente comando de <a href="http://nodejs.org/">nodo</a> :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ npm install -g plugman
+</code></pre></div></div>
+
+<p>Necesita un directorio fuente válida de la aplicación, tales como el nivel superior <code class="language-plaintext highlighter-rouge">www</code> directorio incluido en un proyecto generado por CLI predeterminado como se describe en la interfaz de línea de comandos. Asegúrese de que la aplicación de <code class="language-plaintext highlighter-rouge">index.html</code> página de inicio de referencia el nombre de JavaScript interfaz del plugin, como si estuviera en el mismo directorio fuente:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;script src="myplugin.js"&gt;&lt;/script&gt;
+</code></pre></div></div>
+
 <p>Luego ejecutar un comando como el siguiente para comprobar las dependencias iOS carguen adecuadamente:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">     $ plugman install --platform ios --project /path/to/my/project/www --plugin /path/to/my/plugin
-</code></pre></div>
-<p>Para obtener más información sobre <code>plugman</code> Opciones, vea usando Plugman para gestionar Plugins. Para obtener información sobre cómo realmente <em>depurar</em> plugins, consulte interfaz nativa de cada plataforma enumerado en la parte inferior de esta página.</p>
 
-<h2>La interfaz de JavaScript</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     $ plugman install --platform ios --project /path/to/my/project/www --plugin /path/to/my/plugin
+</code></pre></div></div>
 
-<p>El JavaScript proporciona la interfaz de frente, por lo que es quizás la parte más importante del plugin. Usted puede estructurar JavaScript de tu plugin sin embargo te gusta, pero tiene que llamar a <code>cordova.exec</code> para comunicarse con la plataforma nativa, usando la siguiente sintaxis:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    cordova.exec(function(winParam) {},
+<p>Para obtener más información sobre <code class="language-plaintext highlighter-rouge">plugman</code> Opciones, vea usando Plugman para gestionar Plugins. Para obtener información sobre cómo realmente <em>depurar</em> plugins, consulte interfaz nativa de cada plataforma enumerado en la parte inferior de esta página.</p>
+
+<h2 id="la-interfaz-de-javascript">La interfaz de JavaScript</h2>
+
+<p>El JavaScript proporciona la interfaz de frente, por lo que es quizás la parte más importante del plugin. Usted puede estructurar JavaScript de tu plugin sin embargo te gusta, pero tiene que llamar a <code class="language-plaintext highlighter-rouge">cordova.exec</code> para comunicarse con la plataforma nativa, usando la siguiente sintaxis:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    cordova.exec(function(winParam) {},
                  function(error) {},
                  "service",
                  "action",
                  ["firstArgument", "secondArgument", 42, false]);
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Aquí está cómo funciona cada parámetro:</p>
 
 <ul>
-<li><p><code>function(winParam) {}</code>: Una función de devolución de llamada de éxito. Asumiendo que tu <code>exec</code> llamada se realiza correctamente, esta función se ejecuta junto con cualquiera de los parámetros pasas.</p></li>
-<li><p><code>function(error) {}</code>: Una función de callback de error. Si la operación no se completa correctamente, esta función se ejecuta con un parámetro opcional de error.</p></li>
-<li><p><code>&quot;service&quot;</code>: El nombre del servicio que llame al lado nativo. Esto corresponde a una clase nativa, para lo cual existe más información en las guías nativas enumeradas a continuación.</p></li>
-<li><p><code>&quot;action&quot;</code>: El nombre de acción para llamar al lado nativo. Esto generalmente corresponde al método de la clase nativa. Consulte a las guías nativos enumerados a continuación.</p></li>
-<li><p><code>[/* arguments */]</code>: Un conjunto de argumentos que se pasarán en el entorno nativo.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">function(winParam) {}</code>: Una función de devolución de llamada de éxito. Asumiendo que tu <code class="language-plaintext highlighter-rouge">exec</code> llamada se realiza correctamente, esta función se ejecuta junto con cualquiera de los parámetros pasas.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">function(error) {}</code>: Una función de callback de error. Si la operación no se completa correctamente, esta función se ejecuta con un parámetro opcional de error.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">"service"</code>: El nombre del servicio que llame al lado nativo. Esto corresponde a una clase nativa, para lo cual existe más información en las guías nativas enumeradas a continuación.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">"action"</code>: El nombre de acción para llamar al lado nativo. Esto generalmente corresponde al método de la clase nativa. Consulte a las guías nativos enumerados a continuación.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">[/* arguments */]</code>: Un conjunto de argumentos que se pasarán en el entorno nativo.</p>
+  </li>
 </ul>
 
-<h2>Muestra JavaScript</h2>
+<h2 id="muestra-javascript">Muestra JavaScript</h2>
 
 <p>Este ejemplo muestra una forma de implementar interfaz del plugin JavaScript:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    window.echo = function(str, callback) {
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    window.echo = function(str, callback) {
         cordova.exec(callback, function(err) {
             callback('Nothing to echo.');
         }, "Echo", "echo", [str]);
     };
-</code></pre></div>
-<p>En este ejemplo, el plugin se adhiere a la <code>window</code> objeto como la <code>echo</code> la función, que llamarían a los usuarios plugin como sigue:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    window.echo("echome", function(echoValue) {
+</code></pre></div></div>
+
+<p>En este ejemplo, el plugin se adhiere a la <code class="language-plaintext highlighter-rouge">window</code> objeto como la <code class="language-plaintext highlighter-rouge">echo</code> la función, que llamarían a los usuarios plugin como sigue:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    window.echo("echome", function(echoValue) {
         alert(echoValue == "echome"); // should alert true.
     });
-</code></pre></div>
-<p>Mira a los tres últimos argumentos de la <code>cordova.exec</code> función. Las primeras convocatorias del <code>Echo</code> <em>servicio</em>, un nombre de clase. El segundo pide la <code>echo</code> <em>acción</em>, un método dentro de esa clase. La tercera es una matriz de argumentos que contengan la cadena Eco, que es el <code>window.echo</code> función es el primer parámetro.</p>
+</code></pre></div></div>
 
-<p>El callback de éxito pasó a <code>exec</code> es simplemente una referencia a la función de callback <code>window.echo</code> toma. Si la plataforma nativa despide el callback de error, simplemente pide la devolución de llamada de éxito y pasa una cadena predeterminada.</p>
+<p>Mira a los tres últimos argumentos de la <code class="language-plaintext highlighter-rouge">cordova.exec</code> función. Las primeras convocatorias del <code class="language-plaintext highlighter-rouge">Echo</code> <em>servicio</em>, un nombre de clase. El segundo pide la <code class="language-plaintext highlighter-rouge">echo</code> <em>acción</em>, un método dentro de esa clase. La tercera es una matriz de argumentos que contengan la cadena Eco, que es el <code class="language-plaintext highlighter-rouge">window.echo</code> función es el primer parámetro.</p>
 
-<h2>Interfaces nativas</h2>
+<p>El callback de éxito pasó a <code class="language-plaintext highlighter-rouge">exec</code> es simplemente una referencia a la función de callback <code class="language-plaintext highlighter-rouge">window.echo</code> toma. Si la plataforma nativa despide el callback de error, simplemente pide la devolución de llamada de éxito y pasa una cadena predeterminada.</p>
+
+<h2 id="interfaces-nativas">Interfaces nativas</h2>
 
 <p>Una vez se define JavaScript para tu plugin, debes complementarlo con por lo menos una aplicación nativa. Los datos de cada plataforma se enumeran a continuación, y cada uno se basa en el simple ejemplo Eco Plugin anterior:</p>
 
 <ul>
-<li>  <a href="../../platforms/amazonfireos/plugin.html">Amazon fuego OS Plugins</a></li>
-<li>  <a href="../../platforms/android/plugin.html">Android Plugins</a></li>
-<li>  <a href="../../platforms/ios/plugin.html">iOS Plugins</a></li>
-<li>  <a href="../../platforms/blackberry10/plugin.html">BlackBerry 10 Plugins</a></li>
-<li>  <a href="../../platforms/wp8/plugin.html">Windows Phone 8 Plugins</a></li>
-<li>  <a href="../../platforms/win8/plugin.html">Windows Plugins</a></li>
+  <li><a href="../../platforms/amazonfireos/plugin.html">Amazon fuego OS Plugins</a></li>
+  <li><a href="../../platforms/android/plugin.html">Android Plugins</a></li>
+  <li><a href="../../platforms/ios/plugin.html">iOS Plugins</a></li>
+  <li><a href="../../platforms/blackberry10/plugin.html">BlackBerry 10 Plugins</a></li>
+  <li><a href="../../platforms/wp8/plugin.html">Windows Phone 8 Plugins</a></li>
+  <li><a href="../../platforms/win8/plugin.html">Windows Plugins</a></li>
 </ul>
 
 <p>La plataforma Tizen no admite plugins.</p>
 
-<h2>Editorial Plugins</h2>
+<h2 id="editorial-plugins">Editorial Plugins</h2>
 
-<p>Una vez que desarrollas tu plugin, quizá quieras publicar y compartir con la comunidad. Puedes publicar tu plugin a cualquier <code>npmjs</code> -base de registro, pero el recomendado es el <a href="https://www.npmjs.com">registro de la nueva gestión pública</a>. Lea nuestro <a href="http://plugins.cordova.io/npm/developers.html">editorial plugins guía del MNP</a>.</p>
+<p>Una vez que desarrollas tu plugin, quizá quieras publicar y compartir con la comunidad. Puedes publicar tu plugin a cualquier <code class="language-plaintext highlighter-rouge">npmjs</code> -base de registro, pero el recomendado es el <a href="https://www.npmjs.com">registro de la nueva gestión pública</a>. Lea nuestro <a href="http://plugins.cordova.io/npm/developers.html">editorial plugins guía del MNP</a>.</p>
 
-<p><strong>Nota</strong>: <a href="https://plugins.cordova.io">registro de plugin de Córdoba</a> se está moviendo a un estado de sólo lectura. <code>publish</code>/ <code>unpublish</code> se han eliminado los comandos de <code>plugman</code> , así que necesitarás usar correspondiente <code>npm</code> comandos.</p>
+<p><strong>Nota</strong>: <a href="https://plugins.cordova.io">registro de plugin de Córdoba</a> se está moviendo a un estado de sólo lectura. <code class="language-plaintext highlighter-rouge">publish</code>/ <code class="language-plaintext highlighter-rouge">unpublish</code> se han eliminado los comandos de <code class="language-plaintext highlighter-rouge">plugman</code> , así que necesitarás usar correspondiente <code class="language-plaintext highlighter-rouge">npm</code> comandos.</p>
 
-<p>Otros desarrolladores pueden instalar el plugin automáticamente mediante <code>plugman</code> o CLI Cordova. (Para más detalles sobre cada paso del desarrollo, ver Plugman utilizando para administrar Plugins y la interfaz de línea de comandos).</p>
+<p>Otros desarrolladores pueden instalar el plugin automáticamente mediante <code class="language-plaintext highlighter-rouge">plugman</code> o CLI Cordova. (Para más detalles sobre cada paso del desarrollo, ver Plugman utilizando para administrar Plugins y la interfaz de línea de comandos).</p>
 
 <p>Para publicar un plugin para registro de MNP necesita seguir los siguientes pasos:</p>
 
 <ul>
-<li><p>crear <code>package.json</code> archivo de tu plugin:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ plugman createpackagejson /path/to/your/plugin
-</code></pre></div></li>
-<li><p>publicarla:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ npm adduser # that is if you don't have an account yet
+  <li>
+    <p>crear <code class="language-plaintext highlighter-rouge">package.json</code> archivo de tu plugin:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ plugman createpackagejson /path/to/your/plugin
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>publicarla:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ npm adduser # that is if you don't have an account yet
 $ npm publish /path/to/your/plugin
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ul>
 
 <p>Eso es todo!</p>
 
-<p>Ejecutando <code>plugman --help</code> enumera otros basados en el registro de los comandos disponibles.</p>
+<p>Ejecutando <code class="language-plaintext highlighter-rouge">plugman --help</code> enumera otros basados en el registro de los comandos disponibles.</p>
 
 
             </div>

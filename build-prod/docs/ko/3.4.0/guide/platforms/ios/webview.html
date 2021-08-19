@@ -1062,34 +1062,62 @@
             
 
             <div id="page-toc-source">
-                <h1>iOS WebViews</h1>
+                <h1 id="ios-webviews">iOS WebViews</h1>
 
 <p>이 단원에서는 큰 iOS 응용 프로그램 내에서 WebView 코르도바 활성화 구성 요소를 포함 하는 방법을 보여 줍니다. 어떻게 이러한 구성 요소가 서로 통신할 수 있습니다 응용 프로그램 플러그인을 참조.</p>
 
-<p>IOS WebViews에 대 한 지원을 시작 코르도바 버전 1.4 사용 하는 <code>Cleaver</code> Xcode 템플릿 참조 구현으로 쓸모 있는 구성 요소. 코르 도우 바 2.0 및 이후 버전 에서만 하위 프로젝트 기반 칼 구현을 지원합니다.</p>
+<p>IOS WebViews에 대 한 지원을 시작 코르도바 버전 1.4 사용 하는 <code class="language-plaintext highlighter-rouge">Cleaver</code> Xcode 템플릿 참조 구현으로 쓸모 있는 구성 요소. 코르 도우 바 2.0 및 이후 버전 에서만 하위 프로젝트 기반 칼 구현을 지원합니다.</p>
 
-<p>이러한 지침을 적어도 필요로 코르도바 2.3와 Xcode 4.5와 함께 한 <code>config.xml</code> 새로 만든된 iOS 프로젝트에서 파일. 절차 수 있습니다는 명령줄 인터페이스에서 새 프로젝트를 만든 다음 얻을 하는 <code>config.xml</code> 내에서 명명 된 응용 프로그램의 하위 디렉터리 내에서 파일<code>platforms/ios</code>.</p>
+<p>이러한 지침을 적어도 필요로 코르도바 2.3와 Xcode 4.5와 함께 한 <code class="language-plaintext highlighter-rouge">config.xml</code> 새로 만든된 iOS 프로젝트에서 파일. 절차 수 있습니다는 명령줄 인터페이스에서 새 프로젝트를 만든 다음 얻을 하는 <code class="language-plaintext highlighter-rouge">config.xml</code> 내에서 명명 된 응용 프로그램의 하위 디렉터리 내에서 파일<code class="language-plaintext highlighter-rouge">platforms/ios</code>.</p>
 
 <p>이러한 지침에 따라, 최신 코르도바 분포를가지고 있는지 확인 합니다. <a href="http://cordova.apache.org">Cordova.apache.org</a> 에서 다운로드 하 고 그것의 iOS 패키지의 압축을 풉니다.</p>
 
-<h2>칼은 Xcode 프로젝트 (CordovaLib 하위 프로젝트)에 추가</h2>
+<h2 id="칼은-xcode-프로젝트-cordovalib-하위-프로젝트에-추가">칼은 Xcode 프로젝트 (CordovaLib 하위 프로젝트)에 추가</h2>
 
 <ol>
-<li><p>실행 중인 경우 Xcode를 종료 합니다.</p></li>
-<li><p>터미널을 열고 코르도바 iOS의 소스 디렉터리로 이동 합니다.</p></li>
-<li><p>복사는 <code>config.xml</code> 파일을 프로젝트 디렉터리에 위에서 설명한.</p></li>
-<li><p>Xcode 열고 Finder를 사용 하 여 복사 하는 <code>config.xml</code> 파일은 <strong>프로젝트 탐색기</strong> 창으로.</p></li>
-<li><p><strong>어떤 추가 된 폴더에 대 한 그룹 만들기를</strong> 선택 하 고 <strong>완료</strong> 를 누릅니다.</p></li>
-<li><p>Finder를 사용 하 여 복사 하는 <code>CordovaLib/CordovaLib.xcodeproj</code> Xcode의 <strong>프로젝트 탐색기</strong> 에 파일</p></li>
-<li><p>선택 <code>CordovaLib.xcodeproj</code> <strong>프로젝트 탐색기</strong> 내에서.</p></li>
-<li><p><strong>파일 관리자</strong> 를 표시 하려면 <strong>옵션-명령-1</strong> 키 조합 입력.</p></li>
-<li><p><strong>위치</strong> 에 대 한 드롭 다운 메뉴에 대 한 <strong>파일 관리자</strong> 에서 <strong>상대 그룹</strong> 선택.</p></li>
-<li><p><strong>프로젝트 탐색기</strong>에서 <strong>프로젝트 아이콘</strong> 을 선택, <strong>대상</strong>을 선택한 다음 <strong>빌드 설정</strong> 탭을 선택 합니다.</p></li>
-<li><p>추가 <code>-force_load</code> 및 <code>-Obj-C</code> <strong>다른 링커 플래그</strong> 값에 대 한.</p></li>
-<li><p>프로젝트 탐색기에서 <strong>프로젝트 아이콘</strong> 을 클릭 하십시오, <strong>대상</strong>을 선택한 다음 <strong>빌드 단계</strong> 탭을 선택 합니다.</p></li>
-<li><p>확장 <strong>라이브러리와 링크 바이너리</strong>.</p></li>
-<li><p><strong>+</strong> 선택 버튼, 그리고 다음과 같은 <strong>프레임 워크</strong>를 추가 합니다. 필요에 따라 <strong>프로젝트 탐색기</strong>내에서 이동 <strong>프레임 워크</strong> 그룹:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">AddressBook.framework
+  <li>
+    <p>실행 중인 경우 Xcode를 종료 합니다.</p>
+  </li>
+  <li>
+    <p>터미널을 열고 코르도바 iOS의 소스 디렉터리로 이동 합니다.</p>
+  </li>
+  <li>
+    <p>복사는 <code class="language-plaintext highlighter-rouge">config.xml</code> 파일을 프로젝트 디렉터리에 위에서 설명한.</p>
+  </li>
+  <li>
+    <p>Xcode 열고 Finder를 사용 하 여 복사 하는 <code class="language-plaintext highlighter-rouge">config.xml</code> 파일은 <strong>프로젝트 탐색기</strong> 창으로.</p>
+  </li>
+  <li>
+    <p><strong>어떤 추가 된 폴더에 대 한 그룹 만들기를</strong> 선택 하 고 <strong>완료</strong> 를 누릅니다.</p>
+  </li>
+  <li>
+    <p>Finder를 사용 하 여 복사 하는 <code class="language-plaintext highlighter-rouge">CordovaLib/CordovaLib.xcodeproj</code> Xcode의 <strong>프로젝트 탐색기</strong> 에 파일</p>
+  </li>
+  <li>
+    <p>선택 <code class="language-plaintext highlighter-rouge">CordovaLib.xcodeproj</code> <strong>프로젝트 탐색기</strong> 내에서.</p>
+  </li>
+  <li>
+    <p><strong>파일 관리자</strong> 를 표시 하려면 <strong>옵션-명령-1</strong> 키 조합 입력.</p>
+  </li>
+  <li>
+    <p><strong>위치</strong> 에 대 한 드롭 다운 메뉴에 대 한 <strong>파일 관리자</strong> 에서 <strong>상대 그룹</strong> 선택.</p>
+  </li>
+  <li>
+    <p><strong>프로젝트 탐색기</strong>에서 <strong>프로젝트 아이콘</strong> 을 선택, <strong>대상</strong>을 선택한 다음 <strong>빌드 설정</strong> 탭을 선택 합니다.</p>
+  </li>
+  <li>
+    <p>추가 <code class="language-plaintext highlighter-rouge">-force_load</code> 및 <code class="language-plaintext highlighter-rouge">-Obj-C</code> <strong>다른 링커 플래그</strong> 값에 대 한.</p>
+  </li>
+  <li>
+    <p>프로젝트 탐색기에서 <strong>프로젝트 아이콘</strong> 을 클릭 하십시오, <strong>대상</strong>을 선택한 다음 <strong>빌드 단계</strong> 탭을 선택 합니다.</p>
+  </li>
+  <li>
+    <p>확장 <strong>라이브러리와 링크 바이너리</strong>.</p>
+  </li>
+  <li>
+    <p><strong>+</strong> 선택 버튼, 그리고 다음과 같은 <strong>프레임 워크</strong>를 추가 합니다. 필요에 따라 <strong>프로젝트 탐색기</strong>내에서 이동 <strong>프레임 워크</strong> 그룹:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AddressBook.framework
 AddressBookUI.framework
 AudioToolbox.framework
 AVFoundation.framework
@@ -1099,66 +1127,117 @@ QuartzCore.framework
 SystemConfiguration.framework
 MobileCoreServices.framework
 CoreMedia.framework
-</code></pre></div></li>
-<li><p><strong>대상 종속성</strong>, 하나 이상의 상자 경우 그 상표를 가진 최고 상자를 확장 합니다.</p></li>
-<li><p><strong>+</strong> 선택 버튼, 그리고 추가 <code>CordovaLib</code> 제품을 구축.</p></li>
-<li><p><strong>라이브러리와 함께 링크 바이너리</strong>, 하나 이상의 상자 경우 그 상표를 가진 최고 상자를 확장 합니다.</p></li>
-<li><p><strong>+</strong> 선택 버튼, 그리고 추가<code>libCordova.a</code>.</p></li>
-<li><p>설정에서 <strong>Xcode 환경 설정 → 위치 → 파생 데이터 → 고급...</strong> <strong>고유</strong> 하.</p></li>
-<li><p>프로젝트 탐색기에서 <strong>프로젝트 아이콘</strong> 을 선택, 당신의 <strong>대상</strong>을 선택한 다음 <strong>빌드 설정</strong> 탭을 선택 합니다.</p></li>
-<li><p><strong>헤더 검색 경로</strong>대 한 검색입니다. 해당 설정에 대 한 아래, 따옴표를 포함 하 여 이러한 세 가지 값을 추가:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">"$(TARGET_BUILD_DIR)/usr/local/lib/include"        
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>대상 종속성</strong>, 하나 이상의 상자 경우 그 상표를 가진 최고 상자를 확장 합니다.</p>
+  </li>
+  <li>
+    <p><strong>+</strong> 선택 버튼, 그리고 추가 <code class="language-plaintext highlighter-rouge">CordovaLib</code> 제품을 구축.</p>
+  </li>
+  <li>
+    <p><strong>라이브러리와 함께 링크 바이너리</strong>, 하나 이상의 상자 경우 그 상표를 가진 최고 상자를 확장 합니다.</p>
+  </li>
+  <li>
+    <p><strong>+</strong> 선택 버튼, 그리고 추가<code class="language-plaintext highlighter-rouge">libCordova.a</code>.</p>
+  </li>
+  <li>
+    <p>설정에서 <strong>Xcode 환경 설정 → 위치 → 파생 데이터 → 고급…</strong> <strong>고유</strong> 하.</p>
+  </li>
+  <li>
+    <p>프로젝트 탐색기에서 <strong>프로젝트 아이콘</strong> 을 선택, 당신의 <strong>대상</strong>을 선택한 다음 <strong>빌드 설정</strong> 탭을 선택 합니다.</p>
+  </li>
+  <li>
+    <p><strong>헤더 검색 경로</strong>대 한 검색입니다. 해당 설정에 대 한 아래, 따옴표를 포함 하 여 이러한 세 가지 값을 추가:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"$(TARGET_BUILD_DIR)/usr/local/lib/include"        
 "$(OBJROOT)/UninstalledProducts/include"
 "$(BUILT_PRODUCTS_DIR)"
-</code></pre></div>
-<p>코르 도우 바 2.1.0, 현재 <code>CordovaLib</code> <strong>자동 참조 계산 (아크)를</strong>사용 하도록 업그레이드 되었습니다. <strong>아크</strong> 사용 하 여 업그레이드할 필요가 없습니다 <code>CordovaLib</code> , <strong>아크</strong>를 사용 하 여 프로젝트를 업그레이드 하려면에서 Xcode 마이그레이션 마법사를 사용 해야 하지만 <strong>→ 편집 → 리팩터링 변환을 오브 젝 티브-C 호...</strong> 메뉴 <strong>libCordova.a 선택 취소</strong>, 완료 마법사 실행.</p></li>
+</code></pre></div>    </div>
+
+    <p>코르 도우 바 2.1.0, 현재 <code class="language-plaintext highlighter-rouge">CordovaLib</code> <strong>자동 참조 계산 (아크)를</strong>사용 하도록 업그레이드 되었습니다. <strong>아크</strong> 사용 하 여 업그레이드할 필요가 없습니다 <code class="language-plaintext highlighter-rouge">CordovaLib</code> , <strong>아크</strong>를 사용 하 여 프로젝트를 업그레이드 하려면에서 Xcode 마이그레이션 마법사를 사용 해야 하지만 <strong>→ 편집 → 리팩터링 변환을 오브 젝 티브-C 호…</strong> 메뉴 <strong>libCordova.a 선택 취소</strong>, 완료 마법사 실행.</p>
+  </li>
 </ol>
 
-<h2>CDVViewController를 사용 하 여</h2>
+<h2 id="cdvviewcontroller를-사용-하-여">CDVViewController를 사용 하 여</h2>
 
 <ol>
-<li><p>다음 헤더 추가:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">#import &lt;Cordova/CDVViewController.h&gt;
-</code></pre></div></li>
-<li><p>새로운 인스턴스화할 <code>CDVViewController</code> 어딘가에, 예를 들어, 클래스 속성에 유지:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">CDVViewController* viewController = [CDVViewController new];
-</code></pre></div></li>
-<li><p>필요에 따라 설정 된 <code>wwwFolderName</code> 속성 기본값은 <code>www</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">viewController.wwwFolderName = @"myfolder";
-</code></pre></div></li>
-<li><p>선택적으로, 시작 페이지 설정에서 <code>config.xml</code> 파일의 <code>&lt;content&gt;</code> 태그, 두 로컬 파일:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;content src="index.html" /&gt;
-</code></pre></div>
-<p>.. 아니면 원격 사이트:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;content src="http://apache.org" /&gt;
-</code></pre></div></li>
-<li><p>필요에 따라 설정 된 <code>useSplashScreen</code> 속성 기본값은 <code>NO</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">viewController.useSplashScreen = YES;
-</code></pre></div></li>
-<li><p><strong>보기 프레임</strong>을 설정 합니다. 항상이 마지막 속성 설정:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">viewController.view.frame = CGRectMake(0, 0, 320, 480);
-</code></pre></div></li>
-<li><p>보기에 식 칼을 추가:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">[myView addSubview:viewController.view];
-</code></pre></div></li>
+  <li>
+    <p>다음 헤더 추가:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#import &lt;Cordova/CDVViewController.h&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>새로운 인스턴스화할 <code class="language-plaintext highlighter-rouge">CDVViewController</code> 어딘가에, 예를 들어, 클래스 속성에 유지:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CDVViewController* viewController = [CDVViewController new];
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>필요에 따라 설정 된 <code class="language-plaintext highlighter-rouge">wwwFolderName</code> 속성 기본값은 <code class="language-plaintext highlighter-rouge">www</code> :</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>viewController.wwwFolderName = @"myfolder";
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>선택적으로, 시작 페이지 설정에서 <code class="language-plaintext highlighter-rouge">config.xml</code> 파일의 <code class="language-plaintext highlighter-rouge">&lt;content&gt;</code> 태그, 두 로컬 파일:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;content src="index.html" /&gt;
+</code></pre></div>    </div>
+
+    <p>.. 아니면 원격 사이트:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;content src="http://apache.org" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>필요에 따라 설정 된 <code class="language-plaintext highlighter-rouge">useSplashScreen</code> 속성 기본값은 <code class="language-plaintext highlighter-rouge">NO</code> :</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>viewController.useSplashScreen = YES;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>보기 프레임</strong>을 설정 합니다. 항상이 마지막 속성 설정:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>viewController.view.frame = CGRectMake(0, 0, 320, 480);
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>보기에 식 칼을 추가:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[myView addSubview:viewController.view];
+</code></pre></div>    </div>
+  </li>
 </ol>
 
-<h2>HTML, CSS 및 JavaScript 자산 추가</h2>
+<h2 id="html-css-및-javascript-자산-추가">HTML, CSS 및 JavaScript 자산 추가</h2>
 
 <ol>
-<li><p>프로젝트 내에서 새 디렉터리를 만들 <code>www</code> 예를 들면.</p></li>
-<li><p>이 디렉토리에 HTML, CSS, 자바 스크립트 자산을 배치.</p></li>
-<li><p>Finder를 사용 하 여 Xcode의 <strong>프로젝트 탐색기</strong> 창에는 디렉토리를 복사.</p></li>
-<li><p><strong>어떤 추가 폴더 만들기 폴더 참조</strong> 선택.</p></li>
-<li><p>적절 한 설정 <code>wwwFolderName</code> 및 <code>startPage</code> 처음 만든 디렉터리에 대 한 속성 (이전 섹션에 지정 된) 기본값을 사용 하거나 인스턴스화할 때는<code>CDVViewController</code>.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">/*
+  <li>
+    <p>프로젝트 내에서 새 디렉터리를 만들 <code class="language-plaintext highlighter-rouge">www</code> 예를 들면.</p>
+  </li>
+  <li>
+    <p>이 디렉토리에 HTML, CSS, 자바 스크립트 자산을 배치.</p>
+  </li>
+  <li>
+    <p>Finder를 사용 하 여 Xcode의 <strong>프로젝트 탐색기</strong> 창에는 디렉토리를 복사.</p>
+  </li>
+  <li>
+    <p><strong>어떤 추가 폴더 만들기 폴더 참조</strong> 선택.</p>
+  </li>
+  <li>
+    <p>적절 한 설정 <code class="language-plaintext highlighter-rouge">wwwFolderName</code> 및 <code class="language-plaintext highlighter-rouge">startPage</code> 처음 만든 디렉터리에 대 한 속성 (이전 섹션에 지정 된) 기본값을 사용 하거나 인스턴스화할 때는<code class="language-plaintext highlighter-rouge">CDVViewController</code>.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*
  if you created a folder called 'myfolder' and
  you want the file 'mypage.html' in it to be
  the startPage
 */
 viewController.wwwFolderName = @"myfolder";
 viewController.startPage = @"mypage.html"
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ol>
 
 

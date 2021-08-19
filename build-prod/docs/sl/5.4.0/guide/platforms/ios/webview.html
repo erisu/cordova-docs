@@ -1042,34 +1042,62 @@
             
 
             <div id="page-toc-source">
-                <h1>iOS spletni pogledi</h1>
+                <h1 id="ios-spletni-pogledi">iOS spletni pogledi</h1>
 
 <p>To poglavje prikazuje kako vlagati Cordova omogočen spletni pogled komponente znotraj večje iOS aplikacije. Podrobnosti o tem, kako te komponente lahko komunicirajo med seboj, si oglejte Uporaba Plugins.</p>
 
-<p>Podpora za iOS spletni pogledi začel z Cordova prevod 1.4, using a <code>Cleaver</code> komponento, za katero predlogo Xcode služi kot referenčno izvedbo. Cordova 2.0 in novejše različice podpirajo le Mesarski nož izvajanja podprojekta, ki temelji.</p>
+<p>Podpora za iOS spletni pogledi začel z Cordova prevod 1.4, using a <code class="language-plaintext highlighter-rouge">Cleaver</code> komponento, za katero predlogo Xcode služi kot referenčno izvedbo. Cordova 2.0 in novejše različice podpirajo le Mesarski nož izvajanja podprojekta, ki temelji.</p>
 
-<p>Ta navodila zahtevajo vsaj Cordova 2.3 in Xcode 4.5, skupaj z a <code>config.xml</code> datoteko iz projekta novoustanovljeno iOS. Uporabite lahko postopek v vmesnik ukazne vrstice ustvariti nov projekt, nato pa pridobite na <code>config.xml</code> datoteko iz znotraj imenovanega vloga subdirectory v<code>platforms/ios</code>.</p>
+<p>Ta navodila zahtevajo vsaj Cordova 2.3 in Xcode 4.5, skupaj z a <code class="language-plaintext highlighter-rouge">config.xml</code> datoteko iz projekta novoustanovljeno iOS. Uporabite lahko postopek v vmesnik ukazne vrstice ustvariti nov projekt, nato pa pridobite na <code class="language-plaintext highlighter-rouge">config.xml</code> datoteko iz znotraj imenovanega vloga subdirectory v<code class="language-plaintext highlighter-rouge">platforms/ios</code>.</p>
 
 <p>Sledite tem navodilom, poskrbite, da imate najnovejšo distribucijo Cordova. Travnato gričevje to s <a href="http://cordova.apache.org">cordova.apache.org</a> ter odpreti patentno zadrgo svoj paket iOS.</p>
 
-<h2>Dodajanje sekač Xcode projekta (CordovaLib podprojekt)</h2>
+<h2 id="dodajanje-sekač-xcode-projekta-cordovalib-podprojekt">Dodajanje sekač Xcode projekta (CordovaLib podprojekt)</h2>
 
 <ol>
-<li><p>Če se izvaja, zaprite Xcode.</p></li>
-<li><p>Plan a semestralen ter pluti v izvorni imenik za Cordova iOS.</p></li>
-<li><p>Izvod v <code>config.xml</code> datoteko, opisanih v imeniku projekta.</p></li>
-<li><p>Odprite Xcode in uporabiti Finder kopirati v <code>config.xml</code> datoteke v oknu <strong>Navigator projekta</strong> .</p></li>
-<li><p>Izberite <strong>Ustvari skupine za vse dodane mape</strong> in pritisnite <strong>konča</strong>.</p></li>
-<li><p>Uporabite Finder za kopiranje na <code>CordovaLib/CordovaLib.xcodeproj</code> datoteko v Xcode&#39;s <strong>Projekta Navigator</strong></p></li>
-<li><p>Izberite <code>CordovaLib.xcodeproj</code> v okviru <strong>projekta Navigator</strong>.</p></li>
-<li><p>Vnesite kombinacijo tipk <strong>možnost-ukaz-1</strong> razkazati <strong>Nadzornik datoteko</strong>.</p></li>
-<li><p>Izberite <strong>glede na skupine</strong> v <strong>Datoteko inšpektor</strong> za spustni meni za <strong>lokacijo</strong>.</p></li>
-<li><p>Izberite <strong>ikono projekta</strong> v <strong>Projekt Navigator</strong>, izberite <strong>cilj</strong>, nato pa izberite zavihek <strong>Nastavitve graditi</strong> .</p></li>
-<li><p>Dodaj <code>-force_load</code> in <code>-Obj-C</code> za vrednost <strong>Drugih Povezivač zastavic</strong> .</p></li>
-<li><p>Kliknite na <strong>ikono projekta</strong> v projekt Navigator, izberite <strong>cilj</strong>, nato pa izberite zavihek <strong>Izgradnjo faze</strong> .</p></li>
-<li><p>Razširite <strong>Link Binaries s knjižnicami</strong>.</p></li>
-<li><p>Izberite <strong>+</strong> gumb, in dodajte naslednje <strong>okvire</strong>. Po želji v okviru <strong>Projekta Navigator</strong>, jih premaknete v skupini <strong>okvirov</strong> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">AddressBook.framework
+  <li>
+    <p>Če se izvaja, zaprite Xcode.</p>
+  </li>
+  <li>
+    <p>Plan a semestralen ter pluti v izvorni imenik za Cordova iOS.</p>
+  </li>
+  <li>
+    <p>Izvod v <code class="language-plaintext highlighter-rouge">config.xml</code> datoteko, opisanih v imeniku projekta.</p>
+  </li>
+  <li>
+    <p>Odprite Xcode in uporabiti Finder kopirati v <code class="language-plaintext highlighter-rouge">config.xml</code> datoteke v oknu <strong>Navigator projekta</strong> .</p>
+  </li>
+  <li>
+    <p>Izberite <strong>Ustvari skupine za vse dodane mape</strong> in pritisnite <strong>konča</strong>.</p>
+  </li>
+  <li>
+    <p>Uporabite Finder za kopiranje na <code class="language-plaintext highlighter-rouge">CordovaLib/CordovaLib.xcodeproj</code> datoteko v Xcode’s <strong>Projekta Navigator</strong></p>
+  </li>
+  <li>
+    <p>Izberite <code class="language-plaintext highlighter-rouge">CordovaLib.xcodeproj</code> v okviru <strong>projekta Navigator</strong>.</p>
+  </li>
+  <li>
+    <p>Vnesite kombinacijo tipk <strong>možnost-ukaz-1</strong> razkazati <strong>Nadzornik datoteko</strong>.</p>
+  </li>
+  <li>
+    <p>Izberite <strong>glede na skupine</strong> v <strong>Datoteko inšpektor</strong> za spustni meni za <strong>lokacijo</strong>.</p>
+  </li>
+  <li>
+    <p>Izberite <strong>ikono projekta</strong> v <strong>Projekt Navigator</strong>, izberite <strong>cilj</strong>, nato pa izberite zavihek <strong>Nastavitve graditi</strong> .</p>
+  </li>
+  <li>
+    <p>Dodaj <code class="language-plaintext highlighter-rouge">-force_load</code> in <code class="language-plaintext highlighter-rouge">-Obj-C</code> za vrednost <strong>Drugih Povezivač zastavic</strong> .</p>
+  </li>
+  <li>
+    <p>Kliknite na <strong>ikono projekta</strong> v projekt Navigator, izberite <strong>cilj</strong>, nato pa izberite zavihek <strong>Izgradnjo faze</strong> .</p>
+  </li>
+  <li>
+    <p>Razširite <strong>Link Binaries s knjižnicami</strong>.</p>
+  </li>
+  <li>
+    <p>Izberite <strong>+</strong> gumb, in dodajte naslednje <strong>okvire</strong>. Po želji v okviru <strong>Projekta Navigator</strong>, jih premaknete v skupini <strong>okvirov</strong> :</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AddressBook.framework
 AddressBookUI.framework
 AudioToolbox.framework
 AVFoundation.framework
@@ -1079,66 +1107,117 @@ QuartzCore.framework
 SystemConfiguration.framework
 MobileCoreServices.framework
 CoreMedia.framework
-</code></pre></div></li>
-<li><p>Razširite <strong>Ciljne odvisnosti</strong>, zgornje polje s to oznako, če obstaja več kot eno polje.</p></li>
-<li><p>Izberite <strong>+</strong> gumb, in dodamo na <code>CordovaLib</code> graditi izdelek.</p></li>
-<li><p>Razširite <strong>Link Binaries s knjižnicami</strong>, zgornje polje s to oznako, če obstaja več kot eno polje.</p></li>
-<li><p>Izberite <strong>+</strong> gumb, in dodamo<code>libCordova.a</code>.</p></li>
-<li><p>Nastavite na <strong>Xcode nastavitve → lokacijah → pridobljenih podatkov → Advanced...</strong> <strong>edinstvene</strong>.</p></li>
-<li><p>Izberite <strong>ikono projekta</strong> v projekt Navigator, izberite vašo <strong>ciljno</strong>, nato pa izberite zavihek <strong>Nastavitve graditi</strong> .</p></li>
-<li><p>Iskanje <strong>poti iskanja glavo</strong>. Nastavitve, dodajte te tri vrednosti spodaj, vključno navajati:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">"$(TARGET_BUILD_DIR)/usr/local/lib/include"        
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Razširite <strong>Ciljne odvisnosti</strong>, zgornje polje s to oznako, če obstaja več kot eno polje.</p>
+  </li>
+  <li>
+    <p>Izberite <strong>+</strong> gumb, in dodamo na <code class="language-plaintext highlighter-rouge">CordovaLib</code> graditi izdelek.</p>
+  </li>
+  <li>
+    <p>Razširite <strong>Link Binaries s knjižnicami</strong>, zgornje polje s to oznako, če obstaja več kot eno polje.</p>
+  </li>
+  <li>
+    <p>Izberite <strong>+</strong> gumb, in dodamo<code class="language-plaintext highlighter-rouge">libCordova.a</code>.</p>
+  </li>
+  <li>
+    <p>Nastavite na <strong>Xcode nastavitve → lokacijah → pridobljenih podatkov → Advanced…</strong> <strong>edinstvene</strong>.</p>
+  </li>
+  <li>
+    <p>Izberite <strong>ikono projekta</strong> v projekt Navigator, izberite vašo <strong>ciljno</strong>, nato pa izberite zavihek <strong>Nastavitve graditi</strong> .</p>
+  </li>
+  <li>
+    <p>Iskanje <strong>poti iskanja glavo</strong>. Nastavitve, dodajte te tri vrednosti spodaj, vključno navajati:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"$(TARGET_BUILD_DIR)/usr/local/lib/include"        
 "$(OBJROOT)/UninstalledProducts/include"
 "$(BUILT_PRODUCTS_DIR)"
-</code></pre></div>
-<p>Od Cordova 2.1.0, <code>CordovaLib</code> has been vzpenjajoč se rabiti <strong>Samodejno Reference štetje (ARC)</strong>. Vam ni treba nadgraditi na <strong>lok</strong> za uporabo <code>CordovaLib</code> , vendar če želite nadgraditi svoj projekt za uporabo <strong>ARC</strong>, uporabite čarovnika za migracije Xcode iz je <strong>Uredi → Refactor → pretvori v Objective-C ARC...</strong> meni, <strong>de-izberite libCordova.a</strong>, nato zaženite čarovnik za dokončanje.</p></li>
+</code></pre></div>    </div>
+
+    <p>Od Cordova 2.1.0, <code class="language-plaintext highlighter-rouge">CordovaLib</code> has been vzpenjajoč se rabiti <strong>Samodejno Reference štetje (ARC)</strong>. Vam ni treba nadgraditi na <strong>lok</strong> za uporabo <code class="language-plaintext highlighter-rouge">CordovaLib</code> , vendar če želite nadgraditi svoj projekt za uporabo <strong>ARC</strong>, uporabite čarovnika za migracije Xcode iz je <strong>Uredi → Refactor → pretvori v Objective-C ARC…</strong> meni, <strong>de-izberite libCordova.a</strong>, nato zaženite čarovnik za dokončanje.</p>
+  </li>
 </ol>
 
-<h2>Z uporabo CDVViewController</h2>
+<h2 id="z-uporabo-cdvviewcontroller">Z uporabo CDVViewController</h2>
 
 <ol>
-<li><p>Dodajte naslednje glavo:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">#import &lt;Cordova/CDVViewController.h&gt;
-</code></pre></div></li>
-<li><p>Instantiate a nov <code>CDVViewController</code> in obdržati nekje, npr., da razred lastnine:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">CDVViewController* viewController = [CDVViewController new];
-</code></pre></div></li>
-<li><p>Po želji lahko nastavite na <code>wwwFolderName</code> premoženja, ki je privzeto <code>www</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">viewController.wwwFolderName = @"myfolder";
-</code></pre></div></li>
-<li><p>Po izbiri iz začetne strani v <code>config.xml</code> datoteke <code>&lt;content&gt;</code> tag, bodisi lokalno datoteko:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;content src="index.html" /&gt;
-</code></pre></div>
-<p>.. ali oddaljenem mestu:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;content src="http://apache.org" /&gt;
-</code></pre></div></li>
-<li><p>Po želji lahko nastavite na <code>useSplashScreen</code> premoženja, ki je privzeto <code>NO</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">viewController.useSplashScreen = YES;
-</code></pre></div></li>
-<li><p>Nastavite <strong>pogled okvir</strong>. Vedno nastavite to lastnost zadnji:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">viewController.view.frame = CGRectMake(0, 0, 320, 480);
-</code></pre></div></li>
-<li><p>Sekač dodati pogled:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">[myView addSubview:viewController.view];
-</code></pre></div></li>
+  <li>
+    <p>Dodajte naslednje glavo:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#import &lt;Cordova/CDVViewController.h&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Instantiate a nov <code class="language-plaintext highlighter-rouge">CDVViewController</code> in obdržati nekje, npr., da razred lastnine:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CDVViewController* viewController = [CDVViewController new];
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Po želji lahko nastavite na <code class="language-plaintext highlighter-rouge">wwwFolderName</code> premoženja, ki je privzeto <code class="language-plaintext highlighter-rouge">www</code> :</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>viewController.wwwFolderName = @"myfolder";
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Po izbiri iz začetne strani v <code class="language-plaintext highlighter-rouge">config.xml</code> datoteke <code class="language-plaintext highlighter-rouge">&lt;content&gt;</code> tag, bodisi lokalno datoteko:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;content src="index.html" /&gt;
+</code></pre></div>    </div>
+
+    <p>.. ali oddaljenem mestu:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;content src="http://apache.org" /&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Po želji lahko nastavite na <code class="language-plaintext highlighter-rouge">useSplashScreen</code> premoženja, ki je privzeto <code class="language-plaintext highlighter-rouge">NO</code> :</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>viewController.useSplashScreen = YES;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Nastavite <strong>pogled okvir</strong>. Vedno nastavite to lastnost zadnji:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>viewController.view.frame = CGRectMake(0, 0, 320, 480);
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Sekač dodati pogled:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[myView addSubview:viewController.view];
+</code></pre></div>    </div>
+  </li>
 </ol>
 
-<h2>Dodajanje HTML, CSS in JavaScript sredstev</h2>
+<h2 id="dodajanje-html-css-in-javascript-sredstev">Dodajanje HTML, CSS in JavaScript sredstev</h2>
 
 <ol>
-<li><p>Ustvarite nov imenik v okviru projekta, <code>www</code> na primer.</p></li>
-<li><p>Mesto HTML, CSS in JavaScript sredstev v ta imenik.</p></li>
-<li><p>Kopiranje imenika v Xcode&#39;s <strong>Projekta Navigator</strong> okno uporabite Finder.</p></li>
-<li><p>Izberite <strong>ustvari mapo referenc za vse dodane mape</strong>.</p></li>
-<li><p>Nastavite ustrezno <code>wwwFolderName</code> in <code>startPage</code> lastnosti imenika, ki je prvotno ustvaril, ali uporabite privzete nastavitve (navedena v prejšnjem razdelku) ko instantiating na<code>CDVViewController</code>.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">/*
+  <li>
+    <p>Ustvarite nov imenik v okviru projekta, <code class="language-plaintext highlighter-rouge">www</code> na primer.</p>
+  </li>
+  <li>
+    <p>Mesto HTML, CSS in JavaScript sredstev v ta imenik.</p>
+  </li>
+  <li>
+    <p>Kopiranje imenika v Xcode’s <strong>Projekta Navigator</strong> okno uporabite Finder.</p>
+  </li>
+  <li>
+    <p>Izberite <strong>ustvari mapo referenc za vse dodane mape</strong>.</p>
+  </li>
+  <li>
+    <p>Nastavite ustrezno <code class="language-plaintext highlighter-rouge">wwwFolderName</code> in <code class="language-plaintext highlighter-rouge">startPage</code> lastnosti imenika, ki je prvotno ustvaril, ali uporabite privzete nastavitve (navedena v prejšnjem razdelku) ko instantiating na<code class="language-plaintext highlighter-rouge">CDVViewController</code>.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*
  if you created a folder called 'myfolder' and
  you want the file 'mypage.html' in it to be
  the startPage
 */
 viewController.wwwFolderName = @"myfolder";
 viewController.startPage = @"mypage.html"
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ol>
 
 

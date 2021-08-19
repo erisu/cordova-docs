@@ -1304,137 +1304,181 @@
             
 
             <div id="page-toc-source">
-                <h1>白名單指南</h1>
+                <h1 id="白名單指南">白名單指南</h1>
 
-<h2>概述</h2>
+<h2 id="概述">概述</h2>
 
-<p>資源白的就是安全模型控制訪問外部網路資源，如 <code>http://google.com</code> 。 Apache 科爾多瓦預設安全性原則允許訪問 Internet 上的任何網站上的任何資源。 在移動之前您在生產中的應用，應審查其白名單和聲明訪問到特定的網路域和子域。</p>
+<p>資源白的就是安全模型控制訪問外部網路資源，如 <code class="language-plaintext highlighter-rouge">http://google.com</code> 。 Apache 科爾多瓦預設安全性原則允許訪問 Internet 上的任何網站上的任何資源。 在移動之前您在生產中的應用，應審查其白名單和聲明訪問到特定的網路域和子域。</p>
 
-<h2>規格</h2>
+<h2 id="規格">規格</h2>
 
-<p>域白為<a href="http://www.w3.org/TR/widgets-access/">W3C 構件訪問</a>規範奠定了基礎。 在構件訪問規範中， <code>&lt;access&gt;</code> 元素，用來聲明對特定的網路資源的訪問。 Apache 科爾多瓦擴展了此概念允許個別網路資源 (Url) 的白。 在將來，Apache 科爾多瓦將抽象的白平臺實現。 然而，現在每個平臺實現其自己的資源或域的白。 平臺實現之間的差異是在本文檔後面所述。</p>
+<p>域白為<a href="http://www.w3.org/TR/widgets-access/">W3C 構件訪問</a>規範奠定了基礎。 在構件訪問規範中， <code class="language-plaintext highlighter-rouge">&lt;access&gt;</code> 元素，用來聲明對特定的網路資源的訪問。 Apache 科爾多瓦擴展了此概念允許個別網路資源 (Url) 的白。 在將來，Apache 科爾多瓦將抽象的白平臺實現。 然而，現在每個平臺實現其自己的資源或域的白。 平臺實現之間的差異是在本文檔後面所述。</p>
 
-<p>白名單條目的一般格式如下 Google Chrome 打包企業應用套件的&quot;<a href="http://developer.chrome.com/apps/match_patterns.html">模式匹配</a>&quot;規範。 資源指定的 URL，但一個星號 （*） 字元可用作在幾個地方的&quot;萬用字元&quot;表示&quot;任何值可能會在這裡去&quot;。 具體的例子如下所示。</p>
+<p>白名單條目的一般格式如下 Google Chrome 打包企業應用套件的”<a href="http://developer.chrome.com/apps/match_patterns.html">模式匹配</a>“規範。 資源指定的 URL，但一個星號 （*） 字元可用作在幾個地方的”萬用字元”表示”任何值可能會在這裡去”。 具體的例子如下所示。</p>
 
-<h2>語法</h2>
+<h2 id="語法">語法</h2>
 
 <p>在<a href="http://google.com">google.com</a>的所有資源的存取權限：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">http://google.com/*
-</code></pre></div>
-<p>訪問所有資源在安全<a href="https://google.com">google.com</a> ( <code>https://</code> ):</p>
-<div class="highlight"><pre><code class="language-" data-lang="">HTTPs://google.com/ *
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://google.com/*
+</code></pre></div></div>
+
+<p>訪問所有資源在安全<a href="https://google.com">google.com</a> ( <code class="language-plaintext highlighter-rouge">https://</code> ):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTPs://google.com/ *
+</code></pre></div></div>
+
 <p>對特定的子域<a href="http://maps.google.com">maps.google.com</a>的訪問：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">http://maps.google.com/*
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://maps.google.com/*
+</code></pre></div></div>
+
 <p>訪問<a href="http://google.com">google.com</a> （例如， <a href="http://mail.google.com">mail.google.com</a>和<a href="http://docs.google.com">docs.google.com</a>） 的所有子域：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">http://*.google.com/*
-</code></pre></div>
-<p>對上<a href="http://www.google.com">www.google.com</a> &quot;/ 移動&quot;路徑下的所有資源的訪問：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">http://www.google.com/mobile/*
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://*.google.com/*
+</code></pre></div></div>
+
+<p>對上<a href="http://www.google.com">www.google.com</a> “/ 移動”路徑下的所有資源的訪問：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://www.google.com/mobile/*
+</code></pre></div></div>
+
 <p>訪問<a href="http://google.com">google.com</a>上任何協定 （如 HTTP、 HTTPS、 FTP 等）：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">*://google.com/*
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*://google.com/*
+</code></pre></div></div>
+
 <p>所有資源 （例如， <a href="http://google.com">google.com</a>和<a href="http://developer.mozilla.org">developer.mozilla.org</a>） 在互聯網上訪問：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">*
-</code></pre></div>
-<h2>Android 系統</h2>
 
-<h3>詳細資訊</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*
+</code></pre></div></div>
 
-<p>在找到白規則 <code>res/xml/config.xml</code> ，並宣佈與元素<code>&lt;access origin=&quot;...&quot; /&gt;</code>.</p>
+<h2 id="android-系統">Android 系統</h2>
+
+<h3 id="詳細資訊">詳細資訊</h3>
+
+<p>在找到白規則 <code class="language-plaintext highlighter-rouge">res/xml/config.xml</code> ，並宣佈與元素<code class="language-plaintext highlighter-rouge">&lt;access origin="..." /&gt;</code>.</p>
 
 <p>Android 系統完全支援白語法。</p>
 
-<h3>語法</h3>
+<h3 id="語法-1">語法</h3>
 
 <p><a href="http://google.com">Google.com</a>訪問：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com/*" /&gt;
-</code></pre></div>
-<h2>黑莓 10</h2>
 
-<h3>詳細資訊</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com/*" /&gt;
+</code></pre></div></div>
 
-<p>在找到白規則 <code>www/config.xml</code> ，並宣佈與元素<code>&lt;access origin=&quot;...&quot; /&gt;</code>.</p>
+<h2 id="黑莓-10">黑莓 10</h2>
+
+<h3 id="詳細資訊-1">詳細資訊</h3>
+
+<p>在找到白規則 <code class="language-plaintext highlighter-rouge">www/config.xml</code> ，並宣佈與元素<code class="language-plaintext highlighter-rouge">&lt;access origin="..." /&gt;</code>.</p>
 
 <p>黑莓 10 比其他平臺兩種方式以不同的方式處理萬用字元：</p>
 
-<p>1） 由用戶端代碼訪問的內容必須顯式聲明。起源 =&quot;*&quot;將不尊重這一使用情形。或者，可使用首選項禁用所有 web 安全。</p>
+<p>1） 由用戶端代碼訪問的內容必須顯式聲明。起源 =”*“將不尊重這一使用情形。或者，可使用首選項禁用所有 web 安全。</p>
 
-<p>2） 子域 =&quot;true&quot;可用於代替&quot;*.domain&quot;</p>
+<p>2） 子域 =”true”可用於代替”*.domain”</p>
 
-<h3>語法</h3>
+<h3 id="語法-2">語法</h3>
 
 <p><a href="http://google.com">Google.com</a>訪問：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" subdomains="false" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" subdomains="false" /&gt;
+</code></pre></div></div>
+
 <p>對<a href="http://maps.google.com">maps.google.com</a>的訪問：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://maps.google.com" subdomains="false" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://maps.google.com" subdomains="false" /&gt;
+</code></pre></div></div>
+
 <p>對在<a href="http://google.com">google.com</a>上的所有子域的訪問：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" subdomains="true" /&gt;
-</code></pre></div>
-<p>訪問到所有的域，包括 <code>file://</code> 協定：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="*" subdomains="true" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" subdomains="true" /&gt;
+</code></pre></div></div>
+
+<p>訪問到所有的域，包括 <code class="language-plaintext highlighter-rouge">file://</code> 協定：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="*" subdomains="true" /&gt;
+</code></pre></div></div>
+
 <p>禁用所有 web 安全性：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;preference name="websecurity" value="disable" /&gt;
-</code></pre></div>
-<h2>iOS</h2>
 
-<h3>詳細資訊</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;preference name="websecurity" value="disable" /&gt;
+</code></pre></div></div>
 
-<p>在找到白規則 <code>AppName/config.xml</code> ，並宣佈與元素<code>&lt;access origin=&quot;...&quot; /&gt;</code>.</p>
+<h2 id="ios">iOS</h2>
+
+<h3 id="詳細資訊-2">詳細資訊</h3>
+
+<p>在找到白規則 <code class="language-plaintext highlighter-rouge">AppName/config.xml</code> ，並宣佈與元素<code class="language-plaintext highlighter-rouge">&lt;access origin="..." /&gt;</code>.</p>
 
 <p>iOS 完全支援白語法。</p>
 
-<h3>在 3.1.0 中更改：</h3>
+<h3 id="在-310-中更改">在 3.1.0 中更改：</h3>
 
-<p>之前 3.1.0 版，科爾多瓦 iOS 包括一些非標準擴展域 whilelisting 計畫其他科爾多瓦平臺都支援的。 自 3.1.0、 iOS 白名單現在符合資源白名單語法描述了本文檔的頂部。 如果您從 pre-3.1.0、 升級和使用這些擴展，您可能需要更改您 <code>config.xml</code> ，以前一樣繼續白組相同的資源檔。</p>
+<p>之前 3.1.0 版，科爾多瓦 iOS 包括一些非標準擴展域 whilelisting 計畫其他科爾多瓦平臺都支援的。 自 3.1.0、 iOS 白名單現在符合資源白名單語法描述了本文檔的頂部。 如果您從 pre-3.1.0、 升級和使用這些擴展，您可能需要更改您 <code class="language-plaintext highlighter-rouge">config.xml</code> ，以前一樣繼續白組相同的資源檔。</p>
 
 <p>具體而言，這些模式需要更新：</p>
 
 <ul>
-<li><p>&quot; <code>apache.org</code> &quot;（無協定）： 這將先前匹配 <code>http</code> ， <code>https</code> ， <code>ftp</code> ，和 <code>ftps</code> 的協定。 將更改為&quot; <code>*://apache.org/*</code> &quot;，包括所有協定，或都包括您需要支援的每個協定的線。</p></li>
-<li><p>&quot; <code>http://apache.*</code> &quot;（萬用字元域的一端）： 這將先前匹配的所有頂級-級別-域，包括所有可能的兩個字母 Tld （但不是有用域喜歡。 co.uk)。 為每個 TLD，您實際上控制，並且需要到白名單中包括一條線。</p></li>
-<li><p>&quot; <code>h*t*://ap*he.o*g</code> &quot;（萬用字元為隨機丟失信件）： 不再支援這些 ； 更改包含一條線的每個域和協定，您實際上需要到白名單中。</p></li>
+  <li>
+    <p>” <code class="language-plaintext highlighter-rouge">apache.org</code> “（無協定）： 這將先前匹配 <code class="language-plaintext highlighter-rouge">http</code> ， <code class="language-plaintext highlighter-rouge">https</code> ， <code class="language-plaintext highlighter-rouge">ftp</code> ，和 <code class="language-plaintext highlighter-rouge">ftps</code> 的協定。 將更改為” <code class="language-plaintext highlighter-rouge">*://apache.org/*</code> “，包括所有協定，或都包括您需要支援的每個協定的線。</p>
+  </li>
+  <li>
+    <p>” <code class="language-plaintext highlighter-rouge">http://apache.*</code> “（萬用字元域的一端）： 這將先前匹配的所有頂級-級別-域，包括所有可能的兩個字母 Tld （但不是有用域喜歡。 co.uk)。 為每個 TLD，您實際上控制，並且需要到白名單中包括一條線。</p>
+  </li>
+  <li>
+    <p>” <code class="language-plaintext highlighter-rouge">h*t*://ap*he.o*g</code> “（萬用字元為隨機丟失信件）： 不再支援這些 ； 更改包含一條線的每個域和協定，您實際上需要到白名單中。</p>
+  </li>
 </ul>
 
-<h3>語法</h3>
+<h3 id="語法-3">語法</h3>
 
 <p><a href="http://google.com">Google.com</a>訪問：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com/*" /&gt;
-</code></pre></div>
-<h2>Windows Phone (7 和 8)</h2>
 
-<p>在找到白規則 <code>config.xml</code> ，並宣佈與元素<code>&lt;access origin=&quot;...&quot; /&gt;</code>.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com/*" /&gt;
+</code></pre></div></div>
 
-<h3>語法</h3>
+<h2 id="windows-phone-7-和-8">Windows Phone (7 和 8)</h2>
 
-<p><a href="http://google.com">Google.com</a>訪問：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" /&gt;
-</code></pre></div>
-<h2>Tizen</h2>
+<p>在找到白規則 <code class="language-plaintext highlighter-rouge">config.xml</code> ，並宣佈與元素<code class="language-plaintext highlighter-rouge">&lt;access origin="..." /&gt;</code>.</p>
 
-<h3>詳細資訊</h3>
-
-<p>應用程式根目錄下的 <code>config.xml</code> 檔指定域白規則，使用 <code>&lt;access origin=&quot;...&quot; /&gt;</code> 元素。 完整引用，請參閱<a href="https://developer.tizen.org/help/topic/org.tizen.help.gs/Creating%20a%20Project.html?path=0_1_1_4#8814682_CreatingaProject-AccessingExternalNetworkResources">Tizen 訪問外部網路資源檔</a>.</p>
-
-<h3>語法</h3>
+<h3 id="語法-4">語法</h3>
 
 <p><a href="http://google.com">Google.com</a>訪問：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" subdomains="false" /&gt;
-</code></pre></div>
-<p>對安全<a href="https://google.com">google.com</a>的訪問 ( <code>https://</code> ):</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="https://google.com" subdomains="false" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" /&gt;
+</code></pre></div></div>
+
+<h2 id="tizen">Tizen</h2>
+
+<h3 id="詳細資訊-3">詳細資訊</h3>
+
+<p>應用程式根目錄下的 <code class="language-plaintext highlighter-rouge">config.xml</code> 檔指定域白規則，使用 <code class="language-plaintext highlighter-rouge">&lt;access origin="..." /&gt;</code> 元素。 完整引用，請參閱<a href="https://developer.tizen.org/help/topic/org.tizen.help.gs/Creating%20a%20Project.html?path=0_1_1_4#8814682_CreatingaProject-AccessingExternalNetworkResources">Tizen 訪問外部網路資源檔</a>.</p>
+
+<h3 id="語法-5">語法</h3>
+
+<p><a href="http://google.com">Google.com</a>訪問：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" subdomains="false" /&gt;
+</code></pre></div></div>
+
+<p>對安全<a href="https://google.com">google.com</a>的訪問 ( <code class="language-plaintext highlighter-rouge">https://</code> ):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="https://google.com" subdomains="false" /&gt;
+</code></pre></div></div>
+
 <p>對在<a href="http://google.com">google.com</a>上的所有子域的訪問：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="http://google.com" subdomains="true" /&gt;
-</code></pre></div>
-<p>訪問到所有的域，包括 <code>file://</code> 協定：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;access origin="*" subdomains="true" /&gt;
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="http://google.com" subdomains="true" /&gt;
+</code></pre></div></div>
+
+<p>訪問到所有的域，包括 <code class="language-plaintext highlighter-rouge">file://</code> 協定：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;access origin="*" subdomains="true" /&gt;
+</code></pre></div></div>
+
 
             </div>
         </div>

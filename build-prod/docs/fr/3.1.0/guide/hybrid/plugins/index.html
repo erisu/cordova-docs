@@ -1256,82 +1256,100 @@
             
 
             <div id="page-toc-source">
-                <h1>Guide de développement de plugin</h1>
+                <h1 id="guide-de-développement-de-plugin">Guide de développement de plugin</h1>
 
-<p>Un ponts de plugin de Cordova, un peu de fonctionnalité entre le WebView alimentant une application de Cordova et la plate-forme native, l&#39;application de Cordova s&#39;exécute sur. Plugins sont composés d&#39;une seule interface JavaScript utilisée sur toutes les plates-formes et des implémentations natives suite d&#39;interfaces de Plugin spécifique à la plateforme qui appelle le code JavaScript. Tous le noyau Cordova APIs sont implémentées à l&#39;aide de cette architecture.</p>
+<p>Un ponts de plugin de Cordova, un peu de fonctionnalité entre le WebView alimentant une application de Cordova et la plate-forme native, l’application de Cordova s’exécute sur. Plugins sont composés d’une seule interface JavaScript utilisée sur toutes les plates-formes et des implémentations natives suite d’interfaces de Plugin spécifique à la plateforme qui appelle le code JavaScript. Tous le noyau Cordova APIs sont implémentées à l’aide de cette architecture.</p>
 
-<p>Ce guide étapes le processus d&#39;écriture d&#39;un Plugin Echo simple qui transmet une chaîne à partir de JavaScript et l&#39;envoie dans l&#39;environnement natif pour les plates-formes supportées. Le code natif retourne alors la chaîne même aux rappels à l&#39;intérieur JavaScript du plugin.</p>
+<p>Ce guide étapes le processus d’écriture d’un Plugin Echo simple qui transmet une chaîne à partir de JavaScript et l’envoie dans l’environnement natif pour les plates-formes supportées. Le code natif retourne alors la chaîne même aux rappels à l’intérieur JavaScript du plugin.</p>
 
 <p>Ce guide fournit suffisamment aperçu sur lequel vous pouvez construire pour écrire des plugins plus complexes.</p>
 
-<h2>JavaScript</h2>
+<h2 id="javascript">JavaScript</h2>
 
-<p>Le point d&#39;entrée pour n&#39;importe quel plugin est JavaScript. L&#39;utilisation de développeurs raison que Cordova est afin qu&#39;ils puissent utiliser et écrire JavaScript, pas Objective-C, pas de Java, pas de langage c#. L&#39;interface JavaScript de votre plugin est la partie frontale et sans doute plus importante de votre plugin de Cordova.</p>
+<p>Le point d’entrée pour n’importe quel plugin est JavaScript. L’utilisation de développeurs raison que Cordova est afin qu’ils puissent utiliser et écrire JavaScript, pas Objective-C, pas de Java, pas de langage c#. L’interface JavaScript de votre plugin est la partie frontale et sans doute plus importante de votre plugin de Cordova.</p>
 
-<p>Vous pouvez structurer votre plugin JavaScript comme bon vous semble. La seule chose que vous <em>devez</em> utiliser pour communiquer entre le Cordova JavaScript et les environnements natifs est le <code>cordova.exec</code> fonction. Voici un exemple :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    cordova.exec(function(winParam) {}, function(error) {}, "service",
+<p>Vous pouvez structurer votre plugin JavaScript comme bon vous semble. La seule chose que vous <em>devez</em> utiliser pour communiquer entre le Cordova JavaScript et les environnements natifs est le <code class="language-plaintext highlighter-rouge">cordova.exec</code> fonction. Voici un exemple :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    cordova.exec(function(winParam) {}, function(error) {}, "service",
                  "action", ["firstArgument", "secondArgument", 42,
                  false]);
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Les paramètres sont détaillées ci-dessous :</p>
 
 <ul>
-<li><p><code>function(winParam) {}</code>: Rappel de fonction succès. En supposant que votre <code>exec</code> appel se termine avec succès, cette fonction est appelée (en option avec tous les paramètres vous passez à lui).</p></li>
-<li><p><code>function(error) {}</code>: Rappel d&#39;erreur de fonction. Si l&#39;opération ne se termine pas avec succès, cette fonction est appelée (éventuellement avec un paramètre error).</p></li>
-<li><p><code>&quot;service&quot;</code>: Le nom du service pour appeler dans le côté natif. Il est mappé à une classe native, sur lequel des informations supplémentaires sont disponibles dans les guides autochtones énumérées ci-dessous.</p></li>
-<li><p><code>&quot;action&quot;</code>: Le nom de l&#39;action d&#39;appeler. C&#39;est capté par le récepteur de la classe native le <code>exec</code> appel et, dépendant de la plate-forme, essentiellement correspond à méthode d&#39;une classe. Les natives guides énumérés ci-dessous fournissent des détails.</p></li>
-<li><p><code>[/* arguments */]</code>: Arguments pour passer dans l&#39;environnement natif.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">function(winParam) {}</code>: Rappel de fonction succès. En supposant que votre <code class="language-plaintext highlighter-rouge">exec</code> appel se termine avec succès, cette fonction est appelée (en option avec tous les paramètres vous passez à lui).</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">function(error) {}</code>: Rappel d’erreur de fonction. Si l’opération ne se termine pas avec succès, cette fonction est appelée (éventuellement avec un paramètre error).</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">"service"</code>: Le nom du service pour appeler dans le côté natif. Il est mappé à une classe native, sur lequel des informations supplémentaires sont disponibles dans les guides autochtones énumérées ci-dessous.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">"action"</code>: Le nom de l’action d’appeler. C’est capté par le récepteur de la classe native le <code class="language-plaintext highlighter-rouge">exec</code> appel et, dépendant de la plate-forme, essentiellement correspond à méthode d’une classe. Les natives guides énumérés ci-dessous fournissent des détails.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">[/* arguments */]</code>: Arguments pour passer dans l’environnement natif.</p>
+  </li>
 </ul>
 
-<h3>Exemple de JavaScript Plugin Echo</h3>
-<div class="highlight"><pre><code class="language-" data-lang="">    window.echo = function(str, callback) {
+<h3 id="exemple-de-javascript-plugin-echo">Exemple de JavaScript Plugin Echo</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    window.echo = function(str, callback) {
         cordova.exec(callback, function(err) {
             callback('Nothing to echo.');
         }, "Echo", "echo", [str]);
     };
-</code></pre></div>
-<p>Plongeons-nous dans tout cela. Le plugin s&#39;attache à <code>window</code> , plus précisément à la <code>echo</code> fonction. Plugin utilisateurs seraient alors utilisez-le comme suit :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    window.echo("echome", function(echoValue) {
+</code></pre></div></div>
+
+<p>Plongeons-nous dans tout cela. Le plugin s’attache à <code class="language-plaintext highlighter-rouge">window</code> , plus précisément à la <code class="language-plaintext highlighter-rouge">echo</code> fonction. Plugin utilisateurs seraient alors utilisez-le comme suit :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    window.echo("echome", function(echoValue) {
         alert(echoValue == "echome"); // should alert true.
     });
-</code></pre></div>
-<p>Tout d&#39;abord, nous allons jeter un regard sur les trois derniers arguments de la <code>exec</code> fonction. Nous demanderons le <code>Echo</code> « de service », demandant la <code>echo</code> « action », et en passant un tableau d&#39;arguments qui contient la chaîne echo, qui est le premier paramètre dans la <code>window.echo</code> fonction.</p>
+</code></pre></div></div>
 
-<p>Le rappel du succès passé dans <code>exec</code> est simplement une référence au rappel fonction <code>window.echo</code> prend. Nous faisons un peu plus pour le rappel de l&#39;erreur : si le côté natif déclenche le rappel de l&#39;erreur, nous avons simplement appeler le rappel de la réussite et transmettez-lui une chaîne « par défaut ».</p>
+<p>Tout d’abord, nous allons jeter un regard sur les trois derniers arguments de la <code class="language-plaintext highlighter-rouge">exec</code> fonction. Nous demanderons le <code class="language-plaintext highlighter-rouge">Echo</code> « de service », demandant la <code class="language-plaintext highlighter-rouge">echo</code> « action », et en passant un tableau d’arguments qui contient la chaîne echo, qui est le premier paramètre dans la <code class="language-plaintext highlighter-rouge">window.echo</code> fonction.</p>
 
-<h2>Spécification du plugin</h2>
+<p>Le rappel du succès passé dans <code class="language-plaintext highlighter-rouge">exec</code> est simplement une référence au rappel fonction <code class="language-plaintext highlighter-rouge">window.echo</code> prend. Nous faisons un peu plus pour le rappel de l’erreur : si le côté natif déclenche le rappel de l’erreur, nous avons simplement appeler le rappel de la réussite et transmettez-lui une chaîne « par défaut ».</p>
 
-<p>Cordoue possède une spécification de plugin disponible pour activer l&#39;installation automatique du plugin pour Android, iOS, plates-formes 10 BlackBerry et Windows Phone. En structurant votre plugin de façon particulière et en ajoutant un <code>plugin.xml</code> fichier manifeste, vous pouvez permettre aux utilisateurs d&#39;installer votre plug-in via les outils de ligne de commande.</p>
+<h2 id="spécification-du-plugin">Spécification du plugin</h2>
+
+<p>Cordoue possède une spécification de plugin disponible pour activer l’installation automatique du plugin pour Android, iOS, plates-formes 10 BlackBerry et Windows Phone. En structurant votre plugin de façon particulière et en ajoutant un <code class="language-plaintext highlighter-rouge">plugin.xml</code> fichier manifeste, vous pouvez permettre aux utilisateurs d’installer votre plug-in via les outils de ligne de commande.</p>
 
 <ul>
-<li>  <a href="../../../plugin_ref/spec.html">Spécification du plugin</a></li>
+  <li><a href="../../../plugin_ref/spec.html">Spécification du plugin</a></li>
 </ul>
 
-<h2>Native</h2>
+<h2 id="native">Native</h2>
 
-<p>Une fois que vous définissez JavaScript pour votre plugin, vous devez compléter au moins une implémentation native. Détails de le faire pour chaque plate-forme sont répertoriées ci-dessous. Ces guides continuent de miser sur l&#39;exemple simple de Plugin Echo discuté ci-dessus.</p>
+<p>Une fois que vous définissez JavaScript pour votre plugin, vous devez compléter au moins une implémentation native. Détails de le faire pour chaque plate-forme sont répertoriées ci-dessous. Ces guides continuent de miser sur l’exemple simple de Plugin Echo discuté ci-dessus.</p>
 
 <ul>
-<li>  <a href="../../platforms/android/plugin.html">Plugins Android</a></li>
-<li>  <a href="../../platforms/blackberry/plugin.html">Plugins de blackBerry</a></li>
-<li>  <a href="../../platforms/blackberry10/plugin.html">BlackBerry 10 Plugins</a></li>
-<li>  <a href="../../platforms/ios/plugin.html">iOS Plugins</a></li>
-<li>  <a href="../../platforms/wp8/plugin.html">Windows Phone Plugins</a></li>
+  <li><a href="../../platforms/android/plugin.html">Plugins Android</a></li>
+  <li><a href="../../platforms/blackberry/plugin.html">Plugins de blackBerry</a></li>
+  <li><a href="../../platforms/blackberry10/plugin.html">BlackBerry 10 Plugins</a></li>
+  <li><a href="../../platforms/ios/plugin.html">iOS Plugins</a></li>
+  <li><a href="../../platforms/wp8/plugin.html">Windows Phone Plugins</a></li>
 </ul>
 
 <p>La plate-forme paciarelli ne supporte actuellement pas de plugins.</p>
 
-<h2>Plugins édition</h2>
+<h2 id="plugins-édition">Plugins édition</h2>
 
-<p>Une fois que vous avez développé votre plugin, vous pouvez publier et partager avec la communauté. Vous pouvez publier votre plugin dans le registre de cordova (basé sur <a href="https://github.com/isaacs/npmjs.org">npmjs</a>) ou à toute autre npmjs base de Registre. Utilisateurs seront en mesure de l&#39;installer automatiquement en utilisant plugman ou cordova-cli.</p>
+<p>Une fois que vous avez développé votre plugin, vous pouvez publier et partager avec la communauté. Vous pouvez publier votre plugin dans le registre de cordova (basé sur <a href="https://github.com/isaacs/npmjs.org">npmjs</a>) ou à toute autre npmjs base de Registre. Utilisateurs seront en mesure de l’installer automatiquement en utilisant plugman ou cordova-cli.</p>
 
-<p>Pour publier un plugin, vous devez utiliser l&#39;outil plugman et passer par les étapes suivantes :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ plugman adduser # that is if you don't have an account yet
+<p>Pour publier un plugin, vous devez utiliser l’outil plugman et passer par les étapes suivantes :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ plugman adduser # that is if you don't have an account yet
 $ plugman publish /path/to/your/plugin
-</code></pre></div>
-<p>C&#39;est tout !</p>
+</code></pre></div></div>
 
-<p>Autres commandes basées sur le Registre sont disponibles et <code>plugman --help</code> vous donnera une liste de ce que les commandes sont disponibles et comment les utiliser.</p>
+<p>C’est tout !</p>
+
+<p>Autres commandes basées sur le Registre sont disponibles et <code class="language-plaintext highlighter-rouge">plugman --help</code> vous donnera une liste de ce que les commandes sont disponibles et comment les utiliser.</p>
 
 
             </div>

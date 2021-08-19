@@ -1310,7 +1310,7 @@
     }
 </style>
 
-<h1>Руководство по разработке расширений</h1>
+<h1 id="руководство-по-разработке-расширений">Руководство по разработке расширений</h1>
 
 <p>Мосты плагин Cordova a bit of функциональность между WebView питания Cordova-приложение и родной платформе Cordova-приложение работает на. Плагины состоят из единого интерфейса JavaScript, используемых на всех платформах и встроенных реализаций после платформа специфического плагин интерфейсы, которые вызывает JavaScript. Все основные Cordova API реализованы с помощью этой архитектуры.</p>
 
@@ -1318,74 +1318,92 @@
 
 <p>Это руководство предоставляет достаточно обзор, на котором можно построить писать более сложные плагины.</p>
 
-<h2>JavaScript</h2>
+<h2 id="javascript">JavaScript</h2>
 
 <p>Точка входа для любого плагина является JavaScript. Причина разработчиков использовать Cordova, поэтому они могут использовать и писать JavaScript, не Objective-C, не Java, C#. Интерфейс JavaScript для вашего плагина является передней и возможно наиболее важной частью Cordova плагин.</p>
 
-<p>Можно структурировать ваш плагин JavaScript, как вам нравится. Одна вещь, вы <em>должны</em> использовать для связи между Cordova JavaScript и родной среды <code>cordova.exec</code> функции. Вот пример:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    cordova.exec(function(winParam) {}, function(error) {}, "service",
+<p>Можно структурировать ваш плагин JavaScript, как вам нравится. Одна вещь, вы <em>должны</em> использовать для связи между Cordova JavaScript и родной среды <code class="language-plaintext highlighter-rouge">cordova.exec</code> функции. Вот пример:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    cordova.exec(function(winParam) {}, function(error) {}, "service",
                  "action", ["firstArgument", "secondArgument", 42,
                  false]);
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Параметры описаны ниже:</p>
 
 <ul>
-<li><p><code>function(winParam) {}</code>: Успех функции обратного вызова. Если ваш <code>exec</code> вызов завершается успешно, эта функция вызывается (при необходимости с любыми параметрами, вы проходите к нему).</p></li>
-<li><p><code>function(error) {}</code>: Ошибка функции обратного вызова. Если операция не завершена успешно, эта функция вызывается (при необходимости с параметром ошибка).</p></li>
-<li><p><code>&quot;service&quot;</code>: Имя службы, для вызова на родной стороне. Это сопоставляется собственный класс, о котором более подробная информация доступна в родной гидов, перечисленных ниже.</p></li>
-<li><p><code>&quot;action&quot;</code>: Имя действия для вызова. Это взял на получение собственного класса <code>exec</code> вызов и, в зависимости от платформы, по существу карты к методу класса. Перечисленные ниже родной руководствах детали.</p></li>
-<li><p><code>[/* arguments */]</code>: Аргументы для передачи в родной среде.</p></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">function(winParam) {}</code>: Успех функции обратного вызова. Если ваш <code class="language-plaintext highlighter-rouge">exec</code> вызов завершается успешно, эта функция вызывается (при необходимости с любыми параметрами, вы проходите к нему).</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">function(error) {}</code>: Ошибка функции обратного вызова. Если операция не завершена успешно, эта функция вызывается (при необходимости с параметром ошибка).</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">"service"</code>: Имя службы, для вызова на родной стороне. Это сопоставляется собственный класс, о котором более подробная информация доступна в родной гидов, перечисленных ниже.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">"action"</code>: Имя действия для вызова. Это взял на получение собственного класса <code class="language-plaintext highlighter-rouge">exec</code> вызов и, в зависимости от платформы, по существу карты к методу класса. Перечисленные ниже родной руководствах детали.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">[/* arguments */]</code>: Аргументы для передачи в родной среде.</p>
+  </li>
 </ul>
 
-<h3>Пример JavaScript плагин эхо</h3>
-<div class="highlight"><pre><code class="language-" data-lang="">    window.echo = function(str, callback) {
+<h3 id="пример-javascript-плагин-эхо">Пример JavaScript плагин эхо</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    window.echo = function(str, callback) {
         cordova.exec(callback, function(err) {
             callback('Nothing to echo.');
         }, "Echo", "echo", [str]);
     };
-</code></pre></div>
-<p>Обсудим это. Плагин прикрепляется к <code>window</code> , специально для <code>echo</code> функции. Плагин пользователей будет затем использовать его следующим образом:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    window.echo("echome", function(echoValue) {
+</code></pre></div></div>
+
+<p>Обсудим это. Плагин прикрепляется к <code class="language-plaintext highlighter-rouge">window</code> , специально для <code class="language-plaintext highlighter-rouge">echo</code> функции. Плагин пользователей будет затем использовать его следующим образом:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    window.echo("echome", function(echoValue) {
         alert(echoValue == "echome"); // should alert true.
     });
-</code></pre></div>
-<p>Во-первых Давайте рассмотрим три последние аргументы для <code>exec</code> функции. Мы будет вызывать <code>Echo</code> «услуг», с просьбой <code>echo</code> «action» и пройдя массив аргументов, содержащих строку эхо, который является первым параметром в <code>window.echo</code> функции.</p>
+</code></pre></div></div>
 
-<p>Успех обратного вызова передается в <code>exec</code> это просто ссылка на обратный вызов функцию, <code>window.echo</code> принимает. Мы делаем немного больше для обратного вызова ошибки: Если родной стороне запускает обратный вызов для ошибки, мы просто успех обратного вызова и передайте в него строку «по умолчанию».</p>
+<p>Во-первых Давайте рассмотрим три последние аргументы для <code class="language-plaintext highlighter-rouge">exec</code> функции. Мы будет вызывать <code class="language-plaintext highlighter-rouge">Echo</code> «услуг», с просьбой <code class="language-plaintext highlighter-rouge">echo</code> «action» и пройдя массив аргументов, содержащих строку эхо, который является первым параметром в <code class="language-plaintext highlighter-rouge">window.echo</code> функции.</p>
 
-<h2>Модуль Спецификация</h2>
+<p>Успех обратного вызова передается в <code class="language-plaintext highlighter-rouge">exec</code> это просто ссылка на обратный вызов функцию, <code class="language-plaintext highlighter-rouge">window.echo</code> принимает. Мы делаем немного больше для обратного вызова ошибки: Если родной стороне запускает обратный вызов для ошибки, мы просто успех обратного вызова и передайте в него строку «по умолчанию».</p>
 
-<p>Cordova имеет плагин спецификации доступны для включения автоматической установки плагина для Android, iOS, платформы BlackBerry 10 и Windows Phone. Структурирование ваш плагин определенным образом и добавив <code>plugin.xml</code> файл манифеста, можно разрешить пользователям устанавливать ваш плагин через командной строки инструмента.</p>
+<h2 id="модуль-спецификация">Модуль Спецификация</h2>
+
+<p>Cordova имеет плагин спецификации доступны для включения автоматической установки плагина для Android, iOS, платформы BlackBerry 10 и Windows Phone. Структурирование ваш плагин определенным образом и добавив <code class="language-plaintext highlighter-rouge">plugin.xml</code> файл манифеста, можно разрешить пользователям устанавливать ваш плагин через командной строки инструмента.</p>
 
 <ul>
-<li>  Модуль Спецификация</li>
+  <li>Модуль Спецификация</li>
 </ul>
 
-<h2>Родной</h2>
+<h2 id="родной">Родной</h2>
 
 <p>После того, как вы определяете JavaScript для вашего плагина, вы должны дополнить его по крайней мере один собственной реализации. Ниже перечислены детали, чтобы сделать это для каждой платформы. Эти руководства по-прежнему опираться на простой пример эхо плагин, рассмотренных выше.</p>
 
 <ul>
-<li>  Андроид плагины</li>
-<li>  Ежевика плагины</li>
-<li>  Ежевика 10 плагинов</li>
-<li>  iOS, плагины</li>
-<li>  <a href="../../platforms/wp8/plugin.html">Windows Phone плагины</a></li>
+  <li>Андроид плагины</li>
+  <li>Ежевика плагины</li>
+  <li>Ежевика 10 плагинов</li>
+  <li>iOS, плагины</li>
+  <li><a href="../../platforms/wp8/plugin.html">Windows Phone плагины</a></li>
 </ul>
 
 <p>В настоящее время Tizen платформа не поддерживает плагины.</p>
 
-<h2>Публикации плагины</h2>
+<h2 id="публикации-плагины">Публикации плагины</h2>
 
 <p>После того как вы разработали ваш плагин, вы можете опубликовать его и поделиться им с сообществом. Вы можете опубликовать ваш плагин в cordova реестр (на <a href="https://github.com/isaacs/npmjs.org">npmjs</a>) или для любых других npmjs на основе реестра. Пользователи смогут установить его автоматически с помощью plugman или Кордова cli.</p>
 
 <p>Чтобы опубликовать плагин необходимо использовать средство plugman и пройти через следующие шаги:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ plugman adduser # that is if you don't have an account yet
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ plugman adduser # that is if you don't have an account yet
 $ plugman publish /path/to/your/plugin
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Вот оно что!</p>
 
-<p>Другие на основе реестра команды доступны и <code>plugman --help</code> даст вам список какие команды доступны и как их использовать.</p>
+<p>Другие на основе реестра команды доступны и <code class="language-plaintext highlighter-rouge">plugman --help</code> даст вам список какие команды доступны и как их использовать.</p>
 
 
             </div>

@@ -1112,24 +1112,35 @@
             
 
             <div id="page-toc-source">
-                <h1>Android WebViews</h1>
+                <h1 id="android-webviews">Android WebViews</h1>
 
 <p>本指南說明如何將嵌入在較大型的 Android 應用程式內的科爾多瓦啟用 web 視圖元件。這些元件可以如何與對方溝通的詳細資訊，請參閱應用程式外掛程式。</p>
 
-<p>如果你熟悉 Android，你應首先熟悉 Android 平臺指南和之前你嘗試更不尋常發展嵌入 web 視圖的選項，安裝了最新 Android sdk。 從開始科爾多瓦 1.9，Android 平臺依靠 <code>CordovaWebView</code> 元件，生成遺留下來 <code>CordovaActivity</code> 預日期 1.9 版本的元件。</p>
+<p>如果你熟悉 Android，你應首先熟悉 Android 平臺指南和之前你嘗試更不尋常發展嵌入 web 視圖的選項，安裝了最新 Android sdk。 從開始科爾多瓦 1.9，Android 平臺依靠 <code class="language-plaintext highlighter-rouge">CordovaWebView</code> 元件，生成遺留下來 <code class="language-plaintext highlighter-rouge">CordovaActivity</code> 預日期 1.9 版本的元件。</p>
 
 <ol>
-<li><p>要按照這些說明進行操作，請確保您有最新的科爾多瓦分佈。從<a href="http://cordova.apache.org">cordova.apache.org</a>下載和解壓縮其 android 系統的套裝軟體。</p></li>
-<li><p>導航到 Android 包 <code>/framework</code> 目錄並運行 <code>ant jar</code> 。它創建了科爾多瓦 <code>.jar</code> 檔中，形成了作為<code>/framework/cordova-x.x.x.jar</code>.</p></li>
-<li><p>複製 <code>.jar</code> 到 Android 專案檔案 <code>/libs</code> 目錄。</p></li>
-<li><p>將以下內容添加到應用程式的 <code>/res/xml/main.xml</code> 檔中，與 <code>layout_height</code> 、 <code>layout_width</code> 和 <code>id</code> 修改，以適合應用程式：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;org.apache.cordova.CordovaWebView
+  <li>
+    <p>要按照這些說明進行操作，請確保您有最新的科爾多瓦分佈。從<a href="http://cordova.apache.org">cordova.apache.org</a>下載和解壓縮其 android 系統的套裝軟體。</p>
+  </li>
+  <li>
+    <p>導航到 Android 包 <code class="language-plaintext highlighter-rouge">/framework</code> 目錄並運行 <code class="language-plaintext highlighter-rouge">ant jar</code> 。它創建了科爾多瓦 <code class="language-plaintext highlighter-rouge">.jar</code> 檔中，形成了作為<code class="language-plaintext highlighter-rouge">/framework/cordova-x.x.x.jar</code>.</p>
+  </li>
+  <li>
+    <p>複製 <code class="language-plaintext highlighter-rouge">.jar</code> 到 Android 專案檔案 <code class="language-plaintext highlighter-rouge">/libs</code> 目錄。</p>
+  </li>
+  <li>
+    <p>將以下內容添加到應用程式的 <code class="language-plaintext highlighter-rouge">/res/xml/main.xml</code> 檔中，與 <code class="language-plaintext highlighter-rouge">layout_height</code> 、 <code class="language-plaintext highlighter-rouge">layout_width</code> 和 <code class="language-plaintext highlighter-rouge">id</code> 修改，以適合應用程式：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;org.apache.cordova.CordovaWebView
     android:id="@+id/tutorialView"
     android:layout_width="match_parent"
     android:layout_height="match_parent" /&gt;
-</code></pre></div></li>
-<li><p>修改活動，使它實現了 <code>CordovaInterface</code> 。 它應實施的包括的方法。 您可能希望將它們從複製 <code>/framework/src/org/apache/cordova/CordovaActivity.java</code> ，或其他執行他們自己。 下面的代碼片段顯示了一個基本的應用程式依賴于介面。 請注意如何引用的視圖 id 匹配 <code>id</code> 在上面所示的 XML 片段中指定的屬性：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">public class CordovaViewTestActivity extends Activity implements CordovaInterface {
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>修改活動，使它實現了 <code class="language-plaintext highlighter-rouge">CordovaInterface</code> 。 它應實施的包括的方法。 您可能希望將它們從複製 <code class="language-plaintext highlighter-rouge">/framework/src/org/apache/cordova/CordovaActivity.java</code> ，或其他執行他們自己。 下面的代碼片段顯示了一個基本的應用程式依賴于介面。 請注意如何引用的視圖 id 匹配 <code class="language-plaintext highlighter-rouge">id</code> 在上面所示的 XML 片段中指定的屬性：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class CordovaViewTestActivity extends Activity implements CordovaInterface {
     CordovaWebView cwv;
     /* Called when the activity is first created. */
     @Override
@@ -1140,9 +1151,12 @@
         Config.init(this);
         cwv.loadUrl(Config.getStartUrl());
     }
-</code></pre></div></li>
-<li><p>如果應用程式需要使用相機，實現以下內容：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">@Override
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>如果應用程式需要使用相機，實現以下內容：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Override
 public void setActivityResultCallback(CordovaPlugin plugin) {
     this.activityResultCallback = plugin;
 }
@@ -1157,16 +1171,16 @@ public void setActivityResultCallback(CordovaPlugin plugin) {
 public void startActivityForResult(CordovaPlugin command, Intent intent, int requestCode) {
     this.activityResultCallback = command;
     this.activityResultKeepRunning = this.keepRunning;
-
+    
     // If multitasking turned on, then disable it for activities that return results
     if (command != null) {
         this.keepRunning = false;
     }
-
+    
     // Start activity
     super.startActivityForResult(intent, requestCode);
 }   
-
+    
 @Override
 /**
  * Called when an activity you launched exits, giving you the requestCode you started it with,
@@ -1184,16 +1198,25 @@ protected void onActivityResult(int requestCode, int resultCode, Intent intent) 
         callback.onActivityResult(requestCode, resultCode, intent);
     }
 }
-</code></pre></div></li>
-<li><p>最後，請記住，添加執行緒池，否則外掛程式有沒有線程在其上運行：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">@Override
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>最後，請記住，添加執行緒池，否則外掛程式有沒有線程在其上運行：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Override
 public ExecutorService getThreadPool() {
     return threadPool;
 }
-</code></pre></div></li>
-<li><p>將應用程式的 HTML 和 JavaScript 檔案複製到 Android 專案 <code>/assets/www</code> 目錄。</p></li>
-<li><p>複製 <code>config.xml</code> 檔從 <code>/framework/res/xml</code> 到專案中的 <code>/res/xml</code> 目錄。</p></li>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>將應用程式的 HTML 和 JavaScript 檔案複製到 Android 專案 <code class="language-plaintext highlighter-rouge">/assets/www</code> 目錄。</p>
+  </li>
+  <li>
+    <p>複製 <code class="language-plaintext highlighter-rouge">config.xml</code> 檔從 <code class="language-plaintext highlighter-rouge">/framework/res/xml</code> 到專案中的 <code class="language-plaintext highlighter-rouge">/res/xml</code> 目錄。</p>
+  </li>
 </ol>
+
 
 
             </div>

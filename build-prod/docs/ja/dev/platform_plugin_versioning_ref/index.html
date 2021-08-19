@@ -2244,60 +2244,68 @@
             
 
             <div id="page-toc-source">
-                <h1>プラットフォームとプラグインのバージョン管理</h1>
+                <h1 id="プラットフォームとプラグインのバージョン管理">プラットフォームとプラグインのバージョン管理</h1>
 
 <p>バージョン 4.3.0 以降、コルドバは、プラットフォームおよびプラグイン保存および復元する機能を提供します。</p>
 
 <p>この機能を使用して、保存し、すべてのプラットフォームとプラグインのソース コードをチェックインすることがなく既知の状態に自分たちのアプリを復元することができます。</p>
 
-<p>&#39;save&#39; コマンドは、config.xml でアプリのプラットフォームとプラグインのバージョンに関する詳細を格納します。 <strong>cordova prepare</strong>することが発行されたときに &#39;復元&#39; 手順自動的に行われます config.xml ファイルに保存されている情報の使用します。</p>
+<p>‘save’ コマンドは、config.xml でアプリのプラットフォームとプラグインのバージョンに関する詳細を格納します。 <strong>cordova prepare</strong>することが発行されたときに ‘復元’ 手順自動的に行われます config.xml ファイルに保存されている情報の使用します。</p>
 
 <p>保存/復元機能が便利になるシナリオの 1 つは、プラットフォームやプラグインに焦点を各チーム メンバーとアプリに、連携する大規模なチームです。 この機能では、簡単にプロジェクトを共有し、リポジトリにチェックインされているコードの重複の量を減らします。</p>
 
-<h2>プラットフォームのバージョン管理</h2>
+<h2 id="プラットフォームのバージョン管理">プラットフォームのバージョン管理</h2>
 
-<h3>プラットフォームを保存</h3>
+<h3 id="プラットフォームを保存">プラットフォームを保存</h3>
 
 <p>プラットフォームを保存するには、次のコマンドを発行します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova platform add &lt;platform[@&lt;version&gt;] | directory | git_url&gt; --save
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova platform add &lt;platform[@&lt;version&gt;] | directory | git_url&gt; --save
+</code></pre></div></div>
+
 <p>上記のコマンドを実行すると、結果の config.xml はようになります。</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;?xml version='1.0' encoding='utf-8'?&gt;</span>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version='1.0' encoding='utf-8'?&gt;
     ...
-    <span class="nt">&lt;engine</span> <span class="na">name=</span><span class="s">"android"</span> <span class="na">spec=</span><span class="s">"~4.0.0"</span> <span class="nt">/&gt;</span>
+    &lt;engine name="android" spec="~4.0.0" /&gt;
     ...
-<span class="nt">&lt;/xml&gt;</span>
-</code></pre></div>
+&lt;/xml&gt;
+</code></pre></div></div>
+
 <p>いくつかの例:</p>
 
 <ul>
-<li>android プラットフォームの固定されたバージョンを取得します = &gt; <strong>&#39;保存コルドバ プラットフォームを追加 android-&#39;</strong>を、プロジェクトに追加し、config.xml を更新します。</li>
-<li>取得 = &gt; <strong>&#39;保存コルドバ プラットフォームの追加 android@3.7.0-&#39;</strong>をバージョン 3.7.0 npm から android プラットフォームはプロジェクト、その後更新 config.xml にそれを追加します。</li>
-<li>= &gt; <strong>&#39;コルドバ プラットフォーム android @https://github.com/apache/cordova-android.git - を保存追加&#39;</strong>指定したコルドバ android git リポジトリをクローン、android プラットフォームをプロジェクトに追加します config.xml を更新し、指定した git url をそのバージョンをポイントします。</li>
-<li>取得 = &gt; <strong>&#39;保存コルドバ プラットフォームの追加 c:/パス/を/アンドロイド/プラットフォーム-&#39;</strong>を指定したディレクトリから android プラットフォームはプロジェクト、し、更新プログラムの config.xml ファイルとディレクトリにポイントにそれを追加します。</li>
+  <li>android プラットフォームの固定されたバージョンを取得します = &gt; <strong>‘保存コルドバ プラットフォームを追加 android-‘</strong>を、プロジェクトに追加し、config.xml を更新します。</li>
+  <li>取得 = &gt; <strong>‘保存コルドバ プラットフォームの追加 android@3.7.0-‘</strong>をバージョン 3.7.0 npm から android プラットフォームはプロジェクト、その後更新 config.xml にそれを追加します。</li>
+  <li>= &gt; <strong>‘コルドバ プラットフォーム android @https://github.com/apache/cordova-android.git - を保存追加’</strong>指定したコルドバ android git リポジトリをクローン、android プラットフォームをプロジェクトに追加します config.xml を更新し、指定した git url をそのバージョンをポイントします。</li>
+  <li>取得 = &gt; <strong>‘保存コルドバ プラットフォームの追加 c:/パス/を/アンドロイド/プラットフォーム-‘</strong>を指定したディレクトリから android プラットフォームはプロジェクト、し、更新プログラムの config.xml ファイルとディレクトリにポイントにそれを追加します。</li>
 </ul>
 
-<h3>既存のプロジェクトのプラットフォームを保存質量</h3>
+<h3 id="既存のプロジェクトのプラットフォームを保存質量">既存のプロジェクトのプラットフォームを保存質量</h3>
 
-<p>&#39;--save&#39; 上記フラグは、プラットフォームの追加使用を覚えている場合にのみ役に立つ。 既存のプロジェクトがある場合、プロジェクトに追加された現在のすべてのプラットフォームを保存する場合は、使用することができます。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova platform save
-</code></pre></div>
-<h3>更新/プラットフォームを削除します。</h3>
+<p>’–save’ 上記フラグは、プラットフォームの追加使用を覚えている場合にのみ役に立つ。 既存のプロジェクトがある場合、プロジェクトに追加された現在のすべてのプラットフォームを保存する場合は、使用することができます。</p>
 
-<p>また、コマンド &#39;コルドバ プラットフォーム アップ デート&#39; と &#39;コルドバ プラットフォームを削除&#39; の間に config.xml から更新/削除することが可能です。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova platform update &lt;platform[@&lt;version&gt;] | directory | git_url&gt; --save
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova platform save
+</code></pre></div></div>
+
+<h3 id="更新プラットフォームを削除します">更新/プラットフォームを削除します。</h3>
+
+<p>また、コマンド ‘コルドバ プラットフォーム アップ デート’ と ‘コルドバ プラットフォームを削除’ の間に config.xml から更新/削除することが可能です。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova platform update &lt;platform[@&lt;version&gt;] | directory | git_url&gt; --save
 $ cordova platform remove &lt;platform&gt; --save
-</code></pre></div>
+</code></pre></div></div>
+
 <p>いくつかの例:</p>
 
 <ul>
-<li>固定バージョン、config.xml の更新のエントリに android プラットフォームのアップデートに加えて = &gt; <strong>&#39;コルドバ プラットフォーム アップ デート android - 保存&#39;</strong>を</li>
-<li>バージョン 3.8.0、config.xml の更新のエントリに android プラットフォームのアップデートに加えて =&gt; <strong>&#39;コルドバのプラットフォームは、android@3.8.0 - を保存更新&#39;</strong></li>
-<li>フォルダーで、config.xml の更新のエントリのバージョンに android プラットフォームのアップデートに加えて =&gt; <strong>&#39;コルドバのプラットフォームは、/path/to/android/platform - を保存更新&#39;</strong></li>
-<li>= &gt; <strong>&#39;保存するコルドバ プラットフォーム削除アンドロイド-&#39;</strong>をプロジェクトから android プラットフォームを削除し、config.xml からそのエントリを削除します。</li>
+  <li>固定バージョン、config.xml の更新のエントリに android プラットフォームのアップデートに加えて = &gt; <strong>‘コルドバ プラットフォーム アップ デート android - 保存’</strong>を</li>
+  <li>バージョン 3.8.0、config.xml の更新のエントリに android プラットフォームのアップデートに加えて =&gt; <strong>‘コルドバのプラットフォームは、android@3.8.0 - を保存更新’</strong></li>
+  <li>フォルダーで、config.xml の更新のエントリのバージョンに android プラットフォームのアップデートに加えて =&gt; <strong>‘コルドバのプラットフォームは、/path/to/android/platform - を保存更新’</strong></li>
+  <li>= &gt; <strong>‘保存するコルドバ プラットフォーム削除アンドロイド-‘</strong>をプロジェクトから android プラットフォームを削除し、config.xml からそのエントリを削除します。</li>
 </ul>
 
-<h3>プラットフォームの復元</h3>
+<h3 id="プラットフォームの復元">プラットフォームの復元</h3>
 
 <p>プラットフォームは、 <strong>「コルドバ準備」</strong>コマンドの実行時に自動的に config.xml から復元されます。</p>
 
@@ -2306,62 +2314,72 @@ $ cordova platform remove &lt;platform&gt; --save
 <p>例:</p>
 
 <p>Config.xml ファイルに次のエントリが含まれているとします。</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;?xml version='1.0' encoding='utf-8'?&gt;</span>
-    ...
-    <span class="nt">&lt;engine</span> <span class="na">name=</span><span class="s">"android"</span> <span class="na">spec=</span><span class="s">"3.7.0"</span> <span class="nt">/&gt;</span>
-    ...
-<span class="nt">&lt;/xml&gt;</span>
-</code></pre></div>
-<p>コマンド<strong>&#39;コルドバ プラットフォームは、android を追加&#39;</strong> (ないバージョン/フォルダー/git_url 指定) を実行すると、&#39;android@3.7.0&#39; (config.xml から取得)、プラットフォームがインストールされます。</p>
 
-<hr>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version='1.0' encoding='utf-8'?&gt;
+    ...
+    &lt;engine name="android" spec="3.7.0" /&gt;
+    ...
+&lt;/xml&gt;
+</code></pre></div></div>
 
-<h2>バージョン管理プラグイン</h2>
+<p>コマンド<strong>‘コルドバ プラットフォームは、android を追加’</strong> (ないバージョン/フォルダー/git_url 指定) を実行すると、’android@3.7.0’ (config.xml から取得)、プラットフォームがインストールされます。</p>
+
+<hr />
+
+<h2 id="バージョン管理プラグイン">バージョン管理プラグイン</h2>
 
 <p><em>(プラグインのコマンドがプラグインのコマンドのミラー)</em></p>
 
-<h3>プラグインの保存</h3>
+<h3 id="プラグインの保存">プラグインの保存</h3>
 
 <p>プラグインを保存するには、次のコマンドを発行します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin add &lt;plugin[@&lt;version&gt;] | directory | git_url&gt; --save
-</code></pre></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin add &lt;plugin[@&lt;version&gt;] | directory | git_url&gt; --save
+</code></pre></div></div>
+
 <p>上記のコマンドを実行すると、結果の config.xml はようになります。</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;?xml version='1.0' encoding='utf-8'?&gt;</span>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version='1.0' encoding='utf-8'?&gt;
     ...
-    <span class="nt">&lt;plugin</span> <span class="na">name=</span><span class="s">"cordova-plugin-console"</span> <span class="na">spec=</span><span class="s">"~1.0.0"</span> <span class="nt">/&gt;</span>
+    &lt;plugin name="cordova-plugin-console" spec="~1.0.0" /&gt;
     ...
-<span class="nt">&lt;/xml&gt;</span>
-</code></pre></div>
+&lt;/xml&gt;
+</code></pre></div></div>
+
 <p>いくつかの例:</p>
 
 <ul>
-<li>= &gt; <strong>&#39;を保存コルドバ プラグインの追加コルドバ-プラグイン-コンソール-&#39;</strong>をコンソール ・ プラグインの固定されたバージョンを取得します、それをプロジェクトに追加します、次に、config.xml を更新します。</li>
-<li>取得 = &gt; <strong>&#39;保存コルドバ プラグインの追加 cordova-plugin-console@0.2.13-&#39;</strong>を android のプラグインは、バージョン 0.2.13 npm からはプロジェクト、その後更新 config.xml にそれを追加します。</li>
-<li><strong>&#39;保存コルドバ プラグインの追加 https://github.com/apache/cordova-plugin-console.git-&#39;</strong> = &gt; 指定されたコンソールのプラグインの git リポジトリのクローンを作成、コンソール ・ プラグインをプロジェクトに追加しますし、config.xml を更新および指定した git url をそのバージョンをポイントします。</li>
-<li>取得 = &gt; <strong>&#39;保存コルドバ プラグインの追加 c:/パス/を/コンソール/プラグイン-&#39;</strong>を指定したディレクトリからコンソール ・ プラグインはプロジェクト、し、更新プログラムの config.xml ファイルとディレクトリにポイントにそれを追加します。</li>
+  <li>= &gt; <strong>‘を保存コルドバ プラグインの追加コルドバ-プラグイン-コンソール-‘</strong>をコンソール ・ プラグインの固定されたバージョンを取得します、それをプロジェクトに追加します、次に、config.xml を更新します。</li>
+  <li>取得 = &gt; <strong>‘保存コルドバ プラグインの追加 cordova-plugin-console@0.2.13-‘</strong>を android のプラグインは、バージョン 0.2.13 npm からはプロジェクト、その後更新 config.xml にそれを追加します。</li>
+  <li><strong>‘保存コルドバ プラグインの追加 https://github.com/apache/cordova-plugin-console.git-‘</strong> = &gt; 指定されたコンソールのプラグインの git リポジトリのクローンを作成、コンソール ・ プラグインをプロジェクトに追加しますし、config.xml を更新および指定した git url をそのバージョンをポイントします。</li>
+  <li>取得 = &gt; <strong>‘保存コルドバ プラグインの追加 c:/パス/を/コンソール/プラグイン-‘</strong>を指定したディレクトリからコンソール ・ プラグインはプロジェクト、し、更新プログラムの config.xml ファイルとディレクトリにポイントにそれを追加します。</li>
 </ul>
 
-<h3>既存のプロジェクトのプラグインを保存質量</h3>
+<h3 id="既存のプロジェクトのプラグインを保存質量">既存のプロジェクトのプラグインを保存質量</h3>
 
-<p>&#39;--保存&#39; 上記のフラグは、プラグイン追加時に使用するを忘れないで場合にのみ役に立つ。 既存のプロジェクトがある場合や保存する場合、すべては現在、プロジェクトのプラグインを追加を使用できます。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin save
-</code></pre></div>
-<h3>更新/プラグインを削除</h3>
+<p>’–保存’ 上記のフラグは、プラグイン追加時に使用するを忘れないで場合にのみ役に立つ。 既存のプロジェクトがある場合や保存する場合、すべては現在、プロジェクトのプラグインを追加を使用できます。</p>
 
-<p>また、コマンド &#39;コルドバ プラグイン更新&#39; と &#39;コルドバ プラグインを削除&#39; の間に config.xml から更新/削除することが可能です。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ cordova plugin update &lt;plugin[@&lt;version&gt;] | directory | git_url&gt; --save
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin save
+</code></pre></div></div>
+
+<h3 id="更新プラグインを削除">更新/プラグインを削除</h3>
+
+<p>また、コマンド ‘コルドバ プラグイン更新’ と ‘コルドバ プラグインを削除’ の間に config.xml から更新/削除することが可能です。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cordova plugin update &lt;plugin[@&lt;version&gt;] | directory | git_url&gt; --save
 $ cordova plugin remove &lt;plugin&gt; --save
-</code></pre></div>
+</code></pre></div></div>
+
 <p>いくつかの例:</p>
 
 <ul>
-<li>固定されたバージョン、config.xml の更新のエントリをコンソール ・ プラグインの更新に加えて =&gt; <strong>「保存コルドバ プラグインのアップデート コルドバ-プラグイン-コンソール」</strong></li>
-<li>android のプラグインの更新バージョン 3.8.0、config.xml の更新のエントリに加え =&gt; <strong>&#39;コルドバ プラグインは、cordova-plugin-console@0.2.13 - を保存更新&#39;</strong></li>
-<li>フォルダーで、config.xml の更新のエントリのバージョンをコンソール ・ プラグインの更新に加えて =&gt; <strong>&#39;コルドバ プラグインは、/path/to/console/plugin - を保存更新&#39;</strong></li>
-<li>= &gt; <strong>&#39;保存するコルドバ プラグイン削除コルドバ-プラグイン-コンソール-&#39;</strong>をプロジェクトからコンソール ・ プラグインを削除し、config.xml からそのエントリを削除します。</li>
+  <li>固定されたバージョン、config.xml の更新のエントリをコンソール ・ プラグインの更新に加えて =&gt; <strong>「保存コルドバ プラグインのアップデート コルドバ-プラグイン-コンソール」</strong></li>
+  <li>android のプラグインの更新バージョン 3.8.0、config.xml の更新のエントリに加え =&gt; <strong>‘コルドバ プラグインは、cordova-plugin-console@0.2.13 - を保存更新’</strong></li>
+  <li>フォルダーで、config.xml の更新のエントリのバージョンをコンソール ・ プラグインの更新に加えて =&gt; <strong>‘コルドバ プラグインは、/path/to/console/plugin - を保存更新’</strong></li>
+  <li>= &gt; <strong>‘保存するコルドバ プラグイン削除コルドバ-プラグイン-コンソール-‘</strong>をプロジェクトからコンソール ・ プラグインを削除し、config.xml からそのエントリを削除します。</li>
 </ul>
 
-<h3>プラグインを復元します。</h3>
+<h3 id="プラグインを復元します">プラグインを復元します。</h3>
 
 <p>プラグインは、 <strong>「コルドバ準備」</strong>コマンドの実行時に自動的に config.xml から復元されます。</p>
 
@@ -2370,13 +2388,15 @@ $ cordova plugin remove &lt;plugin&gt; --save
 <p>例:</p>
 
 <p>Config.xml ファイルに次のエントリが含まれているとします。</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;?xml version='1.0' encoding='utf-8'?&gt;</span>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version='1.0' encoding='utf-8'?&gt;
     ...
-    <span class="nt">&lt;plugin</span> <span class="na">name=</span><span class="s">"cordova-plugin-console"</span> <span class="na">spec=</span><span class="s">"0.2.11"</span> <span class="nt">/&gt;</span>
+    &lt;plugin name="cordova-plugin-console" spec="0.2.11" /&gt;
     ...
-<span class="nt">&lt;/ xml&gt;</span>
-</code></pre></div>
-<p>コマンド<strong>&#39;コルドバ プラグインは、コルドバ プラグイン コンソールを追加する&#39;</strong> (ないバージョン/フォルダー/git_url 指定) を実行すると、&#39;cordova-plugin-console@0.2.11&#39; (config.xml から取得)、プラグインがインストールされます。</p>
+&lt;/ xml&gt;
+</code></pre></div></div>
+
+<p>コマンド<strong>‘コルドバ プラグインは、コルドバ プラグイン コンソールを追加する’</strong> (ないバージョン/フォルダー/git_url 指定) を実行すると、’cordova-plugin-console@0.2.11’ (config.xml から取得)、プラグインがインストールされます。</p>
 
 
             </div>

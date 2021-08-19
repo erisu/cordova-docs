@@ -1214,22 +1214,23 @@
     }
 </style>
 
-<h1>Руководство по хукам</h1>
+<h1 id="руководство-по-хукам">Руководство по хукам</h1>
 
-<p>Хуки Cordova представляют собой специальные скрипты, которые могут быть добавлены приложениями и разработчиками плагинов или даже самостоятельно вашей системы сборки для настройки команд cordova. Скрипты хуков могут быть определены путем добавления их в специальную предопределенную папку (<code>/hooks</code>) или через конфигурационные файлы (<code>config.xml</code> и <code>plugin.xml</code>) и запускаются последовательно в следующем порядке:</p>
+<p>Хуки Cordova представляют собой специальные скрипты, которые могут быть добавлены приложениями и разработчиками плагинов или даже самостоятельно вашей системы сборки для настройки команд cordova. Скрипты хуков могут быть определены путем добавления их в специальную предопределенную папку (<code class="language-plaintext highlighter-rouge">/hooks</code>) или через конфигурационные файлы (<code class="language-plaintext highlighter-rouge">config.xml</code> и <code class="language-plaintext highlighter-rouge">plugin.xml</code>) и запускаются последовательно в следующем порядке:</p>
 
 <ul>
-<li>Хуки приложения из <code>/hooks</code>;</li>
-<li>Хуки приложения из <code>config.xml</code>;</li>
-<li>Хуки плагинов из <code>plugins/.../plugin.xml</code>.</li>
+  <li>Хуки приложения из <code class="language-plaintext highlighter-rouge">/hooks</code>;</li>
+  <li>Хуки приложения из <code class="language-plaintext highlighter-rouge">config.xml</code>;</li>
+  <li>Хуки плагинов из <code class="language-plaintext highlighter-rouge">plugins/.../plugin.xml</code>.</li>
 </ul>
 
-<p><strong>Примечание</strong>: Каталог <code>/hooks</code> считается устаревшим и заменяется элементами hook в файлах config.xml и plugin.xml.</p>
+<p><strong>Примечание</strong>: Каталог <code class="language-plaintext highlighter-rouge">/hooks</code> считается устаревшим и заменяется элементами hook в файлах config.xml и plugin.xml.</p>
 
-<h2>Типы поддерживаемых хуков</h2>
+<h2 id="типы-поддерживаемых-хуков">Типы поддерживаемых хуков</h2>
 
 <p>Поддерживаются следующие типы хуков:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">after_build
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>after_build
 after_compile
 after_clean
 after_docs
@@ -1263,23 +1264,27 @@ before_prepare
 before_run
 before_serve
 pre_package // Windows and Windows Phone only
-</code></pre></div>
-<h2>Способы определения хуков</h2>
+</code></pre></div></div>
 
-<h3>Через каталог <code>/hooks</code></h3>
+<h2 id="способы-определения-хуков">Способы определения хуков</h2>
+
+<h3 id="через-каталог-hooks">Через каталог <code class="language-plaintext highlighter-rouge">/hooks</code></h3>
 
 <p><strong>Примечание</strong>: Этот метод считается устаревшим и заменяется элементами hook в файлах config.xml и plugin.xml.</p>
 
-<p>Для выполнения настраиваемых действий при срабатывании соответствующего типа хука, используйте имя хука как имя подпапки внутри директории &#39;hooks&#39; и разместите ваш файл скрипта там, например:</p>
-<div class="highlight"><pre><code class="language-" data-lang=""># Файл скрипта будет автоматически выполняться после каждой сборки
+<p>Для выполнения настраиваемых действий при срабатывании соответствующего типа хука, используйте имя хука как имя подпапки внутри директории ‘hooks’ и разместите ваш файл скрипта там, например:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Файл скрипта будет автоматически выполняться после каждой сборки
 hooks/after_build/after_build_custom_action.js
-</code></pre></div>
+</code></pre></div></div>
+
 <p>При использовании этих хуков, они всегда будут запускаться как исполняемые файлы, не как загружаемые модули JavaScript. <strong>Помните</strong>: Сделайте ваши скрипты исполняемым для этого случая.</p>
 
-<h3>Config.xml</h3>
+<h3 id="configxml">Config.xml</h3>
 
-<p>Крючки могут быть определены в файле проекта <code>config.xml</code> с помощью элементов <code>&lt;hook&gt;</code>, например:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;hook type="before_build" src="scripts/appBeforeBuild.bat" /&gt;
+<p>Крючки могут быть определены в файле проекта <code class="language-plaintext highlighter-rouge">config.xml</code> с помощью элементов <code class="language-plaintext highlighter-rouge">&lt;hook&gt;</code>, например:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;hook type="before_build" src="scripts/appBeforeBuild.bat" /&gt;
 &lt;hook type="before_build" src="scripts/appBeforeBuild.js" /&gt;
 &lt;hook type="before_plugin_install" src="scripts/appBeforePluginInstall.js" /&gt;
 
@@ -1296,11 +1301,13 @@ hooks/after_build/after_build_custom_action.js
     &lt;hook type="before_plugin_install" src="scripts/windows8/appWin8BeforePluginInstall.js" /&gt;
     ...
 &lt;/platform&gt;
-</code></pre></div>
-<h3>Хуки плагинов (plugin.xml)</h3>
+</code></pre></div></div>
 
-<p>Как разработчик плагинов, вы можете определить скрипты хуков с использованием элементов <code>&lt;hook&gt;</code> в файле <code>plugin.xml</code>, как например:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;hook type="before_plugin_install" src="scripts/beforeInstall.js" /&gt;
+<h3 id="хуки-плагинов-pluginxml">Хуки плагинов (plugin.xml)</h3>
+
+<p>Как разработчик плагинов, вы можете определить скрипты хуков с использованием элементов <code class="language-plaintext highlighter-rouge">&lt;hook&gt;</code> в файле <code class="language-plaintext highlighter-rouge">plugin.xml</code>, как например:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;hook type="before_plugin_install" src="scripts/beforeInstall.js" /&gt;
 &lt;hook type="after_build" src="scripts/afterBuild.js" /&gt;
 
 &lt;platform name="wp8"&gt;
@@ -1308,91 +1315,105 @@ hooks/after_build/after_build_custom_action.js
     &lt;hook type="before_build" src="scripts/wp8BeforeBuild.js" /&gt;
     ...
 &lt;/platform&gt;
-</code></pre></div>
-<p>Хуки плагинов <code>before_plugin_install</code>, <code>after_plugin_install</code>, <code>before_plugin_uninstall</code> будут вызываться исключительно для плагина который устанавливается/удаляется.</p>
+</code></pre></div></div>
 
-<h2>Интерфейс скрипта</h2>
+<p>Хуки плагинов <code class="language-plaintext highlighter-rouge">before_plugin_install</code>, <code class="language-plaintext highlighter-rouge">after_plugin_install</code>, <code class="language-plaintext highlighter-rouge">before_plugin_uninstall</code> будут вызываться исключительно для плагина который устанавливается/удаляется.</p>
 
-<h3>Javascript</h3>
+<h2 id="интерфейс-скрипта">Интерфейс скрипта</h2>
+
+<h3 id="javascript">Javascript</h3>
 
 <p>Если вы пишете хуки с помощью Node.js следует использовать следующее определение модуля:</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
     <span class="p">...</span>
 <span class="p">}</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Вы можете сделать ваши скрипты асинхронными, используя Q:</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">Q</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">requireCordovaModule</span><span class="p">(</span><span class="s1">'q'</span><span class="p">);</span>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">Q</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">requireCordovaModule</span><span class="p">(</span><span class="dl">'</span><span class="s1">q</span><span class="dl">'</span><span class="p">);</span>
     <span class="kd">var</span> <span class="nx">deferral</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Q</span><span class="p">.</span><span class="nx">defer</span><span class="p">();</span>
 
     <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'hook.js&gt;&gt; end'</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">hook.js&gt;&gt; end</span><span class="dl">'</span><span class="p">);</span>
     <span class="nx">deferral</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
     <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
 
     <span class="k">return</span> <span class="nx">deferral</span><span class="p">.</span><span class="nx">promise</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div>
-<p>Объект <code>контекста</code> содержит тип хука, полный путь исполняемого скрипта, параметры хука, аргументы командной строки, передаваемые Cordova и объект верхнего уровня &quot;cordova»:</p>
-<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"hook"</span><span class="p">:</span><span class="w"> </span><span class="s2">"before_plugin_install"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"scriptLocation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c:</span><span class="se">\\</span><span class="s2">script</span><span class="se">\\</span><span class="s2">full</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">appBeforePluginInstall.js"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cmdLine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The</span><span class="se">\\</span><span class="s2">exact</span><span class="se">\\</span><span class="s2">command</span><span class="se">\\</span><span class="s2">cordova</span><span class="se">\\</span><span class="s2">run</span><span class="se">\\</span><span class="s2">with arguments"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"opts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"projectRoot"</span><span class="p">:</span><span class="s2">"C:</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">to</span><span class="se">\\</span><span class="s2">the</span><span class="se">\\</span><span class="s2">project"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cordova"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"platforms"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"wp8"</span><span class="p">],</span><span class="w">
-      </span><span class="s2">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"com.plugin.withhooks"</span><span class="p">],</span><span class="w">
-      </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.21.7-dev"</span><span class="w">
+</code></pre></div></div>
+
+<p>Объект <code class="language-plaintext highlighter-rouge">контекста</code> содержит тип хука, полный путь исполняемого скрипта, параметры хука, аргументы командной строки, передаваемые Cordova и объект верхнего уровня “cordova»:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"hook"</span><span class="p">:</span><span class="w"> </span><span class="s2">"before_plugin_install"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"scriptLocation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c:</span><span class="se">\\</span><span class="s2">script</span><span class="se">\\</span><span class="s2">full</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">appBeforePluginInstall.js"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"cmdLine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The</span><span class="se">\\</span><span class="s2">exact</span><span class="se">\\</span><span class="s2">command</span><span class="se">\\</span><span class="s2">cordova</span><span class="se">\\</span><span class="s2">run</span><span class="se">\\</span><span class="s2">with arguments"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"opts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"projectRoot"</span><span class="p">:</span><span class="s2">"C:</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">to</span><span class="se">\\</span><span class="s2">the</span><span class="se">\\</span><span class="s2">project"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"cordova"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"platforms"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"wp8"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"com.plugin.withhooks"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.21.7-dev"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"plugin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"com.plugin.withhooks"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"pluginInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"plugin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"com.plugin.withhooks"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"pluginInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="err">...</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wp8"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"dir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C:</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">to</span><span class="se">\\</span><span class="s2">the</span><span class="se">\\</span><span class="s2">project</span><span class="se">\\</span><span class="s2">plugins</span><span class="se">\\</span><span class="s2">com.plugin.withhooks"</span><span class="w">
+      </span><span class="nl">"platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wp8"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"dir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C:</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">to</span><span class="se">\\</span><span class="s2">the</span><span class="se">\\</span><span class="s2">project</span><span class="se">\\</span><span class="s2">plugins</span><span class="se">\\</span><span class="s2">com.plugin.withhooks"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"cordova"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+  </span><span class="nl">"cordova"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre></div>
-<p>Объект <code>context.opts.plugin</code> будет передаваться только сценариям хуков плагина.</p>
+</span></code></pre></div></div>
 
-<p>Также можете подключить дополнительные модули Cordova в вашем скрипте, используя <code>context.requireCordovaModule</code> следующим образом:</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">Q</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">requireCordovaModule</span><span class="p">(</span><span class="s1">'q'</span><span class="p">);</span>
-</code></pre></div>
-<p><strong>Примечание</strong>: новый интерфейс загрузчика модулей используется для <code>.js</code> файлов определенных только через <code>config.xml</code> или <code>plugin.xml</code>. Для обеспечения совместимости файлов хуков, указанные с помощью каталога <code>/hooks</code> запускаются через узел child_process.spawn, раздел &#39;Не-javascript&#39; ниже.</p>
+<p>Объект <code class="language-plaintext highlighter-rouge">context.opts.plugin</code> будет передаваться только сценариям хуков плагина.</p>
 
-<h3>Не-javascript</h3>
+<p>Также можете подключить дополнительные модули Cordova в вашем скрипте, используя <code class="language-plaintext highlighter-rouge">context.requireCordovaModule</code> следующим образом:</p>
 
-<p><strong>Примечание</strong>: Мы настоятельно рекомендуем писать ваши хуки, используя Node.js, так, что они будут кросс платформенными, см. выше раздел &#39;Javascript&#39;.</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Q</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">requireCordovaModule</span><span class="p">(</span><span class="dl">'</span><span class="s1">q</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>Примечание</strong>: новый интерфейс загрузчика модулей используется для <code class="language-plaintext highlighter-rouge">.js</code> файлов определенных только через <code class="language-plaintext highlighter-rouge">config.xml</code> или <code class="language-plaintext highlighter-rouge">plugin.xml</code>. Для обеспечения совместимости файлов хуков, указанные с помощью каталога <code class="language-plaintext highlighter-rouge">/hooks</code> запускаются через узел child_process.spawn, раздел ‘Не-javascript’ ниже.</p>
+
+<h3 id="не-javascript">Не-javascript</h3>
+
+<p><strong>Примечание</strong>: Мы настоятельно рекомендуем писать ваши хуки, используя Node.js, так, что они будут кросс платформенными, см. выше раздел ‘Javascript’.</p>
 
 <p>Не-javascript сценарии запускаются через узел child_process.spawn из корневого каталога проекта и получают корневой каталог в качестве первого аргумента. Все остальные параметры передаются в сценарий с помощью переменных среды:</p>
 
 <ul>
-<li>CORDOVA_VERSION - версия Cordova-CLI.</li>
-<li>CORDOVA_PLATFORMS - разделенный запятыми список платформ, к которым команда применяется (например: android, ios).</li>
-<li>CORDOVA_PLUGINS - разделенный запятыми список идентификаторов плагинов, к которым команда применяется (например: org.apache.cordova.file, org.apache.cordova.file)</li>
-<li>CORDOVA_HOOK - путь к выполняемому хуку.</li>
-<li>CORDOVA_CMDLINE - точные аргументы командной строки, передаваемые cordova (например: cordova run ios --emulate)</li>
+  <li>CORDOVA_VERSION - версия Cordova-CLI.</li>
+  <li>CORDOVA_PLATFORMS - разделенный запятыми список платформ, к которым команда применяется (например: android, ios).</li>
+  <li>CORDOVA_PLUGINS - разделенный запятыми список идентификаторов плагинов, к которым команда применяется (например: org.apache.cordova.file, org.apache.cordova.file)</li>
+  <li>CORDOVA_HOOK - путь к выполняемому хуку.</li>
+  <li>CORDOVA_CMDLINE - точные аргументы командной строки, передаваемые cordova (например: cordova run ios –emulate)</li>
 </ul>
 
 <p>Если сценарий возвращает код выхода не равный нулю, то родительская команда cordova будет прервана.</p>
 
 <p>Кроме того обратите внимание, что даже если вы работаете на Windows, и в случае, если ваши скрипты хуков не bat файлы (что рекомендуется, если вы хотите, чтобы ваши скрипты работали не только на Windows) Cordova CLI будет ожидать shabang линию в качестве первой линии для того чтобы знать какой интерпретатор необходимо использовать для запуска сценария. Shebang линия должна соответствовать следующему примеру:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">#!/usr/bin/env [name_of_interpreter_executable]
-</code></pre></div>
-<h2>Пример использования</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/usr/bin/env [name_of_interpreter_executable]
+</code></pre></div></div>
+
+<h2 id="пример-использования">Пример использования</h2>
 
 <p>В этом примере демонстрируется использование хуков Cordova для трассировки в консоль вывода размера файла созданного .apk для платформы Android.</p>
 
-<p>Создайте пустое Cordova-приложение и добавьте следующее определение в <code>config.xml</code> , чтобы указать Cordova запускать скрипт <code>afterBuild.js</code> после каждой сборки платформы.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;hook type="after_build" src="scripts/afterBuild.js" /&gt;
-</code></pre></div>
-<p>Создайте файл <code>scripts/afterBuild.js</code> и добавьте следующую реализацию. Мы используем асинхронную версию метода <code>fs.stat</code> чтобы продемонстрировать, как async функциональность может быть реализована через хуки.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">module.exports = function(ctx) {
+<p>Создайте пустое Cordova-приложение и добавьте следующее определение в <code class="language-plaintext highlighter-rouge">config.xml</code> , чтобы указать Cordova запускать скрипт <code class="language-plaintext highlighter-rouge">afterBuild.js</code> после каждой сборки платформы.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;hook type="after_build" src="scripts/afterBuild.js" /&gt;
+</code></pre></div></div>
+
+<p>Создайте файл <code class="language-plaintext highlighter-rouge">scripts/afterBuild.js</code> и добавьте следующую реализацию. Мы используем асинхронную версию метода <code class="language-plaintext highlighter-rouge">fs.stat</code> чтобы продемонстрировать, как async функциональность может быть реализована через хуки.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module.exports = function(ctx) {
     // Убедитесь что платформа android является частью построения 
     if (ctx.opts.platforms.indexOf('android') &lt; 0) {
         return;
@@ -1415,16 +1436,19 @@ hooks/after_build/after_build_custom_action.js
 
     return deferral.promise;
 };
-</code></pre></div>
-<p>Параметр <code>ctx</code> в приведенном выше примере передается Cordova и представляет контекст выполнения, такой как полный путь к сценарию, целевая платформа, аргументы командной строки, и т.д., а также предоставляет дополнительные вспомогательные функции. Смотрите раздел <code>Интерфейс скрипта</code> выше для более подробной информации.</p>
+</code></pre></div></div>
+
+<p>Параметр <code class="language-plaintext highlighter-rouge">ctx</code> в приведенном выше примере передается Cordova и представляет контекст выполнения, такой как полный путь к сценарию, целевая платформа, аргументы командной строки, и т.д., а также предоставляет дополнительные вспомогательные функции. Смотрите раздел <code class="language-plaintext highlighter-rouge">Интерфейс скрипта</code> выше для более подробной информации.</p>
 
 <p>Теперь можно добавить платформу android и выполнить построение.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cordova platform add android
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova platform add android
 ..
 cordova build
 ..
 Size of path\to\app\platforms\android\build\outputs\apk\android-debug.apk is 1821193 bytes
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Более хорошие примеры использования можно найти здесь:</p>
 
 <p><a href="http://devgirl.org/2013/11/12/three-hooks-your-cordovaphonegap-project-needs/">http://devgirl.org/2013/11/12/three-hooks-your-cordovaphonegap-project-needs/</a></p>

@@ -2244,22 +2244,23 @@
             
 
             <div id="page-toc-source">
-                <h1>フック ガイド</h1>
+                <h1 id="フック-ガイド">フック ガイド</h1>
 
-<p>コルドバのフックは、アプリケーションとプラグインの開発者によって追加することができるまたはあなた専有物によってもコルドバ コマンドをカスタマイズするシステムを構築する特別なスクリプトを表します。 フック スクリプトは、定義済みの特別なフォルダーにそれらを追加することによって定義できる ( <code>/hooks</code> ) もしくは構成ファイル ( <code>config.xml</code> と <code>plugin.xml</code> ) と、次の順序で直列に実行します。</p>
+<p>コルドバのフックは、アプリケーションとプラグインの開発者によって追加することができるまたはあなた専有物によってもコルドバ コマンドをカスタマイズするシステムを構築する特別なスクリプトを表します。 フック スクリプトは、定義済みの特別なフォルダーにそれらを追加することによって定義できる ( <code class="language-plaintext highlighter-rouge">/hooks</code> ) もしくは構成ファイル ( <code class="language-plaintext highlighter-rouge">config.xml</code> と <code class="language-plaintext highlighter-rouge">plugin.xml</code> ) と、次の順序で直列に実行します。</p>
 
 <ul>
-<li>アプリケーションからフック <code>/hooks</code> ;</li>
-<li>アプリケーションからフック <code>config.xml</code> ;</li>
-<li>プラグイン フックから<code>plugins/.../plugin.xml</code>.</li>
+  <li>アプリケーションからフック <code class="language-plaintext highlighter-rouge">/hooks</code> ;</li>
+  <li>アプリケーションからフック <code class="language-plaintext highlighter-rouge">config.xml</code> ;</li>
+  <li>プラグイン フックから<code class="language-plaintext highlighter-rouge">plugins/.../plugin.xml</code>.</li>
 </ul>
 
-<p><strong>注</strong>: <code>/hooks</code>ディレクトリは、config.xml と plugin.xml にフック要素の使用は推奨と見なされます。</p>
+<p><strong>注</strong>: <code class="language-plaintext highlighter-rouge">/hooks</code>ディレクトリは、config.xml と plugin.xml にフック要素の使用は推奨と見なされます。</p>
 
-<h2>サポートされているフック タイプ</h2>
+<h2 id="サポートされているフック-タイプ">サポートされているフック タイプ</h2>
 
 <p>次のフックの種類がサポートされます。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">after_build
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>after_build
 after_compile
 after_clean
 after_docs
@@ -2293,23 +2294,27 @@ before_prepare
 before_run
 before_serve
 pre_package // Windows and Windows Phone only
-</code></pre></div>
-<h2>フックを定義する方法</h2>
+</code></pre></div></div>
 
-<h3><code>/hooks</code>ディレクトリ経由で</h3>
+<h2 id="フックを定義する方法">フックを定義する方法</h2>
+
+<h3 id="hooksディレクトリ経由で"><code class="language-plaintext highlighter-rouge">/hooks</code>ディレクトリ経由で</h3>
 
 <p><strong>注</strong>: このメソッドは、config.xml と plugin.xml にフック要素の使用は推奨と見なされます。</p>
 
-<p>対応するフック タイプが発生したときにカスタム アクションを実行する &#39;フック&#39; ディレクトリ内のサブフォルダーの名前としてフック タイプを使用して、配置するには、ファイルここでは、たとえばスクリプトします。</p>
-<div class="highlight"><pre><code class="language-" data-lang=""># script file will be automatically executed after each build
+<p>対応するフック タイプが発生したときにカスタム アクションを実行する ‘フック’ ディレクトリ内のサブフォルダーの名前としてフック タイプを使用して、配置するには、ファイルここでは、たとえばスクリプトします。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># script file will be automatically executed after each build
 hooks/after_build/after_build_custom_action.js
-</code></pre></div>
+</code></pre></div></div>
+
 <p>これらのフックを使用する場合は JavaScript のローダブル モジュールとしてではなく、実行可能ファイルとして実行常に。 <strong>注意</strong>: ここでは、スクリプトを実行可能にします。</p>
 
-<h3>Config.xml</h3>
+<h3 id="configxml">Config.xml</h3>
 
-<p>フックは、たとえば<code>&lt; hooks &gt;</code>要素を使用してプロジェクトの<code>config.xml</code>で定義できます。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;hook type="before_build" src="scripts/appBeforeBuild.bat" /&gt;
+<p>フックは、たとえば<code class="language-plaintext highlighter-rouge">&lt; hooks &gt;</code>要素を使用してプロジェクトの<code class="language-plaintext highlighter-rouge">config.xml</code>で定義できます。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;hook type="before_build" src="scripts/appBeforeBuild.bat" /&gt;
 &lt;hook type="before_build" src="scripts/appBeforeBuild.js" /&gt;
 &lt;hook type="before_plugin_install" src="scripts/appBeforePluginInstall.js" /&gt;
 
@@ -2326,11 +2331,13 @@ hooks/after_build/after_build_custom_action.js
     &lt;hook type="before_plugin_install" src="scripts/windows8/appWin8BeforePluginInstall.js" /&gt;
     ...
 &lt;/platform&gt;
-</code></pre></div>
-<h3>プラグイン フック (plugin.xml)</h3>
+</code></pre></div></div>
 
-<p>定義することができますプラグイン開発者としてフックの<code>plugin.xml</code>に<code>&lt; hook &gt;</code>要素を使用してそのようなスクリプトを実行します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;hook type="before_plugin_install" src="scripts/beforeInstall.js" /&gt;
+<h3 id="プラグイン-フック-pluginxml">プラグイン フック (plugin.xml)</h3>
+
+<p>定義することができますプラグイン開発者としてフックの<code class="language-plaintext highlighter-rouge">plugin.xml</code>に<code class="language-plaintext highlighter-rouge">&lt; hook &gt;</code>要素を使用してそのようなスクリプトを実行します。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;hook type="before_plugin_install" src="scripts/beforeInstall.js" /&gt;
 &lt;hook type="after_build" src="scripts/afterBuild.js" /&gt;
 
 &lt;platform name="wp8"&gt;
@@ -2338,91 +2345,105 @@ hooks/after_build/after_build_custom_action.js
     &lt;hook type="before_build" src="scripts/wp8BeforeBuild.js" /&gt;
     ...
 &lt;/platform&gt;
-</code></pre></div>
-<p><code>before_plugin_install</code>、 <code>after_plugin_install</code>、 <code>before_plugin_uninstall</code>プラグインをインストール/アンインストールするプラグイン専用のフックが発生します。</p>
+</code></pre></div></div>
 
-<h2>スクリプト インターフェイス</h2>
+<p><code class="language-plaintext highlighter-rouge">before_plugin_install</code>、 <code class="language-plaintext highlighter-rouge">after_plugin_install</code>、 <code class="language-plaintext highlighter-rouge">before_plugin_uninstall</code>プラグインをインストール/アンインストールするプラグイン専用のフックが発生します。</p>
 
-<h3>Javascript</h3>
+<h2 id="スクリプト-インターフェイス">スクリプト インターフェイス</h2>
+
+<h3 id="javascript">Javascript</h3>
 
 <p>Node.js を使用してフックを作成する場合、次のモジュール定義を使用する必要があります。</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
     <span class="p">...</span>
 <span class="p">}</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Q: を使用して、スクリプトの非同期を作ることができます。</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">Q</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">requireCordovaModule</span><span class="p">(</span><span class="s1">'q'</span><span class="p">);</span>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">Q</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">requireCordovaModule</span><span class="p">(</span><span class="dl">'</span><span class="s1">q</span><span class="dl">'</span><span class="p">);</span>
     <span class="kd">var</span> <span class="nx">deferral</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Q</span><span class="p">.</span><span class="nx">defer</span><span class="p">();</span>
 
     <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'hook.js&gt;&gt; end'</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">hook.js&gt;&gt; end</span><span class="dl">'</span><span class="p">);</span>
     <span class="nx">deferral</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
     <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
 
     <span class="k">return</span> <span class="nx">deferral</span><span class="p">.</span><span class="nx">promise</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div>
-<p><code>コンテキスト</code>オブジェクトにフックの種類、実行するスクリプトの完全なパスが含まれています, オプションのフックは、コルドバとトップレベル「コルドバ」オブジェクトに渡されるコマンドライン引数。</p>
-<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"hook"</span><span class="p">:</span><span class="w"> </span><span class="s2">"before_plugin_install"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"scriptLocation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c:</span><span class="se">\\</span><span class="s2">script</span><span class="se">\\</span><span class="s2">full</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">appBeforePluginInstall.js"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cmdLine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The</span><span class="se">\\</span><span class="s2">exact</span><span class="se">\\</span><span class="s2">command</span><span class="se">\\</span><span class="s2">cordova</span><span class="se">\\</span><span class="s2">run</span><span class="se">\\</span><span class="s2">with arguments"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"opts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"projectRoot"</span><span class="p">:</span><span class="s2">"C:</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">to</span><span class="se">\\</span><span class="s2">the</span><span class="se">\\</span><span class="s2">project"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cordova"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"platforms"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"wp8"</span><span class="p">],</span><span class="w">
-      </span><span class="s2">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"com.plugin.withhooks"</span><span class="p">],</span><span class="w">
-      </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.21.7-dev"</span><span class="w">
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">コンテキスト</code>オブジェクトにフックの種類、実行するスクリプトの完全なパスが含まれています, オプションのフックは、コルドバとトップレベル「コルドバ」オブジェクトに渡されるコマンドライン引数。</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"hook"</span><span class="p">:</span><span class="w"> </span><span class="s2">"before_plugin_install"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"scriptLocation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c:</span><span class="se">\\</span><span class="s2">script</span><span class="se">\\</span><span class="s2">full</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">appBeforePluginInstall.js"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"cmdLine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The</span><span class="se">\\</span><span class="s2">exact</span><span class="se">\\</span><span class="s2">command</span><span class="se">\\</span><span class="s2">cordova</span><span class="se">\\</span><span class="s2">run</span><span class="se">\\</span><span class="s2">with arguments"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"opts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"projectRoot"</span><span class="p">:</span><span class="s2">"C:</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">to</span><span class="se">\\</span><span class="s2">the</span><span class="se">\\</span><span class="s2">project"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"cordova"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"platforms"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"wp8"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"com.plugin.withhooks"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.21.7-dev"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"plugin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"com.plugin.withhooks"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"pluginInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"plugin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"com.plugin.withhooks"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"pluginInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="err">...</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wp8"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"dir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C:</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">to</span><span class="se">\\</span><span class="s2">the</span><span class="se">\\</span><span class="s2">project</span><span class="se">\\</span><span class="s2">plugins</span><span class="se">\\</span><span class="s2">com.plugin.withhooks"</span><span class="w">
+      </span><span class="nl">"platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wp8"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"dir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C:</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">to</span><span class="se">\\</span><span class="s2">the</span><span class="se">\\</span><span class="s2">project</span><span class="se">\\</span><span class="s2">plugins</span><span class="se">\\</span><span class="s2">com.plugin.withhooks"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"cordova"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+  </span><span class="nl">"cordova"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre></div>
-<p><code>context.opts.plugin</code>オブジェクトのみプラグイン フック スクリプトに渡されます。</p>
+</span></code></pre></div></div>
 
-<p>コルドバの追加モジュールを要求する、次のように<code>context.requireCordovaModule</code>を使用してスクリプトのことも。</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">Q</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">requireCordovaModule</span><span class="p">(</span><span class="s1">'q'</span><span class="p">);</span>
-</code></pre></div>
-<p><strong>注</strong>: <code>config.xml</code>または<code>plugin.xml</code>のみを介して定義されている<code>.js</code>ファイルに新しいモジュール ローダー スクリプト インターフェイスを使用します。 互換性の理由から<code>/hooks</code>フォルダーで指定したフック ファイルはノード child_process スポーン、後述を参照してください &#39; javascript&#39; を介して実行されます。</p>
+<p><code class="language-plaintext highlighter-rouge">context.opts.plugin</code>オブジェクトのみプラグイン フック スクリプトに渡されます。</p>
 
-<h3>非 javascript</h3>
+<p>コルドバの追加モジュールを要求する、次のように<code class="language-plaintext highlighter-rouge">context.requireCordovaModule</code>を使用してスクリプトのことも。</p>
 
-<p><strong>注</strong>: Node.js を使用してクロスプラット フォームになるようにフックを書いて強くお勧めします上記の &#39;Javascript&#39; セクションを参照してください。</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Q</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">requireCordovaModule</span><span class="p">(</span><span class="dl">'</span><span class="s1">q</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>注</strong>: <code class="language-plaintext highlighter-rouge">config.xml</code>または<code class="language-plaintext highlighter-rouge">plugin.xml</code>のみを介して定義されている<code class="language-plaintext highlighter-rouge">.js</code>ファイルに新しいモジュール ローダー スクリプト インターフェイスを使用します。 互換性の理由から<code class="language-plaintext highlighter-rouge">/hooks</code>フォルダーで指定したフック ファイルはノード child_process スポーン、後述を参照してください ‘ javascript’ を介して実行されます。</p>
+
+<h3 id="非-javascript">非 javascript</h3>
+
+<p><strong>注</strong>: Node.js を使用してクロスプラット フォームになるようにフックを書いて強くお勧めします上記の ‘Javascript’ セクションを参照してください。</p>
 
 <p>非 javascript スクリプトは、プロジェクトのルート ディレクトリからノード child_process スポーンを介して実行され、最初の引数としてルート ディレクトリ パスを持っています。 その他のすべてのオプションは、環境変数を使用してスクリプトに渡されます。</p>
 
 <ul>
-<li>CORDOVA_VERSION - コルドバ-CLI のバージョン。</li>
-<li>CORDOVA_PLATFORMS - カンマ区切りのコマンドに適用されるプラットフォームのリスト (例えば: アンドロイド, ios の)。</li>
-<li>CORDOVA_PLUGINS - カンマ区切りのプラグインに適用されます、コマンド Id のリスト (例: org.apache.cordova.file、org.apache.cordova.file 転送)</li>
-<li>CORDOVA_HOOK - 実行されているフックへのパス。</li>
-<li>CORDOVA_CMDLINE - コルドバに渡された正確なコマンドライン引数 (例えば: コルドバ - ios の実行をエミュレート)</li>
+  <li>CORDOVA_VERSION - コルドバ-CLI のバージョン。</li>
+  <li>CORDOVA_PLATFORMS - カンマ区切りのコマンドに適用されるプラットフォームのリスト (例えば: アンドロイド, ios の)。</li>
+  <li>CORDOVA_PLUGINS - カンマ区切りのプラグインに適用されます、コマンド Id のリスト (例: org.apache.cordova.file、org.apache.cordova.file 転送)</li>
+  <li>CORDOVA_HOOK - 実行されているフックへのパス。</li>
+  <li>CORDOVA_CMDLINE - コルドバに渡された正確なコマンドライン引数 (例えば: コルドバ - ios の実行をエミュレート)</li>
 </ul>
 
 <p>スクリプトには、ゼロ以外の終了コードが返された場合は、親コルドバ コマンドが中止されます。</p>
 
 <p>また、たとえウィンドウで作業しているし、コルドバ CLI は通訳を知るための最初の行として、shebang 行を期待するフック スクリプトない bat ファイル (これは推奨、Windows 以外のオペレーティング システムで動作するようにあなたのスクリプトの場合) のため必要を使用してスクリプトを起動するに注意してください。 Shebang 行は、次の例と一致する必要があります。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">#!/usr/bin/env [name_of_interpreter_executable]
-</code></pre></div>
-<h2>サンプルの使用方法</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/usr/bin/env [name_of_interpreter_executable]
+</code></pre></div></div>
+
+<h2 id="サンプルの使用方法">サンプルの使用方法</h2>
 
 <p>このサンプルは、コンソール出力生成された .apk ファイル Android プラットフォーム用のサイズにトレースするコルドバ フックの使用方法を示します。</p>
 
-<p>空白の Cordova アプリを作成し、プラットフォーム ビルドするたびに<code>afterBuild.js</code>スクリプトを実行するコルドバを指示する<code>config.xml</code>に次の定義を追加します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;hook type="after_build" src="scripts/afterBuild.js" /&gt;
-</code></pre></div>
-<p><code>Scripts/afterBuild.js</code>ファイルを作成し、次の実装を追加します。 我々 は、 <code>fs.stat</code>メソッドの非同期バージョンを使用して、フックを介して非同期機能を行うことができる方法を示します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">module.exports = function(ctx) {
+<p>空白の Cordova アプリを作成し、プラットフォーム ビルドするたびに<code class="language-plaintext highlighter-rouge">afterBuild.js</code>スクリプトを実行するコルドバを指示する<code class="language-plaintext highlighter-rouge">config.xml</code>に次の定義を追加します。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;hook type="after_build" src="scripts/afterBuild.js" /&gt;
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">Scripts/afterBuild.js</code>ファイルを作成し、次の実装を追加します。 我々 は、 <code class="language-plaintext highlighter-rouge">fs.stat</code>メソッドの非同期バージョンを使用して、フックを介して非同期機能を行うことができる方法を示します。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module.exports = function(ctx) {
     // make sure android platform is part of build 
     if (ctx.opts.platforms.indexOf('android') &lt; 0) {
         return;
@@ -2445,16 +2466,19 @@ hooks/after_build/after_build_custom_action.js
 
     return deferral.promise;
 };
-</code></pre></div>
-<p>上記の例のパラメーター <code>ctx</code>コルドバによって渡されるスクリプトの完全なパス、ターゲット プラットフォーム、コマンドライン引数などの実行コンテキストを表しし、も追加のヘルパー機能を公開します。 詳細については上記を参照してください<code>スクリプト インターフェイス</code>セクション。</p>
+</code></pre></div></div>
+
+<p>上記の例のパラメーター <code class="language-plaintext highlighter-rouge">ctx</code>コルドバによって渡されるスクリプトの完全なパス、ターゲット プラットフォーム、コマンドライン引数などの実行コンテキストを表しし、も追加のヘルパー機能を公開します。 詳細については上記を参照してください<code class="language-plaintext highlighter-rouge">スクリプト インターフェイス</code>セクション。</p>
 
 <p>Android プラットフォームを追加し、ビルドを実行することができます。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cordova platform add android
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova platform add android
 ..
 cordova build
 ..
 Size of path\to\app\platforms\android\build\outputs\apk\android-debug.apk is 1821193 bytes
-</code></pre></div>
+</code></pre></div></div>
+
 <p>多くの適切な使用例はここで見つけることができます。</p>
 
 <p><a href="http://devgirl.org/2013/11/12/three-hooks-your-cordovaphonegap-project-needs/">http://devgirl.org/2013/11/12/three-hooks-your-cordovaphonegap-project-needs/</a></p>

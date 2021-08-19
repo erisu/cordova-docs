@@ -1304,78 +1304,112 @@
             
 
             <div id="page-toc-source">
-                <h1>Windows Phone Plugins</h1>
+                <h1 id="windows-phone-plugins">Windows Phone Plugins</h1>
 
-<p>Scrivere un plugin per Cordova su Windows Phone richiede una conoscenza base dell&#39;architettura di Cordova. Cordova-WP7 è costituito da un browser Web che ospita il codice JavaScript di applicazione e gestisce le chiamate API native. C&#39;è un BaseCommand ( <code>WP7CordovaClassLib.Cordova.Commands.BaseCommand</code> ) classe in c# che è possibile estendere, e viene fornito con la maggior parte delle tubature&#39; &#39; costruita per voi già.</p>
+<p>Scrivere un plugin per Cordova su Windows Phone richiede una conoscenza base dell’architettura di Cordova. Cordova-WP7 è costituito da un browser Web che ospita il codice JavaScript di applicazione e gestisce le chiamate API native. C’è un BaseCommand ( <code class="language-plaintext highlighter-rouge">WP7CordovaClassLib.Cordova.Commands.BaseCommand</code> ) classe in c# che è possibile estendere, e viene fornito con la maggior parte delle tubature’ ‘ costruita per voi già.</p>
 
 <ol>
-<li> Selezionare il progetto e fare clic destro per scegliere <strong>Aggiungi → nuovo elemento...</strong></li>
-</ol>
-<div class="highlight"><pre><code class="language-" data-lang="">*   Preferibilmente aggiungerlo alla directory 'Plugins', ma spetta a voi
-</code></pre></div>
-<ol>
-<li> Selezionare &#39;Class&#39; e il nome<code>Echo.cs</code></li>
-</ol>
-<div class="highlight"><pre><code class="language-" data-lang="">*   Il nome di questa classe devono *esattamente* corrispondere quello che tu chiami in`cordova.exec(win, fail, "Echo", ...)`
-</code></pre></div>
-<ol>
-<li><p>Includono l&#39;implementazione di classi base</p>
-<div class="highlight"><pre><code class="language-" data-lang="">usando WPCordovaClassLib.Cordova;
+  <li>
+    <p>Selezionare il progetto e fare clic destro per scegliere <strong>Aggiungi → nuovo elemento…</strong></p>
+
+    <ul>
+      <li>Preferibilmente aggiungerlo alla directory ‘Plugins’, ma spetta a voi</li>
+    </ul>
+  </li>
+  <li>
+    <p>Selezionare ‘Class’ e il nome<code class="language-plaintext highlighter-rouge">Echo.cs</code></p>
+
+    <ul>
+      <li>Il nome di questa classe devono <em>esattamente</em> corrispondere quello che tu chiami in<code class="language-plaintext highlighter-rouge">cordova.exec(win, fail, "Echo", ...)</code></li>
+    </ul>
+  </li>
+  <li>
+    <p>Includono l’implementazione di classi base</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>usando WPCordovaClassLib.Cordova;
 usando WPCordovaClassLib.Cordova.Commands;
 usando WPCordovaClassLib.Cordova.JSON;
-</code></pre></div></li>
-<li><p>Estendere la classe da BaseCommand</p>
-<div class="highlight"><pre><code class="language-" data-lang="">classe pubblica Echo: BaseCommand {/ /...}
-</code></pre></div></li>
-<li><p>Aggiungere un metodo chiamabile da JavaScript</p>
-<div class="highlight"><pre><code class="language-" data-lang="">classe pubblica Echo: BaseCommand {public void eco (opzioni di stringa) {/ / tutti i metodi JS plugin richiamabile devono avere questa firma!
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Estendere la classe da BaseCommand</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>classe pubblica Echo: BaseCommand {/ /...}
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Aggiungere un metodo chiamabile da JavaScript</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>classe pubblica Echo: BaseCommand {public void eco (opzioni di stringa) {/ / tutti i metodi JS plugin richiamabile devono avere questa firma!
         / / pubblico, tornando a vuoto, 1 argomento che è una stringa}}
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ol>
 
-<h2>Spazi dei nomi</h2>
+<h2 id="spazi-dei-nomi">Spazi dei nomi</h2>
 
 <p>Lo spazio dei nomi predefinito per i comandi non qualificati è:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">Namespace Cordova.Extension.Commands {/ /...}
-</code></pre></div>
-<p>Se si desidera utilizzare il proprio spazio dei nomi, è necessario effettuare una chiamata completo a <code>cordova.exec</code> . Per esempio, se si desidera definire una classe c# come questo:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">Namespace com.mydomain.cordovaExtensions {classe pubblica Echo: BaseCommand {/ /...}}
-</code></pre></div>
-<p>Poi, in JavaScript è necessario chiamare <code>exec</code> come questo:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">Cordova.exec (vittoria, fail, "com.mydomain.cordovaExtensions.Echo",...);
-</code></pre></div>
-<h2>Interpretando i tuoi argomenti in C</h2>
 
-<p>I dati ricevuti dal tuo metodo di plugin sono un valore stringa, ma in realtà guardando il nostro codice JavaScript, vediamo che la nostra intenzione era quella di passare un array di stringhe. Guardando indietro alla nostra chiamata JavaScript a <code>cordova.exec</code> , vediamo che abbiamo passato <code>[str]</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">Cordova.exec (vincere, fallire, "Echo", "eco", ["stringa di input"]);
-</code></pre></div>
-<p>Se noi controllare la stringa di opzioni passata al nostro <code>Echo.echo</code> metodo, vediamo che il valore è in realtà:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">"[\"input string\ "]"
-</code></pre></div>
-<p>Tutti i JavaScript <code>exec</code> argomenti sono JSON codificati prima di essere passato in c#.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Namespace Cordova.Extension.Commands {/ /...}
+</code></pre></div></div>
+
+<p>Se si desidera utilizzare il proprio spazio dei nomi, è necessario effettuare una chiamata completo a <code class="language-plaintext highlighter-rouge">cordova.exec</code> . Per esempio, se si desidera definire una classe c# come questo:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Namespace com.mydomain.cordovaExtensions {classe pubblica Echo: BaseCommand {/ /...}}
+</code></pre></div></div>
+
+<p>Poi, in JavaScript è necessario chiamare <code class="language-plaintext highlighter-rouge">exec</code> come questo:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cordova.exec (vittoria, fail, "com.mydomain.cordovaExtensions.Echo",...);
+</code></pre></div></div>
+
+<h2 id="interpretando-i-tuoi-argomenti-in-c">Interpretando i tuoi argomenti in C</h2>
+
+<p>I dati ricevuti dal tuo metodo di plugin sono un valore stringa, ma in realtà guardando il nostro codice JavaScript, vediamo che la nostra intenzione era quella di passare un array di stringhe. Guardando indietro alla nostra chiamata JavaScript a <code class="language-plaintext highlighter-rouge">cordova.exec</code> , vediamo che abbiamo passato <code class="language-plaintext highlighter-rouge">[str]</code> :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cordova.exec (vincere, fallire, "Echo", "eco", ["stringa di input"]);
+</code></pre></div></div>
+
+<p>Se noi controllare la stringa di opzioni passata al nostro <code class="language-plaintext highlighter-rouge">Echo.echo</code> metodo, vediamo che il valore è in realtà:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"[\"input string\ "]"
+</code></pre></div></div>
+
+<p>Tutti i JavaScript <code class="language-plaintext highlighter-rouge">exec</code> argomenti sono JSON codificati prima di essere passato in c#.</p>
 
 <p>Se vogliamo considerare questo come la stringa che ci aspettavamo, abbiamo bisogno di decodificarlo. Possiamo usare semplice deserializzazione JSON.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">String optVal = JsonHelper.Deserialize, &lt; string [] &gt; (opzioni) [0];
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>String optVal = JsonHelper.Deserialize, &lt; string [] &gt; (opzioni) [0];
 / / optVal ora ha il valore di "stringa di input"
-</code></pre></div>
-<h2>Risultati passando da c# a JavaScript</h2>
+</code></pre></div></div>
+
+<h2 id="risultati-passando-da-c-a-javascript">Risultati passando da c# a JavaScript</h2>
 
 <p>La classe base BaseCommand fornisce metodi per il passaggio di dati per i gestori di callback JavaScript. Per segnalare semplicemente che il comando è riuscito, quando nessuna info risultato supplementare è necessario, è possibile semplicemente chiamare:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">DispatchCommandResult(); / / chiamate torna con un risultato di plugin vuoto, considerato un callback di successo
-</code></pre></div>
-<p>Per passare dati indietro, è necessario chiamare una versione diversa di <code>DispatchCommandResult</code> :</p>
-<div class="highlight"><pre><code class="language-" data-lang="">DispatchCommandResult (nuovo PluginResult (PluginResult.Status.OK, "tutto è andato come previsto, questo è un risultato che viene passato al gestore successo."));
-</code></pre></div>
-<p>Per passare dati oggetto strutturato a JavaScript, dovrebbe essere codificato come stringa JSON:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">DispatchCommandResult(new PluginResult(PluginResult.Status.OK, "{result:\"super awesome!\"}"));
-</code></pre></div>
-<p>Se dovete segnalare che si è verificato un errore, è possibile chiamare <code>DispatchCommandResult</code> con un <code>PluginResult</code> oggetto:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">DispatchCommandResult (nuovo PluginResult (PluginResult.Status.ERROR, "Echo segnalato un errore"));
-</code></pre></div>
-<h2>Gestione degli errori di serializzazione in metodo c# del vostro plugin</h2>
 
-<p>Nell&#39;interpretare i tuoi argomenti, è una buona idea utilizzare un blocco try/catch, nel caso in cui abbiamo ingresso male. Questo è un modello utilizzato in tutto il codice c# Cordova:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">string optVal = null;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DispatchCommandResult(); / / chiamate torna con un risultato di plugin vuoto, considerato un callback di successo
+</code></pre></div></div>
+
+<p>Per passare dati indietro, è necessario chiamare una versione diversa di <code class="language-plaintext highlighter-rouge">DispatchCommandResult</code> :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DispatchCommandResult (nuovo PluginResult (PluginResult.Status.OK, "tutto è andato come previsto, questo è un risultato che viene passato al gestore successo."));
+</code></pre></div></div>
+
+<p>Per passare dati oggetto strutturato a JavaScript, dovrebbe essere codificato come stringa JSON:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DispatchCommandResult(new PluginResult(PluginResult.Status.OK, "{result:\"super awesome!\"}"));
+</code></pre></div></div>
+
+<p>Se dovete segnalare che si è verificato un errore, è possibile chiamare <code class="language-plaintext highlighter-rouge">DispatchCommandResult</code> con un <code class="language-plaintext highlighter-rouge">PluginResult</code> oggetto:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DispatchCommandResult (nuovo PluginResult (PluginResult.Status.ERROR, "Echo segnalato un errore"));
+</code></pre></div></div>
+
+<h2 id="gestione-degli-errori-di-serializzazione-in-metodo-c-del-vostro-plugin">Gestione degli errori di serializzazione in metodo c# del vostro plugin</h2>
+
+<p>Nell’interpretare i tuoi argomenti, è una buona idea utilizzare un blocco try/catch, nel caso in cui abbiamo ingresso male. Questo è un modello utilizzato in tutto il codice c# Cordova:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>string optVal = null;
 
 try
 {
@@ -1393,58 +1427,75 @@ if (optVal == null)
 else
 {
     // ... continuare su a fare il nostro lavoro}
-</code></pre></div>
-<h2>Plugin XML</h2>
+</code></pre></div></div>
+
+<h2 id="plugin-xml">Plugin XML</h2>
 
 <p>Questi sono esempi specifici di telefono windows di utilizzare il file del plugin, fare riferimento alla specifica Plugin per maggiori dettagli</p>
 
-<h3><code>&lt;source-file&gt;</code></h3>
+<h3 id="source-file"><code class="language-plaintext highlighter-rouge">&lt;source-file&gt;</code></h3>
 
-<p>Windows phone il <code>&lt;source-file&gt;</code> elemento attualmente è utilizzato per definire tutte le risorse del plugin (ie. cs, XAML,. xaml.cs,. dll, immagine beni ecc).</p>
+<p>Windows phone il <code class="language-plaintext highlighter-rouge">&lt;source-file&gt;</code> elemento attualmente è utilizzato per definire tutte le risorse del plugin (ie. cs, XAML,. xaml.cs,. dll, immagine beni ecc).</p>
 
-<h3><code>&lt;config-file&gt;</code></h3>
+<h3 id="config-file"><code class="language-plaintext highlighter-rouge">&lt;config-file&gt;</code></h3>
 
-<p>Il <code>&lt;config-file&gt;</code> elemento definisce quali elementi vengono messe in un file di configurazione. Ad esempio per aggiungere un plugin per le piattaforme config. xml, si farebbe qualcosa di simile:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt; target="config.xml config-file" padre = "/ *" &gt;&lt; nome caratteristica = "PluginName" &gt;&lt; param nome = valore "wp-pacchetto" = "PluginName" / &gt;&lt; / caratteristica &gt;&lt; / config-file &gt;
-</code></pre></div>
+<p>Il <code class="language-plaintext highlighter-rouge">&lt;config-file&gt;</code> elemento definisce quali elementi vengono messe in un file di configurazione. Ad esempio per aggiungere un plugin per le piattaforme config. xml, si farebbe qualcosa di simile:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt; target="config.xml config-file" padre = "/ *" &gt;&lt; nome caratteristica = "PluginName" &gt;&lt; param nome = valore "wp-pacchetto" = "PluginName" / &gt;&lt; / caratteristica &gt;&lt; / config-file &gt;
+</code></pre></div></div>
+
 <p>Se volessimo aggiungere la funzionalità di contatti per il WMAppManifest. xml, sarebbe simile a questa:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;config-file target="Properties/WMAppManifest.xml" parent="/Deployment/App/Capabilities"&gt;
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;config-file target="Properties/WMAppManifest.xml" parent="/Deployment/App/Capabilities"&gt;
     &lt;Capability Name="ID_CAP_CONTACTS" /&gt;
 &lt;/config-file&gt;
-</code></pre></div>
-<h2>Funzionalità avanzate del Plugin</h2>
+</code></pre></div></div>
 
-<p>Vedere altri metodi che è possibile eseguire l&#39;override in:</p>
+<h2 id="funzionalità-avanzate-del-plugin">Funzionalità avanzate del Plugin</h2>
+
+<p>Vedere altri metodi che è possibile eseguire l’override in:</p>
 
 <ul>
-<li>  <a href="https://github.com/apache/cordova-wp7/blob/master/templates/standalone/cordovalib/Commands/BaseCommand.cs">BaseCommand.cs</a></li>
+  <li><a href="https://github.com/apache/cordova-wp7/blob/master/templates/standalone/cordovalib/Commands/BaseCommand.cs">BaseCommand.cs</a></li>
 </ul>
 
-<p>Ad esempio, è possibile agganciarsi nella &#39;<a href="../../../cordova/events/events.pause.html">pausa</a>&#39; e &#39;riprendere&#39; eventi di applicazione.</p>
+<p>Ad esempio, è possibile agganciarsi nella ‘<a href="../../../cordova/events/events.pause.html">pausa</a>’ e ‘riprendere’ eventi di applicazione.</p>
 
-<h3>Plugin debug</h3>
+<h3 id="plugin-debug">Plugin debug</h3>
 
 <p>Per eseguire il debug lato c#, è possibile utilizzare il debugger di Visual Studio, basta impostare un punto di interruzione in uno qualsiasi dei metodi esposti dalla classe.</p>
 
-<p>JavaScript è un po&#39; più difficile eseguire il debug di Windows Phone. È necessario utilizzare <code>console.log</code> per lo stato del vostro plugin di output, o informarsi di errori.</p>
+<p>JavaScript è un po’ più difficile eseguire il debug di Windows Phone. È necessario utilizzare <code class="language-plaintext highlighter-rouge">console.log</code> per lo stato del vostro plugin di output, o informarsi di errori.</p>
 
-<h2>Trabocchetti comuni</h2>
+<h2 id="trabocchetti-comuni">Trabocchetti comuni</h2>
 
 <ul>
-<li><p>Fare attenzione quando si decide su argomenti che si passa al nativo nell&#39;implementazione JavaScript. La maggior parte delle piattaforme per dispositivi aspettano il passato a cordova.exec essere una matrice args, ma se si hanno diversi tipi di oggetti in questa matrice, diventa difficile o impossibile per deserializzare.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">Cordova.exec (vittoria, fail, "Nomeservizio", "MethodName", ["questa è una stringa", 54, {literal: 'trouble'}]);
-</code></pre></div>
-<ul>
-<li><p>Questo significa che il codice c# riceve un difficile decodificare il valore stringa, come:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">"[\"this è un string\ ", 54, {letterale: 'trouble'}]"
-</code></pre></div></li>
-<li><p>Prendere in considerazione tutti i parametri di conversione stringhe prima di chiamare exec:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">Cordova.exec (vittoria, fail, "Nomeservizio", "MethodName", ["questa è una stringa", "54", "{literal: 'trouble'}"]);
+  <li>
+    <p>Fare attenzione quando si decide su argomenti che si passa al nativo nell’implementazione JavaScript. La maggior parte delle piattaforme per dispositivi aspettano il passato a cordova.exec essere una matrice args, ma se si hanno diversi tipi di oggetti in questa matrice, diventa difficile o impossibile per deserializzare.</p>
 
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cordova.exec (vittoria, fail, "Nomeservizio", "MethodName", ["questa è una stringa", 54, {literal: 'trouble'}]);
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p>Questo significa che il codice c# riceve un difficile decodificare il valore stringa, come:</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"[\"this è un string\ ", 54, {letterale: 'trouble'}]"
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>Prendere in considerazione tutti i parametri di conversione stringhe prima di chiamare exec:</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cordova.exec (vittoria, fail, "Nomeservizio", "MethodName", ["questa è una stringa", "54", "{literal: 'trouble'}"]);
+        
 String [] optValues = JsonHelper.Deserialize, &lt; string [] &gt; (opzioni);
-</code></pre></div></li>
-</ul></li>
-<li><p>Di solito è una buona idea fare il parametro di controllo nel codice JavaScript, prima di chiamare <code>exec</code> . Ciò consente di riutilizzare il codice JavaScript più tra le varie implementazioni native del vostro plugin.</p></li>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Di solito è una buona idea fare il parametro di controllo nel codice JavaScript, prima di chiamare <code class="language-plaintext highlighter-rouge">exec</code> . Ciò consente di riutilizzare il codice JavaScript più tra le varie implementazioni native del vostro plugin.</p>
+  </li>
 </ul>
 
 

@@ -1292,29 +1292,32 @@
             
 
             <div id="page-toc-source">
-                <h1>device.uuid</h1>
+                <h1 id="deviceuuid">device.uuid</h1>
 
 <p>デバイスの固定 ID (<a href="http://en.wikipedia.org/wiki/Universally_Unique_Identifier">UUID</a>) を取得します。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">var string = device.uuid;
-</code></pre></div>
-<h2>概要</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var string = device.uuid;
+</code></pre></div></div>
+
+<h2 id="概要">概要</h2>
 
 <p>UUID の生成方法については、デバイスの製造者やプラットフォームによって決定されます。</p>
 
-<h2>サポートされているプラットフォーム</h2>
+<h2 id="サポートされているプラットフォーム">サポートされているプラットフォーム</h2>
 
 <ul>
-<li>Android</li>
-<li>BlackBerry WebWorks (OS 5.0 以上)</li>
-<li>iPhone</li>
-<li>Windows Phone 7 (Mango)</li>
-<li>Bada 1.2 &amp; 2.x</li>
-<li>webOS</li>
-<li>Tizen</li>
+  <li>Android</li>
+  <li>BlackBerry WebWorks (OS 5.0 以上)</li>
+  <li>iPhone</li>
+  <li>Windows Phone 7 (Mango)</li>
+  <li>Bada 1.2 &amp; 2.x</li>
+  <li>webOS</li>
+  <li>Tizen</li>
 </ul>
 
-<h2><a href="../storage/storage.opendatabase.html">使用例</a></h2>
-<div class="highlight"><pre><code class="language-" data-lang="">// Android: ランダムな64ビットの数値を文字列として返します
+<h2 id="使用例"><a href="../storage/storage.opendatabase.html">使用例</a></h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Android: ランダムな64ビットの数値を文字列として返します
 //          数値はデバイスの初回起動時に生成されます
 //
 // BlackBerry: デバイスの PIN 番号を文字列として返します
@@ -1332,44 +1335,47 @@
 // Tizen: デバイスの IMEI (International Mobile Equipment Identity) を返します
 //        IMEI はGSM と UMTS の全ての携帯電話ごとに一意な番号です
 var deviceID = device.uuid;
-</code></pre></div>
-<h2>詳細な使用例</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>デバイスプロパティーの使用例<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova-2.1.0.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="詳細な使用例">詳細な使用例</h2>
 
-    <span class="c1">// Cordova の読み込み完了まで待機</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;デバイスプロパティーの使用例&lt;/title&gt;
 
-    <span class="c1">// Cordova 準備完了</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">element</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'deviceProperties'</span><span class="p">);</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.1.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-        <span class="nx">element</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">'デバイス名: '</span>          <span class="o">+</span> <span class="nx">device</span><span class="p">.</span><span class="nx">name</span>       <span class="o">+</span> <span class="err">'</span><span class="o">&lt;</span><span class="nx">br</span> <span class="o">/&gt;</span><span class="s1">' +
-                            '</span><span class="err">デバイス</span> <span class="nx">Cordova</span><span class="p">:</span> <span class="s1">'    + device.cordova    + '</span><span class="o">&lt;</span><span class="nx">br</span> <span class="o">/&gt;</span><span class="s1">' +
-                            '</span><span class="err">デバイスプラットフォーム</span><span class="p">:</span> <span class="s1">' + device.platform + '</span><span class="o">&lt;</span><span class="nx">br</span> <span class="o">/&gt;</span><span class="s1">' +
-                            '</span><span class="err">デバイス</span> <span class="nx">UUID</span><span class="p">:</span> <span class="s1">'       + device.uuid       + '</span><span class="o">&lt;</span><span class="nx">br</span> <span class="o">/&gt;</span><span class="s1">' +
-                            '</span><span class="err">デバイスバージョン</span><span class="p">:</span> <span class="s1">'  + device.version    + '</span><span class="o">&lt;</span><span class="nx">br</span> <span class="o">/&gt;</span><span class="err">'</span><span class="p">;</span>
-    <span class="p">}</span>
+    // Cordova の読み込み完了まで待機
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">"deviceProperties"</span><span class="nt">&gt;</span>デバイスプロパティーを読込中...<span class="nt">&lt;/p&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2>iOS に関する注意点</h2>
+    // Cordova 準備完了
+    //
+    function onDeviceReady() {
+        var element = document.getElementById('deviceProperties');
+
+        element.innerHTML = 'デバイス名: '          + device.name       + '&lt;br /&gt;' +
+                            'デバイス Cordova: '    + device.cordova    + '&lt;br /&gt;' +
+                            'デバイスプラットフォーム: ' + device.platform + '&lt;br /&gt;' +
+                            'デバイス UUID: '       + device.uuid       + '&lt;br /&gt;' +
+                            'デバイスバージョン: '  + device.version    + '&lt;br /&gt;';
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p id="deviceProperties"&gt;デバイスプロパティーを読込中...&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h2 id="ios-に関する注意点">iOS に関する注意点</h2>
 
 <p>iOS の UUID はデバイスによって一意ではありませんが、インストールされたアプリごとに一意です。もしアプリを削除し再インストールすると、この値は変化します。また、 iOS のバージョンアップをしたとき、もしくはアプリのバージョンアップをしたときにも変化する可能性があります (iOS 5.1 で現象を確認) 。安定した値ではありません。</p>
 
-<h2>Windows Phone 7 に関する注意点</h2>
+<h2 id="windows-phone-7-に関する注意点">Windows Phone 7 に関する注意点</h2>
 
 <p>Windows Phone 7 の UUID には IDCAPIDENTITY_DEVICE の許可が必要です。 Microsoft はこのプロパティーを近い将来サポートしなくなります。もし機能が有効でなければ、アプリが永続的な guid を生成し、インストールされている限り保持されます。</p>
 

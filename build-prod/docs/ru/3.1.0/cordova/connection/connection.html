@@ -1312,74 +1312,93 @@
     }
 </style>
 
-<h1>Подключение</h1>
+<h1 id="подключение">Подключение</h1>
 
 <blockquote>
-<p><code>connection</code>Объектов, через <code>navigator.connection</code> , предоставляет информацию о сотовых и wifi подключение устройства.</p>
+  <p><code class="language-plaintext highlighter-rouge">connection</code>Объектов, через <code class="language-plaintext highlighter-rouge">navigator.connection</code> , предоставляет информацию о сотовых и wifi подключение устройства.</p>
 </blockquote>
 
-<h2>Свойства</h2>
+<h2 id="свойства">Свойства</h2>
 
 <ul>
-<li>  <a href="connection.type.html">connection.type</a></li>
+  <li><a href="connection.type.html">connection.type</a></li>
 </ul>
 
-<h2>Константы</h2>
+<h2 id="константы">Константы</h2>
 
 <ul>
-<li>  Connection.UNKNOWN</li>
-<li>  Connection.ETHERNET</li>
-<li>  Connection.WIFI</li>
-<li>  Connection.CELL_2G</li>
-<li>  Connection.CELL_3G</li>
-<li>  Connection.CELL_4G</li>
-<li>  Connection.CELL</li>
-<li>  Connection.NONE</li>
+  <li>Connection.UNKNOWN</li>
+  <li>Connection.ETHERNET</li>
+  <li>Connection.WIFI</li>
+  <li>Connection.CELL_2G</li>
+  <li>Connection.CELL_3G</li>
+  <li>Connection.CELL_4G</li>
+  <li>Connection.CELL</li>
+  <li>Connection.NONE</li>
 </ul>
 
-<h2>Доступ к функции</h2>
+<h2 id="доступ-к-функции">Доступ к функции</h2>
 
-<p>Начиная с версии 3.0 Кордова реализует интерфейсы API уровень устройства как <em>плагины</em>. Использование CLI <code>plugin</code> команды, описанные в интерфейс командной строки, чтобы добавить или удалить эту функцию для проекта:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    $ cordova plugin add org.apache.cordova.network-information
+<p>Начиная с версии 3.0 Кордова реализует интерфейсы API уровень устройства как <em>плагины</em>. Использование CLI <code class="language-plaintext highlighter-rouge">plugin</code> команды, описанные в интерфейс командной строки, чтобы добавить или удалить эту функцию для проекта:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ cordova plugin add org.apache.cordova.network-information
     $ cordova plugin ls
     [ 'org.apache.cordova.network-information' ]
     $ cordova plugin rm org.apache.cordova.network-information
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Эти команды применяются для всех целевых платформ, но изменить параметры конфигурации платформы, описанные ниже:</p>
 
 <ul>
-<li><p>Андроид</p>
-<div class="highlight"><pre><code class="language-" data-lang="">(in app/res/xml/config.xml)
+  <li>
+    <p>Андроид</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(in app/res/xml/config.xml)
 &lt;feature name="NetworkStatus"&gt;
     &lt;param name="android-package" value="org.apache.cordova.NetworkManager" /&gt;
 &lt;/feature&gt;
-
+    
 (in app/AndroidManifest.xml)
 &lt;uses-permission android:name="android.permission.INTERNET" /&gt;
 &lt;uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /&gt;
 &lt;uses-permission android:name="android.permission.READ_PHONE_STATE" /&gt;
-</code></pre></div></li>
-<li><p>Ежевика WebWorks</p>
-<div class="highlight"><pre><code class="language-" data-lang="">(in www/plugins.xml)
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Ежевика WebWorks</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(in www/plugins.xml)
 &lt;feature name="Network Status"&gt;
     &lt;param name="blackberry-package" value="org.apache.cordova.network.Network" /&gt;
 &lt;/feature&gt;
-</code></pre></div></li>
-<li><p>iOS (в<code>config.xml</code>)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="NetworkStatus"&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>iOS (в<code class="language-plaintext highlighter-rouge">config.xml</code>)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="NetworkStatus"&gt;
     &lt;param name="ios-package" value="CDVConnection" /&gt;
 &lt;/feature&gt;
-</code></pre></div></li>
-<li><p>Windows Phone (в<code>Properties/WPAppManifest.xml</code>)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;Capabilities&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Windows Phone (в<code class="language-plaintext highlighter-rouge">Properties/WPAppManifest.xml</code>)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;Capabilities&gt;
     &lt;Capability Name="ID_CAP_NETWORKING" /&gt;
 &lt;/Capabilities&gt;
-</code></pre></div>
-<p>Ссылка: <a href="http://msdn.microsoft.com/en-us/library/ff769509%28v=vs.92%29.aspx">манифест приложения для Windows Phone</a></p></li>
-<li><p>Tizen (в<code>config.xml</code>)</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;feature name="http://tizen.org/api/systeminfo" required="true"/&gt;
-</code></pre></div>
-<p>Ссылка: <a href="https://developer.tizen.org/help/topic/org.tizen.help.gs/Creating%20a%20Project.html?path=0_1_1_3#8814682_CreatingaProject-EditingconfigxmlFeatures">манифест приложения для Tizen веб-приложения</a></p></li>
+</code></pre></div>    </div>
+
+    <p>Ссылка: <a href="http://msdn.microsoft.com/en-us/library/ff769509%28v=vs.92%29.aspx">манифест приложения для Windows Phone</a></p>
+  </li>
+  <li>
+    <p>Tizen (в<code class="language-plaintext highlighter-rouge">config.xml</code>)</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;feature name="http://tizen.org/api/systeminfo" required="true"/&gt;
+</code></pre></div>    </div>
+
+    <p>Ссылка: <a href="https://developer.tizen.org/help/topic/org.tizen.help.gs/Creating%20a%20Project.html?path=0_1_1_3#8814682_CreatingaProject-EditingconfigxmlFeatures">манифест приложения для Tizen веб-приложения</a></p>
+  </li>
 </ul>
 
 <p>Некоторые платформы могут поддерживать эту функцию без необходимости специальной настройки. В разделе <em>Поддержка платформы</em> в разделе Обзор.</p>

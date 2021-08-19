@@ -1304,27 +1304,30 @@
             
 
             <div id="page-toc-source">
-                <h1>media.startRecord</h1>
+                <h1 id="mediastartrecord">media.startRecord</h1>
 
 <p>開始錄製的音訊檔。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">media.startRecord() ；
-</code></pre></div>
-<h2>說明</h2>
 
-<p><code>media.startRecord</code>方法同步執行，開始錄製的音訊檔。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>media.startRecord() ；
+</code></pre></div></div>
 
-<h2>支援的平臺</h2>
+<h2 id="說明">說明</h2>
+
+<p><code class="language-plaintext highlighter-rouge">media.startRecord</code>方法同步執行，開始錄製的音訊檔。</p>
+
+<h2 id="支援的平臺">支援的平臺</h2>
 
 <ul>
-<li>  Android 系統</li>
-<li>  黑莓手機 WebWorks （OS 5.0 和更高）</li>
-<li>  iOS</li>
-<li>  Windows Phone 7 和 8</li>
-<li>  Windows 8</li>
+  <li>Android 系統</li>
+  <li>黑莓手機 WebWorks （OS 5.0 和更高）</li>
+  <li>iOS</li>
+  <li>Windows Phone 7 和 8</li>
+  <li>Windows 8</li>
 </ul>
 
-<h2>快速的示例</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">// Record audio
+<h2 id="快速的示例">快速的示例</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Record audio
 //
 function recordAudio() {
     var src = "myrecording.mp3";
@@ -1342,100 +1345,110 @@ function recordAudio() {
     // Record audio
     mediaRec.startRecord();
 }
-</code></pre></div>
-<h2>完整的示例</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Device Properties Example<span class="nt">&lt;/title&gt;</span>
+</code></pre></div></div>
 
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">src=</span><span class="s">"cordova.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<h2 id="完整的示例">完整的示例</h2>
 
-    <span class="c1">// Wait for device API libraries to load</span>
-    <span class="c1">//</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"deviceready"</span><span class="p">,</span> <span class="nx">onDeviceReady</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Device Properties Example&lt;/title&gt;
 
-    <span class="c1">// Record audio</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">recordAudio</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">src</span> <span class="o">=</span> <span class="s2">"myrecording.amr"</span><span class="p">;</span>
-        <span class="kd">var</span> <span class="nx">mediaRec</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Media</span><span class="p">(</span><span class="nx">src</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onError</span><span class="p">);</span>
+    &lt;script type="text/javascript" charset="utf-8" src="cordova.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
 
-        <span class="c1">// Record audio</span>
-        <span class="nx">mediaRec</span><span class="p">.</span><span class="nx">startRecord</span><span class="p">();</span>
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
 
-        <span class="c1">// Stop recording after 10 sec</span>
-        <span class="kd">var</span> <span class="nx">recTime</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="kd">var</span> <span class="nx">recInterval</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-            <span class="nx">recTime</span> <span class="o">=</span> <span class="nx">recTime</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-            <span class="nx">setAudioPosition</span><span class="p">(</span><span class="nx">recTime</span> <span class="o">+</span> <span class="s2">" sec"</span><span class="p">);</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nx">recTime</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">recInterval</span><span class="p">);</span>
-                <span class="nx">mediaRec</span><span class="p">.</span><span class="nx">stopRecord</span><span class="p">();</span>
-            <span class="p">}</span>
-        <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
-    <span class="p">}</span>
+    // Record audio
+    //
+    function recordAudio() {
+        var src = "myrecording.amr";
+        var mediaRec = new Media(src, onSuccess, onError);
 
-    <span class="c1">// device APIs are available</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onDeviceReady</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">recordAudio</span><span class="p">();</span>
-    <span class="p">}</span>
+        // Record audio
+        mediaRec.startRecord();
 
-    <span class="c1">// onSuccess Callback</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onSuccess</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"recordAudio():Audio Success"</span><span class="p">);</span>
-    <span class="p">}</span>
+        // Stop recording after 10 sec
+        var recTime = 0;
+        var recInterval = setInterval(function() {
+            recTime = recTime + 1;
+            setAudioPosition(recTime + " sec");
+            if (recTime &gt;= 10) {
+                clearInterval(recInterval);
+                mediaRec.stopRecord();
+            }
+        }, 1000);
+    }
 
-    <span class="c1">// onError Callback</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">onError</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">alert</span><span class="p">(</span><span class="s1">'code: '</span>    <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span>    <span class="o">+</span> <span class="s1">'\n'</span> <span class="o">+</span>
-              <span class="s1">'message: '</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="o">+</span> <span class="s1">'\n'</span><span class="p">);</span>
-    <span class="p">}</span>
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        recordAudio();
+    }
 
-    <span class="c1">// Set audio position</span>
-    <span class="c1">//</span>
-    <span class="kd">function</span> <span class="nx">setAudioPosition</span><span class="p">(</span><span class="nx">position</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'audio_position'</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">position</span><span class="p">;</span>
-    <span class="p">}</span>
+    // onSuccess Callback
+    //
+    function onSuccess() {
+        console.log("recordAudio():Audio Success");
+    }
 
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">"media"</span><span class="nt">&gt;</span>Recording audio...<span class="nt">&lt;/p&gt;</span>
-    <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">"audio_position"</span><span class="nt">&gt;&lt;/p&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2>Android 的怪癖</h2>
+    // onError Callback
+    //
+    function onError(error) {
+        alert('code: '    + error.code    + '\n' +
+              'message: ' + error.message + '\n');
+    }
+
+    // Set audio position
+    //
+    function setAudioPosition(position) {
+        document.getElementById('audio_position').innerHTML = position;
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p id="media"&gt;Recording audio...&lt;/p&gt;
+    &lt;p id="audio_position"&gt;&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<h2 id="android-的怪癖">Android 的怪癖</h2>
 
 <ul>
-<li>  Android 設備音訊格式記錄的自我調整多速率。指定的檔應以<em>.amr</em>副檔名結尾。</li>
+  <li>Android 設備音訊格式記錄的自我調整多速率。指定的檔應以<em>.amr</em>副檔名結尾。</li>
 </ul>
 
-<h2>黑莓 WebWorks 怪癖</h2>
+<h2 id="黑莓-webworks-怪癖">黑莓 WebWorks 怪癖</h2>
 
 <ul>
-<li>  黑莓設備音訊格式記錄的自我調整多速率。指定的檔必須以<em>.amr</em>副檔名結尾。</li>
+  <li>黑莓設備音訊格式記錄的自我調整多速率。指定的檔必須以<em>.amr</em>副檔名結尾。</li>
 </ul>
 
-<h2>iOS 的怪癖</h2>
+<h2 id="ios-的怪癖">iOS 的怪癖</h2>
 
 <ul>
-<li><p>iOS 只記錄到檔的類型<em>.wav</em>和返回一個錯誤如果檔副檔名不正確。</p></li>
-<li><p>如果未提供的完整路徑，錄音放在應用程式的 <code>documents/tmp</code> 目錄。 這可以通過訪問 <code>File</code> API 使用 <code>LocalFileSystem.TEMPORARY</code> 。 在記錄時指定的任何子目錄中必須已經存在。</p></li>
-<li><p>檔可以記錄和演奏的後面使用的檔的 URI：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">var myMedia = new Media("documents://beer.mp3")
-</code></pre></div></li>
+  <li>
+    <p>iOS 只記錄到檔的類型<em>.wav</em>和返回一個錯誤如果檔副檔名不正確。</p>
+  </li>
+  <li>
+    <p>如果未提供的完整路徑，錄音放在應用程式的 <code class="language-plaintext highlighter-rouge">documents/tmp</code> 目錄。 這可以通過訪問 <code class="language-plaintext highlighter-rouge">File</code> API 使用 <code class="language-plaintext highlighter-rouge">LocalFileSystem.TEMPORARY</code> 。 在記錄時指定的任何子目錄中必須已經存在。</p>
+  </li>
+  <li>
+    <p>檔可以記錄和演奏的後面使用的檔的 URI：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var myMedia = new Media("documents://beer.mp3")
+</code></pre></div>    </div>
+  </li>
 </ul>
 
-<h2>Tizen 怪癖</h2>
+<h2 id="tizen-怪癖">Tizen 怪癖</h2>
 
 <ul>
-<li>  Tizen 設備上不支援。</li>
+  <li>Tizen 設備上不支援。</li>
 </ul>
 
 

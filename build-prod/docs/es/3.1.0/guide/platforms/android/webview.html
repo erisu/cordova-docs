@@ -1304,32 +1304,45 @@
             
 
             <div id="page-toc-source">
-                <h1>Android WebViews</h1>
+                <h1 id="android-webviews">Android WebViews</h1>
 
-<p>Desde Córdoba 1.9, con la asistencia de la <code>CordovaActivity</code>, puede utilizar Cordova como un componente en una aplicación Android nativa más grande. Android se refiere a este componente como el <code>CordovaWebView</code>. Nuevas aplicaciones basadas en Córdoba de 1,9 en adelante utilizar el <code>CordovaWebView</code> como su principal punto de vista, independientemente de si el legado <code>CordovaActivity</code> enfoque se utiliza.</p>
+<p>Desde Córdoba 1.9, con la asistencia de la <code class="language-plaintext highlighter-rouge">CordovaActivity</code>, puede utilizar Cordova como un componente en una aplicación Android nativa más grande. Android se refiere a este componente como el <code class="language-plaintext highlighter-rouge">CordovaWebView</code>. Nuevas aplicaciones basadas en Córdoba de 1,9 en adelante utilizar el <code class="language-plaintext highlighter-rouge">CordovaWebView</code> como su principal punto de vista, independientemente de si el legado <code class="language-plaintext highlighter-rouge">CordovaActivity</code> enfoque se utiliza.</p>
 
 <p>Si no está familiarizado con el desarrollo de aplicaciones Android, por favor lea a la guía de plataforma Android para desarrollar una aplicación Cordova antes de intentar incluir un WebView. No es la forma principal de autor aplicaciones Android Cordova. Estas instrucciones están actualmente manuales, pero eventualmente se puede automatizarse.</p>
 
-<h2>Prerequisitos</h2>
+<h2 id="prerequisitos">Prerequisitos</h2>
 
 <ul>
-<li><p>Córdoba 1.9 o mayor</p></li>
-<li><p>SDK de Android actualizado al último SDK</p></li>
+  <li>
+    <p>Córdoba 1.9 o mayor</p>
+  </li>
+  <li>
+    <p>SDK de Android actualizado al último SDK</p>
+  </li>
 </ul>
 
-<h2>Guía de uso de CordovaWebView en un proyecto de Android</h2>
+<h2 id="guía-de-uso-de-cordovawebview-en-un-proyecto-de-android">Guía de uso de CordovaWebView en un proyecto de Android</h2>
 
 <ol>
-<li><p><code>cd</code>en <code>/framework</code> y ejecutar <code>ant jar</code> para construir la jarra cordova. Se crea el archivo .jar formado como <code>cordova-x.x.x.jar</code> en el <code>/framework</code> Directorio.</p></li>
-<li><p>Copie la jarra cordova en su proyecto Android <code>/libs</code> Directorio.</p></li>
-<li><p>Editar de la aplicación <code>main.xml</code> archivo (bajo <code>/res/xml</code> ) para ver como el siguiente, con el <code>layout_height</code> , <code>layout_width</code> y <code>id</code> modificado para adaptarse a su aplicación:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;org.apache.cordova.CordovaWebView
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cd</code>en <code class="language-plaintext highlighter-rouge">/framework</code> y ejecutar <code class="language-plaintext highlighter-rouge">ant jar</code> para construir la jarra cordova. Se crea el archivo .jar formado como <code class="language-plaintext highlighter-rouge">cordova-x.x.x.jar</code> en el <code class="language-plaintext highlighter-rouge">/framework</code> Directorio.</p>
+  </li>
+  <li>
+    <p>Copie la jarra cordova en su proyecto Android <code class="language-plaintext highlighter-rouge">/libs</code> Directorio.</p>
+  </li>
+  <li>
+    <p>Editar de la aplicación <code class="language-plaintext highlighter-rouge">main.xml</code> archivo (bajo <code class="language-plaintext highlighter-rouge">/res/xml</code> ) para ver como el siguiente, con el <code class="language-plaintext highlighter-rouge">layout_height</code> , <code class="language-plaintext highlighter-rouge">layout_width</code> y <code class="language-plaintext highlighter-rouge">id</code> modificado para adaptarse a su aplicación:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;org.apache.cordova.CordovaWebView
     android:id="@+id/tutorialView"
     android:layout_width="match_parent"
     android:layout_height="match_parent" /&gt;
-</code></pre></div></li>
-<li><p>Modificar su actividad para que implementa el <code>CordovaInterface</code> . Debe implementar los métodos incluidos. Puede que desee copiar desde <code>/framework/src/org/apache/cordova/CordovaActivity.java</code> , o implementarlas en tu propio. El fragmento de código siguiente muestra una aplicación básica que utiliza la interfaz. Observe cómo coincide con el id de referencia ver el <code>id</code> atributo especificado en el fragmento de XML se muestra arriba:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">public class CordovaViewTestActivity extends Activity implements CordovaInterface {
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Modificar su actividad para que implementa el <code class="language-plaintext highlighter-rouge">CordovaInterface</code> . Debe implementar los métodos incluidos. Puede que desee copiar desde <code class="language-plaintext highlighter-rouge">/framework/src/org/apache/cordova/CordovaActivity.java</code> , o implementarlas en tu propio. El fragmento de código siguiente muestra una aplicación básica que utiliza la interfaz. Observe cómo coincide con el id de referencia ver el <code class="language-plaintext highlighter-rouge">id</code> atributo especificado en el fragmento de XML se muestra arriba:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class CordovaViewTestActivity extends Activity implements CordovaInterface {
     CordovaWebView cwv;
     /* Called when the activity is first created. */
     @Override
@@ -1340,11 +1353,13 @@
         Config.init(this);
         cwv.loadUrl(Config.getStartUrl());
     }
-</code></pre></div></li>
+</code></pre></div>    </div>
+  </li>
 </ol>
 
 <p>Si se utiliza la cámara, también debe implementar esto:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    @Override
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @Override
     public void setActivityResultCallback(CordovaPlugin plugin) {
         this.activityResultCallback = plugin;
     }
@@ -1386,16 +1401,23 @@
             callback.onActivityResult(requestCode, resultCode, intent);
         }
     }
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Finalmente, no olvide añadir el grupo de subprocesos, de lo contrario los plugins no tienen hilos para correr en:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">    @Override
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @Override
     public ExecutorService getThreadPool() {
         return threadPool;
     }
-</code></pre></div>
+</code></pre></div></div>
+
 <ol>
-<li><p>Copia archivos HTML y JavaScript de la aplicación de su proyecto Android <code>/assets/www</code> Directorio.</p></li>
-<li><p>Copia <code>config.xml</code> de <code>/framework/res/xml</code> a de su proyecto <code>/res/xml</code> Directorio.</p></li>
+  <li>
+    <p>Copia archivos HTML y JavaScript de la aplicación de su proyecto Android <code class="language-plaintext highlighter-rouge">/assets/www</code> Directorio.</p>
+  </li>
+  <li>
+    <p>Copia <code class="language-plaintext highlighter-rouge">config.xml</code> de <code class="language-plaintext highlighter-rouge">/framework/res/xml</code> a de su proyecto <code class="language-plaintext highlighter-rouge">/res/xml</code> Directorio.</p>
+  </li>
 </ol>
 
 

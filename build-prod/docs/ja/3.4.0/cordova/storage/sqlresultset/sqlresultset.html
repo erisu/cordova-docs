@@ -1172,43 +1172,59 @@
             
 
             <div id="page-toc-source">
-                <h1>SQLResultSet</h1>
+                <h1 id="sqlresultset">SQLResultSet</h1>
 
-<p>ときに、 <code>[SQLTransaction](../sqltransaction/sqltransaction.html)</code> オブジェクトの <code>executeSql</code> メソッドは、指定されたコールバック実行される、 <code>SQLResultSet</code> パラメーター。</p>
+<p>ときに、 <code class="language-plaintext highlighter-rouge">[SQLTransaction](../sqltransaction/sqltransaction.html)</code> オブジェクトの <code class="language-plaintext highlighter-rouge">executeSql</code> メソッドは、指定されたコールバック実行される、 <code class="language-plaintext highlighter-rouge">SQLResultSet</code> パラメーター。</p>
 
-<h2>プロパティ</h2>
-
-<ul>
-<li><p><strong>insertId</strong>: 行の行 ID を <code>SQLResultSet</code> オブジェクトの SQL 文をデータベースに挿入します。</p></li>
-<li><p><strong>rowsAffected</strong>： 0 ステートメントは、行に影響しない場合、SQL ステートメントによって変更された行の数。</p></li>
-<li><p><strong>行</strong>: <code>[SQLResultSetRowList](../sqlresultsetrowlist/sqlresultsetrowlist.html)</code> 返される行を表す、空の行が返されない場合。</p></li>
-</ul>
-
-<h2>詳細</h2>
-
-<p>ときに、 <code>[SQLTransaction](../sqltransaction/sqltransaction.html)</code> オブジェクトの <code>executeSql</code> メソッドは、指定されたコールバックで実行すること、 <code>SQLResultSet</code> 3 つのプロパティが含まれているパラメーター。</p>
+<h2 id="プロパティ">プロパティ</h2>
 
 <ul>
-<li><p><code>insertId</code>、Successly の SQL 挿入ステートメントの行番号を返します。場合は、SQL は、任意の行を挿入しません、 <code>insertId</code> が設定されていません。</p></li>
-<li><p><code>rowsAffected</code>は、常に `<code>sql</code>select<code>ステートメント。ため</code>insert<code>または</code>update` 変更された行のステートメントの数を返します。</p></li>
-<li><p>最終的な <code>SQLResultSetList</code> SQL の select ステートメントから返されたデータが含まれています。</p></li>
+  <li>
+    <p><strong>insertId</strong>: 行の行 ID を <code class="language-plaintext highlighter-rouge">SQLResultSet</code> オブジェクトの SQL 文をデータベースに挿入します。</p>
+  </li>
+  <li>
+    <p><strong>rowsAffected</strong>： 0 ステートメントは、行に影響しない場合、SQL ステートメントによって変更された行の数。</p>
+  </li>
+  <li>
+    <p><strong>行</strong>: <code class="language-plaintext highlighter-rouge">[SQLResultSetRowList](../sqlresultsetrowlist/sqlresultsetrowlist.html)</code> 返される行を表す、空の行が返されない場合。</p>
+  </li>
 </ul>
 
-<h2>サポートされているプラットフォーム</h2>
+<h2 id="詳細">詳細</h2>
+
+<p>ときに、 <code class="language-plaintext highlighter-rouge">[SQLTransaction](../sqltransaction/sqltransaction.html)</code> オブジェクトの <code class="language-plaintext highlighter-rouge">executeSql</code> メソッドは、指定されたコールバックで実行すること、 <code class="language-plaintext highlighter-rouge">SQLResultSet</code> 3 つのプロパティが含まれているパラメーター。</p>
 
 <ul>
-<li>  アンドロイド</li>
-<li>  ブラックベリー WebWorks (OS 6.0 およびより高い)</li>
-<li>  iOS</li>
-<li>  Tizen</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">insertId</code>、Successly の SQL 挿入ステートメントの行番号を返します。場合は、SQL は、任意の行を挿入しません、 <code class="language-plaintext highlighter-rouge">insertId</code> が設定されていません。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">rowsAffected</code>は、常に `` sql <code class="language-plaintext highlighter-rouge">select</code> ステートメント。ため <code class="language-plaintext highlighter-rouge">insert</code> または <code class="language-plaintext highlighter-rouge">update</code> 変更された行のステートメントの数を返します。</p>
+  </li>
+  <li>
+    <p>最終的な <code class="language-plaintext highlighter-rouge">SQLResultSetList</code> SQL の select ステートメントから返されたデータが含まれています。</p>
+  </li>
 </ul>
 
-<h2>簡単な例を SQL を実行します。</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">機能 queryDB(tx) {tx.executeSql (' 選択 * からデモ '、、querySuccess、errorCB);}querySuccess （テキサス州、結果） 機能 {console.log ("で返された行数 ="+ results.rows.length);//select ステートメントだったのでそして rowsAffected は 0 だった場合は、true になります (! results.rowsAffected) {console.log ('ない行!');リターン偽;}//、insert ステートメントのこのプロパティは最後に挿入された行 console.log の ID を返します ("最後に挿入された行の ID ="+ results.insertId);}errorCB(err) 関数 {警告 ("SQL を処理中にエラー:"+ err.code);}var db = window.openDatabase (「データベース」、「1.0」、」コルドバ デモ「、200000);db.transaction queryDB （errorCB）;
-</code></pre></div>
-<h2>完全な例</h2>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="cp">&lt;!DOCTYPE html &gt;</span><span class="nt">&lt;</span> <span class="nt">html</span> <span class="nt">&gt;&lt;</span> <span class="err">頭</span> <span class="nt">&gt;&lt;</span> <span class="err">タイトル</span> <span class="nt">&gt;</span> ストレージの例 <span class="nt">&lt;/</span><span class="err">タイトル</span> <span class="nt">&gt;&lt;</span> <span class="err">型のスクリプト"テキスト/</span><span class="na">javascript</span> <span class="err">に"</span><span class="na">charset =</span><span class="s">「utf-8」src="cordova.js</span> <span class="err">="</span><span class="nt">&gt;&lt;/</span><span class="err">スクリプト</span> <span class="nt">&gt;&lt;</span> <span class="err">型のスクリプト"テキスト/</span><span class="na">javascript</span> <span class="err">に"</span><span class="na">charset =</span><span class="err"> </span><span class="s">=「utf-8」</span><span class="nt">&gt;</span>/デバイス API ライブラリをロードするを待つ///document.addEventListener （"deviceready"、onDeviceReady、false);//データベース設定//関数 populateDB(tx) {tx.executeSql （' ドロップ テーブル IF EXISTS デモ'）;tx.executeSql （' 作成テーブル IF NOT 存在するデモ (id 固有データ)'）;tx.executeSql (' (id、データ) のデモに挿入値 （1、「最初の行」)');tx.executeSql ('(id、データ) のデモに挿入値 （2、」2 番目の行"));}//データベースのクエリ//queryDB(tx) 関数 {tx.executeSql (' 選択 * からデモ '、、querySuccess、errorCB);}//クエリ成功コールバック//querySuccess （テキサス州、結果） 関数 {console.log ("で返された行数 ="+ results.rows.length);//select ステートメントだったのでそして rowsAffected は 0 だった場合は、true になります (! results.rowsAffected) {console.log ('ない行!');リターン偽;}//、insert ステートメントのこのプロパティは最後に挿入された行 console.log の ID を返します ("最後に挿入された行の ID ="+ results.insertId);}//トランザクション エラー コールバック//errorCB(err) 関数 {console.log ("SQL を処理中にエラー:"+ err.code);}//取引成功コールバック//successCB() 関数 {var db = window.openDatabase (「データベース」、「1.0」、」コルドバ デモ「、200000);db.transaction queryDB （errorCB）;}/デバイス Api が利用可能な///onDeviceReady() 関数 {var db = window.openDatabase (「データベース」、「1.0」、」コルドバ デモ「、200000);db.transaction (populateDB、errorCB、successCB);} <span class="nt">&lt;/</span><span class="err">スクリプト</span> <span class="nt">&gt;&lt;/</span><span class="err">ヘッド</span> <span class="nt">&gt;&lt;</span> <span class="err">本体</span> <span class="nt">&gt;&lt;</span> <span class="nt">h1</span> <span class="nt">&gt;</span> 例 <span class="nt">&lt;/h1</span> <span class="nt">&gt;&lt;</span> <span class="err">データベース</span> <span class="na">p</span> <span class="nt">&gt;</span> <span class="nt">&lt;/p</span> <span class="nt">&gt;&lt;/</span><span class="err">ボディ</span> <span class="nt">&gt;&lt;/html</span> <span class="nt">&gt;</span>
-</code></pre></div>
+<h2 id="サポートされているプラットフォーム">サポートされているプラットフォーム</h2>
+
+<ul>
+  <li>アンドロイド</li>
+  <li>ブラックベリー WebWorks (OS 6.0 およびより高い)</li>
+  <li>iOS</li>
+  <li>Tizen</li>
+</ul>
+
+<h2 id="簡単な例を-sql-を実行します">簡単な例を SQL を実行します。</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>機能 queryDB(tx) {tx.executeSql (' 選択 * からデモ '、、querySuccess、errorCB);}querySuccess （テキサス州、結果） 機能 {console.log ("で返された行数 ="+ results.rows.length);//select ステートメントだったのでそして rowsAffected は 0 だった場合は、true になります (! results.rowsAffected) {console.log ('ない行!');リターン偽;}//、insert ステートメントのこのプロパティは最後に挿入された行 console.log の ID を返します ("最後に挿入された行の ID ="+ results.insertId);}errorCB(err) 関数 {警告 ("SQL を処理中にエラー:"+ err.code);}var db = window.openDatabase (「データベース」、「1.0」、」コルドバ デモ「、200000);db.transaction queryDB （errorCB）;
+</code></pre></div></div>
+
+<h2 id="完全な例">完全な例</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html &gt;&lt; html &gt;&lt; 頭 &gt;&lt; タイトル &gt; ストレージの例 &lt;/タイトル &gt;&lt; 型のスクリプト"テキスト/javascript に"charset =「utf-8」src="cordova.js ="&gt;&lt;/スクリプト &gt;&lt; 型のスクリプト"テキスト/javascript に"charset = =「utf-8」&gt;/デバイス API ライブラリをロードするを待つ///document.addEventListener （"deviceready"、onDeviceReady、false);//データベース設定//関数 populateDB(tx) {tx.executeSql （' ドロップ テーブル IF EXISTS デモ'）;tx.executeSql （' 作成テーブル IF NOT 存在するデモ (id 固有データ)'）;tx.executeSql (' (id、データ) のデモに挿入値 （1、「最初の行」)');tx.executeSql ('(id、データ) のデモに挿入値 （2、」2 番目の行"));}//データベースのクエリ//queryDB(tx) 関数 {tx.executeSql (' 選択 * からデモ '、、querySuccess、errorCB);}//クエリ成功コールバック//querySuccess （テキサス州、結果） 関数 {console.log ("で返された行数 ="+ results.rows.length);//select ステートメントだったのでそして rowsAffected は 0 だった場合は、true になります (! results.rowsAffected) {console.log ('ない行!');リターン偽;}//、insert ステートメントのこのプロパティは最後に挿入された行 console.log の ID を返します ("最後に挿入された行の ID ="+ results.insertId);}//トランザクション エラー コールバック//errorCB(err) 関数 {console.log ("SQL を処理中にエラー:"+ err.code);}//取引成功コールバック//successCB() 関数 {var db = window.openDatabase (「データベース」、「1.0」、」コルドバ デモ「、200000);db.transaction queryDB （errorCB）;}/デバイス Api が利用可能な///onDeviceReady() 関数 {var db = window.openDatabase (「データベース」、「1.0」、」コルドバ デモ「、200000);db.transaction (populateDB、errorCB、successCB);} &lt;/スクリプト &gt;&lt;/ヘッド &gt;&lt; 本体 &gt;&lt; h1 &gt; 例 &lt;/h1 &gt;&lt; データベース p &gt; &lt;/p &gt;&lt;/ボディ &gt;&lt;/html &gt;
+</code></pre></div></div>
+
 
             </div>
         </div>
