@@ -83,93 +83,20 @@ window.addEventListener("cordovacallbackerror", function (event) {
 
 The following table lists the cordova events and the supported platforms:
 
-<!-- START HTML -->
-<table class="compat" width="100%">
-    <thead>
-        <tr>
-            <th>Supported Platforms/<br/>Events</th>
-            <th>android</th>
-            <th>ios</th>
-            <th>Windows</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th><a href="#deviceready">deviceready</a></th>
-            <td data-col="android"    class="y"></td>
-            <td data-col="ios"        class="y"></td>
-            <td data-col="win"       class="y"></td>
-        </tr>
-        <tr>
-            <th><a href="#pause">pause</a></th>
-            <td data-col="android"    class="y"></td>
-            <td data-col="ios"        class="y"></td>
-            <td data-col="win"       class="y"></td>
-        </tr>
-        <tr>
-            <th><a href="#resume">resume</a></th>
-            <td data-col="android"    class="y"></td>
-            <td data-col="ios"        class="y"></td>
-            <td data-col="win"       class="y"></td>
-        </tr>
-        <tr>
-            <th><a href="#backbutton">backbutton</a></th>
-            <td data-col="android"    class="y"></td>
-            <td data-col="ios"        class="n"></td>
-            <td data-col="win"       class="y"></td>
-        </tr>
-        <tr>
-            <th><a href="#menubutton">menubutton</a></th>
-            <td data-col="android"    class="y"></td>
-            <td data-col="ios"        class="n"></td>
-            <td data-col="win"       class="n"></td>
-        </tr>
-        <tr>
-            <th><a href="#searchbutton">searchbutton</a></th>
-            <td data-col="android"    class="y"></td>
-            <td data-col="ios"        class="n"></td>
-            <td data-col="win"       class="n"></td>
-        </tr>
-        <tr>
-            <th><a href="#startcallbutton">startcallbutton</a></th>
-            <td data-col="android"    class="n"></td>
-            <td data-col="ios"        class="n"></td>
-            <td data-col="win"       class="n"></td>
-        </tr>
-        <tr>
-            <th><a href="#endcallbutton">endcallbutton</a></th>
-            <td data-col="android"    class="n"></td>
-            <td data-col="ios"        class="n"></td>
-            <td data-col="win"       class="n"></td>
-        </tr>
-        <tr>
-            <th><a href="#volumedownbutton">volumedownbutton</a></th>
-            <td data-col="android"    class="y"></td>
-            <td data-col="ios"        class="n"></td>
-            <td data-col="win"       class="n"></td>
-        </tr>
-        <tr>
-            <th><a href="#volumeupbutton">volumeupbutton</a></th>
-            <td data-col="android"    class="y"></td>
-            <td data-col="ios"        class="n"></td>
-            <td data-col="win"       class="n"></td>
-        </tr>
-        <tr>
-            <th><a href="#activated">activated</a></th>
-            <td data-col="android"    class="n"></td>
-            <td data-col="ios"        class="n"></td>
-            <td data-col="win"       class="y"></td>
-        </tr>
-        <tr>
-            <th><a href="#cordovacallbackerror">cordovacallbackerror</a></th>
-            <td data-col="android"    class="y"></td>
-            <td data-col="ios"        class="y"></td>
-            <td data-col="win"       class="y"></td>
-        </tr>
-    </tbody>
-</table>
-<!-- END HTML -->
-
+| Cordova Events | Android | iOS | Windows |
+| -- | :--: | :--: | :--: |
+| [deviceready](#deviceready) | &#9989; | &#9989; | &#9989; |
+| [pause](#pause) | &#9989; | &#9989; | &#9989; |
+| [resume](#resume) | &#9989; | &#9989; | &#9989; |
+| [backbutton](#backbutton) | &#9989; | &#10060; | &#9989; |
+| [menubutton](#menubutton) | &#9989; | &#10060; | &#10060; |
+| [searchbutton](#searchbutton) | &#9989; | &#10060; | &#10060; |
+| [startcallbutton](#startcallbutton) | &#10060; | &#10060; | &#10060; |
+| [endcallbutton](#endcallbutton) | &#10060; | &#10060; | &#10060; |
+| [volumedownbutton](#volumedownbutton) | &#9989; | &#10060; | &#10060; |
+| [volumeupbutton](#volumeupbutton) | &#9989; | &#10060; | &#10060; |
+| [activated](#activated) | &#10060; | &#10060; | &#9989; |
+| [cordovacallbackerror](#cordovacallbackerror) | &#9989; | &#9989; | &#9989; |
 
 ## deviceready
 
