@@ -48,14 +48,22 @@
     <script defer type="text/javascript" src="/static/js/lib/jquery-2.1.1.min.js"></script>
     <script defer type="text/javascript" src="/static/js/lib/bootstrap.min.js"></script>
 
-    <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-64283057-1', 'auto');
-    ga('send', 'pageview');
-</script>
+    <!-- Matomo -->
+<script>
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="https://analytics.apache.org/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '16']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+  
 
 </head>
 
@@ -1440,9 +1448,31 @@
                             <a href="/docs/en/latest/" class="missing-page">
                                 
                                     
-                                10.x
+                                11.x
                                 
                                     (Latest)
+                                
+                            
+                                
+                            </a>
+                        </li>
+                        
+                        <li>
+                            
+                            
+
+                            
+
+                            
+                            
+                            
+
+                            
+
+                            <a href="/docs/en/10.x/" class="missing-page">
+                                
+                                    
+                                10.x
                                 
                             
                                 
@@ -2534,7 +2564,7 @@ the <code>cordova.file.*</code> properties map to physical paths on a real devic
       <td style="text-align: left"><code>&lt;sdcard&gt;/</code></td>
       <td style="text-align: left">externalRootDirectory</td>
       <td style="text-align: left">sdcard</td>
-      <td style="text-align: center">r/w</td>
+      <td style="text-align: center">r/w***</td>
       <td style="text-align: center">Yes</td>
       <td style="text-align: center">No</td>
       <td style="text-align: center">No</td>
@@ -2576,6 +2606,8 @@ the <code>cordova.file.*</code> properties map to physical paths on a real devic
 <p>** The OS does not clear this directory automatically; you are responsible for managing
      the contents yourself. Should the user purge the cache manually, the contents of the
      directory are removed.</p>
+
+<p>*** As of API 30, these directories are no longer writable.</p>
 
 <p><strong>Note</strong>: If external storage can&#39;t be mounted, the <code>cordova.file.external*</code>
 properties are <code>null</code>.</p>
@@ -2954,7 +2986,25 @@ This method will now return filesystem URLs of the form</p>
 
 <p>which can be used to identify the file uniquely.</p>
 
+<p>In v7.0.0 the return value of <code>toURL()</code> for Android was updated to return the absolute <code>file://</code> URL when app content is served from the <code>file://</code> scheme.</p>
+
+<p>If app content is served from the <code>http(s)://</code> scheme, a <code>cdvfile</code> formatted URL will be returned instead. The <code>cdvfile</code> formatted URL is created from the internal method <code>toInternalURL()</code>.</p>
+
+<p>An example <code>toInternalURL()</code> return filesystem URL:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://localhost/persistent/path/to/file
+</code></pre></div></div>
+
+<p><a href="//sketchviz.com/@erisu/7b05499842275be93a0581e8e3576798"><img src="https://sketchviz.com/@erisu/7b05499842275be93a0581e8e3576798/6dc71d8302cafd05b443d874a592d10fa415b8e3.sketchy.png" alt="toURL flow" /></a></p>
+
+<p>It is recommended to always use the <code>toURL()</code> to ensure that the correct URL is returned.</p>
+
 <h2>cdvfile protocol</h2>
+
+<ul>
+  <li>Not Supported on Android</li>
+</ul>
+
 <p><strong>Purpose</strong></p>
 
 <p><code>cdvfile://localhost/persistent|temporary|another-fs-root*/path/to/file</code> can be used for platform-independent file paths.
@@ -3457,6 +3507,9 @@ Android also supports a special filesystem named &quot;documents&quot;, which re
                     <li>
                         <a target="_blank" href="http://www.apache.org/security/">Security</a>
                     </li>
+                    <li>
+                        <a target="_blank" href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy policy</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -3473,7 +3526,7 @@ Android also supports a special filesystem named &quot;documents&quot;, which re
     </div>
 </div>
 <p class="copyright_text">
-    Copyright &copy; 2021 The Apache Software Foundation, Licensed under the <a target="_blank" href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.<br/>
+    Copyright &copy; 2022 The Apache Software Foundation, Licensed under the <a target="_blank" href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.<br/>
     Apache and the Apache feather logos are <a target="_blank" href="http://www.apache.org/foundation/marks/list/">trademarks</a> of The Apache Software Foundation.
     <br/>
     "Raleway" font used under license. For details see the <a href="/attributions/">attributions page</a>.
