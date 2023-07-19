@@ -294,7 +294,7 @@
     <li>
         
             <a class="" href="/docs/en/dev/guide/platforms/windows/index.html">
-                Windows (deprecated)
+                
             </a>
             
         
@@ -309,7 +309,7 @@
     <li>
         
             <a class="" href="/docs/en/dev/guide/platforms/osx/index.html">
-                OS X (deprecated)
+                
             </a>
             
         
@@ -527,7 +527,7 @@
     <li>
         
             <a class="" href="/docs/en/dev/guide/platforms/windows/plugin.html">
-                Windows
+                
             </a>
             
         
@@ -1064,7 +1064,7 @@
 
 <li>
     <a class="" href="/docs/en/dev/guide/platforms/windows/index.html">
-        Windows (deprecated)
+        
     </a>
 </li>
 
@@ -1073,7 +1073,7 @@
 
 <li>
     <a class="" href="/docs/en/dev/guide/platforms/osx/index.html">
-        OS X (deprecated)
+        
     </a>
 </li>
 
@@ -1193,7 +1193,7 @@
 
 <li>
     <a class="" href="/docs/en/dev/guide/platforms/windows/plugin.html">
-        Windows
+        
     </a>
 </li>
 
@@ -2468,23 +2468,37 @@ and the <a href="https://developer.apple.com/library/prerelease/ios/documentatio
       <td>(Optional) GUID of the provisioning profile to be used for manual signing. It is copied here on your Mac: <code>~/Library/MobileDevice/Provisioning\ Profiles/</code>. Opening it in a text editor, you can find the GUID which needs to be specified here if using manual signing.</td>
     </tr>
     <tr>
-      <td>Code Sign Resource Rules</td>
-      <td><code>--codesignResourceRules</code></td>
-      <td>(Optional) Used to control which files in a bundle should be sealed by a code signature. For more details, read <a href="https://developer.apple.com/library/mac/technotes/tn2206/_index.html#//apple_ref/doc/uid/DTS40007919-CH1-TNTAG206">The OS X Code Signing In Depth article</a></td>
-    </tr>
-    <tr>
       <td>Automatic Provisioning</td>
       <td><code>--automaticProvisioning</code></td>
       <td>(Optional) Enable to allow Xcode to automatically manage provisioning profiles. Valid options are <code>false</code> (the default) and <code>true</code>.</td>
     </tr>
+    <tr>
+      <td>Authentication Key Path</td>
+      <td><code>--authenticationKeyPath</code></td>
+      <td>(Optional) The path to an <a href="https://developer.apple.com/documentation/appstoreconnectapi/creating_api_keys_for_app_store_connect_api">App Store Connect API</a> p8 key file, for automatic distribution signing.</td>
+    </tr>
+    <tr>
+      <td>Authentication Key ID</td>
+      <td><code>--authenticationKeyID</code></td>
+      <td>(Optional) The key ID for the App Store Connect API key file, for automatic distribution signing.</td>
+    </tr>
+    <tr>
+      <td>Authentication Key Issuer ID</td>
+      <td><code>--authenticationKeyIssuerID</code></td>
+      <td>(Optional) The issuer ID value for the App Store Connect API credentials,for automatic distribution signing.</td>
+    </tr>
   </tbody>
 </table>
 
+<p>These parameters can be specified using the command line arguments above to the Cordova CLI <code>build</code> or <code>run</code> commands.</p>
+
+<p><strong>Note</strong>: You should use double <code>--</code> to indicate that these are platform-specific arguments, for example:</p>
+
+<p><code>cordova run ios --release -- --codeSignIdentity="iPhone Developer" --developmentTeam=FG35JLLMXX4A --packageType=development</code>.</p>
+
 <h3>Using build.json</h3>
 
-<p>Alternatively, you could specify them in a build configuration file (<code>build.json</code>)
-using the <code>--buildConfig</code> argument to the same commands. Here&#39;s a sample of a
-build configuration file:</p>
+<p>Alternatively, you could specify these flags in a build configuration file (default: <code>build.json</code> or add the <code>--buildConfig</code> flag to the same commands, so you can also use other file names e.g. <code>cordova build ios --buildConfig=../customBuild.json</code>). Here&#39;s a sample of a build configuration file:</p>
 
 <p>For automatic signing, where provisioning profiles are managed automatically by Xcode (recommended):</p>
 
@@ -2494,23 +2508,16 @@ build configuration file:</p>
             </span><span class="nl">"codeSignIdentity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"iPhone Developer"</span><span class="p">,</span><span class="w">
             </span><span class="nl">"developmentTeam"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FG35JLLMXX4A"</span><span class="p">,</span><span class="w">
             </span><span class="nl">"packageType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"development"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"automaticProvisioning"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"buildFlag"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                </span><span class="s2">"EMBEDDED_CONTENT_CONTAINS_SWIFT = YES"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES=NO"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"LD_RUNPATH_SEARCH_PATHS = </span><span class="se">\"</span><span class="s2">@executable_path/Frameworks</span><span class="se">\"</span><span class="s2">"</span><span class="w">
-            </span><span class="p">]</span><span class="w">
+            </span><span class="nl">"automaticProvisioning"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nl">"release"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nl">"codeSignIdentity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"iPhone Developer"</span><span class="p">,</span><span class="w">
             </span><span class="nl">"developmentTeam"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FG35JLLMXX4A"</span><span class="p">,</span><span class="w">
             </span><span class="nl">"packageType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app-store"</span><span class="p">,</span><span class="w">
             </span><span class="nl">"automaticProvisioning"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"buildFlag"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                </span><span class="s2">"EMBEDDED_CONTENT_CONTAINS_SWIFT = YES"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES=NO"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"LD_RUNPATH_SEARCH_PATHS = </span><span class="se">\"</span><span class="s2">@executable_path/Frameworks</span><span class="se">\"</span><span class="s2">"</span><span class="w">
-            </span><span class="p">]</span><span class="w">
+            </span><span class="nl">"authenticationKeyPath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/path/to/AuthKey_D383SF739.p8"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"authenticationKeyID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D383SF739"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"authenticationKeyIssuerID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6053b7fe-68a8-4acb-89be-165aa6465141"</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -2535,6 +2542,8 @@ build configuration file:</p>
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
+
+<p>There is also support to mix and match command line arguments and parameters in <code>build.json</code>. Values from the command line arguments will get precedence.</p>
 
 <h2>Xcode Build Flags</h2>
 
@@ -2691,7 +2700,7 @@ scripts for the project-specific Cordova commands (e.g. <code>run</code>, <code>
     </div>
 </div>
 <p class="copyright_text">
-    Copyright &copy; 2022 The Apache Software Foundation, Licensed under the <a target="_blank" href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.<br/>
+    Copyright &copy; 2023 The Apache Software Foundation, Licensed under the <a target="_blank" href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.<br/>
     Apache and the Apache feather logos are <a target="_blank" href="https://www.apache.org/foundation/marks/list/">trademarks</a> of The Apache Software Foundation.
     <br/>
     <p>See the <a href="/attributions/">attributions page</a> for other copyright & trademark notices.</p>
