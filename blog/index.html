@@ -28,8 +28,6 @@
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="/static/css/main.css">
     <link rel="stylesheet" type="text/css" href="/static/css/lib/syntax.css">
-    <!-- Algolia Search CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css" />
 
     <!-- Fonts -->
     <!-- For attribution information, see www/attributions.html -->
@@ -106,7 +104,6 @@
                             <form class="navbar-form navbar-right" id="header-search-form" role="search">
                                 <div class="input-group">
                                     
-                                    <input id="header-search-field" type="text" placeholder="Search '11.x' docs..." class="form-control hidden-xs" autocomplete="off">
                                 </div>
                             </form>
                         </li>
@@ -129,6 +126,719 @@
             </span>
         </h1>
         <ul class="posts">
+            
+            <li>
+                <header>
+                    <div class="adorner" blogTime="Wed, 03 Apr 2024 00:00:00 +0000"></div>
+                    <h2 class="title">
+                        <a href="/announcements/2024/04/03/cordova-ios-7.1.0.html">Cordova iOS 7.1.0 Released!</a>
+                    </h2>
+                    <div class="details">
+                        <span class="date">03 Apr 2024</span>
+                        - by
+                        <span class="author">
+                            
+                                Bryan Ellis
+                            
+                        </span>
+                        <a class="comment" href="/announcements/2024/04/03/cordova-ios-7.1.0.html#disqus_thread"></a>
+                    </div>
+                </header>
+                <section class="post-excerpt">
+                    <p><p>We are happy to announce that we have just released <code>Cordova iOS 7.1.0</code>! This is one of Cordova&#39;s supported platforms for building iOS applications.</p>
+
+<ul>
+  <li><a href="https://www.npmjs.com/package/cordova-ios">cordova-ios@7.1.0</a></li>
+</ul>
+
+<p><strong>To upgrade:</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova platform remove ios
+cordova platform add ios@7.1.0
+</code></pre></div></div>
+
+<p><strong>To install:</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova platform add ios@7.1.0
+</code></pre></div></div>
+
+<h2>Release Highlights</h2>
+
+<h3>Features</h3>
+
+<ul>
+  <li>
+    <p><strong><code>SplashScreenBackgroundColor</code> preference support</strong></p>
+
+    <p>This preference allows you to set the splashscreen&#39;s background colour. If no <code>SplashScreenBackgroundColor</code> is provided, it will fall back to the <code>BackgroundColor</code>, which is the current behavior, and then fallback to the system background colour when nothing is defined.</p>
+  </li>
+  <li>
+    <p><strong><code>privacy-manifest</code> Support</strong></p>
+
+    <p>This release supplies the templated blank privacy manifest file, <code>PrivacyInfo.xcprivacy</code> which can be configured from <code>config.xml</code>.</p>
+
+    <p>This release focuses specifically on providing support for app developers to set this configuration, while a later release will introduce support for plugin developers.</p>
+
+    <p>It is recommended that plugin developers help app developers by providing in their plugin documentation the necessary configuration setup.</p>
+
+    <p>Below is an example config.xml entry that app developers can define to configure the privacy manifest file.</p>
+
+    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;platform</span> <span class="na">name=</span><span class="s">"ios"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;privacy-manifest&gt;</span>
+          <span class="nt">&lt;key&gt;</span>NSPrivacyTracking<span class="nt">&lt;/key&gt;</span>
+          <span class="nt">&lt;true/&gt;</span>
+          <span class="nt">&lt;key&gt;</span>NSPrivacyCollectedDataTypes<span class="nt">&lt;/key&gt;</span>
+          <span class="nt">&lt;array/&gt;</span>
+          <span class="nt">&lt;key&gt;</span>NSPrivacyAccessedAPITypes<span class="nt">&lt;/key&gt;</span>
+          <span class="nt">&lt;array/&gt;</span>
+          <span class="nt">&lt;key&gt;</span>NSPrivacyTrackingDomains<span class="nt">&lt;/key&gt;</span>
+          <span class="nt">&lt;array/&gt;</span>
+      <span class="nt">&lt;/privacy-manifest&gt;</span>
+  <span class="nt">&lt;/platform&gt;</span>
+</code></pre></div>    </div>
+
+    <p>The contents and values of <code>NSPrivacyTracking</code>, <code>NSPrivacyCollectedDataTypes</code>, <code>NSPrivacyAccessedAPITypes</code>, and <code>NSPrivacyTrackingDomains</code> will depend on the specific native APIs being utilized.</p>
+
+    <p>It is recommended to read the Apple Developer documentation to better understand these parameters.</p>
+
+    <ul>
+      <li><a href="https://developer.apple.com/documentation/bundleresources/privacy_manifest_files">Privacy manifest files</a></li>
+      <li><a href="https://developer.apple.com/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api">Describing use of required reason API</a></li>
+      <li><a href="https://developer.apple.com/documentation/bundleresources/privacy_manifest_files/describing_data_use_in_privacy_manifests">Describing data use in privacy manifests</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Fixes</h3>
+
+<ul>
+  <li>
+    <p><strong>Use <code>PROVISIONING_PROFILE_SPECIFIER</code> for manual codesigning</strong></p>
+
+    <p>Allows you to use either the UUID or name value from the provisioning profile for the build flag <code>provisioningProfile</code> in either the <code>build.json</code> configuration file or via the CLI command.</p>
+  </li>
+  <li>
+    <p><strong>WASM MIME type error</strong></p>
+
+    <p>Enables WebAssembly support in Cordova WebView.</p>
+  </li>
+</ul>
+
+<p>Please report any issues you find on our <a href="https://github.com/apache/cordova-iOS/issues">Cordova-iOS</a> GitHub issue tracker!</p>
+
+</p>
+                    <div><a href="/announcements/2024/04/03/cordova-ios-7.1.0.html">More...</a></div>
+                </section>
+            </li>
+            
+            <li>
+                <header>
+                    <div class="adorner" blogTime="Mon, 11 Mar 2024 00:00:00 +0000"></div>
+                    <h2 class="title">
+                        <a href="/announcements/2024/03/11/cordova-electron-release-4.0.0.html">Cordova Electron 4.0.0 Released!</a>
+                    </h2>
+                    <div class="details">
+                        <span class="date">11 Mar 2024</span>
+                        - by
+                        <span class="author">
+                            
+                                Bryan Ellis
+                            
+                        </span>
+                        <a class="comment" href="/announcements/2024/03/11/cordova-electron-release-4.0.0.html#disqus_thread"></a>
+                    </div>
+                </header>
+                <section class="post-excerpt">
+                    <p><p>We are happy to announce that we have just released <code>Cordova Electron 4.0.0</code>! This is one of Cordova&#39;s supported platforms for building Electron applications.</p>
+
+<ul>
+  <li><a href="https://www.npmjs.com/package/cordova-electron">cordova-electron@4.0.0</a></li>
+</ul>
+
+<p><strong>To upgrade:</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova platform remove electron
+cordova platform add electron@4.0.0
+</code></pre></div></div>
+
+<p><strong>To install:</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova platform add electron@4.0.0
+</code></pre></div></div>
+
+<h2>Release Highlights</h2>
+
+<p>Some of the notable breaking changes in this release are:</p>
+
+<p><strong>Node.js Requirement:</strong></p>
+
+<p>This release requires the environment to have <strong>Node.js</strong> <code>18.0.0</code> or higher. It is recommended to use the current LTS, which is <code>20.11.1</code> at the time of this release.</p>
+
+<p><strong>Electron Update:</strong></p>
+
+<p>The <strong>Electron</strong> core dependencies have been updated to <code>29.0.0</code>. This version of Electron comes with the following app stack:</p>
+
+<ul>
+  <li>Chromium 122.0.6261.39</li>
+  <li>Node v20.9.0</li>
+  <li>V8 12.2</li>
+</ul>
+
+<p>More information about Electron 29.0.0 can be read on their <a href="https://www.electronjs.org/blog/electron-29-0">blog post here</a>.</p>
+
+<p><strong>Removed Plugin Argument&#39;s Accidental Multidimensional Array Wrapping:</strong></p>
+
+<p>In Cordova-Electron 3.0.0, plugin support was introduced, but an unintentional multidimensional array wrapping of the plugin arguments occurred. This wrapping may not have been noticeable to app developers, but it affected plugin developers.</p>
+
+<p>Typically, a plugin includes a set of APIs that may accept arguments, and these arguments are forwarded to the native side of the plugin. Due to improper argument spreading, plugin developers had to consistently access index 0 at the first level to retrieve the actual arguments, as in <code>args[0][0]</code>. There was never an <code>args[n+1]</code> scenario.</p>
+
+<p>This release corrected this issue. Plugin developers will need to update their plugins if the plugins are designed to read passed-in arguments.</p>
+
+<p>For a quick start guide and in-depth configuration setup, please check out our <a href="https://cordova.apache.org/docs/en/12.x/guide/platforms/electron/index.html">Cordova Electron Documentation</a>!</p>
+
+<p>Please report any issues you find at <a href="http://issues.cordova.io/">issues.cordova.io</a>!</p>
+
+</p>
+                    <div><a href="/announcements/2024/03/11/cordova-electron-release-4.0.0.html">More...</a></div>
+                </section>
+            </li>
+            
+            <li>
+                <header>
+                    <div class="adorner" blogTime="Fri, 12 Jan 2024 00:00:00 +0000"></div>
+                    <h2 class="title">
+                        <a href="/announcements/2024/01/12/survey-results.html">Cordova Survey 2023 Results</a>
+                    </h2>
+                    <div class="details">
+                        <span class="date">12 Jan 2024</span>
+                        - by
+                        <span class="author">
+                            
+                                <a href="https://twitter.com/niklasmaerz">Niklas Merz</a>
+                            
+                        </span>
+                        <a class="comment" href="/announcements/2024/01/12/survey-results.html#disqus_thread"></a>
+                    </div>
+                </header>
+                <section class="post-excerpt">
+                    <p><p>Thank you very much for taking part in our user &amp; contributor survey. We received 228 submissions. Let&#39;s dive straight into the data.</p>
+
+<p>This survey got over 200 responses and considering only a fraction of people who actually see the survey will respond, there are probably quite a lot of happy Cordova users and new and long-running app projects out there. We got some good feedback of the most requested improvements and biggest pain points.</p>
+
+</p>
+                    <div><a href="/announcements/2024/01/12/survey-results.html">More...</a></div>
+                </section>
+            </li>
+            
+            <li>
+                <header>
+                    <div class="adorner" blogTime="Fri, 24 Nov 2023 00:00:00 +0000"></div>
+                    <h2 class="title">
+                        <a href="/announcements/2023/11/24/survey.html">Announcing the Cordova User & Contributor Survey!</a>
+                    </h2>
+                    <div class="details">
+                        <span class="date">24 Nov 2023</span>
+                        - by
+                        <span class="author">
+                            
+                                <a href="https://twitter.com/niklasmaerz">Niklas Merz</a>
+                            
+                        </span>
+                        <a class="comment" href="/announcements/2023/11/24/survey.html#disqus_thread"></a>
+                    </div>
+                </header>
+                <section class="post-excerpt">
+                    <p><p>The Apache Cordova projects wants to understand the users and contributors better. Therefore, we invite you take part in a short survey for app developers and contributors of Cordova plugins.</p>
+
+<p>The survey questions are designed to not contain any personal information and can be answered anonymously. <em>Please take note that the survey is using Google Forms to process the responses. The <a href="https://policies.google.com/privacy?hl=en">Google privacy policy</a> is applicable for the data processed.</em></p>
+
+<p><strong><a href="https://forms.gle/2HKWATLcRQdw85mE6">Take survey</a></strong></p>
+
+<p>Thank you very much for taking part in this survey. The goal of this survey is to identify areas that can be improved by the Cordova community together. The survey is open from now on to December 24, 2023. The results will be shared on the Cordova blog.</p>
+</p>
+                    <div><a href="/announcements/2023/11/24/survey.html">More...</a></div>
+                </section>
+            </li>
+            
+            <li>
+                <header>
+                    <div class="adorner" blogTime="Thu, 23 Nov 2023 00:00:00 +0000"></div>
+                    <h2 class="title">
+                        <a href="/announcements/2023/11/23/inappbrowser-release-6.0.0.html">Cordova Plugin InAppBrowser 6.0.0 Released!</a>
+                    </h2>
+                    <div class="details">
+                        <span class="date">23 Nov 2023</span>
+                        - by
+                        <span class="author">
+                            
+                                <a href="https://twitter.com/niklasmaerz">Niklas Merz</a>
+                            
+                        </span>
+                        <a class="comment" href="/announcements/2023/11/23/inappbrowser-release-6.0.0.html#disqus_thread"></a>
+                    </div>
+                </header>
+                <section class="post-excerpt">
+                    <p><p>We are happy to announce that we have just released an update to <code>cordova-plugin-inappbrowser</code>!</p>
+
+<ul>
+  <li><a href="https://www.npmjs.com/package/cordova-plugin-inappbrowser">cordova-plugin-inappbrowser@6.0.0</a></li>
+</ul>
+
+<h2>Release Highlights</h2>
+
+<p>This is a new major version with breaking changes which requires at least <code>cordova-android@10.0.0</code> and <code>cordova-ios@6.0.0</code>. Make sure to check and update your platforms.</p>
+
+<p>The most notable improvements in this major release are:</p>
+
+<ul>
+  <li>Permission requests for Android</li>
+  <li>Removal of deprecated code and platforms</li>
+  <li>Make WebView inspectable on iOS</li>
+  <li>Make system open tel, sms, mailto and geo links on iOS</li>
+</ul>
+
+<p>Please report any issues you find on <a href="http://https://github.com/apache/cordova-plugin-inappbrowser/issues">GitHub</a>!</p>
+
+</p>
+                    <div><a href="/announcements/2023/11/23/inappbrowser-release-6.0.0.html">More...</a></div>
+                </section>
+            </li>
+            
+            <li>
+                <header>
+                    <div class="adorner" blogTime="Thu, 21 Sep 2023 00:00:00 +0000"></div>
+                    <h2 class="title">
+                        <a href="/news/2023/09/21/geolocation-plugin-5.0.0.html">Geolocation Plugin 5.0.0 Released!</a>
+                    </h2>
+                    <div class="details">
+                        <span class="date">21 Sep 2023</span>
+                        - by
+                        <span class="author">
+                            
+                                Norman Breau
+                            
+                        </span>
+                        <a class="comment" href="/news/2023/09/21/geolocation-plugin-5.0.0.html#disqus_thread"></a>
+                    </div>
+                </header>
+                <section class="post-excerpt">
+                    <p><p>We are happy to announce that we have just released an update for <code>cordova-plugin-geolocation</code>!</p>
+
+<ul>
+  <li><a href="https://www.npmjs.com/package/cordova-plugin-geolocation">cordova-plugin-geolocation@5.0.0</a></li>
+</ul>
+
+<p><strong>To upgrade:</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova plugin remove cordova-plugin-geolocation
+cordova plugin add cordova-plugin-geolocation@5.0.0
+</code></pre></div></div>
+
+<h2>Release Highlights</h2>
+
+<h3>Breaking Changes</h3>
+
+<ul>
+  <li><strong>Modern JavaScript</strong></li>
+</ul>
+
+<p>The JavaScript of the plugin has been upgraded to use ES6 features, such as <code>let</code> and <code>const</code>.</p>
+
+<p><strong>NOTE</strong>: This release has failed to upgrade required engines. Despite the declared requirement on <code>cordova-android</code> &gt;= 6.3.0 and no declared requirement on iOS, the new minimum requirements will be:</p>
+
+<ul>
+  <li>cordova-ios 6 or later</li>
+  <li>cordova-android 10 or later</li>
+</ul>
+
+<p>Earlier versions of these platforms may not work as expected. As always, it will be recommended to use the latest version available.
+The engines <em>may be corrected</em> in a patch release at a later date.</p>
+
+<ul>
+  <li><strong>Cordova Windows Support Drop</strong></li>
+</ul>
+
+<p>Support for the deprecated <a href="https://github.com/apache/cordova-windows">cordova-windows</a> platform has been dropped and entirely removed in this release.</p>
+
+<h3>Notable Fixes</h3>
+
+<ul>
+  <li>
+    <p><strong>Sanity check on Geolocation serialization on iOS</strong></p>
+
+    <p>A rare occurrence of <code>Infinity</code> values would cause a crash during JSON serialization on iOS. This is now caught and will now produce a Position Unavailable error gracefully.</p>
+  </li>
+  <li>
+    <p><strong>Improved Android Permission Handling</strong></p>
+
+    <p>Android has received fixes for when handling coarse vs fine location permissions for improved compatibility on Android 12+ devices. Android will now handle the following situations:</p>
+
+    <ol>
+      <li>Permission request that consists of only <code>COARSE</code> location.</li>
+      <li>Permission request that consists of both <code>COARSE</code> and <code>FINE</code> (high accuracy) location.</li>
+      <li>Permission upgrade for when <code>COARSE</code> is granted, but <code>FINE</code> is required.</li>
+    </ol>
+  </li>
+</ul>
+
+<p>For more details on these changes, see the <a href="https://github.com/apache/cordova-plugin-geolocation/pull/250">PR</a>.</p>
+
+<ul>
+  <li><strong>Improved W3C Compliance</strong></li>
+</ul>
+
+<p>Fixes has been made to the <code>heading</code> and <code>speed</code> to better conform to the <a href="https://www.w3.org/TR/geolocation/#constructing-a-geolocationposition">W3C Geolocation API</a> specification. If either of these values are not determined to be expected valid range, they will now return <code>null</code> to provide better consistency between Cordova and other web environments.</p>
+
+<p>Please report any issues you find by following the this <a href="https://github.com/apache/cordova#filing-a-bug">How to File a Bug</a> guide!</p>
+
+</p>
+                    <div><a href="/news/2023/09/21/geolocation-plugin-5.0.0.html">More...</a></div>
+                </section>
+            </li>
+            
+            <li>
+                <header>
+                    <div class="adorner" blogTime="Tue, 12 Sep 2023 00:00:00 +0000"></div>
+                    <h2 class="title">
+                        <a href="/news/2023/09/12/camera-media-file-transfer-plugin-release.html">Camera 7.0.0, Media 7.0.0 & File-Transfer 2.0.0 Released!</a>
+                    </h2>
+                    <div class="details">
+                        <span class="date">12 Sep 2023</span>
+                        - by
+                        <span class="author">
+                            
+                                Bryan Ellis
+                            
+                        </span>
+                        <a class="comment" href="/news/2023/09/12/camera-media-file-transfer-plugin-release.html#disqus_thread"></a>
+                    </div>
+                </header>
+                <section class="post-excerpt">
+                    <p><p>We are happy to announce that we have just released an update for the following plugins!</p>
+
+<ul>
+  <li><a href="https://www.npmjs.com/package/cordova-plugin-camera">cordova-plugin-camera@7.0.0</a></li>
+  <li><a href="https://www.npmjs.com/package/cordova-plugin-media">cordova-plugin-media@7.0.0</a></li>
+  <li><a href="https://www.npmjs.com/package/cordova-plugin-file-transfer">cordova-plugin-file-transfer@2.0.0</a></li>
+</ul>
+
+<p><strong>To upgrade:</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova plugin remove cordova-plugin-camera
+cordova plugin add cordova-plugin-camera@7.0.0
+
+cordova plugin remove cordova-plugin-media
+cordova plugin add cordova-plugin-media@7.0.0
+
+cordova plugin remove cordova-plugin-file-transfer
+cordova plugin add cordova-plugin-file-transfer@2.0.0
+</code></pre></div></div>
+
+<h2>Release Highlights</h2>
+
+<h3><code>cordova-plugin-camera</code></h3>
+
+<ul>
+  <li>
+    <p><strong>Android 13 Support</strong></p>
+
+    <p>In this release of the <code>camera</code> plugin, the <code>maxSdkTarget</code> for the <code>WRITE_EXTERNAL_STORAGE</code> permission has been set to <code>32</code>. This change was made as the permission has been deprecated and replaced by Android 13&#39;s more granular permissions, <code>READ_MEDIA_IMAGES</code> and <code>READ_MEDIA_VIDEO</code>. Additionally, the <code>getPermissions</code> method has been improved to accurately fetch the required permissions based on the Android version. If Android 13 and above, it will also fetch based on media type.</p>
+
+    <p>Furthermore, to support the new granular permissions on Android 13 (SDK 33), we have raised the minimum requirement for <code>cordova-android</code> to version <code>12.0.0</code>. This version of Cordova-Android specifically includes the necessary updates to handle Android 13 and compile your project with the new permissions successfully.</p>
+  </li>
+  <li>
+    <p><strong>Removed Deprecated Platforms</strong></p>
+
+    <p>As the Cordova-Windows and Cordova-OSX platform has been deprecated, the supporting logic for these platforms has been removed from this plugin.</p>
+  </li>
+  <li>
+    <p><strong>Retain Image Exif Data from Photo Library (iOS)</strong></p>
+
+    <p>This release contains a fix to preserve image&#39;s EXIF data for iOS.</p>
+  </li>
+</ul>
+
+<h3><code>cordova-plugin-media</code></h3>
+
+<ul>
+  <li>
+    <p><strong>Android 13 Support</strong></p>
+
+    <p>In this release of the <code>media</code> plugin, the dependency of the file plugin has been bumped to <code>8.0.0</code> which introduced Android 13 support. This support includes the Android 13&#39;s more granular permissions <code>READ_MEDIA_IMAGES</code>, <code>READ_MEDIA_VIDEO</code>, and <code>READ_MEDIA_AUDIO</code>.</p>
+
+    <p>Additionally we have raised the minimum requirement for <code>cordova-android</code> to version <code>12.0.0</code>.</p>
+
+    <p>For more information, check out the <a href="https://cordova.apache.org/news/2023/07/11/file-plugin-8.0.0.html">Cordova&#39;s File Plugin 8.0.0 release blog post</a>.</p>
+  </li>
+  <li>
+    <p><strong>Removed Deprecated Windows Platforms</strong></p>
+
+    <p>As the Cordova-Windows platform has been deprecated, the supporting logic for that platform has been removed from this plugin.</p>
+  </li>
+  <li>
+    <p><strong>Ability to load files from custom scheme and leading slash directory paths</strong></p>
+
+    <p>The file plugin can now accept URL constructed with a custom scheme or a leading slash.</p>
+
+    <p><strong>Custom Scheme Example:</strong></p>
+
+    <p>By default, iOS uses the following custom scheme <code>app://localhost/</code>. You can now pass in <code>app://localhost/file.mp4</code> to prepresent a media file located in the root directory of which the app content is loaded from, <code>www</code>.</p>
+
+    <p><strong>Leading Slash Example:</strong></p>
+
+    <p>It can also load the same file <code>file.mp4</code> from the above example if the provided URL was <code>/file.mp4</code>. It will navigate from the root directory of which the app content is loaded from, <code>www</code>.</p>
+  </li>
+  <li>
+    <p><strong>Increased Android&#39;s Audio Quality</strong></p>
+
+    <p>From this plugin&#39;s version and onward, the Android&#39;s captured audio quality has been increased significantly. This was achieved by increasing the bit rate to 96 Kbps and the sampling rate to 44.1 kHz.</p>
+
+    <blockquote>
+      <p><strong>PR&#39;s Note:</strong> This plugin uses the AAC encoder, which generally provides better quality audio at a lower bitrate compared against MP3 encoder. While researching acceptable bitrate of AAC compared against MP3, some suggest using 96 Kbps for AAC while MP3 would be 128 Kbps. But this does not mean it is identical. In terms of quality, it will always depend on the source and underlying equipment.</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h3><code>cordova-plugin-file-transfer</code></h3>
+
+<ul>
+  <li>
+    <p><strong>Bumped File Dependecy for Android 13 Support</strong></p>
+
+    <p>In this release of the <code>file-transfer</code> plugin, the dependency on the file plugin has been updated to version <code>8.0.0</code>, enabling Android 13 support. Consequently, the minimum requirement for <code>cordova-android</code> has been raised to version <code>12.0.0</code> to align with the updated file plugin.</p>
+
+    <p>For more information, check out the <a href="https://cordova.apache.org/news/2023/07/11/file-plugin-8.0.0.html">Cordova&#39;s File Plugin 8.0.0 release blog post</a>.</p>
+  </li>
+  <li>
+    <p><strong>Removed Deprecated Platforms</strong></p>
+
+    <p>As the Cordova Windows/WP8, OSX, Amazon Fire OS, Blackberry 10, Windows Phone &amp; Firefox OS platform has been deprecated, the supporting logic for these platforms has been removed from this plugin.</p>
+  </li>
+  <li>
+    <p><strong>Removed Deprecated <code>whitelist</code> Plugin</strong></p>
+
+    <p>The legacy <code>whitelist</code> plugin has been deprecated for a long time and is no longer needed in the <code>file-transfer</code> plugin. This plugin will continue call and check against the <code>shouldAllowRequest</code> method which is apart of the platform core coding.</p>
+
+    <p>Refer to the <a href="https://cordova.apache.org/docs/en/12.x/guide/appdev/allowlist/index.html">Allow List</a> page of the Cordova Documentation for more information in how to configure the list.</p>
+  </li>
+  <li>
+    <p><strong>Fixed Download Functionality for Android Q+</strong></p>
+  </li>
+  <li>
+    <p><strong>Removed Hardcoded <code>X-Requested-With</code> Header</strong></p>
+
+    <p>This hardcoded header was removed from the Android platform. This header was also not set in any other platform. It is up to the app developer to set the header if it is desired to &#39;disguise&#39; the HTTP call as an XMLHttpRequest.</p>
+  </li>
+  <li>
+    <p><strong>Fixed Missing Headers on File Upload</strong></p>
+
+    <p>In iOS, header data was not properly being set during file upload. In this release, the <code>applyRequestHeaders</code> method was updated to ensure that the headers were being applied.</p>
+  </li>
+  <li>
+    <p><strong>Re-implemented UserAgent Overwrites</strong></p>
+
+    <p>In iOS, the ability to overwrite the UserAgent using the <code>navigator.userAgent</code> value from the WebView was re-implemented.</p>
+  </li>
+</ul>
+
+<p>Please report any issues you find at <a href="http://issues.cordova.io/">issues.cordova.io</a>!</p>
+
+</p>
+                    <div><a href="/news/2023/09/12/camera-media-file-transfer-plugin-release.html">More...</a></div>
+                </section>
+            </li>
+            
+            <li>
+                <header>
+                    <div class="adorner" blogTime="Wed, 06 Sep 2023 00:00:00 +0000"></div>
+                    <h2 class="title">
+                        <a href="/announcements/2023/09/06/cordova-ios-7.0.1.html">Cordova iOS 7.0.1 Released!</a>
+                    </h2>
+                    <div class="details">
+                        <span class="date">06 Sep 2023</span>
+                        - by
+                        <span class="author">
+                            
+                                Bryan Ellis
+                            
+                        </span>
+                        <a class="comment" href="/announcements/2023/09/06/cordova-ios-7.0.1.html#disqus_thread"></a>
+                    </div>
+                </header>
+                <section class="post-excerpt">
+                    <p><p>We are happy to announce that we have just released <code>Cordova iOS 7.0.1</code>! This is one of Cordova&#39;s supported platforms for building iOS applications.</p>
+
+<ul>
+  <li><a href="https://www.npmjs.com/package/cordova-ios">cordova-ios@7.0.1</a></li>
+</ul>
+
+<h2>Release Highlights</h2>
+
+<p><strong>To upgrade:</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova platform remove ios
+cordova platform add ios@7.0.1
+</code></pre></div></div>
+
+<p><strong>To install:</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova platform add ios@7.0.1
+</code></pre></div></div>
+
+<p><strong>Fixes:</strong></p>
+
+<ul>
+  <li>
+    <p><strong>Building on Xcode 11</strong></p>
+
+    <p>Cordova-iOS 7 is documented to support Xcode 11 and later. However, due to recent changes to support <code>LimitsNavigationsToAppBoundDomains</code>, builds fail on Xcode 11. To address this issue, we have added conditional checks to ensure that the app can be built with Xcode 11. Please note that the <code>LimitsNavigationsToAppBoundDomains</code> feature will not be available when building with Xcode 11.</p>
+  </li>
+  <li>
+    <p><strong>Fix paths in the Xcode pbxproj</strong></p>
+
+    <p>Cordova-iOS 7.0.0&#39;s Xcode project file was missing path information for some files. While this worked fine within the Xcode app, it caused problems for plugins and hooks that were attempting to modify the project file programmatically. We&#39;ve fixed this issue by ensuring that all files in the Xcode project include a path property.</p>
+  </li>
+</ul>
+
+<p>Please report any issues you find on our <a href="https://github.com/apache/cordova-iOS/issues">Cordova-iOS</a> GitHub issue tracker!</p>
+
+</p>
+                    <div><a href="/announcements/2023/09/06/cordova-ios-7.0.1.html">More...</a></div>
+                </section>
+            </li>
+            
+            <li>
+                <header>
+                    <div class="adorner" blogTime="Mon, 28 Aug 2023 00:00:00 +0000"></div>
+                    <h2 class="title">
+                        <a href="/announcements/2023/08/28/cordova-android-12.0.1.html">Cordova Android 12.0.1 Released!</a>
+                    </h2>
+                    <div class="details">
+                        <span class="date">28 Aug 2023</span>
+                        - by
+                        <span class="author">
+                            
+                                Bryan Ellis
+                            
+                        </span>
+                        <a class="comment" href="/announcements/2023/08/28/cordova-android-12.0.1.html#disqus_thread"></a>
+                    </div>
+                </header>
+                <section class="post-excerpt">
+                    <p><p>We are happy to announce that we have just released <code>Cordova Android 12.0.1</code>! This is one of Cordova&#39;s supported platforms for building Android applications.</p>
+
+<ul>
+  <li><a href="https://www.npmjs.com/package/cordova-android">cordova-android@12.0.1</a></li>
+</ul>
+
+<h2>Release Highlights</h2>
+
+<p><strong>To upgrade:</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova platform remove android
+cordova platform add android@12.0.1
+</code></pre></div></div>
+
+<p><strong>To install:</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova platform add android@12.0.1
+</code></pre></div></div>
+
+<p><strong>Fixes:</strong></p>
+
+<ul>
+  <li>
+    <p><strong>Adaptive Icon Fix</strong></p>
+
+    <p>In Cordova-Android 12.0.0, an issue arose with the introduction of Android 13&#39;s Themed Icons support. This issue resulted in adaptive icons not being generated due to an incorrect validation check.</p>
+
+    <p>In this release, the problematic validation check was rectified. As a result, the adaptive icon will be generated even when monochrome attributes are not provided.</p>
+  </li>
+</ul>
+
+<p>Please report any issues you find on our <a href="https://github.com/apache/cordova-android/issues">Cordova-Android</a> GitHub issue tracker!</p>
+
+</p>
+                    <div><a href="/announcements/2023/08/28/cordova-android-12.0.1.html">More...</a></div>
+                </section>
+            </li>
+            
+            <li>
+                <header>
+                    <div class="adorner" blogTime="Fri, 18 Aug 2023 00:00:00 +0000"></div>
+                    <h2 class="title">
+                        <a href="/news/2023/08/18/media-capture-plugin-5.0.0.html">Media-Capture Plugin 5.0.0 Released!</a>
+                    </h2>
+                    <div class="details">
+                        <span class="date">18 Aug 2023</span>
+                        - by
+                        <span class="author">
+                            
+                                Bryan Ellis
+                            
+                        </span>
+                        <a class="comment" href="/news/2023/08/18/media-capture-plugin-5.0.0.html#disqus_thread"></a>
+                    </div>
+                </header>
+                <section class="post-excerpt">
+                    <p><p>We are happy to announce that we have just released an update for <code>cordova-plugin-media-capture</code>!</p>
+
+<ul>
+  <li><a href="https://www.npmjs.com/package/cordova-plugin-media-capture">cordova-plugin-media-capture@5.0.0</a></li>
+</ul>
+
+<p><strong>To upgrade:</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova plugin remove cordova-plugin-media-capture
+cordova plugin add cordova-plugin-media-capture@5.0.0
+</code></pre></div></div>
+
+<h2>Release Highlights</h2>
+
+<h3>Breaking Changes</h3>
+
+<ul>
+  <li>
+    <p><strong>Android 13+ Support</strong></p>
+
+    <p>Beginning from Android 13 (SDK 33), the <code>READ_EXTERNAL_STORAGE</code> permission no longer has any effect. Instead, this permission has been replaced with more granular permissions: <code>READ_MEDIA_IMAGES</code>, <code>READ_MEDIA_VIDEO</code>, and <code>READ_MEDIA_AUDIO</code>. Also the <code>WRITE_EXTERNAL_STORAGE</code> has <a href="https://developer.android.com/reference/android/Manifest.permission#WRITE_EXTERNAL_STORAGE">stopped providing write access starting from API level 30 and above</a>.</p>
+
+    <p>To adapt to this change, we have introduced these three new permissions. This ensures that the existing functionality and behavior related to reading various media file are maintained for Android 13 and higher versions.</p>
+
+    <p>The <code>READ_EXTERNAL_STORAGE</code> and  <code>WRITE_EXTERNAL_STORAGE</code> permissions are still defined but has declared the <code>maxSdkVersion</code> attribute with the value of <code>32</code> to ensure that the are not used in API 33 of higher.</p>
+
+    <p>Furthermore, to support the new granular permissions on Android 13 (SDK 33), we have raised the minimum requirement for <code>cordova-android</code> to version <code>12.0.0</code>. This version of Cordova-Android specifically includes the necessary updates to handle Android 13 and compile your project with the new permissions successfully.</p>
+  </li>
+</ul>
+
+<h3>Features &amp; Fixes</h3>
+
+<ul>
+  <li>
+    <p><strong>Added video <code>quality</code> option for iOS</strong></p>
+
+    <p>You can now change the quality of the video that is being captured for iOS. By default, it will capture the highest quality.</p>
+  </li>
+  <li>
+    <p><strong>Fixes for various iOS crashes</strong></p>
+
+    <p>Various fixes were implemented to enhance stability and user experience on iOS. Here are some example changes:</p>
+
+    <ol>
+      <li>Implement an alert dialog to guide users to enable necessary permissions if they had previously denied them. This will occur when users attempt to use the capture feature.</li>
+      <li>Improve the layout of the audio capture interface to fit and use the entire device screen.</li>
+      <li>Implement safeguards to prevent application crashes in scenarios where audio data is unavailable ensuring a smoother and more reliable user experience.</li>
+      <li>Implement measures to maintain the functionality of the capture feature even when users dismiss the capture window by swiping, ensuring consistent and uninterrupted functionality.</li>
+    </ol>
+  </li>
+</ul>
+
+<p>Please report any issues you find by following the this <a href="https://github.com/apache/cordova#filing-a-bug">How to File a Bug</a> guide!</p>
+
+</p>
+                    <div><a href="/news/2023/08/18/media-capture-plugin-5.0.0.html">More...</a></div>
+                </section>
+            </li>
             
             <li>
                 <header>
@@ -13174,35 +13884,12 @@ just around the corner (July 19, 2013), and we are really excited about it!</p>
         </ul>
         <!-- <a target="_blank" href="http://feed1.w3.org/check.cgi?url=/feed.xml"><img src="/static/img/valid-rss-rogers.png" alt="[Valid RSS]" title="Validate my RSS feed" /></a> -->
     </div>
-    <div class="col-sm-4 social-container">
-        <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/apachecordova" data-widget-id="629424968011386884">Tweets by @apachecordova</a>
-
-<script>
-window.twttr = (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0],
-        t = window.twttr || {};
-    if (d.getElementById(id)) return t;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "https://platform.twitter.com/widgets.js";
-    fjs.parentNode.insertBefore(js, fjs);
-
-    t._e = [];
-    t.ready = function(f) {
-        t._e.push(f);
-    };
-
-    return t;
-}(document, "script", "twitter-wjs"));
-</script>
-
-    </div>
 </div>
 
 <script>
     window.onload = function(){
         setTimeout(function(){
-            var lastPostTime = new Date("Tue, 11 Jul 2023 00:00:00 +0000").getTime();
+            var lastPostTime = new Date("Wed, 03 Apr 2024 00:00:00 +0000").getTime();
           setCookie("visitTime", lastPostTime, 365);
         }, 2000);
     };
@@ -13243,7 +13930,7 @@ window.twttr = (function(d, s, id) {
                         <a href="https://www.apache.org/dyn/closer.cgi/cordova">Source Distribution</a>
                     </li>
                     <li>
-                        <a target="_blank" href="https://www.apache.org/licenses/LICENSE-2.0">License</a>
+                        <a target="_blank" href="https://www.apache.org/licenses">License</a>
                     </li>
                     <li>
                         <a href="/artwork">Artwork</a>
@@ -13265,6 +13952,9 @@ window.twttr = (function(d, s, id) {
                 <ul class="nav">
                     <li>
                         <a target="_blank" href="https://www.apache.org/">About ASF</a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="https://www.apache.org/events/current-event">Events</a>
                     </li>
                     <li>
                         <a target="_blank" href="https://www.apache.org/foundation/sponsorship.html">Become a Sponsor</a>
@@ -13290,11 +13980,10 @@ window.twttr = (function(d, s, id) {
             Learn More
         </a>
         <p style="padding-top:20px"> <a href="https://twitter.com/apachecordova" class="twitter-follow-button" data-show-count="false">Follow @apachecordova</a></p>
-        <script async defer src="https://slack-cordova-io.herokuapp.com/slackin.js"></script>
     </div>
 </div>
 <p class="copyright_text">
-    Copyright &copy; 2023 The Apache Software Foundation, Licensed under the <a target="_blank" href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.<br/>
+    Copyright &copy; 2024 <a href="https://apache.org">The Apache Software Foundation</a>, Licensed under the <a target="_blank" href="https://www.apache.org/licenses/">Apache License, Version 2.0</a>.<br/>
     Apache and the Apache feather logos are <a target="_blank" href="https://www.apache.org/foundation/marks/list/">trademarks</a> of The Apache Software Foundation.
     <br/>
     <p>See the <a href="/attributions/">attributions page</a> for other copyright & trademark notices.</p>
@@ -13306,19 +13995,5 @@ window.twttr = (function(d, s, id) {
 
     <script defer type="text/javascript" src="/static/js/index.js"></script>
     <script defer type="text/javascript" src="/static/js/twitter.js"></script>
-    
-
-
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
-<script type="text/javascript">
-    docsearch({
-        apiKey: '0a916ab198bd93d031aa70611271e42e',
-        indexName: 'cordova',
-        inputSelector: '#header-search-field',
-        algoliaOptions: { 'facetFilters': ["version:  11.x", "language: en"] }
-    });
-</script>
-
 </body>
 </html>

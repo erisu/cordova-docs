@@ -47,6 +47,16 @@ function checkNotification() {
     var dates = [];
     if (lastVisit != "") {
         
+        dates.push('Wed, 03 Apr 2024 00:00:00 +0000');
+        dates.push('Mon, 11 Mar 2024 00:00:00 +0000');
+        dates.push('Fri, 12 Jan 2024 00:00:00 +0000');
+        dates.push('Fri, 24 Nov 2023 00:00:00 +0000');
+        dates.push('Thu, 23 Nov 2023 00:00:00 +0000');
+        dates.push('Thu, 21 Sep 2023 00:00:00 +0000');
+        dates.push('Tue, 12 Sep 2023 00:00:00 +0000');
+        dates.push('Wed, 06 Sep 2023 00:00:00 +0000');
+        dates.push('Mon, 28 Aug 2023 00:00:00 +0000');
+        dates.push('Fri, 18 Aug 2023 00:00:00 +0000');
         dates.push('Tue, 11 Jul 2023 00:00:00 +0000');
         dates.push('Mon, 10 Jul 2023 00:00:00 +0000');
         dates.push('Mon, 22 May 2023 00:00:00 +0000');
