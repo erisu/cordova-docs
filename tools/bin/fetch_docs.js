@@ -18,12 +18,11 @@
 'use strict';
 
 const fs = require('node:fs');
-const https = require('https');
+const https = require('node:https');
 const path = require('node:path');
 const child_process = require('node:child_process');
 const yaml = require('js-yaml');
 const minimist = require('minimist');
-
 const util = require('./util');
 
 // constants

@@ -19,7 +19,6 @@
 
 const path = require('node:path');
 const yaml = require('js-yaml');
-
 const util = require('./util');
 
 // constants

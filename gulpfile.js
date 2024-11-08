@@ -1,26 +1,20 @@
 'use strict';
 
-// dependencies
 const path = require('node:path');
 const fs = require('node:fs');
 const child_process = require('node:child_process');
 const { styleText } = require('node:util');
-
-const minimist = require('minimist');
 const gulp = require('gulp');
 const Sass = require('gulp-sass')(require('sass'));
-const browsersync = require('browser-sync');
-
+const htmllint = require('gulp-htmllint');
 const vstream = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
-
-const htmllint = require('gulp-htmllint');
+const browsersync = require('browser-sync');
 const Crawler = require('simplecrawler');
-
+const minimist = require('minimist');
+const HeaderTransform = require('./tools/HeaderTransform');
 const nextversion = require('./tools/bin/nextversion');
 const { listdirsSync, srcTocfileName, logger } = require('./tools/bin/util');
-
-const HeaderTransform = require('./tools/HeaderTransform');
 
 const argv = minimist(process.argv.slice(2));
 

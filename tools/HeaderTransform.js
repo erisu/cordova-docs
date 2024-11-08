@@ -19,7 +19,6 @@
 
 const { Transform } = require('node:stream');
 const { styleText } = require('node:util');
-
 const VinylFile = require('vinyl');
 
 class HeaderTransform extends Transform {

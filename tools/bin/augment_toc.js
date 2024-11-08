@@ -20,11 +20,10 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { styleText } = require('node:util');
-
 const yaml = require('js-yaml');
 const minimist = require('minimist');
-
 const util = require('./util');
+
 // constants
 const VERBOSE_BY_DEFAULT = false;
 
